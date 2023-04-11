@@ -1,19 +1,16 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 public class HelloSponsorsView extends JFXCentralSampleBase {
 
@@ -52,27 +49,14 @@ public class HelloSponsorsView extends JFXCentralSampleBase {
     public Node getControlPanel() {
         Spinner<Integer> spinner = new Spinner<>(0, 5, 5);
         sponsorsView.showLogoCountProperty().bind(spinner.valueProperty());
-        ComboBox<Size> targetDeviceComboBox = new ComboBox<>();
-        targetDeviceComboBox.getItems().addAll(Size.values());
-        targetDeviceComboBox.getSelectionModel().select(Size.LARGE);
-        sponsorsView.sizeProperty().bind(targetDeviceComboBox.getSelectionModel().selectedItemProperty());
-        targetDeviceComboBox.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(Size object) {
-                return object.toString();
-            }
-
-            @Override
-            public Size fromString(String string) {
-                return null;
-            }
-        });
+        SizeComboBox sizeComboBox = new SizeComboBox();
+        sponsorsView.sizeProperty().bind(sizeComboBox.sizeProperty());
 
         CheckBox showDividerCheckBox = new CheckBox("Show Divider");
         showDividerCheckBox.setSelected(true);
         sponsorsView.dividerVisibleProperty().bind(showDividerCheckBox.selectedProperty());
 
-        VBox controlBox = new VBox(10, new Label("Change size:"), targetDeviceComboBox, new Separator(),
+        VBox controlBox = new VBox(10, new Label("Change size:"), sizeComboBox, new Separator(),
                 new Label("Show Logo Count:"), spinner, new Separator(), showDividerCheckBox);
         controlBox.setSpacing(10);
         controlBox.setAlignment(Pos.TOP_LEFT);
