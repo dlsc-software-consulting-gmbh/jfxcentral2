@@ -21,14 +21,6 @@ public class ControlBaseSkin<T extends ControlBase> extends SkinBase<T> {
         return getSkinnable().getSize().isLarge();
     }
 
-    public boolean isComputer() {
-        return getSkinnable().getTarget().isComputer();
-    }
-
-    public boolean isEmbedded() {
-        return getSkinnable().getTarget().isEmbedded();
-    }
-
     public boolean isDesktop() {
         return getSkinnable().getTarget().isDesktop();
     }
@@ -39,10 +31,6 @@ public class ControlBaseSkin<T extends ControlBase> extends SkinBase<T> {
 
     public boolean isMobile() {
         return getSkinnable().getTarget().isMobile();
-    }
-
-    public boolean isTablet() {
-        return getSkinnable().getTarget().isTablet();
     }
 
 }
