@@ -20,16 +20,7 @@ public class ControlBase extends Control {
 
     private static final PseudoClass DESKTOP_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("desktop");
     private static final PseudoClass BROWSER_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("browser");
-    /**
-     * computer = desktop or browser
-     */
-    private static final PseudoClass COMPUTER_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("computer");
-    private static final PseudoClass TABLET_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("tablet");
     private static final PseudoClass MOBILE_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("mobile");
-    /**
-     * embedded = tablet or mobile
-     */
-    private static final PseudoClass EMBEDDED_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("embedded");
 
 
     public ControlBase() {
@@ -44,10 +35,7 @@ public class ControlBase extends Control {
     private void activateTargetPseudoClass(Target target) {
         pseudoClassStateChanged(DESKTOP_PSEUDOCLASS_STATE, target.isDesktop());
         pseudoClassStateChanged(BROWSER_PSEUDOCLASS_STATE, target.isBrowser());
-        pseudoClassStateChanged(COMPUTER_PSEUDOCLASS_STATE, target.isComputer());
-        pseudoClassStateChanged(TABLET_PSEUDOCLASS_STATE, target.isTablet());
         pseudoClassStateChanged(MOBILE_PSEUDOCLASS_STATE, target.isMobile());
-        pseudoClassStateChanged(EMBEDDED_PSEUDOCLASS_STATE, target.isEmbedded());
     }
 
     private void activateSizePseudoClass(Size size) {
