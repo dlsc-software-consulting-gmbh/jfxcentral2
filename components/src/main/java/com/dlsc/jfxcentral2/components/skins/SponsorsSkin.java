@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.skins;
 
-import com.dlsc.jfxcentral2.components.Sponsors;
+import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.components.SponsorsView;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -20,13 +21,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class SponsorsSkin extends SkinBase<Sponsors> {
+public class SponsorsSkin extends SkinBase<SponsorsView> {
     private final GridPane gridPane;
-    private final Sponsors control;
+    private final SponsorsView control;
     private final Text title;
-    private final List<Sponsors.Sponsor> showedSponsor = new ArrayList<>();
+    private final List<SponsorsView.Sponsor> showedSponsor = new ArrayList<>();
 
-    public SponsorsSkin(Sponsors control) {
+    public SponsorsSkin(SponsorsView control) {
         super(control);
         this.control = control;
 
@@ -39,7 +40,7 @@ public class SponsorsSkin extends SkinBase<Sponsors> {
 
         initLogoNodes();
         control.itemsProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
-        control.targetProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
+        control.sizeProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
         control.showLogoCountProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
         control.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             initLogoNodes();
@@ -48,7 +49,7 @@ public class SponsorsSkin extends SkinBase<Sponsors> {
     }
 
     private void initLogoNodes() {
-        ObservableList<Sponsors.Sponsor> items = control.getItems();
+        ObservableList<SponsorsView.Sponsor> items = control.getItems();
         List<Node> nodes = new ArrayList<>();
         int logoCount = control.getShowLogoCount();
         int itemSize = items.size();
@@ -61,10 +62,11 @@ public class SponsorsSkin extends SkinBase<Sponsors> {
             showedSponsor.addAll(items);
             Collections.shuffle(showedSponsor);
         } else if (itemSize < 2 * realLogoCount) {
-            List<Sponsors.Sponsor> temp = new ArrayList<>(items);
+            List<SponsorsView.Sponsor> temp = new ArrayList<>(items);
             temp.removeAll(showedSponsor);
-            for (int i = 0; i < realLogoCount - temp.size(); i++) {
-                Sponsors.Sponsor sponsor = showedSponsor.get(random.nextInt(showedSponsor.size()));
+            int tempSize = temp.size();
+            for (int i = 0; i < realLogoCount - tempSize; i++) {
+                SponsorsView.Sponsor sponsor = showedSponsor.get(random.nextInt(showedSponsor.size()));
                 if (!temp.contains(sponsor)) {
                     temp.add(sponsor);
                 } else {
@@ -75,30 +77,33 @@ public class SponsorsSkin extends SkinBase<Sponsors> {
             showedSponsor.addAll(temp);
             Collections.shuffle(showedSponsor);
         } else {
-            List<Sponsors.Sponsor> temp = new ArrayList<>(items);
+            List<SponsorsView.Sponsor> temp = new ArrayList<>(items);
             temp.removeAll(showedSponsor);
             Collections.shuffle(temp);
             showedSponsor.clear();
             showedSponsor.addAll(temp.subList(0, realLogoCount));
         }
         //add divider and logo
+        Size screenSize = control.getSize();
         for (int i = 0; i < showedSponsor.size(); i++) {
-            Region divider = new Region();
-            divider.setPrefSize(7, 7);
-            divider.setMinSize(7, 7);
-            divider.setMaxSize(7, 7);
-            divider.getStyleClass().addAll("divider", "divider-" + (i + 1));
-            divider.managedProperty().bind(divider.visibleProperty());
-            divider.visibleProperty().bind(control.dividerVisibleProperty());
-            nodes.add(divider);
+            if (i != 0 || screenSize == Size.LARGE) {
+                Region divider = new Region();
+                divider.setPrefSize(7, 7);
+                divider.setMinSize(7, 7);
+                divider.setMaxSize(7, 7);
+                divider.getStyleClass().addAll("divider", "divider-" + i);
+                divider.managedProperty().bind(divider.visibleProperty());
+                divider.visibleProperty().bind(control.dividerVisibleProperty());
+                nodes.add(divider);
+            }
 
-            Sponsors.Sponsor sponsor = showedSponsor.get(i);
+            SponsorsView.Sponsor sponsor = showedSponsor.get(i);
             ImageView logo = new ImageView(sponsor.logoUrl());
             logo.setPickOnBounds(true);
             logo.setPreserveRatio(true);
             logo.fitHeightProperty().bind(control.logoFitHeightProperty());
             logo.fitWidthProperty().bind(control.logoFitWidthProperty());
-            logo.getStyleClass().addAll("logo","logo-"+sponsor.name().toLowerCase(), "logo-" + (i + 1));
+            logo.getStyleClass().addAll("logo", "logo-" + sponsor.name().toLowerCase(), "logo-" + i);
             logo.setOnMousePressed(e -> {
                 System.out.println("Opening sponsor.url()");
                 e.consume();
@@ -115,8 +120,8 @@ public class SponsorsSkin extends SkinBase<Sponsors> {
             gridPane.add(title, 0, 0, 1, 1);
             return;
         }
-        switch (control.getTarget()) {
-            case DESKTOP, BROWSER -> {
+        switch (screenSize) {
+            case LARGE -> {
                 gridPane.add(title, 0, 0, 1, 1);
                 int size = nodes.size();
                 gridPane.getColumnConstraints().add(getColumnConstraints());
@@ -125,26 +130,25 @@ public class SponsorsSkin extends SkinBase<Sponsors> {
                     gridPane.add(nodes.get(i), i + 1, 0);
                 }
             }
-            case TABLET, MOBILE -> {
+            case MEDIUM, SMALL -> {
                 gridPane.getRowConstraints().add(getRowConstraints());
                 int size = nodes.size();
-                gridPane.add(title, 0, 0,size, 1);
-                //skip the first divider
-                for (int i = 1; i < size; i++) {
+                gridPane.add(title, 0, 0, size, 1);
+                for (int i = 0; i < size; i++) {
                     gridPane.getColumnConstraints().add(getColumnConstraints());
-                    gridPane.add(nodes.get(i), i - 1, 1);
+                    gridPane.add(nodes.get(i), i, 1);
                 }
             }
         }
     }
 
-    private static RowConstraints getRowConstraints() {
+    private RowConstraints getRowConstraints() {
         RowConstraints row1 = new RowConstraints();
         row1.setValignment(VPos.CENTER);
         return row1;
     }
 
-    private static ColumnConstraints getColumnConstraints() {
+    private ColumnConstraints getColumnConstraints() {
         ColumnConstraints columnConstraints = new ColumnConstraints();
         columnConstraints.setHalignment(HPos.CENTER);
         columnConstraints.setHgrow(Priority.ALWAYS);

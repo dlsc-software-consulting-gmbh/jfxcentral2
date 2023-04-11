@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.components.skins.SponsorsSkin;
-import com.dlsc.jfxcentral2.utils.ResourceUtil;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -26,16 +25,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Sponsors extends ControlBase {
+public class SponsorsView extends ControlBase {
 
-    private static final String DEFAULT_STYLE_CLASS = "sponsors";
+    private static final String DEFAULT_STYLE_CLASS = "sponsors-view";
     private static final String DEFAULT_TITLE = "OUR PARTNERS";
     private static final int DEFAULT_LOGO_FIT_HEIGHT = 35;
     private static final int DEFAULT_LOGO_FIT_WIDTH = 200;
-    private static final String USER_AGENT_STYLESHEET = ResourceUtil.load("/com/dlsc/jfxcentral2/components/jfxcentral2.css").toExternalForm();
 
 
-    public Sponsors() {
+    public SponsorsView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
     }
 
@@ -49,7 +47,7 @@ public class Sponsors extends ControlBase {
 
     @Override
     public String getUserAgentStylesheet() {
-        return USER_AGENT_STYLESHEET;
+        return SponsorsView.class.getResource("/com/dlsc/jfxcentral2/components/jfxcentral2.css").toExternalForm();
     }
 
     private final IntegerProperty showLogoCount = new SimpleIntegerProperty(this, "showCount", 5);
@@ -94,7 +92,7 @@ public class Sponsors extends ControlBase {
         this.items.set(items);
     }
 
-    private final StyleableBooleanProperty dividerVisible = new SimpleStyleableBooleanProperty(StyleableProperties.DIVIDER_VISIBLE, Sponsors.this,
+    private final StyleableBooleanProperty dividerVisible = new SimpleStyleableBooleanProperty(StyleableProperties.DIVIDER_VISIBLE, SponsorsView.this,
             "dividerVisible", true);
 
     public boolean isDividerVisible() {
@@ -116,13 +114,13 @@ public class Sponsors extends ControlBase {
         }
 
         @Override
-        public CssMetaData<Sponsors, Number> getCssMetaData() {
+        public CssMetaData<SponsorsView, Number> getCssMetaData() {
             return StyleableProperties.LOGO_FIT_HEIGHT;
         }
 
         @Override
         public Object getBean() {
-            return Sponsors.this;
+            return SponsorsView.this;
         }
 
         @Override
@@ -151,13 +149,13 @@ public class Sponsors extends ControlBase {
         }
 
         @Override
-        public CssMetaData<Sponsors, Number> getCssMetaData() {
+        public CssMetaData<SponsorsView, Number> getCssMetaData() {
             return StyleableProperties.LOGO_FIT_WIDTH;
         }
 
         @Override
         public Object getBean() {
-            return Sponsors.this;
+            return SponsorsView.this;
         }
 
         @Override
@@ -181,42 +179,42 @@ public class Sponsors extends ControlBase {
 
     private static class StyleableProperties {
 
-        private static final CssMetaData<Sponsors, Boolean> DIVIDER_VISIBLE = new CssMetaData<>(
+        private static final CssMetaData<SponsorsView, Boolean> DIVIDER_VISIBLE = new CssMetaData<>(
                 "-fx-divider-visible", BooleanConverter.getInstance(), true) {
 
             @Override
-            public StyleableProperty<Boolean> getStyleableProperty(Sponsors control) {
+            public StyleableProperty<Boolean> getStyleableProperty(SponsorsView control) {
                 return control.dividerVisibleProperty();
             }
 
             @Override
-            public boolean isSettable(Sponsors control) {
+            public boolean isSettable(SponsorsView control) {
                 return !control.dividerVisible.isBound();
             }
         };
 
-        private static final CssMetaData<Sponsors, Number> LOGO_FIT_HEIGHT =
+        private static final CssMetaData<SponsorsView, Number> LOGO_FIT_HEIGHT =
                 new CssMetaData<>("-fx-logo-fit-height", SizeConverter.getInstance(), DEFAULT_LOGO_FIT_HEIGHT) {
                     @Override
-                    public boolean isSettable(Sponsors node) {
+                    public boolean isSettable(SponsorsView node) {
                         return !node.logoFitHeight.isBound();
                     }
 
                     @Override
-                    public StyleableProperty<Number> getStyleableProperty(Sponsors node) {
+                    public StyleableProperty<Number> getStyleableProperty(SponsorsView node) {
                         return (StyleableProperty<Number>) node.logoFitHeightProperty();
                     }
                 };
 
-        private static final CssMetaData<Sponsors, Number> LOGO_FIT_WIDTH =
+        private static final CssMetaData<SponsorsView, Number> LOGO_FIT_WIDTH =
                 new CssMetaData<>("-fx-logo-fit-width", SizeConverter.getInstance(), DEFAULT_LOGO_FIT_WIDTH) {
                     @Override
-                    public boolean isSettable(Sponsors node) {
+                    public boolean isSettable(SponsorsView node) {
                         return !node.logoFitWidth.isBound();
                     }
 
                     @Override
-                    public StyleableProperty<Number> getStyleableProperty(Sponsors node) {
+                    public StyleableProperty<Number> getStyleableProperty(SponsorsView node) {
                         return (StyleableProperty<Number>) node.logoFitWidthProperty();
                     }
                 };

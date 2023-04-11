@@ -43,48 +43,52 @@
 /** -------------------------------
 * Sponsors
 */
-.sponsors {
+.sponsors-view {
     -fx-background-color: -grey-10;
     -fx-logo-fit-height: 35px;
 }
 
-.sponsors:computer {
+.sponsors-view:lg {
     -fx-padding: 35px 60px 35px 60px;
 }
 
-.sponsors:tablet {
+.sponsors-view:md {
     -fx-padding: 30px 40px 30px 40px;
 }
 
-.sponsors:mobile {
-    -fx-padding: 20px 0px 20px 0px;
+.sponsors-view:sm {
+    -fx-padding: 20px 5px 20px 5px;
 }
 
-.sponsors .title {
+.sponsors-view .title {
     -fx-font-family: "Roboto Condensed";
     -fx-font-weight: bold;
     -fx-fill: -grey-100;
 }
 
-.sponsors:computer .title {
+.sponsors-view:lg .title {
     -fx-font-size: 16px;
 }
 
-.sponsors:embedded .title {
+.sponsors-view:sm-md .title {
     -fx-font-size: 20px;
 }
 
-.sponsors .grid-pane {
+.sponsors-view .grid-pane {
     -fx-hgap: 40px;
     -fx-vgap: 30px;
 }
 
-.sponsors:embedded .grid-pane {
+.sponsors-view:sm-md .grid-pane {
     -fx-hgap: 20px;
     -fx-vgap: 20px;
 }
 
-.sponsors .divider {
+.sponsors-view .divider {
     -fx-background-color: -grey-20;
     -fx-background-radius: 1000px;
+}
+
+.sponsors-view .logo:hover {
+    -fx-cursor: hand;
 }
