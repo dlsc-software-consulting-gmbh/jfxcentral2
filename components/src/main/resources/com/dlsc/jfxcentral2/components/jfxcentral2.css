@@ -1,0 +1,94 @@
+/** -------------------------------
+* Roboto Condensed Font
+* (https://fonts.google.com/specimen/Roboto+Condensed)
+*/
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url('../fonts/RobotoCondensed-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url('../fonts/RobotoCondensed-Italic.ttf');
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url('../fonts/RobotoCondensed-Bold.ttf');
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url('../fonts/RobotoCondensed-BoldItalic.ttf');
+}
+
+@font-face {
+    font-family: "Roboto Condensed Light";
+    src: url('../fonts/RobotoCondensed-Light.ttf');
+}
+
+@font-face {
+    font-family: "Roboto Condensed Light";
+    src: url('../fonts/RobotoCondensed-LightItalic.ttf');
+}
+
+
+* {
+    -grey-10: #e2e2e2;
+    -grey-20: #c9cccd;
+    -grey-100: #232323;
+    -bright-blue: #0E4AE4;
+}
+
+/** -------------------------------
+* Sponsors
+*/
+.sponsors-view {
+    -fx-background-color: -grey-10;
+    -fx-logo-fit-height: 35px;
+}
+
+.sponsors-view:lg {
+    -fx-padding: 35px 60px 35px 60px;
+}
+
+.sponsors-view:md {
+    -fx-padding: 30px 40px 30px 40px;
+}
+
+.sponsors-view:sm {
+    -fx-padding: 20px 5px 20px 5px;
+}
+
+.sponsors-view .title {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-weight: bold;
+    -fx-fill: -grey-100;
+}
+
+.sponsors-view:lg .title {
+    -fx-font-size: 16px;
+}
+
+.sponsors-view:sm-md .title {
+    -fx-font-size: 20px;
+}
+
+.sponsors-view .grid-pane {
+    -fx-hgap: 40px;
+    -fx-vgap: 30px;
+}
+
+.sponsors-view:sm-md .grid-pane {
+    -fx-hgap: 20px;
+    -fx-vgap: 20px;
+}
+
+.sponsors-view .divider {
+    -fx-background-color: -grey-20;
+    -fx-background-radius: 1000px;
+}
+
+.sponsors-view .logo:hover {
+    -fx-cursor: hand;
+}
