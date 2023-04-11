@@ -7,10 +7,26 @@ public enum Target {
     MOBILE;
 
     public boolean isComputer() {
-        return this == Target.DESKTOP || this == BROWSER;
+        return isDesktop() || isBrowser();
     }
 
     public boolean isEmbedded() {
-        return this == Target.TABLET || this == MOBILE;
+        return isTablet() || isMobile();
+    }
+
+    public boolean isMobile() {
+        return this == Target.MOBILE;
+    }
+
+    public boolean isTablet() {
+        return this == Target.TABLET;
+    }
+
+    public boolean isBrowser() {
+        return this == Target.BROWSER;
+    }
+
+    public boolean isDesktop() {
+        return this == Target.DESKTOP;
     }
 }

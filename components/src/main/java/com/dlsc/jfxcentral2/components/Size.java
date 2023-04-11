@@ -12,5 +12,18 @@ public enum Size {
     /**
      * PseudoClassName: lg
      */
-    LARGE
+    LARGE;
+
+    public boolean isSmall() {
+        return this == SMALL;
+    }
+
+    public boolean isMedium() {
+        return this == MEDIUM;
+    }
+
+    public boolean isLarge() {
+        return this == LARGE;
+    }
+
 }

@@ -42,20 +42,20 @@ public class ControlBase extends Control {
     }
 
     private void activateTargetPseudoClass(Target target) {
-        pseudoClassStateChanged(DESKTOP_PSEUDOCLASS_STATE, target == Target.DESKTOP);
-        pseudoClassStateChanged(BROWSER_PSEUDOCLASS_STATE, target == Target.BROWSER);
+        pseudoClassStateChanged(DESKTOP_PSEUDOCLASS_STATE, target.isDesktop());
+        pseudoClassStateChanged(BROWSER_PSEUDOCLASS_STATE, target.isBrowser());
         pseudoClassStateChanged(COMPUTER_PSEUDOCLASS_STATE, target.isComputer());
-        pseudoClassStateChanged(TABLET_PSEUDOCLASS_STATE, target == Target.TABLET);
-        pseudoClassStateChanged(MOBILE_PSEUDOCLASS_STATE, target == Target.MOBILE);
+        pseudoClassStateChanged(TABLET_PSEUDOCLASS_STATE, target.isTablet());
+        pseudoClassStateChanged(MOBILE_PSEUDOCLASS_STATE, target.isMobile());
         pseudoClassStateChanged(EMBEDDED_PSEUDOCLASS_STATE, target.isEmbedded());
     }
 
     private void activateSizePseudoClass(Size size) {
-        pseudoClassStateChanged(LARGE_PSEUDOCLASS_STATE, size == Size.LARGE);
-        pseudoClassStateChanged(MEDIUM_PSEUDOCLASS_STATE, size == Size.MEDIUM);
-        pseudoClassStateChanged(SMALL_PSEUDOCLASS_STATE, size == Size.SMALL);
-        pseudoClassStateChanged(SMALL_OR_MEDIUM_PSEUDOCLASS_STATE, size == Size.SMALL || size == Size.MEDIUM);
-        pseudoClassStateChanged(MEDIUM_OR_LARGE_PSEUDOCLASS_STATE, size == Size.MEDIUM || size == Size.LARGE);
+        pseudoClassStateChanged(LARGE_PSEUDOCLASS_STATE, size.isLarge());
+        pseudoClassStateChanged(MEDIUM_PSEUDOCLASS_STATE, size.isMedium());
+        pseudoClassStateChanged(SMALL_PSEUDOCLASS_STATE, size.isSmall());
+        pseudoClassStateChanged(SMALL_OR_MEDIUM_PSEUDOCLASS_STATE, size.isSmall() || size.isMedium());
+        pseudoClassStateChanged(MEDIUM_OR_LARGE_PSEUDOCLASS_STATE, size.isMedium() || size.isLarge());
     }
 
     private final ObjectProperty<Target> target = new SimpleObjectProperty<>(this, "target", Target.DESKTOP);

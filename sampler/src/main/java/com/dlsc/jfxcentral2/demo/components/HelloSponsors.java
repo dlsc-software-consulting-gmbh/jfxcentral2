@@ -30,20 +30,20 @@ public class HelloSponsors extends JFXCentralSampleBase {
         sponsorsView.setShowLogoCount(5);
         sponsorsView.itemsProperty().addAll(
                 new SponsorsView.Sponsor("JPRO",
-                        getClass().getResource("/com/dlsc/jfxcentral2/demo/components/logos/jpro.png").toExternalForm(),
+                        getClass().getResource("logos/jpro.png").toExternalForm(),
                         "https://www.jpro.one/"),
                 new SponsorsView.Sponsor("SANDEC",
-                        getClass().getResource("/com/dlsc/jfxcentral2/demo/components/logos/sandec.png").toExternalForm(),
+                        getClass().getResource("logos/sandec.png").toExternalForm(),
                         "https://www.jpro.one/"),
                 new SponsorsView.Sponsor("DLSC",
-                        getClass().getResource("/com/dlsc/jfxcentral2/demo/components/logos/dlsc.png").toExternalForm(),
+                        getClass().getResource("logos/dlsc.png").toExternalForm(),
                         "https://www.jpro.one/"),
                 new SponsorsView.Sponsor("NAVIELEKTRO",
-                        getClass().getResource("/com/dlsc/jfxcentral2/demo/components/logos/navielektro.png").toExternalForm(),
+                        getClass().getResource("logos/navielektro.png").toExternalForm(),
                         "https://www.jpro.one/"),
                 new SponsorsView.Sponsor(
                         "Hydraulic",
-                        getClass().getResource("/com/dlsc/jfxcentral2/demo/components/logos/hydraulic.png").toExternalForm(),
+                        getClass().getResource("logos/hydraulic.png").toExternalForm(),
                         "https://www.jpro.one/")
         );
 

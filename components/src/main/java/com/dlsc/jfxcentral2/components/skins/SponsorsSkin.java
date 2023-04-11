@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.control.SkinBase;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
@@ -21,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class SponsorsSkin extends SkinBase<SponsorsView> {
+public class SponsorsSkin extends ControlsBaseSkin<SponsorsView> {
     private final GridPane gridPane;
     private final SponsorsView control;
     private final Text title;
@@ -86,7 +85,7 @@ public class SponsorsSkin extends SkinBase<SponsorsView> {
         //add divider and logo
         Size screenSize = control.getSize();
         for (int i = 0; i < showedSponsor.size(); i++) {
-            if (i != 0 || screenSize == Size.LARGE) {
+            if (i != 0 || screenSize.isLarge()) {
                 Region divider = new Region();
                 divider.setPrefSize(7, 7);
                 divider.setMinSize(7, 7);

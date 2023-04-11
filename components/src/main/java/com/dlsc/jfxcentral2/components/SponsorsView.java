@@ -47,7 +47,7 @@ public class SponsorsView extends ControlBase {
 
     @Override
     public String getUserAgentStylesheet() {
-        return SponsorsView.class.getResource("/com/dlsc/jfxcentral2/components/jfxcentral2.css").toExternalForm();
+        return SponsorsView.class.getResource("jfxcentral2.css").toExternalForm();
     }
 
     private final IntegerProperty showLogoCount = new SimpleIntegerProperty(this, "showCount", 5);
