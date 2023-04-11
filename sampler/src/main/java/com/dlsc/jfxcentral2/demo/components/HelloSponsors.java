@@ -46,7 +46,7 @@ public class HelloSponsors extends JFXCentralSampleBase {
                         getClass().getResource("logos/hydraulic.png").toExternalForm(),
                         "https://www.jpro.one/")
         );
-
+        sponsorsView.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
         return new ScrollPane(sponsorsView);
     }
 
