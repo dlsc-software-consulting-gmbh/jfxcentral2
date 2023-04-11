@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-public class HelloSponsors extends JFXCentralSampleBase {
+public class HelloSponsorsView extends JFXCentralSampleBase {
 
     private SponsorsView sponsorsView;
 
@@ -26,12 +26,10 @@ public class HelloSponsors extends JFXCentralSampleBase {
 
     @Override
     public Node getPanel(Stage stage) {
-        sponsorsView = new SponsorsView();
-        sponsorsView.setShowLogoCount(5);
-        sponsorsView.itemsProperty().addAll(
+        sponsorsView = new SponsorsView(
                 new SponsorsView.Sponsor("JPRO",
-                        getClass().getResource("logos/jpro.png").toExternalForm(),
-                        "https://www.jpro.one/"),
+                getClass().getResource("logos/jpro.png").toExternalForm(),
+                "https://www.jpro.one/"),
                 new SponsorsView.Sponsor("SANDEC",
                         getClass().getResource("logos/sandec.png").toExternalForm(),
                         "https://www.jpro.one/"),
@@ -44,8 +42,8 @@ public class HelloSponsors extends JFXCentralSampleBase {
                 new SponsorsView.Sponsor(
                         "Hydraulic",
                         getClass().getResource("logos/hydraulic.png").toExternalForm(),
-                        "https://www.jpro.one/")
-        );
+                        "https://www.jpro.one/"));
+        sponsorsView.setShowLogoCount(5);
         sponsorsView.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
         return new ScrollPane(sponsorsView);
     }
@@ -75,7 +73,7 @@ public class HelloSponsors extends JFXCentralSampleBase {
         sponsorsView.dividerVisibleProperty().bind(showDividerCheckBox.selectedProperty());
 
         VBox controlBox = new VBox(10, new Label("Change size:"), targetDeviceComboBox, new Separator(),
-                new Label("Show Logo Count:"), spinner, showDividerCheckBox);
+                new Label("Show Logo Count:"), spinner, new Separator(), showDividerCheckBox);
         controlBox.setSpacing(10);
         controlBox.setAlignment(Pos.TOP_LEFT);
         return controlBox;

@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.components.skins;
 
-import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
@@ -20,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class SponsorsSkin extends ControlsBaseSkin<SponsorsView> {
+public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
     private final GridPane gridPane;
     private final SponsorsView control;
     private final Text title;
@@ -83,9 +82,8 @@ public class SponsorsSkin extends ControlsBaseSkin<SponsorsView> {
             showedSponsor.addAll(temp.subList(0, realLogoCount));
         }
         //add divider and logo
-        Size screenSize = control.getSize();
         for (int i = 0; i < showedSponsor.size(); i++) {
-            if (i != 0 || screenSize.isLarge()) {
+            if (i != 0 || isLarge()) {
                 Region divider = new Region();
                 divider.setPrefSize(7, 7);
                 divider.setMinSize(7, 7);
@@ -119,7 +117,7 @@ public class SponsorsSkin extends ControlsBaseSkin<SponsorsView> {
             gridPane.add(title, 0, 0, 1, 1);
             return;
         }
-        switch (screenSize) {
+        switch (control.getSize()) {
             case LARGE -> {
                 gridPane.add(title, 0, 0, 1, 1);
                 int size = nodes.size();

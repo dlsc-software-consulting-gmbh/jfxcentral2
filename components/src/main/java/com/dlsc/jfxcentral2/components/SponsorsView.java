@@ -33,8 +33,9 @@ public class SponsorsView extends ControlBase {
     private static final int DEFAULT_LOGO_FIT_WIDTH = 200;
 
 
-    public SponsorsView() {
+    public SponsorsView(Sponsor... sponsors) {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
+        itemsProperty().setAll(sponsors);
     }
 
     public record Sponsor(String name, String logoUrl, String url) {
