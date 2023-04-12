@@ -7,10 +7,10 @@ import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-public class HelloFooter extends JFXCentralSampleBase {
+public class HelloFooterView extends JFXCentralSampleBase {
 
     private FooterView footer;
 
@@ -20,7 +20,7 @@ public class HelloFooter extends JFXCentralSampleBase {
     }
 
     @Override
-    public Node getPanel(Stage stage) {
+    protected Region createControl() {
         footer = new FooterView();
         footer.setOnSendMail(() -> System.out.println("Send mail to dlemmermann@gmail.com"));
         footer.setOnTwitter(() -> System.out.println("https://twitter.com/dlemmermann"));

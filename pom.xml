@@ -108,6 +108,15 @@
                 <artifactId>ikonli-javafx</artifactId>
                 <version>${ikonli.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>fr.brouillard.oss</groupId>
+                <artifactId>cssfx</artifactId>
+                <version>11.5.1</version>
+            </dependency>
+
+            <!-- Test dependencies -->
+
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>

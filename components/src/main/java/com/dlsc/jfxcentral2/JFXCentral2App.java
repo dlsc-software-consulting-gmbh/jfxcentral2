@@ -16,15 +16,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.util.List;
-
 public class JFXCentral2App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         // sponsor view
         SponsorsView sponsorsView = new SponsorsView();
-        sponsorsView.getItems().setAll(createSponsors());
         sponsorsView.sizeProperty().bind(sizeProperty());
         sponsorsView.showLogoCountProperty().bind(Bindings.createIntegerBinding(() -> switch (getSize()) {
             case SMALL -> 2;
@@ -76,31 +73,12 @@ public class JFXCentral2App extends Application {
 
         Stage controlsStage = new Stage(StageStyle.UTILITY);
         controlsStage.setTitle("Controls");
-        controlsStage.initOwner(primaryStage);
         controlsStage.setAlwaysOnTop(true);
         controlsStage.setScene(controlsScene);
         controlsStage.sizeToScene();
+        controlsStage.setX(100);
+        controlsStage.setY(100);
         controlsStage.show();
-    }
-
-    private List<SponsorsView.Sponsor> createSponsors() {
-        return List.of(
-                new SponsorsView.Sponsor("JPRO",
-                        getClass().getResource("logos/jpro.png").toExternalForm(),
-                        "https://www.jpro.one/"),
-                new SponsorsView.Sponsor("SANDEC",
-                        getClass().getResource("logos/sandec.png").toExternalForm(),
-                        "https://www.jpro.one/"),
-                new SponsorsView.Sponsor("DLSC",
-                        getClass().getResource("logos/dlsc.png").toExternalForm(),
-                        "https://www.jpro.one/"),
-                new SponsorsView.Sponsor("NAVIELEKTRO",
-                        getClass().getResource("logos/navielektro.png").toExternalForm(),
-                        "https://www.jpro.one/"),
-                new SponsorsView.Sponsor(
-                        "Hydraulic",
-                        getClass().getResource("logos/hydraulic.png").toExternalForm(),
-                        "https://www.jpro.one/"));
     }
 
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(this, "size", Size.LARGE);

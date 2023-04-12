@@ -33,9 +33,29 @@ public class SponsorsView extends ControlBase {
     private static final int DEFAULT_LOGO_FIT_WIDTH = 200;
 
 
-    public SponsorsView(Sponsor... sponsors) {
+    public SponsorsView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
-        itemsProperty().setAll(sponsors);
+        itemsProperty().setAll(createSponsors());
+    }
+
+    private List<SponsorsView.Sponsor> createSponsors() {
+        return List.of(
+                new SponsorsView.Sponsor("JPRO",
+                        getClass().getResource("logos/jpro.png").toExternalForm(),
+                        "https://www.jpro.one/"),
+                new SponsorsView.Sponsor("SANDEC",
+                        getClass().getResource("logos/sandec.png").toExternalForm(),
+                        "https://www.jpro.one/"),
+                new SponsorsView.Sponsor("DLSC",
+                        getClass().getResource("logos/dlsc.png").toExternalForm(),
+                        "https://www.jpro.one/"),
+                new SponsorsView.Sponsor("NAVIELEKTRO",
+                        getClass().getResource("logos/navielektro.png").toExternalForm(),
+                        "https://www.jpro.one/"),
+                new SponsorsView.Sponsor(
+                        "Hydraulic",
+                        getClass().getResource("logos/hydraulic.png").toExternalForm(),
+                        "https://www.jpro.one/"));
     }
 
     public record Sponsor(String name, String logoUrl, String url) {

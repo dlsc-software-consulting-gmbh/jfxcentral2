@@ -5,12 +5,54 @@
  */
 package com.dlsc.jfxcentral2.demo;
 
+import com.dlsc.jfxcentral2.JFXCentral2App;
+import fr.brouillard.oss.cssfx.CSSFX;
 import fxsampler.SampleBase;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
 public abstract class JFXCentralSampleBase extends SampleBase {
 
+    private boolean stylesheetsAdded;
+
     protected JFXCentralSampleBase() {
     }
+
+    @Override
+    public final Node getPanel(Stage stage) {
+//        CSSFXLogger.setLoggerFactory((loggerName) -> (level, message, args) -> {
+//            String logMessage = "CSS: " + String.format(message, args);
+//            switch (level) {
+//                case NONE -> LoggingDomain.CSS.trace(logMessage);
+//                case INFO -> LoggingDomain.CSS.info(logMessage);
+//                case ERROR -> LoggingDomain.CSS.error(logMessage);
+//                case WARN -> LoggingDomain.CSS.warn(logMessage);
+//                case DEBUG -> LoggingDomain.CSS.debug(logMessage);
+//            }
+//        });
+
+        CSSFX.start();
+
+        Region panel = createControl();
+
+        panel.sceneProperty().addListener(it -> {
+            Scene scene = panel.getScene();
+
+            if (scene == null || stylesheetsAdded) {
+                return;
+            }
+
+            scene.getStylesheets().add(JFXCentral2App.class.getResource("theme.css").toExternalForm());
+
+            stylesheetsAdded = true;
+        });
+
+        return panel;
+    }
+
+    protected abstract Region createControl();
 
     @Override
     public String getSampleSourceURL() {

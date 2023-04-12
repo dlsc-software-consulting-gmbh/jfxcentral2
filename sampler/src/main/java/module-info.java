@@ -6,6 +6,8 @@ open module com.dlsc.jfxcentral.sampler {
     requires javafx.controls;
     requires javafx.web;
 
+    requires fr.brouillard.oss.cssfx;
+
     requires org.controlsfx.controls;
     requires org.controlsfx.fxsampler;
 
