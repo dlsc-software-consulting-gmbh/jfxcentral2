@@ -70,10 +70,21 @@
     -green: #08e093;
     -purple: #d2a8ff;
     -orange: #f9990f;
-
+    -white: #ffffff;
     -bright-blue: #0e4ae4;
+    -light-blue: #cfdbfa;
+}
+
+.root {
     -fx-font-family: "Spline Sans";
     -fx-font-size: 16px;
+}
+
+/** -------------------------------
+* Button
+*/
+.button {
+    -fx-cursor: hand;
 }
 
 /** -------------------------------
@@ -274,4 +285,251 @@
 
 .footer-view .links-pane .link:pressed {
     -fx-text-fill: derive(tf, -15%);
+}
+
+/** -------------------------------
+* WelcomeView
+*/
+.welcome-view {
+    -fx-background-color: -bright-blue;
+    -fx-background-image: url("images/welcome.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.welcome-view .fx-logo {
+    -fx-image: url("images/fxlogo.png");
+}
+
+.welcome-view .label-box .label {
+    -fx-text-fill: -white;
+}
+
+.welcome-view .flow-pane .button {
+    -fx-font-weight: bold;
+}
+
+.welcome-view .flow-pane .ikonli-font-icon {
+    -fx-icon-size: 28px;
+    -fx-icon-color: -white;
+}
+
+.welcome-view .flow-pane .transparent-button {
+    -fx-border-color: #FFFFFF33;
+    -fx-border-radius: 10px;
+    -fx-border-insets: 0px;
+    -fx-text-fill: -white;
+    -fx-content-display: top;
+    -fx-background-color: transparent;
+}
+
+.welcome-view .flow-pane .fill-button {
+    -fx-text-fill: -grey-100;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0;
+    -fx-content-display: right;
+}
+
+.welcome-view .flow-pane .fill-button .ikonli-font-icon {
+    -fx-icon-color: -grey-100;
+}
+
+.welcome-view .flow-pane .install-button {
+    -bg: -light-blue;
+    -fx-background-color: -bg;
+}
+
+.welcome-view .flow-pane .openjfx-button {
+    -bg: -green;
+    -fx-background-color: -bg;
+}
+
+.welcome-view .flow-pane .fill-button:hover {
+    -fx-background-color: derive(-bg, 15%);
+}
+
+.welcome-view .flow-pane .fill-button:pressed {
+    -fx-background-color: derive(-bg, -15%);
+}
+
+.welcome-view:lg {
+    -fx-pref-width: 1440px;
+    -fx-pref-height: 800px;
+    -fx-max-width: 1440px;
+    -fx-max-height: 800px;
+    -fx-padding: 195px 180px 200px 180px;
+}
+
+.welcome-view:lg .content {
+    -fx-spacing: 140px;
+    -fx-alignment: center;
+}
+
+.welcome-view:lg .label-box {
+    -fx-pref-width: 632px;
+    -fx-pref-height: 300px;
+    -fx-max-width: 632px;
+    -fx-max-height: 300px;
+    -fx-spacing: 5px;
+}
+
+.welcome-view:lg .fx-logo {
+    -fx-fit-height: 58px;
+    -fx-fit-width: 170px
+}
+
+.welcome-view:lg .label-box .home-label,
+.welcome-view:lg .label-box .related-label {
+    -fx-font-size: 54px;
+}
+
+.welcome-view:lg .label-box .related-label {
+    -fx-padding: 0 0 20px 0;
+}
+
+.welcome-view:lg .label-box .description-label {
+    -fx-font-size: 24px;
+}
+
+.welcome-view:lg .flow-pane {
+    -fx-pref-width: 303px;
+    -fx-pref-height: 225px;
+    -fx-maax-width: 303px;
+    -fx-max-height: 225px;
+    -fx-hgap: 10px;
+    -fx-vgap: 15px;
+}
+
+.welcome-view:lg .flow-pane .transparent-button {
+    -fx-pref-width: 146px;
+    -fx-pref-height: 75px;
+    -fx-max-width: 146px;
+    -fx-max-height: 75px;
+}
+
+.welcome-view .flow-pane .transparent-button:hover {
+    -fx-border-color: -white;
+}
+
+.welcome-view .flow-pane .transparent-button:pressed {
+    -fx-border-color: -grey-30;
+}
+
+.welcome-view:lg .flow-pane .fill-button {
+    -fx-pref-width: 303px;
+    -fx-pref-height: 60px;
+    -fx-max-width: 303px;
+    -fx-max-height: 60px;
+}
+
+.welcome-view:md {
+    -fx-pref-width: 768px;
+    -fx-pref-height: 1024px;
+    -fx-max-width: 768px;
+    -fx-max-height: 1024px;
+}
+
+.welcome-view:md .content {
+    -fx-spacing: 80px;
+    -fx-alignment: center;
+    -fx-max-width: 632px;
+}
+
+.welcome-view:md .label-box {
+    -fx-alignment: center;
+}
+
+.welcome-view:md .fx-logo {
+    -fx-fit-height: 47px;
+    -fx-fit-width: 138px
+}
+
+.welcome-view:md .home-label,
+.welcome-view:md .related-label {
+    -fx-font-size: 44px;
+}
+
+.welcome-view:md .related-label {
+    -fx-padding: 0 0 20px 0;
+}
+
+.welcome-view:md .description-label {
+    -fx-font-size: 20px;
+    -fx-text-alignment: center;
+}
+
+.welcome-view:md .flow-pane {
+    -fx-pref-width: 632px;
+    -fx-pref-height: 300px;
+    -fx-max-width: 632px;
+    -fx-max-height: 300px;
+    -fx-hgap: 20px;
+    -fx-vgap: 15px;
+    -fx-alignment: top-center;
+}
+
+.welcome-view:md .flow-pane .button {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 50px;
+    -fx-max-width: 300px;
+    -fx-max-height: 50px;
+}
+
+.welcome-view:sm {
+    -fx-pref-width: 375px;
+    -fx-pref-height: 812px;
+    -fx-max-width: 375px;
+    -fx-max-height: 812px;
+}
+
+.welcome-view:sm .content {
+    -fx-pref-width: 317px;
+    -fx-max-width: 317px;
+    -fx-alignment: center;
+}
+
+.welcome-view:sm .fx-logo {
+    -fx-fit-height: 36px;
+    -fx-fit-width: 106px
+}
+
+.welcome-view:sm .content {
+    -fx-spacing: 40px;
+    -fx-alignment: center;
+}
+
+.welcome-view:sm .label-box {
+    -fx-alignment: center;
+}
+
+.welcome-view:sm .home-label,
+.welcome-view:sm .related-label {
+    -fx-font-size: 34px;
+}
+
+.welcome-view:sm .related-label {
+    -fx-padding: 0 0 20px 0;
+}
+
+.welcome-view:sm .description-label {
+    -fx-text-alignment: center;
+    -fx-font-size: 20px;
+}
+
+.welcome-view:sm .flow-pane {
+    -fx-hgap: 15px;
+    -fx-vgap: 10px;
+    -fx-alignment: center;
+}
+
+.welcome-view:sm .transparent-button {
+    -fx-pref-width: 145px;
+    -fx-pref-height: 75px;
+}
+
+.welcome-view:sm .fill-button {
+    -fx-pref-width: 315px;
+    -fx-pref-height: 50px;
 }

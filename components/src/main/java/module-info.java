@@ -8,6 +8,7 @@ open module com.dlsc.jfxcentral2.components {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;
+    requires org.kordamp.ikonli.materialdesign;
 
     exports com.dlsc.jfxcentral2;
     exports com.dlsc.jfxcentral2.components;
