@@ -207,12 +207,12 @@
 
 .footer:md .content {
     -fx-spacing: 25px;
-    -fx-padding: 40px 30px 40px 30px;
+    -fx-padding: 40px 45px 40px 44px;
 }
 
 .footer:sm .content {
     -fx-spacing: 20px;
-    -fx-padding: 30px 30px 30px 15px;
+    -fx-padding: 30px 33px 30px 20px;
 }
 
 .footer .duke-image {

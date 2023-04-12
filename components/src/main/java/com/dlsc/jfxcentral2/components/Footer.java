@@ -39,9 +39,6 @@ public class Footer extends PaneBase {
             dukeImageView.setFitHeight(getSize().isLarge() ? 90 : 61);
             layoutBySize(dukeImageView, linksPane, legalInfoPane);
         });
-        widthProperty().addListener((ob, ov, nv) ->{
-            System.out.println(nv);
-        });
     }
 
 
