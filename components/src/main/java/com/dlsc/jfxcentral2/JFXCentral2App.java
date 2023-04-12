@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral2.components.FooterView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.SponsorsView;
+import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -79,6 +80,8 @@ public class JFXCentral2App extends Application {
         controlsStage.setX(100);
         controlsStage.setY(100);
         controlsStage.show();
+
+        CSSFX.start();
     }
 
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(this, "size", Size.LARGE);
