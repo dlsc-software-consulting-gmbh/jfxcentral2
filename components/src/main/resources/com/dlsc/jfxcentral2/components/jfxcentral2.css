@@ -199,23 +199,24 @@
 .footer {
     -fx-background-color: -grey-100;
 }
-.footer .duke-image {
-    -fx-image: url('../images/duke.png');
-}
 
-.footer:lg {
+.footer:lg .content {
     -fx-spacing: 170px;
-    -fx-padding: 60px 45px 60px 45px;
+    -fx-padding: 60px 120px 60px 123px;
 }
 
-.footer:md {
+.footer:md .content {
     -fx-spacing: 25px;
     -fx-padding: 40px 30px 40px 30px;
 }
 
-.footer:sm {
+.footer:sm .content {
     -fx-spacing: 20px;
     -fx-padding: 30px 30px 30px 15px;
+}
+
+.footer .duke-image {
+    -fx-image: url('../images/duke.png');
 }
 
 .footer:sm .number-pane-box {

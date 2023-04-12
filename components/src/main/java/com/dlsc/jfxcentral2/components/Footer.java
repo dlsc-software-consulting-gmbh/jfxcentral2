@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral2.utils.JFXCentralUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.css.PseudoClass;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -18,45 +17,43 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
-public class Footer extends HBox {
+public class Footer extends PaneBase {
 
-    private static final PseudoClass SMALL_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("sm");
-    private static final PseudoClass MEDIUM_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("md");
-    private static final PseudoClass LARGE_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("lg");
+    private final HBox contentBox;
 
     public Footer() {
         getStyleClass().add("footer");
-        activateSizePseudoClass(getSize());
+        contentBox = new HBox();
+        contentBox.getStyleClass().add("content");
+        getChildren().add(contentBox);
+
         ImageView dukeImageView = new ImageView();
         dukeImageView.setPreserveRatio(true);
         dukeImageView.getStyleClass().add("duke-image");
-        getChildren().add(dukeImageView);
+        contentBox.getChildren().add(dukeImageView);
         LineNumberPane linksPane = initLinksPane();
         LineNumberPane legalInfoPane = initLegalInfoPane();
         setMinWidth(Region.USE_PREF_SIZE);
         layoutBySize(dukeImageView, linksPane, legalInfoPane);
         sizeProperty().addListener((ob, oldSize, newSize) -> {
-            activateSizePseudoClass(newSize);
             dukeImageView.setFitHeight(getSize().isLarge() ? 90 : 61);
             layoutBySize(dukeImageView, linksPane, legalInfoPane);
         });
+        widthProperty().addListener((ob, ov, nv) ->{
+            System.out.println(nv);
+        });
     }
 
-    private void activateSizePseudoClass(Size size) {
-        pseudoClassStateChanged(LARGE_PSEUDOCLASS_STATE, size.isLarge());
-        pseudoClassStateChanged(MEDIUM_PSEUDOCLASS_STATE, size.isMedium());
-        pseudoClassStateChanged(SMALL_PSEUDOCLASS_STATE, size.isSmall());
-    }
 
     private void layoutBySize(ImageView dukeImageView, LineNumberPane linksPane, LineNumberPane legalInfoPane) {
         LineNumberPane contactPane = initContactPane();
         Size size = getSize();
         if (size.isLarge() || size.isMedium()) {
-            getChildren().setAll(dukeImageView, contactPane, linksPane, legalInfoPane);
+            contentBox.getChildren().setAll(dukeImageView, contactPane, linksPane, legalInfoPane);
         } else {
             VBox box = new VBox(contactPane, linksPane, legalInfoPane);
             box.getStyleClass().add("number-pane-box");
-            getChildren().setAll(dukeImageView, box);
+            contentBox.getChildren().setAll(dukeImageView, box);
         }
     }
 
@@ -67,13 +64,7 @@ public class Footer extends HBox {
         cookiesLink.setOnAction(event -> JFXCentralUtil.run(onCookies));
         Hyperlink privacyPolicyLink = new Hyperlink("Privacy policy");
         privacyPolicyLink.setOnAction(event -> JFXCentralUtil.run(onPrivacyPolicy));
-        return new LineNumberPane(
-                new Label("Legal info"),
-                null,
-                tcLink,
-                cookiesLink,
-                privacyPolicyLink
-        );
+        return new LineNumberPane(new Label("Legal info"), null, tcLink, cookiesLink, privacyPolicyLink);
     }
 
     private LineNumberPane initLinksPane() {
@@ -161,26 +152,6 @@ public class Footer extends HBox {
                 add(node, 1, i);
             }
         }
-    }
-
-
-    @Override
-    public String getUserAgentStylesheet() {
-        return Footer.class.getResource("jfxcentral2.css").toExternalForm();
-    }
-
-    private final ObjectProperty<Size> size = new SimpleObjectProperty<>(this, "size", Size.LARGE);
-
-    public Size getSize() {
-        return size.get();
-    }
-
-    public ObjectProperty<Size> sizeProperty() {
-        return size;
-    }
-
-    public void setSize(Size size) {
-        this.size.set(size);
     }
 
     private final ObjectProperty<Runnable> onSendMail = new SimpleObjectProperty<>(this, "onSendMail");
