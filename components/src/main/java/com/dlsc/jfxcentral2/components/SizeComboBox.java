@@ -1,6 +1,5 @@
-package com.dlsc.jfxcentral2.demo.components;
+package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.components.Size;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.ComboBox;

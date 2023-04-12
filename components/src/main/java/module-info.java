@@ -7,6 +7,6 @@ module com.dlsc.jfxcentral2.components {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;
 
-    opens com.dlsc.jfxcentral2.components to javafx.fxml;
+    exports com.dlsc.jfxcentral2;
     exports com.dlsc.jfxcentral2.components;
 }

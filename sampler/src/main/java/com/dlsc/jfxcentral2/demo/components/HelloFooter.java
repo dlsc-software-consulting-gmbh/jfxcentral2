@@ -1,7 +1,8 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.Footer;
+import com.dlsc.jfxcentral2.components.FooterView;
 import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 
 public class HelloFooter extends JFXCentralSampleBase {
 
-    private Footer footer;
+    private FooterView footer;
 
     @Override
     public String getSampleName() {
@@ -20,7 +21,7 @@ public class HelloFooter extends JFXCentralSampleBase {
 
     @Override
     public Node getPanel(Stage stage) {
-        footer = new Footer();
+        footer = new FooterView();
         footer.setOnSendMail(() -> System.out.println("Send mail to dlemmermann@gmail.com"));
         footer.setOnTwitter(() -> System.out.println("https://twitter.com/dlemmermann"));
         footer.setOnGithub(() -> System.out.println("https://github.com/dlsc-software-consulting-gmbh"));

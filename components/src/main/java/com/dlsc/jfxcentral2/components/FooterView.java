@@ -17,12 +17,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
-public class Footer extends PaneBase {
+public class FooterView extends PaneBase {
 
     private final HBox contentBox;
 
-    public Footer() {
-        getStyleClass().add("footer");
+    public FooterView() {
+        getStyleClass().add("footer-view");
         contentBox = new HBox();
         contentBox.getStyleClass().add("content");
         getChildren().add(contentBox);
@@ -31,9 +31,12 @@ public class Footer extends PaneBase {
         dukeImageView.setPreserveRatio(true);
         dukeImageView.getStyleClass().add("duke-image");
         contentBox.getChildren().add(dukeImageView);
+
         LineNumberPane linksPane = initLinksPane();
         LineNumberPane legalInfoPane = initLegalInfoPane();
+
         setMinWidth(Region.USE_PREF_SIZE);
+
         layoutBySize(dukeImageView, linksPane, legalInfoPane);
         sizeProperty().addListener((ob, oldSize, newSize) -> {
             dukeImageView.setFitHeight(getSize().isLarge() ? 90 : 61);

@@ -32,11 +32,13 @@ public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
         gridPane = new GridPane();
         gridPane.getStyleClass().add("grid-pane");
         getChildren().add(gridPane);
+
         title = new Text(control.getTitle());
         title.textProperty().bind(control.titleProperty());
         title.getStyleClass().add("title");
 
         initLogoNodes();
+
         control.itemsProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
         control.sizeProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
         control.showLogoCountProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
@@ -85,9 +87,6 @@ public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
         for (int i = 0; i < showedSponsor.size(); i++) {
             if (i != 0 || isLarge()) {
                 Region divider = new Region();
-                divider.setPrefSize(7, 7);
-                divider.setMinSize(7, 7);
-                divider.setMaxSize(7, 7);
                 divider.getStyleClass().addAll("divider", "divider-" + i);
                 divider.managedProperty().bind(divider.visibleProperty());
                 divider.visibleProperty().bind(control.dividerVisibleProperty());

@@ -6,6 +6,7 @@ import javafx.css.PseudoClass;
 import javafx.scene.layout.StackPane;
 
 public class PaneBase extends StackPane {
+
     private static final PseudoClass SMALL_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("sm");
     private static final PseudoClass MEDIUM_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("md");
     private static final PseudoClass LARGE_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("lg");
@@ -23,35 +24,31 @@ public class PaneBase extends StackPane {
     private static final PseudoClass BROWSER_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("browser");
     private static final PseudoClass MOBILE_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("mobile");
 
-
     public PaneBase() {
-        Target target = targetProperty().get();
-        activateTargetPseudoClass(target);
-        targetProperty().addListener((observable, oldValue, newValue) -> activateTargetPseudoClass(newValue));
-        Size size = sizeProperty().get();
-        activateSizePseudoClass(size);
-        sizeProperty().addListener((observable, oldValue, newValue) -> activateSizePseudoClass(newValue));
+        // target styling
+        activateTargetPseudoClass();
+        targetProperty().addListener(it -> activateTargetPseudoClass());
+
+        // size styling
+        activateSizePseudoClass();
+        sizeProperty().addListener(it -> activateSizePseudoClass());
     }
 
-    private void activateTargetPseudoClass(Target target) {
+    private void activateTargetPseudoClass() {
+        Target target = getTarget();
         pseudoClassStateChanged(DESKTOP_PSEUDOCLASS_STATE, target.isDesktop());
         pseudoClassStateChanged(BROWSER_PSEUDOCLASS_STATE, target.isBrowser());
         pseudoClassStateChanged(MOBILE_PSEUDOCLASS_STATE, target.isMobile());
     }
 
-    private void activateSizePseudoClass(Size size) {
+    private void activateSizePseudoClass() {
+        Size size = getSize();
         pseudoClassStateChanged(LARGE_PSEUDOCLASS_STATE, size.isLarge());
         pseudoClassStateChanged(MEDIUM_PSEUDOCLASS_STATE, size.isMedium());
         pseudoClassStateChanged(SMALL_PSEUDOCLASS_STATE, size.isSmall());
         pseudoClassStateChanged(SMALL_OR_MEDIUM_PSEUDOCLASS_STATE, size.isSmall() || size.isMedium());
         pseudoClassStateChanged(MEDIUM_OR_LARGE_PSEUDOCLASS_STATE, size.isMedium() || size.isLarge());
     }
-
-    @Override
-    public String getUserAgentStylesheet() {
-        return Footer.class.getResource("jfxcentral2.css").toExternalForm();
-    }
-
 
     private final ObjectProperty<Target> target = new SimpleObjectProperty<>(this, "target", Target.DESKTOP);
 

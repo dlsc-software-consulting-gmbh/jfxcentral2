@@ -4,32 +4,32 @@
 */
 @font-face {
     font-family: "Roboto Condensed";
-    src: url('../fonts/RobotoCondensed-Regular.ttf');
+    src: url('fonts/RobotoCondensed-Regular.ttf');
 }
 
 @font-face {
     font-family: "Roboto Condensed";
-    src: url('../fonts/RobotoCondensed-Italic.ttf');
+    src: url('fonts/RobotoCondensed-Italic.ttf');
 }
 
 @font-face {
     font-family: "Roboto Condensed";
-    src: url('../fonts/RobotoCondensed-Bold.ttf');
+    src: url('fonts/RobotoCondensed-Bold.ttf');
 }
 
 @font-face {
     font-family: "Roboto Condensed";
-    src: url('../fonts/RobotoCondensed-BoldItalic.ttf');
+    src: url('fonts/RobotoCondensed-BoldItalic.ttf');
 }
 
 @font-face {
     font-family: "Roboto Condensed Light";
-    src: url('../fonts/RobotoCondensed-Light.ttf');
+    src: url('fonts/RobotoCondensed-Light.ttf');
 }
 
 @font-face {
     font-family: "Roboto Condensed Light";
-    src: url('../fonts/RobotoCondensed-LightItalic.ttf');
+    src: url('fonts/RobotoCondensed-LightItalic.ttf');
 }
 
 /** -------------------------------
@@ -38,22 +38,22 @@
 */
 @font-face {
     font-family: "Spline Sans";
-    src: url('../fonts/SplineSans-Regular.ttf');
+    src: url('fonts/SplineSans-Regular.ttf');
 }
 
 @font-face {
     font-family: "Spline Sans";
-    src: url('../fonts/SplineSans-Bold.ttf');
+    src: url('fonts/SplineSans-Bold.ttf');
 }
 
 @font-face {
     font-family: "Spline Sans Light";
-    src: url('../fonts/SplineSans-Light.ttf');
+    src: url('fonts/SplineSans-Light.ttf');
 }
 
 @font-face {
     font-family: "Spline Sans SemiBold";
-    src: url('../fonts/SplineSans-SemiBold.ttf');
+    src: url('fonts/SplineSans-SemiBold.ttf');
 }
 
 * {
@@ -112,9 +112,23 @@
     -fx-cursor: hand;
 }
 
+.controls {
+    -fx-pref-width: 200px;
+    -fx-padding: 10px;
+    -fx-background-color: light-grey;
+}
+
+.background {
+    -fx-background-color: #3C3C3C;
+}
+
+.background > .ui {
+    -fx-background-color: white;
+}
+
 /** -------------------------------
-* Sponsors
-*/
+ * Sponsors
+ */
 .sponsors-view {
     -fx-background-color: -grey-10;
     -fx-logo-fit-height: 35px;
@@ -157,6 +171,13 @@
 }
 
 .sponsors-view .divider {
+    -size: 7px;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
     -fx-background-color: -grey-20;
     -fx-background-radius: 1000px;
 }
@@ -196,63 +217,63 @@
 /** -------------------------------
 * Footer
 */
-.footer {
+.footer-view {
     -fx-background-color: -grey-100;
 }
 
-.footer:lg .content {
+.footer-view:lg .content {
     -fx-spacing: 170px;
     -fx-padding: 60px 120px 60px 123px;
 }
 
-.footer:md .content {
+.footer-view:md .content {
     -fx-spacing: 25px;
     -fx-padding: 40px 45px 40px 44px;
 }
 
-.footer:sm .content {
+.footer-view:sm .content {
     -fx-spacing: 20px;
     -fx-padding: 30px 33px 30px 20px;
 }
 
-.footer .duke-image {
-    -fx-image: url('../images/duke.png');
+.footer-view .duke-image {
+    -fx-image: url('images/duke.png');
 }
 
-.footer:sm .number-pane-box {
+.footer-view:sm .number-pane-box {
     -fx-spacing: 40px;
 }
 
-.footer .links-pane .twitter-link {
+.footer-view .links-pane .twitter-link {
     tf: -blue;
     -fx-text-fill: tf;
 }
 
-.footer .links-pane .linkedin-link {
+.footer-view .links-pane .linkedin-link {
     tf: -orange;
     -fx-text-fill: tf;
 }
 
-.footer .links-pane .github-link {
+.footer-view .links-pane .github-link {
     tf: -green;
     -fx-text-fill: tf;
 }
 
-.footer .links-pane .youtube-link {
+.footer-view .links-pane .youtube-link {
     tf: -purple;
     -fx-text-fill: tf;
 }
 
-.footer .links-pane .link {
+.footer-view .links-pane .link {
     -fx-font-weight: bold;
     -fx-font-size: 15px;
     -fx-cursor: hand;
 }
 
-.footer .links-pane .link:hover {
+.footer-view .links-pane .link:hover {
     -fx-text-fill: derive(tf, 15%);
 }
 
-.footer .links-pane .link:pressed {
+.footer-view .links-pane .link:pressed {
     -fx-text-fill: derive(tf, -15%);
 }

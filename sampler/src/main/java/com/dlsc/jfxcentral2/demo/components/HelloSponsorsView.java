@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.demo.components;
 
+import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import javafx.geometry.Pos;
