@@ -113,9 +113,7 @@
 }
 
 .controls {
-    -fx-pref-width: 200px;
-    -fx-padding: 10px;
-    -fx-background-color: light-grey;
+    -fx-padding: 20px;
 }
 
 .background {
