@@ -8,8 +8,12 @@ import javafx.util.StringConverter;
 
 public class SizeComboBox extends ComboBox<Size> {
     public SizeComboBox() {
+       this(Size.LARGE);
+    }
+
+    public SizeComboBox(Size size) {
         getItems().addAll(Size.values());
-        getSelectionModel().select(Size.LARGE);
+        getSelectionModel().select(size);
         setConverter(new StringConverter<>() {
             @Override
             public String toString(Size object) {
@@ -21,7 +25,7 @@ public class SizeComboBox extends ComboBox<Size> {
                 return null;
             }
         });
-        size.bind(getSelectionModel().selectedItemProperty());
+        this.size.bind(getSelectionModel().selectedItemProperty());
     }
 
     private final ReadOnlyObjectWrapper<Size> size = new ReadOnlyObjectWrapper<>(this, "size");
