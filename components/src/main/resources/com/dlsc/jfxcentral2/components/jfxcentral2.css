@@ -32,12 +32,84 @@
     src: url('../fonts/RobotoCondensed-LightItalic.ttf');
 }
 
+/** -------------------------------
+* Spline Sans Font
+* (https://fonts.google.com/specimen/Spline+Sans)
+*/
+@font-face {
+    font-family: "Spline Sans";
+    src: url('../fonts/SplineSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Spline Sans";
+    src: url('../fonts/SplineSans-Bold.ttf');
+}
+
+@font-face {
+    font-family: "Spline Sans Light";
+    src: url('../fonts/SplineSans-Light.ttf');
+}
+
+@font-face {
+    font-family: "Spline Sans SemiBold";
+    src: url('../fonts/SplineSans-SemiBold.ttf');
+}
 
 * {
     -grey-10: #e2e2e2;
-    -grey-20: #c9cccd;
+    -grey-20: #cbcbcb;
+    -grey-30: #b2b2b2;
+    -grey-40: #a3a3a3;
+    -grey-50: #8f8f8f;
+    -grey-60: #757676;
     -grey-100: #232323;
-    -bright-blue: #0E4AE4;
+
+    -red: #ff7b72;
+    -blue: #58a6ff;
+    -green: #08e093;
+    -purple: #d2a8ff;
+    -orange: #f9990f;
+
+    -bright-blue: #0e4ae4;
+    -fx-font-family: "Spline Sans";
+    -fx-font-size: 16px;
+}
+
+/** -------------------------------
+* Hyperlink
+*/
+.hyperlink,
+.hyperlink:hover,
+.hyperlink:visited,
+.hyperlink:focused,
+.hyperlink:pressed,
+.hyperlink:focused:hover,
+.hyperlink:visited:hover,
+.hyperlink:visited:focused {
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+    -fx-underline: false;
+}
+
+.hyperlink,
+.hyperlink:visited {
+    -fx-text-fill: -grey-60;
+}
+
+.hyperlink:hover,
+.hyperlink:focused:hover,
+.hyperlink:visited:hover {
+    -fx-text-fill: -grey-40;
+}
+
+.hyperlink:pressed,
+.hyperlink:focused:pressed {
+    -fx-text-fill: derive(-grey-60, 15%);
+}
+
+.link {
+    -fx-cursor: hand;
 }
 
 /** -------------------------------
@@ -91,4 +163,96 @@
 
 .sponsors-view .logo:hover {
     -fx-cursor: hand;
+}
+
+/** -------------------------------
+* LineNumberPane
+*/
+.line-number-pane {
+    -fx-hgap: 10px;
+}
+
+.line-number-pane .label {
+    -fx-text-fill: -grey-60;
+}
+
+.line-number-pane .number-label {
+    -fx-text-fill: -grey-60;
+    -fx-padding: 2px 10px 2px 10px;
+    -fx-border-width: 0 1px 0 0;
+    -fx-border-color: -grey-60;
+}
+
+.line-number-pane .content-line-0 {
+    -fx-text-fill: -red;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.line-number-pane .purple-label {
+    -fx-text-fill: -purple;
+}
+
+/** -------------------------------
+* Footer
+*/
+.footer {
+    -fx-background-color: -grey-100;
+}
+
+.footer:lg .content {
+    -fx-spacing: 170px;
+    -fx-padding: 60px 120px 60px 123px;
+}
+
+.footer:md .content {
+    -fx-spacing: 25px;
+    -fx-padding: 40px 45px 40px 44px;
+}
+
+.footer:sm .content {
+    -fx-spacing: 20px;
+    -fx-padding: 30px 33px 30px 20px;
+}
+
+.footer .duke-image {
+    -fx-image: url('../images/duke.png');
+}
+
+.footer:sm .number-pane-box {
+    -fx-spacing: 40px;
+}
+
+.footer .links-pane .twitter-link {
+    tf: -blue;
+    -fx-text-fill: tf;
+}
+
+.footer .links-pane .linkedin-link {
+    tf: -orange;
+    -fx-text-fill: tf;
+}
+
+.footer .links-pane .github-link {
+    tf: -green;
+    -fx-text-fill: tf;
+}
+
+.footer .links-pane .youtube-link {
+    tf: -purple;
+    -fx-text-fill: tf;
+}
+
+.footer .links-pane .link {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+}
+
+.footer .links-pane .link:hover {
+    -fx-text-fill: derive(tf, 15%);
+}
+
+.footer .links-pane .link:pressed {
+    -fx-text-fill: derive(tf, -15%);
 }
