@@ -26,16 +26,23 @@ public class WelcomeView extends PaneBase {
 
         labelBox = new VBox();
         labelBox.getStyleClass().add("label-box");
+
         Label label1 = new Label("Home to anything");
         label1.getStyleClass().add("home-label");
+
         CustomImageView fxLogo = new CustomImageView();
         fxLogo.getStyleClass().add("fx-logo");
+
         Label label2 = new Label("related", fxLogo);
         label2.getStyleClass().add("related-label");
+
         Label label3 = new Label("JFX Central is an opensource project you can find on GitHub, with the content in a separate project. Feel free to add your project, documentation, book, etc. via a pull-request!");
         label3.getStyleClass().add("description-label");
         label3.setWrapText(true);
+        label3.setMinHeight(Region.USE_PREF_SIZE);
+
         labelBox.getChildren().addAll(label1, label2, label3);
+        labelBox.setMinHeight(Region.USE_PREF_SIZE);
 
         flowPane = new FlowPane();
         flowPane.getStyleClass().add("flow-pane");
