@@ -772,31 +772,23 @@
     -fx-background-color: -blue;
     -fx-pref-width: 5.5px;
     -fx-pref-height: 14.2px;
-    -fx-max-width: 5.5px;
-    -fx-max-height: 14.2px;
 }
 
 .copyright-view:lg {
     -fx-pref-width: 1440px;
     -fx-pref-height: 42px;
-    -fx-max-width: 1440px;
-    -fx-max-height: 42px;
     -fx-padding: 10px 68px 10px 68px;
 }
 
 .copyright-view:md {
     -fx-pref-width: 769px;
     -fx-pref-height: 42px;
-    -fx-max-width: 769px;
-    -fx-max-height: 42px;
     -fx-padding: 10px 30px 10px 30px;
 }
 
 .copyright-view:sm {
     -fx-pref-width: 375px;
     -fx-pref-height: 69px;
-    -fx-max-width: 375px;
-    -fx-max-height: 69px;
     -fx-padding: 10px 30px 10px 30px;
 }
 

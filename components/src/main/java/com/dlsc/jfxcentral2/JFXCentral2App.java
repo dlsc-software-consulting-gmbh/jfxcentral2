@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2;
 
 import com.dlsc.jfxcentral2.components.AutoGrowRegion;
+import com.dlsc.jfxcentral2.components.CopyrightView;
 import com.dlsc.jfxcentral2.components.FooterView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
@@ -15,6 +16,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -41,16 +43,21 @@ public class JFXCentral2App extends Application {
         FooterView footerView = new FooterView();
         footerView.sizeProperty().bind(sizeProperty());
 
-        VBox uiBox = new VBox(topMenuBar,new AutoGrowRegion(Orientation.VERTICAL), sponsorsView, footerView);
+        // copyright view
+        CopyrightView copyrightView = new CopyrightView();
+        copyrightView.sizeProperty().bind(sizeProperty());
+
+        VBox uiBox = new VBox(topMenuBar,new AutoGrowRegion(Orientation.VERTICAL), sponsorsView, footerView,copyrightView);
         uiBox.getStyleClass().add("ui");
         uiBox.setAlignment(Pos.BOTTOM_CENTER);
-        uiBox.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> switch (getSize()) {
-            case SMALL -> 375d;
-            case MEDIUM -> 768d;
-            case LARGE -> 1445d;
-        }, sizeProperty()));
-        uiBox.minWidthProperty().bind(uiBox.prefWidthProperty());
-        uiBox.maxWidthProperty().bind(uiBox.prefWidthProperty());
+        uiBox.setMaxWidth(Region.USE_PREF_SIZE);
+//        uiBox.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> switch (getSize()) {
+//            case SMALL -> 375d;
+//            case MEDIUM -> 768d;
+//            case LARGE -> 1445d;
+//        }, sizeProperty()));
+//        uiBox.minWidthProperty().bind(uiBox.prefWidthProperty());
+//        uiBox.maxWidthProperty().bind(uiBox.prefWidthProperty());
 
         StackPane.setAlignment(uiBox, Pos.TOP_CENTER);
 

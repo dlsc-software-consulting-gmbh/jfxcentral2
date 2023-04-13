@@ -5,6 +5,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
+import java.time.Year;
+
 public class CopyrightView extends PaneBase {
 
     private final HBox poweredByBox;
@@ -13,7 +15,7 @@ public class CopyrightView extends PaneBase {
     public CopyrightView() {
         getStyleClass().add("copyright-view");
 
-        copyrightLabel = new Label("© 2023 DLSC Software & Consulting GmbH");
+        copyrightLabel = new Label("© " + Year.now() + " DLSC Software & Consulting GmbH");
 
         Region leftCurlyBraces = new Region();
         leftCurlyBraces.getStyleClass().addAll("curly-braces","left");
