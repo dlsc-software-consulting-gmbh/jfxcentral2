@@ -760,8 +760,12 @@
     -fx-alignment: center;
 }
 
-.copyright-view .powered-by-box {
-    -fx-spacing: 2px;
+.copyright-view .powered-by-box .powered-by-label {
+    -fx-padding: 0 3px 0 0;
+}
+
+.copyright-view .powered-by-box .jpro-label {
+    -fx-font-weight: bold;
 }
 
 .copyright-view .label {
@@ -772,6 +776,8 @@
     -fx-background-color: -blue;
     -fx-pref-width: 5.5px;
     -fx-pref-height: 14.2px;
+    -fx-max-width: 5.5px;
+    -fx-max-height: 14.2px;
 }
 
 .copyright-view:lg {

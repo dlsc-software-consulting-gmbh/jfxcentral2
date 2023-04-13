@@ -18,15 +18,17 @@ public class CopyrightView extends PaneBase {
         copyrightLabel = new Label("© " + Year.now() + " DLSC Software & Consulting GmbH");
 
         Region leftCurlyBraces = new Region();
-        leftCurlyBraces.getStyleClass().addAll("curly-braces","left");
+        leftCurlyBraces.getStyleClass().addAll("curly-braces", "left");
         Region rightCurlyBraces = new Region();
-        rightCurlyBraces.getStyleClass().addAll("curly-braces","right");
-        poweredByBox = new HBox(
-                new Label("Powered by"),
-                leftCurlyBraces,
-                new Label("JPro"),
-                rightCurlyBraces
-        );
+        rightCurlyBraces.getStyleClass().addAll("curly-braces", "right");
+
+        Label jproLabel = new Label("JPro");
+        jproLabel.getStyleClass().add("jpro-label");
+
+        Label poweredByLabel = new Label("Powered by");
+        poweredByLabel.getStyleClass().add("powered-by-label");
+
+        poweredByBox = new HBox(poweredByLabel, leftCurlyBraces, jproLabel, rightCurlyBraces);
         poweredByBox.getStyleClass().add("powered-by-box");
 
         layoutBySize();
@@ -34,11 +36,11 @@ public class CopyrightView extends PaneBase {
 
     protected void layoutBySize() {
         if (isSmall()) {
-            VBox box = new VBox(copyrightLabel,poweredByBox);
+            VBox box = new VBox(copyrightLabel, poweredByBox);
             box.getStyleClass().add("content");
             getChildren().setAll(box);
-        }else {
-            HBox box = new HBox(copyrightLabel,new AutoGrowRegion(), poweredByBox);
+        } else {
+            HBox box = new HBox(copyrightLabel, new AutoGrowRegion(), poweredByBox);
             box.getStyleClass().add("content");
             getChildren().setAll(box);
         }
