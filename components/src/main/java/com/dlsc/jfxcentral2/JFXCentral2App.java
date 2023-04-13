@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
+import com.dlsc.jfxcentral2.components.WelcomeView;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -30,6 +31,13 @@ public class JFXCentral2App extends Application {
         TopMenuBar topMenuBar = new TopMenuBar();
         topMenuBar.sizeProperty().bind(sizeProperty());
 
+        // welcome view
+        WelcomeView welcomeView = new WelcomeView();
+        welcomeView.sizeProperty().bind(sizeProperty());
+
+        StackPane welcomeStackPane = new StackPane(welcomeView, topMenuBar);
+        StackPane.setAlignment(topMenuBar, Pos.TOP_CENTER);
+
         // sponsor view
         SponsorsView sponsorsView = new SponsorsView();
         sponsorsView.sizeProperty().bind(sizeProperty());
@@ -47,7 +55,7 @@ public class JFXCentral2App extends Application {
         CopyrightView copyrightView = new CopyrightView();
         copyrightView.sizeProperty().bind(sizeProperty());
 
-        VBox uiBox = new VBox(topMenuBar,new AutoGrowRegion(Orientation.VERTICAL), sponsorsView, footerView,copyrightView);
+        VBox uiBox = new VBox(welcomeStackPane, new AutoGrowRegion(Orientation.VERTICAL), sponsorsView, footerView,copyrightView);
         uiBox.getStyleClass().add("ui");
         uiBox.setAlignment(Pos.BOTTOM_CENTER);
         uiBox.setMaxWidth(Region.USE_PREF_SIZE);

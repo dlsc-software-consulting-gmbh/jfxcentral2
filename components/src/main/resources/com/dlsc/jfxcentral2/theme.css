@@ -404,7 +404,6 @@
 .welcome-view:lg {
     -fx-pref-width: 1440px;
     -fx-pref-height: 800px;
-    -fx-max-width: 1440px;
     -fx-max-height: 800px;
     -fx-padding: 195px 180px 200px 180px;
 }
@@ -474,7 +473,6 @@
 .welcome-view:md {
     -fx-pref-width: 768px;
     -fx-pref-height: 1024px;
-    -fx-max-width: 768px;
     -fx-max-height: 1024px;
 }
 
@@ -531,7 +529,6 @@
 .welcome-view:sm {
     -fx-pref-width: 375px;
     -fx-pref-height: 812px;
-    -fx-max-width: 375px;
     -fx-max-height: 812px;
 }
 
@@ -589,7 +586,6 @@
  * TopMenuBar
  */
 .top-menu-bar {
-    -fx-background-color: -grey-100;
     -fx-foreground-color: -white;
 }
 
@@ -638,7 +634,6 @@
 .top-menu-bar:lg {
     -fx-pref-width: 1440px;
     -fx-pref-height: 126px;
-    -fx-max-width: 1440px;
     -fx-max-height: 126px;
     -fx-padding: 35px 25px 35px 25px;
 }
@@ -699,7 +694,6 @@
 .top-menu-bar:md {
     -fx-pref-width: 768px;
     -fx-pref-height: 99px;
-    -fx-max-width: 768px;
     -fx-max-height: 99px;
     -fx-padding: 25px;
 }
@@ -734,7 +728,6 @@
 .top-menu-bar:sm {
     -fx-pref-width: 375px;
     -fx-pref-height: 84px;
-    -fx-max-width: 375px;
     -fx-max-height: 84px;
     -fx-padding: 17px 10px 17px 15px;
 }
