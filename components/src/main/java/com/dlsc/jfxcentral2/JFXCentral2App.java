@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2;
 
-import com.dlsc.jfxcentral2.components.AutoGrowRegion;
+import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.components.CopyrightView;
 import com.dlsc.jfxcentral2.components.FooterView;
 import com.dlsc.jfxcentral2.components.Size;
@@ -27,18 +27,18 @@ public class JFXCentral2App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        //top menubar
+        // menubar
         TopMenuBar topMenuBar = new TopMenuBar();
         topMenuBar.sizeProperty().bind(sizeProperty());
 
-        // welcome view
+        // welcome
         WelcomeView welcomeView = new WelcomeView();
         welcomeView.sizeProperty().bind(sizeProperty());
 
         StackPane welcomeStackPane = new StackPane(welcomeView, topMenuBar);
         StackPane.setAlignment(topMenuBar, Pos.TOP_CENTER);
 
-        // sponsor view
+        // sponsors
         SponsorsView sponsorsView = new SponsorsView();
         sponsorsView.sizeProperty().bind(sizeProperty());
         sponsorsView.showLogoCountProperty().bind(Bindings.createIntegerBinding(() -> switch (getSize()) {
@@ -47,15 +47,15 @@ public class JFXCentral2App extends Application {
             case LARGE -> 5;
         }, sizeProperty()));
 
-        // footer view
+        // footer
         FooterView footerView = new FooterView();
         footerView.sizeProperty().bind(sizeProperty());
 
-        // copyright view
+        // copyright
         CopyrightView copyrightView = new CopyrightView();
         copyrightView.sizeProperty().bind(sizeProperty());
 
-        VBox uiBox = new VBox(welcomeStackPane, new AutoGrowRegion(Orientation.VERTICAL), sponsorsView, footerView,copyrightView);
+        VBox uiBox = new VBox(welcomeStackPane, new Spacer(Orientation.VERTICAL), sponsorsView, footerView, copyrightView);
         uiBox.getStyleClass().add("ui");
         uiBox.setAlignment(Pos.BOTTOM_CENTER);
         uiBox.setMaxWidth(Region.USE_PREF_SIZE);
