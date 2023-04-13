@@ -32,7 +32,6 @@ public class TopMenuBar extends PaneBase {
         searchField = new SearchField<>();
         searchField.setPromptText("Search");
         layoutBySize();
-        sizeProperty().addListener((ob, ov, nv) -> layoutBySize());
     }
 
     private Region createSpacingRegion() {
@@ -45,25 +44,34 @@ public class TopMenuBar extends PaneBase {
         if (isLarge()) {
             MenuButton resourcesBtn = new MenuButton("Resources");
             resourcesBtn.getStyleClass().add("resources-button");
+
             MenuButton communityBtn = new MenuButton("Community");
             communityBtn.getStyleClass().add("community-button");
+
             Button showcasesBtn = new Button("Showcases");
             showcasesBtn.getStyleClass().add("sh owcases-button");
+
             Button downloadsBtn = new Button("Downloads");
             downloadsBtn.getStyleClass().add("downloads-button");
+
             Button loginBtn = new Button("Login", new FontIcon(MaterialDesignA.ACCOUNT_CIRCLE_OUTLINE));
             loginBtn.getStyleClass().add("login-button");
+
             searchField.setVisible(true);
             contentBox.getChildren().setAll(createLogo(), createSpacingRegion(), resourcesBtn, communityBtn, showcasesBtn, downloadsBtn, createSeparatorRegion(), loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");
+
             Button logOutBtn = new Button(null, logoutRegion);
             logOutBtn.getStyleClass().add("logout-button");
+
             Region searchRegion = new Region();
             searchRegion.getStyleClass().add("search-region");
+
             Button searchBtn = new Button(null, searchRegion);
             StackPane stackPane = new StackPane(searchField, searchBtn);
+
             searchField.managedProperty().bind(searchField.visibleProperty());
             searchBtn.managedProperty().bind(searchBtn.visibleProperty());
             searchBtn.visibleProperty().bind(searchField.visibleProperty().not());
@@ -71,10 +79,10 @@ public class TopMenuBar extends PaneBase {
 
             searchBtn.setOnAction(event -> {
                 searchField.setVisible(true);
-                Platform.runLater(()->getSearchTextField().requestFocus());
+                Platform.runLater(() -> getSearchTextField().requestFocus());
             });
-
             searchBtn.getStyleClass().add("search-button");
+
             MenuButton menuBtn = new MenuButton("Menu");
             menuBtn.getStyleClass().add("top-menu-button");
 
@@ -85,7 +93,7 @@ public class TopMenuBar extends PaneBase {
     private Node getSearchTextField() {
         if (searchTextField == null) {
             searchTextField = searchField.lookup(".text-field");
-            searchTextField.focusedProperty().addListener((ob, ov, nv) ->{
+            searchTextField.focusedProperty().addListener((ob, ov, nv) -> {
                 if (!nv) {
                     searchField.setVisible(false);
                 }
@@ -93,8 +101,6 @@ public class TopMenuBar extends PaneBase {
         }
         return searchTextField;
     }
-
-
 
     private Region createSeparatorRegion() {
         Region separator = new Region();

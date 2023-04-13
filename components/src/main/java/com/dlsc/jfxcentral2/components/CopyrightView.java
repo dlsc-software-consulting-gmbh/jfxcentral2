@@ -28,7 +28,6 @@ public class CopyrightView extends PaneBase {
         poweredByBox.getStyleClass().add("powered-by-box");
 
         layoutBySize();
-        sizeProperty().addListener((ob, ov, nv) -> layoutBySize());
     }
 
     protected void layoutBySize() {

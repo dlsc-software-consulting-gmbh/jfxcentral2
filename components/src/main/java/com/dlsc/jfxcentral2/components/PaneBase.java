@@ -31,7 +31,10 @@ public class PaneBase extends StackPane {
 
         // size styling
         activateSizePseudoClass();
-        sizeProperty().addListener(it -> activateSizePseudoClass());
+        sizeProperty().addListener(it -> {
+            activateSizePseudoClass();
+            layoutBySize();
+        });
     }
 
     private void activateTargetPseudoClass() {
