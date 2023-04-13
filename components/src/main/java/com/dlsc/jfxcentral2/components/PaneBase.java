@@ -31,7 +31,10 @@ public class PaneBase extends StackPane {
 
         // size styling
         activateSizePseudoClass();
-        sizeProperty().addListener(it -> activateSizePseudoClass());
+        sizeProperty().addListener(it -> {
+            activateSizePseudoClass();
+            layoutBySize();
+        });
     }
 
     private void activateTargetPseudoClass() {
@@ -48,6 +51,10 @@ public class PaneBase extends StackPane {
         pseudoClassStateChanged(SMALL_PSEUDOCLASS_STATE, size.isSmall());
         pseudoClassStateChanged(SMALL_OR_MEDIUM_PSEUDOCLASS_STATE, size.isSmall() || size.isMedium());
         pseudoClassStateChanged(MEDIUM_OR_LARGE_PSEUDOCLASS_STATE, size.isMedium() || size.isLarge());
+    }
+
+    protected void layoutBySize() {
+
     }
 
     private final ObjectProperty<Target> target = new SimpleObjectProperty<>(this, "target", Target.DESKTOP);

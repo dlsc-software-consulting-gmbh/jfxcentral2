@@ -20,6 +20,9 @@ import javafx.scene.layout.VBox;
 public class FooterView extends PaneBase {
 
     private final HBox contentBox;
+    private final ImageView dukeImageView;
+    private final LineNumberPane linksPane;
+    private final LineNumberPane legalInfoPane;
 
     public FooterView() {
         getStyleClass().add("footer-view");
@@ -27,25 +30,20 @@ public class FooterView extends PaneBase {
         contentBox.getStyleClass().add("content");
         getChildren().add(contentBox);
 
-        ImageView dukeImageView = new ImageView();
+        dukeImageView = new ImageView();
         dukeImageView.setPreserveRatio(true);
         dukeImageView.getStyleClass().add("duke-image");
         contentBox.getChildren().add(dukeImageView);
 
-        LineNumberPane linksPane = initLinksPane();
-        LineNumberPane legalInfoPane = initLegalInfoPane();
+        linksPane = initLinksPane();
+        legalInfoPane = initLegalInfoPane();
 
         setMinWidth(Region.USE_PREF_SIZE);
-
-        layoutBySize(dukeImageView, linksPane, legalInfoPane);
-        sizeProperty().addListener((ob, oldSize, newSize) -> {
-            dukeImageView.setFitHeight(getSize().isLarge() ? 90 : 61);
-            layoutBySize(dukeImageView, linksPane, legalInfoPane);
-        });
+        layoutBySize();
     }
 
-
-    private void layoutBySize(ImageView dukeImageView, LineNumberPane linksPane, LineNumberPane legalInfoPane) {
+    public void layoutBySize() {
+        dukeImageView.setFitHeight(getSize().isLarge() ? 90 : 61);
         LineNumberPane contactPane = initContactPane();
         Size size = getSize();
         if (size.isLarge() || size.isMedium()) {

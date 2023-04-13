@@ -1,15 +1,18 @@
 package com.dlsc.jfxcentral2;
 
+import com.dlsc.jfxcentral2.components.AutoGrowRegion;
 import com.dlsc.jfxcentral2.components.CopyrightView;
 import com.dlsc.jfxcentral2.components.FooterView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.SponsorsView;
+import com.dlsc.jfxcentral2.components.TopMenuBar;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -23,6 +26,10 @@ public class JFXCentral2App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        //top menubar
+        TopMenuBar topMenuBar = new TopMenuBar();
+        topMenuBar.sizeProperty().bind(sizeProperty());
+
         // sponsor view
         SponsorsView sponsorsView = new SponsorsView();
         sponsorsView.sizeProperty().bind(sizeProperty());
@@ -40,7 +47,7 @@ public class JFXCentral2App extends Application {
         CopyrightView copyrightView = new CopyrightView();
         copyrightView.sizeProperty().bind(sizeProperty());
 
-        VBox uiBox = new VBox(sponsorsView, footerView, copyrightView);
+        VBox uiBox = new VBox(topMenuBar,new AutoGrowRegion(Orientation.VERTICAL), sponsorsView, footerView,copyrightView);
         uiBox.getStyleClass().add("ui");
         uiBox.setAlignment(Pos.BOTTOM_CENTER);
         uiBox.setMaxWidth(Region.USE_PREF_SIZE);

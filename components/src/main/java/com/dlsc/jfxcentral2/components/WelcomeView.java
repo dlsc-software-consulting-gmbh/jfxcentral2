@@ -16,10 +16,10 @@ public class WelcomeView extends PaneBase {
 
     private final VBox labelBox;
     private final FlowPane flowPane;
-    private final Button jfxCentralButton;
-    private final Button jfxcentralDataButton;
-    private final Button installLocallyButton;
     private final Button openJFXProjectButton;
+    private final Button installLocallyButton;
+    private final Button jfxcentralDataButton;
+    private final Button jfxCentralButton;
 
     public WelcomeView() {
         getStyleClass().add("welcome-view");
@@ -61,13 +61,12 @@ public class WelcomeView extends PaneBase {
         openJFXProjectButton.setOnAction(event -> JFXCentralUtil.run(onOpenJFXProject));
 
         layoutBySize();
-        sizeProperty().addListener((ob, ov, nv) -> layoutBySize());
     }
 
-    private void layoutBySize() {
+    protected void layoutBySize() {
         if (isMedium()) {
             flowPane.getChildren().setAll(jfxCentralButton, installLocallyButton, jfxcentralDataButton, openJFXProjectButton);
-        }else {
+        } else {
             flowPane.getChildren().setAll(jfxCentralButton, jfxcentralDataButton, installLocallyButton, openJFXProjectButton);
         }
         if (isLarge()) {
@@ -75,7 +74,7 @@ public class WelcomeView extends PaneBase {
             box.getStyleClass().add("content");
             box.getChildren().setAll(labelBox, flowPane);
             getChildren().add(box);
-        }else {
+        } else {
             VBox box = new VBox();
             box.getStyleClass().add("content");
             box.getChildren().setAll(labelBox, flowPane);
