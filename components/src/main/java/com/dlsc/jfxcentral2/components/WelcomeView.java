@@ -57,7 +57,7 @@ public class WelcomeView extends PaneBase {
         sizeProperty().addListener((ob, ov, nv) -> layoutBySize());
     }
 
-    private void layoutBySize() {
+    protected void layoutBySize() {
         if (isLarge()) {
             HBox box = new HBox();
             box.getStyleClass().add("content");
