@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -15,6 +16,10 @@ public class WelcomeView extends PaneBase {
 
     private final VBox labelBox;
     private final FlowPane flowPane;
+    private final Button jfxCentralButton;
+    private final Button jfxcentralDataButton;
+    private final Button installLocallyButton;
+    private final Button openJFXProjectButton;
 
     public WelcomeView() {
         getStyleClass().add("welcome-view");
@@ -34,24 +39,26 @@ public class WelcomeView extends PaneBase {
 
         flowPane = new FlowPane();
         flowPane.getStyleClass().add("flow-pane");
-        Button jfxCentralButton = new Button("jfxcentral");
+        jfxCentralButton = new Button("jfxcentral");
         jfxCentralButton.setGraphic(new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
         jfxCentralButton.getStyleClass().addAll("transparent-button", "jfxcentral-button");
         jfxCentralButton.setOnAction(event -> JFXCentralUtil.run(onJFXCentral));
 
-        Button jfxcentralDataButton = new Button("jfxcentral-data", new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
+        jfxcentralDataButton = new Button("jfxcentral-data", new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
         jfxcentralDataButton.getStyleClass().addAll("transparent-button", "jfxcentral-data-button");
         jfxcentralDataButton.setOnAction(event -> JFXCentralUtil.run(onJFXCentralData));
 
-        Button installLocallyButton = new Button("Install Locally",new FontIcon(MaterialDesign.MDI_ARROW_DOWN));
+        Region downloadRegion = new Region();
+        downloadRegion.getStyleClass().add("download-region");
+        installLocallyButton = new Button("Install Locally", downloadRegion);
         installLocallyButton.getStyleClass().addAll("fill-button", "install-button");
         installLocallyButton.setOnAction(event -> JFXCentralUtil.run(onInstallLocally));
 
-        Button openJFXProjectButton = new Button("OpenJFX project", new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT));
+        Region openjfxRegion = new Region();
+        openjfxRegion.getStyleClass().add("openjfx-region");
+        openJFXProjectButton = new Button("OpenJFX project", openjfxRegion);
         openJFXProjectButton.getStyleClass().addAll("fill-button", "openjfx-button");
         openJFXProjectButton.setOnAction(event -> JFXCentralUtil.run(onOpenJFXProject));
-
-        flowPane.getChildren().addAll(jfxCentralButton, jfxcentralDataButton, installLocallyButton, openJFXProjectButton);
 
         layoutBySize();
         sizeProperty().addListener((ob, ov, nv) -> layoutBySize());
