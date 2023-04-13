@@ -17,24 +17,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoGrowRegion extends Region {
+public class Spacer extends Region {
 
     private static final PseudoClass VERTICAL_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("vertical");
+
     private static final PseudoClass HORIZONTAL_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("horizontal");
 
-    public AutoGrowRegion() {
+    public Spacer() {
         this(Orientation.HORIZONTAL);
     }
 
-    public AutoGrowRegion(Orientation orientation) {
-        getStyleClass().add("auto-grow-region");
+    public Spacer(Orientation orientation) {
+        getStyleClass().add("spacer");
         setOrientation(orientation);
         pseudoClassStateChanged(HORIZONTAL_PSEUDOCLASS_STATE, orientation == Orientation.HORIZONTAL);
         pseudoClassStateChanged(VERTICAL_PSEUDOCLASS_STATE, orientation == Orientation.VERTICAL);
-        setOrientationGrow();
+        updateGrowConstraints();
     }
 
-    private void setOrientationGrow() {
+    private void updateGrowConstraints() {
         Orientation orientation = getOrientation();
         if (orientation == Orientation.HORIZONTAL) {
             VBox.setVgrow(this, Priority.NEVER);
@@ -45,33 +46,31 @@ public class AutoGrowRegion extends Region {
         }
     }
 
-    private final ObjectProperty<Orientation> orientation =
-            new StyleableObjectProperty<>(Orientation.HORIZONTAL) {
+    private final ObjectProperty<Orientation> orientation = new StyleableObjectProperty<>(Orientation.HORIZONTAL) {
 
-                @Override
-                public Object getBean() {
-                    return AutoGrowRegion.this;
-                }
+        @Override
+        public Object getBean() {
+            return Spacer.this;
+        }
 
-                @Override
-                public String getName() {
-                    return "orientation";
-                }
+        @Override
+        public String getName() {
+            return "orientation";
+        }
 
-                @Override
-                protected void invalidated() {
-                    final boolean isVertical = (get() == Orientation.VERTICAL);
-                    pseudoClassStateChanged(VERTICAL_PSEUDOCLASS_STATE, isVertical);
-                    pseudoClassStateChanged(HORIZONTAL_PSEUDOCLASS_STATE, !isVertical);
-                    setOrientationGrow();
-                }
+        @Override
+        protected void invalidated() {
+            boolean isVertical = (get() == Orientation.VERTICAL);
+            pseudoClassStateChanged(VERTICAL_PSEUDOCLASS_STATE, isVertical);
+            pseudoClassStateChanged(HORIZONTAL_PSEUDOCLASS_STATE, !isVertical);
+            updateGrowConstraints();
+        }
 
-                @Override
-                public CssMetaData<AutoGrowRegion, Orientation> getCssMetaData() {
-                    return StyleableProperties.ORIENTATION;
-                }
-
-            };
+        @Override
+        public CssMetaData<Spacer, Orientation> getCssMetaData() {
+            return StyleableProperties.ORIENTATION;
+        }
+    };
 
     public final void setOrientation(Orientation value) {
         orientation.set(value);
@@ -86,31 +85,29 @@ public class AutoGrowRegion extends Region {
     }
 
     private static class StyleableProperties {
-        private static final CssMetaData<AutoGrowRegion, Orientation> ORIENTATION =
-                new CssMetaData<>("-fx-orientation",
-                        new EnumConverter<>(Orientation.class),
-                        Orientation.HORIZONTAL) {
 
-                    @Override
-                    public Orientation getInitialValue(AutoGrowRegion node) {
-                        return node.getOrientation();
-                    }
+        private static final CssMetaData<Spacer, Orientation> ORIENTATION = new CssMetaData<>("-fx-orientation", new EnumConverter<>(Orientation.class), Orientation.HORIZONTAL) {
 
-                    @Override
-                    public boolean isSettable(AutoGrowRegion n) {
-                        return !n.orientation.isBound();
-                    }
+            @Override
+            public Orientation getInitialValue(Spacer node) {
+                return node.getOrientation();
+            }
 
-                    @Override
-                    public StyleableProperty<Orientation> getStyleableProperty(AutoGrowRegion n) {
-                        return (StyleableProperty<Orientation>) n.orientationProperty();
-                    }
-                };
+            @Override
+            public boolean isSettable(Spacer n) {
+                return !n.orientation.isBound();
+            }
+
+            @Override
+            public StyleableProperty<Orientation> getStyleableProperty(Spacer n) {
+                return (StyleableProperty<Orientation>) n.orientationProperty();
+            }
+        };
+
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            final List<CssMetaData<? extends Styleable, ?>> styleables =
-                    new ArrayList<>(Region.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(Region.getClassCssMetaData());
             styleables.add(ORIENTATION);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }
@@ -124,5 +121,4 @@ public class AutoGrowRegion extends Region {
     public List<CssMetaData<? extends Styleable, ?>> getCssMetaData() {
         return getClassCssMetaData();
     }
-
 }

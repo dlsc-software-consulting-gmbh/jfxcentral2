@@ -40,7 +40,7 @@ public class CopyrightView extends PaneBase {
             box.getStyleClass().add("content");
             getChildren().setAll(box);
         } else {
-            HBox box = new HBox(copyrightLabel, new AutoGrowRegion(), poweredByBox);
+            HBox box = new HBox(copyrightLabel, new Spacer(), poweredByBox);
             box.getStyleClass().add("content");
             getChildren().setAll(box);
         }
