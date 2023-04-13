@@ -87,6 +87,14 @@
     -fx-cursor: hand;
 }
 
+.curly-braces {
+    -fx-shape: "M4.09617 14.208C3.37083 14.208 2.84283 14.0293 2.51217 13.672C2.18683 13.32 2.02417 12.7467 2.02417 11.952V9.064C2.02417 8.65333 1.91483 8.368 1.69617 8.208C1.48283 8.04267 1.07483 7.94133 0.472168 7.904V6.304C1.07483 6.26133 1.48283 6.16 1.69617 6C1.91483 5.83467 2.02417 5.54933 2.02417 5.144V2.256C2.02417 1.46133 2.18683 0.888 2.51217 0.536C2.84283 0.178667 3.37083 0 4.09617 0H6.00017V1.712H4.67217C4.4055 1.712 4.21617 1.784 4.10417 1.928C3.99217 2.072 3.93617 2.32 3.93617 2.672V5.776C3.93617 6.112 3.86683 6.37067 3.72817 6.552C3.59483 6.73333 3.3735 6.856 3.06417 6.92L2.17617 7.104L3.06417 7.288C3.3735 7.352 3.59483 7.47467 3.72817 7.656C3.86683 7.832 3.93617 8.09067 3.93617 8.432V11.536C3.93617 11.888 3.99217 12.136 4.10417 12.28C4.21617 12.424 4.4055 12.496 4.67217 12.496H6.00017V14.208H4.09617Z";
+}
+
+.curly-braces.right {
+    -fx-rotate: 180;
+}
+
 /** -------------------------------
 * Hyperlink
 */
@@ -554,4 +562,61 @@
 .welcome-view:sm .fill-button {
     -fx-pref-width: 315px;
     -fx-pref-height: 50px;
+}
+
+/** -------------------------------
+* CopyrightView
+*/
+.copyright-view {
+    -fx-font-size: 13px;
+    -fx-background-color: #2e2e2e;
+}
+
+.copyright-view .content,
+.copyright-view .powered-by-box {
+    -fx-alignment: center;
+}
+
+.copyright-view .powered-by-box {
+    -fx-spacing: 2px;
+}
+
+.copyright-view .label {
+    -fx-text-fill: -grey-60;
+}
+
+.copyright-view .curly-braces {
+    -fx-background-color: -blue;
+    -fx-pref-width: 5.5px;
+    -fx-pref-height: 14.2px;
+    -fx-max-width: 5.5px;
+    -fx-max-height: 14.2px;
+}
+
+.copyright-view:lg {
+    -fx-pref-width: 1440px;
+    -fx-pref-height: 42px;
+    -fx-max-width: 1440px;
+    -fx-max-height: 42px;
+    -fx-padding: 10px 68px 10px 68px;
+}
+
+.copyright-view:md {
+    -fx-pref-width: 769px;
+    -fx-pref-height: 42px;
+    -fx-max-width: 769px;
+    -fx-max-height: 42px;
+    -fx-padding: 10px 30px 10px 30px;
+}
+
+.copyright-view:sm {
+    -fx-pref-width: 375px;
+    -fx-pref-height: 69px;
+    -fx-max-width: 375px;
+    -fx-max-height: 69px;
+    -fx-padding: 10px 30px 10px 30px;
+}
+
+.copyright-view:sm .content {
+    -fx-spacing: 10px;
 }
