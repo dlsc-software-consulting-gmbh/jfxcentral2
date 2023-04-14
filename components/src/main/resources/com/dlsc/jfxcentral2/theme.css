@@ -589,6 +589,14 @@
     -fx-foreground-color: -white;
 }
 
+.top-menu-bar:dark {
+    -fx-foreground-color: -white;
+}
+
+.top-menu-bar:light {
+    -fx-foreground-color: -grey-100;
+}
+
 .top-menu-bar .separator-region {
     -fx-border-color: transparent -white-a20 transparent transparent;
     -fx-border-width: 0 1px 0 0;
