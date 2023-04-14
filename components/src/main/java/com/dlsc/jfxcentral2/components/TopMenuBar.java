@@ -12,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -23,12 +22,16 @@ import java.util.Collections;
 import java.util.List;
 
 public class TopMenuBar extends PaneBase {
+
     private static final BackgroundMode DEFAULT_BACKGROUND_MODE = BackgroundMode.DARK;
+
     private static final PseudoClass LIGHT_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("light");
     private static final PseudoClass DARK_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("dark");
+
     private final CustomImageView dukeView;
     private final SearchField<String> searchField;
     private final HBox contentBox;
+
     private Node searchTextField;
 
     public enum BackgroundMode {
@@ -49,9 +52,9 @@ public class TopMenuBar extends PaneBase {
         dukeView = new CustomImageView();
         dukeView.getStyleClass().add("duke-image");
 
-        createSpacingRegion();
         searchField = new SearchField<>();
         searchField.setPromptText("Search");
+
         layoutBySize();
     }
 
@@ -59,12 +62,6 @@ public class TopMenuBar extends PaneBase {
         BackgroundMode mode = getBackgroundMode();
         pseudoClassStateChanged(LIGHT_PSEUDOCLASS_STATE, mode == BackgroundMode.LIGHT);
         pseudoClassStateChanged(DARK_PSEUDOCLASS_STATE, mode == BackgroundMode.DARK);
-    }
-
-    private Region createSpacingRegion() {
-        Region spacingRegion = new Region();
-        HBox.setHgrow(spacingRegion, Priority.ALWAYS);
-        return spacingRegion;
     }
 
     protected void layoutBySize() {
@@ -76,7 +73,7 @@ public class TopMenuBar extends PaneBase {
             communityBtn.getStyleClass().add("community-button");
 
             Button showcasesBtn = new Button("Showcases");
-            showcasesBtn.getStyleClass().add("sh owcases-button");
+            showcasesBtn.getStyleClass().add("showcases-button");
 
             Button downloadsBtn = new Button("Downloads");
             downloadsBtn.getStyleClass().add("downloads-button");
@@ -85,7 +82,7 @@ public class TopMenuBar extends PaneBase {
             loginBtn.getStyleClass().add("login-button");
 
             searchField.setVisible(true);
-            contentBox.getChildren().setAll(createLogo(), createSpacingRegion(), resourcesBtn, communityBtn, showcasesBtn, downloadsBtn, createSeparatorRegion(), loginBtn, searchField);
+            contentBox.getChildren().setAll(createLogo(), new Spacer(), resourcesBtn, communityBtn, showcasesBtn, downloadsBtn, new Spacer(), loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");
@@ -113,7 +110,7 @@ public class TopMenuBar extends PaneBase {
             MenuButton menuBtn = new MenuButton("Menu");
             menuBtn.getStyleClass().add("top-menu-button");
 
-            contentBox.getChildren().setAll(createLogo(), createSpacingRegion(), logOutBtn, createSeparatorRegion(), stackPane, createSeparatorRegion(), menuBtn);
+            contentBox.getChildren().setAll(createLogo(), new Spacer(), logOutBtn, createSeparatorRegion(), stackPane, createSeparatorRegion(), menuBtn);
         }
     }
 
@@ -148,6 +145,7 @@ public class TopMenuBar extends PaneBase {
     }
 
     private final StyleableObjectProperty<BackgroundMode> backgroundMode = new StyleableObjectProperty<>(DEFAULT_BACKGROUND_MODE) {
+
         @Override
         public Object getBean() {
             return TopMenuBar.this;
@@ -172,14 +170,13 @@ public class TopMenuBar extends PaneBase {
         return backgroundMode.get();
     }
 
-    public final void setBackgroundMode(final BackgroundMode backgroundMode) {
+    public final void setBackgroundMode(BackgroundMode backgroundMode) {
         this.backgroundModeProperty().set(backgroundMode);
     }
 
     private static class StyleableProperties {
 
-        private static final CssMetaData<TopMenuBar, BackgroundMode> BACKGROUND_MODE = new CssMetaData<>(
-                "-fx-background-mode", new EnumConverter<>(BackgroundMode.class), DEFAULT_BACKGROUND_MODE) {
+        private static final CssMetaData<TopMenuBar, BackgroundMode> BACKGROUND_MODE = new CssMetaData<>("-fx-background-mode", new EnumConverter<>(BackgroundMode.class), DEFAULT_BACKGROUND_MODE) {
 
             @Override
             public boolean isSettable(TopMenuBar control) {
@@ -195,7 +192,7 @@ public class TopMenuBar extends PaneBase {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            final List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(PaneBase.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(PaneBase.getClassCssMetaData());
             styleables.add(BACKGROUND_MODE);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }
@@ -209,5 +206,4 @@ public class TopMenuBar extends PaneBase {
     public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
         return StyleableProperties.STYLEABLES;
     }
-
 }
