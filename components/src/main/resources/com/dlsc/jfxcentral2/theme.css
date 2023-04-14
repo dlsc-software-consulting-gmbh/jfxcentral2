@@ -405,6 +405,7 @@
     -fx-pref-width: 1440px;
     -fx-pref-height: 800px;
     -fx-max-height: 800px;
+    -fx-min-height: 800px;
     -fx-padding: 195px 180px 200px 180px;
 }
 
