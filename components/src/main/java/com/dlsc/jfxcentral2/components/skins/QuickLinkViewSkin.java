@@ -14,6 +14,9 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
 
     public QuickLinkViewSkin(QuickLinkView control) {
         super(control);
+        control.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            control.toFront();
+        });
         control.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             if (event.isPrimaryButtonDown()) {
                 if (control.getQuickLink() != null && control.getQuickLink().url() != null) {
@@ -25,27 +28,36 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
     }
 
     public void layoutBySize() {
-        QuickLinkView.QuickLink quickLink = getSkinnable().getQuickLink();
+        QuickLinkView control = getSkinnable();
+        QuickLinkView.QuickLink quickLink = control.getQuickLink();
 
-        FontIcon icon = new FontIcon(quickLink.ikon());
-        icon.getStyleClass().add("icon");
+        if (quickLink.imageUrl() == null) {
+            FontIcon icon = new FontIcon(quickLink.ikon());
+            icon.getStyleClass().add("icon");
 
-        FontIcon linkIcon = new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT);
-        linkIcon.getStyleClass().add("link-icon");
+            FontIcon linkIcon = new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT);
+            linkIcon.getStyleClass().add("link-icon");
 
-        HBox topBox = new HBox(icon, new Spacer(), linkIcon);
-        topBox.getStyleClass().add("top-box");
+            HBox topBox = new HBox(icon, new Spacer(), linkIcon);
+            topBox.getStyleClass().add("top-box");
 
-        Label titleLabel = new Label(quickLink.title());
-        titleLabel.getStyleClass().add("title-label");
+            Label titleLabel = new Label(quickLink.title());
+            titleLabel.getStyleClass().add("title-label");
 
-        Label descriptionLabel = new Label(quickLink.description());
-        descriptionLabel.getStyleClass().add("description-label");
-        descriptionLabel.setWrapText(true);
+            Label descriptionLabel = new Label(quickLink.description());
+            descriptionLabel.getStyleClass().add("description-label");
+            descriptionLabel.setWrapText(true);
 
-        VBox contentBox = new VBox(topBox, new Spacer(Orientation.VERTICAL), titleLabel, descriptionLabel);
+            VBox contentBox = new VBox(topBox, new Spacer(Orientation.VERTICAL), titleLabel, descriptionLabel);
 
-        contentBox.getStyleClass().add("content-box");
-        getChildren().setAll(contentBox);
+            contentBox.getStyleClass().add("content-box");
+            getChildren().setAll(contentBox);
+            control.getStyleClass().remove("image-cell");
+        } else {
+            if (!control.getStyleClass().contains("image-cell")) {
+                control.getStyleClass().add("image-cell");
+            }
+            control.setStyle("-fx-background-image: url(" + quickLink.imageUrl() + ");");
+        }
     }
 }

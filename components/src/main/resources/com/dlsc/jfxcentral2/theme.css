@@ -952,3 +952,13 @@
 .quick-link-view:sm .title-label {
     -fx-font-size: 20px;
 }
+
+.quick-link-view:hover {
+    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.25), 30, 0.2, 0, 0);
+}
+
+.quick-link-view.image-cell {
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    -fx-cursor: default;
+}
