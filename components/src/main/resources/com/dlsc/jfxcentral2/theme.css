@@ -834,6 +834,7 @@
 .menu-view:vertical  {
     -fx-padding: 15px 0px 15px 0px;
 }
+
 .menu-view:vertical .content {
     -fx-spacing: 1px;
 }
@@ -851,6 +852,7 @@
 .menu-view:horizontal {
     -fx-padding: 0px 20px 0px 20px;
 }
+
 .menu-view:horizontal .content {
     -fx-spacing: 15px;
 }
