@@ -805,6 +805,67 @@
 }
 
 /** -------------------------------
+ * MenuView
+ */
+.menu-view {
+    -fx-background-color: -white;
+}
+
+.menu-view .item {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-cursor: hand;
+    -fx-max-width: 1000px;
+    -fx-alignment: center-left;
+    -fx-text-fill: -grey-20;
+}
+
+.menu-view .item:selected {
+    -fx-text-fill: -grey-100;
+}
+
+.menu-view .item:hover{
+    -fx-background-color: derive(-grey-10, 50%);
+}
+
+.menu-view:vertical  {
+    -fx-padding: 15px 0px 15px 0px;
+}
+.menu-view:vertical .content {
+    -fx-spacing: 1px;
+}
+
+.menu-view:vertical .item {
+    -fx-padding: 6px 75px 6px 16px;
+    -fx-border-width: 0 0 0 4px;
+    -fx-border-color: transparent;
+}
+
+.menu-view:vertical .item:selected {
+    -fx-border-color: linear-gradient(from 100.0% 100.0% to 100.0% 0.0%, transparent 0.0%, transparent 18%, -bright-blue 18.01%, -bright-blue 82%, transparent 82.01%, transparent 100.0%);
+}
+
+.menu-view:horizontal {
+    -fx-padding: 0px 20px 0px 20px;
+}
+.menu-view:horizontal .content {
+    -fx-spacing: 15px;
+}
+
+.menu-view:horizontal .item {
+    -fx-padding: 15px 10px 15px 10px;
+    -fx-border-width: 0 0 4px 0;
+    -fx-border-color: transparent;
+}
+
+.menu-view:horizontal .item:selected {
+    -fx-border-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, transparent 0.0%, transparent 10%, -bright-blue 10.01%, -bright-blue 90%, transparent 90.01%, transparent 100.0%);
+}
+
+/** -------------------------------
  * QuickLinkView
  */
 .quick-link-view {
