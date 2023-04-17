@@ -69,7 +69,7 @@ public class HelloQuickLinkContainer extends JFXCentralSampleBase {
             list.add(new QuickLinkView.QuickLink(null, null, null, null, HelloQuickLinkContainer.class.getResource(url).toExternalForm()));
         });
 
-        //If the aboev QuickLinks are less than 9, fill null
+        //If the above QuickLinks are less than 9, fill null
         for (int i = 0; i < 9 - count - count2; i++) {
             list.add(null);
         }
