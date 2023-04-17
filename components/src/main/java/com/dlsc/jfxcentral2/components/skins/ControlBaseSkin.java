@@ -7,6 +7,10 @@ public class ControlBaseSkin<T extends ControlBase> extends SkinBase<T> {
 
     protected ControlBaseSkin(T control) {
         super(control);
+        control.sizeProperty().addListener((observable, oldValue, newValue) -> layoutBySize());
+    }
+
+    protected void layoutBySize() {
     }
 
     public boolean isSmall() {
