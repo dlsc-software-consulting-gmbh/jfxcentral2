@@ -13,37 +13,30 @@ public class QuickLinksContainer extends PaneBase {
 
     public QuickLinksContainer() {
         getStyleClass().add("quick-links-container");
-        gridPane = new GridPane();
-        gridPane.getStyleClass().add("grid-pane");
-        getChildren().add(gridPane);
+
         setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
-        layoutBySize();
+        gridPane = new GridPane();
+        gridPane.getStyleClass().add("grid-pane");
+        getChildren().add(gridPane);
+
         quickLinksProperty().addListener((observable, oldValue, newValue) -> layoutBySize());
+        layoutBySize();
     }
 
     @Override
     protected void layoutBySize() {
         gridPane.getChildren().clear();
         ObservableList<QuickLinkView.QuickLink> links = getQuickLinks();
-        if (!getSize().isSmall()) {
-            for (int i = 0; i < links.size(); i++) {
-                QuickLinkView.QuickLink quickLink = links.get(i);
-                if (quickLink != null) {
-                    QuickLinkView quickLinkView = new QuickLinkView(quickLink);
-                    quickLinkView.sizeProperty().bind(sizeProperty());
-                    gridPane.add(quickLinkView, i % 3, i / 3);
-                }
-            }
-        } else {
-            for (int i = 0; i < links.size(); i++) {
-                QuickLinkView.QuickLink quickLink = links.get(i);
-                if (quickLink != null) {
-                    QuickLinkView quickLinkView = new QuickLinkView(quickLink);
-                    quickLinkView.sizeProperty().bind(sizeProperty());
-                    gridPane.add(quickLinkView, i % 2, i / 2);
-                }
+
+        int col = getSize().isSmall() ? 2 : 3;
+        for (int i = 0; i < links.size(); i++) {
+            QuickLinkView.QuickLink quickLink = links.get(i);
+            if (quickLink != null) {
+                QuickLinkView quickLinkView = new QuickLinkView(quickLink);
+                quickLinkView.sizeProperty().bind(sizeProperty());
+                gridPane.add(quickLinkView, i % col, i / col);
             }
         }
     }
