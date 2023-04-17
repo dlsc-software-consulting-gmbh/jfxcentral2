@@ -28,7 +28,6 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
         QuickLinkView.QuickLink quickLink = getSkinnable().getQuickLink();
 
         FontIcon icon = new FontIcon(quickLink.ikon());
-        ;
         icon.getStyleClass().add("icon");
 
         FontIcon linkIcon = new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT);

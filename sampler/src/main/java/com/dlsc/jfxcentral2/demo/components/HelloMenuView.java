@@ -25,7 +25,6 @@ public class HelloMenuView extends JFXCentralSampleBase {
                 new MenuView.Item("BOOK", null, "book url"),
                 new MenuView.Item("TIPS & TRICKS", null, "Tips & Tricks url")
         ));
-        menuView.setSelectedIndex(0);
         return new ScrollPane(menuView);
     }
 

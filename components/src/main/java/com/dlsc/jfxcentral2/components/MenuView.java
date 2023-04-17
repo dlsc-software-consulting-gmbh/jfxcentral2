@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral2.components.skins.MenuViewSkin;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,15 +37,16 @@ public class MenuView extends ControlBase {
     public MenuView(Orientation orientation) {
         getStyleClass().add("menu-view");
         setOrientation(orientation);
-
-        pseudoClassStateChanged(HORIZONTAL_PSEUDOCLASS_STATE, orientation == Orientation.HORIZONTAL);
-        pseudoClassStateChanged(VERTICAL_PSEUDOCLASS_STATE, orientation == Orientation.VERTICAL);
-
-        orientationProperty().addListener((ob,ov,nv) -> {
-            Orientation tempOrientation = getOrientation();
-            pseudoClassStateChanged(HORIZONTAL_PSEUDOCLASS_STATE, tempOrientation == Orientation.HORIZONTAL);
-            pseudoClassStateChanged(VERTICAL_PSEUDOCLASS_STATE, tempOrientation == Orientation.VERTICAL);
+        activateOrientationPseudoClass();
+        orientationProperty().addListener((ob, ov, nv) -> {
+            activateOrientationPseudoClass();
         });
+    }
+
+    private void activateOrientationPseudoClass() {
+        Orientation tempOrientation = getOrientation();
+        pseudoClassStateChanged(HORIZONTAL_PSEUDOCLASS_STATE, tempOrientation == Orientation.HORIZONTAL);
+        pseudoClassStateChanged(VERTICAL_PSEUDOCLASS_STATE, tempOrientation == Orientation.VERTICAL);
     }
 
     public MenuView(ObservableList<Item> items) {
@@ -62,20 +62,6 @@ public class MenuView extends ControlBase {
     @Override
     protected Skin<?> createDefaultSkin() {
         return new MenuViewSkin(this);
-    }
-
-    private final SimpleIntegerProperty selectedIndex = new SimpleIntegerProperty(this, "selectedIndex", -1);
-
-    public int getSelectedIndex() {
-        return selectedIndex.get();
-    }
-
-    public SimpleIntegerProperty selectedIndexProperty() {
-        return selectedIndex;
-    }
-
-    public void setSelectedIndex(int selectedIndex) {
-        this.selectedIndex.set(selectedIndex);
     }
 
     private final ListProperty<Item> items = new SimpleListProperty<>(this, "items", FXCollections.observableArrayList());
@@ -154,6 +140,5 @@ public class MenuView extends ControlBase {
     public List<CssMetaData<? extends Styleable, ?>> getControlCssMetaData() {
         return getClassCssMetaData();
     }
-
 
 }

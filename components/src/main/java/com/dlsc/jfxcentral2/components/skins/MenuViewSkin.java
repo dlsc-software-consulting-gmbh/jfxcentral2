@@ -22,21 +22,11 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
 
         control.orientationProperty().addListener((ob, ov, nv) -> layoutByOrientation());
         control.itemsProperty().addListener((ob, ov, nv) -> layoutByOrientation());
-        control.selectedIndexProperty().addListener((ob, ov, nv) -> {
-            int selectedIndex = nv.intValue();
-            if (selectedIndex != -1) {
-                CustomToggleButton button = (CustomToggleButton) box.getChildren().get(selectedIndex);
-                button.setSelected(true);
-            } else {
-                box.getChildren().forEach(node -> ((CustomToggleButton) node).setSelected(false));
-            }
-        });
 
     }
 
     private void layoutByOrientation() {
         ObservableList<MenuView.Item> items = control.getItems();
-        int index = control.getSelectedIndex();
         if (box != null) {
             box.getChildren().clear();
         }
@@ -55,8 +45,9 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
                     button.setGraphic(new FontIcon(item.ikon()));
                 }
                 box.getChildren().add(button);
-                if (i == index) {
+                if (i == 0) {
                     button.setSelected(true);
+                    System.out.println("item url = " + item.url());
                 }
             }
         } else {
@@ -67,7 +58,6 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
             int tempIndex = i;
             CustomToggleButton button = (CustomToggleButton) box.getChildren().get(i);
             button.setOnAction(event -> {
-                control.setSelectedIndex(tempIndex);
                 MenuView.Item item = control.getItems().get(tempIndex);
                 System.out.println("item url = " + item.url());
             });
