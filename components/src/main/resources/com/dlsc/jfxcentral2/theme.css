@@ -475,6 +475,7 @@
     -fx-pref-width: 768px;
     -fx-pref-height: 1024px;
     -fx-max-height: 1024px;
+    -fx-background-image: url("images/welcome-md.jpg");
 }
 
 .welcome-view:md .content {
@@ -531,6 +532,7 @@
     -fx-pref-width: 375px;
     -fx-pref-height: 812px;
     -fx-max-height: 812px;
+    -fx-background-image: url("images/welcome-sm.jpg");
 }
 
 .welcome-view:sm .content {
