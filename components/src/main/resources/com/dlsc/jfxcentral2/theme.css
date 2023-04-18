@@ -480,6 +480,7 @@
     -fx-pref-width: 768px;
     -fx-pref-height: 1024px;
     -fx-max-height: 1024px;
+    -fx-background-image: url("images/welcome-md.jpg");
 }
 
 .welcome-view:md .content {
@@ -536,6 +537,7 @@
     -fx-pref-width: 375px;
     -fx-pref-height: 812px;
     -fx-max-height: 812px;
+    -fx-background-image: url("images/welcome-sm.jpg");
 }
 
 .welcome-view:sm .content {
@@ -607,6 +609,10 @@
     -fx-border-color: transparent -white-a20 transparent transparent;
     -fx-border-width: 0 1px 0 0;
     -fx-max-height: 30;
+}
+
+.top-menu-bar:light .separator-region {
+    -fx-border-color: transparent -grey-20 transparent transparent;
 }
 
 .top-menu-bar .content {
