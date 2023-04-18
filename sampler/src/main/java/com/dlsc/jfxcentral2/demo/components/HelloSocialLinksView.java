@@ -10,27 +10,26 @@ import javafx.scene.layout.VBox;
 public class HelloSocialLinksView extends JFXCentralSampleBase {
 
     private CustomMenuItem customMenuItem;
+    private SocialLinksView socialLinksView;
 
     @Override
     protected Region createControl() {
-        SocialLinksView socialLinksView = new SocialLinksView(new SocialLinksView.SocialLinks(
-                "https://twitter.com/dlemmermann",
-                "https://www.linkedin.com/in/dlemmermann/",
-                "https://www.dlsc.com",
-                "mailto:dlemmermann@gmail.com",
-                "https://github.com/dlsc-software-consulting-gmbh"));
+        socialLinksView = new SocialLinksView();
+        socialLinksView.setTwitterUrl("https://twitter.com/dlemmermann");
+        socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/dlemmermann/");
+        socialLinksView.setWebsiteUrl("https://www.dlsc.com");
+        socialLinksView.setMailUrl("mailto:dlemmermann@gmail.com");
+        socialLinksView.setGithubUrl("https://github.com/dlsc-software-consulting-gmbh");
 
         MenuButton menuButton = new MenuButton("Menu");
-        customMenuItem = new CustomMenuItem(new SocialLinksView(new SocialLinksView.SocialLinks(
-                "https://twitter.com/",
-                "https://www.linkedin.com/in/",
-                null,
-                null,
-                "https://github.com/")));
+        SocialLinksView menuLinksView = new SocialLinksView();
+        menuLinksView.setTwitterUrl("https://twitter.com/");
+        menuLinksView.setLinkedInUrl("https://www.linkedin.com/in/");
+        menuLinksView.setGithubUrl("https://github.com/");
+        customMenuItem = new CustomMenuItem(menuLinksView);
         customMenuItem.setHideOnClick(false);
 
-        menuButton.getItems().addAll(
-                customMenuItem);
+        menuButton.getItems().addAll(customMenuItem);
 
         VBox vBox = new VBox(20, socialLinksView, menuButton);
         vBox.getStyleClass().add("hello-social-links-view");
