@@ -67,6 +67,8 @@ public class WelcomeView extends PaneBase {
         openJFXProjectButton.getStyleClass().addAll("fill-button", "openjfx-button");
         openJFXProjectButton.setOnAction(event -> JFXCentralUtil.run(onOpenJFXProject));
 
+        setMinHeight(Region.USE_PREF_SIZE);
+
         layoutBySize();
     }
 
