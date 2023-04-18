@@ -9,8 +9,12 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 
 public class SaveAndLikeButton extends Control {
+
     public SaveAndLikeButton() {
         getStyleClass().add("save-and-like-button");
+
+        visibleProperty().bind(saveButtonVisibleProperty().or(likeButtonVisibleProperty()));
+        managedProperty().bind(saveButtonVisibleProperty().or(likeButtonVisibleProperty()));
     }
 
     @Override
@@ -20,67 +24,67 @@ public class SaveAndLikeButton extends Control {
 
     private final StringProperty saveButtonText = new SimpleStringProperty(this, "saveButtonText", "Save");
 
-    public String getSaveButtonText() {
+    public final String getSaveButtonText() {
         return saveButtonText.get();
     }
 
-    public StringProperty saveButtonTextProperty() {
+    public final StringProperty saveButtonTextProperty() {
         return saveButtonText;
     }
 
-    public void setSaveButtonText(String saveButtonText) {
+    public final void setSaveButtonText(String saveButtonText) {
         this.saveButtonText.set(saveButtonText);
     }
 
     private final StringProperty likeButtonText = new SimpleStringProperty(this, "likeButtonText", "Like");
 
-    public String getLikeButtonText() {
+    public final String getLikeButtonText() {
         return likeButtonText.get();
     }
 
-    public StringProperty likeButtonTextProperty() {
+    public final StringProperty likeButtonTextProperty() {
         return likeButtonText;
     }
 
-    public void setLikeButtonText(String likeButtonText) {
+    public final void setLikeButtonText(String likeButtonText) {
         this.likeButtonText.set(likeButtonText);
     }
 
     private final BooleanProperty saveButtonSelected = new SimpleBooleanProperty(this, "saveButtonSelected", false);
 
-    public boolean getSaveButtonSelected() {
+    public final boolean getSaveButtonSelected() {
         return saveButtonSelected.get();
     }
 
-    public BooleanProperty saveButtonSelectedProperty() {
+    public final BooleanProperty saveButtonSelectedProperty() {
         return saveButtonSelected;
     }
 
-    public void setSaveButtonSelected(boolean saveButtonSelected) {
+    public final void setSaveButtonSelected(boolean saveButtonSelected) {
         this.saveButtonSelected.set(saveButtonSelected);
     }
 
     private final BooleanProperty likeButtonSelected = new SimpleBooleanProperty(this, "likeButtonSelected", false);
 
-    public boolean getLikeButtonSelected() {
+    public final boolean getLikeButtonSelected() {
         return likeButtonSelected.get();
     }
 
-    public BooleanProperty likeButtonSelectedProperty() {
+    public final BooleanProperty likeButtonSelectedProperty() {
         return likeButtonSelected;
     }
 
-    public void setLikeButtonSelected(boolean likeButtonSelected) {
+    public final void setLikeButtonSelected(boolean likeButtonSelected) {
         this.likeButtonSelected.set(likeButtonSelected);
     }
 
     private final BooleanProperty saveButtonVisible = new SimpleBooleanProperty(this, "saveButtonVisible", true);
 
-    public boolean isSaveButtonVisible() {
+    public final boolean isSaveButtonVisible() {
         return saveButtonVisible.get();
     }
 
-    public BooleanProperty saveButtonVisibleProperty() {
+    public final BooleanProperty saveButtonVisibleProperty() {
         return saveButtonVisible;
     }
 
@@ -90,11 +94,11 @@ public class SaveAndLikeButton extends Control {
 
     private final BooleanProperty likeButtonVisible = new SimpleBooleanProperty(this, "likeButtonVisible", true);
 
-    public boolean isLikeButtonVisible() {
+    public final boolean isLikeButtonVisible() {
         return likeButtonVisible.get();
     }
 
-    public BooleanProperty likeButtonVisibleProperty() {
+    public final BooleanProperty likeButtonVisibleProperty() {
         return likeButtonVisible;
     }
 
