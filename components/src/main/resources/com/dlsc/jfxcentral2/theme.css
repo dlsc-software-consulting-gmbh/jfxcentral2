@@ -81,6 +81,11 @@
     -fx-font-size: 16px;
 }
 
+.label,
+.button {
+    -fx-text-fill: -grey-100;
+}
+
 /** -------------------------------
  * Button
  */
@@ -748,7 +753,7 @@
 .top-menu-bar:sm .text-field {
     -fx-pref-width: 130px;
 }
-    
+
 /** -------------------------------
  * CopyrightView
  */
@@ -827,11 +832,11 @@
     -fx-text-fill: -grey-100;
 }
 
-.menu-view .item:hover{
+.menu-view .item:hover {
     -fx-background-color: derive(-grey-10, 50%);
 }
 
-.menu-view:vertical  {
+.menu-view:vertical {
     -fx-padding: 15px 0px 15px 0px;
 }
 
@@ -961,4 +966,31 @@
     -fx-background-position: center;
     -fx-background-size: cover;
     -fx-cursor: default;
+}
+
+/** -------------------------------
+ * SaveAndLikeButton
+ */
+.save-and-like-button .content {
+    -fx-spacing: 3px;
+}
+
+.save-and-like-button .toggle-button {
+    -fx-background-color: -white;
+    -fx-background-radius: 15px;
+    -fx-border-color: -grey-20;
+    -fx-border-radius: 15px;
+    -fx-graphic-text-gap: 5px;
+    -fx-padding: 2px 6px;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.save-and-like-button .toggle-button .ikonli-font-icon {
+    -fx-icon-size: 15px;
+}
+
+.save-and-like-button .toggle-button:selected {
+    -fx-background-color: -green;
+    -fx-border-color: transparent;
 }
