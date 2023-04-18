@@ -2,6 +2,13 @@
     -fx-background-image: url('images/welcome.jpg');
 }
 
+.hello-save-and-like-button .save-and-like-button {
+    -fx-background-color: -white;
+    -fx-border-color: -grey-20;
+    -fx-padding: 8px 20px;
+    -fx-spacing: 3px;
+}
+
 .top-menu-bar:md {
     -fx-background-image: url('images/welcome-md.jpg');
 }
