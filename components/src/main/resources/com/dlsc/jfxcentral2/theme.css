@@ -816,6 +816,112 @@
 }
 
 /** -------------------------------
+ * FeatureView
+ */
+.feature-view {
+    -fx-background-color: -bright-blue;
+    -fx-alignment: top-left;
+    -fx-cursor: hand;
+}
+
+.feature-view:pressed {
+    -fx-background-color: derive(-bright-blue, -5%);
+}
+
+.feature-view .type-icon {
+    -fx-icon-size: 34px;
+    -fx-translate-y: -3px;
+}
+
+.feature-view .label {
+    -fx-text-fill: -white;
+}
+
+.feature-view .ikonli-font-icon {
+    -fx-icon-color: -white;
+}
+
+.feature-view .remark {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-graphic-text-gap: 13px;
+}
+
+.feature-view .remark .ikonli-font-icon {
+    -fx-icon-size: 16px;
+}
+
+.feature-view .description {
+    -fx-pref-height: 200px;
+    -fx-max-height: 200px;
+    -fx-alignment: bottom-left;
+}
+
+.feature-view:lg {
+    -fx-padding: 30px 20px 30px 20px;
+    -fx-pref-width: 360px;
+    -fx-pref-height: 415px;
+    -fx-max-width: 360px;
+    -fx-max-height: 415px;
+}
+
+.feature-view:md-lg .tag {
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.feature-view:lg .title {
+    -fx-font-size: 44px;
+}
+
+.feature-view:lg .custom-image-view {
+    -fx-fit-width: 320px;
+    -fx-fit-height: 147px;
+}
+
+.feature-view:lg .description {
+    -fx-font-size: 24px;
+}
+
+.feature-view:md {
+    -fx-padding: 30px 20px 30px 20px;
+    -fx-pref-width: 236px;
+    -fx-pref-height: 385px;
+    -fx-max-width: 236px;
+    -fx-max-height: 385px;
+}
+
+.feature-view:md .title {
+    -fx-font-size: 34px;
+}
+
+.feature-view:md .custom-image-view {
+    -fx-fit-width: 195px;
+    -fx-fit-height: 109px;
+}
+
+.feature-view:md .description {
+    -fx-font-size: 20px;
+}
+
+.feature-view:sm {
+    -fx-padding: 15px;
+    -fx-pref-width: 192px;
+    -fx-pref-height: 140px;
+    -fx-max-width: 192px;
+    -fx-max-height: 140px;
+}
+
+.feature-view:sm .custom-image-view {
+    -fx-fit-width: 162px;
+    -fx-fit-height: 71px;
+}
+
+.feature-view:sm .description {
+    -fx-font-size: 13px;
+}
+
+/** -------------------------------
  * MenuView
  */
 .menu-view {
