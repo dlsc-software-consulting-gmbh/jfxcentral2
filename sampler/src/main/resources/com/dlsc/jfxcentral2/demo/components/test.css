@@ -22,3 +22,30 @@
     -fx-foreground-color: -grey-100;
     -fx-background-image: null;
 }
+
+.hello-social-links-view .menu-button:expanded .arrow {
+    -fx-rotate: 180;
+}
+
+.hello-social-links-view .menu-button  > .arrow-button > .arrow {
+    -fx-shape: "M6.03015 6L0 0H12.0603L6.03015 6Z";
+    -fx-background-color: #0e4ae4;
+}
+
+.hello-social-links-view .menu-button:showing  > .arrow-button > .arrow {
+    -fx-rotate: 180;
+}
+
+.hello-social-links-view .custom-menu-item ,
+.hello-social-links-view .custom-menu-item:hover,
+.hello-social-links-view .custom-menu-item:pressed,
+.hello-social-links-view .custom-menu-item:focused {
+    -fx-padding: 0;
+    -fx-background-color: transparent ;
+}
+
+.hello-social-links-view .menu-button .context-menu {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent ;
+    -fx-background-radius: 10px;
+}

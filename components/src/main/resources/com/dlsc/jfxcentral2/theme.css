@@ -74,6 +74,7 @@
     -white-a20: #ffffff33; /* 20% alpha */
     -bright-blue: #0e4ae4;
     -light-blue: #cfdbfa;
+    -blue-shadow: dropshadow(gaussian, rgba(14, 74, 228, 0.25), 30, 0.2, 0, 0); /* 20% alpha */
 }
 
 .root {
@@ -1071,7 +1072,7 @@
 }
 
 .quick-link-view:hover {
-    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.25), 30, 0.2, 0, 0);
+    -fx-effect: -blue-shadow;
 }
 
 .quick-link-view.image-cell {
@@ -1106,3 +1107,46 @@
     -fx-background-color: -green;
     -fx-border-color: transparent;
 }
+/** -------------------------------
+ * SocialLinksView
+ */
+.social-links-view {
+    -fx-background-color: -bright-blue;
+    -fx-padding: 15px 15px 15px 11px;
+    -fx-background-radius: 10px;
+    -fx-effect: -blue-shadow;
+    -fx-hgap: 5px;
+    -fx-vgap: 10px;
+    -fx-alignment: center-right;
+    -fx-pref-width: 302px;
+    -fx-pref-height: 90px;
+    -fx-max-width: 302px;
+    -fx-max-height: 90px;
+}
+
+.social-links-view .button {
+    -fx-background-color: -white;
+    -fx-background-radius: 30px;
+    -fx-background-insets: 0;
+    -fx-padding: 4px 9px;
+    -fx-content-display: right;
+    -fx-graphic-text-gap: 5px;
+    -fx-text-fill: -bright-blue;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.social-links-view .button:hover {
+    -fx-background-color: derive(-white, -5%);
+}
+
+.social-links-view .button:pressed {
+    -fx-background-color: derive(-white, -10%);
+
+}
+
+.social-links-view .button .ikonli-font-icon {
+    -fx-icon-color: -bright-blue;
+    -fx-icon-size: 14px;
+}
+
