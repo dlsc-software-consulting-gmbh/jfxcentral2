@@ -14,5 +14,6 @@ open module com.dlsc.jfxcentral2.components {
 
     exports com.dlsc.jfxcentral2;
     exports com.dlsc.jfxcentral2.components;
+    exports com.dlsc.jfxcentral2.model;
     exports com.dlsc.jfxcentral2.components.skins;
 }

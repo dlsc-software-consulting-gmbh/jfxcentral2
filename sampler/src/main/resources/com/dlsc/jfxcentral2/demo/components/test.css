@@ -2,6 +2,27 @@
     -fx-background-image: url('images/welcome.jpg');
 }
 
+.hello-save-and-like-button .save-and-like-button {
+    -fx-background-color: -white;
+    -fx-border-color: -grey-20;
+    -fx-padding: 8px 20px;
+    -fx-spacing: 3px;
+}
+
+.top-menu-bar:md {
+    -fx-background-image: url('images/welcome-md.jpg');
+}
+
+.top-menu-bar:sm {
+    -fx-background-image: url('images/welcome-sm.jpg');
+}
+
+.top-menu-bar:light {
+    -fx-background-color: #F2F2F2;
+    -fx-foreground-color: -grey-100;
+    -fx-background-image: null;
+}
+
 .hello-social-links-view .menu-button:expanded .arrow {
     -fx-rotate: 180;
 }
