@@ -604,6 +604,10 @@
     -fx-max-height: 30;
 }
 
+.top-menu-bar:light .separator-region {
+    -fx-border-color: transparent -grey-20 transparent transparent;
+}
+
 .top-menu-bar .content {
     -fx-alignment: center;
     -fx-spacing: 30px;
