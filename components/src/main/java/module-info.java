@@ -10,6 +10,8 @@ open module com.dlsc.jfxcentral2.components {
     requires org.kordamp.ikonli.core;
     requires org.kordamp.ikonli.materialdesign;
     requires org.kordamp.ikonli.materialdesign2;
+    requires org.kordamp.ikonli.material;
+    requires org.kordamp.ikonli.material2;
     requires com.dlsc.gemsfx;
 
     exports com.dlsc.jfxcentral2;

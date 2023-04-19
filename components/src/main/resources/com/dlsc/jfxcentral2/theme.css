@@ -104,6 +104,47 @@
 }
 
 /** -------------------------------
+ * ContextMenu
+*/
+.context-menu {
+    -hover-text-icon-color: -grey-100; /* (hover)label:textFill; (hover)ikonli-font-icon:iconColor */
+    -normal-text-icon-color: -grey-20; /* label:textFill; ikonli-font-icon:iconColor */
+    -fx-background-color: -white;
+    -fx-background-radius: 10px;
+    -fx-effect: -blue-shadow;
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 20px;
+    -fx-padding: 20px 30px 20px 30px;
+}
+
+.context-menu .menu-item {
+    -fx-cursor: hand;
+}
+
+.context-menu .menu-item > .label {
+    -fx-padding: 3px 10px 3px 12px;
+    -fx-text-fill: -normal-text-icon-color;
+}
+
+.context-menu .menu-item .graphic-container .ikonli-font-icon {
+    -fx-icon-color: -normal-text-icon-color;
+    -fx-icon-size: 25px;
+}
+
+.context-menu .menu-item:hover > .label {
+    -fx-text-fill: -hover-text-icon-color;
+}
+
+.context-menu .menu-item:hover .graphic-container .ikonli-font-icon {
+    -fx-icon-color: -hover-text-icon-color;
+}
+
+.context-menu .menu-item:hover,
+.context-menu .menu-item:focused {
+    -fx-background-color: transparent;
+}
+
+/** -------------------------------
  * JFXCentral Logo Shape
  */
 .jfxcentral-region {
@@ -1107,6 +1148,7 @@
     -fx-background-color: -green;
     -fx-border-color: transparent;
 }
+
 /** -------------------------------
  * SocialLinksView
  */
@@ -1149,4 +1191,3 @@
     -fx-icon-color: -bright-blue;
     -fx-icon-size: 14px;
 }
-
