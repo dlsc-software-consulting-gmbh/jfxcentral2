@@ -48,4 +48,16 @@
     -fx-border-color: transparent;
     -fx-background-color: transparent ;
     -fx-background-radius: 10px;
+    -fx-padding: 0px;
+}
+
+.menu-button.dropdowns-style2 .context-menu {
+    -normal-text-icon-color: -grey-100;
+    -hover-text-icon-color: -grey-20;
+}
+
+.hello-styling-dropdowns > .label {
+    -fx-border-color: -grey-100;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 20px;
 }

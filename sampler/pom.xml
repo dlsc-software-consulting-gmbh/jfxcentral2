@@ -48,6 +48,16 @@
 
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-material-pack</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-material2-pack</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
 			<artifactId>ikonli-javafx</artifactId>
 		</dependency>
 
