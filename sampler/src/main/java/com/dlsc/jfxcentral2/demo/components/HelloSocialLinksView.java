@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.demo.components;
 
 import com.dlsc.jfxcentral2.components.SocialLinksView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
+import javafx.geometry.Insets;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.Region;
@@ -32,6 +33,7 @@ public class HelloSocialLinksView extends JFXCentralSampleBase {
         menuButton.getItems().addAll(customMenuItem);
 
         VBox vBox = new VBox(20, socialLinksView, menuButton);
+        vBox.setPadding(new Insets(20));
         vBox.getStyleClass().add("hello-social-links-view");
         vBox.getStylesheets().add(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/test.css").toExternalForm());
         return vBox;
