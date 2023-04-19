@@ -61,3 +61,7 @@
     -fx-padding: 5px 10px;
     -fx-font-size: 20px;
 }
+
+.website-changes-view {
+    -fx-border-color: pink;
+}
