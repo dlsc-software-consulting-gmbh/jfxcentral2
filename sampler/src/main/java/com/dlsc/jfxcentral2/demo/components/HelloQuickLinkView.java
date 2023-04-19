@@ -3,6 +3,8 @@ package com.dlsc.jfxcentral2.demo.components;
 import com.dlsc.jfxcentral2.components.QuickLinkView;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
+import com.dlsc.jfxcentral2.model.NormalQuickLink;
+import com.dlsc.jfxcentral2.model.QuickLink;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -16,12 +18,11 @@ public class HelloQuickLinkView extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        QuickLinkView.QuickLink quickLink = new QuickLinkView.QuickLink(
+        QuickLink quickLink = new NormalQuickLink(
                 "Tools",
                 "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur",
                 MaterialDesignT.TOOLS,
-                "xxx url...",
-                null);
+                "xxx url...");
         quickLinkView = new QuickLinkView(quickLink);
 
         return new ScrollPane(new VBox(30, quickLinkView));

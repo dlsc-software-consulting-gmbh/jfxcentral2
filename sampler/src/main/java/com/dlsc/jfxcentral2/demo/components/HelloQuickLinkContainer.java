@@ -1,10 +1,12 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.QuickLinkView;
 import com.dlsc.jfxcentral2.components.QuickLinksContainer;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
+import com.dlsc.jfxcentral2.model.ImageQuickLink;
+import com.dlsc.jfxcentral2.model.NormalQuickLink;
+import com.dlsc.jfxcentral2.model.QuickLink;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -34,7 +36,7 @@ public class HelloQuickLinkContainer extends JFXCentralSampleBase {
         return scrollPane;
     }
 
-    public List<QuickLinkView.QuickLink> generateQuickLinkList(Size size) {
+    public List<QuickLink> generateQuickLinkList(Size size) {
         if (size != Size.SMALL) {
             return getLargeOrMediumQuickLinks(size);
         } else {
@@ -42,20 +44,21 @@ public class HelloQuickLinkContainer extends JFXCentralSampleBase {
         }
     }
 
-    private List<QuickLinkView.QuickLink> getSmallQuickLinks() {
-        List<QuickLinkView.QuickLink> list = new ArrayList<>();
+    private List<QuickLink> getSmallQuickLinks() {
+        List<QuickLink> list = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            list.add(new QuickLinkView.QuickLink("Tools", "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", MaterialDesignT.TOOLS, "xxx url...", null));
+            list.add(new NormalQuickLink("Tools", "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", MaterialDesignT.TOOLS, "xxx url..."));
         }
+        Collections.shuffle(list);
         return list;
     }
 
-    private List<QuickLinkView.QuickLink> getLargeOrMediumQuickLinks(Size size) {
-        ArrayList<QuickLinkView.QuickLink> list = new ArrayList<>();
+    private List<QuickLink> getLargeOrMediumQuickLinks(Size size) {
+        ArrayList<QuickLink> list = new ArrayList<>();
         // Randomly generate 4 to 6 QuickLinks
         int count = new Random().nextInt(3) + 4;
         for (int i = 0; i < count; i++) {
-            list.add(new QuickLinkView.QuickLink("Tools", i + " Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", MaterialDesignT.TOOLS, "xxx url...", null));
+            list.add(new NormalQuickLink("Tools", i + " Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", MaterialDesignT.TOOLS, "xxx url..."));
         }
         //Randomly generate 1~3 QuickLinks for image placeholders
         int count2 = new Random().nextInt(3) + 1;
@@ -66,7 +69,7 @@ public class HelloQuickLinkContainer extends JFXCentralSampleBase {
         }
         Collections.shuffle(imageUrlList);
         imageUrlList.subList(0, count2).forEach(url -> {
-            list.add(new QuickLinkView.QuickLink(null, null, null, null, HelloQuickLinkContainer.class.getResource(url).toExternalForm()));
+            list.add(new ImageQuickLink(HelloQuickLinkContainer.class.getResource(url).toExternalForm()));
         });
 
         //If the above QuickLinks are less than 9, fill null
@@ -80,7 +83,7 @@ public class HelloQuickLinkContainer extends JFXCentralSampleBase {
         return list;
     }
 
-    public boolean checkArrayList(ArrayList<QuickLinkView.QuickLink> list) {
+    public boolean checkArrayList(ArrayList<QuickLink> list) {
         int rows = 3;
         int cols = 3;
         //Cannot have 3 null values or 3 QuickLinks without images in the same row
@@ -92,7 +95,7 @@ public class HelloQuickLinkContainer extends JFXCentralSampleBase {
                 int index = i * cols + j;
                 if (list.get(index) == null) {
                     nullCount++;
-                } else if (list.get(index).imageUrl() == null) {
+                } else if (list.get(index) instanceof NormalQuickLink) {
                     normalView++;
                 } else {
                     imageView++;
@@ -111,7 +114,7 @@ public class HelloQuickLinkContainer extends JFXCentralSampleBase {
                 int index = i * cols + j;
                 if (list.get(index) == null) {
                     nullCount++;
-                } else if (list.get(index).imageUrl() == null) {
+                } else if (list.get(index) instanceof NormalQuickLink) {
                     normalView++;
                 } else {
                     imageView++;
