@@ -913,6 +913,7 @@
 .feature-view:lg .top-box {
     -fx-padding: 0 0 25px 0;
 }
+
 .feature-view:md .top-box {
     -fx-padding: 0 0 35px 0;
 }
@@ -1004,6 +1005,11 @@
     -fx-max-height: 479px;
 }
 
+.features-container:sm .pagination-container {
+    -fx-border-color: -bright-blue;
+    -fx-border-width: 15px;
+}
+
 .features-container .feature-view.odd {
     -fx-background-color: #1040c0;
 }
@@ -1011,7 +1017,6 @@
 .features-container .feature-view.odd:pressed {
     -fx-background-color: derive(#1040c0, -10%);
 }
-
 
 .features-container:sm .feature-view {
     -fx-min-width: 317px;
@@ -1076,6 +1081,11 @@
 .pagination-control .control-box .prev-button .ikonli-font-icon,
 .pagination-control .control-box .next-button .ikonli-font-icon {
     -fx-icon-color: -white;
+}
+
+.pagination-control .content-pane-center {
+    -fx-border-color: -bright-blue;
+    -fx-border-width: 0 15px 0 15px;
 }
 
 /** -------------------------------

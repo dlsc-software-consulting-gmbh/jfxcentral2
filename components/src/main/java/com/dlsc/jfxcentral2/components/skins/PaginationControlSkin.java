@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
@@ -56,6 +58,11 @@ public class PaginationControlSkin extends SkinBase<PaginationControl> {
 
         BorderPane contentPane = new BorderPane();
         contentPane.getStyleClass().add("content-pane");
+        StackPane contentPaneCenter = new StackPane();
+        contentPane.setCenter(contentPaneCenter);
+        BorderPane.setAlignment(contentPaneCenter, Pos.TOP_CENTER);
+        contentPaneCenter.setMaxHeight(Region.USE_PREF_SIZE);
+        contentPaneCenter.getStyleClass().add("content-pane-center");
         control.currentPageIndexProperty().addListener((ob, ov, nv) -> {
             if (nv.intValue() < 0 || nv.intValue() > control.getPageCount() - 1) {
                 return;
@@ -63,7 +70,7 @@ public class PaginationControlSkin extends SkinBase<PaginationControl> {
             btnPrev.setDisable(nv.intValue() == 0);
             btnNext.setDisable(nv.intValue() == control.getPageCount() - 1);
             if (control.getPageFactory() != null) {
-                contentPane.setCenter(control.getPageFactory().call(nv.intValue()));
+                contentPaneCenter.getChildren().setAll(control.getPageFactory().call(nv.intValue()));
             }
         });
 
@@ -77,11 +84,11 @@ public class PaginationControlSkin extends SkinBase<PaginationControl> {
 
         int pageIndex = control.getCurrentPageIndex();
         if (pageIndex >= 0 && control.getPageFactory() != null) {
-            contentPane.setCenter(control.getPageFactory().call(pageIndex));
+            contentPaneCenter.getChildren().setAll(control.getPageFactory().call(pageIndex));
         }
         btnPrev.setDisable(pageIndex == 0);
 
-        BorderPane.setAlignment(controlBox, Pos.CENTER);
+        BorderPane.setAlignment(controlBox, Pos.BOTTOM_CENTER);
         contentPane.setBottom(controlBox);
 
         getChildren().setAll(contentPane);
