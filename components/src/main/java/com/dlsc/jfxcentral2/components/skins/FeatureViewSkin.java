@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral2.components.FeatureView;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.Feature;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -36,11 +35,9 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
         typeIcon.getStyleClass().add("type-icon");
         typeIcon.setIconCode(feature.type() == Feature.Type.VIDEO ? MaterialDesign.MDI_PLAY : MaterialDesign.MDI_ARROW_TOP_RIGHT);
 
-        Label titleLabel = null;
-        if (!isSmall()) {
-            titleLabel = NodeUtil.createLabel("title");
-            titleLabel.setText(feature.title());
-        }
+        Label titleLabel = NodeUtil.createLabel("title");
+        titleLabel.setText(feature.title());
+        titleLabel.managedProperty().bind(titleLabel.visibleProperty());
 
         HBox topBox = new HBox(NodeUtil.createVBox(tagLabel, titleLabel), new Spacer(), typeIcon);
         topBox.getStyleClass().add("top-box");
@@ -65,17 +62,6 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
         VBox contentBox = NodeUtil.createVBox(topBox, imageView, descriptionLabel, remarkLabel);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
-        if (isLarge()) {
-            VBox.setMargin(topBox, new Insets(0, 0, 0, 0));
-            NodeUtil.setVBoxMargin(imageView, new Insets(25, 0, 10, 0));
-        } else if (isMedium()) {
-            VBox.setMargin(topBox, new Insets(0, 0, 10, 0));
-            NodeUtil.setVBoxMargin(imageView, new Insets(25, 0, 20, 0));
-        } else if (isSmall()) {
-            VBox.setMargin(topBox, new Insets(0, 0, 0, 0));
-            NodeUtil.setVBoxMargin(imageView, new Insets(0, 0, 0, 0));
-        }
-        NodeUtil.setVBoxMargin(remarkLabel, new Insets(10, 0, 0, 0));
     }
 
 }
