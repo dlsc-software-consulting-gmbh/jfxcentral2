@@ -2,12 +2,12 @@ package com.dlsc.jfxcentral2;
 
 import com.dlsc.jfxcentral2.components.CopyrightView;
 import com.dlsc.jfxcentral2.components.FooterView;
+import com.dlsc.jfxcentral2.components.HomePageTopView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
-import com.dlsc.jfxcentral2.components.WelcomeView;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
@@ -30,11 +30,11 @@ public class JFXCentral2App extends Application {
         TopMenuBar topMenuBar = new TopMenuBar();
         topMenuBar.sizeProperty().bind(sizeProperty());
 
-        // welcome
-        WelcomeView welcomeView = new WelcomeView();
-        welcomeView.sizeProperty().bind(sizeProperty());
+        // HomePage TopView
+        HomePageTopView homePageTopView = new HomePageTopView();
+        homePageTopView.sizeProperty().bind(sizeProperty());
 
-        StackPane welcomeStackPane = new StackPane(welcomeView, topMenuBar);
+        StackPane welcomeStackPane = new StackPane(homePageTopView, topMenuBar);
         StackPane.setAlignment(topMenuBar, Pos.TOP_CENTER);
 
         // sponsors
@@ -62,9 +62,7 @@ public class JFXCentral2App extends Application {
 //        uiBox.maxWidthProperty().bind(uiBox.prefWidthProperty());
 
         StackPane.setAlignment(uiBox, Pos.TOP_CENTER);
-        uiBox.widthProperty().addListener((ob, ov, nv) ->{
-            System.out.println("uiBox.width: " + nv);
-        });
+
         StackPane background = new StackPane(uiBox);
         background.getStyleClass().add("background");
 

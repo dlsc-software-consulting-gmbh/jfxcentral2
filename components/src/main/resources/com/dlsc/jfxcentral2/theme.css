@@ -286,6 +286,58 @@
 }
 
 /** -------------------------------
+ * HomePageTopView
+ */
+.home-page-top-view {
+    -fx-background-color: #f1f2f2;
+}
+
+.home-page-top-view:lg {
+    -fx-min-height: 1713px;
+    -fx-pref-height: 1713px;
+    -fx-max-height: 1713px;
+    -fx-max-width: 1440px;
+    -fx-pref-width: 1440px;
+    -fx-min-width: 1440px;
+}
+
+.home-page-top-view:md {
+    -fx-min-height: 1837px;
+    -fx-pref-height: 1837px;
+    -fx-max-height: 1837px;
+    -fx-max-width: 1024px;
+    -fx-pref-width: 1024px;
+    -fx-min-width: 1024px;
+}
+
+.home-page-top-view:sm {
+    -fx-min-height: 1734px;
+    -fx-pref-height: 1734px;
+    -fx-max-height: 1734px;
+    -fx-max-width: 375px;
+    -fx-pref-width: 375px;
+    -fx-min-width: 375px;
+}
+
+.home-page-top-view:lg > .features-links-box {
+    -fx-max-height: 1091px;
+    -fx-padding: 0px 180px 99px 180px;
+}
+
+.home-page-top-view:md > .features-links-box {
+    -fx-max-height: 1006px;
+    -fx-padding: 0px 30px 70px 30px;
+}
+
+.home-page-top-view:sm > .features-links-box {
+    -fx-max-height: 1018px;
+    -fx-spacing: 60px;
+    -fx-max-width: 375px;
+    -fx-padding: 0px 0px 60px 0px;
+
+}
+
+/** -------------------------------
  * LineNumberPane
  */
 .line-number-pane {
@@ -326,7 +378,7 @@
 }
 
 .footer-view:md .content {
-    -fx-spacing: 20px;
+    -fx-spacing: 80px;
     -fx-padding: 40px 30px 40px 30px;
 }
 
@@ -598,16 +650,12 @@
     -fx-pref-width: 317px;
     -fx-max-width: 317px;
     -fx-alignment: center;
+    -fx-spacing: 40px;
 }
 
 .welcome-view:sm .fx-logo {
     -fx-fit-height: 36px;
     -fx-fit-width: 106px
-}
-
-.welcome-view:sm .content {
-    -fx-spacing: 40px;
-    -fx-alignment: center;
 }
 
 .welcome-view:sm .label-box {
@@ -1008,6 +1056,18 @@
 /** -------------------------------
  * FeaturesContainer
  */
+.features-container:lg {
+    -fx-max-width: 1080px;
+    -fx-pref-width: 1080px;
+    -fx-min-width: 1080px;
+}
+
+.features-container:md {
+    -fx-max-width: 708px;
+    -fx-pref-width: 708px;
+    -fx-min-width: 708px;
+}
+
 .features-container:sm {
     -fx-min-width: -sm-width;
     -fx-min-height: 479px;
