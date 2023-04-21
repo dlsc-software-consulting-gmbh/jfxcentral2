@@ -1,16 +1,15 @@
 package com.dlsc.jfxcentral2;
 
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.components.CopyrightView;
 import com.dlsc.jfxcentral2.components.FooterView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
+import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.WelcomeView;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Orientation;
@@ -41,11 +40,6 @@ public class JFXCentral2App extends Application {
         // sponsors
         SponsorsView sponsorsView = new SponsorsView();
         sponsorsView.sizeProperty().bind(sizeProperty());
-        sponsorsView.showLogoCountProperty().bind(Bindings.createIntegerBinding(() -> switch (getSize()) {
-            case SMALL -> 2;
-            case MEDIUM -> 3;
-            case LARGE -> 5;
-        }, sizeProperty()));
 
         // footer
         FooterView footerView = new FooterView();
@@ -68,7 +62,9 @@ public class JFXCentral2App extends Application {
 //        uiBox.maxWidthProperty().bind(uiBox.prefWidthProperty());
 
         StackPane.setAlignment(uiBox, Pos.TOP_CENTER);
-
+        uiBox.widthProperty().addListener((ob, ov, nv) ->{
+            System.out.println("uiBox.width: " + nv);
+        });
         StackPane background = new StackPane(uiBox);
         background.getStyleClass().add("background");
 

@@ -9,7 +9,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
-import javafx.scene.control.Spinner;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -25,16 +24,12 @@ public class HelloSponsorsView extends JFXCentralSampleBase {
     @Override
     protected Region createControl() {
         sponsorsView = new SponsorsView();
-        sponsorsView.setShowLogoCount(5);
         sponsorsView.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
         return new ScrollPane(sponsorsView);
     }
 
     @Override
     public Node getControlPanel() {
-        Spinner<Integer> spinner = new Spinner<>(0, 5, 5);
-        sponsorsView.showLogoCountProperty().bind(spinner.valueProperty());
-
         SizeComboBox sizeComboBox = new SizeComboBox();
         sponsorsView.sizeProperty().bind(sizeComboBox.sizeProperty());
 
@@ -42,7 +37,7 @@ public class HelloSponsorsView extends JFXCentralSampleBase {
         showDividerCheckBox.setSelected(true);
         sponsorsView.dividerVisibleProperty().bind(showDividerCheckBox.selectedProperty());
 
-        VBox controlBox = new VBox(10, new Label("Change size:"), sizeComboBox, new Separator(), new Label("Show Logo Count:"), spinner, new Separator(), showDividerCheckBox);
+        VBox controlBox = new VBox(10, new Label("Change size:"), sizeComboBox, new Separator(), showDividerCheckBox);
         controlBox.setSpacing(10);
         controlBox.setAlignment(Pos.TOP_LEFT);
         return controlBox;
