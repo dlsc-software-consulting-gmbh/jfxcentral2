@@ -2,9 +2,7 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.components.skins.SponsorsSkin;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -64,20 +62,6 @@ public class SponsorsView extends ControlBase {
     @Override
     protected Skin<?> createDefaultSkin() {
         return new SponsorsSkin(this);
-    }
-
-    private final IntegerProperty showLogoCount = new SimpleIntegerProperty(this, "showCount", 5);
-
-    public int getShowLogoCount() {
-        return showLogoCount.get();
-    }
-
-    public IntegerProperty showLogoCountProperty() {
-        return showLogoCount;
-    }
-
-    public void setShowLogoCount(int showLogoCount) {
-        this.showLogoCount.set(showLogoCount);
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title", DEFAULT_TITLE);

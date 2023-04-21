@@ -41,7 +41,6 @@ public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
 
         control.itemsProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
         control.sizeProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
-        control.showLogoCountProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
         control.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             initLogoNodes();
             event.consume();
@@ -51,7 +50,11 @@ public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
     private void initLogoNodes() {
         ObservableList<SponsorsView.Sponsor> items = control.getItems();
         List<Node> nodes = new ArrayList<>();
-        int logoCount = control.getShowLogoCount();
+        int logoCount = switch (control.getSize()){
+            case SMALL -> 2;
+            case MEDIUM -> 3;
+            case LARGE -> 5;
+        };
         int itemSize = items.size();
         int realLogoCount = Math.min(itemSize, logoCount);
 
@@ -81,7 +84,7 @@ public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
             temp.removeAll(showedSponsor);
             Collections.shuffle(temp);
             showedSponsor.clear();
-            showedSponsor.addAll(temp.subList(0, realLogoCount));
+            showedSponsor.addAll(temp.subList(0, Math.min(realLogoCount, temp.size())));
         }
         //add divider and logo
         for (int i = 0; i < showedSponsor.size(); i++) {
