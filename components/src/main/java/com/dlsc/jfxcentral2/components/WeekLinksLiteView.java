@@ -28,7 +28,7 @@ public class WeekLinksLiteView extends PaneBase {
         subtitle.setWrapText(true);
         subtitle.getStyleClass().add("subtitle");
 
-        viewAllButton = new Button("view all links of the week");
+        viewAllButton = new Button("VIEW ALL LINKS OF THE WEEK");
         viewAllButton.getStyleClass().add("view-all-button");
 
         markdownView = new MarkdownView();

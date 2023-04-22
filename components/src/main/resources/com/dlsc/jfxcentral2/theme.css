@@ -1511,6 +1511,15 @@
     -fx-font-size: 16px;
 }
 
+.week-links-lite-view > .content-box .view-all-button:hover {
+    -fx-background-color: #FFFFFF80;
+}
+
+.week-links-lite-view > .content-box .view-all-button:hover:pressed {
+    -fx-text-fill: -grey-60;
+    -fx-background-color: FFFFFF;
+}
+
 .week-links-lite-view:lg > .content-box .title {
     -fx-font-size: 54px;
 }
