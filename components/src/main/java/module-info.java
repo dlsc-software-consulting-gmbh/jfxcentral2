@@ -13,6 +13,7 @@ open module com.dlsc.jfxcentral2.components {
     requires org.kordamp.ikonli.material;
     requires org.kordamp.ikonli.material2;
     requires com.dlsc.gemsfx;
+    requires com.sandec.mdfx;
 
     exports com.dlsc.jfxcentral2;
     exports com.dlsc.jfxcentral2.components;

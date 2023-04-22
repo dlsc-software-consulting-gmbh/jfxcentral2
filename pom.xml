@@ -144,6 +144,17 @@
                 <version>1.72.0</version>
             </dependency>
             <dependency>
+                <groupId>com.sandec</groupId>
+                <artifactId>mdfx</artifactId>
+                <version>0.2.9</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
                 <groupId>fr.brouillard.oss</groupId>
                 <artifactId>cssfx</artifactId>
                 <version>11.5.1</version>

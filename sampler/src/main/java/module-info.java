@@ -17,6 +17,7 @@ open module com.dlsc.jfxcentral.sampler {
     requires org.kordamp.ikonli.material;
     requires org.kordamp.ikonli.material2;
     requires com.dlsc.jfxcentral2.components;
+    requires com.sandec.mdfx;
 
     provides fxsampler.FXSamplerProject with JFXCentralSamplerProject;
 
