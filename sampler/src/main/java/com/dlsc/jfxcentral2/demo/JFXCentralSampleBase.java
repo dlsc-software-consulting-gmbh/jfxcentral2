@@ -5,7 +5,6 @@
  */
 package com.dlsc.jfxcentral2.demo;
 
-import com.dlsc.jfxcentral2.JFXCentral2App;
 import fr.brouillard.oss.cssfx.CSSFX;
 import fxsampler.SampleBase;
 import javafx.scene.Node;
