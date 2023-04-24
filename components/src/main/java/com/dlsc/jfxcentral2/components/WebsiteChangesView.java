@@ -10,9 +10,10 @@ public class WebsiteChangesView extends LinksContainerBase {
 
     public WebsiteChangesView() {
         getStyleClass().add("website-changes-view");
+        layoutBySize();
+        quickLinksProperty().addListener((ob, ov, nv) -> layoutBySize());
     }
 
-    @Override
     protected void layoutBySize() {
         gridPane.getChildren().clear();
         gridPane.getRowConstraints().clear();
@@ -21,19 +22,15 @@ public class WebsiteChangesView extends LinksContainerBase {
         if (titleProperty() == null || quickLinks == null || quickLinks.isEmpty()) {
             return;
         }
-        System.out.println(quickLinks.size());
         TitleAndDescriptionBox header = new TitleAndDescriptionBox();
         header.getStyleClass().add("header");
-        header.sizeProperty().bind(sizeProperty());
         header.titleProperty().bind(titleProperty());
         header.descriptionProperty().bind(descriptionProperty());
-        System.out.println();
         if (isSmall()) {
             gridPane.add(header, 0, 0);
             for (int i = 0; i < 3; i++) {
                 QuickLink quickLink = quickLinks.get(i);
                 QuickLinkView linkView = new QuickLinkView(quickLink);
-                linkView.sizeProperty().bind(sizeProperty());
                 gridPane.add(linkView, 0, i + 1);
             }
         } else {
@@ -45,7 +42,6 @@ public class WebsiteChangesView extends LinksContainerBase {
                 }
                 QuickLink quickLink = quickLinks.get(index);
                 QuickLinkView linkView = new QuickLinkView(quickLink);
-                linkView.sizeProperty().bind(sizeProperty());
                 gridPane.add(linkView, i % 3, i / 3);
                 index++;
             }

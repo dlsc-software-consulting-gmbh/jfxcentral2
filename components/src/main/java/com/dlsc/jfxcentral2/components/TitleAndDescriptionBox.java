@@ -27,6 +27,11 @@ public class TitleAndDescriptionBox extends PaneBase {
         getChildren().setAll(new VBox(title, new Spacer(Orientation.VERTICAL), description));
     }
 
+    @Override
+    protected void layoutBySize() {
+
+    }
+
     private final StringProperty title = new SimpleStringProperty(this, "title");
 
     public String getTitle() {

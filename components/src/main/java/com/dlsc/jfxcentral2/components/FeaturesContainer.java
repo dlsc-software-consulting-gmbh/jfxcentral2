@@ -22,16 +22,12 @@ public class FeaturesContainer extends PaneBase {
     }
 
     @Override
-    protected void layoutBySize() {
+    public void layoutBySize() {
         int size = getItems().size();
         if (isSmall()) {
             PaginationControl pagination = new PaginationControl();
             pagination.setPageCount(size);
-            pagination.setPageFactory(index -> {
-                FeatureView featureView = new FeatureView(getItems().get(index));
-                featureView.sizeProperty().bind(sizeProperty());
-                return featureView;
-            });
+            pagination.setPageFactory(index -> new FeatureView(getItems().get(index)));
             getChildren().setAll(pagination);
         } else {
             HBox contentBox = new HBox();
@@ -39,7 +35,6 @@ public class FeaturesContainer extends PaneBase {
                 Feature item = getItems().get(i);
                 FeatureView featureView = new FeatureView(item);
                 featureView.getStyleClass().addAll("feature-view-" + i, i % 2 == 0 ? "even" : "odd");
-                featureView.sizeProperty().bind(sizeProperty());
                 contentBox.getChildren().add(featureView);
             }
             getChildren().setAll(contentBox);

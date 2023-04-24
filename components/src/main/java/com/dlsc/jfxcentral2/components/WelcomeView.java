@@ -72,6 +72,7 @@ public class WelcomeView extends PaneBase {
         layoutBySize();
     }
 
+    @Override
     protected void layoutBySize() {
         if (isMedium()) {
             flowPane.getChildren().setAll(jfxCentralButton, installLocallyButton, jfxcentralDataButton, openJFXProjectButton);

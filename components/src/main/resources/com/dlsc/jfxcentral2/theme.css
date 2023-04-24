@@ -320,17 +320,17 @@
     -fx-background-color: -grey-100;
 }
 
-.footer-view:lg .content {
+.footer-view:lg{
     -fx-spacing: 170px;
     -fx-padding: 60px 100px 60px 100px;
 }
 
-.footer-view:md .content {
+.footer-view:md {
     -fx-spacing: 20px;
     -fx-padding: 40px 30px 40px 30px;
 }
 
-.footer-view:sm .content {
+.footer-view:sm {
     -fx-spacing: 20px;
     -fx-padding: 30px 33px 30px 20px;
 }
