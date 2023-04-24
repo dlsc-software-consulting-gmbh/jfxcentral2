@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>one.jpro</groupId>
 			<artifactId>jpro-routing-core</artifactId>
-			<version>0.15.0-SNAPSHOT</version>
+			<version>${routing.version}</version>
 		</dependency>
 
 		<dependency>
