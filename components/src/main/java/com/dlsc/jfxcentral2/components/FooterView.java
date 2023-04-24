@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.utils.JFXCentralUtil;
+import com.dlsc.jfxcentral2.utils.NodeUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.HPos;
@@ -17,29 +18,25 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
-public class FooterView extends PaneBase {
-
-    private final HBox contentBox;
+public class FooterView extends HBox implements Targetable,Sizeable {
     private final ImageView dukeImageView;
     private final LineNumberPane linksPane;
     private final LineNumberPane legalInfoPane;
 
     public FooterView() {
         getStyleClass().add("footer-view");
-        contentBox = new HBox();
-        contentBox.getStyleClass().add("content");
-        getChildren().add(contentBox);
 
         dukeImageView = new ImageView();
         dukeImageView.setPreserveRatio(true);
         dukeImageView.getStyleClass().add("duke-image");
-        contentBox.getChildren().add(dukeImageView);
+        getChildren().add(dukeImageView);
 
         linksPane = initLinksPane();
         legalInfoPane = initLegalInfoPane();
 
         setMinWidth(Region.USE_PREF_SIZE);
         layoutBySize();
+        NodeUtil.initSizeAndTargetPseudoClass(this, null, this::layoutBySize);
     }
 
     public void layoutBySize() {
@@ -47,11 +44,11 @@ public class FooterView extends PaneBase {
         LineNumberPane contactPane = initContactPane();
         Size size = getSize();
         if (size.isLarge() || size.isMedium()) {
-            contentBox.getChildren().setAll(dukeImageView, contactPane, linksPane, legalInfoPane);
+            getChildren().setAll(dukeImageView, contactPane, linksPane, legalInfoPane);
         } else {
             VBox box = new VBox(contactPane, linksPane, legalInfoPane);
             box.getStyleClass().add("number-pane-box");
-            contentBox.getChildren().setAll(dukeImageView, box);
+            getChildren().setAll(dukeImageView, box);
         }
     }
 

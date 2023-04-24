@@ -34,6 +34,7 @@ public class CopyrightView extends PaneBase {
         layoutBySize();
     }
 
+    @Override
     protected void layoutBySize() {
         if (isSmall()) {
             VBox box = new VBox(copyrightLabel, poweredByBox);

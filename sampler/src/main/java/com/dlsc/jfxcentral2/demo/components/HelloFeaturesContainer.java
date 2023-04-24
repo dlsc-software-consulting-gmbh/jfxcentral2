@@ -2,10 +2,11 @@ package com.dlsc.jfxcentral2.demo.components;
 
 import com.dlsc.jfxcentral2.components.FeaturesContainer;
 import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.Feature;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -14,24 +15,19 @@ import java.util.List;
 
 public class HelloFeaturesContainer extends JFXCentralSampleBase {
 
+    private FeaturesContainer featuresContainer;
 
     @Override
     protected Region createControl() {
+        featuresContainer = new FeaturesContainer(createFeatures());
+        return new ScrollPane(featuresContainer);
+    }
 
-        FeaturesContainer smallFC = new FeaturesContainer(createFeatures());
-        smallFC.setSize(Size.SMALL);
-
-        FeaturesContainer mediumFC = new FeaturesContainer(createFeatures());
-        mediumFC.setSize(Size.MEDIUM);
-
-        FeaturesContainer largerFC = new FeaturesContainer(createFeatures());
-        largerFC.setSize(Size.LARGE);
-
-        return new TabPane(
-                new Tab("FeaturesContainer sm", smallFC),
-                new Tab("FeaturesContainer md", mediumFC),
-                new Tab("FeaturesContainer ld", largerFC)
-        );
+    @Override
+    public Node getControlPanel() {
+        SizeComboBox sizeComboBox = new SizeComboBox(Size.SMALL);
+        featuresContainer.sizeProperty().bind(sizeComboBox.sizeProperty());
+        return sizeComboBox;
     }
 
     private List<Feature> createFeatures() {
