@@ -64,7 +64,6 @@ public class TopMenuBar extends PaneBase {
         pseudoClassStateChanged(DARK_PSEUDOCLASS_STATE, mode == BackgroundMode.DARK);
     }
 
-    @Override
     protected void layoutBySize() {
         if (isLarge()) {
             MenuButton resourcesBtn = new MenuButton("Resources");
