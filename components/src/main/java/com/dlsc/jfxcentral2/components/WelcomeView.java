@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -78,17 +79,10 @@ public class WelcomeView extends PaneBase {
         } else {
             flowPane.getChildren().setAll(jfxCentralButton, jfxcentralDataButton, installLocallyButton, openJFXProjectButton);
         }
-        if (isLarge()) {
-            HBox box = new HBox();
-            box.getStyleClass().add("content");
-            box.getChildren().setAll(labelBox, flowPane);
-            getChildren().add(box);
-        } else {
-            VBox box = new VBox();
-            box.getStyleClass().add("content");
-            box.getChildren().setAll(labelBox, flowPane);
-            getChildren().add(box);
-        }
+        Pane content = isLarge() ? new HBox() : new VBox();
+        content.getStyleClass().add("content");
+        content.getChildren().setAll(labelBox, flowPane);
+        getChildren().setAll(content);
     }
 
     private final ObjectProperty<Runnable> onInstallLocally = new SimpleObjectProperty<>(this, "onInstallLocally");

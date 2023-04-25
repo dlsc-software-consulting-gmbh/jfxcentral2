@@ -1,10 +1,8 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.model.Feature;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.layout.HBox;
 
 import java.util.List;
@@ -13,22 +11,26 @@ public class FeaturesContainer extends PaneBase {
 
     public FeaturesContainer(List<Feature> items) {
         this();
-        getItems().setAll(items);
+        setFeatures(items);
     }
 
     public FeaturesContainer() {
         getStyleClass().add("features-container");
-        itemsProperty().addListener((ob, ov, nv) -> layoutBySize());
+        featuresProperty().addListener((ob, ov, nv) -> layoutBySize());
     }
 
     @Override
     protected void layoutBySize() {
-        int size = getItems().size();
+        getChildren().clear();
+        if (getFeatures() == null || getFeatures().isEmpty()) {
+            return;
+        }
+        int size = getFeatures().size();
         if (isSmall()) {
             PaginationControl pagination = new PaginationControl();
             pagination.setPageCount(size);
             pagination.setPageFactory(index -> {
-                FeatureView featureView = new FeatureView(getItems().get(index));
+                FeatureView featureView = new FeatureView(getFeatures().get(index));
                 featureView.sizeProperty().bind(sizeProperty());
                 return featureView;
             });
@@ -36,7 +38,7 @@ public class FeaturesContainer extends PaneBase {
         } else {
             HBox contentBox = new HBox();
             for (int i = 0; i < size; i++) {
-                Feature item = getItems().get(i);
+                Feature item = getFeatures().get(i);
                 FeatureView featureView = new FeatureView(item);
                 featureView.getStyleClass().addAll("feature-view-" + i, i % 2 == 0 ? "even" : "odd");
                 featureView.sizeProperty().bind(sizeProperty());
@@ -46,17 +48,18 @@ public class FeaturesContainer extends PaneBase {
         }
     }
 
-    private final ListProperty<Feature> items = new SimpleListProperty<>(this, "items", FXCollections.observableArrayList());
+    private final ObjectProperty<List<Feature>> features = new SimpleObjectProperty<>(this, "features");
 
-    public ObservableList<Feature> getItems() {
-        return items.get();
+    public List<Feature> getFeatures() {
+        return features.get();
     }
 
-    public ListProperty<Feature> itemsProperty() {
-        return items;
+    public ObjectProperty<List<Feature>> featuresProperty() {
+        return features;
     }
 
-    public void setItems(ObservableList<Feature> items) {
-        this.items.set(items);
+    public void setFeatures(List<Feature> features) {
+        this.features.set(features);
     }
+
 }
