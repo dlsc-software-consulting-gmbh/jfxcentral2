@@ -82,9 +82,18 @@ public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
         } else {
             List<SponsorsView.Sponsor> temp = new ArrayList<>(items);
             temp.removeAll(showedSponsor);
-            Collections.shuffle(temp);
             showedSponsor.clear();
-            showedSponsor.addAll(temp.subList(0, Math.min(realLogoCount, temp.size())));
+            int tempSize = temp.size();
+            for (int i = 0; i < 2 - tempSize; i++) {
+                SponsorsView.Sponsor sponsor = items.get(random.nextInt(items.size()));
+                if (!temp.contains(sponsor)) {
+                    temp.add(sponsor);
+                } else {
+                    i--;
+                }
+            }
+            Collections.shuffle(temp);
+            showedSponsor.addAll(temp.subList(0, 2));
         }
         //add divider and logo
         for (int i = 0; i < showedSponsor.size(); i++) {
