@@ -8,8 +8,6 @@ public class QuickLinksContainer extends LinksContainerBase {
 
     public QuickLinksContainer() {
         getStyleClass().add("quick-links-container");
-        layoutBySize();
-        quickLinksProperty().addListener((ob, ov, nv) -> layoutBySize());
     }
 
     @Override
@@ -23,6 +21,7 @@ public class QuickLinksContainer extends LinksContainerBase {
         for (int i = 0; i < links.size(); i++) {
             QuickLink quickLink = links.get(i);
             QuickLinkView quickLinkView = new QuickLinkView(quickLink);
+            quickLinkView.sizeProperty().bind(sizeProperty());
             gridPane.add(quickLinkView, i % col, i / col);
         }
     }

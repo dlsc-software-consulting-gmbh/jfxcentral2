@@ -32,9 +32,7 @@ public class HelloSponsorsView extends JFXCentralSampleBase {
     public Node getControlPanel() {
         SizeComboBox sizeComboBox = new SizeComboBox();
         sponsorsView.sizeProperty().bind(sizeComboBox.sizeProperty());
-        sponsorsView.sizeProperty().addListener((ob, ov, nv) ->{
-            System.out.println("sponsorsView.size: " + nv);
-        });
+
         CheckBox showDividerCheckBox = new CheckBox("Show Divider");
         showDividerCheckBox.setSelected(true);
         sponsorsView.dividerVisibleProperty().bind(showDividerCheckBox.selectedProperty());

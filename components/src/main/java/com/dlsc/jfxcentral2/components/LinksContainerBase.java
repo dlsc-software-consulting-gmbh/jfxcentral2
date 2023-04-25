@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.model.QuickLink;
-import com.dlsc.jfxcentral2.utils.NodeUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.layout.GridPane;
@@ -9,8 +8,9 @@ import javafx.scene.layout.Region;
 
 import java.util.List;
 
-public abstract class LinksContainerBase extends PaneBase {
-    protected GridPane gridPane = new GridPane();
+public class LinksContainerBase extends PaneBase {
+
+    protected final GridPane gridPane;
 
     public LinksContainerBase() {
         getStyleClass().add("links-container");
@@ -18,14 +18,14 @@ public abstract class LinksContainerBase extends PaneBase {
         setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
+        gridPane = new GridPane();
         gridPane.getStyleClass().add("grid-pane");
         gridPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        getChildren().setAll(gridPane);
+        getChildren().add(gridPane);
 
-        NodeUtil.initSizeAndTargetPseudoClass(this, null, this::layoutBySize);
+        quickLinksProperty().addListener(it -> layoutBySize());
+        layoutBySize();
     }
-
-    protected abstract void layoutBySize();
 
     private final ObjectProperty<List<QuickLink>> quickLinks = new SimpleObjectProperty<>(this, "quickLinks");
 
