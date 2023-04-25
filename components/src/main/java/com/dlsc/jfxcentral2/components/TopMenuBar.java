@@ -14,6 +14,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
 
@@ -140,6 +141,7 @@ public class TopMenuBar extends PaneBase {
             jfxcentralRegion.getStyleClass().add("jfxcentral-region");
             HBox logoBox = new HBox(dukeView, jfxcentralRegion);
             logoBox.getStyleClass().add("logo-box");
+            LinkUtil.setLink(logoBox,"/");
             return logoBox;
         }
     }

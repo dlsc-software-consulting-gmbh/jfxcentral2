@@ -70,6 +70,11 @@
             <groupId>fr.brouillard.oss</groupId>
             <artifactId>cssfx</artifactId>
         </dependency>
+        <dependency>
+            <groupId>one.jpro</groupId>
+            <artifactId>jpro-routing-core</artifactId>
+            <version>${routing.version}</version>
+        </dependency>
 
         <!-- Test dependencies -->
 
