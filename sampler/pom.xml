@@ -77,6 +77,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.sandec</groupId>
+			<artifactId>mdfx</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>fr.brouillard.oss</groupId>
 			<artifactId>cssfx</artifactId>
 		</dependency>
