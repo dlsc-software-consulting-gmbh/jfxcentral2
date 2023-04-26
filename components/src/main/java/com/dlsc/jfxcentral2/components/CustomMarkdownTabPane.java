@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -86,17 +87,21 @@ public class CustomMarkdownTabPane extends PaneBase {
             ObservableList<MarkdownTab> markdownTabs = getTabs();
             ToggleGroup group = new ToggleGroup();
             group.selectedToggleProperty().addListener((ob, ov, nv) -> {
-                CustomToggleButton button = (CustomToggleButton) nv;
-                MarkdownTab selectedTab = (MarkdownTab) button.getUserData();
-                int i = getTabs().indexOf(selectedTab);
-                markdownView.setMdString(selectedTab.getMdString());
-                contentBox.getChildren().remove(markdownView);
-                contentBox.getChildren().add(i + 1, markdownView);
+                if (nv != null) {
+                    ToggleButton button = (ToggleButton) nv;
+                    MarkdownTab selectedTab = (MarkdownTab) button.getUserData();
+                    int i = getTabs().indexOf(selectedTab);
+                    markdownView.setMdString(selectedTab.getMdString());
+                    contentBox.getChildren().remove(markdownView);
+                    contentBox.getChildren().add(i + 1, markdownView);
+                } else {
+                    contentBox.getChildren().remove(markdownView);
+                }
             });
 
             for (int i = 0; i < markdownTabs.size(); i++) {
                 MarkdownTab tab = markdownTabs.get(i);
-                CustomToggleButton toggleButton = new CustomToggleButton();
+                ToggleButton toggleButton = new ToggleButton();
                 toggleButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 toggleButton.getStyleClass().add("tab-button");
 
