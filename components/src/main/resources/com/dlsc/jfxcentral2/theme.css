@@ -1667,3 +1667,87 @@
     -fx-max-height: 657px;
     -fx-padding: 20px 15px;
 }
+
+/** ------------------------------------
+ * CustomMarkdownTabPane
+ **/
+.custom-markdown-tab-pane:lg {
+    -fx-min-width: 858px;
+    -fx-pref-width: 858px;
+    -fx-max-width: 858px;
+}
+
+.custom-markdown-tab-pane:md {
+    -fx-min-width: 586px;
+    -fx-pref-width: 586px;
+    -fx-max-width: 586px;
+}
+
+.custom-markdown-tab-pane:sm {
+    -fx-min-width: 318px;
+    -fx-pref-width: 318px;
+    -fx-max-width: 318px;
+}
+
+.custom-markdown-tab-pane > .content-box .tab-button {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-weight: bold;
+    -fx-background-radius: 0px;
+    -fx-background-insets: 0px;
+    -fx-padding: 13px 0px;
+    -fx-cursor: hand;
+}
+
+.custom-markdown-tab-pane:md-lg > .content-box .tab-button {
+    -fx-background-color: -grey-10;
+    -fx-content-display: text-only;
+}
+
+.custom-markdown-tab-pane:md-lg > .content-box .tab-button:selected {
+    -fx-background-color: -bright-blue;
+    -fx-text-fill: -white;
+}
+
+.custom-markdown-tab-pane:sm > .content-box .tab-button {
+    -fx-background-color: -bright-blue;
+    -fx-text-fill: -white;
+    -fx-content-display: right;
+    -fx-graphic-text-gap: 100px;
+}
+
+.custom-markdown-tab-pane:sm > .content-box .tab-button .tab-graphic-box .ikonli-font-icon {
+    -fx-icon-color: -white;
+    -fx-icon-size: 20px;
+}
+
+.custom-markdown-tab-pane:sm > .content-box .tab-button:selected .tab-graphic-box .ikonli-font-icon {
+    -fx-rotate: 180;
+}
+
+.custom-markdown-tab-pane:sm > .content-box .tab-button .tab-graphic-box {
+    -fx-padding: 0px 20px 0px 20px;
+}
+
+.custom-markdown-tab-pane:sm > .content-box .tab-button .tab-graphic-box .title {
+    -fx-text-fill: -white;
+}
+
+.custom-markdown-tab-pane:md-lg > .content-box {
+    -fx-spacing: 30px;
+}
+
+.custom-markdown-tab-pane:sm > .content-box {
+    -fx-spacing: 20px;
+}
+
+.custom-markdown-tab-pane > .content-box .md-view {
+    -fx-background-color: -white;
+}
+
+.custom-markdown-tab-pane:md-lg > .content-box .md-view {
+    -fx-padding: 40px 30px;
+}
+
+.custom-markdown-tab-pane:sm > .content-box .md-view {
+    -fx-padding: 20px 30px;
+}
