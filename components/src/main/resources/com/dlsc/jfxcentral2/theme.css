@@ -1723,11 +1723,8 @@
 
 .week-links-lite-view:sm {
     -fx-min-width: -sm-width;
-    -fx-min-height: 94px;
     -fx-pref-width: -sm-width;
-    -fx-pref-height: 943px;
     -fx-max-width: -sm-width;
-    -fx-max-height: 943px;
     -fx-padding: 40px 29px;
 }
 
