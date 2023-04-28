@@ -1,12 +1,10 @@
 package com.dlsc.jfxcentral2.model;
 
-import javafx.scene.image.Image;
-
-public class Book extends TileData {
+public class Book extends SimpleHeaderInfo {
     public Book() {
     }
 
-    public Book(String title, String description, Image thumbnail, String url, boolean save, boolean like) {
-        super(title, description, thumbnail, url, save, like);
+    public Book(String name, String description, String website, boolean saved, boolean liked) {
+        super(name, description, website, saved, liked);
     }
 }

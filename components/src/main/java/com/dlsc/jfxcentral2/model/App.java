@@ -1,12 +1,14 @@
 package com.dlsc.jfxcentral2.model;
 
-import javafx.scene.image.Image;
-
-public class App extends TileData {
+public class App extends SimpleHeaderInfo {
     public App() {
     }
 
-    public App(String title, String description, Image thumbnail, String url, boolean save, boolean like) {
-        super(title, description, thumbnail, url, save, like);
+    public App(String name,  String website, boolean saved, boolean liked) {
+        this(name, null, website, saved, liked);
+    }
+
+    public App(String name, String description, String website, boolean saved, boolean liked) {
+        super(name, description, website, saved, liked);
     }
 }
