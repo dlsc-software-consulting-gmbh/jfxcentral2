@@ -259,7 +259,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.dlsc.jfxcentral2.jfxcentral2/com.dlsc.jfxcentral2.jfxcentral2.HelloApplication
+                                com.dlsc.jfxcentral2.app/com.dlsc.jfxcentral2.app.JFXCentral2App
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
