@@ -35,8 +35,8 @@ public abstract class DefaultPage extends View {
     public Node wrapContent(Node content) {
         VBox vbox = new VBox();
         vbox.getStyleClass().add("ui");
-        updateStyleOnVBox(vbox);
-        sizeProperty().addListener(it -> updateStyleOnVBox(vbox));
+        updateStyleClassBasedOnSize(vbox);
+        sizeProperty().addListener(it -> updateStyleClassBasedOnSize(vbox));
 
         // menubar
         TopMenuBar topMenuBar = new TopMenuBar();
@@ -55,6 +55,8 @@ public abstract class DefaultPage extends View {
         copyrightView.sizeProperty().bind(sizeProperty());
 
         StackPane topStackPane = new StackPane(content, topMenuBar);
+        topStackPane.getStyleClass().add("top");
+        updateStyleClassBasedOnSize(topStackPane);
         StackPane.setAlignment(topMenuBar, Pos.TOP_CENTER);
 
         StackPane.setAlignment(vbox, Pos.TOP_CENTER);
@@ -81,12 +83,12 @@ public abstract class DefaultPage extends View {
         return root;
     }
 
-    private void updateStyleOnVBox(VBox vbox) {
-        vbox.getStyleClass().removeAll("lg", "md", "sm");
+    private void updateStyleClassBasedOnSize(Node node) {
+        node.getStyleClass().removeAll("lg", "md", "sm");
         switch (getSize()) {
-            case SMALL -> vbox.getStyleClass().add("sm");
-            case MEDIUM -> vbox.getStyleClass().add("md");
-            case LARGE -> vbox.getStyleClass().add("lg");
+            case SMALL -> node.getStyleClass().add("sm");
+            case MEDIUM -> node.getStyleClass().add("md");
+            case LARGE -> node.getStyleClass().add("lg");
         }
     }
 }
