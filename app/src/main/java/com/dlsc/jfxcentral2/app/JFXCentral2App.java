@@ -20,6 +20,5 @@ public class JFXCentral2App extends RouteApp {
 
         return Route.empty()
                 .and(RouteUtils.get("/", r -> new StartPage(size)));
-
     }
 }

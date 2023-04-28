@@ -295,7 +295,22 @@
 }
 
 .background > .ui {
-    -fx-background-color: white;
+    -fx-background-color: #3C3C3C;
+}
+
+.background > .ui.lg {
+    -fx-max-width: -lg-width;
+    -fx-pref-width: -lg-width;
+}
+
+.background > .ui.md {
+    -fx-max-width: -md-width;
+    -fx-pref-width: -md-width;
+}
+
+.background > .ui.sm {
+    -fx-max-width: -sm-width;
+    -fx-pref-width: -sm-width;
 }
 
 /** -------------------------------

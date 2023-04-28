@@ -24,10 +24,10 @@
     <link rel="stylesheet" type="text/css" href="/jpro/css/jpro.css">
     <script src="/jpro/js/jpro.js" type="text/javascript"></script>
 </head>
-<body style="background-color:#4483A0">
+<body style="background-color:#3C3C3C">
 
 <div>
-    <jpro-app loader="none" nativescrolling="true" href="/app/default" fxContextMenu="false" setThemeColor="true" fullscreen="true" snapshot="auto" userSelect="true" fxContextMenu="false"/>
+    <jpro-app loader="none" nativescrolling="true" href="/app/default" fxContextMenu="true" setThemeColor="true" fullscreen="true" snapshot="auto" userSelect="true" fxContextMenu="false"/>
 </div>
 
 </body>
