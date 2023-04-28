@@ -68,11 +68,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.controlsfx</groupId>
-			<artifactId>fxsampler</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>com.dlsc.gemsfx</groupId>
 			<artifactId>gemsfx</artifactId>
 		</dependency>
@@ -85,7 +80,6 @@
 		<dependency>
 			<groupId>com.sandec.jpro</groupId>
 			<artifactId>jpro-webapi</artifactId>
-			<version>${jpro.version}</version>
 		</dependency>
 
 	</dependencies>

@@ -11,7 +11,7 @@ import one.jpro.routing.RouteUtils;
 
 public class JFXCentral2App extends RouteApp {
 
-    ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.MEDIUM);
+    ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
     @Override
     public Route createRoute() {

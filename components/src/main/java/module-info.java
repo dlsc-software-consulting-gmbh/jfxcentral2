@@ -15,6 +15,9 @@ open module com.dlsc.jfxcentral2.components {
     requires com.dlsc.gemsfx;
     requires com.sandec.mdfx;
 
+    requires jpro.webapi;
+    requires one.jpro.routing.core;
+
     exports com.dlsc.jfxcentral2.components;
     exports com.dlsc.jfxcentral2.model;
     exports com.dlsc.jfxcentral2.components.skins;

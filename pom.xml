@@ -75,6 +75,11 @@
             </dependency>
             <dependency>
                 <groupId>org.openjfx</groupId>
+                <artifactId>javafx-swing</artifactId>
+                <version>${javafx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
                 <artifactId>javafx-graphics</artifactId>
                 <version>${javafx.version}</version>
             </dependency>
@@ -128,6 +133,30 @@
             </dependency>
 
             <dependency>
+                <groupId>com.sandec.jpro</groupId>
+                <artifactId>jpro-webapi</artifactId>
+                <version>${jpro.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>SANDEC</groupId>
+                <artifactId>simplefx_2.12</artifactId>
+                <version>3.2.23</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
                 <groupId>org.controlsfx</groupId>
                 <artifactId>fxsampler</artifactId>
                 <version>1.0.11</version>
@@ -149,6 +178,18 @@
                 <groupId>com.dlsc.gemsfx</groupId>
                 <artifactId>gemsfx</artifactId>
                 <version>1.72.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>2.12.12</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-reflect</artifactId>
+                <version>2.12.12</version>
             </dependency>
 
             <dependency>
