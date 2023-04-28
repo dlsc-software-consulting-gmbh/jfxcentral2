@@ -15,8 +15,8 @@ open module com.dlsc.jfxcentral2.components {
     requires com.dlsc.gemsfx;
     requires com.sandec.mdfx;
 
-    exports com.dlsc.jfxcentral2;
     exports com.dlsc.jfxcentral2.components;
     exports com.dlsc.jfxcentral2.model;
     exports com.dlsc.jfxcentral2.components.skins;
+    exports com.dlsc.jfxcentral2.utils;
 }
