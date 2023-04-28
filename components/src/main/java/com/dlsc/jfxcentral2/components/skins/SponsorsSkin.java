@@ -13,6 +13,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
+import one.jpro.routing.LinkUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -116,6 +117,7 @@ public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
                 System.out.println("Opening sponsor.url()");
                 e.consume();
             });
+            LinkUtil.setLink(logo, sponsor.url());
             nodes.add(logo);
         }
         gridPane.getChildren().clear();

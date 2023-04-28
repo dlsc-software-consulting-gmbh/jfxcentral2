@@ -5,7 +5,7 @@
  */
 package com.dlsc.jfxcentral2.demo;
 
-import com.dlsc.jfxcentral2.JFXCentral2App;
+import com.dlsc.jfxcentral2.utils.NodeUtil;
 import fr.brouillard.oss.cssfx.CSSFX;
 import fxsampler.SampleBase;
 import javafx.scene.Node;
@@ -44,7 +44,7 @@ public abstract class JFXCentralSampleBase extends SampleBase {
                 return;
             }
 
-            scene.getStylesheets().add(JFXCentral2App.class.getResource("theme.css").toExternalForm());
+            scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
             scene.getStylesheets().add(JFXCentralSampleBase.class.getResource("/com/dlsc/jfxcentral2/demo/components/test.css").toExternalForm());
 
             stylesheetsAdded = true;
