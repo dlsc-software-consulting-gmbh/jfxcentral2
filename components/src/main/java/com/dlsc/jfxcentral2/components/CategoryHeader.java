@@ -4,9 +4,12 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
+
+import java.util.Objects;
 
 public class CategoryHeader extends PaneBase {
 
@@ -26,13 +29,7 @@ public class CategoryHeader extends PaneBase {
         //Only one label and content can be displayed;
         //if the content is not empty, the content will be displayed, otherwise the label will be displayed
         contentProperty().addListener((ob, ov, nv) -> {
-            PaneBase contentNode = getContent();
-            if (contentNode != null) {
-                getChildren().setAll(contentNode);
-                contentNode.sizeProperty().bind(sizeProperty());
-            } else {
-                getChildren().setAll(label);
-            }
+            getChildren().setAll(Objects.requireNonNullElse(getContent(), label));
         });
     }
 
@@ -64,17 +61,17 @@ public class CategoryHeader extends PaneBase {
         this.ikon.set(ikon);
     }
 
-    private final ObjectProperty<PaneBase> content = new SimpleObjectProperty<>(this, "content");
+    private final ObjectProperty<Node> content = new SimpleObjectProperty<>(this, "content");
 
-    public PaneBase getContent() {
+    public Node getContent() {
         return content.get();
     }
 
-    public ObjectProperty<PaneBase> contentProperty() {
+    public ObjectProperty<Node> contentProperty() {
         return content;
     }
 
-    public void setContent(PaneBase content) {
+    public void setContent(Node content) {
         this.content.set(content);
     }
 }
