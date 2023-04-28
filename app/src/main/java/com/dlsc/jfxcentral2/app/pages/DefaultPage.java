@@ -1,11 +1,10 @@
 package com.dlsc.jfxcentral2.app.pages;
 
 
-import com.dlsc.jfxcentral2.components.FooterView;
-import com.dlsc.jfxcentral2.components.Size;
-import com.dlsc.jfxcentral2.components.SponsorsView;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
+import com.dlsc.jfxcentral2.components.*;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
@@ -43,6 +42,11 @@ public abstract class DefaultPage extends View {
         // sponsors
         SponsorsView sponsorsView = new SponsorsView();
         sponsorsView.sizeProperty().bind(sizeProperty());
+        sponsorsView.showLogoCountProperty().bind(Bindings.createIntegerBinding(() -> switch (getSize()) {
+            case SMALL -> 2;
+            case MEDIUM -> 3;
+            case LARGE -> 5;
+        }, sizeProperty()));
 
         var topStackPane = new StackPane(content, topMenuBar);
         StackPane.setAlignment(topMenuBar, Pos.TOP_CENTER);
