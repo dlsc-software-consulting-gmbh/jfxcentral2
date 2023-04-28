@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.demo.components;
 import com.dlsc.jfxcentral2.components.BookTileView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.model.Book;
+import com.dlsc.jfxcentral2.model.BookTileData;
 import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -18,7 +18,7 @@ public class HelloBookTileView extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        Book book = new Book(
+        BookTileData book = new BookTileData(
                 "The Definitive Guide to Modern Java Clients with JavaFX",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
                 new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/book-thumbnail-01.png").toExternalForm()),

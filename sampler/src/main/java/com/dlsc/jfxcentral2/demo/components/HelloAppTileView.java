@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.demo.components;
 import com.dlsc.jfxcentral2.components.AppTileView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.model.App;
+import com.dlsc.jfxcentral2.model.AppTileData;
 import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -19,7 +19,7 @@ public class HelloAppTileView extends JFXCentralSampleBase {
     @Override
     protected Region createControl() {
         appTileView = new AppTileView();
-        appTileView.setData(new App("App Name", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.", new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/app-thumbnail-01.png").toExternalForm()), "https://www.dlsc.com", false, true));
+        appTileView.setData(new AppTileData("App Name", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.", new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/app-thumbnail-01.png").toExternalForm()), "https://www.dlsc.com", false, true));
         return new StackPane(appTileView);
     }
 

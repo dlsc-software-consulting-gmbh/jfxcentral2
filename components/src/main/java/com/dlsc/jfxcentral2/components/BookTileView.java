@@ -1,15 +1,15 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.model.Book;
+import com.dlsc.jfxcentral2.model.BookTileData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-public class BookTileView extends TileView<Book> {
+public class BookTileView extends TileView<BookTileData> {
     private static final Image AMAZON_IMAGE = new Image(BookTileView.class.getResource("/com/dlsc/jfxcentral2/images/amazon.png").toExternalForm());
 
-    public BookTileView(Book book) {
+    public BookTileView(BookTileData book) {
         this();
         setData(book);
     }

@@ -1,12 +1,12 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.model.App;
+import com.dlsc.jfxcentral2.model.AppTileData;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-public class AppTileView extends TileView<App> {
+public class AppTileView extends TileView<AppTileData> {
 
-    public AppTileView(App app) {
+    public AppTileView(AppTileData app) {
         this();
         setData(app);
     }
