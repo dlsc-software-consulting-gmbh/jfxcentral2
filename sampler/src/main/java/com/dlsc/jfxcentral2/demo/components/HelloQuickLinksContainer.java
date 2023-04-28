@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class HelloQuickLinkContainer extends JFXCentralSampleBase {
+public class HelloQuickLinksContainer extends JFXCentralSampleBase {
 
     private QuickLinksContainer containerLarge;
 
@@ -69,7 +69,7 @@ public class HelloQuickLinkContainer extends JFXCentralSampleBase {
         }
         Collections.shuffle(imageUrlList);
         imageUrlList.subList(0, count2).forEach(url -> {
-            list.add(new ImageQuickLink(HelloQuickLinkContainer.class.getResource(url).toExternalForm()));
+            list.add(new ImageQuickLink(HelloQuickLinksContainer.class.getResource(url).toExternalForm()));
         });
 
         //If the above QuickLinks are less than 9, fill null

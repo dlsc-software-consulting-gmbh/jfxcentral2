@@ -111,6 +111,7 @@
                 <artifactId>controlsfx</artifactId>
                 <version>11.1.2</version>
             </dependency>
+
             <dependency>
                 <groupId>net.synedra</groupId>
                 <artifactId>validatorfx</artifactId>
@@ -122,6 +123,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
             <dependency>
                 <groupId>org.controlsfx</groupId>
                 <artifactId>fxsampler</artifactId>
@@ -133,16 +135,19 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
             <dependency>
                 <groupId>org.kordamp.ikonli</groupId>
                 <artifactId>ikonli-javafx</artifactId>
                 <version>${ikonli.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.dlsc.gemsfx</groupId>
                 <artifactId>gemsfx</artifactId>
                 <version>1.72.0</version>
             </dependency>
+
             <dependency>
                 <groupId>com.sandec</groupId>
                 <artifactId>mdfx</artifactId>
@@ -159,16 +164,19 @@
                 <artifactId>cssfx</artifactId>
                 <version>11.5.1</version>
             </dependency>
+
             <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
                 <version>1.2</version>
             </dependency>
+
             <dependency>
                 <groupId>javax.measure</groupId>
                 <artifactId>unit-api</artifactId>
                 <version>2.1.2</version>
             </dependency>
+
             <!-- Test dependencies -->
 
             <dependency>

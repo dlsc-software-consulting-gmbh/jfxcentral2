@@ -30,21 +30,15 @@ public class HelloWebsiteChangesView extends JFXCentralSampleBase {
     @Override
     protected Region createControl() {
         viewLarger = new WebsiteChangesView();
-        viewLarger.setTitle("Website\nChanges");
-        viewLarger.setDescription("Libraries, news, books, people, etc... that have recently been added or updated");
-        viewLarger.setQuickLinks(generateQuickLinks(Size.LARGE));
+        viewLarger.getQuickLinks().setAll(generateQuickLinks(Size.LARGE));
 
         viewMedium = new WebsiteChangesView();
         viewMedium.setSize(Size.MEDIUM);
-        viewMedium.setTitle("Website\nChanges");
-        viewMedium.setDescription("Libraries, news, books, people, etc... that have recently been added or updated");
-        viewMedium.setQuickLinks(generateQuickLinks(Size.MEDIUM));
+        viewMedium.getQuickLinks().setAll(generateQuickLinks(Size.MEDIUM));
 
         viewSmall = new WebsiteChangesView();
         viewSmall.setSize(Size.SMALL);
-        viewSmall.setTitle("Website Changes");
-        viewSmall.setDescription("Libraries, news, books, people, etc... that have recently been added or updated");
-        viewSmall.setQuickLinks(generateQuickLinks(Size.SMALL));
+        viewSmall.getQuickLinks().setAll(generateQuickLinks(Size.SMALL));
 
         TabPane tabPane = new TabPane();
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
@@ -86,7 +80,7 @@ public class HelloWebsiteChangesView extends JFXCentralSampleBase {
             }
             Collections.shuffle(imageUrlList);
             imageUrlList.subList(0, imageQuickLinkCount).forEach(url -> {
-                quickLinks.add(new ImageQuickLink(HelloQuickLinkContainer.class.getResource(url).toExternalForm()));
+                quickLinks.add(new ImageQuickLink(HelloQuickLinksContainer.class.getResource(url).toExternalForm()));
             });
 
             for (int i = 0; i < dateQuickLinkCount; i++) {

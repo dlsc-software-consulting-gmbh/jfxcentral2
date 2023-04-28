@@ -6,6 +6,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class HomePageTopView extends PaneBase {
+
     public HomePageTopView() {
         getStyleClass().add("home-page-top-view");
         WelcomeView welcomeView = new WelcomeView();
@@ -18,8 +19,8 @@ public class HomePageTopView extends PaneBase {
 
         QuickLinksContainer quickLinksContainer = new QuickLinksContainer();
         quickLinksContainer.sizeProperty().bind(sizeProperty());
-        quickLinksContainer.setQuickLinks(GenerateTestDataUtil.generateQuickLinks(getSize()));
-        sizeProperty().addListener((ob, ov, nv) -> quickLinksContainer.setQuickLinks(GenerateTestDataUtil.generateQuickLinks(nv)));
+        quickLinksContainer.getQuickLinks().setAll(GenerateTestDataUtil.generateQuickLinks(getSize()));
+        sizeProperty().addListener((ob, ov, nv) -> quickLinksContainer.getQuickLinks().setAll(GenerateTestDataUtil.generateQuickLinks(nv)));
 
         VBox box = new VBox(featuresContainer, quickLinksContainer);
         box.setAlignment(Pos.CENTER);

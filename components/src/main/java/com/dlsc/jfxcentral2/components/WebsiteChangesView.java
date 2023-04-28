@@ -10,6 +10,9 @@ public class WebsiteChangesView extends LinksContainerBase {
 
     public WebsiteChangesView() {
         getStyleClass().add("website-changes-view");
+
+        setTitle("Website\nChanges");
+        setDescription("Libraries, news, books, people, etc... that have recently been added or updated");
     }
 
     @Override
