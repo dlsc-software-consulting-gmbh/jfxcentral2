@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import one.jpro.routing.Route;
 import one.jpro.routing.RouteApp;
 import one.jpro.routing.RouteUtils;
+import one.jpro.routing.dev.DevFilter;
 
 public class JFXCentral2App extends RouteApp {
 
@@ -16,9 +17,23 @@ public class JFXCentral2App extends RouteApp {
     @Override
     public Route createRoute() {
 
+        getScene().widthProperty().addListener((observable, oldValue, newValue) -> {
+            // below 600px it is small
+            // below 1000px it is medium
+            // above 1000px it is large
+            if (newValue.intValue() < 600) {
+                size.set(Size.SMALL);
+            } else if (newValue.intValue() < 1000) {
+                size.set(Size.MEDIUM);
+            } else {
+                size.set(Size.LARGE);
+            }
+        });
+
         getScene().getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
 
         return Route.empty()
-                .and(RouteUtils.get("/", r -> new StartPage(size)));
+                .and(RouteUtils.get("/", r -> new StartPage(size)))
+                .filter(DevFilter.create());
     }
 }

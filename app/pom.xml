@@ -25,6 +25,11 @@
 			<artifactId>jpro-routing-core</artifactId>
 			<version>${routing.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>one.jpro</groupId>
+			<artifactId>jpro-routing-dev</artifactId>
+			<version>${routing.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.dlsc.jfxcentral2</groupId>

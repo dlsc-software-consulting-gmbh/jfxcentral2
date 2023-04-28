@@ -5,6 +5,7 @@ open module com.dlsc.jfxcentral2.app {
     requires fr.brouillard.oss.cssfx;
     requires com.dlsc.jfxcentral2.components;
     requires one.jpro.routing.core;
+    requires one.jpro.routing.dev;
 
     exports com.dlsc.jfxcentral2.app;
 }
