@@ -21,8 +21,7 @@ public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
         saveButton.visibleProperty().bind(control.saveButtonVisibleProperty());
         saveButton.managedProperty().bind(control.saveButtonVisibleProperty());
         saveButton.getStyleClass().add("save-button");
-
-        control.saveButtonSelectedProperty().bindBidirectional(saveButton.selectedProperty());
+        saveButton.selectedProperty().bindBidirectional(control.saveButtonSelectedProperty());
 
         ToggleButton likeButton = new ToggleButton();
         likeButton.setGraphic(new FontIcon(MaterialDesign.MDI_HEART_OUTLINE));
@@ -30,8 +29,7 @@ public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
         likeButton.visibleProperty().bind(control.likeButtonVisibleProperty());
         likeButton.managedProperty().bind(control.likeButtonVisibleProperty());
         likeButton.getStyleClass().add("like-button");
-
-        control.likeButtonSelectedProperty().bindBidirectional(likeButton.selectedProperty());
+        likeButton.selectedProperty().bindBidirectional(control.likeButtonSelectedProperty());
 
         content = new HBox();
         content.getChildren().setAll(saveButton, likeButton);
