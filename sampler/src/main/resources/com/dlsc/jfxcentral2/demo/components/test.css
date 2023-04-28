@@ -65,3 +65,23 @@
 .website-changes-view {
     -fx-border-color: pink;
 }
+
+.hello-flip-view .front-node > .button {
+    -fx-background-color: -grey-100;
+    -fx-text-fill: -grey-20;
+}
+
+.hello-flip-view .front-node > .button:hover {
+    -fx-background-color: -grey-100;
+    -fx-text-fill: -white;
+}
+
+.hello-flip-view .back-node > .button {
+    -fx-background-color: -grey-20;
+    -fx-text-fill: -grey-100;
+}
+
+.hello-flip-view .back-node > .button:hover {
+    -fx-background-color: -grey-20;
+    -fx-text-fill: -white;
+}
