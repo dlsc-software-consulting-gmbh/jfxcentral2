@@ -738,6 +738,11 @@
     -fx-font-family: "Spline Sans SemiBold";
 }
 
+    
+.openjfx-project-view:lg .fill-button{
+    -fx-pref-width: 270px;
+}
+    
 .openjfx-project-view .fill-button:hover {
     -fx-background-color: derive(-bg, 15%);
 }
@@ -760,7 +765,7 @@
 
 .openjfx-project-view .buttons-box{
     -fx-spacing: 15px;
-
+    -fx-alignment: center;
 }
 
 .openjfx-project-view .details-vbox {
