@@ -1739,9 +1739,6 @@
 }
 
 .week-links-lite-view:lg > .content-box .md-view {
-    -fx-min-height: 508px;
-    -fx-pref-height: 508px;
-    -fx-max-height: 508px;
     -fx-padding: 20px 30px;
 }
 

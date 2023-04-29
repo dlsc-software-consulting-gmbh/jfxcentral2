@@ -31,6 +31,7 @@ import java.util.List;
  * Modified on: 2023-04-25
  */
 public class FlipView extends ControlBase {
+
     private static final Duration DEFAULT_FLIP_TIME = Duration.seconds(1);
 
     private static final boolean DEFAULT_ANIMATE_ON_FLIP = false;

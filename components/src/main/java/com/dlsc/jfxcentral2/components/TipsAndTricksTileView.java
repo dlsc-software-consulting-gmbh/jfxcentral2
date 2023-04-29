@@ -6,10 +6,11 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class TipsAndTricksTileView extends TileView<TipsAndTricks> {
 
-    private static final DateTimeFormatter DEFAULT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final DateTimeFormatter DEFAULT_DATE_FORMAT = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
 
     public TipsAndTricksTileView(TipsAndTricks tipsAndTricks) {
         this();

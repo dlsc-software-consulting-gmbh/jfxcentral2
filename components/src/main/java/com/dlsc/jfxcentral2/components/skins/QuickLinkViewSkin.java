@@ -15,16 +15,15 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d'th' MMM yyyy");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 
     public QuickLinkViewSkin(QuickLinkView control) {
         super(control);
-        control.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-            control.toFront();
-        });
+        control.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> control.toFront());
         control.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             if (event.isPrimaryButtonDown()) {
                 if (control.getQuickLink() != null && control.getQuickLink().getLinkUrl() != null) {
