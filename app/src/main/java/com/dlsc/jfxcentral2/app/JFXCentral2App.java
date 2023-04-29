@@ -12,7 +12,7 @@ import one.jpro.routing.dev.DevFilter;
 
 public class JFXCentral2App extends RouteApp {
 
-    ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
+    private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
     @Override
     public Route createRoute() {
