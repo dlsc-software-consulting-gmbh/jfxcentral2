@@ -829,49 +829,55 @@
     -fx-foreground-color: -grey-100;
 }
 
-.top-menu-bar .separator-region {
+.top-menu-bar > .separator-region {
     -fx-border-color: transparent -white-a20 transparent transparent;
     -fx-border-width: 0 1px 0 0;
     -fx-max-height: 30;
 }
 
-.top-menu-bar:light .separator-region {
+.top-menu-bar:light > .separator-region {
     -fx-border-color: transparent -grey-20 transparent transparent;
 }
 
-.top-menu-bar .content {
+.top-menu-bar > .content {
     -fx-alignment: center;
     -fx-spacing: 30px;
 }
 
-.top-menu-bar .text-field {
+.top-menu-bar > .content > .search-stack-pane > .button {
+    -fx-text-fill: -fx-foreground-color;
+    -fx-background-color: transparent;
+    -fx-font-family: "Roboto Condensed";
+}
+
+.top-menu-bar > .content .search-field .text-field {
     -fx-background-radius: 26px;
     -fx-focus-color: -grey-10;
     -fx-faint-focus-color: transparent;
 }
 
-.top-menu-bar .search-field .graphic-wrapper {
+.top-menu-bar > .content .search-field .graphic-wrapper {
     -fx-padding: 9px;
     -fx-background-color: transparent;
 }
 
-.top-menu-bar .menu-button .label,
-.top-menu-bar .button {
+.top-menu-bar > .content > .menu-button > .label,
+.top-menu-bar > .content > .button {
     -fx-text-fill: -fx-foreground-color;
 }
 
-.top-menu-bar .menu-button,
-.top-menu-bar .button {
+.top-menu-bar > .content > .menu-button,
+.top-menu-bar > .content > .button {
     -fx-background-color: transparent;
     -fx-font-family: "Roboto Condensed";
 }
 
-.top-menu-bar .jfxcentral-region,
-.top-menu-bar .menu-button .arrow {
+.top-menu-bar > .jfxcentral-region,
+.top-menu-bar > .content > .menu-button > .arrow-button > .arrow {
     -fx-background-color: -fx-foreground-color;
 }
 
-.top-menu-bar .login-button .ikonli-font-icon {
+.top-menu-bar > .content > .login-button .ikonli-font-icon {
     -fx-icon-color: -fx-foreground-color;
 }
 

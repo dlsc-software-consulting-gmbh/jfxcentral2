@@ -11,6 +11,7 @@ import javafx.css.converter.EnumConverter;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -68,6 +69,13 @@ public class TopMenuBar extends PaneBase {
     protected void layoutBySize() {
         if (isLarge()) {
             MenuButton resourcesBtn = new MenuButton("Resources");
+            resourcesBtn.getItems().add(new MenuItem("Item A"));
+            resourcesBtn.getItems().add(new MenuItem("Item B"));
+            resourcesBtn.getItems().add(new MenuItem("Item C"));
+            resourcesBtn.getItems().add(new MenuItem("Item D"));
+            resourcesBtn.getItems().add(new MenuItem("Item E"));
+            resourcesBtn.getItems().add(new MenuItem("Item F"));
+
             resourcesBtn.getStyleClass().add("resources-button");
 
             MenuButton communityBtn = new MenuButton("Community");
@@ -96,6 +104,7 @@ public class TopMenuBar extends PaneBase {
 
             Button searchBtn = new Button(null, searchRegion);
             StackPane stackPane = new StackPane(searchField, searchBtn);
+            stackPane.getStyleClass().add("search-stack-pane");
 
             searchField.managedProperty().bind(searchField.visibleProperty());
             searchBtn.managedProperty().bind(searchBtn.visibleProperty());
