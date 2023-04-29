@@ -46,10 +46,12 @@ public class WebsiteChangesView extends LinksContainerBase {
                 if (i == 0 || i == 3) {
                     continue;
                 }
-                QuickLink quickLink = quickLinks.get(index);
-                QuickLinkView linkView = new QuickLinkView(quickLink);
-                linkView.sizeProperty().bind(sizeProperty());
-                gridPane.add(linkView, i % 3, i / 3);
+                if (index < quickLinks.size()) {
+                    QuickLink quickLink = quickLinks.get(index);
+                    QuickLinkView linkView = new QuickLinkView(quickLink);
+                    linkView.sizeProperty().bind(sizeProperty());
+                    gridPane.add(linkView, i % 3, i / 3);
+                }
                 index++;
             }
         }
