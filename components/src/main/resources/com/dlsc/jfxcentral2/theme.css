@@ -56,6 +56,11 @@
     src: url('fonts/SplineSans-SemiBold.ttf');
 }
 
+@font-face {
+    font-family: "Spline Sans Medium";
+    src: url('fonts/SplineSans-Medium.ttf');
+}
+
 * {
     -lg-width: 1440px;
     -md-width: 768px;
@@ -547,6 +552,268 @@
     -fx-text-fill: derive(tf, -15%);
 }
 
+ /** -------------------------------
+ * OpenJFXProjectView
+ */
+
+.openjfx-project-view:lg {
+    -fx-max-height: 674px;
+    -fx-min-height: 674px;
+    -fx-min-width: 1440px;
+    -fx-max-width: 1440px;
+}
+
+.openjfx-project-view:md {
+    -fx-max-height: 864px;
+    -fx-min-height: 864px;
+    -fx-min-width: 768px;
+    -fx-max-width: 768px;
+}
+
+.openjfx-project-view:sm {
+    -fx-max-height: 1165px;
+    -fx-min-height: 1165px;
+    -fx-min-width: 375px;
+    -fx-max-width: 375px;
+
+}
+
+.openjfx-project-view .place-holder{
+    -fx-background-color: #F1F2F2;
+}
+.openjfx-project-view:lg .place-holder{
+    -fx-min-height: 198px;
+    -fx-max-height: 198px;
+}
+
+.openjfx-project-view:md .place-holder{
+    -fx-min-height: 155px;
+    -fx-max-height: 155px;
+}
+
+.openjfx-project-view:sm .place-holder{
+    -fx-min-height: 119px;
+    -fx-max-height: 119px;
+}
+
+.openjfx-project-view .background{
+    -fx-background-color: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.460508) 55.25%, rgba(0, 0, 0, 0) 87.68%);
+    -fx-background-image: url("images/openjfx-background.jpg");
+}
+.openjfx-project-view:lg .background {
+    -fx-pref-height: 476px;
+    -fx-background-position: -120px -1205px;
+}
+
+.openjfx-project-view:md .background {
+    -fx-pref-height: 709px;
+}
+
+.openjfx-project-view:sm .background {
+    -fx-pref-height: 1046px;
+}
+
+.openjfx-project-view .title{
+    -fx-text-fill: white;
+}
+
+.openjfx-project-view:lg .title{
+    -fx-font-size: 44px;
+}
+
+.openjfx-project-view:md .title{
+    -fx-font-size: 34px;
+}
+
+.openjfx-project-view:sm .title{
+    -fx-font-size: 34px;
+}
+
+.openjfx-project-view .fx-logo {
+    -fx-image: url("images/fxlogo.png");
+}
+
+.openjfx-project-view:lg .fx-logo {
+    -fx-fit-width: 170px;
+    -fx-fit-height: 58px;
+}
+
+.openjfx-project-view:md .fx-logo {
+    -fx-fit-width: 163px;
+    -fx-fit-height: 41px;
+}
+
+.openjfx-project-view:sm .fx-logo {
+    -fx-fit-width: 163px;
+    -fx-fit-height: 41px;
+}
+
+.openjfx-project-view .title-vbox{
+    -fx-background-color: -bright-blue;
+}
+
+.openjfx-project-view:lg .title-vbox{
+    -fx-max-width: 414px;
+    -fx-max-height: 310px;
+    -fx-translate-x: 291px;
+    -fx-padding: 70px 20px;
+}
+
+.openjfx-project-view:md .title-vbox{
+    -fx-max-width: 283px;
+    -fx-max-height: 310px;
+    -fx-translate-x: 30px;
+    -fx-padding: 70px 20px;
+}
+
+.openjfx-project-view:sm .title-vbox{
+    -fx-background-color: -bright-blue;
+    -fx-max-height: 226px;
+    -fx-max-width: 317px;
+    -fx-padding: 50px 20px;
+    -fx-spacing: 2px;
+
+}
+
+.openjfx-project-view:sm .description{
+    -fx-font-size: 20px;
+}
+
+.openjfx-project-view:md .description{
+    -fx-font-size: 20px;
+
+}
+
+.openjfx-project-view:lg .description{
+    -fx-font-size: 24px;
+    -fx-max-width: 554px;
+}
+
+.openjfx-project-view .link{
+    -fx-fill: -bright-blue;
+    -fx-font-family: "Spline Sans Medium";
+}
+
+.openjfx-project-view:sm .text-flow{
+    -fx-font-size: 16px;
+    -fx-max-width: 317px;
+}
+
+.openjfx-project-view:md .text-flow{
+    -fx-font-size: 16px;
+    -fx-max-width: 344px;
+}
+
+.openjfx-project-view:lg .text-flow{
+    -fx-font-size: 16px;
+    -fx-max-width: 554px;
+}
+
+.openjfx-project-view .openjfx-region{
+    -fx-shape: "M1.76 18L0.5 16.74L15.44 1.8H6.62V0H18.5V11.88H16.7V3.06L1.76 18Z";
+    -fx-pref-width: 18px;
+    -fx-pref-height: 18px;
+    -fx-background-color: white;
+}
+
+.openjfx-project-view .openjfx-region2{
+    -fx-shape: "M1.76 18L0.5 16.74L15.44 1.8H6.62V0H18.5V11.88H16.7V3.06L1.76 18Z";
+    -fx-pref-width: 18px;
+    -fx-pref-height: 18px;
+    -fx-background-color: black;
+}
+
+.openjfx-project-view .fill-button{
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0;
+    -fx-content-display: right;
+    -fx-graphic-text-gap: 10px;
+
+    -fx-pref-width: infinity;
+    -fx-min-width: 270px;
+    -fx-pref-height: 60px;
+    -fx-max-height: 60px;
+    -fx-font-family: "Spline Sans SemiBold";
+}
+
+    
+.openjfx-project-view:lg .fill-button{
+    -fx-pref-width: 270px;
+}
+    
+.openjfx-project-view .fill-button:hover {
+    -fx-background-color: derive(-bg, 15%);
+}
+
+.openjfx-project-view .fill-button:pressed {
+    -fx-background-color: derive(-bg, -15%);
+}
+
+.openjfx-project-view .visit-homepage-button {
+    -bg: -bright-blue;
+    -fx-background-color: -bg;
+    -fx-text-fill: white;
+}
+
+.openjfx-project-view .report-issue-button {
+    -bg: -light-blue;
+    -fx-background-color: -bg;
+    -fx-text-fill: black;
+}
+
+.openjfx-project-view .buttons-box{
+    -fx-spacing: 15px;
+    -fx-alignment: center;
+}
+
+.openjfx-project-view .details-vbox {
+    -fx-background-color: white;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+.openjfx-project-view:lg .details-vbox {
+    -fx-padding: 50px 40px;
+    -fx-max-width: 666px;
+    -fx-max-height: 594px;
+    -fx-translate-x: 705px;
+    -fx-translate-y: -80px;
+}
+
+.openjfx-project-view:md .details-vbox {
+    -fx-padding: 50px 40px;
+    -fx-max-width: 424px;
+    -fx-max-height: 781px;
+    -fx-translate-x: 313px;
+    -fx-translate-y: -83px;
+}
+
+.openjfx-project-view:sm .details-vbox {
+    -fx-padding: 30px 20px;
+    -fx-max-height: 879px;
+    -fx-max-width: 317px;
+}
+
+.openjfx-project-view .image {
+    -fx-image: url("images/openjfx-image.jpg");
+}
+
+.openjfx-project-view:lg .image {
+    -fx-translate-y: -80px;
+    -fx-translate-x: 70px;
+}
+
+.openjfx-project-view:md .image {
+    -fx-translate-y: -158px;
+}
+
+.openjfx-project-view .column-vbox {
+    -fx-max-height: 1105px;
+    -fx-max-width: 317px;
+}
+    
 /** -------------------------------
  * WelcomeView
  */
