@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
@@ -18,7 +19,7 @@ import one.jpro.routing.View;
 
 public abstract class DefaultPage extends View {
 
-    private final ObjectProperty<Size> size;
+    private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
     public ObjectProperty<Size> sizeProperty() {
         return size;
@@ -29,7 +30,7 @@ public abstract class DefaultPage extends View {
     }
 
     public DefaultPage(ObjectProperty<Size> size) {
-        this.size = size;
+        this.size.bind(size);
     }
 
     public Node wrapContent(Node content) {
