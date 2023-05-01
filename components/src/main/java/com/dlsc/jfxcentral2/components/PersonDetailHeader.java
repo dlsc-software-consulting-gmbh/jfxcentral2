@@ -7,13 +7,11 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
@@ -40,7 +38,8 @@ public class PersonDetailHeader extends DetailHeader {
         if (person == null) {
             return null;
         }
-        ImageView avatarImage = createAvatarImage(person);
+        AvatarView avatarImage = new AvatarView();
+        avatarImage.setImage(person.avatar());
 
         FlowPane nameBadgePane = createNameBadgePane(person);
 
@@ -125,19 +124,6 @@ public class PersonDetailHeader extends DetailHeader {
             socialFlowPane.getChildren().add(githubLinkBtn);
         }
         return socialFlowPane;
-    }
-
-    private ImageView createAvatarImage(Person person) {
-        ImageView avatarImageView = new ImageView();
-        avatarImageView.getStyleClass().add("avatar");
-        avatarImageView.setPreserveRatio(true);
-        int size = isLarge() ? AVATAR_SIZE_LG : AVATAR_SIZE_MD;
-        avatarImageView.setFitHeight(size);
-        avatarImageView.setFitWidth(size);
-        double halfSize = size / 2.0;
-        avatarImageView.setClip(new Circle(halfSize, halfSize, halfSize));
-        avatarImageView.setImage(person.avatar());
-        return avatarImageView;
     }
 
     private final ObjectProperty<Person> person = new SimpleObjectProperty<>(this, "person");
