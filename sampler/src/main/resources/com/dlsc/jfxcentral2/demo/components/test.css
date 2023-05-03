@@ -85,3 +85,7 @@
     -fx-background-color: -grey-20;
     -fx-text-fill: -white;
 }
+
+.test-avatar-view {
+    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.8), 30, 0.2, 0, 0);
+}
