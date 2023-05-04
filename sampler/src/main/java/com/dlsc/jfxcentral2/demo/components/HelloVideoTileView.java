@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.VideoTileView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
@@ -36,21 +35,20 @@ public class HelloVideoTileView extends JFXCentralSampleBase {
         SizeComboBox sizeComboBox = new SizeComboBox();
         tileView.sizeProperty().bind(sizeComboBox.valueProperty());
 
-        CheckBox smallCheckBox = new CheckBox("Small Style2");
-        smallCheckBox.visibleProperty().bind(sizeComboBox.valueProperty().isEqualTo(Size.SMALL));
+        CheckBox smallCheckBox = new CheckBox("Video Gallery Tile");
         smallCheckBox.selectedProperty().addListener(it -> {
             // css selector: .video-tile-view:sm.small or .tile-view:sm.small
-            if (smallCheckBox.isSelected() && !tileView.getStyleClass().contains("small")) {
-                tileView.getStyleClass().add("small");
+            if (smallCheckBox.isSelected() && !tileView.getStyleClass().contains("video-gallery-tile")) {
+                tileView.getStyleClass().add("video-gallery-tile");
             } else {
-                tileView.getStyleClass().remove("small");
+                tileView.getStyleClass().remove("video-gallery-tile");
             }
         });
-        return new VBox(10, sizeComboBox, smallCheckBox);
+        return new VBox(10, smallCheckBox, sizeComboBox);
     }
 
     @Override
     public String getSampleName() {
-        return "TileView";
+        return "VideoTileView";
     }
 }
