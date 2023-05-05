@@ -29,7 +29,7 @@ public class PaginationControlSkin extends ControlBaseSkin<PaginationControl> {
         pageInformationLabel.textProperty().bind(
                 Bindings.min(control.currentPageIndexProperty().add(1).multiply(control.maxItemsPerPageProperty()), control.pageCountProperty())
                         .asString()
-                        .concat("/")
+                        .concat(control.separatorTextProperty())
                         .concat(control.pageCountProperty())
         );
 
