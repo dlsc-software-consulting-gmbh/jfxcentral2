@@ -1577,6 +1577,56 @@
 }
 
 /** -------------------------------
+ * PaginationControl2
+ */
+.custom-pagination-control2 > .content-pane .control-box {
+    -fx-spacing: 15px;
+    -fx-alignment: center;
+}
+
+.custom-pagination-control2 > .content-pane .control-box .number-button,
+.custom-pagination-control2 > .content-pane .control-box .ellipsis-label {
+    -fx-min-width: 33px;
+    -fx-min-height: 33px;
+    -fx-max-width: 33px;
+    -fx-max-height: 33px;
+    -fx-background-color: transparent;
+    -fx-text-fill: -grey-100;
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-padding: 2px;
+}
+
+.custom-pagination-control2 > .content-pane .control-box .number-button {
+    -fx-cursor: hand;
+}
+
+.custom-pagination-control2 > .content-pane .control-box .number-button:selected {
+    -fx-background-color: -grey-10;
+    -fx-background-radius: 1000px;
+}
+
+.custom-pagination-control2 .control-box > .left-arrow-button,
+.custom-pagination-control2 .control-box > .right-arrow-button {
+    -fx-min-width: 42px;
+    -fx-min-height: 42px;
+    -fx-padding: 10px;
+    -fx-background-radius: 1000px;
+    -fx-background-insets: 0px;
+    -fx-border-radius: 28px;
+    -fx-background-color: -bright-blue;
+}
+
+.custom-pagination-control2 .control-box .left-arrow-button > .ikonli-font-icon,
+.custom-pagination-control2 .control-box .right-arrow-button > .ikonli-font-icon {
+    -fx-icon-color: -white;
+    -fx-icon-size: 20px;
+
+}
+
+/** -------------------------------
  * MenuView
  */
 .menu-view {
