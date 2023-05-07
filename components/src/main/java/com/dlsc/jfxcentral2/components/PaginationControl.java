@@ -1,8 +1,11 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.components.skins.PaginationControlSkin;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,6 +19,13 @@ public class PaginationControl extends ControlBase {
     public PaginationControl() {
         getStyleClass().add("pagination-control");
 
+        InvalidationListener pageCountListener = it -> {
+            int actualPageCount = (int) Math.ceil((double) getPageCount() / getMaxItemsPerPage());
+            //calculate the actual number of pages
+            this.actualPageCount.set(actualPageCount);
+        };
+        pageCountProperty().addListener(pageCountListener);
+        maxItemsPerPageProperty().addListener(pageCountListener);
     }
 
     @Override
@@ -65,6 +75,29 @@ public class PaginationControl extends ControlBase {
         this.currentPageIndex.set(currentPageIndex);
     }
 
+    private final IntegerProperty maxItemsPerPage = new SimpleIntegerProperty(this, "maxItemsPerPage", 1);
+
+    public int getMaxItemsPerPage() {
+        return maxItemsPerPage.get();
+    }
+
+    public IntegerProperty maxItemsPerPageProperty() {
+        return maxItemsPerPage;
+    }
+
+    public void setMaxItemsPerPage(int maxItemsPerPage) {
+        this.maxItemsPerPage.set(maxItemsPerPage);
+    }
+
+    private final ReadOnlyIntegerWrapper actualPageCount = new ReadOnlyIntegerWrapper(this, "actualPageCount", 0);
+
+    public int getActualPageCount() {
+        return actualPageCount.get();
+    }
+
+    public ReadOnlyIntegerProperty actualPageCountProperty() {
+        return actualPageCount.getReadOnlyProperty();
+    }
     private final ObjectProperty<Callback<Integer, Node>> pageFactory = new SimpleObjectProperty<>(this, "pageFactory");
 
     public Callback<Integer, Node> getPageFactory() {

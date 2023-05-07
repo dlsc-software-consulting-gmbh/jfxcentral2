@@ -189,10 +189,11 @@ public class TileView<T extends TileData> extends PaneBase {
         titleLabel.visibleProperty().bind(titleProperty().isNotEmpty());
         titleLabel.setWrapText(true);
         titleLabel.minHeightProperty().bind(Bindings.createDoubleBinding(() -> {
-            double height = titleLabel.getFont().getSize() * 1.5 * (isSmall() ? 2 : 4);
+            boolean isGalley = getStyleClass().contains("video-gallery-tile");
+            double height = titleLabel.getFont().getSize() * 1.5 * (isGalley ? 2 : isSmall() ? 2 : 4);
             double prefH = titleLabel.prefHeight(titleLabel.getWidth());
             return Math.min(prefH, height);
-        }, sizeProperty(), titleLabel.fontProperty(), titleLabel.widthProperty()));
+        }, sizeProperty(), titleLabel.fontProperty(), titleLabel.widthProperty(), getStyleClass()));
 
         Label descriptionLabel = new Label();
         descriptionLabel.getStyleClass().add("description");
@@ -202,7 +203,11 @@ public class TileView<T extends TileData> extends PaneBase {
         descriptionLabel.setWrapText(true);
         descriptionLabel.setOnMousePressed(event -> flipView.flipToBack());
 
-        VBox frontBox = new VBox(imageContainer, titleLabel, descriptionLabel);
+        VBox centerBox = new VBox(titleLabel, descriptionLabel);
+        centerBox.getStyleClass().add("center-box");
+        VBox.setVgrow(centerBox, Priority.ALWAYS);
+
+        VBox frontBox = new VBox(imageContainer, centerBox);
         frontBox.getStyleClass().add("front-box");
         frontBox.setAlignment(Pos.TOP_LEFT);
         return frontBox;
