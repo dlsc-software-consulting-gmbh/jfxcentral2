@@ -1,50 +1,50 @@
-#### Cookies Policy
-Introduction
-1.Introduction
-    1.1 Our website uses cookies.
-    1.2 Insofar as those cookies are not strictly necessary for the provision of our website, we will ask you to consent to our use of cookies when you first visit our website.
-2.Credit
-    2.1 This document was created using a template from Docular (https://docular.net/).
-3.About cookies
-    3.1 A cookie is a file containing an identifier (a string of letters and numbers) that is sent by a web server to a web browser and is stored by the browser. The identifier is then sent back to the server each time the browser requests a page from the server.
-    3.2 Cookies may be either "persistent" cookies or "session" cookies: a persistent cookie will be stored by a web browser and will remain valid until its set expiry date, unless deleted by the user before the expiry date; a session cookie, on the other hand, will expire at the end of the user session, when the web browser is closed.
-    3.3 Cookies may not contain any information that personally identifies a user, but personal data that we store about you may be linked to the information stored in and obtained from cookies.
-4.Cookies that we use
-    4.1 We use cookies for the following purposes:
-    (a) [authentication and status - we use cookies [to identify you when you visit our website and as you navigate our website, and to help us determine if you are logged into our website][ (cookies used for this purpose are: [identify cookies])]];
-    (b) [shopping cart - we use cookies to [maintain the state of your shopping cart as you navigate our website][ (cookies used for this purpose are: [identify cookies])]];
-    (c) [personalisation - we use cookies [to store information about your preferences and to personalise our website for you][ (cookies used for this purpose are: [identify cookies])]];
-    (d) [security - we use cookies [as an element of the security measures used to protect user accounts, including preventing fraudulent use of login credentials, and to protect our website and services generally][ (cookies used for this purpose are: [identify cookies])]];
-    (e) [advertising - we use cookies [to help us to display advertisements that will be relevant to you][ (cookies used for this purpose are: [identify cookies])]];
-    (f) [analysis - we use cookies [to help us to analyse the use and performance of our website and services][ (cookies used for this purpose are: [identify cookies])]]; and
-    (g) [cookie consent - we use cookies [to store your preferences in relation to the use of cookies more generally][ (cookies used for this purpose are: [identify cookies])]].
-    [additional list items]
-5.Cookies used by our service providers
-    5.1 Our service providers use cookies and those cookies may be stored on your computer when you visit our website.
-    5.2 We use Google Analytics. Google Analytics gathers information about the use of our website by means of cookies. The information gathered is used to create reports about the use of our website. You can find out more about Google's use of information by visiting https://www.google.com/policies/privacy/partners/ and you can review Google's privacy policy at https://policies.google.com/privacy.[ The relevant cookies are: [identify cookies].]
-    5.3 We publish Google AdSense advertisements on our website[, together with advertisements from the following advertisers and advertising networks that are distributed by Google: [identify and provide links to advertisers and networks]]. The advertisements may be personalised to reflect your interests. To help determine your interests Google and its partners use cookies.[ The relevant cookies served from our website are [identify cookies].] The cookies are used to track your previous visits to our website and your visits to other websites. You can opt out of Google's personalised advertising by visiting https://www.google.com/settings/ads and you can opt out of third party cookies use for personalised advertising by visiting http://www.aboutads.info/. You can review Google's privacy policy at https://policies.google.com/privacy.
-    5.4 We use a Facebook pixel on our website. Using the pixel, Facebook collects information about the users and use of our website. The information is used to personalise Facebook advertisements and to analyse the use of our website. To find out more about the Facebook pixel and about Facebook's use of personal data generally, see the Facebook cookie policy at https://www.facebook.com/policies/cookies/ and the Facebook privacy policy at https://www.facebook.com/about/privacy. The Facebook cookie policy includes information about controlling Facebook's use of cookies to show you advertisements. If you are a registered Facebook user, you can adjust how advertisements are targeted by following the instructions at https://www.facebook.com/help/568137493302217.
-    5.5 We use [identify service provider] to [specify service]. This service uses cookies for [specify purpose(s)]. You can view the privacy policy of this service provider at [URL].[ The relevant cookies are: [identify cookies].]
-6.Managing cookies
-    6.1 Most browsers allow you to refuse to accept cookies and to delete cookies. The methods for doing so vary from browser to browser, and from version to version. You can however obtain up-to-date information about blocking and deleting cookies via these links:
-    (a) https://support.google.com/chrome/answer/95647 (Chrome);
-    (b) https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop (Firefox);
-    (c) https://help.opera.com/en/latest/security-and-privacy/ (Opera);
-    (d) https://support.microsoft.com/en-gb/help/17442/windows-internet-explorer-delete-manage-cookies (Internet Explorer);
-    (e) https://support.apple.com/en-gb/guide/safari/manage-cookies-and-website-data-sfri11471/mac (Safari); and
-    (f) https://support.microsoft.com/en-gb/help/4468242/microsoft-edge-browsing-data-and-privacy (Edge).
-    [additional list items]
-    6.2 Blocking all cookies will have a negative impact upon the usability of many websites.
-    6.3 If you block cookies, you will not be able to use all the features on our website.
-7.Cookie preferences
-    7.1 You can manage your preferences relating to the use of cookies on our website by visiting: [URL]
-8.Our details
-    8.1 This website is owned and operated by [name].
-    8.2 We are registered in [England and Wales] under registration number [number], and our registered office is at [address].
-    8.3 Our principal place of business is at [address].
-    8.4 You can contact us:
-    (a) [by post, to [the postal address given above]];
-    (b) [using our website contact form];
-    (c) [by telephone, on [the contact number published on our website]]; or
-    (d) [by email, using [the email address published on our website]].
-    [additional list items]
+# Cookies Policy
+
+1.	Introduction
+1.1	Our website uses cookies.
+1.2	Insofar as those cookies are not strictly necessary for the provision of our website, we will ask you to consent to our use of cookies when you first visit our website.
+2.	Credit
+2.1	This document was created using a template from Docular (https://docular.net/).
+3.	About cookies
+3.1	A cookie is a file containing an identifier (a string of letters and numbers) that is sent by a web server to a web browser and is stored by the browser. The identifier is then sent back to the server each time the browser requests a page from the server.
+3.2	Cookies may be either "persistent" cookies or "session" cookies: a persistent cookie will be stored by a web browser and will remain valid until its set expiry date, unless deleted by the user before the expiry date; a session cookie, on the other hand, will expire at the end of the user session, when the web browser is closed.
+3.3	Cookies may not contain any information that personally identifies a user, but personal data that we store about you may be linked to the information stored in and obtained from cookies.
+4.	Cookies that we use
+4.1	We use cookies for the following purposes:
+(a)	[authentication and status - we use cookies [to identify you when you visit our website and as you navigate our website, and to help us determine if you are logged into our website][ (cookies used for this purpose are: [identify cookies])]];
+(b)	[shopping cart - we use cookies to [maintain the state of your shopping cart as you navigate our website][ (cookies used for this purpose are: [identify cookies])]];
+(c)	[personalisation - we use cookies [to store information about your preferences and to personalise our website for you][ (cookies used for this purpose are: [identify cookies])]];
+(d)	[security - we use cookies [as an element of the security measures used to protect user accounts, including preventing fraudulent use of login credentials, and to protect our website and services generally][ (cookies used for this purpose are: [identify cookies])]];
+(e)	[advertising - we use cookies [to help us to display advertisements that will be relevant to you][ (cookies used for this purpose are: [identify cookies])]];
+(f)	[analysis - we use cookies [to help us to analyse the use and performance of our website and services][ (cookies used for this purpose are: [identify cookies])]]; and
+(g)	[cookie consent - we use cookies [to store your preferences in relation to the use of cookies more generally][ (cookies used for this purpose are: [identify cookies])]].
+[additional list items]
+5.	Cookies used by our service providers
+5.1	Our service providers use cookies and those cookies may be stored on your computer when you visit our website.
+5.2	We use Google Analytics. Google Analytics gathers information about the use of our website by means of cookies. The information gathered is used to create reports about the use of our website. You can find out more about Google's use of information by visiting https://www.google.com/policies/privacy/partners/ and you can review Google's privacy policy at https://policies.google.com/privacy.[ The relevant cookies are: [identify cookies].]
+5.3	We publish Google AdSense advertisements on our website[, together with advertisements from the following advertisers and advertising networks that are distributed by Google: [identify and provide links to advertisers and networks]]. The advertisements may be personalised to reflect your interests. To help determine your interests Google and its partners use cookies.[ The relevant cookies served from our website are [identify cookies].] The cookies are used to track your previous visits to our website and your visits to other websites. You can opt out of Google's personalised advertising by visiting https://www.google.com/settings/ads and you can opt out of third party cookies use for personalised advertising by visiting http://www.aboutads.info/. You can review Google's privacy policy at https://policies.google.com/privacy.
+5.4	We use a Facebook pixel on our website. Using the pixel, Facebook collects information about the users and use of our website. The information is used to personalise Facebook advertisements and to analyse the use of our website. To find out more about the Facebook pixel and about Facebook's use of personal data generally, see the Facebook cookie policy at https://www.facebook.com/policies/cookies/ and the Facebook privacy policy at https://www.facebook.com/about/privacy. The Facebook cookie policy includes information about controlling Facebook's use of cookies to show you advertisements. If you are a registered Facebook user, you can adjust how advertisements are targeted by following the instructions at https://www.facebook.com/help/568137493302217.
+5.5	We use [identify service provider] to [specify service]. This service uses cookies for [specify purpose(s)]. You can view the privacy policy of this service provider at [URL].[ The relevant cookies are: [identify cookies].]
+6.	Managing cookies
+6.1	Most browsers allow you to refuse to accept cookies and to delete cookies. The methods for doing so vary from browser to browser, and from version to version. You can however obtain up-to-date information about blocking and deleting cookies via these links:
+(a)	https://support.google.com/chrome/answer/95647 (Chrome);
+(b)	https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop (Firefox);
+(c)	https://help.opera.com/en/latest/security-and-privacy/ (Opera);
+(d)	https://support.microsoft.com/en-gb/help/17442/windows-internet-explorer-delete-manage-cookies (Internet Explorer);
+(e)	https://support.apple.com/en-gb/guide/safari/manage-cookies-and-website-data-sfri11471/mac (Safari); and
+(f)	https://support.microsoft.com/en-gb/help/4468242/microsoft-edge-browsing-data-and-privacy (Edge).
+[additional list items]
+6.2	Blocking all cookies will have a negative impact upon the usability of many websites.
+6.3	If you block cookies, you will not be able to use all the features on our website.
+7.	Cookie preferences
+7.1	You can manage your preferences relating to the use of cookies on our website by visiting: [URL]
+8.	Our details
+8.1	This website is owned and operated by [name].
+8.2	We are registered in [England and Wales] under registration number [number], and our registered office is at [address].
+8.3	Our principal place of business is at [address].
+8.4	You can contact us:
+(a)	[by post, to [the postal address given above]];
+(b)	[using our website contact form];
+(c)	[by telephone, on [the contact number published on our website]]; or
+(d)	[by email, using [the email address published on our website]].
+[additional list items]
