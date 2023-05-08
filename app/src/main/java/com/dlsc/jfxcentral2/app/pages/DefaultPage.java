@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.components.FooterView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
+import com.dlsc.jfxcentral2.components.TopPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
@@ -17,7 +18,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import one.jpro.routing.View;
 
+import java.util.Objects;
+
 public abstract class DefaultPage extends View {
+
+    private final TopMenuBar.Mode menuMode;
 
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
@@ -29,8 +34,9 @@ public abstract class DefaultPage extends View {
         return sizeProperty().get();
     }
 
-    public DefaultPage(ObjectProperty<Size> size) {
+    public DefaultPage(ObjectProperty<Size> size, TopMenuBar.Mode menuMode) {
         this.size.bind(size);
+        this.menuMode = Objects.requireNonNull(menuMode);
     }
 
     public Node wrapContent(Node content) {
@@ -42,6 +48,7 @@ public abstract class DefaultPage extends View {
         // menubar
         TopMenuBar topMenuBar = new TopMenuBar();
         topMenuBar.sizeProperty().bind(sizeProperty());
+        topMenuBar.setMode(menuMode);
 
         // footer
         FooterView footerView = new FooterView();
@@ -55,8 +62,7 @@ public abstract class DefaultPage extends View {
         CopyrightView copyrightView = new CopyrightView();
         copyrightView.sizeProperty().bind(sizeProperty());
 
-        StackPane topStackPane = new StackPane(content, topMenuBar);
-        topStackPane.getStyleClass().add("top");
+        TopPane topStackPane = new TopPane(topMenuBar, content);
         updateStyleClassBasedOnSize(topStackPane);
         StackPane.setAlignment(topMenuBar, Pos.TOP_CENTER);
 

@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import one.jpro.routing.LinkUtil;
 
 public class OpenJFXProjectView extends PaneBase {
 
@@ -51,7 +52,7 @@ public class OpenJFXProjectView extends PaneBase {
                 "client application platform for desktop, mobile and embedded systems based on JavaSE." +
                 " It is a collaborative effort by many individuals " +
                 "and companies with the goal of producing a modern, efficient, and fully featured toolkit for" +
-                " developing rich client applications. This is the open source project where we develop JavaFX.");
+                " developing rich client applications. This is the open source project where JavaFX is being developed.");
         description.getStyleClass().add("description");
         description.setWrapText(true);
 
@@ -60,20 +61,13 @@ public class OpenJFXProjectView extends PaneBase {
 
         Text text2 = new Text("GPL v2 with the Classpath exception");
         text2.getStyleClass().add("link");
-        //text2.setOnMouseClicked(event -> JFXCentralUtil.run());
+        LinkUtil.setLink(text2, "https://en.wikipedia.org/wiki/GPL_linking_exception#The_Classpath_exception");
 
         Text text3 = new Text(", just like the JDK. Anybody is welcome to contribute to this project," +
                 " port it to other platforms or devices, or do anything else that " +
-                "a free software license allows you to do!  OpenJFX is free software, licensed under ");
-
-        Text text4 = new Text("GPL v2 with the Classpath exception");
-        text4.getStyleClass().add("link");
-
-        Text text5 = new Text(", just like the JDK. Anybody is welcome to contribute to this project," +
-                " port it to other platforms or devices, or do anything else that " +
                 "a free software license allows you to do!");
 
-        textFlow = new TextFlow(text1, text2, text3, text4, text5);
+        textFlow = new TextFlow(text1, text2, text3);
         textFlow.getStyleClass().add("text-flow");
 
         /*buttons*/

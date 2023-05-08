@@ -2,6 +2,8 @@ package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral2.components.HomePageTopView;
 import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.components.TopMenuBar;
+import com.dlsc.jfxcentral2.components.VideoGallery;
 import com.dlsc.jfxcentral2.components.WebsiteChangesView;
 import com.dlsc.jfxcentral2.components.WeekLinksLiteView;
 import com.dlsc.jfxcentral2.model.DateQuickLink;
@@ -21,18 +23,18 @@ import java.util.Random;
 
 public class StartPage extends DefaultPage {
 
+    public StartPage(ObjectProperty<Size> size) {
+        super(size, TopMenuBar.Mode.DARK);
+    }
+
     @Override
     public String title() {
-        return "title";
+        return "JFXCentral";
     }
 
     @Override
     public String description() {
-        return "description";
-    }
-
-    public StartPage(ObjectProperty<Size> size) {
-        super(size);
+        return "A central place for anything related to JavaFX.";
     }
 
     @Override
@@ -51,7 +53,11 @@ public class StartPage extends DefaultPage {
         websiteChangesView.sizeProperty().bind(sizeProperty());
         websiteChangesView.getQuickLinks().setAll(generateQuickLinks());
 
-        VBox uiBox = new VBox(homePageTopView, weekLinksLiteView, websiteChangesView);
+        // video gallery
+        VideoGallery videoGallery = new VideoGallery();
+        videoGallery.sizeProperty().bind(sizeProperty());
+
+        VBox uiBox = new VBox(homePageTopView, weekLinksLiteView, websiteChangesView, videoGallery);
         uiBox.setAlignment(Pos.BOTTOM_CENTER);
         uiBox.setMaxWidth(Region.USE_PREF_SIZE);
 

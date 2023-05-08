@@ -25,7 +25,7 @@ import java.util.List;
 
 public class TopMenuBar extends PaneBase {
 
-    private static final BackgroundMode DEFAULT_BACKGROUND_MODE = BackgroundMode.DARK;
+    private static final Mode DEFAULT_MODE = Mode.DARK;
 
     private static final PseudoClass LIGHT_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("light");
     private static final PseudoClass DARK_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("dark");
@@ -36,7 +36,7 @@ public class TopMenuBar extends PaneBase {
 
     private Node searchTextField;
 
-    public enum BackgroundMode {
+    public enum Mode {
         LIGHT,
         DARK
     }
@@ -44,8 +44,8 @@ public class TopMenuBar extends PaneBase {
     public TopMenuBar() {
         getStyleClass().add("top-menu-bar");
 
-        activateBackgroundModePseudoClass();
-        backgroundModeProperty().addListener(it -> activateBackgroundModePseudoClass());
+        activateModePseudoClass();
+        modeProperty().addListener(it -> activateModePseudoClass());
 
         contentBox = new HBox();
         contentBox.getStyleClass().add("content");
@@ -60,10 +60,10 @@ public class TopMenuBar extends PaneBase {
         layoutBySize();
     }
 
-    private void activateBackgroundModePseudoClass() {
-        BackgroundMode mode = getBackgroundMode();
-        pseudoClassStateChanged(LIGHT_PSEUDOCLASS_STATE, mode == BackgroundMode.LIGHT);
-        pseudoClassStateChanged(DARK_PSEUDOCLASS_STATE, mode == BackgroundMode.DARK);
+    private void activateModePseudoClass() {
+        Mode mode = getMode();
+        pseudoClassStateChanged(LIGHT_PSEUDOCLASS_STATE, mode == Mode.LIGHT);
+        pseudoClassStateChanged(DARK_PSEUDOCLASS_STATE, mode == Mode.DARK);
     }
 
     protected void layoutBySize() {
@@ -155,7 +155,7 @@ public class TopMenuBar extends PaneBase {
         }
     }
 
-    private final StyleableObjectProperty<BackgroundMode> backgroundMode = new StyleableObjectProperty<>(DEFAULT_BACKGROUND_MODE) {
+    private final StyleableObjectProperty<Mode> mode = new StyleableObjectProperty<>(DEFAULT_MODE) {
 
         @Override
         public Object getBean() {
@@ -164,39 +164,39 @@ public class TopMenuBar extends PaneBase {
 
         @Override
         public String getName() {
-            return "backgroundMode";
+            return "mode";
         }
 
         @Override
-        public CssMetaData<? extends Styleable, BackgroundMode> getCssMetaData() {
-            return StyleableProperties.BACKGROUND_MODE;
+        public CssMetaData<? extends Styleable, Mode> getCssMetaData() {
+            return StyleableProperties.MODE;
         }
     };
 
-    public final StyleableObjectProperty<BackgroundMode> backgroundModeProperty() {
-        return backgroundMode;
+    public final StyleableObjectProperty<Mode> modeProperty() {
+        return mode;
     }
 
-    public final BackgroundMode getBackgroundMode() {
-        return backgroundMode.get();
+    public final Mode getMode() {
+        return mode.get();
     }
 
-    public final void setBackgroundMode(BackgroundMode backgroundMode) {
-        this.backgroundModeProperty().set(backgroundMode);
+    public final void setMode(Mode mode) {
+        this.modeProperty().set(mode);
     }
 
     private static class StyleableProperties {
 
-        private static final CssMetaData<TopMenuBar, BackgroundMode> BACKGROUND_MODE = new CssMetaData<>("-fx-background-mode", new EnumConverter<>(BackgroundMode.class), DEFAULT_BACKGROUND_MODE) {
+        private static final CssMetaData<TopMenuBar, Mode> MODE = new CssMetaData<>("-fx-mode", new EnumConverter<>(Mode.class), DEFAULT_MODE) {
 
             @Override
             public boolean isSettable(TopMenuBar control) {
-                return !control.backgroundMode.isBound();
+                return !control.mode.isBound();
             }
 
             @Override
-            public StyleableProperty<BackgroundMode> getStyleableProperty(TopMenuBar control) {
-                return control.backgroundModeProperty();
+            public StyleableProperty<Mode> getStyleableProperty(TopMenuBar control) {
+                return control.modeProperty();
             }
         };
 
@@ -204,7 +204,7 @@ public class TopMenuBar extends PaneBase {
 
         static {
             List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(PaneBase.getClassCssMetaData());
-            styleables.add(BACKGROUND_MODE);
+            styleables.add(MODE);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }
     }

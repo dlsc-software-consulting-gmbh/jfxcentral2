@@ -11,6 +11,7 @@ import javafx.scene.control.Skin;
 import javafx.util.Callback;
 
 public class PaginationControl2 extends Control {
+
     private static final int DEFAULT_PAGE_COUNT = 10;
     private static final int DEFAULT_CURRENT_PAGE_INDEX = 0;
     private static final int DEFAULT_MAX_PAGE_INDICATOR_COUNT = 3;

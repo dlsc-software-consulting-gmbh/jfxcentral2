@@ -27,10 +27,10 @@ public class HelloTopMenuBar extends JFXCentralSampleBase {
         SizeComboBox sizeComboBox = new SizeComboBox(Size.SMALL);
         topMenuBar.sizeProperty().bind(sizeComboBox.sizeProperty());
 
-        ComboBox<TopMenuBar.BackgroundMode> themeComboBox = new ComboBox<>();
-        themeComboBox.getItems().addAll(TopMenuBar.BackgroundMode.values());
-        themeComboBox.getSelectionModel().select(topMenuBar.getBackgroundMode());
-        topMenuBar.backgroundModeProperty().bind(themeComboBox.getSelectionModel().selectedItemProperty());
+        ComboBox<TopMenuBar.Mode> themeComboBox = new ComboBox<>();
+        themeComboBox.getItems().addAll(TopMenuBar.Mode.values());
+        themeComboBox.getSelectionModel().select(topMenuBar.getMode());
+        topMenuBar.modeProperty().bind(themeComboBox.getSelectionModel().selectedItemProperty());
         return new VBox(10, new Label("Change Size:"), sizeComboBox, new Label("Change Theme:"), themeComboBox);
     }
 

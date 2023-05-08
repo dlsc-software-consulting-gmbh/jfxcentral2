@@ -14,6 +14,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class PaginationControlSkin2 extends SkinBase<PaginationControl2> {
+
     private PaginationControl2 control;
     private final HBox controlBox;
     private final Button leftArrowButton;
@@ -132,5 +133,4 @@ public class PaginationControlSkin2 extends SkinBase<PaginationControl2> {
         rightArrowButton.setDisable(control.getCurrentPageIndex() == control.getPageCount() - 1);
         controlBox.getChildren().add(rightArrowButton);
     }
-
 }

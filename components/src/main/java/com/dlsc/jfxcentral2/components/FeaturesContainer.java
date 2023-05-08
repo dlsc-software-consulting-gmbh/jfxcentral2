@@ -1,18 +1,13 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.model.Feature;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.layout.HBox;
 
-import java.util.List;
-
 public class FeaturesContainer extends PaneBase {
-
-    public FeaturesContainer(List<Feature> items) {
-        this();
-        setFeatures(items);
-    }
 
     public FeaturesContainer() {
         getStyleClass().add("features-container");
@@ -48,18 +43,17 @@ public class FeaturesContainer extends PaneBase {
         }
     }
 
-    private final ObjectProperty<List<Feature>> features = new SimpleObjectProperty<>(this, "features");
+    private final ListProperty<Feature> features = new SimpleListProperty<>(this, "features", FXCollections.observableArrayList());
 
-    public List<Feature> getFeatures() {
+    public ObservableList<Feature> getFeatures() {
         return features.get();
     }
 
-    public ObjectProperty<List<Feature>> featuresProperty() {
+    public ListProperty<Feature> featuresProperty() {
         return features;
     }
 
-    public void setFeatures(List<Feature> features) {
+    public void setFeatures(ObservableList<Feature> features) {
         this.features.set(features);
     }
-
 }

@@ -18,13 +18,16 @@ public class HelloFeaturesContainer extends JFXCentralSampleBase {
     @Override
     protected Region createControl() {
 
-        FeaturesContainer smallFC = new FeaturesContainer(createFeatures());
+        FeaturesContainer smallFC = new FeaturesContainer();
+        smallFC.getFeatures().setAll(createFeatures());
         smallFC.setSize(Size.SMALL);
 
-        FeaturesContainer mediumFC = new FeaturesContainer(createFeatures());
+        FeaturesContainer mediumFC = new FeaturesContainer();
+        mediumFC.getFeatures().setAll(createFeatures());
         mediumFC.setSize(Size.MEDIUM);
 
-        FeaturesContainer largerFC = new FeaturesContainer(createFeatures());
+        FeaturesContainer largerFC = new FeaturesContainer();
+        largerFC.getFeatures().setAll(createFeatures());
         largerFC.setSize(Size.LARGE);
 
         return new TabPane(
