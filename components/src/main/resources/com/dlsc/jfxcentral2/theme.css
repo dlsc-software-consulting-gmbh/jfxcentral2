@@ -630,7 +630,7 @@
 }
 
 .openjfx-project-view .fx-logo {
-    -fx-image: url("images/fxlogo.png");
+    -fx-image: url("images/fxlogo@3x.png");
 }
 
 .openjfx-project-view:lg .fx-logo {
@@ -797,16 +797,23 @@
 }
 
 .openjfx-project-view .image {
-    -fx-image: url("images/openjfx-image.jpg");
+    -fx-max-width: 635px;
+    -fx-background-image: url("images/openjfx-image.jpg");
 }
 
 .openjfx-project-view:lg .image {
+    -fx-max-height: 396px;
+    -fx-background-size: 635px 425px;
+    -fx-background-position: 0 -15;
     -fx-translate-y: -80px;
     -fx-translate-x: 70px;
 }
 
 .openjfx-project-view:md .image {
+    -fx-max-height: 551px;
+    -fx-background-size: 830 551px;
     -fx-translate-y: -158px;
+    -fx-translate-x: -100px;
 }
 
 .openjfx-project-view .column-vbox {
