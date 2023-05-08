@@ -8,14 +8,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 public class OpenJFXProjectView extends PaneBase {
 
-    private final ImageView image;
+    private final Region imageRegion;
     private final Button visitHomePageButton;
     private final Button reportAnIssueButton;
     private final Label description;
@@ -90,11 +89,9 @@ public class OpenJFXProjectView extends PaneBase {
         reportAnIssueButton.setOnAction(event -> JFXCentralUtil.run(onReportAnIssue));
 
         /*image*/
-        image = new ImageView();
-        image.getStyleClass().add("image");
-        image.setPreserveRatio(false);
-        setAlignment(image, Pos.BOTTOM_LEFT);
-        image.setFitWidth(635);
+        imageRegion = new Region();
+        imageRegion.getStyleClass().add("image");
+        setAlignment(imageRegion, Pos.BOTTOM_LEFT);
 
         layoutBySize();
     }
@@ -102,12 +99,11 @@ public class OpenJFXProjectView extends PaneBase {
     protected void layoutBySize() {
         VBox detailsVBox;
         if (isLarge()) {
-            image.setFitHeight(396);
             HBox buttonsBox = new HBox(visitHomePageButton, reportAnIssueButton);
             buttonsBox.getStyleClass().add("buttons-box");
             detailsVBox = new VBox(description, textFlow, buttonsBox);
             detailsVBox.getStyleClass().add("details-vbox");
-            getChildren().setAll(backgroundVBox, image, titleVBox, detailsVBox);
+            getChildren().setAll(backgroundVBox, imageRegion, titleVBox, detailsVBox);
             setAlignment(detailsVBox, Pos.BOTTOM_LEFT);
         }else{
             VBox buttonsBox = new VBox(visitHomePageButton, reportAnIssueButton);
@@ -116,8 +112,7 @@ public class OpenJFXProjectView extends PaneBase {
             detailsVBox.getStyleClass().add("details-vbox");
             setAlignment(detailsVBox, Pos.BOTTOM_LEFT);
             if(isMedium()){
-                image.setFitHeight(551);
-                getChildren().setAll(backgroundVBox, image, titleVBox, detailsVBox);
+                getChildren().setAll(backgroundVBox, imageRegion, titleVBox, detailsVBox);
             }else{
                 //small:
                 VBox columnVBox = new VBox(titleVBox, detailsVBox);
