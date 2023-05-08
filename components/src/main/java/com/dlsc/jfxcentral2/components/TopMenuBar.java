@@ -2,6 +2,10 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SearchField;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.css.CssMetaData;
 import javafx.css.PseudoClass;
 import javafx.css.Styleable;
@@ -60,26 +64,38 @@ public class TopMenuBar extends PaneBase {
         layoutBySize();
     }
 
+    private final BooleanProperty used = new SimpleBooleanProperty(this, "used");
+
+    public boolean isUsed() {
+        return used.get();
+    }
+
+    public BooleanProperty usedProperty() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used.set(used);
+    }
+
     private void activateModePseudoClass() {
         Mode mode = getMode();
         pseudoClassStateChanged(LIGHT_PSEUDOCLASS_STATE, mode == Mode.LIGHT);
         pseudoClassStateChanged(DARK_PSEUDOCLASS_STATE, mode == Mode.DARK);
     }
 
+    private BooleanBinding blocking;
+
     protected void layoutBySize() {
         if (isLarge()) {
-            MenuButton resourcesBtn = new MenuButton("Resources");
-            resourcesBtn.getItems().add(new MenuItem("Item A"));
-            resourcesBtn.getItems().add(new MenuItem("Item B"));
-            resourcesBtn.getItems().add(new MenuItem("Item C"));
-            resourcesBtn.getItems().add(new MenuItem("Item D"));
-            resourcesBtn.getItems().add(new MenuItem("Item E"));
-            resourcesBtn.getItems().add(new MenuItem("Item F"));
-
+            MenuButton resourcesBtn = createMenuButton("Resources");
             resourcesBtn.getStyleClass().add("resources-button");
 
-            MenuButton communityBtn = new MenuButton("Community");
+            MenuButton communityBtn = createMenuButton("Community");
             communityBtn.getStyleClass().add("community-button");
+
+            fill(resourcesBtn);
+            fill(communityBtn);
 
             Button showcasesBtn = new Button("Showcases");
             showcasesBtn.getStyleClass().add("showcases-button");
@@ -117,11 +133,33 @@ public class TopMenuBar extends PaneBase {
             });
             searchBtn.getStyleClass().add("search-button");
 
-            MenuButton menuBtn = new MenuButton("Menu");
+            MenuButton menuBtn = createMenuButton("Menu");
             menuBtn.getStyleClass().add("top-menu-button");
+            fill(menuBtn);
 
             contentBox.getChildren().setAll(createLogo(), new Spacer(), logOutBtn, createSeparatorRegion(), stackPane, createSeparatorRegion(), menuBtn);
         }
+
+        usedProperty().bind(blocking);
+    }
+
+    private void fill(MenuButton button) {
+        button.getItems().add(new MenuItem("Item A"));
+        button.getItems().add(new MenuItem("Item B"));
+        button.getItems().add(new MenuItem("Item C"));
+        button.getItems().add(new MenuItem("Item D"));
+        button.getItems().add(new MenuItem("Item E"));
+        button.getItems().add(new MenuItem("Item F"));
+    }
+
+    private MenuButton createMenuButton(String text) {
+        MenuButton menuButton = new MenuButton(text);
+        if (blocking == null) {
+            blocking = Bindings.createBooleanBinding(menuButton::isShowing, menuButton.showingProperty());
+        } else {
+            blocking = blocking.or(Bindings.createBooleanBinding(menuButton::isShowing, menuButton.showingProperty()));
+        }
+        return menuButton;
     }
 
     private Node getSearchTextField() {

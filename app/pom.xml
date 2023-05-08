@@ -21,6 +21,11 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>org.eclipse.jgit</groupId>
+			<artifactId>org.eclipse.jgit</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>one.jpro</groupId>
 			<artifactId>jpro-routing-core</artifactId>
 			<version>${routing.version}</version>

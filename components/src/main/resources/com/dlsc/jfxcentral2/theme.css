@@ -3998,3 +3998,11 @@
     -fx-pref-width: 216px;
     -fx-max-width: 216px;
 }
+
+/* ----------------------------------------------------------------------------
+ * GlassPane
+ */
+.glass-pane {
+    -fx-background-color: black;
+    -fx-opacity: 0.5;
+}

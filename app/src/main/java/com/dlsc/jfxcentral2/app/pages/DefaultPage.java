@@ -11,8 +11,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -75,16 +73,12 @@ public abstract class DefaultPage extends View {
         clip.heightProperty().bind(vbox.heightProperty());
         vbox.setClip(clip);
 
-        StackPane root = new StackPane(vbox);
-        root.setOnContextMenuRequested(evt -> {
-            ContextMenu menu = new ContextMenu();
-            for (Size size : Size.values()) {
-                MenuItem item = new MenuItem(size.name());
-                item.setOnAction(e -> sizeProperty().set(size));
-                menu.getItems().add(item);
-            }
-            menu.show(root.getScene().getWindow());
-        });
+        StackPane glassPane = new StackPane();
+        glassPane.getStyleClass().add("glass-pane");
+        glassPane.setMouseTransparent(true);
+        glassPane.visibleProperty().bind(topMenuBar.usedProperty());
+
+        StackPane root = new StackPane(vbox, glassPane);
         root.getStyleClass().add("background");
 
         return root;

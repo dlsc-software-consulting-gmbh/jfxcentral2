@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
+import com.dlsc.jfxcentral2.app.pages.RefreshPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
@@ -41,6 +42,7 @@ public class JFXCentral2App extends RouteApp {
         return Route.empty()
                 .and(RouteUtils.get("/", r -> new StartPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
+                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)))
                 .filter(DevFilter.create());
     }
 }
