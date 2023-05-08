@@ -1,7 +1,10 @@
 package com.dlsc.jfxcentral2.app.pages;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral2.components.FeaturesContainer;
 import com.dlsc.jfxcentral2.components.OpenJFXProjectView;
+import com.dlsc.jfxcentral2.components.PullRequestsFilterView;
+import com.dlsc.jfxcentral2.components.PullRequestsView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.StripView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
@@ -40,7 +43,14 @@ public class OpenJFXPage extends DefaultPage {
         OpenJFXProjectView openJFXProjectView = new OpenJFXProjectView();
         openJFXProjectView.sizeProperty().bind(sizeProperty());
 
+        // filter view
+        PullRequestsFilterView pullRequestsFilterView = new PullRequestsFilterView();
+        pullRequestsFilterView.sizeProperty().bind(sizeProperty());
+
         // pull requests
+        PullRequestsView pullRequestsView = new PullRequestsView();
+        pullRequestsView.sizeProperty().bind(sizeProperty());
+        pullRequestsView.getPullRequests().setAll(DataRepository.getInstance().loadPullRequests());
 
         // features
         FeaturesContainer featuresContainer = new FeaturesContainer();
@@ -48,9 +58,9 @@ public class OpenJFXPage extends DefaultPage {
         featuresContainer.getFeatures().setAll(createFeatures());
 
         // strip view for pull requests and features
-        StripView stripView = new StripView(featuresContainer);
+        StripView stripView = new StripView(pullRequestsView, featuresContainer);
 
-        VBox uiBox = new VBox(openJFXProjectView, stripView);
+        VBox uiBox = new VBox(openJFXProjectView, pullRequestsFilterView, stripView);
 
         uiBox.setAlignment(Pos.BOTTOM_CENTER);
         uiBox.setMaxWidth(Region.USE_PREF_SIZE);

@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.components.BooksFilterView;
 import com.dlsc.jfxcentral2.components.CompaniesFilterView;
 import com.dlsc.jfxcentral2.components.DownloadsFilterView;
 import com.dlsc.jfxcentral2.components.PeopleFilterView;
+import com.dlsc.jfxcentral2.components.PullRequestsFilterView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.TipsAndTricksFilterView;
@@ -58,6 +59,9 @@ public class HelloSearchFilterView extends JFXCentralSampleBase {
         TutorialsFilterView tutorialsFilterView = new TutorialsFilterView();
         tutorialsFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
 
+        PullRequestsFilterView pullRequestsFilterView = new PullRequestsFilterView();
+        pullRequestsFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
+
         box.getChildren().addAll(createTiledBox("Videos", videosFilterView),
                 createTiledBox("People", peopleFilterView),
                 createTiledBox("Companies", companiesFilterView),
@@ -67,7 +71,8 @@ public class HelloSearchFilterView extends JFXCentralSampleBase {
                 createTiledBox("Downloads", downloadsFilterView),
                 createTiledBox("Tips And Tricks", tipsAndTricksFilterView),
                 createTiledBox("Tools", toolsFilterView),
-                createTiledBox("Tutorials",tutorialsFilterView));
+                createTiledBox("Tutorials", tutorialsFilterView),
+                createTiledBox("Pull Requests", pullRequestsFilterView));
 
         return new ScrollPane(box);
     }

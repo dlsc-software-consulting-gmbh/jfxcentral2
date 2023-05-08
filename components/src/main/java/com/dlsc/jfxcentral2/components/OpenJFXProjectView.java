@@ -74,13 +74,14 @@ public class OpenJFXProjectView extends PaneBase {
         openjfxRegion.getStyleClass().add("openjfx-region");
         visitHomePageButton = new Button("Visit project Homepage", openjfxRegion);
         visitHomePageButton.getStyleClass().addAll("fill-button", "visit-homepage-button");
-        visitHomePageButton.setOnAction(event -> JFXCentralUtil.run(onVisitHomePage));
+        LinkUtil.setExternalLink(visitHomePageButton, "https://org.openjfx.io");
 
         Region openjfxRegion2 = new Region();
         openjfxRegion2.getStyleClass().add("openjfx-region2");
         reportAnIssueButton = new Button("Report an issue", openjfxRegion2);
         reportAnIssueButton.getStyleClass().addAll("fill-button", "report-issue-button");
         reportAnIssueButton.setOnAction(event -> JFXCentralUtil.run(onReportAnIssue));
+        LinkUtil.setExternalLink(reportAnIssueButton, "https://bugreport.java.com/bugreport/");
 
         /*image*/
         imageRegion = new Region();

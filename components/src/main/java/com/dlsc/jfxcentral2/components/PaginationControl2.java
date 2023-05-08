@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.components.skins.PaginationControlSkin2;
+import com.dlsc.jfxcentral2.components.skins.PaginationControl2Skin;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -33,7 +33,7 @@ public class PaginationControl2 extends Control {
 
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new PaginationControlSkin2(this);
+        return new PaginationControl2Skin(this);
     }
 
     private final IntegerProperty pageCount = new SimpleIntegerProperty(this, "pageCount", DEFAULT_PAGE_COUNT);

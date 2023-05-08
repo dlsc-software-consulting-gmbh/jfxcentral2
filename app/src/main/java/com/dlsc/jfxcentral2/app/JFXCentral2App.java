@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.app;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
 import com.dlsc.jfxcentral2.components.Size;
@@ -14,6 +15,10 @@ import one.jpro.routing.dev.DevFilter;
 public class JFXCentral2App extends RouteApp {
 
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
+
+    static {
+        DataRepository.getInstance().loadData();
+    }
 
     @Override
     public Route createRoute() {

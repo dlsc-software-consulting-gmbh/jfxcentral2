@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components.skins;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
 import javafx.beans.binding.Bindings;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +14,7 @@ import javafx.scene.layout.HBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-public class PaginationControlSkin2 extends SkinBase<PaginationControl2> {
+public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
 
     private PaginationControl2 control;
     private final HBox controlBox;
@@ -25,7 +26,7 @@ public class PaginationControlSkin2 extends SkinBase<PaginationControl2> {
     private final Button toLastButton;
     private final ToggleGroup buttonToggleGroup;
 
-    public PaginationControlSkin2(PaginationControl2 control) {
+    public PaginationControl2Skin(PaginationControl2 control) {
         super(control);
         this.control = control;
 
@@ -72,9 +73,10 @@ public class PaginationControlSkin2 extends SkinBase<PaginationControl2> {
         buttonToggleGroup = new ToggleGroup();
 
         contentPane.setBottom(controlBox);
+        BorderPane.setMargin(controlBox, new Insets(50, 0, 0, 0));
+
         BorderPane.setAlignment(controlBox, Pos.CENTER);
-        contentPane.centerProperty().bind(Bindings.createObjectBinding(() ->
-                        control.getPageFactory().call(control.getCurrentPageIndex()),
+        contentPane.centerProperty().bind(Bindings.createObjectBinding(() -> control.getPageFactory().call(control.getCurrentPageIndex()),
                 control.currentPageIndexProperty(),
                 control.pageFactoryProperty()
         ));

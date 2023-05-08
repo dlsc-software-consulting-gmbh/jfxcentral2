@@ -65,7 +65,6 @@ public class WelcomeView extends PaneBase {
         openJFXProjectButton = new Button("OpenJFX project", openjfxRegion);
         openJFXProjectButton.getStyleClass().addAll("fill-button", "openjfx-button");
         LinkUtil.setLink(openJFXProjectButton, "/openjfx");
-
         setMinHeight(Region.USE_PREF_SIZE);
 
         layoutBySize();
