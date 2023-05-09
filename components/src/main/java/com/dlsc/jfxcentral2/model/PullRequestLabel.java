@@ -2,13 +2,13 @@ package com.dlsc.jfxcentral2.model;
 
 public enum PullRequestLabel {
 
-    ALL("all"),
-    RFR("rfr"),
-    INTEGRATED("integrated"),
-    READY("ready"),
-    CSR("csr"),
-    OCA("oca"),
-    OCA_VERIFY("oca-verify");
+    ALL("All"),
+    RFR("Request for Review"),
+    INTEGRATED("Integrated"),
+    READY("Ready"),
+    CSR("Change Specification Request"),
+    OCA("Oracle Contributor Agreement"),
+    OCA_VERIFY("OCA Verify");
 
     private final String description;
 
