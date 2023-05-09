@@ -8,11 +8,11 @@ import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import one.jpro.routing.Route;
 import one.jpro.routing.RouteApp;
 import one.jpro.routing.RouteUtils;
-import one.jpro.routing.dev.DevFilter;
 
 public class JFXCentral2App extends RouteApp {
 
@@ -25,23 +25,30 @@ public class JFXCentral2App extends RouteApp {
     @Override
     public Route createRoute() {
 
-        getScene().setFill(Color.web("070B32"));
-        getScene().widthProperty().addListener((observable, oldWidth, newWidth) -> {
-            if (newWidth.intValue() < 780) {
-                size.set(Size.SMALL);
-            } else if (newWidth.intValue() < 1160) {
-                size.set(Size.MEDIUM);
-            } else {
-                size.set(Size.LARGE);
-            }
-        });
+        Scene scene = getScene();
 
-        getScene().getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
+        scene.setFill(Color.web("070B32"));
+        scene.widthProperty().addListener((it -> updateSize(scene)));
+        scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
+
+        updateSize(scene);
 
         return Route.empty()
                 .and(RouteUtils.get("/", r -> new StartPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
-                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)))
-                .filter(DevFilter.create());
+                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)));
+//                .filter(DevFilter.create());
+    }
+
+    private void updateSize(Scene scene) {
+        double sceneWidth = scene.getWidth();
+        System.out.println("scene width: " + sceneWidth);
+        if (sceneWidth < 768) {
+            size.set(Size.SMALL);
+        } else if (sceneWidth < 1160) {
+            size.set(Size.MEDIUM);
+        } else {
+            size.set(Size.LARGE);
+        }
     }
 }
