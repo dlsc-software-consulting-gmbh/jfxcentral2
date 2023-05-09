@@ -46,6 +46,7 @@ public class OpenJFXPage extends DefaultPage {
         // filter view
         PullRequestsFilterView pullRequestsFilterView = new PullRequestsFilterView();
         pullRequestsFilterView.sizeProperty().bind(sizeProperty());
+        blockingProperty().bind(pullRequestsFilterView.blockingProperty());
 
         // pull requests
         PullRequestsView pullRequestsView = new PullRequestsView();
