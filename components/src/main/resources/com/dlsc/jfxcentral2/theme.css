@@ -1308,7 +1308,6 @@
 }
 
 .copyright-view:sm {
-    -fx-max-width: 374px;
     -fx-pref-height: 69px;
     -fx-padding: 10px 30px 10px 30px;
 }
