@@ -10,13 +10,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class VideoGallery extends PaneBase {
+public class VideoGalleryView extends PaneBase {
 
-    private final BorderPane contentPane;
     private static final int TOTAL_ITEMS = 6;
 
-    public VideoGallery() {
-        getStyleClass().add("video-gallery");
+    private final BorderPane contentPane;
+
+    public VideoGalleryView() {
+        getStyleClass().add("video-gallery-view");
 
         contentPane = new BorderPane();
         contentPane.getStyleClass().add("content-pane");
@@ -29,15 +30,19 @@ public class VideoGallery extends PaneBase {
     protected void layoutBySize() {
         Label title = new Label("Video Gallery");
         title.getStyleClass().add("title");
+
         Button button = new Button("VIEW ALL VIDEOS");
         button.getStyleClass().add("view-all");
+
         Pane pane = isSmall() ?
                 new VBox(title, new Spacer(Orientation.VERTICAL), button) :
                 new HBox(title, new Spacer(), button);
         pane.getStyleClass().add("title-box");
         contentPane.setTop(pane);
+
         HBox videosBox = new HBox();
         videosBox.getStyleClass().add("videos-box");
+
         PaginationControl pagination = new PaginationControl();
         pagination.setPageCount(TOTAL_ITEMS);
         pagination.setMaxItemsPerPage(isLarge() ? 3 : (isMedium() ? 2 : 1));
