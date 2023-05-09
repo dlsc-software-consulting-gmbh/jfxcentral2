@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.sandec.mdfx.MarkdownView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
