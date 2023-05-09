@@ -188,7 +188,7 @@ public class TopMenuBar extends PaneBase {
             jfxcentralRegion.getStyleClass().add("jfxcentral-region");
             HBox logoBox = new HBox(dukeView, jfxcentralRegion);
             logoBox.getStyleClass().add("logo-box");
-            LinkUtil.setLink(logoBox,"/");
+            LinkUtil.setLink(logoBox, "/", "Back to homepage");
             return logoBox;
         }
     }
