@@ -28,6 +28,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -136,6 +137,7 @@ public class SearchFilterView extends PaneBase {
         box.getStyleClass().addAll("filter-box", "filter-box-" + index);
 
         Label titleLabel = new Label(filterItem.title());
+        titleLabel.setMinWidth(Region.USE_PREF_SIZE);
         titleLabel.getStyleClass().add("filter-title");
 
         Object[] enumConstants = filterItem.filterEnumClass().getEnumConstants();

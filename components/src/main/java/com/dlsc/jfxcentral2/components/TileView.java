@@ -47,6 +47,7 @@ public class TileView<T extends TileData> extends PaneBase {
 
     public TileView() {
         getStyleClass().add("tile-view");
+
         VBox contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");
         //[Top] FlipView

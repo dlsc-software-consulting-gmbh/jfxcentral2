@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="UTF-8">
     <meta name="description" content="JavaFX, libraries, real world, news, videos, downloads, tutorials, blogs, tools, open source"/>
-    <meta name="theme-color" content="#3C3C3C">
+    <meta name="theme-color" content="#070B32">
 
     <title>JFX-Central - Everything JavaFX</title>
 
@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="/jpro/css/jpro.css">
     <script src="/jpro/js/jpro.js" type="text/javascript"></script>
 </head>
-<body>
+<body style="background-color:#070B32">
 
 <div>
     <jpro-app loader="none" nativescrolling="true" href="/app/default" fxContextMenu="false" setThemeColor="false" fullscreen="true" snapshot="auto" userSelect="true" fxContextMenu="false"/>

@@ -11,7 +11,6 @@ import com.dlsc.jfxcentral2.model.QuickLink;
 import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -21,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class StartPage extends DefaultPage {
+public class StartPage extends PageBase {
 
     public StartPage(ObjectProperty<Size> size) {
         super(size, TopMenuBar.Mode.DARK);
@@ -59,7 +58,6 @@ public class StartPage extends DefaultPage {
 
         VBox uiBox = new VBox(homePageTopView, weekLinksLiteView, websiteChangesView, videoGallery);
         uiBox.setAlignment(Pos.BOTTOM_CENTER);
-        uiBox.setMaxWidth(Region.USE_PREF_SIZE);
 
         StackPane.setAlignment(uiBox, Pos.TOP_CENTER);
 

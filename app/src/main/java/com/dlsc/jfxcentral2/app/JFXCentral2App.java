@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.paint.Color;
 import one.jpro.routing.Route;
 import one.jpro.routing.RouteApp;
 import one.jpro.routing.RouteUtils;
@@ -24,13 +25,11 @@ public class JFXCentral2App extends RouteApp {
     @Override
     public Route createRoute() {
 
-        getScene().widthProperty().addListener((observable, oldValue, newValue) -> {
-            // below 600px it is small
-            // below 1000px it is medium
-            // above 1000px it is large
-            if (newValue.intValue() < 600) {
+        getScene().setFill(Color.web("070B32"));
+        getScene().widthProperty().addListener((observable, oldWidth, newWidth) -> {
+            if (newWidth.intValue() < 780) {
                 size.set(Size.SMALL);
-            } else if (newValue.intValue() < 1000) {
+            } else if (newWidth.intValue() < 1160) {
                 size.set(Size.MEDIUM);
             } else {
                 size.set(Size.LARGE);

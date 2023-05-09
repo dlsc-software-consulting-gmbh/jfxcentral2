@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
@@ -28,6 +29,8 @@ public class FooterView extends PaneBase {
         getStyleClass().add("footer-view");
         contentBox = new HBox();
         contentBox.getStyleClass().add("content");
+        contentBox.setAlignment(Pos.TOP_RIGHT);
+
         getChildren().add(contentBox);
 
         dukeImageView = new ImageView();
@@ -38,6 +41,10 @@ public class FooterView extends PaneBase {
         linksPane = initLinksPane();
         legalInfoPane = initLegalInfoPane();
 
+        HBox.setHgrow(dukeImageView, Priority.ALWAYS);
+        HBox.setHgrow(linksPane, Priority.ALWAYS);
+        HBox.setHgrow(legalInfoPane, Priority.ALWAYS);
+
         setMinWidth(Region.USE_PREF_SIZE);
         layoutBySize();
     }
@@ -45,9 +52,11 @@ public class FooterView extends PaneBase {
     public void layoutBySize() {
         dukeImageView.setFitHeight(getSize().isLarge() ? 90 : 61);
         LineNumberPane contactPane = initContactPane();
+        HBox.setHgrow(contactPane, Priority.ALWAYS);
+
         Size size = getSize();
         if (size.isLarge() || size.isMedium()) {
-            contentBox.getChildren().setAll(dukeImageView, contactPane, linksPane, legalInfoPane);
+            contentBox.getChildren().setAll(dukeImageView, new Spacer(), contactPane, linksPane, legalInfoPane);
         } else {
             VBox box = new VBox(contactPane, linksPane, legalInfoPane);
             box.getStyleClass().add("number-pane-box");

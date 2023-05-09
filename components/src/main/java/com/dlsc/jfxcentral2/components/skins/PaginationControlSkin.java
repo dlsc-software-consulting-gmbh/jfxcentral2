@@ -64,6 +64,7 @@ public class PaginationControlSkin extends ControlBaseSkin<PaginationControl> {
 
         BorderPane contentPane = new BorderPane();
         contentPane.getStyleClass().add("content-pane");
+
         StackPane contentPaneCenter = new StackPane();
         contentPane.setCenter(contentPaneCenter);
         BorderPane.setAlignment(contentPaneCenter, Pos.TOP_CENTER);

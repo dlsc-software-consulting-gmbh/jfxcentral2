@@ -20,13 +20,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
+public class SponsorsViewSkin extends ControlBaseSkin<SponsorsView> {
     private final GridPane gridPane;
     private final SponsorsView control;
     private final Text title;
     private final List<SponsorsView.Sponsor> showedSponsor = new ArrayList<>();
 
-    public SponsorsSkin(SponsorsView control) {
+    public SponsorsViewSkin(SponsorsView control) {
         super(control);
         this.control = control;
 
@@ -38,6 +38,9 @@ public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
         title.textProperty().bind(control.titleProperty());
         title.getStyleClass().add("title");
 
+        // we have to initialize the showed sponsors list with all items at first or the
+        // algorithm for picking the sponsors will not work properly the first time it runs
+        showedSponsor.addAll(control.getItems());
         initLogoNodes();
 
         control.itemsProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
@@ -54,7 +57,7 @@ public class SponsorsSkin extends ControlBaseSkin<SponsorsView> {
         int logoCount = switch (control.getSize()){
             case SMALL -> 2;
             case MEDIUM -> 3;
-            case LARGE -> 5;
+            case LARGE -> 4;
         };
         int itemSize = items.size();
         int realLogoCount = Math.min(itemSize, logoCount);

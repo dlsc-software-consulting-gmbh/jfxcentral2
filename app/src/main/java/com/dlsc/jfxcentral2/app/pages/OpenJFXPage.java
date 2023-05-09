@@ -20,7 +20,7 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.List;
 
-public class OpenJFXPage extends DefaultPage {
+public class OpenJFXPage extends PageBase {
 
 
     public OpenJFXPage(ObjectProperty<Size> size) {

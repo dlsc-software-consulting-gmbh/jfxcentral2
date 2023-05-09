@@ -32,9 +32,9 @@ import java.util.List;
  */
 public class FlipView extends ControlBase {
 
-    private static final Duration DEFAULT_FLIP_TIME = Duration.seconds(1);
+    private static final Duration DEFAULT_FLIP_TIME = Duration.millis(500);
 
-    private static final boolean DEFAULT_ANIMATE_ON_FLIP = false;
+    private static final boolean DEFAULT_ANIMATE_ON_FLIP = true;
 
     private final FlipViewSkin flipViewSkin;
 

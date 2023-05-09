@@ -7,7 +7,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.eclipse.jgit.api.Git;
@@ -19,7 +18,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import java.io.File;
 import java.io.IOException;
 
-public class RefreshPage extends DefaultPage {
+public class RefreshPage extends PageBase {
 
 
     public RefreshPage(ObjectProperty<Size> size) {
@@ -43,7 +42,6 @@ public class RefreshPage extends DefaultPage {
         VBox uiBox = new VBox(label);
 
         uiBox.setAlignment(Pos.BOTTOM_CENTER);
-        uiBox.setMaxWidth(Region.USE_PREF_SIZE);
 
         StackPane.setAlignment(uiBox, Pos.TOP_CENTER);
 

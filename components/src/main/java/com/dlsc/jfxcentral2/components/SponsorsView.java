@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.components.skins.SponsorsSkin;
+import com.dlsc.jfxcentral2.components.skins.SponsorsViewSkin;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -61,7 +61,7 @@ public class SponsorsView extends ControlBase {
 
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new SponsorsSkin(this);
+        return new SponsorsViewSkin(this);
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title", DEFAULT_TITLE);

@@ -1,53 +1,47 @@
 package com.dlsc.jfxcentral2.components;
 
-import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
+import javafx.geometry.Pos;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import java.util.Objects;
 
-public class TopPane extends Pane {
+public class TopPane extends StackPane {
 
     private TopMenuBar topMenuBar;
-    private Node content;
+    private Region content;
 
-    public TopPane(TopMenuBar topMenuBar, Node content) {
-        getStyleClass().add("top-pane");
+    public TopPane(TopMenuBar topMenuBar, Region content) {
         this.topMenuBar = Objects.requireNonNull(topMenuBar);
-        this.topMenuBar.modeProperty().addListener(it -> requestLayout());
         this.content = Objects.requireNonNull(content);
-        getChildren().setAll(content, topMenuBar);
+
+        getStyleClass().add("top-pane");
+        setMinWidth(0);
+
+        this.topMenuBar.setMaxHeight(Region.USE_PREF_SIZE);
+        this.topMenuBar.modeProperty().addListener(it -> updateView());
+        this.content.setMaxWidth(Double.MAX_VALUE);
+
+        // constraints
+        StackPane.setAlignment(topMenuBar, Pos.TOP_CENTER);
+        VBox.setVgrow(topMenuBar, Priority.NEVER);
+        VBox.setVgrow(content, Priority.ALWAYS);
+
+        updateView();
     }
 
-    @Override
-    protected void layoutChildren() {
-        Insets insets = getInsets();
-
-        double toolbarHeight = topMenuBar.prefHeight(getWidth() - insets.getLeft() - insets.getRight());
-
-        topMenuBar.resizeRelocate(insets.getLeft(), insets.getTop(), getWidth() - insets.getLeft() - insets.getRight(), toolbarHeight);
-
+    private void updateView() {
         if (topMenuBar.getMode().equals(TopMenuBar.Mode.DARK)) {
-            content.resizeRelocate(insets.getLeft(), insets.getTop(), getWidth() - insets.getLeft() - insets.getRight(), getHeight() - insets.getTop() - insets.getBottom());
+            getChildren().setAll(content, topMenuBar);
         } else {
-            content.resizeRelocate(insets.getLeft(), insets.getTop() + toolbarHeight, getWidth() - insets.getLeft() - insets.getRight(), getHeight() - toolbarHeight - insets.getTop() - insets.getBottom());
+            VBox box = new VBox(topMenuBar, content);
+            StackPane.setAlignment(box, Pos.TOP_CENTER);
+            box.getStyleClass().add("vbox");
+            box.setMaxWidth(Double.MAX_VALUE);
+            box.setMinWidth(0);
+            getChildren().setAll(box);
         }
-    }
-
-    @Override
-    protected double computePrefHeight(double width) {
-        double ph = content.prefHeight(width - getInsets().getLeft() - getInsets().getRight());
-
-        if (topMenuBar.getMode().equals(TopMenuBar.Mode.LIGHT)) {
-            ph += topMenuBar.prefHeight(width - getInsets().getLeft() - getInsets().getRight());
-        }
-
-        return ph;
-    }
-
-    @Override
-    protected double computePrefWidth(double height) {
-        double availableHeight = height - getInsets().getTop() - getInsets().getBottom();
-        return Math.max(topMenuBar.prefWidth(availableHeight), content.prefWidth(availableHeight));
     }
 }

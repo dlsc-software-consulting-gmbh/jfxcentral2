@@ -98,15 +98,19 @@ public class TopMenuBar extends PaneBase {
             fill(communityBtn);
 
             Button showcasesBtn = new Button("Showcases");
+            showcasesBtn.setMinWidth(Region.USE_PREF_SIZE);
             showcasesBtn.getStyleClass().add("showcases-button");
 
             Button downloadsBtn = new Button("Downloads");
+            downloadsBtn.setMinWidth(Region.USE_PREF_SIZE);
             downloadsBtn.getStyleClass().add("downloads-button");
 
             Button loginBtn = new Button("Login", new FontIcon(MaterialDesignA.ACCOUNT_CIRCLE_OUTLINE));
+            loginBtn.setMinWidth(Region.USE_PREF_SIZE);
             loginBtn.getStyleClass().add("login-button");
 
             searchField.setVisible(true);
+            searchField.setMinWidth(Region.USE_PREF_SIZE);
             contentBox.getChildren().setAll(createLogo(), new Spacer(), resourcesBtn, communityBtn, showcasesBtn, downloadsBtn, new Spacer(), loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
@@ -154,6 +158,7 @@ public class TopMenuBar extends PaneBase {
 
     private MenuButton createMenuButton(String text) {
         MenuButton menuButton = new MenuButton(text);
+        menuButton.setMinWidth(Region.USE_PREF_SIZE);
         if (blocking == null) {
             blocking = Bindings.createBooleanBinding(menuButton::isShowing, menuButton.showingProperty());
         } else {

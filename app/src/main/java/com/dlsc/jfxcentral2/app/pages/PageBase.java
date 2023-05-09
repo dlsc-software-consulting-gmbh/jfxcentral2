@@ -13,14 +13,14 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import one.jpro.routing.View;
 
 import java.util.Objects;
 
-public abstract class DefaultPage extends View {
+public abstract class PageBase extends View {
 
     private final TopMenuBar.Mode menuMode;
 
@@ -34,14 +34,15 @@ public abstract class DefaultPage extends View {
         return sizeProperty().get();
     }
 
-    public DefaultPage(ObjectProperty<Size> size, TopMenuBar.Mode menuMode) {
+    public PageBase(ObjectProperty<Size> size, TopMenuBar.Mode menuMode) {
         this.size.bind(size);
         this.menuMode = Objects.requireNonNull(menuMode);
     }
 
-    public Node wrapContent(Node content) {
+    public Node wrapContent(Region content) {
         VBox vbox = new VBox();
         vbox.getStyleClass().add("ui");
+        vbox.setFillWidth(true);
         updateStyleClassBasedOnSize(vbox);
         sizeProperty().addListener(it -> updateStyleClassBasedOnSize(vbox));
 
@@ -69,11 +70,6 @@ public abstract class DefaultPage extends View {
         StackPane.setAlignment(vbox, Pos.TOP_CENTER);
 
         vbox.getChildren().addAll(topStackPane, sponsorsView, footerView, copyrightView);
-
-        Rectangle clip = new Rectangle();
-        clip.widthProperty().bind(vbox.widthProperty());
-        clip.heightProperty().bind(vbox.heightProperty());
-        vbox.setClip(clip);
 
         StackPane glassPane = new StackPane();
         glassPane.getStyleClass().add("glass-pane");
