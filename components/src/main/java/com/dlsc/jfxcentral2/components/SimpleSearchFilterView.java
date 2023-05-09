@@ -9,6 +9,5 @@ public class SimpleSearchFilterView extends SearchFilterView {
         getFilterItems().setAll(
                 new FilterItem<>("ORDER", FilterOrder.class, FilterOrder.ASCENDING)
         );
-
     }
 }
