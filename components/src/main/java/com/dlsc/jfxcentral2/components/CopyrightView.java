@@ -33,7 +33,7 @@ public class CopyrightView extends PaneBase {
 
         poweredByBox = new HBox(poweredByLabel, leftCurlyBraces, jproLabel, rightCurlyBraces);
         poweredByBox.getStyleClass().add("powered-by-box");
-        LinkUtil.setExternalLink(poweredByBox, "https://jpro.one");
+        LinkUtil.setExternalLink(poweredByBox, "https://www.jpro.one");
 
         layoutBySize();
     }
