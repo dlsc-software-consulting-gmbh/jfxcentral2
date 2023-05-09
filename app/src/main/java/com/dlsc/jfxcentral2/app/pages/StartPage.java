@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.app.pages;
 import com.dlsc.jfxcentral2.components.HomePageTopView;
 import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
-import com.dlsc.jfxcentral2.components.VideoGallery;
+import com.dlsc.jfxcentral2.components.VideoGalleryView;
 import com.dlsc.jfxcentral2.components.WebsiteChangesView;
 import com.dlsc.jfxcentral2.components.WeekLinksLiteView;
 import com.dlsc.jfxcentral2.model.DateQuickLink;
@@ -54,7 +54,7 @@ public class StartPage extends DefaultPage {
         websiteChangesView.getQuickLinks().setAll(generateQuickLinks());
 
         // video gallery
-        VideoGallery videoGallery = new VideoGallery();
+        VideoGalleryView videoGallery = new VideoGalleryView();
         videoGallery.sizeProperty().bind(sizeProperty());
 
         VBox uiBox = new VBox(homePageTopView, weekLinksLiteView, websiteChangesView, videoGallery);
