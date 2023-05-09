@@ -2,9 +2,13 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SearchField;
 import javafx.beans.InvalidationListener;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyListWrapper;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -35,6 +39,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class SearchFilterView extends PaneBase {
+
     private static final String DEFAULT_STYLE_CLASS = "search-filter-view";
     private static final Orientation FILTER_BOX_DEFAULT_ORIENTATION = Orientation.HORIZONTAL;
     private static final String WITH_SEARCH_FIELD = "with-search-field";
@@ -62,8 +67,12 @@ public class SearchFilterView extends PaneBase {
         layoutBySize();
     }
 
+    private BooleanBinding binding;
+
     @Override
     protected void layoutBySize() {
+        binding = null;
+
         Pane contentBox = isSmall() ? new VBox() : new HBox();
         contentBox.getStyleClass().add("content-box");
         contentBox.managedProperty().bind(contentBox.visibleProperty());
@@ -116,6 +125,10 @@ public class SearchFilterView extends PaneBase {
         } else {
             getChildren().setAll(contentBox);
         }
+
+        if (binding != null) {
+            blocking.bind(binding);
+        }
     }
 
     private Node createFilterBox(int index, FilterItem<?> filterItem) {
@@ -126,7 +139,7 @@ public class SearchFilterView extends PaneBase {
         titleLabel.getStyleClass().add("filter-title");
 
         Object[] enumConstants = filterItem.filterEnumClass().getEnumConstants();
-        ComboBox<Enum<?>> comboBox = new ComboBox<>();
+        ComboBox<Enum<?>> comboBox = createComboBox();
         comboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(Enum<?> object) {
@@ -157,6 +170,30 @@ public class SearchFilterView extends PaneBase {
             box.getChildren().setAll(titleLabel, comboBox);
         }
         return box;
+    }
+
+    private <T> ComboBox<T> createComboBox() {
+        ComboBox<T> comboBox = new ComboBox<>();
+        if (binding == null) {
+            binding = Bindings.createBooleanBinding(comboBox::isShowing, comboBox.showingProperty());
+        } else {
+            binding = binding.or(Bindings.createBooleanBinding(comboBox::isShowing, comboBox.showingProperty()));
+        }
+        return comboBox;
+    }
+
+    private final BooleanProperty blocking = new SimpleBooleanProperty(this, "blocking");
+
+    public boolean isBlocking() {
+        return blocking.get();
+    }
+
+    public BooleanProperty blockingProperty() {
+        return blocking;
+    }
+
+    public void setBlocking(boolean blocking) {
+        this.blocking.set(blocking);
     }
 
     private void updateSelectedFilter(int index, Enum<?> newFilterValue) {

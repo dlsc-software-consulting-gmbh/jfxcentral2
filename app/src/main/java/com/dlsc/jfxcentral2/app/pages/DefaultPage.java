@@ -7,7 +7,9 @@ import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.TopPane;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -76,12 +78,26 @@ public abstract class DefaultPage extends View {
         StackPane glassPane = new StackPane();
         glassPane.getStyleClass().add("glass-pane");
         glassPane.setMouseTransparent(true);
-        glassPane.visibleProperty().bind(topMenuBar.usedProperty());
+        glassPane.visibleProperty().bind(topMenuBar.usedProperty().or(blockingProperty()));
 
         StackPane root = new StackPane(vbox, glassPane);
         root.getStyleClass().add("background");
 
         return root;
+    }
+
+    private final BooleanProperty blocking = new SimpleBooleanProperty(this, "blocking");
+
+    public boolean isBlocking() {
+        return blocking.get();
+    }
+
+    public BooleanProperty blockingProperty() {
+        return blocking;
+    }
+
+    public void setBlocking(boolean blocking) {
+        this.blocking.set(blocking);
     }
 
     private void updateStyleClassBasedOnSize(Node node) {
