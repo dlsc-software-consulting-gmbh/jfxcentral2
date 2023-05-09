@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.components.skins.FlipViewSkin;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -34,7 +35,7 @@ public class FlipView extends ControlBase {
 
     private static final Duration DEFAULT_FLIP_TIME = Duration.millis(500);
 
-    private static final boolean DEFAULT_ANIMATE_ON_FLIP = true;
+    private static final boolean DEFAULT_ANIMATE_ON_FLIP = !WebAPI.isBrowser();
 
     private final FlipViewSkin flipViewSkin;
 
