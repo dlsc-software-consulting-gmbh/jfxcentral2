@@ -42,7 +42,6 @@ public class JFXCentral2App extends RouteApp {
 
     private void updateSize(Scene scene) {
         double sceneWidth = scene.getWidth();
-        System.out.println("scene width: " + sceneWidth);
         if (sceneWidth < 768) {
             size.set(Size.SMALL);
         } else if (sceneWidth < 1160) {
