@@ -119,7 +119,7 @@ public class CustomImageView extends ImageView {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            final List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(ImageView.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(ImageView.getClassCssMetaData());
             Collections.addAll(styleables, FITTING_HEIGHT, FITTING_WIDTH);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }

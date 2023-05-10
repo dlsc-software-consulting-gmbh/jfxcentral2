@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.demo.components;
 import com.dlsc.jfxcentral2.components.AppTileView;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.model.AppTileData;
+import com.dlsc.jfxcentral2.model.tiles.AppTileData;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Region;

@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.demo.components;
 import com.dlsc.jfxcentral2.components.BookTileView;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.model.BookTileData;
+import com.dlsc.jfxcentral2.model.tiles.BookTileData;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Region;

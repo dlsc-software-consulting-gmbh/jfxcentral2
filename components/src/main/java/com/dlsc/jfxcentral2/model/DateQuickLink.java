@@ -5,6 +5,7 @@ import org.kordamp.ikonli.Ikon;
 import java.time.ZonedDateTime;
 
 public class DateQuickLink extends NormalQuickLink {
+
     private ZonedDateTime date;
 
     public DateQuickLink() {

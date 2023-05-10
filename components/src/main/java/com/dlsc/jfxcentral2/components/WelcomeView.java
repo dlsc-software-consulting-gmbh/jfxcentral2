@@ -48,11 +48,11 @@ public class WelcomeView extends PaneBase {
         jfxCentralButton = new Button("jfxcentral");
         jfxCentralButton.setGraphic(new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
         jfxCentralButton.getStyleClass().addAll("transparent-button", "jfxcentral-button");
-        LinkUtil.setLink(jfxCentralButton, "https://github.com/dlemmermann/jfxcentral2");
+        LinkUtil.setExternalLink(jfxCentralButton, "https://github.com/dlemmermann/jfxcentral2");
 
         jfxcentralDataButton = new Button("jfxcentral-data", new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
         jfxcentralDataButton.getStyleClass().addAll("transparent-button", "jfxcentral-data-button");
-        LinkUtil.setLink(jfxcentralDataButton, "https://github.com/dlemmermann/jfxcentral-data");
+        LinkUtil.setExternalLink(jfxcentralDataButton, "https://github.com/dlemmermann/jfxcentral-data");
 
         Region downloadRegion = new Region();
         downloadRegion.getStyleClass().add("download-region");

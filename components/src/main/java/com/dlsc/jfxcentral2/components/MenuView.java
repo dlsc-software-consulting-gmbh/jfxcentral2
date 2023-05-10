@@ -13,6 +13,7 @@ import javafx.css.StyleableObjectProperty;
 import javafx.css.StyleableProperty;
 import javafx.css.converter.EnumConverter;
 import javafx.geometry.Orientation;
+import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 import org.kordamp.ikonli.Ikon;
 
@@ -126,7 +127,7 @@ public class MenuView extends ControlBase {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(ControlBase.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(Control.getClassCssMetaData());
             styleables.add(ORIENTATION);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }

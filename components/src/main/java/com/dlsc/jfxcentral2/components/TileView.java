@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.model.TileData;
+import com.dlsc.jfxcentral2.model.tiles.TileData;
 import com.dlsc.jfxcentral2.model.Video;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
@@ -478,7 +478,7 @@ public class TileView<T extends TileData> extends PaneBase {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            final List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(PaneBase.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(StackPane.getClassCssMetaData());
             Collections.addAll(styleables, BUTTON_1_VISIBLE, BUTTON_2_VISIBLE);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }

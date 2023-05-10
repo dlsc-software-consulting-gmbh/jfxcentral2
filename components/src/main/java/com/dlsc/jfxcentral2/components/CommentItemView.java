@@ -144,8 +144,8 @@ public class CommentItemView extends PaneBase {
         contentPane.setLeft(avatar);
         contentPane.setCenter(centerBox);
 
-        this.managedProperty().bind(this.visibleProperty());
-        this.visibleProperty().bind(commentProperty().isNotNull());
+        managedProperty().bind(visibleProperty());
+        visibleProperty().bind(commentProperty().isNotNull());
         commentProperty().addListener((ob, ov, nv) -> layoutBySize());
 
         getChildren().setAll(contentPane);

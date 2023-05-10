@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.model;
 
 public class Book extends SimpleHeaderInfo {
+
     public Book() {
     }
 

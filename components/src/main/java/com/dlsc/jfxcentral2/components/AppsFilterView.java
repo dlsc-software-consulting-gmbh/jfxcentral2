@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.model.AppDOMAIN;
-import com.dlsc.jfxcentral2.model.AppType;
+import com.dlsc.jfxcentral2.model.filter.AppDOMAIN;
+import com.dlsc.jfxcentral2.model.filter.AppType;
 
 public class AppsFilterView extends SearchFilterView {
 

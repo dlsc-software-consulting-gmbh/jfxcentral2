@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.model.FilterOrder;
+import com.dlsc.jfxcentral2.model.filter.FilterOrder;
 
 public class SimpleSearchFilterView extends SearchFilterView {
     public SimpleSearchFilterView() {

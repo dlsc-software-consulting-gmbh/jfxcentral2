@@ -1,14 +1,14 @@
-package com.dlsc.jfxcentral2.model;
+package com.dlsc.jfxcentral2.model.filter;
 
-public enum AppDOMAIN {
+public enum PullRequestStatus {
+
     ALL("All"),
-    FINANCE("Finance"),
-    HEALTHCARE("Healthcare"),
-    EDUCATION("Education");
+    OPEN("Open"),
+    CLOSED("Closed");
 
     private final String description;
 
-    AppDOMAIN(String description) {
+    PullRequestStatus(String description) {
         this.description = description;
     }
 
@@ -16,4 +16,5 @@ public enum AppDOMAIN {
     public String toString() {
         return description;
     }
+
 }

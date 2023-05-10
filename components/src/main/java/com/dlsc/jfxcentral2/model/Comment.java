@@ -3,19 +3,23 @@ package com.dlsc.jfxcentral2.model;
 import java.time.ZonedDateTime;
 
 public class Comment {
+
     private String id;
     private String content;
+
     /**
      * The user who wrote this comment.
      */
     private User user;
     private ZonedDateTime date;
     private int likes;
+
     /**
      * Indicates whether this comment has been deleted.
      * If the comment has been deleted, The user will see the placeholder "comment deleted".
      */
     private boolean deleted;
+
     /**
      * Indicates whether the current user has liked this comment.
      */

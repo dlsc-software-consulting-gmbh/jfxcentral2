@@ -14,6 +14,7 @@ import javafx.css.StyleableProperty;
 import javafx.css.converter.BooleanConverter;
 import javafx.css.converter.EnumConverter;
 import javafx.css.converter.SizeConverter;
+import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 
@@ -207,7 +208,7 @@ public class AvatarView extends ControlBase {
 
                     @Override
                     public StyleableProperty<Type> getStyleableProperty(AvatarView control) {
-                        return (StyleableProperty<Type>) control.typeProperty();
+                        return control.typeProperty();
                     }
                 };
 
@@ -242,7 +243,7 @@ public class AvatarView extends ControlBase {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            final List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(ControlBase.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(Control.getClassCssMetaData());
             Collections.addAll(styleables, AVATAR_SIZE, ROUND_SIZE, TYPE, SMOOTH);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }

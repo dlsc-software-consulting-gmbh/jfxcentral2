@@ -1172,6 +1172,10 @@
 .top-menu-bar:lg .duke-image {
     -fx-fit-width: 55px;
     -fx-fit-height: 57px;
+    -fx-scale-x: 2;
+    -fx-scale-y: 2;
+    -fx-translate-x: 30px;
+    -fx-translate-y: 30px;
 }
 
 .top-menu-bar:lg .duke-image {
@@ -3917,7 +3921,7 @@
  */
 .glass-pane {
     -fx-background-color: black;
-    -fx-opacity: 0.5;
+    -fx-opacity: 0.75;
 }
 
 /* ------------------------------------

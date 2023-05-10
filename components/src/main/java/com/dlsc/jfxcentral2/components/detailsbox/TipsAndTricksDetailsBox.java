@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral2.model.TipsAndTricksDetailsObject;
+import com.dlsc.jfxcentral2.model.details.TipsAndTricksDetailsObject;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignL;
 
 public class TipsAndTricksDetailsBox extends SimpleDetailsBox<TipsAndTricksDetailsObject> {

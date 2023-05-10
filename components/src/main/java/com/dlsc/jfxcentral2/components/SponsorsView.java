@@ -222,7 +222,7 @@ public class SponsorsView extends ControlBase {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            final List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(Control.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(Control.getClassCssMetaData());
             Collections.addAll(styleables, DIVIDER_VISIBLE, LOGO_FIT_HEIGHT, LOGO_FIT_WIDTH);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }

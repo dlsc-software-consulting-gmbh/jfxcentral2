@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral2.model.DetailsObject;
+import com.dlsc.jfxcentral2.model.details.DetailsObject;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

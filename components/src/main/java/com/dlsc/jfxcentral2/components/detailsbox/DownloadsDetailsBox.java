@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral2.model.DownloadsDetailsObject;
+import com.dlsc.jfxcentral2.model.details.DownloadsDetailsObject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;

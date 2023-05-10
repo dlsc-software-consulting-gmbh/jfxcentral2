@@ -15,6 +15,7 @@ import javafx.css.StyleableProperty;
 import javafx.css.converter.BooleanConverter;
 import javafx.css.converter.DurationConverter;
 import javafx.scene.Node;
+import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
@@ -148,7 +149,7 @@ public class FlipView extends ControlBase {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            final List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(ControlBase.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(Control.getClassCssMetaData());
             Collections.addAll(styleables, FLIP_TIME, ANIMATE_ON_FLIP);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }

@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral2.model.CompaniesDetailsObject;
+import com.dlsc.jfxcentral2.model.details.CompaniesDetailsObject;
 import org.kordamp.ikonli.material2.Material2AL;
 
 public class CompaniesDetailsBox extends SimpleDetailsBox<CompaniesDetailsObject> {

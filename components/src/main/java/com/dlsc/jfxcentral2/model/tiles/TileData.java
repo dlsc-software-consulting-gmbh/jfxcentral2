@@ -1,8 +1,10 @@
-package com.dlsc.jfxcentral2.model;
+package com.dlsc.jfxcentral2.model.tiles;
 
+import com.dlsc.jfxcentral2.model.SaveAndLike;
 import javafx.scene.image.Image;
 
 public class TileData implements SaveAndLike {
+
     private String title;
     private String description;
     private Image thumbnail;

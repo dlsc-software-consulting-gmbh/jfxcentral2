@@ -5,6 +5,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
 public class MarkdownTab {
+
     private String title;
     private String mdString;
     private Node graphic;

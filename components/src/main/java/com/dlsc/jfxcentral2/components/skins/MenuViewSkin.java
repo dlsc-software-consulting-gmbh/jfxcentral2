@@ -68,12 +68,12 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
 
     @Override
     protected double computeMaxWidth(double height, double topInset, double rightInset, double bottomInset, double leftInset) {
-        return this.computePrefWidth(height, topInset, rightInset, bottomInset, leftInset);
+        return computePrefWidth(height, topInset, rightInset, bottomInset, leftInset);
     }
 
     @Override
     protected double computeMaxHeight(double width, double topInset, double rightInset, double bottomInset, double leftInset) {
-        return this.computePrefHeight(width, topInset, rightInset, bottomInset, leftInset);
+        return computePrefHeight(width, topInset, rightInset, bottomInset, leftInset);
     }
 
     @Override
@@ -88,11 +88,11 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
 
     @Override
     protected double computeMinWidth(double height, double topInset, double rightInset, double bottomInset, double leftInset) {
-        return this.computePrefWidth(height, topInset, rightInset, bottomInset, leftInset);
+        return computePrefWidth(height, topInset, rightInset, bottomInset, leftInset);
     }
 
     @Override
     protected double computeMinHeight(double width, double topInset, double rightInset, double bottomInset, double leftInset) {
-        return this.computePrefHeight(width, topInset, rightInset, bottomInset, leftInset);
+        return computePrefHeight(width, topInset, rightInset, bottomInset, leftInset);
     }
 }

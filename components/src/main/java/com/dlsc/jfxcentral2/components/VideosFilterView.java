@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.model.VideoDate;
-import com.dlsc.jfxcentral2.model.VideoLength;
-import com.dlsc.jfxcentral2.model.VideoType;
+import com.dlsc.jfxcentral2.model.filter.VideoDate;
+import com.dlsc.jfxcentral2.model.filter.VideoLength;
+import com.dlsc.jfxcentral2.model.filter.VideoType;
 
 public class VideosFilterView extends SearchFilterView {
 

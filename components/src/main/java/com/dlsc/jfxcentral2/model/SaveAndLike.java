@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.model;
 
 public interface SaveAndLike {
+
     boolean isSave();
 
     void setSave(boolean save);
@@ -8,5 +9,4 @@ public interface SaveAndLike {
     boolean isLike();
 
     void setLike(boolean like);
-
 }

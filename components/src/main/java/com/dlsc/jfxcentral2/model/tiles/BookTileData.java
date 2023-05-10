@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.model;
+package com.dlsc.jfxcentral2.model.tiles;
 
 import javafx.scene.image.Image;
 

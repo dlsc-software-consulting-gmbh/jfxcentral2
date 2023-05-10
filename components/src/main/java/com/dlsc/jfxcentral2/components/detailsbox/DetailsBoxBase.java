@@ -5,7 +5,7 @@ import com.dlsc.jfxcentral2.components.PaginationControl2;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
-import com.dlsc.jfxcentral2.model.DetailsObject;
+import com.dlsc.jfxcentral2.model.details.DetailsObject;
 import com.sandec.mdfx.MarkdownView;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;

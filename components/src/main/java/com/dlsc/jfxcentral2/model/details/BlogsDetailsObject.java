@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.model;
+package com.dlsc.jfxcentral2.model.details;
 
 public class BlogsDetailsObject extends DetailsObject {
 

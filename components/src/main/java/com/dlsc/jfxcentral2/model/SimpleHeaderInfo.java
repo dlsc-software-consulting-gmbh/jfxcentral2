@@ -1,12 +1,12 @@
 package com.dlsc.jfxcentral2.model;
 
 public class SimpleHeaderInfo {
+
     private String name;
     private String website;
     private boolean saved;
     private boolean liked;
     private String description;
-
 
     public SimpleHeaderInfo() {
     }

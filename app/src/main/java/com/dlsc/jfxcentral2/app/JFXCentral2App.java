@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import one.jpro.routing.Route;
 import one.jpro.routing.RouteApp;
 import one.jpro.routing.RouteUtils;
+import one.jpro.routing.dev.DevFilter;
 
 public class JFXCentral2App extends RouteApp {
 
@@ -36,8 +37,8 @@ public class JFXCentral2App extends RouteApp {
         return Route.empty()
                 .and(RouteUtils.get("/", r -> new StartPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
-                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)));
-//                .filter(DevFilter.create());
+                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)))
+                .filter(DevFilter.create());
     }
 
     private void updateSize(Scene scene) {

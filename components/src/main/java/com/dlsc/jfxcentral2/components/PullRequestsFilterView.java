@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.model.PullRequestDate;
-import com.dlsc.jfxcentral2.model.PullRequestLabel;
-import com.dlsc.jfxcentral2.model.PullRequestStatus;
+import com.dlsc.jfxcentral2.model.filter.PullRequestDate;
+import com.dlsc.jfxcentral2.model.filter.PullRequestLabel;
+import com.dlsc.jfxcentral2.model.filter.PullRequestStatus;
 
 public class PullRequestsFilterView extends SearchFilterView {
 

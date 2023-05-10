@@ -1,10 +1,12 @@
 package com.dlsc.jfxcentral2.model;
 
+import com.dlsc.jfxcentral2.model.tiles.TileData;
 import javafx.scene.image.Image;
 
 import java.time.ZonedDateTime;
 
 public class TipsAndTricks extends TileData {
+
     private ZonedDateTime date;
 
     public TipsAndTricks() {

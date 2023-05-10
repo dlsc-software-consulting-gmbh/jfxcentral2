@@ -225,7 +225,7 @@ public class TopMenuBar extends PaneBase {
     }
 
     public final void setMode(Mode mode) {
-        this.modeProperty().set(mode);
+        modeProperty().set(mode);
     }
 
     private static class StyleableProperties {
@@ -246,7 +246,7 @@ public class TopMenuBar extends PaneBase {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(PaneBase.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(StackPane.getClassCssMetaData());
             styleables.add(MODE);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }

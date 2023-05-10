@@ -1,8 +1,10 @@
 package com.dlsc.jfxcentral2.model;
 
+import com.dlsc.jfxcentral2.model.tiles.TileData;
 import javafx.scene.image.Image;
 
 public class Company extends TileData {
+
     public Company() {
     }
 
