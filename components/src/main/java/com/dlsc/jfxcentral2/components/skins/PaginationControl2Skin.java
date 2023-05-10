@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral2.components.skins;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
 import javafx.beans.binding.Bindings;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -73,7 +72,6 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
         buttonToggleGroup = new ToggleGroup();
 
         contentPane.setBottom(controlBox);
-        BorderPane.setMargin(controlBox, new Insets(50, 0, 0, 0));
 
         BorderPane.setAlignment(controlBox, Pos.CENTER);
         contentPane.centerProperty().bind(Bindings.createObjectBinding(() -> control.getPageFactory().call(control.getCurrentPageIndex()),
