@@ -1,5 +1,9 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral2.components.CustomImageView;
+import com.dlsc.jfxcentral2.components.FlipView;
+import com.dlsc.jfxcentral2.components.PaneBase;
+import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.model.tiles.TileData;
 import com.dlsc.jfxcentral2.model.Video;
 import javafx.beans.binding.Bindings;

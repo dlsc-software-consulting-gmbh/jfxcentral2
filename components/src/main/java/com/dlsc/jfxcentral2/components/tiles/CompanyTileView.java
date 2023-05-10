@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral2.model.Company;
 import org.kordamp.ikonli.javafx.FontIcon;

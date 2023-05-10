@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.filters;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;

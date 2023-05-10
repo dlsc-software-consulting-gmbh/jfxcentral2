@@ -1,5 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.model.Target;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.css.PseudoClass;

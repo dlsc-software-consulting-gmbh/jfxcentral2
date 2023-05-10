@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.CompanyTileView;
+import com.dlsc.jfxcentral2.components.tiles.CompanyTileView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.Company;
 import javafx.scene.image.Image;

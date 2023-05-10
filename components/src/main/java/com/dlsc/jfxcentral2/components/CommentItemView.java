@@ -24,6 +24,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 public class CommentItemView extends PaneBase {
+
     private static final String DELETED_PLACEHOLDER = "Comment Deleted";
     private final Label commentLabel;
     private final HBox badgeBox;

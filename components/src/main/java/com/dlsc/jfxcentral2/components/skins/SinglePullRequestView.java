@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.components.skins;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral2.components.AvatarView;
-import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;

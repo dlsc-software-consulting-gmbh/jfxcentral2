@@ -1,5 +1,6 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.headers;
 
+import com.dlsc.jfxcentral2.components.PaneBase;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

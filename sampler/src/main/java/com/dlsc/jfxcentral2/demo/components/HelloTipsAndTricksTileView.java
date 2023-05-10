@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.TipsAndTricksTileView;
+import com.dlsc.jfxcentral2.components.tiles.TipsAndTricksTileView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.TipsAndTricks;
 import javafx.scene.image.Image;

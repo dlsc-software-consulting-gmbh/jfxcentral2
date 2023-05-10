@@ -1,5 +1,6 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.headers;
 
+import com.dlsc.jfxcentral2.components.Spacer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -11,6 +12,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
 public class DetailHeader extends CategoryHeader {
+
     public DetailHeader() {
         getStyleClass().add("detail-header");
 

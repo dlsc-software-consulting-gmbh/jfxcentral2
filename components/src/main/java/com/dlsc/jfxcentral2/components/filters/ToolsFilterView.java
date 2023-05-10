@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.filters;
 
 public class ToolsFilterView extends SimpleSearchFilterView {
     public ToolsFilterView() {

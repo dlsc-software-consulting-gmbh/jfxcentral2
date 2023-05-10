@@ -1,18 +1,18 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.filters;
 
-public class DownloadsFilterView extends SimpleSearchFilterView {
-    public DownloadsFilterView() {
+public class CompaniesFilterView extends SimpleSearchFilterView {
+    public CompaniesFilterView() {
         getStyleClass().add("companies-filter-view");
-        setSearchPromptText("Search for a download");
+        setSearchPromptText("Search for a company");
 
         setOnSearch((keywords, filterEnums) -> {
-            System.out.println("------------Search downloads ------------");
+            System.out.println("------------Search companies------------");
             System.out.println("Search keywords: " + keywords);
             System.out.println("Selected Filters: " + filterEnums);
         });
 
         selectedFiltersProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("------------Downloads Selected Filters------------");
+            System.out.println("------------Companies Selected Filters------------");
             System.out.println("Selected Filters: " + newValue);
         });
     }

@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral2.model.SimpleHeaderInfo;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;

@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral.data.DataRepository;
-import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Pos;

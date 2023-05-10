@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral2.components.HomePageTopView;
-import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.VideoGalleryView;
 import com.dlsc.jfxcentral2.components.WebsiteChangesView;

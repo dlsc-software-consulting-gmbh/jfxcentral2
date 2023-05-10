@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.utils;
 
-import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.model.Feature;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;

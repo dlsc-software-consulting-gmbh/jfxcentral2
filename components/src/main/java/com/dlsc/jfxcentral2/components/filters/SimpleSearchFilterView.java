@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.filters;
 
 import com.dlsc.jfxcentral2.model.filter.FilterOrder;
 

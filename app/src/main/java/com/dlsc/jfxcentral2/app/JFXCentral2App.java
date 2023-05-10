@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
 import com.dlsc.jfxcentral2.app.pages.RefreshPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
-import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

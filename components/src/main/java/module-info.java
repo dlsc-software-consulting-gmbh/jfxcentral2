@@ -27,4 +27,7 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.model.details;
     exports com.dlsc.jfxcentral2.model.filter;
     exports com.dlsc.jfxcentral2.model.tiles;
+    exports com.dlsc.jfxcentral2.components.tiles;
+    exports com.dlsc.jfxcentral2.components.filters;
+    exports com.dlsc.jfxcentral2.components.headers;
 }

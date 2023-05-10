@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.components.WebsiteChangesView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.DateQuickLink;

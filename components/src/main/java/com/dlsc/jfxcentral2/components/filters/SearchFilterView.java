@@ -1,6 +1,8 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.filters;
 
 import com.dlsc.gemsfx.SearchField;
+import com.dlsc.jfxcentral2.components.PaneBase;
+import com.dlsc.jfxcentral2.components.Spacer;
 import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;

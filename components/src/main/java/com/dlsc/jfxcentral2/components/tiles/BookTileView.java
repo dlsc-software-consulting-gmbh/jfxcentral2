@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.components;
+package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral2.model.tiles.BookTileData;
 import javafx.scene.image.Image;
