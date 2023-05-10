@@ -23,4 +23,5 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.model;
     exports com.dlsc.jfxcentral2.components.skins;
     exports com.dlsc.jfxcentral2.utils;
+    exports com.dlsc.jfxcentral2.components.detailsbox;
 }

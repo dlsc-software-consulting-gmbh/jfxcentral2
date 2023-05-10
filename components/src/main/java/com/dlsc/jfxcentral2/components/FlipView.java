@@ -149,7 +149,7 @@ public class FlipView extends ControlBase {
 
         static {
             final List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(ControlBase.getClassCssMetaData());
-            Collections.addAll(styleables, ANIMATE_ON_FLIP, ANIMATE_ON_FLIP);
+            Collections.addAll(styleables, FLIP_TIME, ANIMATE_ON_FLIP);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }
     }
