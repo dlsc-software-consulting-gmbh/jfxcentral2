@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
 import com.dlsc.jfxcentral2.app.pages.RefreshPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
 import com.dlsc.jfxcentral2.app.pages.details.BookDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.details.PersonDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.RealWorldAppDetailsPage;
 import com.dlsc.jfxcentral2.model.Size;
@@ -42,7 +43,8 @@ public class JFXCentral2App extends RouteApp {
                 .and(RouteUtils.get("/", r -> new StartPage(size)))
                 .and(RouteUtils.get("/person", r -> new PersonDetailsPage(size, id(r))))
                 .and(RouteUtils.get("/book", r -> new BookDetailsPage(size, id(r))))
-                .and(RouteUtils.get("/real_world/*", r -> new RealWorldAppDetailsPage(size, id(r))))
+                .and(RouteUtils.get("/real_world", r -> new RealWorldAppDetailsPage(size, id(r))))
+                .and(RouteUtils.get("/legal", r -> new LegalPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
                 .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)))
                 .filter(DevFilter.create());
