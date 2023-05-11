@@ -39,7 +39,7 @@ public abstract class PageBase extends View {
         this.menuMode = Objects.requireNonNull(menuMode);
     }
 
-    public Node wrapContent(Region content) {
+    public Node wrapContent(Region... content) {
         VBox vbox = new VBox();
         vbox.getStyleClass().add("ui");
         vbox.setFillWidth(true);
@@ -63,7 +63,12 @@ public abstract class PageBase extends View {
         CopyrightView copyrightView = new CopyrightView();
         copyrightView.sizeProperty().bind(sizeProperty());
 
-        TopPane topStackPane = new TopPane(topMenuBar, content);
+        VBox uiBox = new VBox(content);
+        uiBox.setAlignment(Pos.BOTTOM_CENTER);
+
+        StackPane.setAlignment(uiBox, Pos.TOP_CENTER);
+
+        TopPane topStackPane = new TopPane(topMenuBar, uiBox);
         updateStyleClassBasedOnSize(topStackPane);
         StackPane.setAlignment(topMenuBar, Pos.TOP_CENTER);
 

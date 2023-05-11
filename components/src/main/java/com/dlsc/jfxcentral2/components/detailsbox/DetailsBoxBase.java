@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class DetailsBoxBase<T extends DetailsObject> extends PaneBase {
+
     private static final boolean DEFAULT_SHOW_MAIN_PREVIEW = true;
 
     public DetailsBoxBase() {

@@ -1,5 +1,14 @@
 package com.dlsc.jfxcentral2.model;
 
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tutorial;
+
 public class SimpleHeaderInfo {
 
     private String name;
@@ -57,5 +66,27 @@ public class SimpleHeaderInfo {
 
     public void setLiked(boolean liked) {
         this.liked = liked;
+    }
+
+    public static SimpleHeaderInfo of(ModelObject mo) {
+        if (mo instanceof Person person) {
+            return new SimpleHeaderInfo(person.getName(), person.getDescription(), person.getWebsite(), false, false);
+        } else if (mo instanceof Library library) {
+            return new SimpleHeaderInfo(library.getName(), library.getDescription(), library.getHomepage(), false, false);
+        } else if (mo instanceof Tool tool) {
+            return new SimpleHeaderInfo(tool.getName(), tool.getDescription(), tool.getHomepage(), false, false);
+        } else if (mo instanceof Book book) {
+            return new SimpleHeaderInfo(book.getName(), book.getDescription(), book.getUrl(), false, false);
+        } else if (mo instanceof Tip tip) {
+            return new SimpleHeaderInfo(tip.getName(), tip.getDescription(), null, false, false);
+        } else if (mo instanceof Blog blog) {
+            return new SimpleHeaderInfo(blog.getName(), blog.getDescription(), blog.getUrl(), false, false);
+        } else if (mo instanceof Tutorial tutorial) {
+            return new SimpleHeaderInfo(tutorial.getName(), tutorial.getDescription(), tutorial.getUrl(), false, false);
+        }
+
+        System.err.println("warning: unmapped simple header info creation, type: " + mo.getClass().getName());
+
+        return new SimpleHeaderInfo(mo.getName(), mo.getDescription(), null, false, false);
     }
 }

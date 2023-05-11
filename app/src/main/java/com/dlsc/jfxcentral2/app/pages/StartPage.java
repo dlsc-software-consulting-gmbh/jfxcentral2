@@ -1,18 +1,15 @@
 package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral2.components.HomePageTopView;
-import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.VideoGalleryView;
 import com.dlsc.jfxcentral2.components.WebsiteChangesView;
 import com.dlsc.jfxcentral2.components.WeekLinksLiteView;
 import com.dlsc.jfxcentral2.model.DateQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
+import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -56,12 +53,7 @@ public class StartPage extends PageBase {
         VideoGalleryView videoGallery = new VideoGalleryView();
         videoGallery.sizeProperty().bind(sizeProperty());
 
-        VBox uiBox = new VBox(homePageTopView, weekLinksLiteView, websiteChangesView, videoGallery);
-        uiBox.setAlignment(Pos.BOTTOM_CENTER);
-
-        StackPane.setAlignment(uiBox, Pos.TOP_CENTER);
-
-        return wrapContent(uiBox);
+        return wrapContent(homePageTopView, weekLinksLiteView, websiteChangesView, videoGallery);
     }
 
     private String createFakeLOTWText() {

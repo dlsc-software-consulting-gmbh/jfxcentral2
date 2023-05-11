@@ -1,20 +1,57 @@
 package com.dlsc.jfxcentral2.app.pages.details;
 
 import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.app.pages.PageBase;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
+import com.dlsc.jfxcentral2.components.detailsbox.AppsDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.BlogsDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.BooksDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.CompaniesDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.DetailsBoxBase;
+import com.dlsc.jfxcentral2.components.detailsbox.DownloadsDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.LibrariesDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.PersonsDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.TipsAndTricksDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.ToolsDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.TutorialsDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.VideosDetailsBox;
 import com.dlsc.jfxcentral2.model.Size;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
+
 public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
+
+    private T item;
 
     public DetailsPageBase(ObjectProperty<Size> size, Class<? extends T> clazz, String itemId) {
         super(size, TopMenuBar.Mode.DARK);
         setItem((T) DataRepository.getInstance().getByID(clazz, itemId));
+    }
+
+    public T getItem() {
+        return item;
+    }
+
+    public void setItem(T item) {
+        this.item = item;
     }
 
     @Override
@@ -36,20 +73,34 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
 
     @Override
     public Node content() {
-        return new Label(getItem().getName());
+        return wrapContent(new Label(getItem().getName()));
     }
 
-    private final ObjectProperty<T> item = new SimpleObjectProperty<>(this, "item");
+    protected List<DetailsBoxBase<?>> createDetailBoxes() {
+        ModelObject modelObject = getItem();
+        List<DetailsBoxBase<?>> boxes = new ArrayList<>();
 
-    public ModelObject getItem() {
-        return item.get();
+        maybeAddBox(modelObject, Video.class, VideosDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Tool.class, ToolsDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Library.class, LibrariesDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Book.class, BooksDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Blog.class, BlogsDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Tutorial.class, TutorialsDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Download.class, DownloadsDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Tip.class, TipsAndTricksDetailsBox::new, boxes);
+        maybeAddBox(modelObject, RealWorldApp.class, AppsDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Person.class, PersonsDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Company.class, CompaniesDetailsBox::new, boxes);
+
+        return boxes;
     }
 
-    public ObjectProperty<T> itemProperty() {
-        return item;
-    }
-
-    public void setItem(T item) {
-        this.item.set(item);
+    private void maybeAddBox(ModelObject modelObject, Class<? extends ModelObject> clazz, Supplier<DetailsBoxBase> boxSupplier, List<DetailsBoxBase<?>> boxList) {
+        ListProperty<? extends ModelObject> linkedObjects = DataRepository.getInstance().getLinkedObjects(modelObject, clazz);
+        if (!linkedObjects.isEmpty()) {
+            DetailsBoxBase box = boxSupplier.get();
+            box.sizeProperty().bind(sizeProperty());
+            boxList.add(box);
+        }
     }
 }

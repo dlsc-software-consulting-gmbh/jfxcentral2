@@ -18,6 +18,4 @@ public class AppDetailHeader extends SimpleDetailHeader {
         setOnBack(() -> System.out.println(getClass().getSimpleName() + " back"));
         setOnShare(() -> System.out.println(getClass().getSimpleName() + " share"));
     }
-
-
 }

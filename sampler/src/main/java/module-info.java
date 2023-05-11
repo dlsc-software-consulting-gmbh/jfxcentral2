@@ -8,6 +8,8 @@ open module com.dlsc.jfxcentral.sampler {
 
     requires fr.brouillard.oss.cssfx;
 
+    requires jfxcentral.data;
+
     requires org.controlsfx.controls;
     requires org.controlsfx.fxsampler;
 

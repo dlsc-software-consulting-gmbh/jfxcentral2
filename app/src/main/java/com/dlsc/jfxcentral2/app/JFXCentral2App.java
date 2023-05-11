@@ -49,6 +49,9 @@ public class JFXCentral2App extends RouteApp {
     }
 
     private String id(Request r) {
+        if (true) {
+            return r.queryParameters().get("id").get();
+        }
         String path = r.path();
         System.out.println("path: " + path);
         int index = path.lastIndexOf("/");
