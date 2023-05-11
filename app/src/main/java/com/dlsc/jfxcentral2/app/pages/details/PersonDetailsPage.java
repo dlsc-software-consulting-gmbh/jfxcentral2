@@ -24,6 +24,8 @@ public class PersonDetailsPage extends DetailsPageBase<Person> {
         DetailsContentPane detailsContentPane = new DetailsContentPane();
         detailsContentPane.sizeProperty().bind(sizeProperty());
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
+        detailsContentPane.getFeaturesContainer().getFeatures().setAll(createFeatures());
+        detailsContentPane.getMenuView().getItems().setAll(createMenuItems());
 
         return wrapContent(personDetailHeader, detailsContentPane);
     }

@@ -41,16 +41,19 @@ public class HelloPersonDetailHeader extends JFXCentralSampleBase {
         ToggleGroup toggleGroup = new ToggleGroup();
         RadioButton largeBox = new RadioButton("Large");
         RadioButton mediumBox = new RadioButton("Medium");
-        toggleGroup.getToggles().addAll(largeBox, mediumBox);
+        RadioButton smallBox = new RadioButton("Small");
+        toggleGroup.getToggles().addAll(largeBox, mediumBox, smallBox);
         toggleGroup.selectedToggleProperty().addListener((ob, ov, nv) -> {
             if (nv == largeBox) {
                 personDetailHeader.setSize(Size.LARGE);
             } else if (nv == mediumBox) {
                 personDetailHeader.setSize(Size.MEDIUM);
+            } else {
+                personDetailHeader.setSize(Size.SMALL);
             }
         });
         mediumBox.setSelected(true);
-        return new VBox(20, largeBox, mediumBox);
+        return new VBox(20, largeBox, mediumBox, smallBox);
     }
 
     @Override

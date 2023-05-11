@@ -1459,6 +1459,9 @@
 /** -------------------------------
  * FeaturesContainer
  */
+.features-container {
+}
+
 .features-container:lg {
     -fx-max-width: 1080px;
     -fx-pref-width: 1080px;
@@ -1472,9 +1475,7 @@
 }
 
 .features-container:sm {
-    -fx-min-width: -sm-width;
     -fx-min-height: 479px;
-    -fx-pref-width: -sm-width;
     -fx-pref-height: 479px;
     -fx-max-height: 479px;
 }
@@ -2084,7 +2085,9 @@
     -fx-pref-width: -lg-width;
     -fx-pref-height: 300px;
     -fx-max-height: 300px;
-    -fx-background-image: url("components/CategoryHeader/bg-lg.jpg");
+    -fx-background-image: url("components/header/bg-lg.jpg");
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }
 
 .category-header:md {
@@ -2093,7 +2096,9 @@
     -fx-pref-width: -md-width;
     -fx-pref-height: 300px;
     -fx-max-height: 300px;
-    -fx-background-image: url("components/CategoryHeader/bg-md.jpg");
+    -fx-background-image: url("components/header/bg-md.jpg");
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }
 
 .category-header:sm {
@@ -2102,7 +2107,9 @@
     -fx-pref-width: -sm-width;
     -fx-pref-height: 240px;
     -fx-max-height: 240px;
-    -fx-background-image: url("components/CategoryHeader/bg-sm.jpg");
+    -fx-background-image: url("components/header/bg-sm.jpg");
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }
 
 .category-header > .header-title {
@@ -2216,11 +2223,7 @@
 
 /** ------------------------------------
  * PersonDetailHeader
- **/
-.person-detail-header:lg {
-    -fx-background-image: url("components/DetailHeader/simple-bg-lg.jpg");
-}
-
+ */
 .person-detail-header:lg > .content-pane > .content-box {
     -fx-spacing: 56px;
     -fx-padding: 80px 0 0 0;
@@ -2251,10 +2254,6 @@
 .person-detail-header:lg > .content-pane .social-flow-pane {
     -fx-hgap: 10px;
     -fx-vgap: 10px;
-}
-
-.person-detail-header:md {
-    -fx-background-image: url("components/DetailHeader/simple-bg-md.jpg");
 }
 
 .person-detail-header:md > .content-pane > .content-box {
@@ -2383,11 +2382,9 @@
  * AppDetailHeader
  */
 .app-detail-header:lg {
-    -fx-background-image: url("components/DetailHeader/app-bg-lg.jpg");
 }
 
 .app-detail-header:md {
-    -fx-background-image: url("components/DetailHeader/app-bg-md.jpg");
 }
 
 .app-detail-header:lg > .content-pane .content-box > .name {
@@ -2408,11 +2405,9 @@
  * BookDetailHeader
  */
 .book-detail-header:lg {
-    -fx-background-image: url("components/DetailHeader/simple-bg-lg.jpg");
 }
 
 .book-detail-header:md {
-    -fx-background-image: url("components/DetailHeader/simple-bg-md.jpg");
 }
 
 .book-detail-header:lg > .content-pane .content-box > .name {
@@ -4328,4 +4323,28 @@
     -bg: -youtube-red;
 }
 
+/** ------------------------------------
+ * DetailsContentPane
+ */
+.details-content-pane {
+    -fx-background-color: -background;
+}
 
+.details-content-pane:lg {
+    -fx-pref-width: 1330;
+}
+
+.details-content-pane > .content-box {
+    -fx-spacing: 30px;
+    -fx-alignment: top-center;
+    -fx-padding: 40px 0px;
+    -fx-max-width: 1330px;
+}
+
+.details-content-pane > .content-box > .center-box {
+    -fx-spacing: 15px;
+}
+
+.details-content-pane > .content-box > .center-box > .boxes-container {
+    -fx-spacing: 10px;
+}

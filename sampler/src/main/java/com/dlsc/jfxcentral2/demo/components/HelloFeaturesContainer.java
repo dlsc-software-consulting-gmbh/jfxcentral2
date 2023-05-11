@@ -4,10 +4,13 @@ import com.dlsc.jfxcentral2.components.FeaturesContainer;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.Feature;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.List;
@@ -31,10 +34,17 @@ public class HelloFeaturesContainer extends JFXCentralSampleBase {
         largerFC.setSize(Size.LARGE);
 
         return new TabPane(
-                new Tab("FeaturesContainer sm", smallFC),
-                new Tab("FeaturesContainer md", mediumFC),
-                new Tab("FeaturesContainer ld", largerFC)
+                new Tab("FeaturesContainer sm", wrap(smallFC)),
+                new Tab("FeaturesContainer md", wrap(mediumFC)),
+                new Tab("FeaturesContainer ld", wrap(largerFC))
         );
+    }
+
+    private Node wrap(Region node) {
+        node.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        StackPane wrapper = new StackPane(node);
+        StackPane.setAlignment(node, Pos.CENTER);
+        return wrapper;
     }
 
     private List<Feature> createFeatures() {
