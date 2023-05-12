@@ -55,13 +55,9 @@ public class LegalPage extends PageBase {
         );
 
         switch (section) {
-            case TERMS -> {
-                // TODO: add tab selection
-            }
-            case COOKIES -> {
-            }
-            case PRIVACY -> {
-            }
+            case TERMS -> customMarkdownTabPane.setSelectedIndex(0);
+            case PRIVACY -> customMarkdownTabPane.setSelectedIndex(1);
+            case COOKIES -> customMarkdownTabPane.setSelectedIndex(2);
         }
 
         // strip view
