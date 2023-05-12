@@ -19,8 +19,17 @@ public class LegalPage extends PageBase {
     private static final String privacyText = readText("PrivacyPolicy.txt");
     private static final String cookieText = readText("CookiePolicy.txt");
 
-    public LegalPage(ObjectProperty<Size> size) {
+    private final Section section;
+
+    public enum Section {
+        TERMS,
+        COOKIES,
+        PRIVACY
+    }
+
+    public LegalPage(ObjectProperty<Size> size, Section section) {
         super(size, TopMenuBar.Mode.LIGHT);
+        this.section = section;
     }
 
     @Override
@@ -44,6 +53,16 @@ public class LegalPage extends PageBase {
                 new MarkdownTab("PRIVACY POLICY", privacyText),
                 new MarkdownTab("COOKIE POLICY", cookieText)
         );
+
+        switch (section) {
+            case TERMS -> {
+                // TODO: add tab selection
+            }
+            case COOKIES -> {
+            }
+            case PRIVACY -> {
+            }
+        }
 
         // strip view
         StripView stripView = new StripView(customMarkdownTabPane);

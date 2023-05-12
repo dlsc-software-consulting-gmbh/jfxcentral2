@@ -44,7 +44,10 @@ public class JFXCentral2App extends RouteApp {
                 .and(RouteUtils.get("/person", r -> new PersonDetailsPage(size, id(r))))
                 .and(RouteUtils.get("/book", r -> new BookDetailsPage(size, id(r))))
                 .and(RouteUtils.get("/real_world", r -> new RealWorldAppDetailsPage(size, id(r))))
-                .and(RouteUtils.get("/legal", r -> new LegalPage(size)))
+                .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
+                .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
+                .and(RouteUtils.get("/legal/cookies", r -> new LegalPage(size, LegalPage.Section.COOKIES)))
+                .and(RouteUtils.get("/legal/privacy", r -> new LegalPage(size, LegalPage.Section.PRIVACY)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
                 .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)))
                 .filter(DevFilter.create());

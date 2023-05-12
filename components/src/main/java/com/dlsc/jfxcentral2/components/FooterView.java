@@ -18,6 +18,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.LinkUtil;
 
 public class FooterView extends PaneBase {
 
@@ -67,11 +68,13 @@ public class FooterView extends PaneBase {
 
     private LineNumberPane initLegalInfoPane() {
         Hyperlink tcLink = new Hyperlink("T&C");
-        tcLink.setOnAction(event -> JFXCentralUtil.run(onTC));
         Hyperlink cookiesLink = new Hyperlink("Cookies");
-        cookiesLink.setOnAction(event -> JFXCentralUtil.run(onCookies));
         Hyperlink privacyPolicyLink = new Hyperlink("Privacy policy");
-        privacyPolicyLink.setOnAction(event -> JFXCentralUtil.run(onPrivacyPolicy));
+
+        LinkUtil.setLink(tcLink, "/legal/terms");
+        LinkUtil.setLink(tcLink, "/legal/cookies");
+        LinkUtil.setLink(tcLink, "/legal/privacy");
+
         return new LineNumberPane(new Label("Legal info"), null, tcLink, cookiesLink, privacyPolicyLink);
     }
 
