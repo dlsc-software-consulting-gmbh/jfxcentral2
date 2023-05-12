@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.components.VideoGalleryView;
 import com.dlsc.jfxcentral2.components.WebsiteChangesView;
 import com.dlsc.jfxcentral2.components.WeekLinksLiteView;
 import com.dlsc.jfxcentral2.model.DateQuickLink;
+import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
@@ -73,18 +74,36 @@ public class StartPage extends PageBase {
 
     private List<QuickLink> generateQuickLinks() {
         List<QuickLink> quickLinks = new ArrayList<>();
-        Random random = new Random();
-        int imageQuickLinkCount = random.nextInt(2) + 2;
-        int dateQuickLinkCount = random.nextInt(2) + 3;
-        int nullCount = 7 - imageQuickLinkCount - dateQuickLinkCount;
+        if (getSize() != Size.SMALL) {
+            Random random = new Random();
+            int imageQuickLinkCount = random.nextInt(2) + 2;
+            int dateQuickLinkCount = random.nextInt(2) + 3;
+            int nullCount = 7 - imageQuickLinkCount - dateQuickLinkCount;
 
-        for (int i = 0; i < dateQuickLinkCount; i++) {
-            quickLinks.add(new DateQuickLink("JDKMon", "Download", null, "xxx url...", ZonedDateTime.now().plusDays(i)));
+            //normal QuickLinks
+            for (int i = 0; i < dateQuickLinkCount; i++) {
+                quickLinks.add(new DateQuickLink("JDKMon", "Download", null, "xxx url...", ZonedDateTime.now().plusDays(i)));
+            }
+
+            //image QuickLinks
+            for (int i = 0; i < imageQuickLinkCount; i++) {
+                String imgUrl = "/com/dlsc/jfxcentral2/test/images/" + (getSize() == Size.LARGE ? "quick-link-lg" : "website-changes-view-md") + i + ".png";
+                quickLinks.add(new ImageQuickLink(ImageQuickLink.class.getResource(imgUrl).toExternalForm()));
+            }
+
+            //empty QuickLinks
+            for (int i = 0; i < nullCount; i++) {
+                quickLinks.add(null);
+            }
+            Collections.shuffle(quickLinks);
+        }else { //small size
+
+            //normal QuickLinks
+            for (int i = 0; i < 3; i++) {
+                quickLinks.add(new DateQuickLink("JDKMon", "Download", null, "xxx url...", ZonedDateTime.now().plusDays(i)));
+            }
         }
-        for (int i = 0; i < nullCount; i++) {
-            quickLinks.add(null);
-        }
-        Collections.shuffle(quickLinks);
+
         return quickLinks;
     }
 }
