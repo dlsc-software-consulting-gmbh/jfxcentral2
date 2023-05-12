@@ -20,6 +20,7 @@ public class PaginationControlSkin extends ControlBaseSkin<PaginationControl> {
         Button btnPrev = new Button();
         btnPrev.getStyleClass().add("prev-button");
         btnPrev.setGraphic(new FontIcon(MaterialDesign.MDI_ARROW_LEFT));
+        btnPrev.setFocusTraversable(false);
         BorderPane.setAlignment(btnPrev, Pos.CENTER);
 
         Label pageInformationLabel = new Label();
@@ -38,6 +39,7 @@ public class PaginationControlSkin extends ControlBaseSkin<PaginationControl> {
         btnNext.getStyleClass().add("next-button");
         btnNext.setGraphic(new FontIcon(MaterialDesign.MDI_ARROW_RIGHT));
         BorderPane.setAlignment(btnNext, Pos.CENTER);
+        btnNext.setFocusTraversable(false);
 
         BorderPane controlBox = new BorderPane();
         controlBox.setLeft(btnPrev);
