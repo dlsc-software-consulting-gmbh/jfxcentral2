@@ -13,17 +13,19 @@ import javafx.scene.layout.HBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
 
+    private final ToggleGroup toggleGroup;
     private PaginationControl2 control;
     private final HBox controlBox;
     private final Button leftArrowButton;
     private final Button rightArrowButton;
-    private final Label ellipsisLeftLabel;
     private final Button toFirstButton;
-    private final Label ellipsisRightLabel;
     private final Button toLastButton;
-    private final ToggleGroup buttonToggleGroup;
+    private final List<CustomToggleButton> numButtons = new ArrayList<>();
 
     public PaginationControl2Skin(PaginationControl2 control) {
         super(control);
@@ -58,19 +60,34 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
         toFirstButton = new Button("1");
         toFirstButton.getStyleClass().addAll("first", "number-button");
         toFirstButton.setOnAction(e -> control.setCurrentPageIndex(0));
+        toFirstButton.managedProperty().bind(toFirstButton.visibleProperty());
 
-        ellipsisLeftLabel = new Label("...");
+        Label ellipsisLeftLabel = new Label("...");
         ellipsisLeftLabel.getStyleClass().addAll("ellipsis-label", "ellipsis-left");
-
-        ellipsisRightLabel = new Label("...");
-        ellipsisRightLabel.getStyleClass().addAll("ellipsis-label", "ellipsis-right");
+        ellipsisLeftLabel.managedProperty().bind(ellipsisLeftLabel.visibleProperty());
+        ellipsisLeftLabel.visibleProperty().bind(toFirstButton.visibleProperty());
 
         toLastButton = new Button();
         toLastButton.getStyleClass().addAll("last", "number-button");
         toLastButton.setOnAction(e -> control.setCurrentPageIndex(control.getPageCount() - 1));
+        toLastButton.managedProperty().bind(toLastButton.visibleProperty());
 
-        buttonToggleGroup = new ToggleGroup();
+        Label ellipsisRightLabel = new Label("...");
+        ellipsisRightLabel.getStyleClass().addAll("ellipsis-label", "ellipsis-right");
+        ellipsisRightLabel.managedProperty().bind(ellipsisRightLabel.visibleProperty());
+        ellipsisRightLabel.visibleProperty().bind(toLastButton.visibleProperty());
 
+        controlBox.getChildren().addAll(leftArrowButton, toFirstButton, ellipsisLeftLabel);
+
+        toggleGroup = new ToggleGroup();
+        for (int i = 0; i < control.getMaxPageIndicatorCount() && i < control.getPageCount(); i++) {
+            CustomToggleButton button = new CustomToggleButton();
+            button.getStyleClass().add("number-button");
+            toggleGroup.getToggles().add(button);
+            numButtons.add(button);
+            controlBox.getChildren().add(button);
+        }
+        controlBox.getChildren().addAll(ellipsisRightLabel, toLastButton, rightArrowButton);
         contentPane.setBottom(controlBox);
 
         BorderPane.setAlignment(controlBox, Pos.CENTER);
@@ -81,10 +98,42 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
         getChildren().add(contentPane);
 
         updateControlBox();
-        control.pageCountProperty().addListener(it -> updateControlBox());
         control.currentPageIndexProperty().addListener(it -> updateControlBox());
-        control.maxPageIndicatorCountProperty().addListener(it -> updateControlBox());
+        control.pageCountProperty().addListener((ob, ov, nv) -> {
+            changeIndexButtons();
+            updateControlBox();
+            control.setCurrentPageIndex(0);
+        });
+        control.maxPageIndicatorCountProperty().addListener((ob, ov, nv) -> {
+            changeIndexButtons();
+
+            updateControlBox();
+        });
     }
+
+    private void changeIndexButtons() {
+        int newLen = Math.min(control.getMaxPageIndicatorCount(), control.getPageCount());
+        int oldLen = numButtons.size();
+        if (newLen > oldLen) {
+            for (int i = oldLen; i < newLen; i++) {
+                CustomToggleButton button = new CustomToggleButton("");
+                button.getStyleClass().add("number-button");
+                toggleGroup.getToggles().add(button);
+                numButtons.add(button);
+                controlBox.getChildren().add(oldLen + 3, button);
+            }
+        } else if (newLen < oldLen) {
+            List<CustomToggleButton> tempList = new ArrayList<>();
+            for (int i = oldLen - 1; i >= newLen; i--) {
+                CustomToggleButton button = numButtons.get(i);
+                tempList.add(button);
+            }
+            toggleGroup.getToggles().removeAll(tempList);
+            numButtons.removeAll(tempList);
+            controlBox.getChildren().removeAll(tempList);
+        }
+    }
+
 
     private int computeToggleButtonNumber(int index, int pageCount, int currentPageIndex, int maxPageIndicatorCount) {
         int middle = maxPageIndicatorCount / 2;
@@ -101,36 +150,27 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
     }
 
     private void updateControlBox() {
-        buttonToggleGroup.getToggles().clear();
-        controlBox.getChildren().clear();
-
-        leftArrowButton.setDisable(control.getCurrentPageIndex() == 0);
-        controlBox.getChildren().add(leftArrowButton);
-
         int maxPageIndicatorCount = control.getMaxPageIndicatorCount();
         int pageCount = control.getPageCount();
         int currentPage = control.getCurrentPageIndex();
 
-        if (currentPage >= maxPageIndicatorCount) {
-            controlBox.getChildren().addAll(toFirstButton, ellipsisLeftLabel);
-        }
+        toLastButton.setText(String.valueOf(pageCount));
+        leftArrowButton.setDisable(currentPage == 0);
+        rightArrowButton.setDisable(currentPage == pageCount - 1);
 
-        for (int i = 0; i < pageCount && i < maxPageIndicatorCount; i++) {
+        int max = Math.min(maxPageIndicatorCount, pageCount);
+        for (int i = 0; i < max; i++) {
             int num = computeToggleButtonNumber(i, pageCount, currentPage, maxPageIndicatorCount);
-            CustomToggleButton numberToggleButton = new CustomToggleButton(String.valueOf(num + 1));
-            numberToggleButton.getStyleClass().add("number-button");
-            numberToggleButton.setSelected(num == control.getCurrentPageIndex());
+            CustomToggleButton numberToggleButton = numButtons.get(i);
+            numberToggleButton.setText(String.valueOf(num + 1));
+            numberToggleButton.setSelected(num == currentPage);
             numberToggleButton.setOnAction(e -> control.setCurrentPageIndex(num));
-            controlBox.getChildren().add(numberToggleButton);
-            buttonToggleGroup.getToggles().add(numberToggleButton);
+            if (i == 0) {
+                toFirstButton.setVisible(num > 1);
+            }
+            if (i == max - 1) {
+                toLastButton.setVisible(num < pageCount - 2);
+            }
         }
-
-        if (pageCount - currentPage > maxPageIndicatorCount) {
-            toLastButton.setText(String.valueOf(pageCount));
-            controlBox.getChildren().addAll(ellipsisRightLabel, toLastButton);
-        }
-
-        rightArrowButton.setDisable(control.getCurrentPageIndex() == control.getPageCount() - 1);
-        controlBox.getChildren().add(rightArrowButton);
     }
 }
