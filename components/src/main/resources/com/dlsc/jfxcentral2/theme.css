@@ -2082,8 +2082,6 @@
     -fx-pref-height: 300px;
     -fx-max-height: 300px;
     -fx-background-image: url("components/header/bg-lg.jpg");
-    -fx-background-position: center;
-    -fx-background-size: cover;
 }
 
 .category-header:md {
@@ -2143,19 +2141,32 @@
  **/
 .detail-header:lg {
     -fx-min-width: -lg-width;
-    -fx-min-height: 400px;
     -fx-pref-width: -lg-width;
+    -fx-max-width: -lg-width;
+    -fx-min-height: 400px;
     -fx-pref-height: 400px;
     -fx-max-height: 400px;
 }
 
 .detail-header:md {
+    -fx-min-width: -md-width;
+    -fx-pref-width: -md-width;
+    -fx-max-width: -md-width;
+    -fx-min-height: 400px;
+    -fx-pref-height: 400px;
+    -fx-max-height: 400px;
+}
+
+.detail-header:sm {
     -fx-min-width: -sm-width;
-    -fx-min-height: 500px;
     -fx-pref-width: -sm-width;
+    -fx-max-width: -sm-width;
+    -fx-min-height: 500px;
     -fx-pref-height: 500px;
     -fx-max-height: 500px;
+    -fx-background-image: url("components/header/person-bg-sm.jpg");
 }
+
 
 .detail-header > .content-pane > .bottom-box {
     -fx-padding: 20px;
@@ -2223,101 +2234,112 @@
 .person-detail-header:lg > .content-pane > .content-box {
     -fx-spacing: 56px;
     -fx-padding: 80px 0 0 0;
+    -fx-min-width: 860px;
+    -fx-pref-width: 860px;
     -fx-max-width: 860px;
     -fx-alignment: center-left;
 }
 
-.person-detail-header:lg > .content-pane > .content-box > .info-box {
+.person-detail-header:md-lg > .content-pane > .content-box > .info-box {
     -fx-spacing: 20px;
     -fx-alignment: center-left;
 }
 
-.person-detail-header:lg > .content-pane .info-box > .name-flow-pane {
+.person-detail-header:md-lg > .content-pane .info-box > .name-flow-pane {
     -fx-hgap: 5px;
     -fx-alignment: center-left;
 }
 
-.person-detail-header:lg > .content-pane .info-box .name {
+.person-detail-header:md-lg > .content-pane .info-box .name {
     -fx-font-size: 24px;
     -fx-padding: 0 15px 0 0;
 }
 
-.person-detail-header:lg > .content-pane .info-box .name,
-.person-detail-header:lg > .content-pane .info-box > .description {
+.person-detail-header:md-lg > .content-pane .info-box .name,
+.person-detail-header:md-lg > .content-pane .info-box > .description {
     -fx-text-fill: -white;
 }
 
-.person-detail-header:lg > .content-pane .social-flow-pane {
+.person-detail-header:md-lg > .content-pane .social-flow-pane {
     -fx-hgap: 10px;
     -fx-vgap: 10px;
 }
 
 .person-detail-header:md > .content-pane > .content-box {
+    -fx-spacing: 56px;
+    -fx-padding: 80px 0 0 0;
+    -fx-min-width: 708px;
+    -fx-pref-width: 708px;
+    -fx-max-width: 708px;
+    -fx-alignment: center-left;
+}
+
+.person-detail-header:sm > .content-pane > .content-box {
     -fx-spacing: 15px;
     -fx-padding: 80px 0 0 0;
     -fx-max-width: 315px;
     -fx-alignment: center;
 }
 
-.person-detail-header:md > .content-pane .name-flow-pane {
+.person-detail-header:sm > .content-pane .name-flow-pane {
     -fx-hgap: 5px;
     -fx-alignment: center;
 }
 
-.person-detail-header:md .name-flow-pane > .badge {
+.person-detail-header:sm .name-flow-pane > .badge {
     -fx-content-display: graphic-only;
 }
 
-.person-detail-header:md > .content-pane .name {
+.person-detail-header:sm > .content-pane .name {
     -fx-font-size: 20px;
     -fx-padding: 0 15px 0 0;
 }
 
-.person-detail-header:md > .content-pane .name,
-.person-detail-header:md > .content-pane .description {
+.person-detail-header:sm > .content-pane .name,
+.person-detail-header:sm > .content-pane .description {
     -fx-text-fill: -white;
     -fx-text-alignment: center;
 }
 
-.person-detail-header:md > .content-pane .description {
+.person-detail-header:sm > .content-pane .description {
     -fx-font-size: 13px;
 }
 
-.person-detail-header:md > .content-pane .social-flow-pane {
+.person-detail-header:sm > .content-pane .social-flow-pane {
     -fx-hgap: 15px;
     -fx-vgap: 10px;
     -fx-alignment: center;
 }
 
-.person-detail-header:lg .avatar-view {
+.person-detail-header:md-lg .avatar-view {
     -fx-avatar-size: 134px;
 }
 
-.person-detail-header:md .avatar-view {
+.person-detail-header:sm .avatar-view {
     -fx-avatar-size: 68px;
 }
 
 /** ------------------------------------
  * SimpleDetailHeader
  */
-.simple-detail-header:lg > .content-pane .content-box {
+.simple-detail-header:md-lg > .content-pane .content-box {
     -fx-alignment: center;
     -fx-pref-width: 635px;
     -fx-max-width: 635px;
     -fx-min-width: 635px;
 }
 
-.simple-detail-header:lg > .content-pane .content-box > .name {
+.simple-detail-header:md-lg > .content-pane .content-box > .name {
     -fx-text-fill: -white;
     -fx-padding: 120px 0 0 0;
 }
 
-.simple-detail-header:lg > .content-pane .content-box > .description {
+.simple-detail-header:md-lg > .content-pane .content-box > .description {
     -fx-font-size: 20px;
     -fx-padding: 10px 0;
 }
 
-.simple-detail-header:md > .content-pane .content-box {
+.simple-detail-header:sm > .content-pane .content-box {
     -fx-min-width: 255px;
     -fx-pref-width: 255px;
     -fx-max-width: 255px;
@@ -2325,12 +2347,12 @@
     -fx-alignment: center;
 }
 
-.simple-detail-header:md > .content-pane .content-box > .name {
+.simple-detail-header:sm > .content-pane .content-box > .name {
     -fx-text-fill: -white;
     -fx-padding: 100px 0 0 0;
 }
 
-.simple-detail-header:md > .content-pane .content-box > .description {
+.simple-detail-header:sm > .content-pane .content-box > .description {
     -fx-font-size: 16px;
 }
 
@@ -2378,16 +2400,22 @@
  * AppDetailHeader
  */
 .app-detail-header:lg {
+    -fx-background-image: url("components/header/app-bg-lg.jpg");
 }
 
 .app-detail-header:md {
+    -fx-background-image: url("components/header/app-bg-md.jpg");
 }
 
-.app-detail-header:lg > .content-pane .content-box > .name {
+.app-detail-header:sm {
+    -fx-background-image: url("components/header/app-bg-sm.jpg");
+}
+
+.app-detail-header:md-lg > .content-pane .content-box > .name {
     -fx-font-size: 44px;
 }
 
-.app-detail-header:md > .content-pane .content-box > .name {
+.app-detail-header:sm > .content-pane .content-box > .name {
     -fx-font-size: 34px;
 }
 
@@ -2400,17 +2428,11 @@
 /** ------------------------------------
  * BookDetailHeader
  */
-.book-detail-header:lg {
-}
-
-.book-detail-header:md {
-}
-
-.book-detail-header:lg > .content-pane .content-box > .name {
+.book-detail-header:md-lg > .content-pane .content-box > .name {
     -fx-font-size: 34px;
 }
 
-.book-detail-header:md > .content-pane .content-box > .name {
+.book-detail-header:sm > .content-pane .content-box > .name {
     -fx-font-size: 24px;
 }
 

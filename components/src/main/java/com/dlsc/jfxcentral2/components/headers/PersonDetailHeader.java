@@ -47,7 +47,7 @@ public class PersonDetailHeader extends DetailHeader {
 
         FlowPane socialFlowPane = createSocialFlowPane(person);
 
-        if (isLarge()) {
+        if (!isSmall()) {
             HBox contentBox = new HBox();
             contentBox.getStyleClass().add("content-box");
             VBox infoBox = new VBox(nameBadgePane, descriptionLabel, socialFlowPane);
