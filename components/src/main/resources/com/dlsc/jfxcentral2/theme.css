@@ -1378,7 +1378,7 @@
 }
 
 .feature-view:sm .top-box {
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 0;
 }
 
 .feature-view:md .top-box {
@@ -1428,6 +1428,10 @@
     -fx-font-size: 20px;
 }
 
+.feature-view .content-box {
+    -fx-alignment: bottom-left;
+}
+
 .feature-view:sm {
     -fx-padding: 15px;
     -fx-min-width: 192px;
@@ -1444,7 +1448,7 @@
 }
 
 .feature-view:sm .description {
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 0;
     -fx-font-size: 13px;
 }
 
@@ -1458,25 +1462,25 @@
 .features-container {
 }
 
-.features-container:lg {
+.features-container:horizontal:lg {
     -fx-max-width: 1080px;
     -fx-pref-width: 1080px;
     -fx-min-width: 1080px;
 }
 
-.features-container:md {
+.features-container:horizontal:md {
     -fx-max-width: 708px;
     -fx-pref-width: 708px;
     -fx-min-width: 708px;
 }
 
-.features-container:sm {
+.features-container:horizontal:sm {
     -fx-min-height: 479px;
     -fx-pref-height: 479px;
     -fx-max-height: 479px;
 }
 
-.features-container:sm .pagination-container {
+.features-container:horizontal:sm .pagination-container {
     -fx-border-color: -bright-blue;
     -fx-border-width: 15px;
 }
@@ -1489,7 +1493,7 @@
     -fx-background-color: derive(#1040c0, -10%);
 }
 
-.features-container:sm .feature-view {
+.features-container:horizontal:sm .feature-view {
     -fx-min-width: 317px;
     -fx-min-height: 385px;
     -fx-pref-width: 317px;
@@ -1498,24 +1502,77 @@
     -fx-max-height: 385px;
 }
 
-.features-container:sm .feature-view .custom-image-view {
+.features-container:horizontal:sm .feature-view .custom-image-view {
     -fx-fit-width: 277px;
     -fx-fit-height: 109px;
 }
 
-.features-container:sm .feature-view .description {
+.features-container:horizontal:sm .feature-view .description {
     -fx-font-size: 20px;
 }
 
-.features-container:sm .feature-view:sm .title {
+.features-container:horizontal:sm .feature-view:sm .title {
     visibility: visible;
     -fx-padding: 15px 0 50px 0;
     -fx-font-size: 34px;
 }
 
-/** -------------------------------
-* PaginationControl
- */
+.features-container:vertical:sm-md .feature-view:sm-md,
+.features-container:vertical:lg .feature-view:lg {
+    -fx-padding: 15px;
+    -fx-min-width: 192px;
+    -fx-min-height: 140px;
+    -fx-pref-width: 192px;
+    -fx-pref-height: 140px;
+    -fx-max-width: 192px;
+    -fx-max-height: 140px;
+}
+
+.features-container:vertical:sm-md .feature-view:sm-md.with-image,
+.features-container:vertical:lg .feature-view:lg.with-image {
+    -fx-padding: 15px;
+    -fx-min-height: 180px;
+    -fx-pref-height: 180px;
+    -fx-max-height: 180px;
+}
+
+.features-container:vertical:sm-md .feature-view .top-box,
+.features-container:vertical:lg .feature-view .top-box {
+    -fx-padding: 0;
+}
+
+.features-container:vertical:sm-md .feature-view .custom-image-view,
+.features-container:vertical:lg .feature-view .custom-image-view {
+    -fx-fit-width: 162px;
+    -fx-fit-height: 71px;
+}
+
+.features-container:vertical:sm-md .feature-view .description,
+.features-container:vertical:lg .feature-view .description {
+    -fx-padding: 0;
+    -fx-font-size: 13px;
+}
+
+.features-container:vertical:sm-md .feature-view .tag,
+.features-container:vertical:lg .feature-view .tag {
+    visibility: hidden;
+}
+
+.features-container:vertical:sm-md .feature-view .title,
+.features-container:vertical:lg .feature-view .title {
+    visibility: visible;
+    -fx-font-size: 16px;
+}
+
+.features-container:vertical:sm-md .feature-view .remark,
+.features-container:vertical:lg .feature-view .remark {
+    visibility: hidden;
+    -fx-padding: 0;
+}
+
+    /** -------------------------------
+    * PaginationControl
+     */
 .pagination-control .control-box {
     -fx-min-width: 220px;
     -fx-min-height: 54px;
@@ -4217,7 +4274,7 @@
     -fx-background-color: transparent;
 }
 
-.simple-details-box > .content-box .details-cell .main-preview-wrapper .transparent-button > .ikonli-font-icon{
+.simple-details-box > .content-box .details-cell .main-preview-wrapper .transparent-button > .ikonli-font-icon {
     -fx-icon-color: -bright-blue;
     -fx-icon-size: 25px;
     -fx-translate-x: 10px;
