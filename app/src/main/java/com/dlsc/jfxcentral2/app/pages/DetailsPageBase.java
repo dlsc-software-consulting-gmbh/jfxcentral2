@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.app.pages.details;
+package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Blog;
@@ -13,7 +13,6 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
-import com.dlsc.jfxcentral2.app.pages.PageBase;
 import com.dlsc.jfxcentral2.components.MenuView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.detailsbox.AppsDetailsBox;

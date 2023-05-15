@@ -15,6 +15,7 @@ open module com.dlsc.jfxcentral2.components {
     requires org.kordamp.ikonli.material2;
     requires com.dlsc.gemsfx;
     requires com.sandec.mdfx;
+    requires org.apache.commons.lang3;
 
     requires jpro.webapi;
     requires one.jpro.routing.core;

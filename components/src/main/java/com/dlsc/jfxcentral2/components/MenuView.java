@@ -39,9 +39,7 @@ public class MenuView extends ControlBase {
         getStyleClass().add("menu-view");
         setOrientation(orientation);
         activateOrientationPseudoClass();
-        orientationProperty().addListener((ob, ov, nv) -> {
-            activateOrientationPseudoClass();
-        });
+        orientationProperty().addListener((ob, ov, nv) -> activateOrientationPseudoClass());
     }
 
     private void activateOrientationPseudoClass() {

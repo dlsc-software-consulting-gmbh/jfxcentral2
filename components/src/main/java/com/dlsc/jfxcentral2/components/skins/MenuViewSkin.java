@@ -22,7 +22,6 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
 
         control.orientationProperty().addListener((ob, ov, nv) -> layoutByOrientation());
         control.itemsProperty().addListener((ob, ov, nv) -> layoutByOrientation());
-
     }
 
     private void layoutByOrientation() {
@@ -64,11 +63,6 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
         }
         getChildren().setAll(box);
 
-    }
-
-    @Override
-    protected double computeMaxWidth(double height, double topInset, double rightInset, double bottomInset, double leftInset) {
-        return computePrefWidth(height, topInset, rightInset, bottomInset, leftInset);
     }
 
     @Override

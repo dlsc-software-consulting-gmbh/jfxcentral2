@@ -1,6 +1,5 @@
-package com.dlsc.jfxcentral2.app.pages.details;
+package com.dlsc.jfxcentral2.app.pages;
 
-import com.dlsc.jfxcentral2.app.pages.PageBase;
 import com.dlsc.jfxcentral2.components.CustomMarkdownTabPane;
 import com.dlsc.jfxcentral2.components.StripView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;

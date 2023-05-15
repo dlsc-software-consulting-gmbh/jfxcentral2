@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app.pages.details;
 
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
 import com.dlsc.jfxcentral2.components.headers.PersonDetailHeader;
 import com.dlsc.jfxcentral2.model.Size;

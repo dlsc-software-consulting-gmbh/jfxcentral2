@@ -14,6 +14,8 @@ import javafx.css.StyleableProperty;
 import javafx.css.converter.EnumConverter;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CustomMenuItem;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
@@ -94,16 +96,18 @@ public class TopMenuBar extends PaneBase {
             MenuButton communityBtn = createMenuButton("Community");
             communityBtn.getStyleClass().add("community-button");
 
-            fill(resourcesBtn);
-            fill(communityBtn);
+            fillResourcesMenu(resourcesBtn);
+            fillCommunityMenu(communityBtn);
 
             Button showcasesBtn = new Button("Showcases");
             showcasesBtn.setMinWidth(Region.USE_PREF_SIZE);
             showcasesBtn.getStyleClass().add("showcases-button");
+            LinkUtil.setLink(showcasesBtn, "/real_world");
 
             Button downloadsBtn = new Button("Downloads");
             downloadsBtn.setMinWidth(Region.USE_PREF_SIZE);
             downloadsBtn.getStyleClass().add("downloads-button");
+            LinkUtil.setLink(downloadsBtn, "/downloads");
 
             Button loginBtn = new Button("Login", new FontIcon(MaterialDesignA.ACCOUNT_CIRCLE_OUTLINE));
             loginBtn.setMinWidth(Region.USE_PREF_SIZE);
@@ -139,7 +143,6 @@ public class TopMenuBar extends PaneBase {
 
             MenuButton menuBtn = createMenuButton("Menu");
             menuBtn.getStyleClass().add("top-menu-button");
-            fill(menuBtn);
 
             contentBox.getChildren().setAll(createLogo(), new Spacer(), logOutBtn, createSeparatorRegion(), stackPane, createSeparatorRegion(), menuBtn);
         }
@@ -147,13 +150,27 @@ public class TopMenuBar extends PaneBase {
         usedProperty().bind(blocking);
     }
 
-    private void fill(MenuButton button) {
+    private void fillResourcesMenu(MenuButton button) {
+        button.getItems().add(createMenuItem("LIBRARIES", "/books"));
+        button.getItems().add(createMenuItem("TOOLS", "/tools"));
+        button.getItems().add(createMenuItem("VIDEOS", "/videos"));
+        button.getItems().add(createMenuItem("BOOKS", "/books"));
+        button.getItems().add(createMenuItem("BLOGS", "/blogs"));
+        button.getItems().add(createMenuItem("TUTORIALS", "/tutorials"));
+    }
+
+    private void fillCommunityMenu(MenuButton button) {
         button.getItems().add(new MenuItem("Item A"));
-        button.getItems().add(new MenuItem("Item B"));
-        button.getItems().add(new MenuItem("Item C"));
-        button.getItems().add(new MenuItem("Item D"));
-        button.getItems().add(new MenuItem("Item E"));
-        button.getItems().add(new MenuItem("Item F"));
+        button.getItems().add(createMenuItem("PEOPLE", "/people"));
+        button.getItems().add(createMenuItem("COMPANIES", "/blogs"));
+        button.getItems().add(createMenuItem("OPENJFX", "/tools"));
+        button.getItems().add(createMenuItem("LINKS OF THE WEEK", "/links"));
+    }
+
+    private MenuItem createMenuItem(String text, String url) {
+        Label label = new Label(text);
+        LinkUtil.setLink(label, url);
+        return new CustomMenuItem(label);
     }
 
     private MenuButton createMenuButton(String text) {
