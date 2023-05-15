@@ -211,7 +211,8 @@
     -fx-cursor: hand;
 }
 
-.context-menu .menu-item > .label {
+.context-menu .menu-item > .label,
+.context-menu .menu-item > * > .label {
     -fx-padding: 3px 10px 3px 12px;
     -fx-text-fill: -normal-text-icon-color;
 }
@@ -221,7 +222,8 @@
     -fx-icon-size: 25px;
 }
 
-.context-menu .menu-item:hover > .label {
+.context-menu .menu-item:hover > .label,
+.context-menu .menu-item:hover > * > .label {
     -fx-text-fill: -hover-text-icon-color;
 }
 
