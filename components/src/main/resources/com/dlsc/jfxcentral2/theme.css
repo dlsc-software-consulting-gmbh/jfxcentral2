@@ -2164,7 +2164,6 @@
     -fx-min-height: 500px;
     -fx-pref-height: 500px;
     -fx-max-height: 500px;
-    -fx-background-image: url("components/header/person-bg-sm.jpg");
 }
 
 
@@ -2399,18 +2398,6 @@
 /** ------------------------------------
  * AppDetailHeader
  */
-.app-detail-header:lg {
-    -fx-background-image: url("components/header/app-bg-lg.jpg");
-}
-
-.app-detail-header:md {
-    -fx-background-image: url("components/header/app-bg-md.jpg");
-}
-
-.app-detail-header:sm {
-    -fx-background-image: url("components/header/app-bg-sm.jpg");
-}
-
 .app-detail-header:md-lg > .content-pane .content-box > .name {
     -fx-font-size: 44px;
 }
