@@ -169,8 +169,11 @@ public class TopMenuBar extends PaneBase {
 
     private MenuItem createMenuItem(String text, String url) {
         Label label = new Label(text);
+        // The StackPane is a workaround for the setLink.
+        // setLink currently only works when the Parent is a Pane.
+        StackPane wrapper = new StackPane(label);
         LinkUtil.setLink(label, url);
-        return new CustomMenuItem(label);
+        return new CustomMenuItem(wrapper);
     }
 
     private MenuButton createMenuButton(String text) {
