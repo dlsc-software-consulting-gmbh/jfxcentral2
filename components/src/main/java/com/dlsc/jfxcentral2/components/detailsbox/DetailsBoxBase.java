@@ -109,6 +109,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         titleBox.getStyleClass().add("title-box");
 
         Label titleLabel = new Label(model.getName());
+        titleLabel.setWrapText(true);
         //library may have a company image
         if (model instanceof Library library) {
             CustomImageView graphic = new CustomImageView();
@@ -124,6 +125,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         List<Node> actionButtons = createActionButtons(model);
         if (actionButtons != null && !actionButtons.isEmpty()) {
             Pane actionButtonsPane = isSmall() ? new FlowPane() : new HBox();
+            actionButtonsPane.setMinWidth(Region.USE_PREF_SIZE);
             actionButtonsPane.getStyleClass().add("action-buttons-pane");
             for (int i = 0; i < actionButtons.size(); i++) {
                 Node actionButton = actionButtons.get(i);
