@@ -1,17 +1,18 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral2.model.details.DetailsObject;
+import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral2.components.CustomImageView;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;
 
-public class SimpleDetailsBox<T extends DetailsObject> extends DetailsBoxBase<T> {
+/**
+ * SimpleDetailsBox for Companies and Tips.
+ */
+public abstract class SimpleDetailsBox<T extends ModelObject> extends DetailsBoxBase<T> {
 
     private Button detailsButton;
 
@@ -36,22 +37,19 @@ public class SimpleDetailsBox<T extends DetailsObject> extends DetailsBoxBase<T>
         if (!isSmall()) {
             return super.createMainPreView(model);
         } else {
-            Image mainPreview = model.getMainPreview();
-            StackPane mainPreviewPane = null;
-            if (mainPreview != null) {
-                mainPreviewPane = createImageWrapper(mainPreview, true);
-                mainPreviewPane.getStyleClass().add("main-preview-wrapper");
-                mainPreviewPane.managedProperty().bind(mainPreviewPane.visibleProperty());
-                if (model.getMainPreviewDescription() != null) {
-                    Label mainPreviewDesc = new Label(model.getMainPreviewDescription(), new FontIcon());
-                    mainPreviewDesc.getStyleClass().add("main-preview-desc");
-                    mainPreviewPane.getChildren().add(mainPreviewDesc);
-                    StackPane.setAlignment(mainPreviewDesc, Pos.TOP_RIGHT);
-                }
-                mainPreviewPane.getChildren().add(detailsButton);
-                StackPane.setAlignment(detailsButton, Pos.TOP_RIGHT);
+            CustomImageView imageView = createImageView(model);
+            if (isSmall()) {
+                StackPane.setAlignment(imageView, Pos.CENTER_LEFT);
             }
-            return mainPreviewPane;
+            StackPane imageWrapper = new StackPane(imageView);
+            imageWrapper.getStyleClass().add("image-wrapper");
+            imageWrapper.managedProperty().bind(imageWrapper.visibleProperty());
+            imageWrapper.getChildren().add(detailsButton);
+            StackPane.setAlignment(detailsButton, Pos.TOP_RIGHT);
+            return imageWrapper;
         }
     }
+
+    protected abstract CustomImageView createImageView(T model);
+
 }

@@ -1,18 +1,17 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
-import com.dlsc.jfxcentral2.model.TipsAndTricks;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
-public class TipsAndTricksTileView extends TileView<TipsAndTricks> {
+public class TipsAndTricksTileView extends TileView<Tip> {
 
-    private static final DateTimeFormatter DEFAULT_DATE_FORMAT = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+    private static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
-    public TipsAndTricksTileView(TipsAndTricks tipsAndTricks) {
+    public TipsAndTricksTileView(Tip tipsAndTricks) {
         this();
         setData(tipsAndTricks);
     }
@@ -21,12 +20,13 @@ public class TipsAndTricksTileView extends TileView<TipsAndTricks> {
         getStyleClass().add("tips-tile-view");
 
         setButton1Text("READ NOW");
-        setButton1Graphic(new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT));
-        setButton1Action(() -> System.out.println("Read: " + (getData() != null ? getData().getUrl() : "..")));
+        setButton1Graphic(new FontIcon(IkonUtil.link));
+        setButton1Action(() -> System.out.println("Read: " + (getData() != null ? getData().getName() : "..")));
 
         dataProperty().addListener((ob, ov, nv) -> {
-            ZonedDateTime date = nv.getDate();
-            setRemark(date != null ? date.format(DEFAULT_DATE_FORMAT) : null);
+            LocalDate date = nv.getCreatedOn();
+            String formattedDate = date.format(DEFAULT_DATE_FORMATTER);
+            setRemark(formattedDate);
         });
 
     }

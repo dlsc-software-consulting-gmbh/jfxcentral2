@@ -1,7 +1,8 @@
 package com.dlsc.jfxcentral2.components.headers;
 
+import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
-import com.dlsc.jfxcentral2.model.SimpleHeaderInfo;
+import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -19,21 +20,21 @@ import org.kordamp.ikonli.javafx.FontIcon;
 /**
  * AppDetailHeader or BookDetailHeader
  */
-public class SimpleDetailHeader extends DetailHeader {
+public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<ModelObject> {
 
-    public SimpleDetailHeader(SimpleHeaderInfo simpleHeaderInfo) {
+    public SimpleDetailHeader(T model) {
         this();
-        setSimpleHeaderInfo(simpleHeaderInfo);
+        setModel(model);
     }
 
     public SimpleDetailHeader() {
         getStyleClass().add("simple-detail-header");
 
-        centerProperty().bind(Bindings.createObjectBinding(this::createCenterNode, simpleHeaderInfoProperty()));
+        centerProperty().bind(Bindings.createObjectBinding(this::createCenterNode, modelProperty()));
     }
 
     protected Pane createCenterNode() {
-        SimpleHeaderInfo header = getSimpleHeaderInfo();
+        ModelObject header = getModel();
         if (header == null) {
             return null;
         }
@@ -53,14 +54,12 @@ public class SimpleDetailHeader extends DetailHeader {
         }
 
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
-        saveAndLikeButton.setSaveButtonSelected(header.isSaved());
-        saveAndLikeButton.setLikeButtonSelected(header.isLiked());
+        saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(header));
+        saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(header));
         saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, nv) -> {
-            header.setSaved(nv);
             System.out.println(header.getName() + " is saved: " + nv);
         });
         saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, nv) -> {
-            header.setLiked(nv);
             System.out.println(header.getName() + " is liked: " + nv);
         });
 
@@ -74,7 +73,11 @@ public class SimpleDetailHeader extends DetailHeader {
             }
             return new FontIcon(icon);
         }, websiteButtonIconProperty()));
-        websiteButton.setOnAction(e -> System.out.println("Open website " + header.getWebsite()));
+        websiteButton.setOnAction(e ->{
+            if (onWebsite.get() != null) {
+                onWebsite.get().run();
+            }
+        });
 
         Region separator = new Region();
         separator.getStyleClass().add("region-separator");
@@ -90,20 +93,6 @@ public class SimpleDetailHeader extends DetailHeader {
 
         contentBox.setMaxWidth(Region.USE_PREF_SIZE);
         return contentBox;
-    }
-
-    private final ObjectProperty<SimpleHeaderInfo> simpleHeaderInfo = new SimpleObjectProperty<>(this, "simpleHeaderInfo");
-
-    public SimpleHeaderInfo getSimpleHeaderInfo() {
-        return simpleHeaderInfo.get();
-    }
-
-    public ObjectProperty<SimpleHeaderInfo> simpleHeaderInfoProperty() {
-        return simpleHeaderInfo;
-    }
-
-    public void setSimpleHeaderInfo(SimpleHeaderInfo simpleHeaderInfo) {
-        this.simpleHeaderInfo.set(simpleHeaderInfo);
     }
 
     private final StringProperty websiteButtonText = new SimpleStringProperty(this, "websiteButtonText");
@@ -135,6 +124,17 @@ public class SimpleDetailHeader extends DetailHeader {
     }
 
 
+    private final ObjectProperty<Runnable> onWebsite = new SimpleObjectProperty<>(this, "onWebsite");
 
+    public Runnable getOnWebsite() {
+        return onWebsite.get();
+    }
 
+    public ObjectProperty<Runnable> onWebsiteProperty() {
+        return onWebsite;
+    }
+
+    public void setOnWebsite(Runnable onWebsite) {
+        this.onWebsite.set(onWebsite);
+    }
 }

@@ -1,42 +1,42 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class SocialLinksView extends FlowPane {
 
     public SocialLinksView() {
         getStyleClass().add("social-links-view");
 
-        Button twitterLinkBtn = new Button("Twitter", new FontIcon(MaterialDesign.MDI_TWITTER));
+        Button twitterLinkBtn = new Button("Twitter", new FontIcon(IkonUtil.twitter));
         twitterLinkBtn.getStyleClass().add("twitter-link-btn");
         twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
         twitterLinkBtn.visibleProperty().bind(twitterUrlProperty().isNotEmpty());
         twitterLinkBtn.setOnAction(e -> System.out.println(getTwitterUrl()));
 
-        Button linkedInLinkBtn = new Button("LinkedIn", new FontIcon(MaterialDesign.MDI_LINKEDIN_BOX));
+        Button linkedInLinkBtn = new Button("LinkedIn", new FontIcon(IkonUtil.linkedin));
         linkedInLinkBtn.getStyleClass().add("linkedin-link-btn");
         linkedInLinkBtn.managedProperty().bind(linkedInLinkBtn.visibleProperty());
         linkedInLinkBtn.visibleProperty().bind(linkedInUrlProperty().isNotEmpty());
         linkedInLinkBtn.setOnAction(e -> System.out.println(getLinkedInUrl()));
 
-        Button websiteLinkBtn = new Button("Website", new FontIcon(MaterialDesign.MDI_WEB));
+        Button websiteLinkBtn = new Button("Website", new FontIcon(IkonUtil.website));
         websiteLinkBtn.getStyleClass().add("website-link-btn");
         websiteLinkBtn.managedProperty().bind(websiteLinkBtn.visibleProperty());
         websiteLinkBtn.visibleProperty().bind(websiteUrlProperty().isNotEmpty());
         websiteLinkBtn.setOnAction(e -> System.out.println(getWebsiteUrl()));
 
-        Button mailLinkBtn = new Button("Mail", new FontIcon(MaterialDesign.MDI_SEND));
+        Button mailLinkBtn = new Button("Mail", new FontIcon(IkonUtil.mail));
         mailLinkBtn.getStyleClass().add("mail-link-btn");
         mailLinkBtn.managedProperty().bind(mailLinkBtn.visibleProperty());
         mailLinkBtn.visibleProperty().bind(mailUrlProperty().isNotEmpty());
         mailLinkBtn.setOnAction(e -> System.out.println(getMailUrl()));
 
-        Button githubLinkBtn = new Button("GitHub", new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
+        Button githubLinkBtn = new Button("GitHub", new FontIcon(IkonUtil.github));
         githubLinkBtn.getStyleClass().add("github-link-btn");
         githubLinkBtn.managedProperty().bind(githubLinkBtn.visibleProperty());
         githubLinkBtn.visibleProperty().bind(githubUrlProperty().isNotEmpty());

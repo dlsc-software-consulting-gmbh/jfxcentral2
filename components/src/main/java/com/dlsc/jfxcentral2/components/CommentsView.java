@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral2.model.Badge;
 import com.dlsc.jfxcentral2.model.Comment;
 import com.dlsc.jfxcentral2.model.User;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -27,9 +28,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material2.Material2OutlinedMZ;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignS;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -110,8 +109,8 @@ public class CommentsView extends PaneBase {
         loadMoreButton.setOnAction(evt -> {
             User writedUser = new User(
                     "0", "Dirk Lemmermann", new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png").toExternalForm()),
-                    List.of(new Badge("Champion", Material2OutlinedMZ.VERIFIED),
-                            new Badge("Rockstar", MaterialDesignS.STAR_FOUR_POINTS_OUTLINE)));
+                    List.of(new Badge("Champion", IkonUtil.champion),
+                            new Badge("Rockstar", IkonUtil.rockstar)));
             comments.addAll(
                     new Comment("001abc", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.", writedUser, ZonedDateTime.now().minusMinutes(5), 125, false, false),
                     new Comment("001abc", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.", writedUser, ZonedDateTime.now().minusHours(3), 125, false, false),
@@ -169,7 +168,7 @@ public class CommentsView extends PaneBase {
 
         Button closeButton = new Button();
         closeButton.getStyleClass().add("close-button");
-        closeButton.setGraphic(new FontIcon(MaterialDesign.MDI_CLOSE));
+        closeButton.setGraphic(new FontIcon(IkonUtil.close));
         closeButton.setOnAction(e -> pane.setCenter(writeBox));
 
         HBox notifyBox = new HBox(submittedNotifylabel, new Spacer(), closeButton);
@@ -180,8 +179,8 @@ public class CommentsView extends PaneBase {
         submitButton.setOnAction(e -> {
             User writedUser = new User(
                     "0", "Dirk Lemmermann", new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png").toExternalForm()),
-                    List.of(new Badge("Champion", Material2OutlinedMZ.VERIFIED),
-                            new Badge("Rockstar", MaterialDesignS.STAR_FOUR_POINTS_OUTLINE))
+                    List.of(new Badge("Champion", IkonUtil.champion),
+                            new Badge("Rockstar", IkonUtil.rockstar))
             );
             //latest comments first
             getComments().add(0, new Comment("001abc", textArea.getText(), writedUser, ZonedDateTime.now(), 125, false, false));

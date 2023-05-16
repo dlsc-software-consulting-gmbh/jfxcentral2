@@ -1,18 +1,23 @@
 package com.dlsc.jfxcentral2.components.headers;
 
-import com.dlsc.jfxcentral2.model.SimpleHeaderInfo;
+import com.dlsc.jfxcentral.data.model.Book;
 
-public class BookDetailHeader extends SimpleDetailHeader {
+public class BookDetailHeader extends SimpleDetailHeader<Book> {
 
-    public BookDetailHeader(SimpleHeaderInfo book) {
+    public BookDetailHeader(Book book) {
         this();
-        setSimpleHeaderInfo(book);
+        setModel(book);
     }
 
     public BookDetailHeader() {
         getStyleClass().add("book-detail-header");
 
         setWebsiteButtonText("amazon");
+        setOnWebsite(() -> {
+            if (getModel() != null) {
+                System.out.println(getModel().getName() + " Book website");
+            }
+        });
         setOnBack(() -> System.out.println(getClass().getSimpleName() + " back"));
         setOnShare(() -> System.out.println(getClass().getSimpleName() + " share"));
     }

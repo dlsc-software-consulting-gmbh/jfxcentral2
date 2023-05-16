@@ -6,9 +6,9 @@ import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.filters.PeopleFilterView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class PeopleCategoryPage extends CategoryPageBase<Person> {
 
@@ -29,7 +29,7 @@ public class PeopleCategoryPage extends CategoryPageBase<Person> {
     @Override
     public Node content() {
         // header
-        CategoryHeader header = createCategoryHeader("People", MaterialDesign.MDI_ACCOUNT);
+        CategoryHeader header = createCategoryHeader("People", IkonUtil.person);
 
         // filter
         PeopleFilterView filterView = new PeopleFilterView();

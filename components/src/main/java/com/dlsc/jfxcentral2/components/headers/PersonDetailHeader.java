@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.model.Badge;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +21,7 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.List;
 
-public class PersonDetailHeader extends DetailHeader {
+public class PersonDetailHeader extends DetailHeader<Person> {
 
     private final Person person;
 
@@ -93,7 +94,7 @@ public class PersonDetailHeader extends DetailHeader {
         socialFlowPane.getStyleClass().add("social-flow-pane");
 
         if (StringUtils.isNotBlank(person.getTwitter())) {
-            Button twitterLinkBtn = new Button("TWITTER", new FontIcon(MaterialDesign.MDI_TWITTER));
+            Button twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
             twitterLinkBtn.getStyleClass().addAll("twitter-link-btn","link-button");
             LinkUtil.setExternalLink(twitterLinkBtn, person.getTwitter());
             twitterLinkBtn.setOnAction(e -> System.out.println(person.getTwitter()));
@@ -101,7 +102,7 @@ public class PersonDetailHeader extends DetailHeader {
         }
 
         if (StringUtils.isNotBlank(person.getLinkedIn())) {
-            Button linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(MaterialDesign.MDI_LINKEDIN_BOX));
+            Button linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(IkonUtil.linkedin));
             linkedInLinkBtn.getStyleClass().addAll("linkedin-link-btn","link-button");
             linkedInLinkBtn.setOnAction(e -> System.out.println(person.getLinkedIn()));
             LinkUtil.setExternalLink(linkedInLinkBtn, person.getTwitter());
@@ -109,7 +110,7 @@ public class PersonDetailHeader extends DetailHeader {
         }
 
         if (StringUtils.isNotBlank(person.getWebsite())) {
-            Button websiteLinkBtn = new Button("WEBSITE", new FontIcon(MaterialDesign.MDI_WEB));
+            Button websiteLinkBtn = new Button("WEBSITE", new FontIcon(IkonUtil.website));
             websiteLinkBtn.getStyleClass().addAll("website-link-btn","link-button");
             websiteLinkBtn.setOnAction(e -> System.out.println(person.getWebsite()));
             LinkUtil.setExternalLink(websiteLinkBtn, person.getWebsite());
@@ -117,7 +118,7 @@ public class PersonDetailHeader extends DetailHeader {
         }
 
         if (StringUtils.isNotBlank(person.getEmail())) {
-            Button mailLinkBtn = new Button("MAIL", new FontIcon(MaterialDesign.MDI_SEND));
+            Button mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
             mailLinkBtn.getStyleClass().addAll("mail-link-btn","link-button");
             mailLinkBtn.setOnAction(e -> System.out.println(person.getEmail()));
             LinkUtil.setExternalLink(mailLinkBtn, person.getEmail());
@@ -125,7 +126,7 @@ public class PersonDetailHeader extends DetailHeader {
         }
 
         if (StringUtils.isNotBlank(person.getGitHub())) {
-            Button githubLinkBtn = new Button("GITHUB", new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
+            Button githubLinkBtn = new Button("GITHUB", new FontIcon(IkonUtil.github));
             githubLinkBtn.getStyleClass().addAll("github-link-btn","link-button");
             githubLinkBtn.setOnAction(e -> System.out.println(person.getGitHub()));
             LinkUtil.setExternalLink(githubLinkBtn, person.getGitHub());

@@ -2,9 +2,8 @@ package com.dlsc.jfxcentral2.model;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import org.kordamp.ikonli.Ikon;
-import org.kordamp.ikonli.material2.Material2OutlinedMZ;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignS;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,10 +19,10 @@ public record Badge(String name, Ikon icon) {
         if (mo instanceof Person person) {
             badges = new ArrayList<>();
             if (person.isChampion()) {
-                badges.add(new Badge("Champion", Material2OutlinedMZ.VERIFIED));
+                badges.add(new Badge("Champion", IkonUtil.champion));
             }
             if (person.isRockstar()) {
-                badges.add(new Badge("Rockstar", MaterialDesignS.STAR_FOUR_POINTS_OUTLINE));
+                badges.add(new Badge("Rockstar", IkonUtil.rockstar));
             }
         }
         if (badges != null) {

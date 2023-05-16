@@ -1,37 +1,36 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral2.model.details.VideosDetailsObject;
+import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignV;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-public class VideosDetailsBox extends DetailsBoxBase<VideosDetailsObject> {
+public class VideosDetailsBox extends DetailsBoxBase<Video> {
 
     public VideosDetailsBox() {
         getStyleClass().addAll("videos-details-box");
         setTitle("VIDEOS");
-        setIkon(MaterialDesignV.VIDEO_OUTLINE);
+        setIkon(IkonUtil.video);
         setMaxItemsPerPage(3);
 
         setOnPlay(detailsObject -> {
-            System.out.println("On Play: " + detailsObject.getTitle());
+            System.out.println("On Play: " + detailsObject.getName());
         });
 
         setOnYoutube(detailsObject -> {
-            System.out.println("On Youtube: " + detailsObject.getTitle());
+            System.out.println("On Youtube: " + detailsObject.getName());
         });
     }
 
     @Override
-    protected List<Node> createActionButtons(VideosDetailsObject model) {
-        Button playButton = new Button("PLAY", new FontIcon(MaterialDesign.MDI_PLAY));
+    protected List<Node> createActionButtons(Video model) {
+        Button playButton = new Button("PLAY", new FontIcon(IkonUtil.play));
         playButton.getStyleClass().add("play-button");
         playButton.managedProperty().bind(playButton.visibleProperty());
         playButton.visibleProperty().bind(onPlayProperty().isNotNull());
@@ -54,31 +53,31 @@ public class VideosDetailsBox extends DetailsBoxBase<VideosDetailsObject> {
         return List.of(playButton, youtubeButton);
     }
 
-    private final ObjectProperty<Consumer<VideosDetailsObject>> onPlay = new SimpleObjectProperty<>(this, "onPlay");
+    private final ObjectProperty<Consumer<Video>> onPlay = new SimpleObjectProperty<>(this, "onPlay");
 
-    public Consumer<VideosDetailsObject> getOnPlay() {
+    public Consumer<Video> getOnPlay() {
         return onPlay.get();
     }
 
-    public ObjectProperty<Consumer<VideosDetailsObject>> onPlayProperty() {
+    public ObjectProperty<Consumer<Video>> onPlayProperty() {
         return onPlay;
     }
 
-    public void setOnPlay(Consumer<VideosDetailsObject> onPlay) {
+    public void setOnPlay(Consumer<Video> onPlay) {
         this.onPlay.set(onPlay);
     }
 
-    private final ObjectProperty<Consumer<VideosDetailsObject>> onYoutube = new SimpleObjectProperty<>(this, "onYoutube");
+    private final ObjectProperty<Consumer<Video>> onYoutube = new SimpleObjectProperty<>(this, "onYoutube");
 
-    public Consumer<VideosDetailsObject> getOnYoutube() {
+    public Consumer<Video> getOnYoutube() {
         return onYoutube.get();
     }
 
-    public ObjectProperty<Consumer<VideosDetailsObject>> onYoutubeProperty() {
+    public ObjectProperty<Consumer<Video>> onYoutubeProperty() {
         return onYoutube;
     }
 
-    public void setOnYoutube(Consumer<VideosDetailsObject> onYoutube) {
+    public void setOnYoutube(Consumer<Video> onYoutube) {
         this.onYoutube.set(onYoutube);
     }
 }

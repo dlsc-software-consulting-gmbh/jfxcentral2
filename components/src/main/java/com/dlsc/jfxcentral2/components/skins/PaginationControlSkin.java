@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.PaginationControl;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,7 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class PaginationControlSkin extends ControlBaseSkin<PaginationControl> {
     private PaginationControl control;
@@ -19,7 +19,7 @@ public class PaginationControlSkin extends ControlBaseSkin<PaginationControl> {
 
         Button btnPrev = new Button();
         btnPrev.getStyleClass().add("prev-button");
-        btnPrev.setGraphic(new FontIcon(MaterialDesign.MDI_ARROW_LEFT));
+        btnPrev.setGraphic(new FontIcon(IkonUtil.arrowLeft));
         btnPrev.setFocusTraversable(false);
         BorderPane.setAlignment(btnPrev, Pos.CENTER);
 
@@ -37,7 +37,7 @@ public class PaginationControlSkin extends ControlBaseSkin<PaginationControl> {
 
         Button btnNext = new Button();
         btnNext.getStyleClass().add("next-button");
-        btnNext.setGraphic(new FontIcon(MaterialDesign.MDI_ARROW_RIGHT));
+        btnNext.setGraphic(new FontIcon(IkonUtil.arrowRight));
         BorderPane.setAlignment(btnNext, Pos.CENTER);
         btnNext.setFocusTraversable(false);
 
@@ -79,6 +79,7 @@ public class PaginationControlSkin extends ControlBaseSkin<PaginationControl> {
             btnPrev.setDisable(nv.intValue() == 0);
             btnNext.setDisable(nv.intValue() == control.getPageCount() - 1);
             if (control.getPageFactory() != null) {
+                control.requestFocus();
                 contentPaneCenter.getChildren().setAll(control.getPageFactory().call(nv.intValue()));
             }
         });

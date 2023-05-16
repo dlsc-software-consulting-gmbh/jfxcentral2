@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.FeatureView;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.Feature;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
@@ -12,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
     public FeatureViewSkin(FeatureView control) {
@@ -36,7 +36,7 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
 
         FontIcon typeIcon = new FontIcon();
         typeIcon.getStyleClass().add("type-icon");
-        typeIcon.setIconCode(feature.type() == Feature.Type.VIDEO ? MaterialDesign.MDI_PLAY : MaterialDesign.MDI_ARROW_TOP_RIGHT);
+        typeIcon.setIconCode(feature.type() == Feature.Type.VIDEO ? IkonUtil.play : IkonUtil.link);
 
         Label titleLabel = NodeUtil.createLabel("title");
         titleLabel.setText(feature.title());
