@@ -108,10 +108,11 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
         return boxes;
     }
 
-    private void maybeAddBox(ModelObject modelObject, Class<? extends ModelObject> clazz, Supplier<DetailsBoxBase> boxSupplier, List<DetailsBoxBase<?>> boxList) {
-        ListProperty<? extends ModelObject> linkedObjects = DataRepository.getInstance().getLinkedObjects(modelObject, clazz);
+    private <MO extends ModelObject> void maybeAddBox(ModelObject modelObject, Class<MO> clazz, Supplier<DetailsBoxBase<MO>> boxSupplier, List<DetailsBoxBase<?>> boxList) {
+        ListProperty<MO> linkedObjects = DataRepository.getInstance().getLinkedObjects(modelObject, clazz);
         if (!linkedObjects.isEmpty()) {
-            DetailsBoxBase box = boxSupplier.get();
+            DetailsBoxBase<MO> box = boxSupplier.get();
+            box.itemsProperty().bind(linkedObjects);
             box.sizeProperty().bind(sizeProperty());
             boxList.add(box);
         }

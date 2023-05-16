@@ -23,6 +23,7 @@ public class PersonDetailsPage extends DetailsPageBase<Person> {
 
         // details
         DetailsContentPane detailsContentPane = createContentPane();
+        detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(personDetailHeader, detailsContentPane);
     }
