@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.JFXCentralUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.HPos;
@@ -81,21 +80,21 @@ public class FooterView extends PaneBase {
     private LineNumberPane initLinksPane() {
         Hyperlink twitterLink = new Hyperlink("Twitter");
         twitterLink.getStyleClass().addAll("link", "twitter-link");
-        twitterLink.setOnAction(event -> JFXCentralUtil.run(onTwitter));
+        LinkUtil.setExternalLink(twitterLink, "https://twitter.com/dlemmermann");
 
-        Hyperlink LinkedinLink = new Hyperlink("Linkedin");
-        LinkedinLink.getStyleClass().addAll("link", "linkedin-link");
-        LinkedinLink.setOnAction(event -> JFXCentralUtil.run(onLinkedin));
+        Hyperlink linkedinLink = new Hyperlink("Linkedin");
+        linkedinLink.getStyleClass().addAll("link", "linkedin-link");
+        LinkUtil.setExternalLink(linkedinLink, "https://www.linkedin.com/in/dlemmermann/");
 
         Hyperlink githubLink = new Hyperlink("Github");
         githubLink.getStyleClass().addAll("link", "github-link");
-        githubLink.setOnAction(event -> JFXCentralUtil.run(onGithub));
+        LinkUtil.setExternalLink(githubLink, "https://github.com/dlemmermann");
 
         Hyperlink youtubeLink = new Hyperlink("Youtube");
         youtubeLink.getStyleClass().addAll("link", "youtube-link");
-        youtubeLink.setOnAction(event -> JFXCentralUtil.run(onYoutube));
+        LinkUtil.setExternalLink(youtubeLink, "https://www.youtube.com/@dlsc/videos");
 
-        LineNumberPane linksPane = new LineNumberPane(new Label("Stay in the loop"), null, twitterLink, LinkedinLink, githubLink, youtubeLink);
+        LineNumberPane linksPane = new LineNumberPane(new Label("Stay in the loop"), null, twitterLink, linkedinLink, githubLink, youtubeLink);
         linksPane.getStyleClass().add("links-pane");
         return linksPane;
     }
@@ -113,7 +112,7 @@ public class FooterView extends PaneBase {
 
         Hyperlink emailLink = new Hyperlink("dlemmermann@gmail.com");
         emailLink.getStyleClass().add("link");
-        emailLink.setOnAction(event -> JFXCentralUtil.run(onSendMail));
+        LinkUtil.setLink(emailLink, "mailto:dlemmermann@gmail.com");
 
         Label contactLabel = new Label("Contact");
         Label dlscLabel = new Label("DLSC Gmbh");
