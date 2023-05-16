@@ -4091,7 +4091,7 @@
 
 .details-box > .content-box .title-box > .title-label > .custom-image-view {
     -fx-fit-width: 200px;
-    -fx-fit-height: 18px;
+    -fx-fit-height: 32px;
 }
 
 .details-box > .content-box .details-cell .cell-bottom {
