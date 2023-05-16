@@ -92,6 +92,7 @@ public class SearchFilterView extends PaneBase {
         });
 
         Button applyFiltersButton = new Button("APPLY FILTERS");
+        applyFiltersButton.setMinWidth(Region.USE_PREF_SIZE);
         applyFiltersButton.getStyleClass().addAll("apply-filters-button", "blue-button");
         applyFiltersButton.managedProperty().bind(applyFiltersButton.visibleProperty());
         applyFiltersButton.visibleProperty().bind(filterItemsProperty().sizeProperty().greaterThan(1));
