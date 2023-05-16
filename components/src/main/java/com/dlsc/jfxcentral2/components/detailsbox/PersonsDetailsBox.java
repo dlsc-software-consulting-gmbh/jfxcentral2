@@ -1,47 +1,47 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral2.model.details.PersonDetailsObject;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-public class PersonsDetailsBox extends DetailsBoxBase<PersonDetailsObject> {
+public class PersonsDetailsBox extends DetailsBoxBase<Person> {
 
     public PersonsDetailsBox() {
         getStyleClass().add("persons-details-box");
         setTitle("PEOPLE");
-        setIkon(MaterialDesign.MDI_ACCOUNT);
+        setIkon(IkonUtil.person);
         setMaxItemsPerPage(2);
 
         setOnDetails(detailsObject -> {
-            System.out.println("On Details: " + detailsObject.getTitle());
+            System.out.println("On Details: " + detailsObject.getName());
         });
 
         setOnHomepage(detailsObject -> {
-            System.out.println("On Homepage: " + detailsObject.getTitle());
+            System.out.println("On Homepage: " + detailsObject.getName());
         });
     }
 
     @Override
-    protected List<Node> createActionButtons(PersonDetailsObject model) {
+    protected List<Node> createActionButtons(Person model) {
         return List.of(createDetailsButton(model), createHomepageButton(model, onHomepageProperty()));
     }
 
-    private final ObjectProperty<Consumer<PersonDetailsObject>> onHomepage = new SimpleObjectProperty<>(this, "onHomepage");
+    private final ObjectProperty<Consumer<Person>> onHomepage = new SimpleObjectProperty<>(this, "onHomepage");
 
-    public Consumer<PersonDetailsObject> getOnHomepage() {
+    public Consumer<Person> getOnHomepage() {
         return onHomepage.get();
     }
 
-    public ObjectProperty<Consumer<PersonDetailsObject>> onHomepageProperty() {
+    public ObjectProperty<Consumer<Person>> onHomepageProperty() {
         return onHomepage;
     }
 
-    public void setOnHomepage(Consumer<PersonDetailsObject> onHomepage) {
+    public void setOnHomepage(Consumer<Person> onHomepage) {
         this.onHomepage.set(onHomepage);
     }
 

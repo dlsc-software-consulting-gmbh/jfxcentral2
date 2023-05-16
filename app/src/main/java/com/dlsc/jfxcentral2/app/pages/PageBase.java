@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.app.pages;
 
-
 import com.dlsc.jfxcentral2.components.CopyrightView;
 import com.dlsc.jfxcentral2.components.FooterView;
 import com.dlsc.jfxcentral2.components.MenuView;
@@ -9,6 +8,7 @@ import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.TopPane;
 import com.dlsc.jfxcentral2.model.Feature;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -21,7 +21,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.View;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.List;
 import java.util.Objects;
@@ -131,8 +130,8 @@ public abstract class PageBase extends View {
 
     protected List<Feature> createFeatures() {
         return List.of(
-                new Feature("Video", "[1] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", MaterialDesign.MDI_TIMER, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[2] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", MaterialDesign.MDI_TIMER, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", MaterialDesign.MDI_TIMER, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."));
+                new Feature("Video", "[1] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."),
+                new Feature("Video", "[2] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."),
+                new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."));
     }
 }

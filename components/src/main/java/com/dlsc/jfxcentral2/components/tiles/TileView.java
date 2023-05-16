@@ -1,11 +1,18 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.FlipView;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
-import com.dlsc.jfxcentral2.model.tiles.TileData;
-import com.dlsc.jfxcentral2.model.Video;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -38,13 +45,12 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TileView<T extends TileData> extends PaneBase {
+public class TileView<T extends ModelObject> extends PaneBase {
 
     private final FlipView flipView = new FlipView();
     private CustomImageView imageView;
@@ -64,19 +70,17 @@ public class TileView<T extends TileData> extends PaneBase {
         saveSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setSaveButtonSelected(nv));
         likeSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setLikeButtonSelected(nv));
 
-        saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, nv) -> {
-            setSaveSelected(nv);
+        saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, saved) -> {
+            setSaveSelected(saved);
             if (getData() != null) {
-                getData().setSave(nv);
-                System.out.println((nv ? "SELECTED: " : "UNSELECTED: ") + getData().getTitle());
+                System.out.println((saved ? "SELECTED: " : "UNSELECTED: ") + getData().getName());
             }
         });
 
-        saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, nv) -> {
-            setLikeSelected(nv);
+        saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, liked) -> {
+            setLikeSelected(liked);
             if (getData() != null) {
-                getData().setLike(nv);
-                System.out.println((nv ? "LIKED: " : "UNLIKED: ") + getData().getTitle());
+                System.out.println((liked ? "LIKED: " : "UNLIKED: ") + getData().getName());
             }
         });
 
@@ -131,11 +135,29 @@ public class TileView<T extends TileData> extends PaneBase {
         dataProperty().addListener((ob, ov, data) -> {
             boolean isVideo = data instanceof Video;
             StackPane.setAlignment(imageView, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
-            setTitle(data.getTitle());
+            setTitle(data.getName());
             setDescription(data.getDescription());
-            setImage(data.getThumbnail());
-            setSaveSelected(data.isSave());
-            setLikeSelected(data.isLike());
+            setSaveSelected(SaveAndLikeUtil.isSaved(data));
+            setLikeSelected(SaveAndLikeUtil.isLiked(data));
+            //TODO set default image for test
+            if (data instanceof RealWorldApp app) {
+                //imageProperty().bind(ImageManager.getInstance().realWorldAppImageProperty(app));
+                setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/app-thumbnail-01.png").toExternalForm()));
+            } else if (data instanceof Video video) {
+                //imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
+                setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/video-thumbnail-01.png").toExternalForm()));
+            } else if (data instanceof Book book) {
+                //imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
+                setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/book-thumbnail-01.png").toExternalForm()));
+            } else if (data instanceof Download download) {
+                //imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
+                setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/download-thumbnail-01.png").toExternalForm()));
+            } else if (data instanceof Company company) {
+                //imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
+                setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/company-thumbnail-01.png").toExternalForm()));
+            } else if (data instanceof Tip) {
+                imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm())));
+            }
         });
     }
 
@@ -219,7 +241,7 @@ public class TileView<T extends TileData> extends PaneBase {
     }
 
     private Node createBack() {
-        Button closeButton = new Button("CLOSE", new FontIcon(MaterialDesign.MDI_CLOSE));
+        Button closeButton = new Button("CLOSE", new FontIcon(IkonUtil.close));
         closeButton.getStyleClass().addAll("close-button", "blue-button");
         closeButton.setContentDisplay(ContentDisplay.RIGHT);
         closeButton.setOnAction(event -> flipView.flipToFront());

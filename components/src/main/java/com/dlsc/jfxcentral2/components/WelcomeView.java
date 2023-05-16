@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -9,7 +10,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class WelcomeView extends PaneBase {
 
@@ -46,11 +46,11 @@ public class WelcomeView extends PaneBase {
         flowPane = new FlowPane();
         flowPane.getStyleClass().add("flow-pane");
         jfxCentralButton = new Button("jfxcentral");
-        jfxCentralButton.setGraphic(new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
+        jfxCentralButton.setGraphic(new FontIcon(IkonUtil.github));
         jfxCentralButton.getStyleClass().addAll("transparent-button", "jfxcentral-button");
         LinkUtil.setExternalLink(jfxCentralButton, "https://github.com/dlemmermann/jfxcentral2");
 
-        jfxcentralDataButton = new Button("jfxcentral-data", new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
+        jfxcentralDataButton = new Button("jfxcentral-data", new FontIcon(IkonUtil.github));
         jfxcentralDataButton.getStyleClass().addAll("transparent-button", "jfxcentral-data-button");
         LinkUtil.setExternalLink(jfxcentralDataButton, "https://github.com/dlemmermann/jfxcentral-data");
 

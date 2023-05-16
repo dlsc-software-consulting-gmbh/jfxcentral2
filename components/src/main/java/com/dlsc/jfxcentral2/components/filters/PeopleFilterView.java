@@ -1,10 +1,10 @@
 package com.dlsc.jfxcentral2.components.filters;
 
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material2.Material2OutlinedMZ;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignS;
 
 public class PeopleFilterView extends SimpleSearchFilterView {
@@ -16,11 +16,11 @@ public class PeopleFilterView extends SimpleSearchFilterView {
         keysLabel.getStyleClass().add("keys-label");
         keysLabel.setMinWidth(Region.USE_PREF_SIZE);
 
-        Label rockStartBadge = new Label("Rockstar", new FontIcon(MaterialDesignS.STAR_FOUR_POINTS_OUTLINE));
+        Label rockStartBadge = new Label("Rockstar", new FontIcon(IkonUtil.rockstar));
         rockStartBadge.getStyleClass().add("badge");
         rockStartBadge.setMinWidth(Region.USE_PREF_SIZE);
 
-        Label championBadge = new Label("Champion", new FontIcon(Material2OutlinedMZ.VERIFIED));
+        Label championBadge = new Label("Champion", new FontIcon(IkonUtil.champion));
         championBadge.getStyleClass().add("badge");
         championBadge.setMinWidth(Region.USE_PREF_SIZE);
 

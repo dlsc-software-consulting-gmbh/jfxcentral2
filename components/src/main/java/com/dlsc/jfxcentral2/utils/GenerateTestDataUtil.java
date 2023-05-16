@@ -1,13 +1,12 @@
 package com.dlsc.jfxcentral2.utils;
 
-import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.model.Feature;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
+import com.dlsc.jfxcentral2.model.Size;
 import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignT;
 
 import java.util.ArrayList;
@@ -22,9 +21,9 @@ public class GenerateTestDataUtil {
 
     public static List<Feature> generateFeatures() {
         return FXCollections.observableArrayList(
-                new Feature("Video", "[1] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", MaterialDesign.MDI_TIMER, Feature.Type.VIDEO, new Image(GenerateTestDataUtil.class.getResource("/com/dlsc/jfxcentral2/test/images/feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[2] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", MaterialDesign.MDI_TIMER, Feature.Type.VIDEO, new Image(GenerateTestDataUtil.class.getResource("/com/dlsc/jfxcentral2/test/images/feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", MaterialDesign.MDI_TIMER, Feature.Type.VIDEO, new Image(GenerateTestDataUtil.class.getResource("/com/dlsc/jfxcentral2/test/images/feature-img.png").toExternalForm()), "url ...")
+                new Feature("Video", "[1] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(GenerateTestDataUtil.class.getResource("/com/dlsc/jfxcentral2/test/images/feature-img.png").toExternalForm()), "url ..."),
+                new Feature("Video", "[2] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(GenerateTestDataUtil.class.getResource("/com/dlsc/jfxcentral2/test/images/feature-img.png").toExternalForm()), "url ..."),
+                new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(GenerateTestDataUtil.class.getResource("/com/dlsc/jfxcentral2/test/images/feature-img.png").toExternalForm()), "url ...")
         );
     }
 
@@ -39,7 +38,7 @@ public class GenerateTestDataUtil {
     private static List<QuickLink> getSmallQuickLinks() {
         List<QuickLink> list = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            list.add(new NormalQuickLink("Tools", "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", MaterialDesignT.TOOLS, "xxx url..."));
+            list.add(new NormalQuickLink("Tools", "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", IkonUtil.tool, "xxx url..."));
         }
         Collections.shuffle(list);
         return list;
@@ -50,7 +49,7 @@ public class GenerateTestDataUtil {
         // Randomly generate 4 to 6 QuickLinks
         int count = new Random().nextInt(3) + 4;
         for (int i = 0; i < count; i++) {
-            list.add(new NormalQuickLink("Tools", i + " Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", MaterialDesignT.TOOLS, "xxx url..."));
+            list.add(new NormalQuickLink("Tools", i + " Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", IkonUtil.tool, "xxx url..."));
         }
         //Randomly generate 1~3 QuickLinks for image placeholders
         int count2 = new Random().nextInt(3) + 1;

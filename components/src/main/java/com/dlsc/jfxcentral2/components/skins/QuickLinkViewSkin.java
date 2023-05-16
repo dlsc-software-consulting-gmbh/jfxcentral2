@@ -6,13 +6,13 @@ import com.dlsc.jfxcentral2.model.DateQuickLink;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -49,7 +49,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
                 titleLabel.setGraphic(icon);
             }
 
-            FontIcon linkIcon = new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT);
+            FontIcon linkIcon = new FontIcon(IkonUtil.link);
             linkIcon.getStyleClass().add("link-icon");
 
             HBox topBox = new HBox(titleLabel, new Spacer(), linkIcon);
@@ -74,7 +74,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             FontIcon icon = new FontIcon(temp.getIkon());
             icon.getStyleClass().add("icon");
 
-            FontIcon linkIcon = new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT);
+            FontIcon linkIcon = new FontIcon(IkonUtil.link);
             linkIcon.getStyleClass().add("link-icon");
 
             HBox topBox = new HBox(icon, new Spacer(), linkIcon);

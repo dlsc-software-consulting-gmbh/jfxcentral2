@@ -1,11 +1,21 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
+import com.dlsc.jfxcentral.data.ImageManager;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
-import com.dlsc.jfxcentral2.model.details.DetailsObject;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import com.sandec.mdfx.MarkdownView;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -31,14 +41,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-public class DetailsBoxBase<T extends DetailsObject> extends PaneBase {
-
-    private static final boolean DEFAULT_SHOW_MAIN_PREVIEW = true;
+public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
     public DetailsBoxBase() {
         getStyleClass().add("details-box");
@@ -101,10 +108,13 @@ public class DetailsBoxBase<T extends DetailsObject> extends PaneBase {
         HBox titleBox = new HBox();
         titleBox.getStyleClass().add("title-box");
 
-        Label titleLabel = new Label(model.getTitle());
-        if (model.getTitleImage() != null) {
+        Label titleLabel = new Label(model.getName());
+        //library may have a company image
+        if (model instanceof Library library) {
             CustomImageView graphic = new CustomImageView();
-            graphic.setImage(model.getTitleImage());
+            graphic.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
+            graphic.managedProperty().bind(graphic.visibleProperty());
+            graphic.visibleProperty().bind(graphic.imageProperty().isNotNull());
             titleLabel.setGraphic(graphic);
         }
         titleLabel.getStyleClass().add("title-label");
@@ -118,6 +128,7 @@ public class DetailsBoxBase<T extends DetailsObject> extends PaneBase {
             for (int i = 0; i < actionButtons.size(); i++) {
                 Node actionButton = actionButtons.get(i);
                 actionButton.getStyleClass().addAll("action-button", "action-button-" + i);
+                actionButton.setFocusTraversable(false);
                 actionButtonsPane.getChildren().add(actionButton);
             }
             if (isSmall()) {
@@ -130,51 +141,35 @@ public class DetailsBoxBase<T extends DetailsObject> extends PaneBase {
         cellRight.getChildren().addAll(titleBox);
 
         // description
-        DetailsObject.Description description = model.getDescription();
-        if (description == null || !description.isMarkdown()) {
-            Label descLabel = new Label(description == null ? "" : description.text());
-            descLabel.setWrapText(true);
-            descLabel.getStyleClass().add("description-label");
-            cellRight.getChildren().add(descLabel);
-        } else {
-            MarkdownView descMD = new MarkdownView(description.text());
+        String description = model.getDescription();
+        if (description != null) {
+            MarkdownView descMD = new MarkdownView(description);
             descMD.getStyleClass().add("description-markdown");
             cellRight.getChildren().add(descMD);
         }
 
         // previews
-        List<Image> previews = model.getPreviews();
-        if (previews != null) {
-            HBox previewsBox = new HBox();
-            previewsBox.getStyleClass().add("previews-box");
-            int max = isSmall() ? 2 : (model.getMainPreview() == null ? 7 : 6) - (isMedium() ? 1 : 0);
-            for (int i = 0; i < previews.size() && i < max; i++) {
-                Image preview = previews.get(i);
-                StackPane previewNode = createImageWrapper(preview, false);
-                previewsBox.getChildren().add(previewNode);
+        if (model instanceof Library library) {
+            Node previewsBox = createPreviewsBox(library);
+            if (previewsBox != null) {
+                previewsBox.getStyleClass().add("previews-box");
+                cellRight.getChildren().add(previewsBox);
             }
-            if (previews.size() > max) {
-                Label moreLabel = new Label("+" + (previews.size() - max));
-                moreLabel.getStyleClass().add("more-label");
-                previewsBox.getChildren().add(moreLabel);
-            }
-            cellRight.getChildren().add(previewsBox);
         }
 
         // save and like
         HBox cellBottom = new HBox();
         cellBottom.getStyleClass().addAll("save-like-box", "cell-bottom");
         SaveAndLikeButton saveButton = new SaveAndLikeButton();
-        saveButton.setSaveButtonSelected(model.isSaved());
-        saveButton.setLikeButtonSelected(model.isLiked());
+        saveButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
+        saveButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(model));
         cellBottom.getChildren().add(saveButton);
 
         HBox cellCenter = new HBox();
         cellCenter.getStyleClass().add("cell-center");
 
-        Image mainPreview = model.getMainPreview();
-        if (mainPreview != null) {
-            Node cellLeft = createMainPreView(model);
+        Node cellLeft = createMainPreView(model);
+        if (cellLeft != null) {
             cellLeft.getStyleClass().add("cell-left");
             if (!isSmall()) {
                 cellCenter.getChildren().add(cellLeft);
@@ -191,37 +186,56 @@ public class DetailsBoxBase<T extends DetailsObject> extends PaneBase {
         return cellContent;
     }
 
+    protected Node createPreviewsBox(Library library) {
+        return null;
+    }
+
     protected List<Node> createActionButtons(T model) {
         return null;
     }
 
     protected Node createMainPreView(T model) {
-        Image mainPreview = model.getMainPreview();
-        StackPane mainPreviewPane = null;
-        if (mainPreview != null) {
-            mainPreviewPane = createImageWrapper(mainPreview, true);
-            mainPreviewPane.getStyleClass().add("main-preview-wrapper");
+        ObjectProperty<Image> imageProperty = null;
+        String mins = null;
+        //TODO use a default image for test
+        if (model instanceof RealWorldApp app) {
+            //imageProperty = ImageManager.getInstance().realWorldAppImageProperty(app);
+            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-main-preview0.png").toExternalForm()));
+        } else if (model instanceof Download download) {
+            //imageProperty = ImageManager.getInstance().downloadBannerImageProperty(download);
+            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()));
+        } else if (model instanceof Book book) {
+            //imageProperty = ImageManager.getInstance().bookCoverImageProperty(book);
+            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/book-thumbnail-01.png").toExternalForm()));
+        } else if (model instanceof Tip) {
+            // use a default image for tips
+            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm()));
+        } else if (model instanceof Company company) {
+            //imageProperty = ImageManager.getInstance().companyImageProperty(company);
+            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/components/logos/jpro.png").toExternalForm()));
+        } else if (model instanceof Video video) {
+            //imageProperty = ImageManager.getInstance().youTubeImageProperty(video);
+            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/video-thumbnail-01.png").toExternalForm()));
+            mins = video.getMinutes() + " mins";
+        }
+        if (imageProperty != null && imageProperty.get() != null) {
+            CustomImageView imageView = new CustomImageView();
+            if (isSmall()) {
+                StackPane.setAlignment(imageView, Pos.CENTER_LEFT);
+            }
+            imageView.imageProperty().bind(imageProperty);
+            StackPane mainPreviewPane = new StackPane(imageView);
+            mainPreviewPane.getStyleClass().addAll("image-wrapper", "main-preview-wrapper");
             mainPreviewPane.managedProperty().bind(mainPreviewPane.visibleProperty());
-            if (model.getMainPreviewDescription() != null) {
-                Label mainPreviewDesc = new Label(model.getMainPreviewDescription(), new FontIcon());
+            if (mins != null) {
+                Label mainPreviewDesc = new Label(mins, new FontIcon());
                 mainPreviewDesc.getStyleClass().add("main-preview-desc");
                 mainPreviewPane.getChildren().add(mainPreviewDesc);
                 StackPane.setAlignment(mainPreviewDesc, Pos.TOP_RIGHT);
             }
+            return mainPreviewPane;
         }
-        return mainPreviewPane;
-    }
-
-    protected StackPane createImageWrapper(Image image, boolean isMainPreview) {
-        CustomImageView imageView = new CustomImageView();
-        imageView.setImage(image);
-        if (isMainPreview && isSmall()) {
-            StackPane.setAlignment(imageView, Pos.CENTER_LEFT);
-        }
-
-        StackPane imageWrapper = new StackPane(imageView);
-        imageWrapper.getStyleClass().add("image-wrapper");
-        return imageWrapper;
+        return null;
     }
 
     private HBox createHeaderBox() {
@@ -245,7 +259,7 @@ public class DetailsBoxBase<T extends DetailsObject> extends PaneBase {
     }
 
     protected Button createDetailsButton(T model) {
-        Button detailsButton = new Button("DETAILS", new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT));
+        Button detailsButton = new Button("DETAILS", new FontIcon(IkonUtil.link));
         detailsButton.getStyleClass().add("details-button");
         detailsButton.managedProperty().bind(detailsButton.visibleProperty());
         detailsButton.visibleProperty().bind(onDetailsProperty().isNotNull());
@@ -258,7 +272,7 @@ public class DetailsBoxBase<T extends DetailsObject> extends PaneBase {
     }
 
     protected Button createHomepageButton(T model, ObjectProperty<Consumer<T>> onHomepageProperty) {
-        Button homepageButton = new Button("HOMEPAGE", new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT));
+        Button homepageButton = new Button("HOMEPAGE", new FontIcon(IkonUtil.link));
         homepageButton.managedProperty().bind(homepageButton.visibleProperty());
         homepageButton.visibleProperty().bind(onHomepageProperty.isNotNull());
         homepageButton.setOnAction(event -> {

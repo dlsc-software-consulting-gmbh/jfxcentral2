@@ -4090,7 +4090,7 @@
 }
 
 .details-box > .content-box .title-box > .title-label > .custom-image-view {
-    -fx-fit-width: 500px;
+    -fx-fit-width: 200px;
     -fx-fit-height: 18px;
 }
 
@@ -4355,6 +4355,12 @@
     -fx-translate-x: -7px;
     -fx-translate-y: 8px;
     -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.videos-details-box:sm > .content-box .details-cell .main-preview-wrapper > .main-preview-desc {
+    -fx-translate-x: 0;
+    -fx-translate-y: 0;
 }
 
 .videos-details-box:sm > .content-box .details-cell .main-preview-wrapper > .main-preview-desc {

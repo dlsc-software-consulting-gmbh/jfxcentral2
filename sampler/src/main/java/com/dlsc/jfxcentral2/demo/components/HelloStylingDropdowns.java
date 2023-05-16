@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.demo.components;
 
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.geometry.Insets;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -11,11 +12,6 @@ import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 import org.kordamp.ikonli.material2.Material2AL;
-import org.kordamp.ikonli.material2.Material2OutlinedAL;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignB;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignT;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignV;
 
 import java.util.List;
 
@@ -48,12 +44,12 @@ public class HelloStylingDropdowns extends JFXCentralSampleBase {
     }
 
     private List<MenuItem> createMenuItems() {
-        MenuItem item1 = new MenuItem("Libraries", new FontIcon(Material2OutlinedAL.LIBRARY_BOOKS));
-        MenuItem item2 = new MenuItem("Blogs", new FontIcon(MaterialDesign.MDI_NEWSPAPER));
-        MenuItem item3 = new MenuItem("Tools", new FontIcon(MaterialDesignT.TOOLS));
-        MenuItem item4 = new MenuItem("Books", new FontIcon(MaterialDesignB.BOOK_OPEN_VARIANT));
+        MenuItem item1 = new MenuItem("Libraries", new FontIcon(IkonUtil.library));
+        MenuItem item2 = new MenuItem("Blogs", new FontIcon(IkonUtil.blog));
+        MenuItem item3 = new MenuItem("Tools", new FontIcon(IkonUtil.tool));
+        MenuItem item4 = new MenuItem("Books", new FontIcon(IkonUtil.book));
         MenuItem item5 = new MenuItem("Tutorials", new FontIcon(Material.VIEW_IN_AR));
-        MenuItem item6 = new MenuItem("Videos", new FontIcon(MaterialDesignV.VIDEO_OUTLINE));
+        MenuItem item6 = new MenuItem("Videos", new FontIcon(IkonUtil.video));
         MenuItem item7 = new MenuItem("Links of the week", new FontIcon(Material2AL.LIST_ALT));
         return List.of(item1, item2, item3, item4, item5, item6, item7);
     }

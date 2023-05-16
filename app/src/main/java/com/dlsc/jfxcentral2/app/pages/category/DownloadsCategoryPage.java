@@ -6,9 +6,9 @@ import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.filters.DownloadsFilterView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class DownloadsCategoryPage extends CategoryPageBase<Person> {
 
@@ -29,7 +29,7 @@ public class DownloadsCategoryPage extends CategoryPageBase<Person> {
     @Override
     public Node content() {
         // header
-        CategoryHeader header = createCategoryHeader("Downloads", MaterialDesign.MDI_DOWNLOAD);
+        CategoryHeader header = createCategoryHeader("Downloads", IkonUtil.download);
 
         // filter
         DownloadsFilterView filterView = new DownloadsFilterView();

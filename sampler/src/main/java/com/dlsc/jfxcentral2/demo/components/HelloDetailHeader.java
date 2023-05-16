@@ -1,6 +1,8 @@
 package com.dlsc.jfxcentral2.demo.components;
 
+import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.headers.AppDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.BookDetailHeader;
@@ -8,9 +10,6 @@ import com.dlsc.jfxcentral2.components.headers.PeopleDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.PersonDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.VideoDetailHeader;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.model.App;
-import com.dlsc.jfxcentral2.model.Book;
-import com.dlsc.jfxcentral2.model.SimpleHeaderInfo;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -41,12 +40,18 @@ public class HelloDetailHeader extends JFXCentralSampleBase {
         return new ScrollPane(new VBox(30, personDetailHeader, appDetailHeader, bookDetailHeader, videoDetailHeader, peopleDetailHeader));
     }
 
-    private SimpleHeaderInfo getBook() {
-        return new Book("The Definitive Guide to Modern Java Clients with JavaFX", "Leveraging the JavaFX APIs", "https://www.jfx-central.com/home", true, false);
+    private Book getBook() {
+        Book book = new Book();
+        book.setName("The Definitive Guide to Modern Java Clients with JavaFX");
+        book.setDescription("Leveraging the JavaFX APIs");
+        return book;
     }
 
-    private App getApp() {
-        return new App("JFXCentral", "https://www.jfx-central.com/home", false, true);
+    private RealWorldApp getApp() {
+        RealWorldApp app = new RealWorldApp();
+        app.setName("JFXCentral");
+        app.setUrl("https://www.jfx-central.com/home");
+        return app;
     }
 
     private Person getPerson() {

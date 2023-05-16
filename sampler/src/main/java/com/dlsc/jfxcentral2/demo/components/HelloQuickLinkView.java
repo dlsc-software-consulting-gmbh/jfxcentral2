@@ -5,12 +5,12 @@ import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignT;
 
 public class HelloQuickLinkView extends JFXCentralSampleBase {
 
@@ -21,7 +21,7 @@ public class HelloQuickLinkView extends JFXCentralSampleBase {
         QuickLink quickLink = new NormalQuickLink(
                 "Tools",
                 "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur",
-                MaterialDesignT.TOOLS,
+                IkonUtil.tool,
                 "xxx url...");
         quickLinkView = new QuickLinkView(quickLink);
 

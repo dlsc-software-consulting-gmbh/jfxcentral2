@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.tiles.VideoTileView;
-import com.dlsc.jfxcentral2.model.Video;
 
 public class VideoGalleryTileView extends VideoTileView {
 

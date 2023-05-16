@@ -1,8 +1,9 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
+import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
@@ -11,8 +12,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import org.kordamp.ikonli.material2.Material2OutlinedAL;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignV;
 
 public class HelloCategoryHeader extends JFXCentralSampleBase {
 
@@ -33,10 +32,10 @@ public class HelloCategoryHeader extends JFXCentralSampleBase {
         titleComboBox.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) ->{
             if (nv.equals("Videos")) {
                 categoryHeader.setTitle("Videos");
-                categoryHeader.setIkon(MaterialDesignV.VIDEO_OUTLINE);
+                categoryHeader.setIkon(IkonUtil.video);
             } else {
                 categoryHeader.setTitle("People");
-                categoryHeader.setIkon(Material2OutlinedAL.ACCOUNT_BOX);
+                categoryHeader.setIkon(IkonUtil.people);
             }
         });
         titleComboBox.getSelectionModel().selectFirst();

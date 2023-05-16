@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,7 +12,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
     public PaginationControl2Skin(PaginationControl2 control) {
         super(control);
         this.control = control;
-
+        control.setFocusTraversable(false);
         BorderPane contentPane = new BorderPane();
         contentPane.getStyleClass().add("content-pane");
 
@@ -39,7 +39,8 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
 
         leftArrowButton = new Button();
         leftArrowButton.getStyleClass().add("left-arrow-button");
-        leftArrowButton.setGraphic(new FontIcon(MaterialDesign.MDI_ARROW_LEFT));
+        leftArrowButton.setGraphic(new FontIcon(IkonUtil.arrowLeft));
+        leftArrowButton.setFocusTraversable(false);
         leftArrowButton.setOnAction(e -> {
             int newIndex = control.getCurrentPageIndex() - 1;
             if (newIndex >= 0) {
@@ -49,7 +50,8 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
 
         rightArrowButton = new Button();
         rightArrowButton.getStyleClass().add("left-arrow-button");
-        rightArrowButton.setGraphic(new FontIcon(MaterialDesign.MDI_ARROW_RIGHT));
+        rightArrowButton.setGraphic(new FontIcon(IkonUtil.arrowRight));
+        rightArrowButton.setFocusTraversable(false);
         rightArrowButton.setOnAction(e -> {
             int newIndex = control.getCurrentPageIndex() + 1;
             if (newIndex < control.getPageCount()) {
@@ -91,7 +93,10 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
         contentPane.setBottom(controlBox);
 
         BorderPane.setAlignment(controlBox, Pos.CENTER);
-        contentPane.centerProperty().bind(Bindings.createObjectBinding(() -> control.getPageFactory().call(control.getCurrentPageIndex()),
+        contentPane.centerProperty().bind(Bindings.createObjectBinding(() -> {
+                    control.requestFocus();
+                    return control.getPageFactory().call(control.getCurrentPageIndex());
+                },
                 control.currentPageIndexProperty(),
                 control.pageFactoryProperty()
         ));
@@ -133,7 +138,6 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
             controlBox.getChildren().removeAll(tempList);
         }
     }
-
 
     private int computeToggleButtonNumber(int index, int pageCount, int currentPageIndex, int maxPageIndicatorCount) {
         int middle = maxPageIndicatorCount / 2;
