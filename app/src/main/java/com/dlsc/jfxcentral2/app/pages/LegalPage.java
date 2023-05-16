@@ -38,7 +38,7 @@ public class LegalPage extends PageBase {
 
     @Override
     public String description() {
-        return null;
+        return "Lists the terms and conditions, the privacy policy, and the cookie policy of JFXCentral.";
     }
 
     @Override

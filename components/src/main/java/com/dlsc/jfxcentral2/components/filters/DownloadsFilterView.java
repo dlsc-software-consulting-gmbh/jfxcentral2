@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.filters;
 
 public class DownloadsFilterView extends SimpleSearchFilterView {
+
     public DownloadsFilterView() {
         getStyleClass().add("companies-filter-view");
         setSearchPromptText("Search for a download");

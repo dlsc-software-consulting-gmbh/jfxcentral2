@@ -34,7 +34,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
         // header
         CategoryHeader header = createCategoryHeader("Links of the Week", MaterialDesign.MDI_LINK);
 
-        // details
+        // this is a category page but we still need to use the details content pane for layout purposes
         DetailsContentPane detailsContentPane = new DetailsContentPane();
         detailsContentPane.sizeProperty().bind(sizeProperty());
         detailsContentPane.getFeaturesContainer().getFeatures().setAll(createFeatures());

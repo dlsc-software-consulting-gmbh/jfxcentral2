@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
@@ -19,5 +20,12 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         categoryHeader.setIkon(ikon);
         categoryHeader.sizeProperty().bind(sizeProperty());
         return categoryHeader;
+    }
+
+    protected CategoryContentPane createCategoryContentPane() {
+        CategoryContentPane contentPane = new CategoryContentPane();
+        contentPane.sizeProperty().bind(sizeProperty());
+        contentPane.getFeaturesContainer().getFeatures().setAll(createFeatures());
+        return contentPane;
     }
 }

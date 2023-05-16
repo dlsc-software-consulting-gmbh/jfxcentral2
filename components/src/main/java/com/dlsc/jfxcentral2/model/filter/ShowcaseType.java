@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.model.filter;
 
-public enum AppType {
+public enum ShowcaseType {
     ALL("All"),
     TOOLS("Tools"),
     BUSINESS("Business"),
@@ -8,7 +8,7 @@ public enum AppType {
 
     private final String description;
 
-    AppType(String description) {
+    ShowcaseType(String description) {
         this.description = description;
     }
 

@@ -12,7 +12,7 @@ public class PullRequestsFilterView extends SearchFilterView {
         getFilterItems().setAll(
                 new FilterItem<>("DATE", PullRequestDate.class, PullRequestDate.ALL),
                 new FilterItem<>("LABEL", PullRequestLabel.class, PullRequestLabel.ALL),
-                new FilterItem<>("Status", PullRequestStatus.class, PullRequestStatus.ALL)
+                new FilterItem<>("STATUS", PullRequestStatus.class, PullRequestStatus.ALL)
         );
 
         setOnApplyFilters(() -> System.out.println("selectedFiltersProperty: " + getSelectedFilters()));

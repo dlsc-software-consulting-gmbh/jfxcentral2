@@ -13,6 +13,7 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.components.DetailsContentPane;
 import com.dlsc.jfxcentral2.components.MenuView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.detailsbox.AppsDetailsBox;
@@ -78,6 +79,14 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
     @Override
     public Node content() {
         return wrapContent(new Label(getItem().getName()));
+    }
+
+    protected DetailsContentPane createContentPane() {
+        DetailsContentPane detailsContentPane = new DetailsContentPane();
+        detailsContentPane.sizeProperty().bind(sizeProperty());
+        detailsContentPane.getFeaturesContainer().getFeatures().setAll(createFeatures());
+        detailsContentPane.getMenuView().getItems().setAll(createMenuItems());
+        return detailsContentPane;
     }
 
     protected List<DetailsBoxBase<?>> createDetailBoxes() {

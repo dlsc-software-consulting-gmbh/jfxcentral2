@@ -3872,15 +3872,15 @@
 /** ------------------------------------
  * AppsFilterView
  */
-.apps-filter-view:lg .filter-box-0 > .filter-combo-box {
+.showcases-filter-view:lg .filter-box-0 > .filter-combo-box {
     -fx-pref-width: 465px;
 }
 
-.apps-filter-view:lg .filter-box-1 > .filter-combo-box {
+.showcases-filter-view:lg .filter-box-1 > .filter-combo-box {
     -fx-pref-width: 445px;
 }
 
-.apps-filter-view:md .filter-box > .filter-combo-box {
+.showcases-filter-view:md .filter-box > .filter-combo-box {
     -fx-pref-width: 270px;
 }
 
@@ -4413,4 +4413,25 @@
 .details-content-pane > .content-box > * > .center-box > .boxes-container {
     -fx-spacing: 10px;
     -fx-alignment: top-center;
+}
+
+/** ------------------------------------
+ * CategoryContentPane
+ */
+.category-content-pane {
+    -fx-background-color: -background;
+}
+
+.category-content-pane > .content-box {
+    -fx-spacing: 30px;
+    -fx-alignment: top-center;
+    -fx-padding: 0px 0px 100px 0px;
+}
+
+.category-content-pane > .nodes {
+    -fx-spacing: 10px;
+}
+
+.category-content-pane:sm-md > .content-box {
+    -fx-padding: 0px 0px;
 }

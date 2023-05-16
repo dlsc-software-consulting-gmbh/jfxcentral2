@@ -6,13 +6,25 @@ import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
 import com.dlsc.jfxcentral2.app.pages.RefreshPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
+import com.dlsc.jfxcentral2.app.pages.category.BlogsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.BooksCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.CompaniesCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.DownloadsCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.LibrariesCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.PeopleCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.ShowcasesCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.ToolsCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.TutorialsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.VideosCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.details.BlogDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.BookDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.CompanyDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.DownloadDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.LibraryDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.PersonDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.ShowcaseDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.ToolDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
@@ -52,11 +64,17 @@ public class JFXCentral2App extends RouteApp {
 
         return Route.empty()
                 .and(RouteUtils.get("/", r -> new StartPage(size)))
-                .and(createCategoryOrDetailRoute("/people", () -> new PeopleCategoryPage(size), id -> new PersonDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute("/blogs", () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/books", () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/videos", () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute("/companies", () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/downloads", () -> new DownloadsCategoryPage(size), id -> new DownloadDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/libraries", () -> new LibrariesCategoryPage(size), id -> new LibraryDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute("/people", () -> new PeopleCategoryPage(size), id -> new PersonDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/real_world", () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // legacy routing for real world apps / showcases
                 .and(createCategoryOrDetailRoute("/showcases", () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/tools", () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/tutorials", () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/videos", () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
                 .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/cookies", r -> new LegalPage(size, LegalPage.Section.COOKIES)))

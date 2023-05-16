@@ -2,7 +2,8 @@ package com.dlsc.jfxcentral2.app.pages.category;
 
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.components.DetailsContentPane;
+import com.dlsc.jfxcentral2.components.CategoryContentPane;
+import com.dlsc.jfxcentral2.components.filters.BooksFilterView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
@@ -30,12 +31,14 @@ public class BooksCategoryPage extends CategoryPageBase<Person> {
         // header
         CategoryHeader header = createCategoryHeader("Books", MaterialDesign.MDI_BOOK);
 
-        // details
-        DetailsContentPane detailsContentPane = new DetailsContentPane();
-        detailsContentPane.sizeProperty().bind(sizeProperty());
-        detailsContentPane.getFeaturesContainer().getFeatures().setAll(createFeatures());
-        detailsContentPane.getMenuView().getItems().setAll(createMenuItems());
+        // filter
+        BooksFilterView filterView = new BooksFilterView();
+        filterView.sizeProperty().bind(sizeProperty());
 
-        return wrapContent(header, detailsContentPane);
+        // details
+        CategoryContentPane contentPane = createCategoryContentPane();
+        contentPane.getNodes().add(filterView);
+
+        return wrapContent(header, contentPane);
     }
 }

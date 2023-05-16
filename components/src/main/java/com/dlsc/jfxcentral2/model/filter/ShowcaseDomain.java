@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.model.filter;
 
-public enum AppDOMAIN {
+public enum ShowcaseDomain {
     ALL("All"),
     FINANCE("Finance"),
     HEALTHCARE("Healthcare"),
@@ -8,7 +8,7 @@ public enum AppDOMAIN {
 
     private final String description;
 
-    AppDOMAIN(String description) {
+    ShowcaseDomain(String description) {
         this.description = description;
     }
 

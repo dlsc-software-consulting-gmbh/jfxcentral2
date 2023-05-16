@@ -102,7 +102,7 @@ public class TopMenuBar extends PaneBase {
             Button showcasesBtn = new Button("Showcases");
             showcasesBtn.setMinWidth(Region.USE_PREF_SIZE);
             showcasesBtn.getStyleClass().add("showcases-button");
-            LinkUtil.setLink(showcasesBtn, "/real_world");
+            LinkUtil.setLink(showcasesBtn, "/showcases");
 
             Button downloadsBtn = new Button("Downloads");
             downloadsBtn.setMinWidth(Region.USE_PREF_SIZE);
@@ -151,7 +151,7 @@ public class TopMenuBar extends PaneBase {
     }
 
     private void fillResourcesMenu(MenuButton button) {
-        button.getItems().add(createMenuItem("LIBRARIES", "/books"));
+        button.getItems().add(createMenuItem("LIBRARIES", "/libraries"));
         button.getItems().add(createMenuItem("TOOLS", "/tools"));
         button.getItems().add(createMenuItem("VIDEOS", "/videos"));
         button.getItems().add(createMenuItem("BOOKS", "/books"));
@@ -160,10 +160,9 @@ public class TopMenuBar extends PaneBase {
     }
 
     private void fillCommunityMenu(MenuButton button) {
-        button.getItems().add(new MenuItem("Item A"));
         button.getItems().add(createMenuItem("PEOPLE", "/people"));
-        button.getItems().add(createMenuItem("COMPANIES", "/blogs"));
-        button.getItems().add(createMenuItem("OPENJFX", "/tools"));
+        button.getItems().add(createMenuItem("COMPANIES", "/companies"));
+        button.getItems().add(createMenuItem("OPENJFX", "/openjfx"));
         button.getItems().add(createMenuItem("LINKS OF THE WEEK", "/links"));
     }
 

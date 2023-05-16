@@ -1,10 +1,11 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.filters.AppsFilterView;
+import com.dlsc.jfxcentral2.components.filters.ShowcaseFilterView;
 import com.dlsc.jfxcentral2.components.filters.BlogsFilterView;
 import com.dlsc.jfxcentral2.components.filters.BooksFilterView;
 import com.dlsc.jfxcentral2.components.filters.CompaniesFilterView;
 import com.dlsc.jfxcentral2.components.filters.DownloadsFilterView;
+import com.dlsc.jfxcentral2.components.filters.LibrariesFilterView;
 import com.dlsc.jfxcentral2.components.filters.PeopleFilterView;
 import com.dlsc.jfxcentral2.components.filters.PullRequestsFilterView;
 import com.dlsc.jfxcentral2.model.Size;
@@ -23,7 +24,7 @@ import javafx.scene.layout.VBox;
 
 public class HelloSearchFilterView extends JFXCentralSampleBase {
 
-    SizeComboBox sizeComboBox = new SizeComboBox(Size.SMALL);
+    private final SizeComboBox sizeComboBox = new SizeComboBox(Size.SMALL);
 
     @Override
     protected Region createControl() {
@@ -32,7 +33,7 @@ public class HelloSearchFilterView extends JFXCentralSampleBase {
         VideosFilterView videosFilterView = new VideosFilterView();
         videosFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
 
-        AppsFilterView appsFilterView = new AppsFilterView();
+        ShowcaseFilterView appsFilterView = new ShowcaseFilterView();
         appsFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
 
         PeopleFilterView peopleFilterView = new PeopleFilterView();
@@ -62,22 +63,26 @@ public class HelloSearchFilterView extends JFXCentralSampleBase {
         PullRequestsFilterView pullRequestsFilterView = new PullRequestsFilterView();
         pullRequestsFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
 
-        box.getChildren().addAll(createTiledBox("Videos", videosFilterView),
-                createTiledBox("People", peopleFilterView),
-                createTiledBox("Companies", companiesFilterView),
-                createTiledBox("App", appsFilterView),
-                createTiledBox("Blogs", blogsFilterView),
-                createTiledBox("Books", booksFilterView),
-                createTiledBox("Downloads", downloadsFilterView),
-                createTiledBox("Tips And Tricks", tipsAndTricksFilterView),
-                createTiledBox("Tools", toolsFilterView),
-                createTiledBox("Tutorials", tutorialsFilterView),
-                createTiledBox("Pull Requests", pullRequestsFilterView));
+        LibrariesFilterView librariesFilterView = new LibrariesFilterView();
+        librariesFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
+
+        box.getChildren().addAll(createTitledBox("Videos", videosFilterView),
+                createTitledBox("People", peopleFilterView),
+                createTitledBox("Companies", companiesFilterView),
+                createTitledBox("App", appsFilterView),
+                createTitledBox("Blogs", blogsFilterView),
+                createTitledBox("Books", booksFilterView),
+                createTitledBox("Downloads", downloadsFilterView),
+                createTitledBox("Tips And Tricks", tipsAndTricksFilterView),
+                createTitledBox("Tools", toolsFilterView),
+                createTitledBox("Tutorials", tutorialsFilterView),
+                createTitledBox("Libraries", librariesFilterView),
+                createTitledBox("Pull Requests", pullRequestsFilterView));
 
         return new ScrollPane(box);
     }
 
-    private VBox createTiledBox(String title, Node node) {
+    private VBox createTitledBox(String title, Node node) {
         VBox box = new VBox(5, new Label(title), node);
         box.setAlignment(Pos.CENTER_LEFT);
         return box;
