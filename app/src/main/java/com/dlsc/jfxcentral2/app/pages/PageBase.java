@@ -130,8 +130,8 @@ public abstract class PageBase extends View {
 
     protected List<Feature> createFeatures() {
         return List.of(
-                new Feature("Video", "[1] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[2] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."));
+                new Feature("Video", "[1] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-tool-tile-view.png").toExternalForm()), "url ..."),
+                new Feature("Video", "[2] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-tool-tile-view.png").toExternalForm()), "url ..."),
+                new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-tool-tile-view.png").toExternalForm()), "url ..."));
     }
 }

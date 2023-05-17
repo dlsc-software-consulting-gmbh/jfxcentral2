@@ -19,6 +19,7 @@ import org.kordamp.ikonli.material2.Material2OutlinedMZ;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignB;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignL;
+import org.kordamp.ikonli.materialdesign2.MaterialDesignN;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignS;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignT;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignV;
@@ -51,6 +52,7 @@ public interface IkonUtil {
     Ikon tool = MaterialDesignT.TOOLS;
     Ikon tutorial = MaterialDesign.MDI_PROJECTOR_SCREEN;
     Ikon video = MaterialDesignV.VIDEO_OUTLINE;
+    Ikon news = MaterialDesignN.NEWSPAPER_VARIANT_OUTLINE;
 
     private static Ikon getModelIkon(Class<? extends ModelObject> clazz) {
         if (clazz == RealWorldApp.class) {
