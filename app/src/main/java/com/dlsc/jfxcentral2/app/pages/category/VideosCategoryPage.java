@@ -1,9 +1,12 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.CategoryContentPane;
+import com.dlsc.jfxcentral2.components.StripView;
 import com.dlsc.jfxcentral2.components.filters.VideosFilterView;
+import com.dlsc.jfxcentral2.components.gridview.VideoGridView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
@@ -35,9 +38,16 @@ public class VideosCategoryPage extends CategoryPageBase<Person> {
         VideosFilterView filterView = new VideosFilterView();
         filterView.sizeProperty().bind(sizeProperty());
 
+        // tile view
+        VideoGridView videoTileView = new VideoGridView();
+        videoTileView.sizeProperty().bind(sizeProperty());
+        videoTileView.setItems(DataRepository.getInstance().getVideos());
+
+        StripView stripView = new StripView(videoTileView);
+
         // details
         CategoryContentPane contentPane = createCategoryContentPane();
-        contentPane.getNodes().add(filterView);
+        contentPane.getNodes().addAll(filterView, stripView);
 
         return wrapContent(header, contentPane);
     }

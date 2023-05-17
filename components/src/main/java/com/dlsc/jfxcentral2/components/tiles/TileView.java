@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Download;
@@ -141,8 +142,8 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
                 //imageProperty().bind(ImageManager.getInstance().realWorldAppImageProperty(app));
                 setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/app-thumbnail-01.png").toExternalForm()));
             } else if (data instanceof Video video) {
-                //imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
-                setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/video-thumbnail-01.png").toExternalForm()));
+                imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
+                //setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/video-thumbnail-01.png").toExternalForm()));
             } else if (data instanceof Book book) {
                 //imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
                 setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/book-thumbnail-01.png").toExternalForm()));
