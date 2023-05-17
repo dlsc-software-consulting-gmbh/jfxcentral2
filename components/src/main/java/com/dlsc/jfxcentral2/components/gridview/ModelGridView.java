@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.components.gridview;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
 import com.dlsc.jfxcentral2.components.PaneBase;
-import com.dlsc.jfxcentral2.components.tiles.TileView;
+import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -23,7 +23,7 @@ import javafx.util.Callback;
 
 import java.util.List;
 
-public class ModelGridView<T extends ModelObject, E extends TileView<T>> extends PaneBase {
+public class ModelGridView<T extends ModelObject, E extends TileViewBase<T>> extends PaneBase {
     private Node currentDetailView;
 
     public ModelGridView() {
@@ -90,7 +90,7 @@ public class ModelGridView<T extends ModelObject, E extends TileView<T>> extends
                     tileView.sizeProperty().bind(sizeProperty());
                     gridPane.add(tileView, column, row * 2);
                     //show detail node on click
-                    tileView.button1ActionProperty().set(() -> {
+                    tileView.setOnShowDetailNode(()->{
                         if (currentDetailView != null) {
                             gridPane.getChildren().remove(currentDetailView);
                             currentDetailView = null;
@@ -113,7 +113,7 @@ public class ModelGridView<T extends ModelObject, E extends TileView<T>> extends
         E tileView = getTileViewProvider().call(model);
         tileView.sizeProperty().bind(sizeProperty());
         //show detail node on click
-        tileView.button1ActionProperty().set(() -> {
+        tileView.setOnShowDetailNode(() -> {
             if (currentDetailView != null) {
                 contentBox.getChildren().remove(currentDetailView);
                 currentDetailView = null;

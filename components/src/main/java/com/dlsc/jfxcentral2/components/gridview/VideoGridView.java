@@ -20,6 +20,7 @@ public class VideoGridView extends ModelGridView<Video, VideoTileView> {
         setTileViewProvider(model -> {
             VideoTileView videoTileView = new VideoTileView();
             videoTileView.setData(model);
+            videoTileView.button1ActionProperty().bind(videoTileView.onShowDetailNodeProperty());
             return videoTileView;
         });
     }

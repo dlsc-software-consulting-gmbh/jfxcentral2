@@ -9,14 +9,11 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.FlipView;
-import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -50,7 +47,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TileView<T extends ModelObject> extends PaneBase {
+public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
     private final FlipView flipView = new FlipView();
     private CustomImageView imageView;
@@ -259,20 +256,6 @@ public class TileView<T extends ModelObject> extends PaneBase {
         return backBox;
     }
 
-    private final ObjectProperty<T> data = new SimpleObjectProperty<>(this, "data");
-
-    public T getData() {
-        return data.get();
-    }
-
-    public ObjectProperty<T> dataProperty() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data.set(data);
-    }
-
     private final StringProperty remark = new SimpleStringProperty(this, "remark");
 
     public String getRemark() {
@@ -285,76 +268,6 @@ public class TileView<T extends ModelObject> extends PaneBase {
 
     public void setRemark(String remark) {
         this.remark.set(remark);
-    }
-
-    private final StringProperty description = new SimpleStringProperty(this, "description");
-
-    public String getDescription() {
-        return description.get();
-    }
-
-    public StringProperty descriptionProperty() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description.set(description);
-    }
-
-    private final StringProperty title = new SimpleStringProperty(this, "title");
-
-    public String getTitle() {
-        return title.get();
-    }
-
-    public StringProperty titleProperty() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title.set(title);
-    }
-
-    private final ObjectProperty<Image> image = new SimpleObjectProperty<>(this, "image");
-
-    public Image getImage() {
-        return image.get();
-    }
-
-    public ObjectProperty<Image> imageProperty() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image.set(image);
-    }
-
-    private final BooleanProperty saveSelected = new SimpleBooleanProperty(this, "saveSelected", false);
-
-    public final boolean getSaveSelected() {
-        return saveSelected.get();
-    }
-
-    public final BooleanProperty saveSelectedProperty() {
-        return saveSelected;
-    }
-
-    public final void setSaveSelected(boolean saveSelected) {
-        this.saveSelected.set(saveSelected);
-    }
-
-    private final BooleanProperty likeSelected = new SimpleBooleanProperty(this, "likeSelected", false);
-
-    public final boolean getLikeSelected() {
-        return likeSelected.get();
-    }
-
-    public final BooleanProperty likeSelectedProperty() {
-        return likeSelected;
-    }
-
-    public final void setLikeSelected(boolean likeSelected) {
-        this.likeSelected.set(likeSelected);
     }
 
     private final StringProperty button1Text = new SimpleStringProperty(this, "button1Text");
