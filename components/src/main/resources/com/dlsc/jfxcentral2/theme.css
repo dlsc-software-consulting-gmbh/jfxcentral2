@@ -1572,9 +1572,9 @@
     -fx-padding: 0;
 }
 
-    /** -------------------------------
-    * PaginationControl
-     */
+/** -------------------------------
+ * PaginationControl
+ */
 .pagination-control .control-box {
     -fx-min-width: 220px;
     -fx-min-height: 54px;
@@ -1975,6 +1975,7 @@
     -fx-padding: 2px 6px;
     -fx-font-weight: bold;
     -fx-font-size: 12px;
+    -fx-cursor: hand;
 }
 
 .save-and-like-button .toggle-button .ikonli-font-icon {
@@ -2816,14 +2817,22 @@
     -fx-fit-height: 78px;
 }
 
+.video-tile-view:sm {
+    -fx-border-width: 1px;
+    -fx-border-color: -grey-10;
+}
+
+.video-tile-view:sm .front-box .center-box {
+    -fx-border-width: 0;
+}
+
 .video-tile-view:sm > .content-box > .flip-view .front-box .image-container {
     -fx-min-width: 317px;
     -fx-min-height: 98px;
     -fx-max-width: 317px;
     -fx-max-height: 98px;
     -fx-padding: 20px 20px 0 20px;
-    -fx-border-width: 1px 1px 0 1px;
-    -fx-border-color: -grey-10;
+    -fx-border-width: 0;
 }
 
 .video-tile-view:sm > .content-box > .flip-view .front-box .center-box {
@@ -4440,4 +4449,30 @@
 
 .category-content-pane:sm-md > .content-box {
     -fx-padding: 0px 0px;
+}
+
+
+/** ------------------------------------
+ * ModelGridView
+ */
+.model-grid-view:lg .custom-pagination-control2 .grid-pane {
+    -fx-hgap: 29px;
+    -fx-vgap: 10px;
+}
+
+.model-grid-view:md .custom-pagination-control2 .grid-pane {
+    -fx-hgap: 20px;
+    -fx-vgap: 10px;
+}
+
+.model-grid-view:sm .content-box {
+    -fx-spacing: 20px;
+}
+
+.model-grid-view:sm .content-box .load-more-button {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -white;
+    -fx-background-radius: 30px;
 }
