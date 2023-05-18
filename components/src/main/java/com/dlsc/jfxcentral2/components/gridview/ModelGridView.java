@@ -29,11 +29,13 @@ public class ModelGridView<T extends ModelObject, E extends TileViewBase<T>> ext
     public ModelGridView() {
         getStyleClass().add("model-grid-view");
 
-        columnsProperty().addListener(it -> layoutBySize());
-        rowsProperty().addListener(it -> layoutBySize());
-        itemsProperty().addListener((InvalidationListener) it -> layoutBySize());
-        detailNodeProviderProperty().addListener(it -> layoutBySize());
-        tileViewProviderProperty().addListener(it -> layoutBySize());
+        InvalidationListener layoutListener = it -> layoutBySize();
+
+        columnsProperty().addListener(layoutListener);
+        rowsProperty().addListener(layoutListener);
+        itemsProperty().addListener(layoutListener);
+        detailNodeProviderProperty().addListener(layoutListener);
+        tileViewProviderProperty().addListener(layoutListener);
     }
 
     @Override
