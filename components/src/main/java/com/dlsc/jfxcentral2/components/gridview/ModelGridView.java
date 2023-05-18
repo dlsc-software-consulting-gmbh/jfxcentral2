@@ -18,12 +18,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 import java.util.List;
 
 public class ModelGridView<T extends ModelObject, E extends TileViewBase<T>> extends PaneBase {
+
     private Node currentDetailView;
 
     public ModelGridView() {
@@ -81,6 +83,7 @@ public class ModelGridView<T extends ModelObject, E extends TileViewBase<T>> ext
             paginationControl.setPageCount((int) Math.ceil((double) items.size() / (double) (columns * rows)));
             paginationControl.setPageFactory(pageIndex -> {
                 GridPane gridPane = new GridPane();
+                gridPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
                 gridPane.getStyleClass().add("grid-pane");
                 int startIndex = pageIndex * columns * rows;
                 int endIndex = Math.min(startIndex + columns * rows, items.size());

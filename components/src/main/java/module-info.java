@@ -19,6 +19,7 @@ open module com.dlsc.jfxcentral2.components {
 
     requires jpro.webapi;
     requires one.jpro.routing.core;
+    requires javafx.web;
 
     exports com.dlsc.jfxcentral2.components;
     exports com.dlsc.jfxcentral2.model;

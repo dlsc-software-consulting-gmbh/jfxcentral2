@@ -44,6 +44,53 @@
     <link rel="manifest" href="manifest.json">
     <link rel="icon" sizes="192x192" href="favicon-192.png">
 
+    <style type="text/css">
+        .yt {
+            position: relative;
+            display: block;
+            width: 100%; /* width of iframe wrapper */
+            height: 0;
+            margin: auto;
+            padding: 0% 0% 56.25%; /* 16:9 ratio */
+            overflow: hidden;
+        }
+
+        .yt iframe {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        #myBtn {
+          display: none;
+          position: fixed;
+          bottom: 20px;
+          right: 30px;
+          z-index: 99;
+          font-size: 18px;
+          border: none;
+          outline: none;
+          background-color: #0e4ae4;
+          color: white;
+          cursor: pointer;
+          padding: 15px;
+          border-radius: 3px;
+          background-radius: 1000px;
+        }
+
+        #myBtn:hover {
+          background-color: white;
+          border: rgb(68, 131, 160);
+          border-width: 1px;
+          color: rgb(68, 131, 160);
+        }
+
+    </style>
+
     <title>JFX-Central - Everything JavaFX</title>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -68,6 +115,30 @@
 <div>
     <jpro-app loader="none" nativescrolling="true" href="/app/default" fxContextMenu="false" setThemeColor="false" fullscreen="true" snapshot="auto" userSelect="true" fxContextMenu="false"/>
 </div>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+<script>
+//Get the button
+var mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
 
 </body>
 </html>

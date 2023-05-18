@@ -39,11 +39,10 @@ public class VideosCategoryPage extends CategoryPageBase<Person> {
         filterView.sizeProperty().bind(sizeProperty());
 
         // tile view
-        VideoGridView videoTileView = new VideoGridView();
-        videoTileView.sizeProperty().bind(sizeProperty());
-        videoTileView.setItems(DataRepository.getInstance().getVideos());
-
-        StripView stripView = new StripView(videoTileView);
+        VideoGridView videoGridView = new VideoGridView();
+        videoGridView.sizeProperty().bind(sizeProperty());
+        videoGridView.setItems(DataRepository.getInstance().getVideos());
+        StripView stripView = new StripView(videoGridView);
 
         // details
         CategoryContentPane contentPane = createCategoryContentPane();
