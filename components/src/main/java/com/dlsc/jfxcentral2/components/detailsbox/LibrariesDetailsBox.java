@@ -2,16 +2,11 @@ package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LibraryInfo;
-import com.dlsc.jfxcentral2.components.CustomImageView;
+import com.dlsc.jfxcentral2.components.LibraryPreviewBox;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -37,63 +32,10 @@ public class LibrariesDetailsBox extends DetailsBoxBase<Library> {
 
     @Override
     protected Node createPreviewsBox(Library library) {
-        //LibraryInfo info = getLibraryInfo();
-        //if (info != null && library != null) {
-        //    List<Image> images = info.getImages();
-        //    int max = isSmall() ? 2 : 7 - (isMedium() ? 1 : 0);
-        //    HBox previewsBox = new HBox();
-        //    for (int i = 0; i < images.size() && i < max; i++) {
-        //        com.dlsc.jfxcentral.data.model.Image image = images.get(i);
-        //        CustomImageView imageView = new CustomImageView();
-        //        if (isSmall()) {
-        //            StackPane.setAlignment(imageView, Pos.CENTER_LEFT);
-        //        }
-        //        StackPane imageWrapper = new StackPane(imageView);
-        //        imageWrapper.getStyleClass().add("image-wrapper");
-        //        imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library, image.getPath()));
-        //        previewsBox.getChildren().add(imageWrapper);
-        //    }
-        //
-        //    if (images.size() > max) {
-        //        Label moreLabel = new Label("+" + (images.size() - max));
-        //        moreLabel.getStyleClass().add("more-label");
-        //        previewsBox.getChildren().add(moreLabel);
-        //    }
-        //    return previewsBox;
-        //}
-        //return null;
-
-        //TODO add images for test
-        HBox previewsBox = new HBox();
-        previewsBox.getStyleClass().add("previews-box");
-        int max = isSmall() ? 2 : 7 - (isMedium() ? 1 : 0);
-        List<Image> previews = List.of(
-                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm())
-        );
-        for (int i = 0; i < previews.size() && i < max; i++) {
-            CustomImageView imageView = new CustomImageView();
-            imageView.setImage(previews.get(i));
-            if (isSmall()) {
-                StackPane.setAlignment(imageView, Pos.CENTER_LEFT);
-            }
-            StackPane imageWrapper = new StackPane(imageView);
-            imageWrapper.getStyleClass().add("image-wrapper");
-            previewsBox.getChildren().add(imageWrapper);
-        }
-        if (previews.size() > max) {
-            Label moreLabel = new Label("+" + (previews.size() - max));
-            moreLabel.getStyleClass().add("more-label");
-            previewsBox.getChildren().add(moreLabel);
-        }
+        LibraryPreviewBox previewsBox = new LibraryPreviewBox();
+        previewsBox.sizeProperty().bind(sizeProperty());
+        previewsBox.setLibrary(library);
+        previewsBox.libraryInfoProperty().bind(libraryInfoProperty());
         return previewsBox;
     }
 

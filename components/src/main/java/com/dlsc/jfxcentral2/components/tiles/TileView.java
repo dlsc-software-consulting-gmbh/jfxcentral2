@@ -215,10 +215,11 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         titleLabel.setWrapText(true);
         titleLabel.minHeightProperty().bind(Bindings.createDoubleBinding(() -> {
             boolean isGalley = getStyleClass().contains("video-gallery-tile");
-            double height = titleLabel.getFont().getSize() * 1.5 * (isGalley ? 2 : isSmall() ? 2 : 4);
+            double height = titleLabel.getFont().getSize() * 1.5 * (isGalley ? 2 : isSmall() ? 2 : 2.2);
             double prefH = titleLabel.prefHeight(titleLabel.getWidth());
             return Math.min(prefH, height);
         }, sizeProperty(), titleLabel.fontProperty(), titleLabel.widthProperty(), getStyleClass()));
+        titleLabel.setOnMousePressed(event -> flipView.flipToBack());
 
         Label descriptionLabel = new Label();
         descriptionLabel.getStyleClass().add("description");
