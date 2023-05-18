@@ -38,6 +38,7 @@ import one.jpro.routing.Response;
 import one.jpro.routing.Route;
 import one.jpro.routing.RouteApp;
 import one.jpro.routing.RouteUtils;
+import one.jpro.routing.dev.DevFilter;
 import simplefx.experimental.parts.FXFuture;
 
 import java.util.function.Supplier;
@@ -80,8 +81,8 @@ public class JFXCentral2App extends RouteApp {
                 .and(RouteUtils.get("/legal/privacy", r -> new LegalPage(size, LegalPage.Section.PRIVACY)))
                 .and(RouteUtils.get("/links", r -> new LinksOfTheWeekPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
-                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)));
-//                .filter(DevFilter.create());
+                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)))
+                .filter(DevFilter.create());
     }
 
     private Route createCategoryOrDetailRoute(String path, Supplier<Response> masterResponse, Callback<String, Response> detailedResponse) {

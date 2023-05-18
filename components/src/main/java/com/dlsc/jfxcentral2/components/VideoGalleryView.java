@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.LinkUtil;
 
 public class VideoGalleryView extends PaneBase {
 
@@ -36,6 +37,7 @@ public class VideoGalleryView extends PaneBase {
 
         Button button = new Button("VIEW ALL VIDEOS");
         button.getStyleClass().add("view-all");
+        LinkUtil.setLink(button, "/videos");
 
         Pane pane = isSmall() ?
                 new VBox(title, new Spacer(Orientation.VERTICAL), button) :

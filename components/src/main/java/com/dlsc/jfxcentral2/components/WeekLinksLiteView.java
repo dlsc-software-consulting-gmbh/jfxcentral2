@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.LinkUtil;
 
 public class WeekLinksLiteView extends PaneBase {
 
@@ -29,6 +30,7 @@ public class WeekLinksLiteView extends PaneBase {
 
         viewAllButton = new Button("VIEW ALL LINKS OF THE WEEK");
         viewAllButton.getStyleClass().add("view-all-button");
+        LinkUtil.setLink(viewAllButton, "/links");
 
         markdownView = new MarkdownView();
         markdownView.getStyleClass().add("md-view");

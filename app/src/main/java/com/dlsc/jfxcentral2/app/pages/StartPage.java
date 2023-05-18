@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.HomePageTopView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
@@ -54,7 +55,7 @@ public class StartPage extends PageBase {
         // video gallery
         VideoGalleryView videoGallery = new VideoGalleryView();
         videoGallery.sizeProperty().bind(sizeProperty());
-        videoGallery.getVideos().setAll(generateVideos());
+        videoGallery.getVideos().setAll(randomSubList(DataRepository.getInstance().getVideos(), 12));
 
         return wrapContent(homePageTopView, weekLinksLiteView, websiteChangesView, videoGallery);
     }

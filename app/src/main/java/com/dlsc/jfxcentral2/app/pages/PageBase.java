@@ -22,6 +22,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.View;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -133,5 +135,11 @@ public abstract class PageBase extends View {
                 new Feature("Video", "[1] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."),
                 new Feature("Video", "[2] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."),
                 new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."));
+    }
+
+    public <T> List<T> randomSubList(List<T> list, int newSize) {
+        list = new ArrayList<>(list);
+        Collections.shuffle(list);
+        return list.subList(0, newSize);
     }
 }

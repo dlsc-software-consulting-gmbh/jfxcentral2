@@ -11,6 +11,7 @@ open module com.dlsc.jfxcentral2.app {
     requires one.jpro.routing.dev;
     requires org.kordamp.ikonli.core;
     requires org.kordamp.ikonli.materialdesign;
+    requires javafx.web;
 
     exports com.dlsc.jfxcentral2.app;
 }
