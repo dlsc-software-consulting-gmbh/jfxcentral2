@@ -2,11 +2,15 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.components.detailsbox.DetailsBoxBase;
 import com.dlsc.jfxcentral2.model.Size;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -29,6 +33,9 @@ public class DetailsContentPane extends PaneBase {
         HBox.setHgrow(menuView, Priority.NEVER);
 
         commentsView.sizeProperty().bind(sizeProperty());
+
+        // TODO: maybe pass in the list of center nodes and save additional layouting?
+        centerNodesProperty().addListener((Observable it) -> layoutBySize());
 
         /*
          * When the page has enough horizontal space to be in "large" size then we can place
@@ -74,16 +81,32 @@ public class DetailsContentPane extends PaneBase {
         Size size = getSize();
 
         if (size.equals(Size.SMALL) || size.equals(Size.MEDIUM)) {
-            centerBox.getChildren().setAll(menuView, detailBoxesContainer, commentsView);
+            centerBox.getChildren().setAll(getCenterNodes());
+            centerBox.getChildren().addAll(detailBoxesContainer, commentsView);
             VBox intermediateBox = new VBox(menuView, centerBox, featuresContainer);
             intermediateBox.getStyleClass().add("intermediate-box");
             intermediateBox.setAlignment(Pos.TOP_CENTER);
             HBox.setHgrow(intermediateBox, Priority.ALWAYS);
             contentBox.getChildren().setAll(intermediateBox);
         } else {
-            centerBox.getChildren().setAll(detailBoxesContainer, commentsView);
+            centerBox.getChildren().setAll(getCenterNodes());
+            centerBox.getChildren().addAll(detailBoxesContainer, commentsView);
             contentBox.getChildren().setAll(menuView, centerBox, featuresContainer);
         }
+    }
+
+    private final ListProperty<Node> centerNodes = new SimpleListProperty<>(this, "centerNodes", FXCollections.observableArrayList());
+
+    public ObservableList<Node> getCenterNodes() {
+        return centerNodes.get();
+    }
+
+    public ListProperty<Node> centerNodesProperty() {
+        return centerNodes;
+    }
+
+    public void setCenterNodes(ObservableList<Node> centerNodes) {
+        this.centerNodes.set(centerNodes);
     }
 
     private final ObservableList<DetailsBoxBase<?>> detailBoxes = FXCollections.observableArrayList();
