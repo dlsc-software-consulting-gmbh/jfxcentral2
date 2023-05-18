@@ -162,19 +162,19 @@ public class TopMenuBar extends PaneBase {
     }
 
     private void fillResourcesMenu(MenuButton button) {
-        button.getItems().add(createMenuItem("LIBRARIES", "/libraries", IkonUtil.getModelIkon(Library.class)));
-        button.getItems().add(createMenuItem("TOOLS", "/tools", IkonUtil.getModelIkon(Tool.class)));
-        button.getItems().add(createMenuItem("VIDEOS", "/videos", IkonUtil.getModelIkon(Video.class)));
-        button.getItems().add(createMenuItem("BOOKS", "/books", IkonUtil.getModelIkon(Book.class)));
-        button.getItems().add(createMenuItem("BLOGS", "/blogs", IkonUtil.getModelIkon(Blog.class)));
-        button.getItems().add(createMenuItem("TUTORIALS", "/tutorials", IkonUtil.getModelIkon(Tutorial.class)));
+        button.getItems().add(createMenuItem("Libraries", "/libraries", IkonUtil.getModelIkon(Library.class)));
+        button.getItems().add(createMenuItem("Tools", "/tools", IkonUtil.getModelIkon(Tool.class)));
+        button.getItems().add(createMenuItem("Videos", "/videos", IkonUtil.getModelIkon(Video.class)));
+        button.getItems().add(createMenuItem("Books", "/books", IkonUtil.getModelIkon(Book.class)));
+        button.getItems().add(createMenuItem("Blogs", "/blogs", IkonUtil.getModelIkon(Blog.class)));
+        button.getItems().add(createMenuItem("Tutorials", "/tutorials", IkonUtil.getModelIkon(Tutorial.class)));
     }
 
     private void fillCommunityMenu(MenuButton button) {
-        button.getItems().add(createMenuItem("PEOPLE", "/people", IkonUtil.getModelIkon(Person.class)));
-        button.getItems().add(createMenuItem("COMPANIES", "/companies", IkonUtil.getModelIkon(Company.class)));
-        button.getItems().add(createMenuItem("OPENJFX", "/openjfx", null));
-        button.getItems().add(createMenuItem("LINKS OF THE WEEK", "/links", IkonUtil.getModelIkon(LinksOfTheWeek.class)));
+        button.getItems().add(createMenuItem("People", "/people", IkonUtil.getModelIkon(Person.class)));
+        button.getItems().add(createMenuItem("Companies", "/companies", IkonUtil.getModelIkon(Company.class)));
+        button.getItems().add(createMenuItem("OpenJFX", "/openjfx", null));
+        button.getItems().add(createMenuItem("Links of the Week", "/links", IkonUtil.getModelIkon(LinksOfTheWeek.class)));
     }
 
     private MenuItem createMenuItem(String text, String url, Ikon ikon) {
