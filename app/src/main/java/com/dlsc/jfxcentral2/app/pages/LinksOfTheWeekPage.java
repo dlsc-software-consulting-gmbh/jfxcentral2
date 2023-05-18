@@ -5,10 +5,10 @@ import com.dlsc.jfxcentral2.components.DetailsContentPane;
 import com.dlsc.jfxcentral2.components.MenuView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
     public Node content() {
 
         // header
-        CategoryHeader header = createCategoryHeader("Links of the Week", MaterialDesign.MDI_LINK);
+        CategoryHeader header = createCategoryHeader("Links of the Week", IkonUtil.getModelIkon(LinksOfTheWeek.class));
 
         // this is a category page but we still need to use the details content pane for layout purposes
         DetailsContentPane detailsContentPane = new DetailsContentPane();

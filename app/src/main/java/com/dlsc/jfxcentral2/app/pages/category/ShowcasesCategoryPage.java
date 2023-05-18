@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.filters.ShowcaseFilterView;
@@ -29,7 +30,7 @@ public class ShowcasesCategoryPage extends CategoryPageBase<Person> {
     @Override
     public Node content() {
         // header
-        CategoryHeader header = createCategoryHeader("Showcases", IkonUtil.app);
+        CategoryHeader header = createCategoryHeader("Showcases", IkonUtil.getModelIkon(RealWorldApp.class));
 
         // filter
         ShowcaseFilterView filterView = new ShowcaseFilterView();

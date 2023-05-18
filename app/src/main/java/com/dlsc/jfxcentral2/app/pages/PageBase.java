@@ -137,9 +137,17 @@ public abstract class PageBase extends View {
                 new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."));
     }
 
+    /**
+     * Useful utility method to create a random sublist of a given list.
+     *
+     * @param list the original list
+     * @param newSize the requested size for the random sublist
+     * @return a new list containing a fixed number of
+     * @param <T> the type of the items in the list
+     */
     public <T> List<T> randomSubList(List<T> list, int newSize) {
         list = new ArrayList<>(list);
         Collections.shuffle(list);
-        return list.subList(0, newSize);
+        return list.subList(0, Math.min(newSize, list.size()));
     }
 }

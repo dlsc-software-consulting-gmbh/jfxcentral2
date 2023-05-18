@@ -1,14 +1,15 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.filters.ToolsFilterView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class ToolsCategoryPage extends CategoryPageBase<Person> {
 
@@ -29,7 +30,7 @@ public class ToolsCategoryPage extends CategoryPageBase<Person> {
     @Override
     public Node content() {
         // header
-        CategoryHeader header = createCategoryHeader("Tools", MaterialDesign.MDI_TOOLTIP);
+        CategoryHeader header = createCategoryHeader("Tools", IkonUtil.getModelIkon(Tool.class));
 
         // filter
         ToolsFilterView filterView = new ToolsFilterView();

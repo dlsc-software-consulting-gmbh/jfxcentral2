@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
+import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.CategoryContentPane;
@@ -29,7 +30,7 @@ public class DownloadsCategoryPage extends CategoryPageBase<Person> {
     @Override
     public Node content() {
         // header
-        CategoryHeader header = createCategoryHeader("Downloads", IkonUtil.download);
+        CategoryHeader header = createCategoryHeader("Downloads", IkonUtil.getModelIkon(Download.class));
 
         // filter
         DownloadsFilterView filterView = new DownloadsFilterView();

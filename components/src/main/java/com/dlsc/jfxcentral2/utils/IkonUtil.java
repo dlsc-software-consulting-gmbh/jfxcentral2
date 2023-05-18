@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
@@ -53,8 +54,9 @@ public interface IkonUtil {
     Ikon tutorial = MaterialDesign.MDI_PROJECTOR_SCREEN;
     Ikon video = MaterialDesignV.VIDEO_OUTLINE;
     Ikon news = MaterialDesignN.NEWSPAPER_VARIANT_OUTLINE;
+    Ikon linkOfTheWeek = MaterialDesign.MDI_LINK;
 
-    private static Ikon getModelIkon(Class<? extends ModelObject> clazz) {
+    static Ikon getModelIkon(Class<? extends ModelObject> clazz) {
         if (clazz == RealWorldApp.class) {
             return app;
         } else if (clazz == Blog.class) {
@@ -77,6 +79,8 @@ public interface IkonUtil {
             return tutorial;
         } else if (clazz == Video.class) {
             return video;
+        } else if (clazz == LinksOfTheWeek.class) {
+            return linkOfTheWeek;
         } else {
             return null;
         }

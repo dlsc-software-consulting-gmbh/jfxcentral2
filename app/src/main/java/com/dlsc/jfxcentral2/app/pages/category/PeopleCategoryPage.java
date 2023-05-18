@@ -29,7 +29,7 @@ public class PeopleCategoryPage extends CategoryPageBase<Person> {
     @Override
     public Node content() {
         // header
-        CategoryHeader header = createCategoryHeader("People", IkonUtil.person);
+        CategoryHeader header = createCategoryHeader("People", IkonUtil.getModelIkon(Person.class));
 
         // filter
         PeopleFilterView filterView = new PeopleFilterView();

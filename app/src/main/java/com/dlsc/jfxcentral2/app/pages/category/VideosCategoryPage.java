@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral2.components.filters.VideosFilterView;
 import com.dlsc.jfxcentral2.components.gridview.VideoGridView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
@@ -17,7 +18,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class VideosCategoryPage extends CategoryPageBase<Person> {
 
@@ -38,7 +38,7 @@ public class VideosCategoryPage extends CategoryPageBase<Person> {
     @Override
     public Node content() {
         // header
-        CategoryHeader header = createCategoryHeader("Videos", MaterialDesign.MDI_VIDEO);
+        CategoryHeader header = createCategoryHeader("Videos", IkonUtil.getModelIkon(Video.class));
 
         // filter
         VideosFilterView filterView = new VideosFilterView();

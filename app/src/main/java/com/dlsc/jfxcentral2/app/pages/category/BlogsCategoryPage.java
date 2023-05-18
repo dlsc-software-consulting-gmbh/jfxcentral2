@@ -1,14 +1,15 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
+import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.filters.BlogsFilterView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class BlogsCategoryPage extends CategoryPageBase<Person> {
 
@@ -29,7 +30,7 @@ public class BlogsCategoryPage extends CategoryPageBase<Person> {
     @Override
     public Node content() {
         // header
-        CategoryHeader header = createCategoryHeader("Blogs", MaterialDesign.MDI_BLOGGER);
+        CategoryHeader header = createCategoryHeader("Blogs", IkonUtil.getModelIkon(Blog.class));
 
         // filter
         BlogsFilterView filterView = new BlogsFilterView();
