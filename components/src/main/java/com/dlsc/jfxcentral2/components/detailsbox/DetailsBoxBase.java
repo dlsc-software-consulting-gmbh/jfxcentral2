@@ -154,7 +154,6 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         if (model instanceof Library library) {
             Node previewsBox = createPreviewsBox(library);
             if (previewsBox != null) {
-                previewsBox.getStyleClass().add("previews-box");
                 cellRight.getChildren().add(previewsBox);
             }
         }
