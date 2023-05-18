@@ -1,6 +1,16 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SearchField;
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -22,6 +32,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import one.jpro.routing.LinkUtil;
+import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
 
@@ -151,23 +162,23 @@ public class TopMenuBar extends PaneBase {
     }
 
     private void fillResourcesMenu(MenuButton button) {
-        button.getItems().add(createMenuItem("LIBRARIES", "/libraries"));
-        button.getItems().add(createMenuItem("TOOLS", "/tools"));
-        button.getItems().add(createMenuItem("VIDEOS", "/videos"));
-        button.getItems().add(createMenuItem("BOOKS", "/books"));
-        button.getItems().add(createMenuItem("BLOGS", "/blogs"));
-        button.getItems().add(createMenuItem("TUTORIALS", "/tutorials"));
+        button.getItems().add(createMenuItem("LIBRARIES", "/libraries", IkonUtil.getModelIkon(Library.class)));
+        button.getItems().add(createMenuItem("TOOLS", "/tools", IkonUtil.getModelIkon(Tool.class)));
+        button.getItems().add(createMenuItem("VIDEOS", "/videos", IkonUtil.getModelIkon(Video.class)));
+        button.getItems().add(createMenuItem("BOOKS", "/books", IkonUtil.getModelIkon(Book.class)));
+        button.getItems().add(createMenuItem("BLOGS", "/blogs", IkonUtil.getModelIkon(Blog.class)));
+        button.getItems().add(createMenuItem("TUTORIALS", "/tutorials", IkonUtil.getModelIkon(Tutorial.class)));
     }
 
     private void fillCommunityMenu(MenuButton button) {
-        button.getItems().add(createMenuItem("PEOPLE", "/people"));
-        button.getItems().add(createMenuItem("COMPANIES", "/companies"));
-        button.getItems().add(createMenuItem("OPENJFX", "/openjfx"));
-        button.getItems().add(createMenuItem("LINKS OF THE WEEK", "/links"));
+        button.getItems().add(createMenuItem("PEOPLE", "/people", IkonUtil.getModelIkon(Person.class)));
+        button.getItems().add(createMenuItem("COMPANIES", "/companies", IkonUtil.getModelIkon(Company.class)));
+        button.getItems().add(createMenuItem("OPENJFX", "/openjfx", null));
+        button.getItems().add(createMenuItem("LINKS OF THE WEEK", "/links", IkonUtil.getModelIkon(LinksOfTheWeek.class)));
     }
 
-    private MenuItem createMenuItem(String text, String url) {
-        Label label = new Label(text);
+    private MenuItem createMenuItem(String text, String url, Ikon ikon) {
+        Label label = new Label(text, ikon != null ? new FontIcon(ikon) : null);
         // The StackPane is a workaround for the setLink.
         // setLink currently only works when the Parent is a Pane.
         StackPane wrapper = new StackPane(label);
