@@ -7,7 +7,6 @@ import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class HelloVideoGallery extends JFXCentralSampleBase {
     protected Region createControl() {
         videoGallery = new VideoGalleryView();
         videoGallery.getVideos().setAll(createVideos());
-        ScrollPane scrollPane = new ScrollPane(new StackPane(videoGallery));
+        ScrollPane scrollPane = new ScrollPane(videoGallery);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         return scrollPane;
