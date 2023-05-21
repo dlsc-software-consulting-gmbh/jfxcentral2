@@ -4922,6 +4922,65 @@
 }
 
 /** ------------------------------------
+ * links-of-the-week-view
+ */
+.links-of-the-week-view {
+    -fx-background-color: -background;
+}
+
+.links-of-the-week-view:lg {
+    -fx-min-width: 858px;
+    -fx-pref-width: 858px;
+    -fx-max-width: 858px;
+}
+
+.links-of-the-week-view:md {
+    -fx-min-width: 713px;
+    -fx-pref-width: 713px;
+    -fx-max-width: 713px;
+}
+
+.links-of-the-week-view:sm {
+    -fx-min-width: 317px;
+    -fx-pref-width: 317px;
+    -fx-max-width: 317px;
+}
+
+.links-of-the-week-view .links-box {
+    -fx-spacing: 30px;
+}
+
+.links-of-the-week-view .links-box .week-box {
+    -fx-background-color: -white;
+}
+
+.links-of-the-week-view .links-box .week-box > .title {
+    -fx-background-color: -bright-blue;
+    -fx-text-fill: -white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Roboto Condensed";
+    -fx-padding: 9px 0;
+    -fx-alignment: center;
+}
+
+.links-of-the-week-view:md-lg .links-box .week-box .markdown-view {
+    -fx-padding: 20px 30px;
+}
+
+.links-of-the-week-view:sm .links-box .week-box .markdown-view {
+    -fx-padding: 20px 15px;
+}
+
+.links-of-the-week-view:sm .custom-pagination-control2 > .content-pane .control-box {
+    -fx-spacing: 2px;
+}
+
+.links-of-the-week-view:md-lg .custom-pagination-control2 > .content-pane .control-box {
+    -fx-spacing: 10px;
+}
+  
+/** ------------------------------------
  * DownloadsBox
  */
 .downloads-box {
