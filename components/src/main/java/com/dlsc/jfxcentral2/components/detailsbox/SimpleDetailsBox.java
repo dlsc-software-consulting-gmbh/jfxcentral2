@@ -42,7 +42,7 @@ public abstract class SimpleDetailsBox<T extends ModelObject> extends DetailsBox
                 StackPane.setAlignment(imageView, Pos.CENTER_LEFT);
             }
             StackPane imageWrapper = new StackPane(imageView);
-            imageWrapper.getStyleClass().add("image-wrapper");
+            imageWrapper.getStyleClass().add("main-preview-wrapper");
             imageWrapper.managedProperty().bind(imageWrapper.visibleProperty());
             imageWrapper.getChildren().add(detailsButton);
             StackPane.setAlignment(detailsButton, Pos.TOP_RIGHT);
