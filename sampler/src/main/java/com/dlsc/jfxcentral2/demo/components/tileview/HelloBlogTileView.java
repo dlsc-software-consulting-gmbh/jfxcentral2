@@ -16,7 +16,8 @@ public class HelloBlogTileView extends JFXCentralSampleBase {
         blog.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ");
         blog.setBookIds(List.of("Book1", "Book2"));
         blog.setAppIds(List.of("App1", "App2"));
-        BlogTileView blogTileView = new BlogTileView(blog);
+        BlogTileView blogTileView = new BlogTileView();
+        blogTileView.setData(blog);
         return new StackPane(blogTileView);
     }
 

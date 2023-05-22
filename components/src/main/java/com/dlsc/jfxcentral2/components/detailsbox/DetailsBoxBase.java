@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Video;
@@ -113,6 +114,8 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
         if (model instanceof Download download) {
             return DataRepository.getInstance().downloadTextProperty(download);
+        } else if (model instanceof Person person) {
+            return DataRepository.getInstance().personDescriptionProperty(person);
         }
 
         return new SimpleStringProperty("(Missing description)");

@@ -12,7 +12,8 @@ public class HelloToolTileView extends JFXCentralSampleBase {
         Tool tool = new Tool();
         tool.setName("CSSFX");
         tool.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...");
-        ToolTileView toolTileView = new ToolTileView(tool);
+        ToolTileView toolTileView = new ToolTileView();
+        toolTileView.setData(tool);
         return new StackPane(toolTileView);
     }
 

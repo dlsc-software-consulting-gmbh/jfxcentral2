@@ -18,7 +18,8 @@ public class HelloBookTileView extends JFXCentralSampleBase {
         Book book = new Book();
         book.setName("The Definitive Guide to Modern Java Clients with JavaFX");
         book.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.");
-        bookTileView = new BookTileView(book);
+        bookTileView = new BookTileView();
+        bookTileView.setData(book);
         return new StackPane(bookTileView);
     }
 

@@ -25,6 +25,7 @@ public class LibraryOverviewBox extends PaneBase {
 
     public LibraryOverviewBox() {
         getStyleClass().add("overview-box");
+
         Header header = new Header();
         header.titleProperty().bind(titleProperty());
         header.iconProperty().bind(iconProperty());

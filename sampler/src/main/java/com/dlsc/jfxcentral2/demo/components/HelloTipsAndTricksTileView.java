@@ -9,13 +9,16 @@ import javafx.scene.layout.StackPane;
 import java.time.LocalDate;
 
 public class HelloTipsAndTricksTileView extends JFXCentralSampleBase {
+
     @Override
     protected Region createControl() {
         Tip data = new Tip();
         data.setName("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod");
         data.setDescription("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident...");
         data.setCreatedOn(LocalDate.now());
-        return new StackPane(new TipsAndTricksTileView(data));
+        TipsAndTricksTileView tipsAndTricksTileView = new TipsAndTricksTileView();
+        tipsAndTricksTileView.setData(data);
+        return new StackPane(tipsAndTricksTileView);
     }
 
     @Override
