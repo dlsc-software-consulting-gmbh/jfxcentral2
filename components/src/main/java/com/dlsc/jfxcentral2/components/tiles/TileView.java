@@ -42,6 +42,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
@@ -51,6 +52,8 @@ import java.util.List;
 public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
     private final FlipView flipView = new FlipView();
+    private final Button button1;
+    private final Button button2;
     private CustomImageView imageView;
 
     public TileView() {
@@ -82,32 +85,24 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
             }
         });
 
-        Button button1 = new Button();
+        button1 = new Button();
         button1.getStyleClass().addAll("bg-transparent-button", "button1");
         button1.textProperty().bind(button1TextProperty());
         button1.graphicProperty().bind(button1GraphicProperty());
         button1.managedProperty().bind(button1.visibleProperty());
         button1.visibleProperty().bind(button1TextProperty().isNotEmpty().or(button1GraphicProperty().isNotNull()));
-        button1.setOnAction(event -> {
-            if (getButton1Action() != null) {
-                getButton1Action().run();
-            }
-        });
+
         Separator separator1 = new Separator(Orientation.VERTICAL);
         separator1.managedProperty().bind(button1.visibleProperty());
         separator1.visibleProperty().bind(button1.visibleProperty());
 
-        Button button2 = new Button();
+        button2 = new Button();
         button2.getStyleClass().addAll("bg-transparent-button", "button2");
         button2.textProperty().bind(button2TextProperty());
         button2.graphicProperty().bind(button2GraphicProperty());
         button2.managedProperty().bind(button2.visibleProperty());
         button2.visibleProperty().bind(button2TextProperty().isNotEmpty().or(button2GraphicProperty().isNotNull()));
-        button2.setOnAction(event -> {
-            if (getButton2Action() != null) {
-                getButton2Action().run();
-            }
-        });
+
         Separator separator2 = new Separator(Orientation.VERTICAL);
         separator2.managedProperty().bind(button2.visibleProperty());
         separator2.visibleProperty().bind(button2.visibleProperty());
@@ -134,29 +129,32 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
             boolean isVideo = data instanceof Video;
             StackPane.setAlignment(imageView, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
             setTitle(data.getName());
-            setDescription(data.getDescription());
+            setDescription(StringUtils.isNotBlank(data.getDescription()) ? data.getDescription() : data.getSummary());
             setSaveSelected(SaveAndLikeUtil.isSaved(data));
             setLikeSelected(SaveAndLikeUtil.isLiked(data));
-            //TODO set default image for test
+
             if (data instanceof RealWorldApp app) {
-                //imageProperty().bind(ImageManager.getInstance().realWorldAppImageProperty(app));
-                setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/app-thumbnail-01.png").toExternalForm()));
+                imageProperty().bind(ImageManager.getInstance().realWorldAppLargeImageProperty(app));
             } else if (data instanceof Video video) {
                 imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
-                //setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/video-thumbnail-01.png").toExternalForm()));
             } else if (data instanceof Book book) {
-                //imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
-                setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/book-thumbnail-01.png").toExternalForm()));
+                imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
             } else if (data instanceof Download download) {
-                //imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
-                setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/download-thumbnail-01.png").toExternalForm()));
+                imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
             } else if (data instanceof Company company) {
-                //imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
-                setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/company-thumbnail-01.png").toExternalForm()));
+                imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
             } else if (data instanceof Tip) {
                 imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm())));
             }
         });
+    }
+
+    public Button getButton1() {
+        return button1;
+    }
+
+    public Button getButton2() {
+        return button2;
     }
 
     private void bottomPaneLayout(SaveAndLikeButton saveAndLikeButton, Button button1, Separator separator1, Button button2, Separator separator2, GridPane bottomPane) {
@@ -300,22 +298,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         this.button1Graphic.set(button1Graphic);
     }
 
-    private final ObjectProperty<Runnable> button1Action = new SimpleObjectProperty<>(this, "button1Action");
-
-    public Runnable getButton1Action() {
-        return button1Action.get();
-    }
-
-    public ObjectProperty<Runnable> button1ActionProperty() {
-        return button1Action;
-    }
-
-    public void setButton1Action(Runnable button1Action) {
-        this.button1Action.set(button1Action);
-    }
-
-    private final StyleableBooleanProperty button1Visible = new SimpleStyleableBooleanProperty(StyleableProperties.BUTTON_1_VISIBLE, TileView.this,
-            "button1Visible", true);
+    private final StyleableBooleanProperty button1Visible = new SimpleStyleableBooleanProperty(StyleableProperties.BUTTON_1_VISIBLE, TileView.this, "button1Visible", true);
 
     public boolean getButton1Visible() {
         return button1Visible.get();
@@ -355,20 +338,6 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
     public void setButton2Graphic(Node button2Graphic) {
         this.button2Graphic.set(button2Graphic);
-    }
-
-    private final ObjectProperty<Runnable> button2Action = new SimpleObjectProperty<>(this, "button2Action");
-
-    public Runnable getButton2Action() {
-        return button2Action.get();
-    }
-
-    public ObjectProperty<Runnable> button2ActionProperty() {
-        return button2Action;
-    }
-
-    public void setButton2Action(Runnable button2Action) {
-        this.button2Action.set(button2Action);
     }
 
     private final StyleableBooleanProperty button2Visible = new SimpleStyleableBooleanProperty(StyleableProperties.BUTTON_2_VISIBLE, TileView.this,

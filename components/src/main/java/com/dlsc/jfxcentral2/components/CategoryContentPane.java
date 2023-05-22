@@ -15,8 +15,10 @@ public class CategoryContentPane extends PaneBase {
     private final CommentsView commentsView = new CommentsView();
     private final FeaturesContainer featuresContainer = new FeaturesContainer();
 
-    public CategoryContentPane() {
+    public CategoryContentPane(Node... nodes) {
         getStyleClass().add("category-content-pane");
+
+        getNodes().setAll(nodes);
 
         commentsView.sizeProperty().bind(sizeProperty());
         featuresContainer.sizeProperty().bind(sizeProperty());
@@ -24,13 +26,16 @@ public class CategoryContentPane extends PaneBase {
         VBox nodesBox = new VBox();
         nodesBox.getStyleClass().add("nodes-box");
         nodesBox.setAlignment(Pos.TOP_CENTER);
-        Bindings.bindContent(nodesBox.getChildren(), nodes);
+        Bindings.bindContent(nodesBox.getChildren(), nodesProperty());
 
         VBox contentBox = new VBox(nodesBox, featuresContainer);
         contentBox.setAlignment(Pos.TOP_CENTER);
         contentBox.getStyleClass().add("content-box");
 
         getChildren().setAll(contentBox);
+    }
+
+    public CategoryContentPane() {
     }
 
     private final ListProperty<Node> nodes = new SimpleListProperty<>(this, "nodes", FXCollections.observableArrayList());

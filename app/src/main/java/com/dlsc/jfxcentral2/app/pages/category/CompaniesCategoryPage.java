@@ -1,17 +1,21 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Company;
-import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.filters.CompaniesFilterView;
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
+import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
+import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
+import com.dlsc.jfxcentral2.components.tiles.CompanyTileView;
+import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
-import javafx.scene.Node;
+import javafx.collections.ObservableList;
+import javafx.util.Callback;
+import org.kordamp.ikonli.Ikon;
 
-public class CompaniesCategoryPage extends CategoryPageBase<Person> {
+public class CompaniesCategoryPage extends CategoryPageBase<Company> {
 
     public CompaniesCategoryPage(ObjectProperty<Size> size) {
         super(size);
@@ -28,18 +32,27 @@ public class CompaniesCategoryPage extends CategoryPageBase<Person> {
     }
 
     @Override
-    public Node content() {
-        // header
-        CategoryHeader header = createCategoryHeader("Companies", IkonUtil.getModelIkon(Company.class));
+    protected String getCategoryTitle() {
+        return "Companies";
+    }
 
-        // filter
-        CompaniesFilterView filterView = new CompaniesFilterView();
-        filterView.sizeProperty().bind(sizeProperty());
+    @Override
+    protected Ikon getCategoryIkon() {
+        return IkonUtil.getModelIkon(Company.class);
+    }
 
-        // details
-        CategoryContentPane contentPane = createCategoryContentPane();
-        contentPane.getNodes().add(filterView);
+    @Override
+    protected Callback<ModelGridView<Company>, TileViewBase<Company>> getTileViewProvider() {
+        return gridView -> new CompanyTileView();
+    }
 
-        return wrapContent(header, contentPane);
+    @Override
+    protected SearchFilterView createSearchFilterView() {
+        return new CompaniesFilterView();
+    }
+
+    @Override
+    protected ObservableList<Company> getCategoryItems() {
+        return DataRepository.getInstance().getCompanies();
     }
 }

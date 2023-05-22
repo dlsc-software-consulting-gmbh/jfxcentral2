@@ -1,17 +1,21 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.filters.BooksFilterView;
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
+import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
+import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
+import com.dlsc.jfxcentral2.components.tiles.BookTileView;
+import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
-import javafx.scene.Node;
+import javafx.collections.ObservableList;
+import javafx.util.Callback;
+import org.kordamp.ikonli.Ikon;
 
-public class BooksCategoryPage extends CategoryPageBase<Person> {
+public class BooksCategoryPage extends CategoryPageBase<Book> {
 
     public BooksCategoryPage(ObjectProperty<Size> size) {
         super(size);
@@ -28,18 +32,27 @@ public class BooksCategoryPage extends CategoryPageBase<Person> {
     }
 
     @Override
-    public Node content() {
-        // header
-        CategoryHeader header = createCategoryHeader("Books", IkonUtil.getModelIkon(Book.class));
+    protected String getCategoryTitle() {
+        return "Books";
+    }
 
-        // filter
-        BooksFilterView filterView = new BooksFilterView();
-        filterView.sizeProperty().bind(sizeProperty());
+    @Override
+    protected Ikon getCategoryIkon() {
+        return IkonUtil.getModelIkon(Book.class);
+    }
 
-        // details
-        CategoryContentPane contentPane = createCategoryContentPane();
-        contentPane.getNodes().add(filterView);
+    @Override
+    protected Callback<ModelGridView<Book>, TileViewBase<Book>> getTileViewProvider() {
+        return gridView -> new BookTileView();
+    }
 
-        return wrapContent(header, contentPane);
+    @Override
+    protected SearchFilterView createSearchFilterView() {
+        return new BooksFilterView();
+    }
+
+    @Override
+    protected ObservableList<Book> getCategoryItems() {
+        return DataRepository.getInstance().getBooks();
     }
 }

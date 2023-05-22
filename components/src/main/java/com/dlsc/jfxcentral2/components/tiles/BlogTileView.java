@@ -4,18 +4,16 @@ import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
 import javafx.scene.image.Image;
+import one.jpro.routing.LinkUtil;
 
 public class BlogTileView extends SimpleTileView<Blog> {
-
-    public BlogTileView(Blog blog) {
-        this();
-        setData(blog);
-    }
 
     public BlogTileView() {
         getStyleClass().add("blog-tile-view");
 
         dataProperty().addListener((ob, ov, data) -> {
+            LinkUtil.setLink(this, "/blogs/" + getData().getId());
+
             saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(data));
             saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(data));
 

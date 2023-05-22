@@ -17,7 +17,6 @@ import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.List;
 
@@ -27,12 +26,8 @@ public class PersonDetailHeader extends DetailHeader<Person> {
 
     public PersonDetailHeader(Person person) {
         this.person = person;
-
         getStyleClass().add("person-detail-header");
         centerProperty().bind(Bindings.createObjectBinding(this::createCenterNode, sizeProperty()));
-
-        setOnBack(() -> System.out.println(getClass().getSimpleName() + " back"));
-        setOnShare(() -> System.out.println(getClass().getSimpleName() + " share"));
     }
 
     private Pane createCenterNode() {

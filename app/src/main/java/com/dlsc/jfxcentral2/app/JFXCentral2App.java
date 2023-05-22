@@ -13,6 +13,7 @@ import com.dlsc.jfxcentral2.app.pages.category.DownloadsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.LibrariesCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.PeopleCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.ShowcasesCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.TipCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.ToolsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.TutorialsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.VideosCategoryPage;
@@ -23,6 +24,7 @@ import com.dlsc.jfxcentral2.app.pages.details.DownloadDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.LibraryDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.PersonDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.ShowcaseDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.TipDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.ToolDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
@@ -59,6 +61,7 @@ public class JFXCentral2App extends RouteApp {
         scene.setFill(Color.web("070B32"));
         scene.widthProperty().addListener((it -> updateSize(scene)));
         scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
+        scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/markdown.css").toExternalForm());
 
         updateSize(scene);
 
@@ -72,6 +75,7 @@ public class JFXCentral2App extends RouteApp {
                 .and(createCategoryOrDetailRoute("/people", () -> new PeopleCategoryPage(size), id -> new PersonDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/real_world", () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // legacy routing for real world apps / showcases
                 .and(createCategoryOrDetailRoute("/showcases", () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/tips", () -> new TipCategoryPage(size), id -> new TipDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/tools", () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/tutorials", () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/videos", () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))

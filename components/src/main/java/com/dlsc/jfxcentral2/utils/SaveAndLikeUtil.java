@@ -12,11 +12,11 @@ public class SaveAndLikeUtil {
     }
 
     public static boolean isSaved(ModelObject obj) {
-        return random.nextBoolean();
+        return false;
     }
 
     public static boolean isLiked(ModelObject obj) {
-        return random.nextBoolean();
+        return false;
     }
 
 

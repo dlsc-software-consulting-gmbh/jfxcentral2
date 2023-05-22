@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -12,7 +13,7 @@ import javafx.scene.layout.HBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
-public class DetailHeader<T extends ModelObject> extends CategoryHeader<ModelObject> {
+public class DetailHeader<T extends ModelObject> extends CategoryHeader<T> {
 
     public DetailHeader() {
         getStyleClass().add("detail-header");
@@ -20,22 +21,15 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader<ModelObj
         BorderPane contentPane = new BorderPane();
         contentPane.getStyleClass().add("content-pane");
         contentPane.centerProperty().bind(centerProperty());
-        contentPane.bottomProperty().bind(Bindings.createObjectBinding(this::createBottomBox, onBackProperty(), onShareProperty()));
+        contentPane.setBottom(createBottomBox());
 
         contentProperty().bind(Bindings.createObjectBinding(() -> contentPane));
     }
 
     private HBox createBottomBox() {
-        //Bottom
         Button backButton = new Button("BACK", new FontIcon(Material.ARROW_BACK_IOS));
         backButton.getStyleClass().addAll("back-button");
-        backButton.managedProperty().bind(backButton.visibleProperty());
-        backButton.visibleProperty().bind(onBackProperty().isNotNull());
-        backButton.setOnAction(event -> {
-            if (getOnBack() != null) {
-                getOnBack().run();
-            }
-        });
+        backButton.setOnAction(event -> WebAPI.getWebAPI(getScene()).executeScript("history.back()"));
 
         Button shareButton = new Button("SHARE", new FontIcon(Material.SHARE));
         shareButton.getStyleClass().add("share-button");
@@ -64,20 +58,6 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader<ModelObj
 
     public void setCenter(Node center) {
         this.center.set(center);
-    }
-
-    private final ObjectProperty<Runnable> onBack = new SimpleObjectProperty<>(this, "onBack");
-
-    public Runnable getOnBack() {
-        return onBack.get();
-    }
-
-    public ObjectProperty<Runnable> onBackProperty() {
-        return onBack;
-    }
-
-    public void setOnBack(Runnable onBack) {
-        this.onBack.set(onBack);
     }
 
     private final ObjectProperty<Runnable> onShare = new SimpleObjectProperty<>(this, "onShare");

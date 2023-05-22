@@ -34,6 +34,7 @@ import javafx.scene.layout.StackPane;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
 
 import java.util.ArrayList;
@@ -173,7 +174,7 @@ public class TopMenuBar extends PaneBase {
     private void fillCommunityMenu(MenuButton button) {
         button.getItems().add(createMenuItem("People", "/people", IkonUtil.getModelIkon(Person.class)));
         button.getItems().add(createMenuItem("Companies", "/companies", IkonUtil.getModelIkon(Company.class)));
-        button.getItems().add(createMenuItem("OpenJFX", "/openjfx", null));
+        button.getItems().add(createMenuItem("OpenJFX", "/openjfx", MaterialDesign.MDI_GITHUB_BOX));
         button.getItems().add(createMenuItem("Links of the Week", "/links", IkonUtil.getModelIkon(LinksOfTheWeek.class)));
     }
 

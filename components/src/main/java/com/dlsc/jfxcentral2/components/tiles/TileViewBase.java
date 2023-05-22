@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Region;
 
 public class TileViewBase<T extends ModelObject> extends PaneBase {
 
@@ -114,5 +113,4 @@ public class TileViewBase<T extends ModelObject> extends PaneBase {
     public final void setLikeSelected(boolean likeSelected) {
         this.likeSelected.set(likeSelected);
     }
-
 }

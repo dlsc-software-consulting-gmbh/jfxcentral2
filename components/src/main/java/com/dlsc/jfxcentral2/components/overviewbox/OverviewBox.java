@@ -31,6 +31,7 @@ public class OverviewBox<T extends ModelObject> extends PaneBase {
 
         MarkdownView markdownView = new MarkdownView();
         markdownView.mdStringProperty().bind(markdownProperty());
+        markdownView.baseURLProperty().bind(baseURLProperty());
 
         bottomWrapper = new StackPane();
         bottomWrapper.getStyleClass().add("bottom-wrapper");
@@ -45,6 +46,20 @@ public class OverviewBox<T extends ModelObject> extends PaneBase {
         layoutBySize();
         getChildren().setAll(contentBox);
 
+    }
+
+    private StringProperty baseURL = new SimpleStringProperty(this, "baseURL");
+
+    public String getBaseURL() {
+        return baseURL.get();
+    }
+
+    public StringProperty baseURLProperty() {
+        return baseURL;
+    }
+
+    public void setBaseURL(String baseURL) {
+        this.baseURL.set(baseURL);
     }
 
     @Override

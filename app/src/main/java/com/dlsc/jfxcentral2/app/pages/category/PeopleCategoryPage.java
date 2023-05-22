@@ -1,14 +1,19 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.filters.PeopleFilterView;
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
+import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
+import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
+import com.dlsc.jfxcentral2.components.tiles.PersonTileView;
+import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
-import javafx.scene.Node;
+import javafx.collections.ObservableList;
+import javafx.util.Callback;
+import org.kordamp.ikonli.Ikon;
 
 public class PeopleCategoryPage extends CategoryPageBase<Person> {
 
@@ -27,18 +32,32 @@ public class PeopleCategoryPage extends CategoryPageBase<Person> {
     }
 
     @Override
-    public Node content() {
-        // header
-        CategoryHeader header = createCategoryHeader("People", IkonUtil.getModelIkon(Person.class));
+    protected String getCategoryTitle() {
+        return "People";
+    }
 
-        // filter
-        PeopleFilterView filterView = new PeopleFilterView();
-        filterView.sizeProperty().bind(sizeProperty());
+    @Override
+    protected Ikon getCategoryIkon() {
+        return IkonUtil.getModelIkon(Person.class);
+    }
 
-        // details
-        CategoryContentPane contentPane = createCategoryContentPane();
-        contentPane.getNodes().add(filterView);
+    @Override
+    protected int getNumberOfGridViewRows() {
+        return 5;
+    }
 
-        return wrapContent(header, contentPane);
+    @Override
+    protected Callback<ModelGridView<Person>, TileViewBase<Person>> getTileViewProvider() {
+        return gridView -> new PersonTileView();
+    }
+
+    @Override
+    protected SearchFilterView createSearchFilterView() {
+        return new PeopleFilterView();
+    }
+
+    @Override
+    protected ObservableList<Person> getCategoryItems() {
+        return DataRepository.getInstance().getPeople();
     }
 }

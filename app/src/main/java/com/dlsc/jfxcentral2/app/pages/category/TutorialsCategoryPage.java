@@ -1,17 +1,21 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
-import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.components.CategoryContentPane;
+import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.filters.TutorialsFilterView;
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
+import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
+import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
+import com.dlsc.jfxcentral2.components.tiles.TutorialTileView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
-import javafx.scene.Node;
+import javafx.collections.ObservableList;
+import javafx.util.Callback;
+import org.kordamp.ikonli.Ikon;
 
-public class TutorialsCategoryPage extends CategoryPageBase<Person> {
+public class TutorialsCategoryPage extends CategoryPageBase<Tutorial> {
 
     public TutorialsCategoryPage(ObjectProperty<Size> size) {
         super(size);
@@ -28,18 +32,27 @@ public class TutorialsCategoryPage extends CategoryPageBase<Person> {
     }
 
     @Override
-    public Node content() {
-        // header
-        CategoryHeader header = createCategoryHeader("Tutorials", IkonUtil.getModelIkon(Tutorial.class));
+    protected String getCategoryTitle() {
+        return "Tutorials";
+    }
 
-        // filter
-        TutorialsFilterView filterView = new TutorialsFilterView();
-        filterView.sizeProperty().bind(sizeProperty());
+    @Override
+    protected Ikon getCategoryIkon() {
+        return IkonUtil.getModelIkon(Tutorial.class);
+    }
 
-        // details
-        CategoryContentPane contentPane = createCategoryContentPane();
-        contentPane.getNodes().add(filterView);
+    @Override
+    protected Callback<ModelGridView<Tutorial>, TileViewBase<Tutorial>> getTileViewProvider() {
+        return gridView -> new TutorialTileView();
+    }
 
-        return wrapContent(header, contentPane);
+    @Override
+    protected SearchFilterView createSearchFilterView() {
+        return new TutorialsFilterView();
+    }
+
+    @Override
+    protected ObservableList<Tutorial> getCategoryItems() {
+        return DataRepository.getInstance().getTutorials();
     }
 }

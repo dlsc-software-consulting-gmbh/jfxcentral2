@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -11,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
 
@@ -73,17 +73,13 @@ public class VideoGalleryView extends PaneBase {
             int startIndex = index * maxItemsPerPage;
             int endIndex = Math.min(startIndex + maxItemsPerPage, videos.getSize());
             for (int i = startIndex; i < endIndex; i++) {
-                VideoGalleryTileView videoTileView = new VideoGalleryTileView(videos.get(i));
+                Video video = videos.get(i);
+                VideoGalleryTileView videoTileView = new VideoGalleryTileView(video);
                 videoTileView.sizeProperty().bind(pagination.sizeProperty());
                 //Play button action
-                videoTileView.setButton1Action(() -> {
+                videoTileView.getButton1().setOnAction(evt -> {
                     centerPlayBox.getChildren().removeIf(node -> node != videosBox);
-
-                    //play video
-                    StackPane videoPane = new StackPane();
-                    videoPane.setMinSize(200, 260);
-                    videoPane.setStyle("-fx-background-color: black;");
-                    centerPlayBox.getChildren().add(videoPane);
+                    centerPlayBox.getChildren().add(VideoViewFactory.createViewViewNode(video));
                 });
                 videosBox.getChildren().add(videoTileView);
             }

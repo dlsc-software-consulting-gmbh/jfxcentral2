@@ -222,11 +222,12 @@
 
 .context-menu .menu-item > .label,
 .context-menu .menu-item > * > .label {
-    -fx-padding: 3px 10px 3px 12px;
+    -fx-padding: 3px 0px 3px 0px;
     -fx-text-fill: -normal-text-icon-color;
+    -fx-graphic-text-gap: 20px;
 }
 
-.context-menu .menu-item .graphic-container .ikonli-font-icon {
+.context-menu .menu-item * .ikonli-font-icon {
     -fx-icon-color: -normal-text-icon-color;
     -fx-icon-size: 25px;
 }
@@ -236,7 +237,7 @@
     -fx-text-fill: -hover-text-icon-color;
 }
 
-.context-menu .menu-item:hover .graphic-container .ikonli-font-icon {
+.context-menu .menu-item:hover * .ikonli-font-icon {
     -fx-icon-color: -hover-text-icon-color;
 }
 
@@ -2465,6 +2466,23 @@
 }
 
 .app-detail-header > .content-pane .button-box .website-button {
+    -bg: -light-blue;
+    -fill: -grey-100;
+    -fx-padding: 3px 9px;
+}
+
+/** ------------------------------------
+ * AppDetailHeader
+ */
+.tip-detail-header:md-lg > .content-pane .content-box > .name {
+    -fx-font-size: 44px;
+}
+
+.tip-detail-header:sm > .content-pane .content-box > .name {
+    -fx-font-size: 34px;
+}
+
+.tip-detail-header > .content-pane .button-box .website-button {
     -bg: -light-blue;
     -fill: -grey-100;
     -fx-padding: 3px 9px;
@@ -4795,6 +4813,17 @@
 }
 
 .app-overview-box:sm .body-box .top-box {
+    -fx-spacing: 5px;
+}
+
+/** ------------------------------------
+ * TipOverviewBox
+ */
+.tip-overview-box .body-box .top-grid {
+    -fx-vgap: 5px;
+}
+
+.tip-overview-box:sm .body-box .top-box {
     -fx-spacing: 5px;
 }
 

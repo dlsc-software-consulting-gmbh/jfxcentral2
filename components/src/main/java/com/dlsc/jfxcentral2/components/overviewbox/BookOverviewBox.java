@@ -1,7 +1,9 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.components.CustomImageView;
+import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -26,7 +28,7 @@ public class BookOverviewBox extends OverviewBox<Book> {
 
     public BookOverviewBox() {
         getStyleClass().add("book-overview-box");
-
+        baseURLProperty().bind(Bindings.createStringBinding(() -> DataRepository.getInstance().getRepositoryDirectoryURL() + "books/" + getData().getId(), dataProperty()));
         dataProperty().addListener(it -> fillData());
     }
 

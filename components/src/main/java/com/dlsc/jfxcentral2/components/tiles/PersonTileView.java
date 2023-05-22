@@ -12,6 +12,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
+import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
@@ -23,15 +24,12 @@ public class PersonTileView extends SimpleTileView<Person> {
     private MenuButton socialButton;
     private SocialLinksView socialLinksView;
 
-    public PersonTileView(Person person) {
-        this();
-        setData(person);
-    }
-
     public PersonTileView() {
         getStyleClass().add("person-tile-view");
 
         dataProperty().addListener(it -> {
+            LinkUtil.setLink(this, "/people/" + getData().getId());
+
             Person person = dataProperty().get();
             //add image for testing
             imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png").toExternalForm())));

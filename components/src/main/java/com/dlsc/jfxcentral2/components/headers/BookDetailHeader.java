@@ -13,13 +13,7 @@ public class BookDetailHeader extends SimpleDetailHeader<Book> {
         getStyleClass().add("book-detail-header");
 
         setWebsiteButtonText("amazon");
-        setOnWebsite(() -> {
-            if (getModel() != null) {
-                System.out.println(getModel().getName() + " Book website");
-            }
-        });
-        setOnBack(() -> System.out.println(getClass().getSimpleName() + " back"));
-        setOnShare(() -> System.out.println(getClass().getSimpleName() + " share"));
+        modelProperty().addListener(it -> setWebsite("http://www.amazon.com/dp/" + getModel().getAmazonASIN()));
     }
 
 }

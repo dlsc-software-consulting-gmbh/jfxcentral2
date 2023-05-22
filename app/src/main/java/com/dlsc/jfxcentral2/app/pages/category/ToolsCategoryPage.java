@@ -1,17 +1,21 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
-import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.components.CategoryContentPane;
+import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.filters.ToolsFilterView;
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
+import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
+import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
+import com.dlsc.jfxcentral2.components.tiles.ToolTileView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
-import javafx.scene.Node;
+import javafx.collections.ObservableList;
+import javafx.util.Callback;
+import org.kordamp.ikonli.Ikon;
 
-public class ToolsCategoryPage extends CategoryPageBase<Person> {
+public class ToolsCategoryPage extends CategoryPageBase<Tool> {
 
     public ToolsCategoryPage(ObjectProperty<Size> size) {
         super(size);
@@ -28,18 +32,32 @@ public class ToolsCategoryPage extends CategoryPageBase<Person> {
     }
 
     @Override
-    public Node content() {
-        // header
-        CategoryHeader header = createCategoryHeader("Tools", IkonUtil.getModelIkon(Tool.class));
+    protected String getCategoryTitle() {
+        return "Tools";
+    }
 
-        // filter
-        ToolsFilterView filterView = new ToolsFilterView();
-        filterView.sizeProperty().bind(sizeProperty());
+    @Override
+    protected Ikon getCategoryIkon() {
+        return IkonUtil.getModelIkon(Tool.class);
+    }
 
-        // details
-        CategoryContentPane contentPane = createCategoryContentPane();
-        contentPane.getNodes().add(filterView);
+    @Override
+    protected int getNumberOfGridViewRows() {
+        return 5;
+    }
 
-        return wrapContent(header, contentPane);
+    @Override
+    protected Callback<ModelGridView<Tool>, TileViewBase<Tool>> getTileViewProvider() {
+        return gridView -> new ToolTileView();
+    }
+
+    @Override
+    protected SearchFilterView createSearchFilterView() {
+        return new ToolsFilterView();
+    }
+
+    @Override
+    protected ObservableList<Tool> getCategoryItems() {
+        return DataRepository.getInstance().getTools();
     }
 }

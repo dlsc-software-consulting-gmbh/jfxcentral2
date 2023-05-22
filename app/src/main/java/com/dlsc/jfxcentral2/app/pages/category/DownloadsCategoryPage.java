@@ -1,17 +1,21 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Download;
-import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.filters.DownloadsFilterView;
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
+import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
+import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
+import com.dlsc.jfxcentral2.components.tiles.DownloadTileView;
+import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
-import javafx.scene.Node;
+import javafx.collections.ObservableList;
+import javafx.util.Callback;
+import org.kordamp.ikonli.Ikon;
 
-public class DownloadsCategoryPage extends CategoryPageBase<Person> {
+public class DownloadsCategoryPage extends CategoryPageBase<Download> {
 
     public DownloadsCategoryPage(ObjectProperty<Size> size) {
         super(size);
@@ -28,18 +32,27 @@ public class DownloadsCategoryPage extends CategoryPageBase<Person> {
     }
 
     @Override
-    public Node content() {
-        // header
-        CategoryHeader header = createCategoryHeader("Downloads", IkonUtil.getModelIkon(Download.class));
+    protected String getCategoryTitle() {
+        return "Downloads";
+    }
 
-        // filter
-        DownloadsFilterView filterView = new DownloadsFilterView();
-        filterView.sizeProperty().bind(sizeProperty());
+    @Override
+    protected Ikon getCategoryIkon() {
+        return IkonUtil.getModelIkon(Download.class);
+    }
 
-        // details
-        CategoryContentPane contentPane = createCategoryContentPane();
-        contentPane.getNodes().add(filterView);
+    @Override
+    protected Callback<ModelGridView<Download>, TileViewBase<Download>> getTileViewProvider() {
+        return gridView -> new DownloadTileView();
+    }
 
-        return wrapContent(header, contentPane);
+    @Override
+    protected SearchFilterView createSearchFilterView() {
+        return new DownloadsFilterView();
+    }
+
+    @Override
+    protected ObservableList<Download> getCategoryItems() {
+        return DataRepository.getInstance().getDownloads();
     }
 }

@@ -5,6 +5,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,8 +15,6 @@ import one.jpro.routing.LinkUtil;
 import java.util.function.Consumer;
 
 public class MarkdownView extends com.sandec.mdfx.MarkdownView {
-
-    private String baseURL = "";
 
     public MarkdownView() {
         getStyleClass().add("markdown-view");
@@ -34,12 +34,18 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
         this.onImageClick.set(onImageClick);
     }
 
+    private StringProperty baseURL = new SimpleStringProperty(this, "baseURL");
+
     public String getBaseURL() {
+        return baseURL.get();
+    }
+
+    public StringProperty baseURLProperty() {
         return baseURL;
     }
 
     public void setBaseURL(String baseURL) {
-        this.baseURL = baseURL;
+        this.baseURL.set(baseURL);
     }
 
     @Override
@@ -55,7 +61,7 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
             return node;
         }
 
-        Node node = super.generateImage(baseURL + "/" + url);
+        Node node = super.generateImage(getBaseURL() + "/" + url);
         configureImage(node);
         return node;
     }

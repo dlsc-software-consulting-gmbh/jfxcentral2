@@ -4,18 +4,16 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
 import javafx.scene.image.Image;
+import one.jpro.routing.LinkUtil;
 
 public class ToolTileView extends SimpleTileView<Tool> {
-
-    public ToolTileView(Tool tool) {
-        this();
-        setData(tool);
-    }
 
     public ToolTileView() {
         getStyleClass().add("tool-tile-view");
 
         dataProperty().addListener((ob, ov, tool) -> {
+            LinkUtil.setLink(this, "/tools/" + getData().getId());
+
             saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(tool));
             saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(tool));
 
@@ -27,5 +25,4 @@ public class ToolTileView extends SimpleTileView<Tool> {
             descriptionProperty().set(tool.getDescription());
         });
     }
-
 }

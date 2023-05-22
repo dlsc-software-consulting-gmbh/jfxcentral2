@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.DataRepository;
-import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tip;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 
 import java.time.format.DateTimeFormatter;
 
-public class AppOverviewBox extends OverviewBox<RealWorldApp> {
+public class TipOverviewBox extends OverviewBox<Tip> {
 
     private static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM yyyy");
 
@@ -24,17 +24,21 @@ public class AppOverviewBox extends OverviewBox<RealWorldApp> {
     private Label createdByLabel;
     private Label createdOnLabel;
 
-    public AppOverviewBox(RealWorldApp app) {
+    public TipOverviewBox(Tip tip) {
         this();
-        setData(app);
+        setData(tip);
     }
 
-    public AppOverviewBox() {
-        getStyleClass().add("app-overview-box");
-
-        baseURLProperty().bind(Bindings.createStringBinding(() -> getData() == null ? "" : DataRepository.getInstance().getRepositoryDirectoryURL() + "realworld/" + getData().getId(), dataProperty()));
-
-        dataProperty().addListener(it -> fillData());
+    public TipOverviewBox() {
+        getStyleClass().add("tip-overview-box");
+        dataProperty().addListener(it -> {
+            Tip tip = getData();
+            if (tip != null) {
+                fillData();
+                markdownProperty().bind(DataRepository.getInstance().tipDescriptionProperty(tip));
+            }
+        });
+        baseURLProperty().bind(Bindings.createStringBinding(() -> getData() == null ? "" : DataRepository.getInstance().getRepositoryDirectoryURL() + "tips/" + getData().getId(), dataProperty()));
     }
 
     @Override
@@ -81,23 +85,23 @@ public class AppOverviewBox extends OverviewBox<RealWorldApp> {
                 rowConstraints.setValignment(VPos.TOP);
                 gridPane.getRowConstraints().add(rowConstraints);
             }
-            gridPane.add(locationHeader, 0, 0);
-            gridPane.add(locationLabel, 0, 1);
-            gridPane.add(domainHeader, 1, 0);
-            gridPane.add(domainLabel, 1, 1);
-            gridPane.add(createdByHeader, 2, 0);
-            gridPane.add(createdByLabel, 2, 1);
-            gridPane.add(createdOnHeader, 3, 0);
-            gridPane.add(createdOnLabel, 3, 1);
+//            gridPane.add(locationHeader, 0, 0);
+//            gridPane.add(locationLabel, 0, 1);
+//            gridPane.add(domainHeader, 1, 0);
+//            gridPane.add(domainLabel, 1, 1);
+//            gridPane.add(createdByHeader, 2, 0);
+//            gridPane.add(createdByLabel, 2, 1);
+            gridPane.add(createdOnHeader, 0, 0);
+            gridPane.add(createdOnLabel, 0, 1);
             return gridPane;
         } else {
             VBox topBox = new VBox(
-                    locationHeader,
-                    locationLabel,
-                    domainHeader,
-                    domainLabel,
-                    createdByHeader,
-                    createdByLabel,
+//                    locationHeader,
+//                    locationLabel,
+//                    domainHeader,
+//                    domainLabel,
+//                    createdByHeader,
+//                    createdByLabel,
                     createdOnHeader,
                     createdOnLabel
             );
@@ -108,15 +112,15 @@ public class AppOverviewBox extends OverviewBox<RealWorldApp> {
     }
 
     private void fillData() {
-        RealWorldApp app = getData();
-        if (app != null) {
-            locationLabel.setText(app.getLocation());
-            domainLabel.setText(app.getDomain());
-            createdByLabel.setText(app.getCompany());
-            if (app.getCreatedOn() != null) {
-                createdOnLabel.setText(app.getCreatedOn().format(DEFAULT_DATE_FORMATTER));
+        Tip tip = getData();
+        if (tip != null) {
+//            locationLabel.setText(tip.getLocation());
+//            domainLabel.setText(tip.getDomain());
+//            createdByLabel.setText(tip.getCompany());
+            if (tip.getCreatedOn() != null) {
+                createdOnLabel.setText(tip.getCreatedOn().format(DEFAULT_DATE_FORMATTER));
             }
-            markdownProperty().bind(DataRepository.getInstance().realWorldAppDescriptionProperty(app));
+            markdownProperty().bind(DataRepository.getInstance().tipDescriptionProperty(tip));
         } else {
             locationLabel.setText("");
             domainLabel.setText("");
@@ -125,5 +129,4 @@ public class AppOverviewBox extends OverviewBox<RealWorldApp> {
             setMarkdown("");
         }
     }
-
 }

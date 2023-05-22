@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -14,13 +15,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.LinkUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 /**
  * AppDetailHeader or BookDetailHeader
  */
-public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<ModelObject> {
+public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
+
+    private Button websiteButton;
 
     public SimpleDetailHeader(T model) {
         this();
@@ -31,6 +36,10 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<Mode
         getStyleClass().add("simple-detail-header");
 
         centerProperty().bind(Bindings.createObjectBinding(this::createCenterNode, modelProperty()));
+    }
+
+    public Button getWebsiteButton() {
+        return websiteButton;
     }
 
     protected Pane createCenterNode() {
@@ -63,7 +72,9 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<Mode
             System.out.println(header.getName() + " is liked: " + nv);
         });
 
-        Button websiteButton = new Button();
+        websiteButton = new Button();
+        websiteButton.visibleProperty().bind(websiteProperty().isNotNull());
+        websiteButton.managedProperty().bind(websiteProperty().isNotNull());
         websiteButton.getStyleClass().addAll("website-button", "link-button");
         websiteButton.textProperty().bind(websiteButtonTextProperty());
         websiteButton.graphicProperty().bind(Bindings.createObjectBinding(() -> {
@@ -73,9 +84,11 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<Mode
             }
             return new FontIcon(icon);
         }, websiteButtonIconProperty()));
-        websiteButton.setOnAction(e ->{
-            if (onWebsite.get() != null) {
-                onWebsite.get().run();
+
+        websiteProperty().addListener(it -> {
+            String url = getWebsite();
+            if (StringUtils.isNotBlank(url)) {
+                LinkUtil.setExternalLink(websiteButton, url);
             }
         });
 
@@ -95,7 +108,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<Mode
         return contentBox;
     }
 
-    private final StringProperty websiteButtonText = new SimpleStringProperty(this, "websiteButtonText");
+    private final StringProperty websiteButtonText = new SimpleStringProperty(this, "websiteButtonText", "WEBSITE");
 
     public String getWebsiteButtonText() {
         return websiteButtonText.get();
@@ -109,7 +122,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<Mode
         this.websiteButtonText.set(websiteButtonText);
     }
 
-    private final ObjectProperty<Ikon> websiteButtonIcon = new SimpleObjectProperty<>(this, "websiteButtonIcon");
+    private final ObjectProperty<Ikon> websiteButtonIcon = new SimpleObjectProperty<>(this, "websiteButtonIcon", IkonUtil.website);
 
     public Ikon getWebsiteButtonIcon() {
         return websiteButtonIcon.get();
@@ -123,18 +136,17 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<Mode
         this.websiteButtonIcon.set(websiteButtonIcon);
     }
 
+    private final StringProperty website = new SimpleStringProperty(this, "website");
 
-    private final ObjectProperty<Runnable> onWebsite = new SimpleObjectProperty<>(this, "onWebsite");
-
-    public Runnable getOnWebsite() {
-        return onWebsite.get();
+    public String getWebsite() {
+        return website.get();
     }
 
-    public ObjectProperty<Runnable> onWebsiteProperty() {
-        return onWebsite;
+    public StringProperty websiteProperty() {
+        return website;
     }
 
-    public void setOnWebsite(Runnable onWebsite) {
-        this.onWebsite.set(onWebsite);
+    public void setWebsite(String website) {
+        this.website.set(website);
     }
 }

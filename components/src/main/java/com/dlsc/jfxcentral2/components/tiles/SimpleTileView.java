@@ -1,6 +1,19 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.News;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
@@ -101,22 +114,24 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         if (data == null) {
             return;
         }
+
+        DataRepository dataRepository = DataRepository.getInstance();
         List<LinkedObjectBadge> linkedObjectBadge = List.of(
-                new LinkedObjectBadge("Books", IkonUtil.book, data.getBookIds().size()),
-                new LinkedObjectBadge("Apps", IkonUtil.app, data.getAppIds().size()),
-                new LinkedObjectBadge("Libraries", IkonUtil.library, data.getLibraryIds().size()),
-                new LinkedObjectBadge("Tutorials", IkonUtil.tutorial, data.getTutorialIds().size()),
-                new LinkedObjectBadge("Downloads", IkonUtil.download, data.getDownloadIds().size()),
-                new LinkedObjectBadge("Tools", IkonUtil.tool, data.getToolIds().size()),
-                new LinkedObjectBadge("Videos", IkonUtil.video, data.getVideoIds().size()),
-                new LinkedObjectBadge("Companies", IkonUtil.company, data.getCompanyIds().size()),
-                new LinkedObjectBadge("Blogs", IkonUtil.blog, data.getBlogIds().size()),
-                new LinkedObjectBadge("Tips", IkonUtil.tip, data.getTipIds().size()),
-                new LinkedObjectBadge("News", IkonUtil.news, data.getNewsIds().size()),
-                new LinkedObjectBadge("Links", IkonUtil.link, data.getLinksOfTheWeekIds().size())
+                new LinkedObjectBadge("Books", IkonUtil.getModelIkon(Book.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("Apps", IkonUtil.getModelIkon(RealWorldApp.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("Libraries", IkonUtil.getModelIkon(Library.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("Tutorials", IkonUtil.getModelIkon(Tutorial.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("Downloads", IkonUtil.getModelIkon(Download.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("Tools", IkonUtil.getModelIkon(Tool.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("Videos", IkonUtil.getModelIkon(Video.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("Companies", IkonUtil.getModelIkon(Company.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("Blogs", IkonUtil.getModelIkon(Blog.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("Tips", IkonUtil.getModelIkon(Tip.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("News", IkonUtil.getModelIkon(News.class), dataRepository.getLinkedObjects(data, Book.class).size()),
+                new LinkedObjectBadge("Links", IkonUtil.getModelIkon(LinksOfTheWeek.class), dataRepository.getLinkedObjects(data, Book.class).size())
         );
 
-        final AtomicInteger index = new AtomicInteger(0);
+        AtomicInteger index = new AtomicInteger(0);
         int maxSize = isLarge() ? 3 : 2;
         linkedObjectBadge.stream().filter(item -> item.count() > 0).limit(maxSize).forEach(item -> {
             Label label = new Label(item.name() + "(" + item.count() + ")");

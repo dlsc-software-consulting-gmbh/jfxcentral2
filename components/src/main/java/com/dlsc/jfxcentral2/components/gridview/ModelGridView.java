@@ -25,7 +25,7 @@ import javafx.util.Callback;
 
 import java.util.List;
 
-public class ModelGridView<T extends ModelObject, E extends TileViewBase<T>> extends PaneBase {
+public class ModelGridView<T extends ModelObject> extends PaneBase {
 
     private Node currentDetailView;
 
@@ -52,7 +52,7 @@ public class ModelGridView<T extends ModelObject, E extends TileViewBase<T>> ext
 
             int initItemCount = getRows();
             for (int i = 0; i < initItemCount && i < items.size(); i++) {
-                E tileView = createTileView(contentBox, i);
+                TileViewBase<T> tileView = createTileView(contentBox, i);
                 contentBox.getChildren().add(tileView);
             }
 
@@ -67,7 +67,7 @@ public class ModelGridView<T extends ModelObject, E extends TileViewBase<T>> ext
                 }
                 int endIndex = Math.min(currentIndex + getRows(), items.size());
                 for (int i = currentIndex; i < endIndex; i++) {
-                    E tileView = createTileView(contentBox, i);
+                    TileViewBase<T> tileView = createTileView(contentBox, i);
                     contentBox.getChildren().add(contentBox.getChildren().size() - 1, tileView);
                 }
                 currentIndex = endIndex;
@@ -92,8 +92,9 @@ public class ModelGridView<T extends ModelObject, E extends TileViewBase<T>> ext
                     int row = (i - startIndex) / columns;
                     int column = (i - startIndex) % columns;
                     T model = items.get(i);
-                    E tileView = getTileViewProvider().call(model);
+                    TileViewBase<T> tileView = getTileViewProvider().call(ModelGridView.this);
                     tileView.sizeProperty().bind(sizeProperty());
+                    tileView.setData(model);
                     gridPane.add(tileView, column, row * 2);
                     //show detail node on click
                     tileView.setOnShowDetailNode(() -> {
@@ -115,9 +116,9 @@ public class ModelGridView<T extends ModelObject, E extends TileViewBase<T>> ext
         }
     }
 
-    private E createTileView(VBox contentBox, int i) {
+    private TileViewBase<T> createTileView(VBox contentBox, int i) {
         T model = items.get(i);
-        E tileView = getTileViewProvider().call(model);
+        TileViewBase<T> tileView = getTileViewProvider().call(this);
         tileView.sizeProperty().bind(sizeProperty());
         //show detail node on click
         tileView.setOnShowDetailNode(() -> {
@@ -194,17 +195,17 @@ public class ModelGridView<T extends ModelObject, E extends TileViewBase<T>> ext
         this.detailNodeProvider.set(detailNodeProvider);
     }
 
-    private final ObjectProperty<Callback<T, E>> tileViewProvider = new SimpleObjectProperty<>(this, "tileViewProvider");
+    private final ObjectProperty<Callback<ModelGridView<T>, TileViewBase<T>>> tileViewProvider = new SimpleObjectProperty<>(this, "tileViewProvider");
 
-    public Callback<T, E> getTileViewProvider() {
+    public Callback<ModelGridView<T>, TileViewBase<T>> getTileViewProvider() {
         return tileViewProvider.get();
     }
 
-    public ObjectProperty<Callback<T, E>> tileViewProviderProperty() {
+    public ObjectProperty<Callback<ModelGridView<T>, TileViewBase<T>>> tileViewProviderProperty() {
         return tileViewProvider;
     }
 
-    public void setTileViewProvider(Callback<T, E> tileViewProvider) {
+    public void setTileViewProvider(Callback<ModelGridView<T>, TileViewBase<T>> tileViewProvider) {
         this.tileViewProvider.set(tileViewProvider);
     }
 }

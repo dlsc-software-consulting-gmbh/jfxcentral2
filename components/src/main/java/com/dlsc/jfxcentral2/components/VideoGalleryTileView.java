@@ -14,5 +14,4 @@ public class VideoGalleryTileView extends VideoTileView {
         super();
         getStyleClass().add("video-gallery-tile");
     }
-
 }
