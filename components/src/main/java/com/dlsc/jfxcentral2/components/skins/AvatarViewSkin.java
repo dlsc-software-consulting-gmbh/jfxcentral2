@@ -21,16 +21,13 @@ public class AvatarViewSkin extends SkinBase<AvatarView> {
     public AvatarViewSkin(AvatarView control) {
         super(control);
         this.control = control;
+
         wrapper = new StackPane();
+
         imageView.imageProperty().bind(control.imageProperty());
         imageView.smoothProperty().bind(control.smoothProperty());
-        imageView.preserveRatioProperty().bind(Bindings.createBooleanBinding(() -> true));
-        imageView.setClip(createClip());
-
-        control.sizeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
-        control.avatarSizeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
-        control.roundSizeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
-        control.typeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
+        imageView.setPreserveRatio(true);
+        imageView.clipProperty().bind(Bindings.createObjectBinding(this::createClip, control.typeProperty()));
         imageView.imageProperty().addListener((ob, ov, nv) -> {
             if (ov != null) {
                 ov.progressProperty().removeListener(progressChangeListener);
@@ -44,9 +41,15 @@ public class AvatarViewSkin extends SkinBase<AvatarView> {
             }
         });
 
+        control.sizeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
+        control.avatarSizeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
+        control.roundSizeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
+        control.typeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
+
         wrapper.getChildren().setAll(new Group(imageView));
         wrapper.prefWidthProperty().bind(control.avatarSizeProperty());
         wrapper.prefHeightProperty().bind(control.avatarSizeProperty());
+
         getChildren().setAll(wrapper);
     }
 
@@ -81,7 +84,7 @@ public class AvatarViewSkin extends SkinBase<AvatarView> {
                 rectangle.setY((height * scale - avatarSize) / 2);
             }
             return rectangle;
-        } else {
+        } else if (control.getType().equals(AvatarView.Type.CIRCLE)) {
             Circle circle = new Circle();
             circle.radiusProperty().bind(control.avatarSizeProperty().divide(2));
             if (isWidthGreaterThanHeight) {
@@ -94,6 +97,7 @@ public class AvatarViewSkin extends SkinBase<AvatarView> {
             return circle;
         }
 
+        return null;
     }
 
     private final ChangeListener<Number> progressChangeListener = (ob, ov, nv) -> {

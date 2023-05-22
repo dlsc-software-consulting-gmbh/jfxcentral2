@@ -33,12 +33,17 @@ public class LibrariesCategoryPage extends CategoryPageBase<Library> {
 
     @Override
     protected String getCategoryTitle() {
-        return "Downloads";
+        return "Libraries";
     }
 
     @Override
     protected Ikon getCategoryIkon() {
         return IkonUtil.getModelIkon(Library.class);
+    }
+
+    @Override
+    protected int getNumberOfGridViewRows() {
+        return 5;
     }
 
     @Override

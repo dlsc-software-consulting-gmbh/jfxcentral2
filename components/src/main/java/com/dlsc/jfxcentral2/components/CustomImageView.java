@@ -21,6 +21,7 @@ import java.util.List;
  * Note: It is best to set the width and height at the same time, otherwise the picture may be deformed
  */
 public class CustomImageView extends ImageView {
+
     private static final double DEFAULT_HEIGHT = 10;
     private static final double DEFAULT_WIDTH = 10;
 

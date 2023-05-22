@@ -2816,6 +2816,36 @@
 }
 
 /** ------------------------------------
+ * LibraryTileView
+ */
+.library-tile-view:lg {
+    -fx-min-width: 413px;
+    -fx-pref-width: 413px;
+    -fx-max-width: 413px;
+    -fx-min-height: 143px;
+    -fx-pref-height: 143px;
+    -fx-max-height: 143px;
+}
+
+.library-tile-view:md {
+    -fx-min-width: 344px;
+    -fx-pref-width: 344px;
+    -fx-max-width: 344px;
+    -fx-min-height: 140px;
+    -fx-pref-height: 140px;
+    -fx-max-height: 140px;
+}
+
+.library-tile-view-tile-view:sm {
+    -fx-min-width: 317px;
+    -fx-pref-width: 317px;
+    -fx-max-width: 317px;
+    -fx-min-height: 136px;
+    -fx-pref-height: 136px;
+    -fx-max-height: 136px;
+}
+
+/** ------------------------------------
  * TileView
  */
 .tile-view .front-box .center-box {
@@ -4364,7 +4394,6 @@
     -fx-mim-height: -wrapper-size;
     -fx-pref-height: -wrapper-size;
     -fx-max-height: -wrapper-size;
-    -fx-background-color: -grey-100;
 }
 
 .details-box:sm > .content-box .details-cell .main-preview-wrapper {
@@ -4600,8 +4629,9 @@
 
 .videos-details-box > .content-box .details-cell .main-preview-wrapper > .main-preview-desc {
     -fx-padding: 2px 10px;
-    -fx-background-color: -white;
-    -fx-background-radius: 26px;
+    -fx-background-color: -grey-10, -white;
+    -fx-background-insets: 0px, 2px;
+    -fx-background-radius: 26px, 25px;
     -fx-translate-x: -7px;
     -fx-translate-y: 8px;
     -fx-font-size: 13px;
@@ -4851,6 +4881,31 @@
 .book-overview-box .body-box .top-box-wrapper .image-wrapper > .preview-image {
     -fx-fit-width: 206px;
     -fx-fit-height: 206px;
+}
+
+/** ------------------------------------
+ * BlogOverviewBox
+ */
+.blog-overview-box .posts-box {
+    -fx-spacing: 10px;
+}
+
+.blog-overview-box .posts-box > .post-view {
+    -fx-spacing: 20px;
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+}
+
+.blog-overview-box .posts-box > .post-view > .title-label {
+    -fx-font-size: 1.2em;
+}
+
+.blog-overview-box .posts-box > .post-view:hover > .title-label {
+    -fx-underline: true;
+}
+
+.blog-overview-box .posts-box > .post-view > .age-label {
+    -fx-opacity: 0.66;
 }
 
 /** ------------------------------------

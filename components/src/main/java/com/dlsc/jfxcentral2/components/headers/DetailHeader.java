@@ -26,6 +26,10 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader<T> {
         contentProperty().bind(Bindings.createObjectBinding(() -> contentPane));
     }
 
+    public DetailHeader(T model) {
+        setModel(model);
+    }
+
     private HBox createBottomBox() {
         Button backButton = new Button("BACK", new FontIcon(Material.ARROW_BACK_IOS));
         backButton.getStyleClass().addAll("back-button");

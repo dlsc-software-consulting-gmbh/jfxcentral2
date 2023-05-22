@@ -42,7 +42,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
@@ -129,7 +128,6 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
             boolean isVideo = data instanceof Video;
             StackPane.setAlignment(imageView, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
             setTitle(data.getName());
-            setDescription(StringUtils.isNotBlank(data.getDescription()) ? data.getDescription() : data.getSummary());
             setSaveSelected(SaveAndLikeUtil.isSaved(data));
             setLikeSelected(SaveAndLikeUtil.isLiked(data));
 

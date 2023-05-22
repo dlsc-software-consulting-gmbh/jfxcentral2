@@ -18,6 +18,8 @@ import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -36,6 +38,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @param <T>
  */
 public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
+
     protected HBox badgeBox = new HBox();
     protected SaveAndLikeButton saveAndLikeButton;
     private final HBox linkedObjectBox;
@@ -45,6 +48,9 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
 
         AvatarView avatarView = new AvatarView();
         avatarView.imageProperty().bind(imageProperty());
+        avatarView.typeProperty().bind(avatarTypeProperty());
+        avatarView.visibleProperty().bind(avatarView.imageProperty().isNotNull());
+        avatarView.managedProperty().bind(avatarView.imageProperty().isNotNull());
 
         Label nameLabel = new Label();
         nameLabel.getStyleClass().add("title");
@@ -84,6 +90,20 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
 
+    }
+
+    private final ObjectProperty<AvatarView.Type> avatarType = new SimpleObjectProperty<>(this, "avatarType", AvatarView.Type.CIRCLE);
+
+    public AvatarView.Type getAvatarType() {
+        return avatarType.get();
+    }
+
+    public ObjectProperty<AvatarView.Type> avatarTypeProperty() {
+        return avatarType;
+    }
+
+    public void setAvatarType(AvatarView.Type avatarType) {
+        this.avatarType.set(avatarType);
     }
 
     protected List<Node> createExtraNodes() {

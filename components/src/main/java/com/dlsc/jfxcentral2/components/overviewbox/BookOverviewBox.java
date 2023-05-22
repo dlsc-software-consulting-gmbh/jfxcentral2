@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
 
 public class BookOverviewBox extends OverviewBox<Book> {
+
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private Label writtenByLabel;
     private Label publisherLabel;

@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
@@ -39,6 +40,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -99,6 +101,23 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         return pageBox;
     }
 
+    protected StringProperty getDescriptionProperty(T model) {
+        // description
+        String description = model.getDescription();
+        if (StringUtils.isBlank(description)) {
+            description = model.getSummary();
+        }
+        if (StringUtils.isNotBlank(description)) {
+            return new SimpleStringProperty(description);
+        }
+
+        if (model instanceof Download download) {
+            return DataRepository.getInstance().downloadTextProperty(download);
+        }
+
+        return new SimpleStringProperty("(Missing description)");
+    }
+
     private Node createDetailsCell(T model) {
         VBox cellRight = new VBox();
         cellRight.getStyleClass().add("cell-right");
@@ -125,7 +144,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         List<Node> actionButtons = createActionButtons(model);
         if (actionButtons != null && !actionButtons.isEmpty()) {
             Pane actionButtonsPane = isSmall() ? new FlowPane() : new HBox();
-            //actionButtonsPane.setMinWidth(Region.USE_PREF_SIZE);
+            actionButtonsPane.setMinWidth(Region.USE_PREF_SIZE);
             actionButtonsPane.getStyleClass().add("action-buttons-pane");
             for (int i = 0; i < actionButtons.size(); i++) {
                 Node actionButton = actionButtons.get(i);
@@ -143,12 +162,10 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         cellRight.getChildren().addAll(titleBox);
 
         // description
-        String description = model.getDescription();
-        if (description != null) {
-            MarkdownView descMD = new MarkdownView(description);
-            descMD.getStyleClass().add("description-markdown");
-            cellRight.getChildren().add(descMD);
-        }
+        MarkdownView descMD = new MarkdownView();
+        descMD.mdStringProperty().bind(getDescriptionProperty(model));
+        descMD.getStyleClass().add("description-markdown");
+        cellRight.getChildren().add(descMD);
 
         // previews
         if (model instanceof Library library) {
@@ -198,25 +215,18 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
     protected Node createMainPreView(T model) {
         ObjectProperty<Image> imageProperty = null;
         String mins = null;
-        //TODO use a default image for test
         if (model instanceof RealWorldApp app) {
-            //imageProperty = ImageManager.getInstance().realWorldAppImageProperty(app);
-            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-main-preview0.png").toExternalForm()));
+            imageProperty = ImageManager.getInstance().realWorldAppImageProperty(app);
         } else if (model instanceof Download download) {
-            //imageProperty = ImageManager.getInstance().downloadBannerImageProperty(download);
-            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()));
+            imageProperty = ImageManager.getInstance().downloadBannerImageProperty(download);
         } else if (model instanceof Book book) {
-            //imageProperty = ImageManager.getInstance().bookCoverImageProperty(book);
-            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/book-thumbnail-01.png").toExternalForm()));
+            imageProperty = ImageManager.getInstance().bookCoverImageProperty(book);
         } else if (model instanceof Tip) {
-            // use a default image for tips
             imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm()));
         } else if (model instanceof Company company) {
-            //imageProperty = ImageManager.getInstance().companyImageProperty(company);
-            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/components/logos/jpro.png").toExternalForm()));
+            imageProperty = ImageManager.getInstance().companyImageProperty(company);
         } else if (model instanceof Video video) {
-            //imageProperty = ImageManager.getInstance().youTubeImageProperty(video);
-            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/video-thumbnail-01.png").toExternalForm()));
+            imageProperty = ImageManager.getInstance().youTubeImageProperty(video);
             mins = video.getMinutes() + " mins";
         }
         if (imageProperty != null && imageProperty.get() != null) {
@@ -225,9 +235,13 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
                 StackPane.setAlignment(imageView, Pos.CENTER_LEFT);
             }
             imageView.imageProperty().bind(imageProperty);
+            StackPane.setAlignment(imageView, Pos.TOP_LEFT);
+
             StackPane mainPreviewPane = new StackPane(imageView);
             mainPreviewPane.getStyleClass().addAll("image-wrapper", "main-preview-wrapper");
             mainPreviewPane.managedProperty().bind(mainPreviewPane.visibleProperty());
+            mainPreviewPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+
             if (mins != null) {
                 Label mainPreviewDesc = new Label(mins, new FontIcon());
                 mainPreviewDesc.getStyleClass().add("main-preview-desc");
@@ -262,6 +276,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
     protected Button createDetailsButton(T model) {
         Button detailsButton = new Button("DETAILS", new FontIcon(IkonUtil.link));
         detailsButton.getStyleClass().add("details-button");
+        detailsButton.setMinWidth(Region.USE_PREF_SIZE);
         detailsButton.managedProperty().bind(detailsButton.visibleProperty());
         detailsButton.visibleProperty().bind(onDetailsProperty().isNotNull());
         detailsButton.setOnAction(event -> {
@@ -274,6 +289,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
     protected Button createHomepageButton(T model, ObjectProperty<Consumer<T>> onHomepageProperty) {
         Button homepageButton = new Button("HOMEPAGE", new FontIcon(IkonUtil.link));
+        homepageButton.setMinWidth(Region.USE_PREF_SIZE);
         homepageButton.managedProperty().bind(homepageButton.visibleProperty());
         homepageButton.visibleProperty().bind(onHomepageProperty.isNotNull());
         homepageButton.setOnAction(event -> {

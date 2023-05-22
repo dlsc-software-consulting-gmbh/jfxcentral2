@@ -92,22 +92,19 @@ public class PersonDetailHeader extends DetailHeader<Person> {
             Button twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
             twitterLinkBtn.getStyleClass().addAll("twitter-link-btn","link-button");
             LinkUtil.setExternalLink(twitterLinkBtn, person.getTwitter());
-            twitterLinkBtn.setOnAction(e -> System.out.println(person.getTwitter()));
             socialFlowPane.getChildren().add(twitterLinkBtn);
         }
 
         if (StringUtils.isNotBlank(person.getLinkedIn())) {
             Button linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(IkonUtil.linkedin));
             linkedInLinkBtn.getStyleClass().addAll("linkedin-link-btn","link-button");
-            linkedInLinkBtn.setOnAction(e -> System.out.println(person.getLinkedIn()));
-            LinkUtil.setExternalLink(linkedInLinkBtn, person.getTwitter());
+            LinkUtil.setExternalLink(linkedInLinkBtn, person.getLinkedIn());
             socialFlowPane.getChildren().add(linkedInLinkBtn);
         }
 
         if (StringUtils.isNotBlank(person.getWebsite())) {
             Button websiteLinkBtn = new Button("WEBSITE", new FontIcon(IkonUtil.website));
             websiteLinkBtn.getStyleClass().addAll("website-link-btn","link-button");
-            websiteLinkBtn.setOnAction(e -> System.out.println(person.getWebsite()));
             LinkUtil.setExternalLink(websiteLinkBtn, person.getWebsite());
             socialFlowPane.getChildren().add(websiteLinkBtn);
         }
@@ -115,7 +112,6 @@ public class PersonDetailHeader extends DetailHeader<Person> {
         if (StringUtils.isNotBlank(person.getEmail())) {
             Button mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
             mailLinkBtn.getStyleClass().addAll("mail-link-btn","link-button");
-            mailLinkBtn.setOnAction(e -> System.out.println(person.getEmail()));
             LinkUtil.setExternalLink(mailLinkBtn, person.getEmail());
             socialFlowPane.getChildren().add(mailLinkBtn);
         }
@@ -123,10 +119,10 @@ public class PersonDetailHeader extends DetailHeader<Person> {
         if (StringUtils.isNotBlank(person.getGitHub())) {
             Button githubLinkBtn = new Button("GITHUB", new FontIcon(IkonUtil.github));
             githubLinkBtn.getStyleClass().addAll("github-link-btn","link-button");
-            githubLinkBtn.setOnAction(e -> System.out.println(person.getGitHub()));
             LinkUtil.setExternalLink(githubLinkBtn, person.getGitHub());
             socialFlowPane.getChildren().add(githubLinkBtn);
         }
+
         return socialFlowPane;
     }
 }

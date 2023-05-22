@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import one.jpro.routing.LinkUtil;
@@ -21,6 +22,7 @@ public class DownloadTileView extends TileView<Download>{
             if (download != null) {
                 LinkUtil.setLink(getButton1(), "/downloads/" + download.getId());
             }
+            descriptionProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
         });
     }
 }

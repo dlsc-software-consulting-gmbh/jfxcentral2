@@ -19,7 +19,7 @@ public class OverviewBox<T extends ModelObject> extends PaneBase {
     private final StackPane topWrapper;
     private final StackPane bottomWrapper;
 
-    public OverviewBox() {
+    public OverviewBox(T modelObject) {
         getStyleClass().add("overview-box");
 
         Header header = new Header();
@@ -46,6 +46,11 @@ public class OverviewBox<T extends ModelObject> extends PaneBase {
         layoutBySize();
         getChildren().setAll(contentBox);
 
+        setData(modelObject);
+    }
+
+    public OverviewBox() {
+        this(null);
     }
 
     private StringProperty baseURL = new SimpleStringProperty(this, "baseURL");

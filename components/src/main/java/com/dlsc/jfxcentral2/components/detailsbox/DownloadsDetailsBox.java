@@ -6,29 +6,19 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Region;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 public class DownloadsDetailsBox extends DetailsBoxBase<Download> {
+
     public DownloadsDetailsBox() {
         getStyleClass().add("downloads-details-box");
         setTitle("DOWNLOADS");
         setIkon(IkonUtil.download);
         setMaxItemsPerPage(3);
-
-        setOnDetails(detailsObject -> {
-            System.out.println("On Details: " + detailsObject.getName());
-        });
-
-        setOnHomepage(detailsObject -> {
-            System.out.println("On Homepage: " + detailsObject.getName());
-        });
-
-        setOnDownload(detailsObject -> {
-            System.out.println("On Download: " + detailsObject.getName());
-        });
     }
 
     @Override
@@ -36,6 +26,7 @@ public class DownloadsDetailsBox extends DetailsBoxBase<Download> {
         Button downloadButton = new Button("DOWNLOADS", new FontIcon(IkonUtil.link));
         downloadButton.managedProperty().bind(downloadButton.visibleProperty());
         downloadButton.visibleProperty().bind(onDownloadProperty().isNotNull());
+        downloadButton.setMinWidth(Region.USE_PREF_SIZE);
         downloadButton.setOnAction(evt -> {
             if (getOnDownload() != null) {
                 getOnDownload().accept(model);

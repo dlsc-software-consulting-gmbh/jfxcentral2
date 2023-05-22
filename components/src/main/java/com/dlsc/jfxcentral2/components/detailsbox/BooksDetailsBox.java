@@ -11,11 +11,15 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class BooksDetailsBox extends DetailsBoxBase<Book> {
+
     public BooksDetailsBox() {
+        super();
+
         getStyleClass().add("books-details-box");
         setTitle("BOOKS");
         setIkon(IkonUtil.book);
         setMaxItemsPerPage(1);
+
 
         setOnDetails(detailsObject -> {
             System.out.println("On Details: " + detailsObject.getName());
@@ -28,7 +32,6 @@ public class BooksDetailsBox extends DetailsBoxBase<Book> {
         setOnAmazon(detailsObject -> {
             System.out.println("On Amazon: " + detailsObject.getName());
         });
-
     }
 
     @Override

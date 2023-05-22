@@ -1,16 +1,16 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.components.SocialLinksView;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import javafx.beans.binding.Bindings;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -30,13 +30,13 @@ public class PersonTileView extends SimpleTileView<Person> {
         dataProperty().addListener(it -> {
             LinkUtil.setLink(this, "/people/" + getData().getId());
 
-            Person person = dataProperty().get();
-            //add image for testing
-            imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png").toExternalForm())));
+            Person person = getData();
 
-            //imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
-            titleProperty().set(person.getName());
-            descriptionProperty().set(person.getDescription());
+            //add image for testing
+            imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
+
+            setTitle(person.getName());
+            descriptionProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
 
             //add badges
             badgeBox.getChildren().clear();
@@ -46,6 +46,7 @@ public class PersonTileView extends SimpleTileView<Person> {
                 championBadge.setMinWidth(Region.USE_PREF_SIZE);
                 badgeBox.getChildren().add(championBadge);
             }
+
             if (person.isRockstar()) {
                 Label rockStartBadge = new Label("", new FontIcon(IkonUtil.rockstar));
                 rockStartBadge.getStyleClass().add("badge");
@@ -53,7 +54,6 @@ public class PersonTileView extends SimpleTileView<Person> {
                 badgeBox.getChildren().add(rockStartBadge);
             }
 
-            //add linked objects
             socialLinksView.setTwitterUrl(person.getTwitter());
             socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + person.getLinkedIn());
             socialLinksView.setWebsiteUrl(person.getWebsite());

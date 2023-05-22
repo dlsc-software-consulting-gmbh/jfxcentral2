@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AvatarView extends ControlBase {
+
     private static final Type DEFAULT_TYPE = Type.CIRCLE;
     private static final double DEFAULT_AVATAR_SIZE = 100;
     private static final double DEFAULT_ROUND_SIZE = 5;
@@ -30,7 +31,8 @@ public class AvatarView extends ControlBase {
 
     public enum Type {
         CIRCLE,
-        SQUARE
+        SQUARE,
+        PLAIN
     }
 
     public AvatarView(Image image) {
