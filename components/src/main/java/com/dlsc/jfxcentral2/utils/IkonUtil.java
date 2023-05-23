@@ -34,6 +34,8 @@ public interface IkonUtil {
     Ikon arrowLeft = MaterialDesign.MDI_ARROW_LEFT;
     Ikon arrowRight = MaterialDesign.MDI_ARROW_RIGHT;
     Ikon website = MaterialDesign.MDI_WEB;
+    Ikon edit = MaterialDesign.MDI_PENCIL;
+    Ikon delete = MaterialDesignT.TRASH_CAN_OUTLINE;
     Ikon close = MaterialDesign.MDI_CLOSE;
     Ikon people = Material2OutlinedAL.ACCOUNT_BOX;
 
