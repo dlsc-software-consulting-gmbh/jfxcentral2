@@ -41,11 +41,13 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
@@ -53,6 +55,35 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
     public DetailsBoxBase() {
         getStyleClass().add("details-box");
         itemsProperty().addListener((ob, ov, nv) -> layoutBySize());
+        selectedItemProperty().addListener((ob, ov, nv) -> layoutBySize());
+    }
+
+    private final ObjectProperty<T> selectedItem = new SimpleObjectProperty<>(this, "selectedItem");
+
+    public T getSelectedItem() {
+        return selectedItem.get();
+    }
+
+    public ObjectProperty<T> selectedItemProperty() {
+        return selectedItem;
+    }
+
+    public void setSelectedItem(T selectedItem) {
+        this.selectedItem.set(selectedItem);
+    }
+
+    private final ObjectProperty<Callback<T, Node>> extrasProvider = new SimpleObjectProperty<>(this, "extras");
+
+    public Callback<T, Node> getExtrasProvider() {
+        return extrasProvider.get();
+    }
+
+    public ObjectProperty<Callback<T, Node>> extrasProviderProperty() {
+        return extrasProvider;
+    }
+
+    public void setExtrasProvider(Callback<T, Node> extrasProvider) {
+        this.extrasProvider.set(extrasProvider);
     }
 
     @Override
@@ -108,6 +139,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         if (StringUtils.isBlank(description)) {
             description = model.getSummary();
         }
+
         if (StringUtils.isNotBlank(description)) {
             return new SimpleStringProperty(description);
         }
@@ -116,6 +148,8 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             return DataRepository.getInstance().downloadTextProperty(download);
         } else if (model instanceof Person person) {
             return DataRepository.getInstance().personDescriptionProperty(person);
+        } else if (model instanceof Company company) {
+            return DataRepository.getInstance().companyDescriptionProperty(company);
         }
 
         return new SimpleStringProperty("(Missing description)");
@@ -203,7 +237,18 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
         VBox cellContent = new VBox();
         cellContent.getStyleClass().addAll("cell-content", "details-cell");
-        cellContent.getChildren().addAll(cellCenter, cellBottom);
+
+        Node extras = null;
+
+        Callback<T, Node> extrasProvider = getExtrasProvider();
+        if (extrasProvider != null && Objects.equals(model, getSelectedItem())) {
+            extras = extrasProvider.call(model);
+        }
+        if (extras != null) {
+            cellContent.getChildren().addAll(cellCenter, cellBottom, extras);
+        } else {
+            cellContent.getChildren().addAll(cellCenter, cellBottom);
+        }
         return cellContent;
     }
 
