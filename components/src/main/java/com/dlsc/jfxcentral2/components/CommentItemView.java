@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.model.Badge;
 import com.dlsc.jfxcentral2.model.Comment;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
@@ -17,7 +18,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignT;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
@@ -51,7 +51,7 @@ public class CommentItemView extends PaneBase {
 
         deleteButton = new Button("DELETE");
         deleteButton.getStyleClass().addAll("delete-button", "blue-button");
-        deleteButton.setGraphic(new FontIcon(MaterialDesignT.TRASH_CAN_OUTLINE));
+        deleteButton.setGraphic(new FontIcon(IkonUtil.delete));
         deleteButton.managedProperty().bind(deleteButton.visibleProperty());
         deleteButton.visibleProperty().bind(booleanBinding);
         deleteButton.setOnAction(event -> {

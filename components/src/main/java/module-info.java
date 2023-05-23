@@ -22,6 +22,7 @@ open module com.dlsc.jfxcentral2.components {
     requires javafx.web;
     requires java.desktop;
     requires com.rometools.rome;
+    requires commons.validator;
 
     exports com.dlsc.jfxcentral2.components;
     exports com.dlsc.jfxcentral2.model;
@@ -34,4 +35,5 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.components.headers;
     exports com.dlsc.jfxcentral2.components.gridview;
     exports com.dlsc.jfxcentral2.components.overviewbox;
+    exports com.dlsc.jfxcentral2.components.userprofile;
 }
