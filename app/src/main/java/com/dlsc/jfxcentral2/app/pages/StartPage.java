@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.HomePageTopView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
@@ -12,6 +13,7 @@ import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 import java.time.ZonedDateTime;
@@ -43,9 +45,11 @@ public class StartPage extends PageBase {
         homePageTopView.sizeProperty().bind(sizeProperty());
 
         // links of the Week
+        ObservableList<LinksOfTheWeek> linksOfTheWeek = DataRepository.getInstance().getLinksOfTheWeek();
+
         WeekLinksLiteView weekLinksLiteView = new WeekLinksLiteView();
         weekLinksLiteView.sizeProperty().bind(sizeProperty());
-        weekLinksLiteView.setMdString(createFakeLOTWText());
+        weekLinksLiteView.mdStringProperty().bind(DataRepository.getInstance().linksOfTheWeekTextProperty(linksOfTheWeek.get(linksOfTheWeek.size() - 1)));
 
         // website changes
         WebsiteChangesView websiteChangesView = new WebsiteChangesView();

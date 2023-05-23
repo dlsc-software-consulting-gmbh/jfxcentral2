@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.app.pages;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
+import com.dlsc.jfxcentral2.components.LinksOfTheWeekView;
 import com.dlsc.jfxcentral2.components.MenuView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
@@ -11,15 +12,19 @@ import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Comparator;
 import java.util.List;
 
 public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
 
     public LinksOfTheWeekPage(ObjectProperty<Size> size) {
         super(size);
@@ -50,12 +55,19 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
 
         // header
         CategoryHeader header = createCategoryHeader();
+        header.setTitle("Links of the Week");
+        header.setIkon(IkonUtil.getModelIkon(LinksOfTheWeek.class));
+
+        // links of the week view
+        LinksOfTheWeekView linksOfTheWeekView = new LinksOfTheWeekView();
+        linksOfTheWeekView.linksOfTheWeeksProperty().bind(DataRepository.getInstance().linksOfTheWeekProperty());
+        linksOfTheWeekView.sizeProperty().bind(sizeProperty());
 
         // this is a category page, but we still need to use the details content pane for layout purposes
         DetailsContentPane detailsContentPane = new DetailsContentPane();
         detailsContentPane.sizeProperty().bind(sizeProperty());
-        detailsContentPane.getFeaturesContainer().getFeatures().setAll(createFeatures());
         detailsContentPane.getMenuView().getItems().setAll(createMenuItems());
+        detailsContentPane.getCenterNodes().add(linksOfTheWeekView);
 
         return wrapContent(header, detailsContentPane);
     }
@@ -76,9 +88,11 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
     }
 
     protected List<MenuView.Item> createMenuItems() {
-        return FXCollections.observableArrayList(
-                new MenuView.Item("16. JAN - 23. JAN", null, null),
-                new MenuView.Item("24. JAN - 31. JAN", null, null)
-        );
+        return DataRepository.getInstance().getLinksOfTheWeek()
+                .stream()
+                .limit(5)
+                .sorted(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed())
+                .map(links -> new MenuView.Item(DATE_FORMATTER.format(links.getCreatedOn()), null, null))
+                .toList();
     }
 }

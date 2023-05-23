@@ -49,7 +49,6 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         // details
         CategoryContentPane contentPane = createCategoryContentPane();
         contentPane.sizeProperty().bind(sizeProperty());
-        contentPane.getFeaturesContainer().getFeatures().setAll(createFeatures());
         contentPane.getNodes().addAll(filterView, stripView);
 
         return wrapContent(header, contentPane);

@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
@@ -46,9 +47,9 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
         topBox.getStyleClass().add("top-box");
 
         CustomImageView imageView = null;
-        if (feature.image() != null) {
+        if (feature.imageProperty() != null) {
             imageView = new CustomImageView();
-            imageView.setImage(feature.image());
+            imageView.imageProperty().bind(feature.imageProperty());
             if (!getSkinnable().getStyleClass().contains("with-image")) {
                 getSkinnable().getStyleClass().add("with-image");
             }
@@ -64,7 +65,7 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
         descriptionLabel.setWrapText(true);
         bottomBox.getChildren().add(descriptionLabel);
 
-        Label remarkLabel = null;
+        Label remarkLabel;
         if (!isSmall() && (feature.remark() != null || feature.remarkIcon() != null)) {
             remarkLabel = NodeUtil.createLabel("remark");
             remarkLabel.managedProperty().bind(remarkLabel.visibleProperty());
@@ -77,6 +78,8 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
         VBox.setVgrow(descriptionLabel, Priority.ALWAYS);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
+
+        LinkUtil.setLink(contentBox, feature.url());
     }
 
 }

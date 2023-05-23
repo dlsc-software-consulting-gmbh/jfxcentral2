@@ -51,7 +51,6 @@ public class OpenJFXPage extends PageBase {
         // features
         FeaturesContainer featuresContainer = new FeaturesContainer();
         featuresContainer.sizeProperty().bind(sizeProperty());
-        featuresContainer.getFeatures().setAll(createFeatures());
 
         // strip view for pull requests and features
         StripView stripView = new StripView(pullRequestsView, featuresContainer);

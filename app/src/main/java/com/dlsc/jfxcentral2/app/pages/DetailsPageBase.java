@@ -28,15 +28,12 @@ import com.dlsc.jfxcentral2.components.detailsbox.TipsAndTricksDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.ToolsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.TutorialsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.VideosDetailsBox;
-import com.dlsc.jfxcentral2.model.Feature;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +81,6 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
     protected DetailsContentPane createContentPane() {
         DetailsContentPane detailsContentPane = new DetailsContentPane();
         detailsContentPane.sizeProperty().bind(sizeProperty());
-        detailsContentPane.getFeaturesContainer().getFeatures().setAll(createFeatures());
         detailsContentPane.getMenuView().getItems().setAll(createMenuItems());
         return detailsContentPane;
     }
@@ -129,12 +125,5 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
                 new MenuView.Item("BOOK", null, "book url"),
                 new MenuView.Item("TIPS & TRICKS", null, "Tips & Tricks url")
         );
-    }
-
-    protected List<Feature> createFeatures() {
-        return List.of(
-                new Feature("Video", "[1] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[2] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(PageBase.class.getResource("feature-img.png").toExternalForm()), "url ..."));
     }
 }

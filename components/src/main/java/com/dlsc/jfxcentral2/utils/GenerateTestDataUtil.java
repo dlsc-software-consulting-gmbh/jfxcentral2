@@ -1,13 +1,9 @@
 package com.dlsc.jfxcentral2.utils;
 
-import com.dlsc.jfxcentral2.model.Feature;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
 import com.dlsc.jfxcentral2.model.Size;
-import javafx.collections.FXCollections;
-import javafx.scene.image.Image;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignT;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,14 +13,6 @@ import java.util.Random;
 public class GenerateTestDataUtil {
 
     private GenerateTestDataUtil() {
-    }
-
-    public static List<Feature> generateFeatures() {
-        return FXCollections.observableArrayList(
-                new Feature("Video", "[1] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(GenerateTestDataUtil.class.getResource("/com/dlsc/jfxcentral2/test/images/feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[2] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(GenerateTestDataUtil.class.getResource("/com/dlsc/jfxcentral2/test/images/feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", IkonUtil.timer, Feature.Type.VIDEO, new Image(GenerateTestDataUtil.class.getResource("/com/dlsc/jfxcentral2/test/images/feature-img.png").toExternalForm()), "url ...")
-        );
     }
 
     public static List<QuickLink> generateQuickLinks(Size size) {

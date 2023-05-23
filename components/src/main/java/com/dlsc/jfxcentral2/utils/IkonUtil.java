@@ -56,6 +56,10 @@ public interface IkonUtil {
     Ikon news = MaterialDesignN.NEWSPAPER_VARIANT_OUTLINE;
     Ikon linkOfTheWeek = MaterialDesign.MDI_LINK;
 
+    static Ikon getModelIkon(ModelObject mo) {
+        return getModelIkon(mo.getClass());
+    }
+
     static Ikon getModelIkon(Class<? extends ModelObject> clazz) {
         if (clazz == RealWorldApp.class) {
             return app;

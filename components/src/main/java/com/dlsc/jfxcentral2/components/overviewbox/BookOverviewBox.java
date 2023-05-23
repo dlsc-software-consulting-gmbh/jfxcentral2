@@ -1,12 +1,12 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -106,9 +106,7 @@ public class BookOverviewBox extends OverviewBox<Book> {
             isbnLabel.setText(book.getIsbn());
             setMarkdown(book.getDescription());
             if (!isSmall()) {
-                //previewImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
-                //add test image
-                previewImageView.setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/book-thumbnail-01.png").toExternalForm()));
+                previewImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
             }
         } else {
             writtenByLabel.setText("");

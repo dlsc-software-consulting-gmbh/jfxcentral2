@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral.data.model.LibraryInfo;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.LibraryPreviewBox;
 import com.dlsc.jfxcentral2.components.MarkdownView;
@@ -15,8 +14,6 @@ import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 
 public class LibraryOverviewBox extends PaneBase {
-
-    private final LibraryPreviewBox libraryPreviewBox;
 
     public LibraryOverviewBox(Library library) {
         this();
@@ -33,8 +30,9 @@ public class LibraryOverviewBox extends PaneBase {
         MarkdownView markdownView = new MarkdownView();
         markdownView.mdStringProperty().bind(markdownProperty());
 
-        libraryPreviewBox = new LibraryPreviewBox();
+        LibraryPreviewBox libraryPreviewBox = new LibraryPreviewBox();
         libraryPreviewBox.sizeProperty().bind(sizeProperty());
+        libraryPreviewBox.libraryProperty().bind(dataProperty());
 
         VBox bodyBox = new VBox(markdownView, libraryPreviewBox);
         bodyBox.getStyleClass().add("body-box");
@@ -46,17 +44,12 @@ public class LibraryOverviewBox extends PaneBase {
         layoutBySize();
         getChildren().setAll(contentBox);
 
-        dataProperty().addListener(it -> layoutBySize());
-        libraryInfoProperty().addListener(it -> layoutBySize());
-    }
-
-    @Override
-    protected void layoutBySize() {
-        Library library = getData();
-        setMarkdown(library != null ? library.getDescription() : "");
-
-        libraryPreviewBox.setLibrary(library);
-        libraryPreviewBox.setLibraryInfo(getLibraryInfo());
+        dataProperty().addListener(it -> {
+            Library library = getData();
+            if (library != null) {
+                setMarkdown(library.getDescription());
+            }
+        });
     }
 
     private final StringProperty markdown = new SimpleStringProperty(this, "markdown");
@@ -113,19 +106,5 @@ public class LibraryOverviewBox extends PaneBase {
 
     public void setData(Library data) {
         this.data.set(data);
-    }
-
-    private final ObjectProperty<LibraryInfo> libraryInfo = new SimpleObjectProperty<>(this, "libraryInfo");
-
-    public LibraryInfo getLibraryInfo() {
-        return libraryInfo.get();
-    }
-
-    public ObjectProperty<LibraryInfo> libraryInfoProperty() {
-        return libraryInfo;
-    }
-
-    public void setLibraryInfo(LibraryInfo libraryInfo) {
-        this.libraryInfo.set(libraryInfo);
     }
 }

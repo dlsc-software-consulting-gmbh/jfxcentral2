@@ -16,7 +16,6 @@ public class HomePageTopView extends PaneBase {
 
         FeaturesContainer featuresContainer = new FeaturesContainer();
         featuresContainer.sizeProperty().bind(sizeProperty());
-        featuresContainer.getFeatures().setAll(GenerateTestDataUtil.generateFeatures());
 
         QuickLinksContainer quickLinksContainer = new QuickLinksContainer();
         quickLinksContainer.sizeProperty().bind(sizeProperty());
