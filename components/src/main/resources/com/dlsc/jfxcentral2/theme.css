@@ -5699,6 +5699,9 @@
     -fx-background-color: -bright-blue;
     -fx-padding: 50px 0 15px 0px;
     -fx-spacing: 55px;
+}
+
+.user-profile-view .toggle-button .header-title {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-font-family: "Roboto Condensed";
