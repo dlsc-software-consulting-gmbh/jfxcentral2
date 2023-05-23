@@ -20,12 +20,6 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
         super(control);
         layoutBySize();
         control.featureProperty().addListener((observable, oldValue, newValue) -> layoutBySize());
-        control.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-            if (event.isPrimaryButtonDown() && control.getFeature() != null && control.getFeature().url() != null) {
-                System.out.println("Opening " + control.getFeature().url());
-            }
-            event.consume();
-        });
     }
 
     protected void layoutBySize() {
@@ -78,8 +72,5 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
         VBox.setVgrow(descriptionLabel, Priority.ALWAYS);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
-
-        LinkUtil.setLink(contentBox, feature.url());
     }
-
 }

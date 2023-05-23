@@ -87,8 +87,8 @@ public class JFXCentral2App extends RouteApp {
                 .and(RouteUtils.get("/links", r -> new LinksOfTheWeekPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
                 .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)))
-                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)))
-                .filter(DevFilter.create());
+                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)));
+           //     .filter(DevFilter.create());
     }
 
     private Route createCategoryOrDetailRoute(String path, Supplier<Response> masterResponse, Callback<String, Response> detailedResponse) {
