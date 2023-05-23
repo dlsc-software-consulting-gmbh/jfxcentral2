@@ -12,8 +12,7 @@ public class HelloDownloadTileView extends JFXCentralSampleBase {
         Download download = new Download();
         download.setName("Download name");
         download.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.");
-        DownloadTileView companyTileView = new DownloadTileView();
-        companyTileView.setData(download);
+        DownloadTileView companyTileView = new DownloadTileView(download);
         return new StackPane(companyTileView);
     }
 

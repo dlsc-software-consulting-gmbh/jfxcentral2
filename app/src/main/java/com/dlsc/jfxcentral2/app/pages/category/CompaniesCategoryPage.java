@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.CompaniesFilterView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.CompanyTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
@@ -42,8 +41,8 @@ public class CompaniesCategoryPage extends CategoryPageBase<Company> {
     }
 
     @Override
-    protected Callback<ModelGridView<Company>, TileViewBase<Company>> getTileViewProvider() {
-        return gridView -> new CompanyTileView();
+    protected Callback<Company, TileViewBase<Company>> getTileViewProvider() {
+        return CompanyTileView::new;
     }
 
     @Override

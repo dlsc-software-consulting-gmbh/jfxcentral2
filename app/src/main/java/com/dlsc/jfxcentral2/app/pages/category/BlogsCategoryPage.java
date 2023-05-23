@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.BlogsFilterView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.BlogTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
@@ -42,8 +41,8 @@ public class BlogsCategoryPage extends CategoryPageBase<Blog> {
     }
 
     @Override
-    protected Callback<ModelGridView<Blog>, TileViewBase<Blog>> getTileViewProvider() {
-        return gridView -> new BlogTileView();
+    protected Callback<Blog, TileViewBase<Blog>> getTileViewProvider() {
+        return BlogTileView::new;
     }
 
     @Override

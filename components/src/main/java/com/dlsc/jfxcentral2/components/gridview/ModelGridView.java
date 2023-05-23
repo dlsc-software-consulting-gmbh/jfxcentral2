@@ -92,9 +92,8 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
                     int row = (i - startIndex) / columns;
                     int column = (i - startIndex) % columns;
                     T model = items.get(i);
-                    TileViewBase<T> tileView = getTileViewProvider().call(ModelGridView.this);
+                    TileViewBase<T> tileView = getTileViewProvider().call(model);
                     tileView.sizeProperty().bind(sizeProperty());
-                    tileView.setData(model);
                     gridPane.add(tileView, column, row * 2);
                     //show detail node on click
                     tileView.setOnShowDetailNode(() -> {
@@ -118,7 +117,7 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
 
     private TileViewBase<T> createTileView(VBox contentBox, int i) {
         T model = items.get(i);
-        TileViewBase<T> tileView = getTileViewProvider().call(this);
+        TileViewBase<T> tileView = getTileViewProvider().call(model);
         tileView.sizeProperty().bind(sizeProperty());
         //show detail node on click
         tileView.setOnShowDetailNode(() -> {
@@ -195,17 +194,17 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
         this.detailNodeProvider.set(detailNodeProvider);
     }
 
-    private final ObjectProperty<Callback<ModelGridView<T>, TileViewBase<T>>> tileViewProvider = new SimpleObjectProperty<>(this, "tileViewProvider");
+    private final ObjectProperty<Callback<T, TileViewBase<T>>> tileViewProvider = new SimpleObjectProperty<>(this, "tileViewProvider");
 
-    public Callback<ModelGridView<T>, TileViewBase<T>> getTileViewProvider() {
+    public Callback<T, TileViewBase<T>> getTileViewProvider() {
         return tileViewProvider.get();
     }
 
-    public ObjectProperty<Callback<ModelGridView<T>, TileViewBase<T>>> tileViewProviderProperty() {
+    public ObjectProperty<Callback<T, TileViewBase<T>>> tileViewProviderProperty() {
         return tileViewProvider;
     }
 
-    public void setTileViewProvider(Callback<ModelGridView<T>, TileViewBase<T>> tileViewProvider) {
+    public void setTileViewProvider(Callback<T, TileViewBase<T>> tileViewProvider) {
         this.tileViewProvider.set(tileViewProvider);
     }
 }

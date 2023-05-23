@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.filters.TipsAndTricksFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.components.tiles.TipsAndTricksTileView;
 import com.dlsc.jfxcentral2.model.Size;
@@ -33,7 +32,7 @@ public class TipCategoryPage extends CategoryPageBase<Tip> {
 
     @Override
     protected String getCategoryTitle() {
-        return "Tip";
+        return "Tips & Tricks";
     }
 
     @Override
@@ -42,8 +41,8 @@ public class TipCategoryPage extends CategoryPageBase<Tip> {
     }
 
     @Override
-    protected Callback<ModelGridView<Tip>, TileViewBase<Tip>> getTileViewProvider() {
-        return gridView -> new TipsAndTricksTileView();
+    protected Callback<Tip, TileViewBase<Tip>> getTileViewProvider() {
+        return TipsAndTricksTileView::new;
     }
 
     @Override

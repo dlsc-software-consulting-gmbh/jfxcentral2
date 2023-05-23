@@ -6,9 +6,11 @@ import com.dlsc.jfxcentral2.utils.IkonUtil;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class DownloadTileView extends TileView<Download>{
+public class DownloadTileView extends TileView<Download> {
 
-    public DownloadTileView() {
+    public DownloadTileView(Download download) {
+        super(download);
+
         getStyleClass().add("download-tile-view");
 
         setButton1Text("DISCOVER");
@@ -17,12 +19,7 @@ public class DownloadTileView extends TileView<Download>{
         setButton2Text("DOWNLOAD");
         setButton2Graphic(new FontIcon(IkonUtil.download));
 
-        dataProperty().addListener(it -> {
-            Download download = getData();
-            if (download != null) {
-                LinkUtil.setLink(getButton1(), "/downloads/" + download.getId());
-            }
-            descriptionProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
-        });
+        LinkUtil.setLink(getButton1(), "/downloads/" + download.getId());
+        descriptionProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
     }
 }

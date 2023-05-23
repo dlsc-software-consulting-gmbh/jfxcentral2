@@ -1160,7 +1160,7 @@
     -fx-font-family: "Roboto Condensed";
 }
 
-.top-menu-bar > .jfxcentral-region,
+.top-menu-bar > .content > .logo-box > .jfxcentral-region,
 .top-menu-bar > .content > .menu-button > .arrow-button > .arrow {
     -fx-background-color: -fx-foreground-color;
 }

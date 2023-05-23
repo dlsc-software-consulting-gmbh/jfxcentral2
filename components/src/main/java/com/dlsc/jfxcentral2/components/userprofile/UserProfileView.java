@@ -12,10 +12,13 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.layout.Region;
 
 public class UserProfileView extends PaneBase {
     public UserProfileView() {
         getStyleClass().add("user-profile-view");
+
+        setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         CustomTabPane tabPane = new CustomTabPane();
         tabPane.sizeProperty().bind(sizeProperty());

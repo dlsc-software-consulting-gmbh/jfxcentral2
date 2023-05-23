@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
 import com.dlsc.jfxcentral2.app.pages.RefreshPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
+import com.dlsc.jfxcentral2.app.pages.UserProfilePage;
 import com.dlsc.jfxcentral2.app.pages.category.BlogsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.BooksCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.CompaniesCategoryPage;
@@ -85,6 +86,7 @@ public class JFXCentral2App extends RouteApp {
                 .and(RouteUtils.get("/legal/privacy", r -> new LegalPage(size, LegalPage.Section.PRIVACY)))
                 .and(RouteUtils.get("/links", r -> new LinksOfTheWeekPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
+                .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)))
                 .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)))
                 .filter(DevFilter.create());
     }

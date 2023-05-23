@@ -68,7 +68,7 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
 
     protected abstract ObservableList<T> getCategoryItems();
 
-    protected abstract Callback<ModelGridView<T>, TileViewBase<T>> getTileViewProvider();
+    protected abstract Callback<T, TileViewBase<T>> getTileViewProvider();
 
     protected Callback<T, Node> getDetailNodeProvider() {
         return null;

@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.BooksFilterView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.BookTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
@@ -42,8 +41,8 @@ public class BooksCategoryPage extends CategoryPageBase<Book> {
     }
 
     @Override
-    protected Callback<ModelGridView<Book>, TileViewBase<Book>> getTileViewProvider() {
-        return gridView -> new BookTileView();
+    protected Callback<Book, TileViewBase<Book>> getTileViewProvider() {
+        return BookTileView::new;
     }
 
     @Override

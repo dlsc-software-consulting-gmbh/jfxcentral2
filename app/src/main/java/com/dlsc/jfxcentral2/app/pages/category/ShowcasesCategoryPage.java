@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.filters.ShowcaseFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.AppTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
@@ -42,8 +41,8 @@ public class ShowcasesCategoryPage extends CategoryPageBase<RealWorldApp> {
     }
 
     @Override
-    protected Callback<ModelGridView<RealWorldApp>, TileViewBase<RealWorldApp>> getTileViewProvider() {
-        return gridView -> new AppTileView();
+    protected Callback<RealWorldApp, TileViewBase<RealWorldApp>> getTileViewProvider() {
+        return AppTileView::new;
     }
 
     @Override

@@ -16,8 +16,7 @@ public class HelloTipsAndTricksTileView extends JFXCentralSampleBase {
         data.setName("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod");
         data.setDescription("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident...");
         data.setCreatedOn(LocalDate.now());
-        TipsAndTricksTileView tipsAndTricksTileView = new TipsAndTricksTileView();
-        tipsAndTricksTileView.setData(data);
+        TipsAndTricksTileView tipsAndTricksTileView = new TipsAndTricksTileView(data);
         return new StackPane(tipsAndTricksTileView);
     }
 

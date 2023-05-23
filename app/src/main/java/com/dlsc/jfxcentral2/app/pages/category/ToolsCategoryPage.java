@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.filters.ToolsFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.components.tiles.ToolTileView;
 import com.dlsc.jfxcentral2.model.Size;
@@ -47,8 +46,8 @@ public class ToolsCategoryPage extends CategoryPageBase<Tool> {
     }
 
     @Override
-    protected Callback<ModelGridView<Tool>, TileViewBase<Tool>> getTileViewProvider() {
-        return gridView -> new ToolTileView();
+    protected Callback<Tool, TileViewBase<Tool>> getTileViewProvider() {
+        return ToolTileView::new;
     }
 
     @Override

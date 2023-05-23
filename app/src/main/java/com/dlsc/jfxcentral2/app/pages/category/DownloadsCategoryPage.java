@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.DownloadsFilterView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.DownloadTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
@@ -42,8 +41,8 @@ public class DownloadsCategoryPage extends CategoryPageBase<Download> {
     }
 
     @Override
-    protected Callback<ModelGridView<Download>, TileViewBase<Download>> getTileViewProvider() {
-        return gridView -> new DownloadTileView();
+    protected Callback<Download, TileViewBase<Download>> getTileViewProvider() {
+        return DownloadTileView::new;
     }
 
     @Override

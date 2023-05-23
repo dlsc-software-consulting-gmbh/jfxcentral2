@@ -55,7 +55,9 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
     private final Button button2;
     private CustomImageView imageView;
 
-    public TileView() {
+    public TileView(T item) {
+        super(item);
+
         getStyleClass().add("tile-view");
 
         VBox contentBox = new VBox();
@@ -124,27 +126,25 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         contentBox.getChildren().setAll(flipView, bottomPane);
         getChildren().setAll(contentBox);
 
-        dataProperty().addListener((ob, ov, data) -> {
-            boolean isVideo = data instanceof Video;
-            StackPane.setAlignment(imageView, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
-            setTitle(data.getName());
-            setSaveSelected(SaveAndLikeUtil.isSaved(data));
-            setLikeSelected(SaveAndLikeUtil.isLiked(data));
+        boolean isVideo = item instanceof Video;
+        StackPane.setAlignment(imageView, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
+        setTitle(item.getName());
+        setSaveSelected(SaveAndLikeUtil.isSaved(item));
+        setLikeSelected(SaveAndLikeUtil.isLiked(item));
 
-            if (data instanceof RealWorldApp app) {
-                imageProperty().bind(ImageManager.getInstance().realWorldAppLargeImageProperty(app));
-            } else if (data instanceof Video video) {
-                imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
-            } else if (data instanceof Book book) {
-                imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
-            } else if (data instanceof Download download) {
-                imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
-            } else if (data instanceof Company company) {
-                imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
-            } else if (data instanceof Tip) {
-                imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm())));
-            }
-        });
+        if (item instanceof RealWorldApp app) {
+            imageProperty().bind(ImageManager.getInstance().realWorldAppLargeImageProperty(app));
+        } else if (item instanceof Video video) {
+            imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
+        } else if (item instanceof Book book) {
+            imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
+        } else if (item instanceof Download download) {
+            imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
+        } else if (item instanceof Company company) {
+            imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
+        } else if (item instanceof Tip) {
+            imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm())));
+        }
     }
 
     public Button getButton1() {

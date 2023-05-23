@@ -8,23 +8,22 @@ import one.jpro.routing.LinkUtil;
 
 public class BlogTileView extends SimpleTileView<Blog> {
 
-    public BlogTileView() {
+    public BlogTileView(Blog blog) {
+        super(blog);
+
         getStyleClass().add("blog-tile-view");
 
-        dataProperty().addListener((ob, ov, data) -> {
-            LinkUtil.setLink(this, "/blogs/" + getData().getId());
+        LinkUtil.setLink(this, "/blogs/" + getData().getId());
 
-            saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(data));
-            saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(data));
+        saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(blog));
+        saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(blog));
 
-            //add image for testing
-            imageProperty().bind(ImageManager.getInstance().blogIconImageProperty(getData()));
+        //add image for testing
+        imageProperty().bind(ImageManager.getInstance().blogIconImageProperty(getData()));
 
-            setTitle(data.getName());
-            setDescription(data.getSummary());
-            setAvatarType(AvatarView.Type.PLAIN);
-            updateLinkedObjectBadges();
-        });
+        setTitle(blog.getName());
+        setDescription(blog.getSummary());
+        setAvatarType(AvatarView.Type.PLAIN);
+        updateLinkedObjectBadges();
     }
-
 }

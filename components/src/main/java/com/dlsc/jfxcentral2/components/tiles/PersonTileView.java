@@ -24,44 +24,42 @@ public class PersonTileView extends SimpleTileView<Person> {
     private MenuButton socialButton;
     private SocialLinksView socialLinksView;
 
-    public PersonTileView() {
+    public PersonTileView(Person person) {
+        super(person);
+
         getStyleClass().add("person-tile-view");
 
-        dataProperty().addListener(it -> {
-            LinkUtil.setLink(this, "/people/" + getData().getId());
+        LinkUtil.setLink(this, "/people/" + getData().getId());
 
-            Person person = getData();
+        //add image for testing
+        imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
 
-            //add image for testing
-            imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
+        setTitle(person.getName());
+        descriptionProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
 
-            setTitle(person.getName());
-            descriptionProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
+        //add badges
+        badgeBox.getChildren().clear();
+        if (person.isChampion()) {
+            Label championBadge = new Label("", new FontIcon(IkonUtil.champion));
+            championBadge.getStyleClass().add("badge");
+            championBadge.setMinWidth(Region.USE_PREF_SIZE);
+            badgeBox.getChildren().add(championBadge);
+        }
 
-            //add badges
-            badgeBox.getChildren().clear();
-            if (person.isChampion()) {
-                Label championBadge = new Label("", new FontIcon(IkonUtil.champion));
-                championBadge.getStyleClass().add("badge");
-                championBadge.setMinWidth(Region.USE_PREF_SIZE);
-                badgeBox.getChildren().add(championBadge);
-            }
+        if (person.isRockstar()) {
+            Label rockStartBadge = new Label("", new FontIcon(IkonUtil.rockstar));
+            rockStartBadge.getStyleClass().add("badge");
+            rockStartBadge.setMinWidth(Region.USE_PREF_SIZE);
+            badgeBox.getChildren().add(rockStartBadge);
+        }
 
-            if (person.isRockstar()) {
-                Label rockStartBadge = new Label("", new FontIcon(IkonUtil.rockstar));
-                rockStartBadge.getStyleClass().add("badge");
-                rockStartBadge.setMinWidth(Region.USE_PREF_SIZE);
-                badgeBox.getChildren().add(rockStartBadge);
-            }
+        socialLinksView.setTwitterUrl(person.getTwitter());
+        socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + person.getLinkedIn());
+        socialLinksView.setWebsiteUrl(person.getWebsite());
+        socialLinksView.setMailUrl("mailto:" + person.getEmail());
+        socialLinksView.setGithubUrl(person.getGitHub());
 
-            socialLinksView.setTwitterUrl(person.getTwitter());
-            socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + person.getLinkedIn());
-            socialLinksView.setWebsiteUrl(person.getWebsite());
-            socialLinksView.setMailUrl("mailto:" + person.getEmail());
-            socialLinksView.setGithubUrl(person.getGitHub());
-
-            sizeUpdated();
-        });
+        sizeUpdated();
 
         sizeProperty().addListener(it -> sizeUpdated());
     }

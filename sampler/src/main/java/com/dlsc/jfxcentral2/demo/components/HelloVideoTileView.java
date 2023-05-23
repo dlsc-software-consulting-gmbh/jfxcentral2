@@ -20,8 +20,7 @@ public class HelloVideoTileView extends JFXCentralSampleBase {
         video.setName("JavaFX on Raspberry Pi");
         video.setDescription("Java, JavaFX and a Raspberry Pi are an ideal combination for any project where you want to connect software and hardware (LEDs, buttons, sensors...) with a beautiful, easy-to-use user interface. In this talk, we will go through the process of building a JavaFX touchscreen user interface to control a relay board and an Arduino with LED strips that were needed to solve the problem of getting my son to the dinner table while he is playing the drums...This includes selecting a Java JDK for Raspberry Pi, setting up a Mosquitto queue, programming the Arduino, understanding the GPIO's on the Raspberry Pi, including a web server, Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ");
         video.setMinutes(5);
-        tileView = new VideoTileView();
-        tileView.setData(video);
+        tileView = new VideoTileView(video);
         return new StackPane(tileView);
     }
 

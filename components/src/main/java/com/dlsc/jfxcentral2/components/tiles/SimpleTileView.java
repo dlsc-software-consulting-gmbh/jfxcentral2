@@ -41,9 +41,12 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
 
     protected HBox badgeBox = new HBox();
     protected SaveAndLikeButton saveAndLikeButton;
+
     private final HBox linkedObjectBox;
 
-    public SimpleTileView() {
+    public SimpleTileView(T item) {
+        super(item);
+
         getStyleClass().addAll("simple-tile-view");
 
         AvatarView avatarView = new AvatarView();

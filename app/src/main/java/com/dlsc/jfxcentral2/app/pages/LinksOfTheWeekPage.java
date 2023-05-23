@@ -6,7 +6,6 @@ import com.dlsc.jfxcentral2.components.DetailsContentPane;
 import com.dlsc.jfxcentral2.components.LinksOfTheWeekView;
 import com.dlsc.jfxcentral2.components.MenuView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
@@ -78,7 +77,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
     }
 
     @Override
-    protected Callback<ModelGridView<LinksOfTheWeek>, TileViewBase<LinksOfTheWeek>> getTileViewProvider() {
+    protected Callback<LinksOfTheWeek, TileViewBase<LinksOfTheWeek>> getTileViewProvider() {
         return null;
     }
 

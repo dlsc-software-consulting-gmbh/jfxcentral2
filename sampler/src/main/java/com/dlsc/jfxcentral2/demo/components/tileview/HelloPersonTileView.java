@@ -16,7 +16,6 @@ public class HelloPersonTileView extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        personTileView = new PersonTileView();
         Person person = new Person();
         person.setName("Very long Name and lo");
         person.setChampion(true);
@@ -30,7 +29,7 @@ public class HelloPersonTileView extends JFXCentralSampleBase {
         person.setBookIds(List.of("Book1", "Book2", "Book3"));
         person.setDownloadIds(List.of("Download1", "Download2", "Download3"));
         person.setVideoIds(List.of("Video1", "Video2", "Video3"));
-        personTileView.setData(person);
+        personTileView = new PersonTileView(person);
         return new StackPane(personTileView);
     }
 

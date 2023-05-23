@@ -12,8 +12,7 @@ public class HelloCompanyTileView extends JFXCentralSampleBase {
         Company company = new Company();
         company.setName("DLSC Software & Consulting GmbH");
         company.setDescription("DLSC is a software company located in Zurich, Switzerland. They are specialised in developing JavaFX and Swing frameworks and providing consulting services. DLSC is best known for its professional Gantt chart, timeline, and calendar controls for planning and scheduling applications. DLSC is the founder and organizer of the annual");
-        CompanyTileView companyTileView = new CompanyTileView();
-        companyTileView.setData(company);
+        CompanyTileView companyTileView = new CompanyTileView(company);
         return new StackPane(companyTileView);
     }
 

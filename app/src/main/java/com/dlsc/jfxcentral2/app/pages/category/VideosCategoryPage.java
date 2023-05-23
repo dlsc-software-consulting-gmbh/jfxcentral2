@@ -3,14 +3,13 @@ package com.dlsc.jfxcentral2.app.pages.category;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.filters.VideosFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.components.tiles.VideoTileView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -54,9 +53,9 @@ public class VideosCategoryPage extends CategoryPageBase<Video> {
     }
 
     @Override
-    protected Callback<ModelGridView<Video>, TileViewBase<Video>> getTileViewProvider() {
-        return gridView -> {
-            VideoTileView tileView = new VideoTileView();
+    protected Callback<Video, TileViewBase<Video>> getTileViewProvider() {
+        return video -> {
+            VideoTileView tileView = new VideoTileView(video);
             tileView.getButton1().setOnAction(evt -> tileView.getOnShowDetailNode().run());
             return tileView;
         };

@@ -1,11 +1,11 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -50,15 +50,9 @@ public class SimpleOverviewBox<T extends ModelObject> extends OverviewBox<T> {
         previewImage.setImage(null);
 
         if (data instanceof Download download) {
-            //previewImage.imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
-
-            //add test image
-            previewImage.setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/download-thumbnail-01.png").toExternalForm()));
+            previewImage.imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
         } else if (data instanceof Tutorial tutorial) {
-            //previewImage.imageProperty().bind(ImageManager.getInstance().tutorialImageProperty(tutorial));
-
-            //add test image
-            previewImage.setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tutorial.png").toExternalForm()));
+            previewImage.imageProperty().bind(ImageManager.getInstance().tutorialImageProperty(tutorial));
         }
     }
 }

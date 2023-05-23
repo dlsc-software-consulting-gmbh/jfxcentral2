@@ -13,7 +13,9 @@ import java.net.URI;
 
 public class VideoTileView extends TileView<Video> {
 
-    public VideoTileView() {
+    public VideoTileView(Video video) {
+        super(video);
+
         getStyleClass().add("video-tile-view");
 
         setButton1Text("PLAY");
@@ -22,21 +24,18 @@ public class VideoTileView extends TileView<Video> {
         setButton2Text("YouTube");
         setButton2Graphic(new FontIcon(MaterialDesign.MDI_YOUTUBE_PLAY));
 
-        dataProperty().addListener(it -> {
-            Video video = getData();
-            setRemark(video.getMinutes() + " mins");
+        setRemark(video.getMinutes() + " mins");
 
-            if (WebAPI.isBrowser()) {
-                LinkUtil.setExternalLink(getButton2(), "https://www.youtube.com/watch?v=" + video.getId());
-            } else {
-                getButton2().setOnAction(evt -> {
-                    try {
-                        Desktop.getDesktop().browse(URI.create("https://www.youtube.com/watch?v=" + video.getId()));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-            }
-        });
+        if (WebAPI.isBrowser()) {
+            LinkUtil.setExternalLink(getButton2(), "https://www.youtube.com/watch?v=" + video.getId());
+        } else {
+            getButton2().setOnAction(evt -> {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://www.youtube.com/watch?v=" + video.getId()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
     }
 }

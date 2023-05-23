@@ -6,12 +6,7 @@ import com.dlsc.jfxcentral2.components.tiles.VideoTileView;
 public class VideoGalleryTileView extends VideoTileView {
 
     public VideoGalleryTileView(Video video) {
-        this();
-        setData(video);
-    }
-
-    public VideoGalleryTileView() {
-        super();
+        super(video);
         getStyleClass().add("video-gallery-tile");
     }
 }

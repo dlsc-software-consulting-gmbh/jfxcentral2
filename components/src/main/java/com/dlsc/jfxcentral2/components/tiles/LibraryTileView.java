@@ -7,21 +7,21 @@ import one.jpro.routing.LinkUtil;
 
 public class LibraryTileView extends SimpleTileView<Library> {
 
-    public LibraryTileView() {
+    public LibraryTileView(Library library) {
+        super(library);
+
         getStyleClass().add("library-tile-view");
 
         setAvatarType(AvatarView.Type.PLAIN);
 
         setPrefWidth(1);
 
-        dataProperty().addListener((ob, ov, library) -> {
-            LinkUtil.setLink(this, "/libraries/" + getData().getId());
+        LinkUtil.setLink(this, "/libraries/" + getData().getId());
 
-            saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(library));
-            saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(library));
+        saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(library));
+        saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(library));
 
-            setTitle(library.getName());
-            setDescription(library.getSummary());
-        });
+        setTitle(library.getName());
+        setDescription(library.getSummary());
     }
 }

@@ -14,6 +14,6 @@ public class TutorialOverviewBox extends SimpleOverviewBox<Tutorial> {
         super(data);
         getStyleClass().add("tutorial-overview-box");
         baseURLProperty().bind(Bindings.createStringBinding(() -> DataRepository.getInstance().getRepositoryDirectoryURL() + "tutorials/" + getData().getId(), dataProperty()));
+        markdownProperty().bind(DataRepository.getInstance().tutorialTextProperty(data));
     }
-
 }

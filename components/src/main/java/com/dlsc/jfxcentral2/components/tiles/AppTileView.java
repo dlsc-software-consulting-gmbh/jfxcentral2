@@ -8,17 +8,12 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 public class AppTileView extends TileView<RealWorldApp> {
 
-    public AppTileView() {
+    public AppTileView(RealWorldApp app) {
+        super(app);
         getStyleClass().add("app-tile-view");
-
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));
-
-        dataProperty().addListener(it -> {
-            RealWorldApp app = getData();
-            if (app != null) {
-                LinkUtil.setLink(getButton1(), "/showcases/" + app.getId());
-            }
-        });
+        descriptionProperty().bind(DataRepository.getInstance().realWorldAppDescriptionProperty(app));
+        LinkUtil.setLink(getButton1(), "/showcases/" + app.getId());
     }
 }

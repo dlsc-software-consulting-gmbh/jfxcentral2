@@ -15,11 +15,10 @@ public class HelloAppTileView extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        appTileView = new AppTileView();
         RealWorldApp app = new RealWorldApp();
         app.setName("App Name");
         app.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.");
-        appTileView.setData(app);
+        appTileView = new AppTileView(app);
         return new StackPane(appTileView);
     }
 

@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.PeopleFilterView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.PersonTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
@@ -47,8 +46,8 @@ public class PeopleCategoryPage extends CategoryPageBase<Person> {
     }
 
     @Override
-    protected Callback<ModelGridView<Person>, TileViewBase<Person>> getTileViewProvider() {
-        return gridView -> new PersonTileView();
+    protected Callback<Person, TileViewBase<Person>> getTileViewProvider() {
+        return PersonTileView::new;
     }
 
     @Override

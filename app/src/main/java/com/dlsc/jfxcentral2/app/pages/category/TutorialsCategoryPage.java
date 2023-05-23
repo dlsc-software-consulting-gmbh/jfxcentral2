@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.filters.TutorialsFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.components.tiles.TutorialTileView;
 import com.dlsc.jfxcentral2.model.Size;
@@ -42,8 +41,8 @@ public class TutorialsCategoryPage extends CategoryPageBase<Tutorial> {
     }
 
     @Override
-    protected Callback<ModelGridView<Tutorial>, TileViewBase<Tutorial>> getTileViewProvider() {
-        return gridView -> new TutorialTileView();
+    protected Callback<Tutorial, TileViewBase<Tutorial>> getTileViewProvider() {
+        return TutorialTileView::new;
     }
 
     @Override

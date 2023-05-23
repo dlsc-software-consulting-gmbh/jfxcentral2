@@ -10,9 +10,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
+import java.util.Objects;
+
 public class TileViewBase<T extends ModelObject> extends PaneBase {
 
-    public TileViewBase() {
+    private final T item;
+
+    public TileViewBase(T item) {
+        this.item = Objects.requireNonNull(item, "item can not be null");
         getStyleClass().add("tile-view-base");
     }
 
@@ -30,18 +35,8 @@ public class TileViewBase<T extends ModelObject> extends PaneBase {
         this.onShowDetailNode.set(onShowDetailNode);
     }
 
-    private final ObjectProperty<T> data = new SimpleObjectProperty<>(this, "data");
-
     public T getData() {
-        return data.get();
-    }
-
-    public ObjectProperty<T> dataProperty() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data.set(data);
+        return item;
     }
 
     private final StringProperty description = new SimpleStringProperty(this, "description");

@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.LibrariesFilterView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.LibraryTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
@@ -47,8 +46,8 @@ public class LibrariesCategoryPage extends CategoryPageBase<Library> {
     }
 
     @Override
-    protected Callback<ModelGridView<Library>, TileViewBase<Library>> getTileViewProvider() {
-        return gridView -> new LibraryTileView();
+    protected Callback<Library, TileViewBase<Library>> getTileViewProvider() {
+        return LibraryTileView::new;
     }
 
     @Override
