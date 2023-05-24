@@ -26,7 +26,6 @@ public class AppOverviewBox extends OverviewBox<RealWorldApp> {
     public AppOverviewBox(RealWorldApp app) {
         super(app);
         getStyleClass().add("app-overview-box");
-        setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "realworld/" + getModel().getId());
         fillData();
     }
 
@@ -58,6 +57,8 @@ public class AppOverviewBox extends OverviewBox<RealWorldApp> {
 
         createdOnLabel = new Label();
         createdOnLabel.getStyleClass().add("field-value");
+
+        setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "realworld/" + getModel().getId());
         fillData();
 
         if (!isSmall()) {
