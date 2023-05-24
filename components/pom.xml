@@ -21,6 +21,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.dlsc.jfxcentral2</groupId>
+            <artifactId>iconfont</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
         </dependency>
