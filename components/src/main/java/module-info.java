@@ -1,4 +1,5 @@
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIkonliHandler;
+import org.kordamp.ikonli.IkonProvider;
 
 open module com.dlsc.jfxcentral2.components {
     requires javafx.controls;
@@ -41,4 +42,6 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.iconfont;
 
     provides org.kordamp.ikonli.IkonHandler with JFXCentralIkonliHandler;
+
+    uses IkonProvider;
 }

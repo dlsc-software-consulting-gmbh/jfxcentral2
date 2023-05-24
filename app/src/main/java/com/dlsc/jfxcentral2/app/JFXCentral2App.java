@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral2.app.pages.IkonliPage;
 import com.dlsc.jfxcentral2.app.pages.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
@@ -41,6 +42,7 @@ import one.jpro.routing.Response;
 import one.jpro.routing.Route;
 import one.jpro.routing.RouteApp;
 import one.jpro.routing.RouteUtils;
+import one.jpro.routing.dev.DevFilter;
 import simplefx.experimental.parts.FXFuture;
 
 import java.util.function.Supplier;
@@ -79,6 +81,7 @@ public class JFXCentral2App extends RouteApp {
                 .and(createCategoryOrDetailRoute("/tools", () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/tutorials", () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/videos", () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
+                .and(RouteUtils.get("/ikonli", r -> new IkonliPage(size)))
                 .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/cookies", r -> new LegalPage(size, LegalPage.Section.COOKIES)))
@@ -86,8 +89,8 @@ public class JFXCentral2App extends RouteApp {
                 .and(RouteUtils.get("/links", r -> new LinksOfTheWeekPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
                 .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)))
-                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)));
-           //     .filter(DevFilter.create());
+                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)))
+                .filter(DevFilter.create());
     }
 
     private Route createCategoryOrDetailRoute(String path, Supplier<Response> masterResponse, Callback<String, Response> detailedResponse) {

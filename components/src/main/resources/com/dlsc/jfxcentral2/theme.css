@@ -2713,7 +2713,7 @@
  * ToolTileView
  */
 .tool-tile-view .avatar-view {
-    -fx-avatar-size: 100px;
+    -fx-avatar-size: 64px;
 }
 
 .tool-tile-view {
@@ -4936,12 +4936,13 @@
  */
 .simple-overview-box .body-box .image-wrapper {
     -fx-background-color: -grey-100;
+    -fx-border-width: 0px 0px 1px 0px;
 }
 
 .simple-overview-box .body-box .markdown-view {
     -fx-border-color: -grey-10;
-    -fx-border-width: 1px 0 0 0;
     -fx-padding: 15px;
+    -fx-border-width: 0px;
 }
 
 .simple-overview-box:md-lg .body-box .image-wrapper {
@@ -5776,4 +5777,100 @@
 
 .user-profile-view:sm .custom-tab-pane > .content-box {
     -fx-spacing: 18px;
+}
+
+/* ----------------------------------------------------------------------------
+ * IkonliBrowser
+ */
+.ikonli-browser {
+    -fx-pref-height: 1000px;
+}
+
+.ikonli-browser > .container {
+    -fx-padding: 0px 50px;
+}
+
+.ikonli-browser:lg {
+}
+
+.ikonli-browser:md {
+}
+
+.ikonli-browser:sm {
+}
+
+.ikonli-browser .header {
+    -fx-background-color: -fx-background;
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+}
+
+.ikonli-browser .viewport {
+    -fx-background-color: -fx-background;
+}
+
+.ikonli-browser .icon-grid {
+    -fx-padding: 0px;
+    -fx-background-color: -fx-background;
+}
+
+.ikonli-browser .icon-grid .grid-cell .ikonli-font-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: rgba(0, 0, 0, .75);
+}
+
+.ikonli-browser .icon-grid .grid-cell .wrapper {
+    -fx-alignment: top-center;
+    -fx-padding: 5px 10px;
+    -fx-spacing: 5px;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 100px;
+    -fx-min-width: 100px;
+    -fx-min-height: 100px;
+}
+
+.ikonli-browser .icon-grid .grid-cell .wrapper .label {
+    -fx-font-size: .8em;
+    -fx-text-fill: grey;
+}
+
+.ikonli-browser .icon-grid .grid-cell .wrapper.selected {
+    -fx-background-radius: 4px;
+    -fx-background-color: -fx-accent;
+}
+
+.ikonli-browser .icon-grid .grid-cell .wrapper.selected .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.ikonli-browser .icon-grid .grid-cell .wrapper.selected .label {
+    -fx-text-fill: white;
+}
+
+.ikonli-browser .search-field {
+    -fx-padding: 0px;
+}
+
+.ikonli-browser .list-view .list-cell {
+    -fx-padding: 5px;
+    -fx-background-color: white;
+    -fx-background-insets: 0px !important;
+    -fx-border-insets: 0px !important;
+    -fx-border-width: 0px !important;
+    -fx-alignment: center-left;
+}
+
+.ikonli-browser .list-view .list-cell:selected {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+    -fx-background-insets: 2px 10px 2px 0px !important;
+    -fx-background-radius: 4px;
+}
+
+.ikonli-browser .status-label {
+    -fx-padding: 15px 15px;
+    -fx-alignment: center-right;
+    -fx-max-width: Infinity;
+    -fx-text-fill: grey;
+    -fx-background-color: -fx-background;
 }

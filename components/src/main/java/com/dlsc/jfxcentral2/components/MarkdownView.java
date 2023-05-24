@@ -83,8 +83,9 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
     }
 
     private double computeFitWidth(ImageView imageView) {
-        Image image = imageView.getImage();
-        return Math.min(image.getWidth(), getWidth());
+//        Image image = imageView.getImage();
+//        return Math.min(image.getWidth(), getWidth());
+        return getWidth();
     }
 
     private final BooleanProperty showImages = new SimpleBooleanProperty(this, "showImages", true);

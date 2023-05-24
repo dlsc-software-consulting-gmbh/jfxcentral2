@@ -18,21 +18,23 @@ public class CategoryHeader<T extends ModelObject> extends PaneBase {
     public CategoryHeader() {
         getStyleClass().add("category-header");
 
-        Label label = new Label();
-        label.textProperty().bind(titleProperty());
         FontIcon fontIcon = new FontIcon();
         fontIcon.iconCodeProperty().bind(ikonProperty());
+
+        Label label = new Label();
+        label.textProperty().bind(titleProperty());
         label.setGraphic(fontIcon);
         label.getStyleClass().add("header-title");
         label.managedProperty().bind(label.visibleProperty());
         label.visibleProperty().bind(titleProperty().isNotEmpty().or(ikonProperty().isNotNull()));
 
         getChildren().setAll(label);
-        //Only one label and content can be displayed;
-        //if the content is not empty, the content will be displayed, otherwise the label will be displayed
-        contentProperty().addListener((ob, ov, nv) -> {
-            getChildren().setAll(Objects.requireNonNullElse(getContent(), label));
-        });
+
+        /*
+         * Only one label and content can be displayed. If the content is not empty, the content will be displayed,
+         * otherwise the label will be displayed
+         */
+        contentProperty().addListener((ob, ov, nv) -> getChildren().setAll(Objects.requireNonNullElse(getContent(), label)));
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title");

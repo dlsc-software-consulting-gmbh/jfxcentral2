@@ -35,6 +35,8 @@ public class SimpleOverviewBox<T extends ModelObject> extends OverviewBox<T> {
 
         StackPane imageWrapper = new StackPane(previewImage);
         imageWrapper.getStyleClass().add("image-wrapper");
+        imageWrapper.visibleProperty().bind(previewImage.imageProperty().isNotNull());
+        imageWrapper.managedProperty().bind(previewImage.imageProperty().isNotNull());
 
         fillData();
         return imageWrapper;

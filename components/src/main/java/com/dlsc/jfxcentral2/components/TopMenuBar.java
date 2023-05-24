@@ -169,6 +169,7 @@ public class TopMenuBar extends PaneBase {
         button.getItems().add(createMenuItem("Books", "/books", IkonUtil.getModelIkon(Book.class)));
         button.getItems().add(createMenuItem("Blogs", "/blogs", IkonUtil.getModelIkon(Blog.class)));
         button.getItems().add(createMenuItem("Tutorials", "/tutorials", IkonUtil.getModelIkon(Tutorial.class)));
+        button.getItems().add(createMenuItem("Icons", "/ikonli", IkonUtil.champion));
     }
 
     private void fillCommunityMenu(MenuButton button) {
