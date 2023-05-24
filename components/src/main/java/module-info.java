@@ -1,4 +1,3 @@
-import com.dlsc.jfxcentral2.iconfont.JFXCentralIkonliHandler;
 import org.kordamp.ikonli.IkonProvider;
 
 open module com.dlsc.jfxcentral2.components {
@@ -26,6 +25,7 @@ open module com.dlsc.jfxcentral2.components {
     requires java.desktop;
     requires com.rometools.rome;
     requires commons.validator;
+    requires com.dlsc.jfxcentral2.iconfont;
 
     exports com.dlsc.jfxcentral2.components;
     exports com.dlsc.jfxcentral2.model;
@@ -39,9 +39,6 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.components.gridview;
     exports com.dlsc.jfxcentral2.components.overviewbox;
     exports com.dlsc.jfxcentral2.components.userprofile;
-    exports com.dlsc.jfxcentral2.iconfont;
-
-    provides org.kordamp.ikonli.IkonHandler with JFXCentralIkonliHandler;
 
     uses IkonProvider;
 }

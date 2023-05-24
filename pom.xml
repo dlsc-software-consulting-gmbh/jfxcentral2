@@ -21,6 +21,7 @@
         <module>components</module>
         <module>sampler</module>
         <module>app</module>
+        <module>iconfont</module>
     </modules>
 
     <properties>
@@ -53,6 +54,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.dlsc.jfxcentral2</groupId>
+                <artifactId>iconfont</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-controls</artifactId>
