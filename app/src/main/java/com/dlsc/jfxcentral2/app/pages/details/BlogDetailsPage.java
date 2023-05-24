@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.app.pages.details;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.headers.DetailHeader;
+import com.dlsc.jfxcentral2.components.headers.BlogDetailHeader;
 import com.dlsc.jfxcentral2.components.overviewbox.BlogOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -20,7 +20,7 @@ public class BlogDetailsPage extends DetailsPageBase<Blog> {
     public Node content() {
 
         // header
-        DetailHeader<Blog> header = new DetailHeader<>(getItem());
+        BlogDetailHeader header = new BlogDetailHeader(getItem());
         header.setTitle(getItem().getName());
         header.setIkon(IkonUtil.getModelIkon(Blog.class));
         header.sizeProperty().bind(sizeProperty());

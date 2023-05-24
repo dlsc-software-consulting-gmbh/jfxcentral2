@@ -17,15 +17,10 @@ public class SimpleOverviewBox<T extends ModelObject> extends OverviewBox<T> {
 
     private CustomImageView previewImage;
 
-    public SimpleOverviewBox(T data) {
-        this();
-        setData(data);
-    }
-
-    public SimpleOverviewBox() {
+    public SimpleOverviewBox(T model) {
+        super(model);
         getStyleClass().add("simple-overview-box");
-
-        dataProperty().addListener(it -> fillData());
+        fillData();
     }
 
     @Override
@@ -43,7 +38,7 @@ public class SimpleOverviewBox<T extends ModelObject> extends OverviewBox<T> {
     }
 
     private void fillData() {
-        T data = getData();
+        T data = getModel();
         setMarkdown(data == null ? "" : data.getDescription());
 
         if (previewImage.imageProperty().isBound()) {

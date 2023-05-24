@@ -5,12 +5,8 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 public class AppDetailHeader extends SimpleDetailHeader<RealWorldApp>  {
 
     public AppDetailHeader(RealWorldApp app) {
-        this();
-        setModel(app);
-    }
-
-    public AppDetailHeader() {
+        super(app);
         getStyleClass().add("app-detail-header");
-        modelProperty().addListener(it -> setWebsite(getModel().getUrl()));
+        setWebsite(getModel().getUrl());
     }
 }

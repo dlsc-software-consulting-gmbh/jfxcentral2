@@ -14,9 +14,15 @@ import javafx.scene.layout.HBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
+import java.util.Objects;
+
 public class DetailHeader<T extends ModelObject> extends CategoryHeader<T> {
 
-    public DetailHeader() {
+    private T model;
+
+    public DetailHeader(T model) {
+        this.model = Objects.requireNonNull(model);
+
         getStyleClass().add("detail-header");
 
         BorderPane contentPane = new BorderPane();
@@ -27,8 +33,8 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader<T> {
         contentProperty().bind(Bindings.createObjectBinding(() -> contentPane));
     }
 
-    public DetailHeader(T model) {
-        setModel(model);
+    public T getModel() {
+        return model;
     }
 
     private HBox createBottomBox() {

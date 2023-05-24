@@ -4,7 +4,6 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.components.CustomImageView;
-import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -23,14 +22,10 @@ public class BookOverviewBox extends OverviewBox<Book> {
     private CustomImageView previewImageView;
 
     public BookOverviewBox(Book book) {
-        this();
-        setData(book);
-    }
-
-    public BookOverviewBox() {
+        super(book);
         getStyleClass().add("book-overview-box");
-        baseURLProperty().bind(Bindings.createStringBinding(() -> DataRepository.getInstance().getRepositoryDirectoryURL() + "books/" + getData().getId(), dataProperty()));
-        dataProperty().addListener(it -> fillData());
+        setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "books/" + getModel().getId());
+        fillData();
     }
 
     @Override
@@ -91,7 +86,7 @@ public class BookOverviewBox extends OverviewBox<Book> {
     }
 
     private void fillData() {
-        Book book = getData();
+        Book book = getModel();
         if (!isSmall()) {
             if (previewImageView.imageProperty().isBound()) {
                 previewImageView.imageProperty().unbind();

@@ -28,14 +28,9 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
     private Button websiteButton;
 
     public SimpleDetailHeader(T model) {
-        this();
-        setModel(model);
-    }
-
-    public SimpleDetailHeader() {
+        super(model);
         getStyleClass().add("simple-detail-header");
-
-        centerProperty().bind(Bindings.createObjectBinding(this::createCenterNode, modelProperty()));
+        setCenter(createCenterNode());
     }
 
     public Button getWebsiteButton() {
@@ -43,33 +38,33 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
     }
 
     protected Pane createCenterNode() {
-        ModelObject header = getModel();
-        if (header == null) {
+        ModelObject model = getModel();
+        if (model == null) {
             return null;
         }
 
         VBox contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");
 
-        Label nameLabel = new Label(header.getName());
+        Label nameLabel = new Label(model.getName());
         nameLabel.getStyleClass().add("name");
         nameLabel.setWrapText(true);
 
         Label descriptionLabel = null;
-        if (header.getDescription() != null && !header.getDescription().isEmpty()) {
-            descriptionLabel = new Label(header.getDescription());
+        if (model.getDescription() != null && !model.getDescription().isEmpty()) {
+            descriptionLabel = new Label(model.getDescription());
             descriptionLabel.getStyleClass().add("description");
             descriptionLabel.setWrapText(true);
         }
 
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
-        saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(header));
-        saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(header));
+        saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
+        saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(model));
         saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, nv) -> {
-            System.out.println(header.getName() + " is saved: " + nv);
+            System.out.println(model.getName() + " is saved: " + nv);
         });
         saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, nv) -> {
-            System.out.println(header.getName() + " is liked: " + nv);
+            System.out.println(model.getName() + " is liked: " + nv);
         });
 
         websiteButton = new Button();
@@ -84,6 +79,11 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
             }
             return new FontIcon(icon);
         }, websiteButtonIconProperty()));
+
+        String website = getWebsite();
+        if (StringUtils.isNotBlank(website)) {
+            LinkUtil.setExternalLink(websiteButton, website);
+        }
 
         websiteProperty().addListener(it -> {
             String url = getWebsite();

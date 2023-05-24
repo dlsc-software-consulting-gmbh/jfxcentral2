@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.components.overviewbox;
+package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Coordinates;
@@ -29,7 +29,7 @@ public class LibraryCoordinatesBox extends PaneBase {
 
     private final Label repositoryCoordinatesLabel;
 
-    public LibraryCoordinatesBox() {
+    public LibraryCoordinatesBox(Coordinates coordinates) {
         Header headerBox = new Header();
         headerBox.setTitle("COORDINATES");
         headerBox.setIcon(MaterialDesign.MDI_CODE_TAGS);
@@ -77,30 +77,24 @@ public class LibraryCoordinatesBox extends PaneBase {
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
 
-        coordinatesProperty().addListener(it -> {
-            Coordinates coordinates = getCoordinates();
-            if (coordinates != null) {
-                setVisible(StringUtils.isNotBlank(coordinates.getGroupId()) && StringUtils.isNotBlank(coordinates.getArtifactId()));
-                setManaged(StringUtils.isNotBlank(coordinates.getGroupId()) && StringUtils.isNotBlank(coordinates.getArtifactId()));
+        setVisible(StringUtils.isNotBlank(coordinates.getGroupId()) && StringUtils.isNotBlank(coordinates.getArtifactId()));
+        setManaged(StringUtils.isNotBlank(coordinates.getGroupId()) && StringUtils.isNotBlank(coordinates.getArtifactId()));
 
-                String groupId = coordinates.getGroupId();
-                String artifactId = coordinates.getArtifactId();
+        String groupId = coordinates.getGroupId();
+        String artifactId = coordinates.getArtifactId();
 
-                if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
-                    StringProperty versionProperty = DataRepository.getInstance().getArtifactVersion(coordinates);
-                    repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
-                        if (getBuildTool().equals(BuildTool.MAVEN)) {
-                            return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + versionProperty.get() + "</version>\n</dependency>";
-                        }
-                        return "dependencies {\n    implementation '" + groupId + ":" + artifactId + ":" + versionProperty.get() + "'\n}";
-                    }, versionProperty, buildTool));
-
-                } else {
-                    repositoryCoordinatesLabel.textProperty().unbind();
+        if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
+            StringProperty versionProperty = DataRepository.getInstance().getArtifactVersion(coordinates);
+            repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
+                if (getBuildTool().equals(BuildTool.MAVEN)) {
+                    return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + versionProperty.get() + "</version>\n</dependency>";
                 }
+                return "dependencies {\n    implementation '" + groupId + ":" + artifactId + ":" + versionProperty.get() + "'\n}";
+            }, versionProperty, buildTool));
 
-            }
-        });
+        } else {
+            repositoryCoordinatesLabel.textProperty().unbind();
+        }
     }
 
     private final StringProperty description = new SimpleStringProperty(this, "description");
@@ -115,20 +109,6 @@ public class LibraryCoordinatesBox extends PaneBase {
 
     public void setDescription(String description) {
         this.description.set(description);
-    }
-
-    private final ObjectProperty<Coordinates> coordinates = new SimpleObjectProperty<>(this, "coordinates");
-
-    public Coordinates getCoordinates() {
-        return coordinates.get();
-    }
-
-    public ObjectProperty<Coordinates> coordinatesProperty() {
-        return coordinates;
-    }
-
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates.set(coordinates);
     }
 
     public enum BuildTool {

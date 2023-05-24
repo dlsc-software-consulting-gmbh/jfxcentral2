@@ -29,7 +29,7 @@
         <junit.version>5.9.1</junit.version>
         <javafx.version>20</javafx.version>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2023.1.0</jpro.version>
+        <jpro.version>2023.2.0-SNAPSHOT</jpro.version>
         <routing.version>0.15.0-SNAPSHOT</routing.version>
     </properties>
 

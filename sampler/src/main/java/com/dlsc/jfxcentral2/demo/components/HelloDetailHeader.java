@@ -6,9 +6,7 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.headers.AppDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.BookDetailHeader;
-import com.dlsc.jfxcentral2.components.headers.PeopleDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.PersonDetailHeader;
-import com.dlsc.jfxcentral2.components.headers.VideoDetailHeader;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.scene.Node;
@@ -31,13 +29,7 @@ public class HelloDetailHeader extends JFXCentralSampleBase {
         BookDetailHeader bookDetailHeader = new BookDetailHeader(getBook());
         bookDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
 
-        VideoDetailHeader videoDetailHeader = new VideoDetailHeader();
-        videoDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
-
-        PeopleDetailHeader peopleDetailHeader = new PeopleDetailHeader();
-        peopleDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
-
-        return new ScrollPane(new VBox(30, personDetailHeader, appDetailHeader, bookDetailHeader, videoDetailHeader, peopleDetailHeader));
+        return new ScrollPane(new VBox(30, personDetailHeader, appDetailHeader, bookDetailHeader));
     }
 
     private Book getBook() {

@@ -2,7 +2,6 @@ package com.dlsc.jfxcentral2.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Tip;
-import javafx.beans.binding.Bindings;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -25,20 +24,11 @@ public class TipOverviewBox extends OverviewBox<Tip> {
     private Label createdOnLabel;
 
     public TipOverviewBox(Tip tip) {
-        this();
-        setData(tip);
-    }
-
-    public TipOverviewBox() {
+        super(tip);
         getStyleClass().add("tip-overview-box");
-        dataProperty().addListener(it -> {
-            Tip tip = getData();
-            if (tip != null) {
-                fillData();
-                markdownProperty().bind(DataRepository.getInstance().tipDescriptionProperty(tip));
-            }
-        });
-        baseURLProperty().bind(Bindings.createStringBinding(() -> getData() == null ? "" : DataRepository.getInstance().getRepositoryDirectoryURL() + "tips/" + getData().getId(), dataProperty()));
+        markdownProperty().bind(DataRepository.getInstance().tipDescriptionProperty(tip));
+        setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "tips/" + getModel().getId());
+        fillData();
     }
 
     @Override
@@ -112,7 +102,7 @@ public class TipOverviewBox extends OverviewBox<Tip> {
     }
 
     private void fillData() {
-        Tip tip = getData();
+        Tip tip = getModel();
         if (tip != null) {
 //            locationLabel.setText(tip.getLocation());
 //            domainLabel.setText(tip.getDomain());

@@ -302,6 +302,8 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm()));
         } else if (model instanceof Company company) {
             imageProperty = ImageManager.getInstance().companyImageProperty(company);
+        } else if (model instanceof Person person) {
+            imageProperty = ImageManager.getInstance().personImageProperty(person);
         } else if (model instanceof Video video) {
             imageProperty = ImageManager.getInstance().youTubeImageProperty(video);
             mins = video.getMinutes() + " mins";

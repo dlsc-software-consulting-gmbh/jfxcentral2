@@ -2,7 +2,6 @@ package com.dlsc.jfxcentral2.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
-import javafx.beans.binding.Bindings;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -25,16 +24,10 @@ public class AppOverviewBox extends OverviewBox<RealWorldApp> {
     private Label createdOnLabel;
 
     public AppOverviewBox(RealWorldApp app) {
-        this();
-        setData(app);
-    }
-
-    public AppOverviewBox() {
+        super(app);
         getStyleClass().add("app-overview-box");
-
-        baseURLProperty().bind(Bindings.createStringBinding(() -> getData() == null ? "" : DataRepository.getInstance().getRepositoryDirectoryURL() + "realworld/" + getData().getId(), dataProperty()));
-
-        dataProperty().addListener(it -> fillData());
+        setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "realworld/" + getModel().getId());
+        fillData();
     }
 
     @Override
@@ -108,7 +101,7 @@ public class AppOverviewBox extends OverviewBox<RealWorldApp> {
     }
 
     private void fillData() {
-        RealWorldApp app = getData();
+        RealWorldApp app = getModel();
         if (app != null) {
             locationLabel.setText(app.getLocation());
             domainLabel.setText(app.getDomain());

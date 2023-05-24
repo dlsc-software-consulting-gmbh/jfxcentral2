@@ -6,10 +6,6 @@ import javafx.scene.Node;
 
 public class VideoOverviewBox extends SimpleOverviewBox<Video> {
 
-    public VideoOverviewBox() {
-        super();
-    }
-
     public VideoOverviewBox(Video data) {
         super(data);
         getStyleClass().add("video-overview-box");
@@ -17,6 +13,6 @@ public class VideoOverviewBox extends SimpleOverviewBox<Video> {
 
     @Override
     protected Node createBottomNode() {
-        return VideoViewFactory.createViewViewNode(getData());
+        return VideoViewFactory.createViewViewNode(getModel());
     }
 }

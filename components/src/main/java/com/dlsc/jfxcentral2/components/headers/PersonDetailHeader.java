@@ -22,15 +22,16 @@ import java.util.List;
 
 public class PersonDetailHeader extends DetailHeader<Person> {
 
-    private final Person person;
 
     public PersonDetailHeader(Person person) {
-        this.person = person;
+        super(person);
         getStyleClass().add("person-detail-header");
         centerProperty().bind(Bindings.createObjectBinding(this::createCenterNode, sizeProperty()));
     }
 
     private Pane createCenterNode() {
+        Person person = getModel();
+
         if (person == null) {
             return null;
         }

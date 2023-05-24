@@ -16,11 +16,6 @@ import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 public class LibraryOverviewBox extends PaneBase {
 
     public LibraryOverviewBox(Library library) {
-        this();
-        setData(library);
-    }
-
-    public LibraryOverviewBox() {
         getStyleClass().add("overview-box");
 
         Header header = new Header();
@@ -32,7 +27,7 @@ public class LibraryOverviewBox extends PaneBase {
 
         LibraryPreviewBox libraryPreviewBox = new LibraryPreviewBox();
         libraryPreviewBox.sizeProperty().bind(sizeProperty());
-        libraryPreviewBox.libraryProperty().bind(dataProperty());
+        libraryPreviewBox.setLibrary(library);
 
         VBox bodyBox = new VBox(markdownView, libraryPreviewBox);
         bodyBox.getStyleClass().add("body-box");
@@ -44,12 +39,7 @@ public class LibraryOverviewBox extends PaneBase {
         layoutBySize();
         getChildren().setAll(contentBox);
 
-        dataProperty().addListener(it -> {
-            Library library = getData();
-            if (library != null) {
-                setMarkdown(library.getDescription());
-            }
-        });
+        setMarkdown(library.getDescription());
     }
 
     private final StringProperty markdown = new SimpleStringProperty(this, "markdown");
@@ -92,19 +82,5 @@ public class LibraryOverviewBox extends PaneBase {
 
     public void setIcon(Ikon icon) {
         this.icon.set(icon);
-    }
-
-    private final ObjectProperty<Library> data = new SimpleObjectProperty<>(this, "data");
-
-    public Library getData() {
-        return data.get();
-    }
-
-    public ObjectProperty<Library> dataProperty() {
-        return data;
-    }
-
-    public void setData(Library data) {
-        this.data.set(data);
     }
 }

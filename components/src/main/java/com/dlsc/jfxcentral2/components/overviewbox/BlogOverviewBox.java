@@ -41,7 +41,7 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
     protected Node createTopNode() {
         VBox box = new VBox();
         box.getStyleClass().add("posts-box");
-        dataProperty().addListener(it -> DataRepository.getInstance().loadPosts(getData()).forEach(post -> box.getChildren().add(new PostView(post))));
+        DataRepository.getInstance().loadPosts(getModel()).forEach(post -> box.getChildren().add(new PostView(post)));
         return box;
     }
 

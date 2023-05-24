@@ -3,7 +3,9 @@ package com.dlsc.jfxcentral2.app.pages.details;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.headers.DetailHeader;
+import com.dlsc.jfxcentral2.components.headers.LibraryDetailHeader;
+import com.dlsc.jfxcentral2.components.detailsbox.LibraryCoordinatesBox;
+import com.dlsc.jfxcentral2.components.detailsbox.LibraryEnsembleBox;
 import com.dlsc.jfxcentral2.components.overviewbox.LibraryOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -20,15 +22,27 @@ public class LibraryDetailsPage extends DetailsPageBase<Library> {
     public Node content() {
 
         // header
-        DetailHeader<Library> header = new DetailHeader<>(getItem());
+        LibraryDetailHeader header = new LibraryDetailHeader(getItem());
         header.setTitle(getItem().getName());
         header.setIkon(IkonUtil.getModelIkon(Library.class));
         header.sizeProperty().bind(sizeProperty());
 
+        // overview box
+        LibraryOverviewBox libraryOverviewBox = new LibraryOverviewBox(getItem());
+        libraryOverviewBox.sizeProperty().bind(sizeProperty());
+
+        // coordinates box
+        LibraryCoordinatesBox coordinatesBox = new LibraryCoordinatesBox(getItem());
+        coordinatesBox.sizeProperty().bind(sizeProperty());
+
+        // ensemble box
+        LibraryEnsembleBox ensembleBox = new LibraryEnsembleBox(getItem());
+        ensembleBox.sizeProperty().bind(sizeProperty());
+
         // details
         DetailsContentPane detailsContentPane = createContentPane();
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
-        detailsContentPane.getCenterNodes().add(new LibraryOverviewBox(getItem()));
+        detailsContentPane.getCenterNodes().addAll(libraryOverviewBox, ensembleBox, coordinatesBox);
 
         return wrapContent(header, detailsContentPane);
     }

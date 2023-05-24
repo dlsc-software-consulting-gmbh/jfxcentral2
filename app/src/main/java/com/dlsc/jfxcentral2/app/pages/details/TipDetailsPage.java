@@ -19,7 +19,7 @@ public class TipDetailsPage extends DetailsPageBase<Tip> {
     public Node content() {
 
         // header
-        TipDetailHeader header = new TipDetailHeader();
+        TipDetailHeader header = new TipDetailHeader(getItem());
         header.sizeProperty().bind(sizeProperty());
         
         // details

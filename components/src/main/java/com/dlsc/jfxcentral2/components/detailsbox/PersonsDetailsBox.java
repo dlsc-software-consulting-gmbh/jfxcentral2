@@ -15,7 +15,9 @@ public class PersonsDetailsBox extends DetailsBoxBase<Person> {
         getStyleClass().add("persons-details-box");
         setTitle("PEOPLE");
         setIkon(IkonUtil.person);
-        setMaxItemsPerPage(2);
+
+        // can't have people show up on second page :-)
+        setMaxItemsPerPage(Integer.MAX_VALUE);
 
         setOnDetails(detailsObject -> {
             System.out.println("On Details: " + detailsObject.getName());

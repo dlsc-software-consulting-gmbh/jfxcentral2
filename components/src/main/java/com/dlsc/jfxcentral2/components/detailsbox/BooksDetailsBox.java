@@ -20,7 +20,6 @@ public class BooksDetailsBox extends DetailsBoxBase<Book> {
         setIkon(IkonUtil.book);
         setMaxItemsPerPage(1);
 
-
         setOnDetails(detailsObject -> {
             System.out.println("On Details: " + detailsObject.getName());
         });

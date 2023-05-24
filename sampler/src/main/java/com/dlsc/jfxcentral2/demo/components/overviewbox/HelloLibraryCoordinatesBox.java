@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral2.demo.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.model.Coordinates;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
-import com.dlsc.jfxcentral2.components.overviewbox.LibraryCoordinatesBox;
+import com.dlsc.jfxcentral2.components.detailsbox.LibraryCoordinatesBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -26,8 +26,7 @@ public class HelloLibraryCoordinatesBox extends JFXCentralSampleBase {
             }
 
         };
-        libraryCoordinatesBox = new LibraryCoordinatesBox();
-        libraryCoordinatesBox.setCoordinates(coordinates);
+        libraryCoordinatesBox = new LibraryCoordinatesBox(coordinates);
         libraryCoordinatesBox.setDescription("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ");
 
         return new ScrollPane(libraryCoordinatesBox);

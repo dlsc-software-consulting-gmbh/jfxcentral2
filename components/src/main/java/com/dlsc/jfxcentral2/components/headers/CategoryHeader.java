@@ -78,18 +78,4 @@ public class CategoryHeader<T extends ModelObject> extends PaneBase {
     public void setContent(Node content) {
         this.content.set(content);
     }
-
-    private final ObjectProperty<T> model = new SimpleObjectProperty<>(this, "model");
-
-    public T getModel() {
-        return model.get();
-    }
-
-    public ObjectProperty<T> modelProperty() {
-        return model;
-    }
-
-    public void setModel(T model) {
-        this.model.set(model);
-    }
 }

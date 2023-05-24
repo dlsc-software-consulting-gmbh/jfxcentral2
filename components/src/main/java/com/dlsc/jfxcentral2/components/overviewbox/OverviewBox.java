@@ -14,12 +14,17 @@ import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 
+import java.util.Objects;
+
 public class OverviewBox<T extends ModelObject> extends PaneBase {
 
     private final StackPane topWrapper;
     private final StackPane bottomWrapper;
+    private final T model;
 
-    public OverviewBox(T modelObject) {
+    public OverviewBox(T model) {
+        this.model = Objects.requireNonNull(model, "model can not be null");
+
         getStyleClass().add("overview-box");
 
         Header header = new Header();
@@ -45,12 +50,6 @@ public class OverviewBox<T extends ModelObject> extends PaneBase {
 
         layoutBySize();
         getChildren().setAll(contentBox);
-
-        setData(modelObject);
-    }
-
-    public OverviewBox() {
-        this(null);
     }
 
     private StringProperty baseURL = new SimpleStringProperty(this, "baseURL");
@@ -132,17 +131,7 @@ public class OverviewBox<T extends ModelObject> extends PaneBase {
         this.icon.set(icon);
     }
 
-    private final ObjectProperty<T> data = new SimpleObjectProperty<>(this, "data");
-
-    public T getData() {
-        return data.get();
-    }
-
-    public ObjectProperty<T> dataProperty() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data.set(data);
+    public T getModel() {
+        return model;
     }
 }

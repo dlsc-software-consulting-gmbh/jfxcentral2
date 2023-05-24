@@ -4,12 +4,8 @@ import com.dlsc.jfxcentral.data.model.Tip;
 
 public class TipDetailHeader extends SimpleDetailHeader<Tip>  {
 
-    public TipDetailHeader(Tip app) {
-        this();
-        setModel(app);
-    }
-
-    public TipDetailHeader() {
+    public TipDetailHeader(Tip tip) {
+        super(tip);
         getStyleClass().add("tip-detail-header");
     }
 }

@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.app.pages.details;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
+import com.dlsc.jfxcentral2.components.headers.TutorialDetailHeader;
 import com.dlsc.jfxcentral2.components.overviewbox.TutorialOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -19,7 +19,7 @@ public class TutorialDetailsPage extends DetailsPageBase<Tutorial> {
     @Override
     public Node content() {
         // header
-        CategoryHeader<Tutorial> header = new CategoryHeader<>();
+        TutorialDetailHeader header = new TutorialDetailHeader(getItem());
         header.setTitle(getItem().getName());
         header.setIkon(IkonUtil.getModelIkon(getItem()));
         header.sizeProperty().bind(sizeProperty());
