@@ -52,10 +52,29 @@ import java.util.function.Consumer;
 
 public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
+    private PaginationControl2 pagination;
+    private VBox pageBox;
+
     public DetailsBoxBase() {
         getStyleClass().add("details-box");
         itemsProperty().addListener((ob, ov, nv) -> layoutBySize());
-        selectedItemProperty().addListener((ob, ov, nv) -> layoutBySize());
+        selectedItemProperty().addListener((ob, ov, item) -> {
+            int index = getItems().indexOf(item);
+            if (index >= 0) {
+                int oldPageIndex = pagination.getCurrentPageIndex();
+                int newPageIndex = index / getMaxItemsPerPage();
+                //If not on the same page; jump to a new page; automatically display the selected item
+                if (oldPageIndex != newPageIndex) {
+                    pagination.setCurrentPageIndex(newPageIndex);
+                } else { //If on the same page; update the items
+                    pageBox.getChildren().forEach(node -> {
+                        if (node instanceof DetailsBoxBase<?>.DetailsCell detailsCell) {
+                            detailsCell.updateExtras();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private final ObjectProperty<T> selectedItem = new SimpleObjectProperty<>(this, "selectedItem");
@@ -90,7 +109,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
     protected void layoutBySize() {
         HBox headerBox = createHeaderBox();
 
-        PaginationControl2 pagination = new PaginationControl2();
+        pagination = new PaginationControl2();
         pagination.getStyleClass().add("pagination2");
         //pagination.setMaxPageIndicatorCount(3);
         int pageCount = itemsProperty().size() / getMaxItemsPerPage();
@@ -116,11 +135,11 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
     private VBox createPageBox(Integer pageIndex) {
         int fromIndex = pageIndex * getMaxItemsPerPage();
         int toIndex = Math.min(fromIndex + getMaxItemsPerPage(), getItems().size());
-        VBox pageBox = new VBox();
+        pageBox = new VBox();
         pageBox.getStyleClass().add("page-box");
         for (int i = fromIndex; i < toIndex; i++) {
             T model = getItems().get(i);
-            Node cell = createDetailsCell(model);
+            DetailsCell cell = new DetailsCell(model);
             if (i == 0) {
                 cell.getStyleClass().add("first-cell");
             }
@@ -155,101 +174,111 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         return new SimpleStringProperty("(Missing description)");
     }
 
-    private Node createDetailsCell(T model) {
-        VBox cellRight = new VBox();
-        cellRight.getStyleClass().add("cell-right");
-        HBox.setHgrow(cellRight, Priority.ALWAYS);
+    private class DetailsCell extends VBox {
+        private final StackPane extrasWrapper;
+        private T model;
 
-        // title box (title and action buttons)
-        HBox titleBox = new HBox();
-        titleBox.getStyleClass().add("title-box");
+        public DetailsCell(T model) {
+            this.model = model;
+            VBox cellRight = new VBox();
+            cellRight.getStyleClass().add("cell-right");
+            HBox.setHgrow(cellRight, Priority.ALWAYS);
 
-        Label titleLabel = new Label(model.getName());
-        titleLabel.setWrapText(true);
-        //library may have a company image
-        if (model instanceof Library library) {
-            CustomImageView graphic = new CustomImageView();
-            graphic.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
-            graphic.managedProperty().bind(graphic.visibleProperty());
-            graphic.visibleProperty().bind(graphic.imageProperty().isNotNull());
-            titleLabel.setGraphic(graphic);
-        }
-        titleLabel.getStyleClass().add("title-label");
+            // title box (title and action buttons)
+            HBox titleBox = new HBox();
+            titleBox.getStyleClass().add("title-box");
 
-        titleBox.getChildren().addAll(titleLabel, new Spacer());
-
-        List<Node> actionButtons = createActionButtons(model);
-        if (actionButtons != null && !actionButtons.isEmpty()) {
-            Pane actionButtonsPane = isSmall() ? new FlowPane() : new HBox();
-            actionButtonsPane.setMinWidth(Region.USE_PREF_SIZE);
-            actionButtonsPane.getStyleClass().add("action-buttons-pane");
-            for (int i = 0; i < actionButtons.size(); i++) {
-                Node actionButton = actionButtons.get(i);
-                actionButton.getStyleClass().addAll("action-button", "action-button-" + i);
-                actionButton.setFocusTraversable(false);
-                actionButtonsPane.getChildren().add(actionButton);
+            Label titleLabel = new Label(model.getName());
+            titleLabel.setWrapText(true);
+            //library may have a company image
+            if (model instanceof Library library) {
+                CustomImageView graphic = new CustomImageView();
+                graphic.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
+                graphic.managedProperty().bind(graphic.visibleProperty());
+                graphic.visibleProperty().bind(graphic.imageProperty().isNotNull());
+                titleLabel.setGraphic(graphic);
             }
-            if (isSmall()) {
-                cellRight.getChildren().add(actionButtonsPane);
+            titleLabel.getStyleClass().add("title-label");
+
+            titleBox.getChildren().addAll(titleLabel, new Spacer());
+
+            List<Node> actionButtons = createActionButtons(model);
+            if (actionButtons != null && !actionButtons.isEmpty()) {
+                Pane actionButtonsPane = isSmall() ? new FlowPane() : new HBox();
+                actionButtonsPane.setMinWidth(Region.USE_PREF_SIZE);
+                actionButtonsPane.getStyleClass().add("action-buttons-pane");
+                for (int i = 0; i < actionButtons.size(); i++) {
+                    Node actionButton = actionButtons.get(i);
+                    actionButton.getStyleClass().addAll("action-button", "action-button-" + i);
+                    actionButton.setFocusTraversable(false);
+                    actionButtonsPane.getChildren().add(actionButton);
+                }
+                if (isSmall()) {
+                    cellRight.getChildren().add(actionButtonsPane);
+                } else {
+                    titleBox.getChildren().add(actionButtonsPane);
+                }
+            }
+
+            cellRight.getChildren().addAll(titleBox);
+
+            // description
+            MarkdownView descMD = new MarkdownView();
+            descMD.mdStringProperty().bind(getDescriptionProperty(model));
+            descMD.getStyleClass().add("description-markdown");
+            cellRight.getChildren().add(descMD);
+
+            // previews
+            if (model instanceof Library library) {
+                Node previewsBox = createPreviewsBox(library);
+                if (previewsBox != null) {
+                    cellRight.getChildren().add(previewsBox);
+                }
+            }
+
+            // save and like
+            HBox cellBottom = new HBox();
+            cellBottom.getStyleClass().addAll("save-like-box", "cell-bottom");
+            SaveAndLikeButton saveButton = new SaveAndLikeButton();
+            saveButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
+            saveButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(model));
+            cellBottom.getChildren().add(saveButton);
+
+            HBox cellCenter = new HBox();
+            cellCenter.getStyleClass().add("cell-center");
+
+            Node cellLeft = createMainPreView(model);
+            if (cellLeft != null) {
+                cellLeft.getStyleClass().add("cell-left");
+                if (!isSmall()) {
+                    cellCenter.getChildren().add(cellLeft);
+                } else {
+                    cellRight.getChildren().add(0, cellLeft);
+                }
+            }
+
+            cellCenter.getChildren().add(cellRight);
+
+            getStyleClass().addAll("cell-content", "details-cell");
+
+            extrasWrapper = new StackPane();
+            getChildren().addAll(cellCenter, cellBottom, extrasWrapper);
+            updateExtras();
+        }
+
+        public void updateExtras() {
+            Callback<T, Node> extrasProvider = getExtrasProvider();
+            if (extrasProvider != null && Objects.equals(model, getSelectedItem())) {
+                Node extras = extrasProvider.call(model);
+                if (extras != null) {
+                    extrasWrapper.getChildren().setAll(extras);
+                } else {
+                    extrasWrapper.getChildren().clear();
+                }
             } else {
-                titleBox.getChildren().add(actionButtonsPane);
+                extrasWrapper.getChildren().clear();
             }
         }
-
-        cellRight.getChildren().addAll(titleBox);
-
-        // description
-        MarkdownView descMD = new MarkdownView();
-        descMD.mdStringProperty().bind(getDescriptionProperty(model));
-        descMD.getStyleClass().add("description-markdown");
-        cellRight.getChildren().add(descMD);
-
-        // previews
-        if (model instanceof Library library) {
-            Node previewsBox = createPreviewsBox(library);
-            if (previewsBox != null) {
-                cellRight.getChildren().add(previewsBox);
-            }
-        }
-
-        // save and like
-        HBox cellBottom = new HBox();
-        cellBottom.getStyleClass().addAll("save-like-box", "cell-bottom");
-        SaveAndLikeButton saveButton = new SaveAndLikeButton();
-        saveButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
-        saveButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(model));
-        cellBottom.getChildren().add(saveButton);
-
-        HBox cellCenter = new HBox();
-        cellCenter.getStyleClass().add("cell-center");
-
-        Node cellLeft = createMainPreView(model);
-        if (cellLeft != null) {
-            cellLeft.getStyleClass().add("cell-left");
-            if (!isSmall()) {
-                cellCenter.getChildren().add(cellLeft);
-            } else {
-                cellRight.getChildren().add(0, cellLeft);
-            }
-        }
-
-        cellCenter.getChildren().add(cellRight);
-
-        VBox cellContent = new VBox();
-        cellContent.getStyleClass().addAll("cell-content", "details-cell");
-
-        Node extras = null;
-
-        Callback<T, Node> extrasProvider = getExtrasProvider();
-        if (extrasProvider != null && Objects.equals(model, getSelectedItem())) {
-            extras = extrasProvider.call(model);
-        }
-        if (extras != null) {
-            cellContent.getChildren().addAll(cellCenter, cellBottom, extras);
-        } else {
-            cellContent.getChildren().addAll(cellCenter, cellBottom);
-        }
-        return cellContent;
     }
 
     protected Node createPreviewsBox(Library library) {
