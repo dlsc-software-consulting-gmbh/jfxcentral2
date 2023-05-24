@@ -3,12 +3,11 @@ package com.dlsc.jfxcentral2.app.pages.details;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.headers.LibraryDetailHeader;
 import com.dlsc.jfxcentral2.components.detailsbox.LibraryCoordinatesBox;
 import com.dlsc.jfxcentral2.components.detailsbox.LibraryEnsembleBox;
+import com.dlsc.jfxcentral2.components.headers.LibraryDetailHeader;
 import com.dlsc.jfxcentral2.components.overviewbox.LibraryOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 
@@ -23,8 +22,6 @@ public class LibraryDetailsPage extends DetailsPageBase<Library> {
 
         // header
         LibraryDetailHeader header = new LibraryDetailHeader(getItem());
-        header.setTitle(getItem().getName());
-        header.setIkon(IkonUtil.getModelIkon(Library.class));
         header.sizeProperty().bind(sizeProperty());
 
         // overview box

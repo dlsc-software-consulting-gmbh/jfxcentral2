@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.components.headers;
 
-import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -13,7 +12,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.Objects;
 
-public class CategoryHeader<T extends ModelObject> extends PaneBase {
+public class CategoryHeader extends PaneBase {
 
     public CategoryHeader() {
         getStyleClass().add("category-header");

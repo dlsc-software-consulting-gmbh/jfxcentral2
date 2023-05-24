@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components.headers;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -16,7 +17,7 @@ import org.kordamp.ikonli.material.Material;
 
 import java.util.Objects;
 
-public class DetailHeader<T extends ModelObject> extends CategoryHeader<T> {
+public class DetailHeader<T extends ModelObject> extends CategoryHeader {
 
     private T model;
 
@@ -24,6 +25,9 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader<T> {
         this.model = Objects.requireNonNull(model);
 
         getStyleClass().add("detail-header");
+
+        setTitle(model.getName());
+        setIkon(IkonUtil.getModelIkon(model));
 
         BorderPane contentPane = new BorderPane();
         contentPane.getStyleClass().add("content-pane");

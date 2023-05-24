@@ -3,10 +3,9 @@ package com.dlsc.jfxcentral2.app.pages.details;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
+import com.dlsc.jfxcentral2.components.headers.VideoDetailHeader;
 import com.dlsc.jfxcentral2.components.overviewbox.VideoOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 
@@ -19,9 +18,7 @@ public class VideoDetailsPage extends DetailsPageBase<Video> {
     @Override
     public Node content() {
         // header
-        CategoryHeader<Video> header = new CategoryHeader<>();
-        header.setTitle(getItem().getName());
-        header.setIkon(IkonUtil.getModelIkon(getItem()));
+        VideoDetailHeader header = new VideoDetailHeader(getItem());
         header.sizeProperty().bind(sizeProperty());
 
         // details

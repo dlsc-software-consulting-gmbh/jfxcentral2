@@ -80,6 +80,8 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
         ellipsisRightLabel.visibleProperty().bind(toLastButton.visibleProperty());
 
         controlBox.getChildren().addAll(leftArrowButton, toFirstButton, ellipsisLeftLabel);
+        controlBox.visibleProperty().bind(control.pageCountProperty().greaterThan(1));
+        controlBox.managedProperty().bind(control.pageCountProperty().greaterThan(1));
 
         toggleGroup = new ToggleGroup();
         for (int i = 0; i < control.getMaxPageIndicatorCount() && i < control.getPageCount(); i++) {

@@ -6,7 +6,6 @@ import com.dlsc.jfxcentral2.components.DetailsContentPane;
 import com.dlsc.jfxcentral2.components.headers.TutorialDetailHeader;
 import com.dlsc.jfxcentral2.components.overviewbox.TutorialOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 
@@ -20,8 +19,6 @@ public class TutorialDetailsPage extends DetailsPageBase<Tutorial> {
     public Node content() {
         // header
         TutorialDetailHeader header = new TutorialDetailHeader(getItem());
-        header.setTitle(getItem().getName());
-        header.setIkon(IkonUtil.getModelIkon(getItem()));
         header.sizeProperty().bind(sizeProperty());
 
         // details

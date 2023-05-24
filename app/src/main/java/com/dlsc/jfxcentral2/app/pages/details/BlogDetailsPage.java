@@ -6,7 +6,6 @@ import com.dlsc.jfxcentral2.components.DetailsContentPane;
 import com.dlsc.jfxcentral2.components.headers.BlogDetailHeader;
 import com.dlsc.jfxcentral2.components.overviewbox.BlogOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 
@@ -21,8 +20,6 @@ public class BlogDetailsPage extends DetailsPageBase<Blog> {
 
         // header
         BlogDetailHeader header = new BlogDetailHeader(getItem());
-        header.setTitle(getItem().getName());
-        header.setIkon(IkonUtil.getModelIkon(Blog.class));
         header.sizeProperty().bind(sizeProperty());
 
         // details
