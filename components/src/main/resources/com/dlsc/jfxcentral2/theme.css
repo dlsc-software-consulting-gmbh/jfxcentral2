@@ -2792,7 +2792,6 @@
     -fx-icon-size: 16px;
     -fx-scale-x: 1.5;
     -fx-scale-y: 1.5;
-    -fx-rotate: 135;
 }
 
 .person-tile-view .menu-button:expanded .arrow,

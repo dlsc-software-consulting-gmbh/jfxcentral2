@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.model.Badge;
 import com.dlsc.jfxcentral2.model.Comment;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -17,7 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material.Material;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
@@ -66,7 +66,7 @@ public class CommentItemView extends PaneBase {
 
         Button editButton = new Button("EDIT");
         editButton.getStyleClass().addAll("edit-button");
-        editButton.setGraphic(new FontIcon(Material.EDIT));
+        editButton.setGraphic(new FontIcon(JFXCentralIcon.EDIT));
         editButton.managedProperty().bind(editButton.visibleProperty());
         editButton.visibleProperty().bind(booleanBinding);
         editButton.setOnAction(event -> {
@@ -128,7 +128,7 @@ public class CommentItemView extends PaneBase {
 
         Label likeCountLabel = new Label();
         likeCountLabel.getStyleClass().add("like-count-label");
-        likeCountLabel.setGraphic(new FontIcon(Material.THUMB_UP));
+        likeCountLabel.setGraphic(new FontIcon(JFXCentralIcon.THUMB_UP));
         likeCountLabel.textProperty().bind(Bindings.createStringBinding(() -> {
             Comment comment = getComment();
             if (comment != null) {

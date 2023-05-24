@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -35,7 +36,7 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader<T> {
         backButton.getStyleClass().addAll("back-button");
         backButton.setOnAction(event -> WebAPI.getWebAPI(getScene()).executeScript("history.back()"));
 
-        Button shareButton = new Button("SHARE", new FontIcon(Material.SHARE));
+        Button shareButton = new Button("SHARE", new FontIcon(JFXCentralIcon.SHARE));
         shareButton.getStyleClass().add("share-button");
         shareButton.managedProperty().bind(shareButton.visibleProperty());
         shareButton.visibleProperty().bind(onShareProperty().isNotNull());

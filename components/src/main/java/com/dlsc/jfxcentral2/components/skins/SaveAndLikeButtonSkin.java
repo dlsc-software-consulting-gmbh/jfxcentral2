@@ -1,12 +1,11 @@
 package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import javafx.scene.control.SkinBase;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignC;
 
 public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
 
@@ -16,7 +15,7 @@ public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
         super(control);
 
         ToggleButton saveButton = new ToggleButton();
-        saveButton.setGraphic(new FontIcon(MaterialDesignC.CONTENT_SAVE_OUTLINE));
+        saveButton.setGraphic(new FontIcon(JFXCentralIcon.FLOPPY));
         saveButton.textProperty().bind(control.saveButtonTextProperty());
         saveButton.visibleProperty().bind(control.saveButtonVisibleProperty());
         saveButton.managedProperty().bind(control.saveButtonVisibleProperty());
@@ -24,7 +23,7 @@ public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
         saveButton.selectedProperty().bindBidirectional(control.saveButtonSelectedProperty());
 
         ToggleButton likeButton = new ToggleButton();
-        likeButton.setGraphic(new FontIcon(MaterialDesign.MDI_HEART_OUTLINE));
+        likeButton.setGraphic(new FontIcon(JFXCentralIcon.HEART));
         likeButton.textProperty().bind(control.likeButtonTextProperty());
         likeButton.visibleProperty().bind(control.likeButtonVisibleProperty());
         likeButton.managedProperty().bind(control.likeButtonVisibleProperty());

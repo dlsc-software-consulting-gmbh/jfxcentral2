@@ -4,6 +4,7 @@ import com.dlsc.gemsfx.PhotoView;
 import com.dlsc.jfxcentral2.components.EditTextField;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.model.RegisteredUser;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -16,8 +17,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material2.Material2OutlinedAL;
-import org.kordamp.ikonli.material2.Material2OutlinedMZ;
 
 public class ProfileContentPane extends PaneBase {
 
@@ -87,12 +86,12 @@ public class ProfileContentPane extends PaneBase {
 
     @Override
     protected void layoutBySize() {
-        Button uploadButton = new Button("UPLOAD", new FontIcon(Material2OutlinedAL.ADD_A_PHOTO));
+        Button uploadButton = new Button("UPLOAD", new FontIcon(JFXCentralIcon.CAMERA));
         uploadButton.getStyleClass().addAll("upload-button", "fill-button");
 
         uploadButton.setOnAction(it -> photoView.setPhoto(photoView.getPhotoSupplier().get()));
 
-        Button removeButton = new Button("REMOVE", new FontIcon(Material2OutlinedMZ.PHOTO_CAMERA));
+        Button removeButton = new Button("REMOVE", new FontIcon(JFXCentralIcon.CAMERA));
         removeButton.getStyleClass().addAll("remove-button", "fill-button");
         removeButton.setOnAction(it -> photoView.setPhoto(null));
 

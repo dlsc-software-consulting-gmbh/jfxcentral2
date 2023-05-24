@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.components.SocialLinksView;
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.geometry.Side;
 import javafx.scene.Node;
@@ -14,7 +15,6 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.Region;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material.Material;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ public class PersonTileView extends SimpleTileView<Person> {
     protected List<Node> createExtraNodes() {
         socialButton = new MenuButton();
         socialButton.getStyleClass().add("social-button");
-        FontIcon graphic = new FontIcon(Material.LINK);
+        FontIcon graphic = new FontIcon(JFXCentralIcon.LINKS);
         graphic.getStyleClass().add("more-graphic");
         socialButton.setGraphic(graphic);
         socialLinksView = new SocialLinksView();

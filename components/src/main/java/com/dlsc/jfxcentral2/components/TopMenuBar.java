@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -35,7 +36,6 @@ import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -121,7 +121,7 @@ public class TopMenuBar extends PaneBase {
             downloadsBtn.getStyleClass().add("downloads-button");
             LinkUtil.setLink(downloadsBtn, "/downloads");
 
-            Button loginBtn = new Button("Login", new FontIcon(MaterialDesignA.ACCOUNT_CIRCLE_OUTLINE));
+            Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));
             loginBtn.setMinWidth(Region.USE_PREF_SIZE);
             loginBtn.getStyleClass().add("login-button");
 
