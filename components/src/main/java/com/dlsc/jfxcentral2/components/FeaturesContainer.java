@@ -73,7 +73,7 @@ public class FeaturesContainer extends PaneBase {
 
 
         allModelObjects
-                .subList(0, 3)
+                .subList(0, Math.min(3, allModelObjects.size()))
                 .forEach(mo -> getFeatures().add(new Feature(mo.getName(), mo.getSummary(), "Featured", getRemark(mo), IkonUtil.getModelIkon(mo), getType(mo), getImageProperty(mo), getUrl(mo))));
     }
 
