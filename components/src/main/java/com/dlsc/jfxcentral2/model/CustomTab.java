@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral2.model;
 
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import javafx.scene.Node;
 import org.kordamp.ikonli.Ikon;
-import org.kordamp.ikonli.material.Material;
 
 public class CustomTab {
     private String title;
@@ -10,11 +10,11 @@ public class CustomTab {
     private Ikon icon;
 
     public CustomTab() {
-        this(null, null, Material.KEYBOARD_ARROW_UP);
+        this(null, null, JFXCentralIcon.CHEVRON_TOP);
     }
 
     public CustomTab(String title, Node content) {
-        this(title, content, Material.KEYBOARD_ARROW_UP);
+        this(title, content, JFXCentralIcon.CHEVRON_TOP);
     }
 
     public CustomTab(String title, Node content, Ikon icon) {

@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.model.Badge;
 import com.dlsc.jfxcentral2.model.Comment;
 import com.dlsc.jfxcentral2.model.User;
@@ -28,7 +29,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -79,7 +79,7 @@ public class CommentsView extends PaneBase {
         titleLabel.getStyleClass().add("title");
         titleLabel.textProperty().bind(titleProperty());
 
-        FontIcon icon = new FontIcon(MaterialDesign.MDI_COMMENT_TEXT_OUTLINE);
+        FontIcon icon = new FontIcon(JFXCentralIcon.COMMENTS);
         icon.getStyleClass().add("icon");
 
         HBox header = new HBox(titleLabel, new Spacer(), icon);

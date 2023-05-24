@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.EditTextField;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -29,7 +30,7 @@ public class EditTextFieldSkin extends ControlBaseSkin<EditTextField> {
         saveButton.managedProperty().bind(saveButton.visibleProperty());
         saveButton.visibleProperty().bind(editState.and(control.validProperty()));
         saveButton.textProperty().bind(control.saveButtonTextProperty());
-        saveButton.setGraphic(new FontIcon(MaterialDesign.MDI_CONTENT_SAVE));
+        saveButton.setGraphic(new FontIcon(JFXCentralIcon.FLOPPY));
         saveButton.setOnAction(it -> {
            if (control.getOnSave()!=null) {
                control.getOnSave().accept(control.getText());

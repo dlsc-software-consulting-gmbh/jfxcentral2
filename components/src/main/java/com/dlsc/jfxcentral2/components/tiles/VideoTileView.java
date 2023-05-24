@@ -1,11 +1,11 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.awt.*;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class VideoTileView extends TileView<Video> {
         setButton1Graphic(new FontIcon(IkonUtil.play));
 
         setButton2Text("YouTube");
-        setButton2Graphic(new FontIcon(MaterialDesign.MDI_YOUTUBE_PLAY));
+        setButton2Graphic(new FontIcon(JFXCentralIcon.YOUTUBE));
 
         setRemark(video.getMinutes() + " mins");
 

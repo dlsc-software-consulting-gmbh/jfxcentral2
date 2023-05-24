@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral2.model;
 
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import javafx.scene.Node;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material.Material;
 
 public class MarkdownTab {
 
@@ -11,7 +11,7 @@ public class MarkdownTab {
     private Node graphic;
 
     public MarkdownTab(String title, String mdString) {
-        this(title, mdString, new FontIcon(Material.KEYBOARD_ARROW_UP));
+        this(title, mdString, new FontIcon(JFXCentralIcon.CHEVRON_TOP));
     }
 
     public MarkdownTab(String title, String mdString, Node graphic) {

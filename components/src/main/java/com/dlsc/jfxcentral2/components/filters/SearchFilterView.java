@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components.filters;
 import com.dlsc.gemsfx.SearchField;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -35,7 +36,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material.Material;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -119,7 +119,7 @@ public class SearchFilterView extends PaneBase {
         contentBox.getChildren().addAll(getExtraNodes());
 
         if (isSmall() && getOnSearch() == null) {
-            ToggleButton collapsibleButton = new ToggleButton("FILTERS", new FontIcon(Material.EXPAND_MORE));
+            ToggleButton collapsibleButton = new ToggleButton("FILTERS", new FontIcon(JFXCentralIcon.CHEVRON_TOP));
             collapsibleButton.getStyleClass().add("collapsible-button");
             collapsibleButton.setMaxWidth(Double.MAX_VALUE);
             collapsibleButton.setSelected(true);
