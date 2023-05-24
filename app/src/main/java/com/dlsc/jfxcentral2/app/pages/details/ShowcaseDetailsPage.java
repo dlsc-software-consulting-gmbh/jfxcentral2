@@ -21,7 +21,7 @@ public class ShowcaseDetailsPage extends DetailsPageBase<RealWorldApp> {
         // header
         AppDetailHeader showcaseDetailHeader = new AppDetailHeader(getItem());
         showcaseDetailHeader.sizeProperty().bind(sizeProperty());
-        showcaseDetailHeader.set
+
         // details
         DetailsContentPane detailsContentPane = createContentPane();
         detailsContentPane.getCenterNodes().add(new AppOverviewBox(getItem()));
