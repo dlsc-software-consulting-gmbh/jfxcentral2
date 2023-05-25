@@ -21,6 +21,8 @@ public class LibraryPreviewBox extends PaneBase {
     public LibraryPreviewBox() {
         getStyleClass().add("library-preview-box");
 
+        libraryInfoProperty().addListener(it -> layoutBySize());
+
         libraryProperty().addListener(it -> {
             libraryInfoProperty().bind(DataRepository.getInstance().libraryInfoProperty(getLibrary()));
             layoutBySize();
@@ -63,12 +65,16 @@ public class LibraryPreviewBox extends PaneBase {
                     CustomImageView imageView = new CustomImageView();
                     imageView.setFittingWidth(100);
                     imageView.setFittingHeight(100);
-                    imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library, getItem().getPath()));
                     StackPane imageWrapper = new StackPane(imageView);
                     imageWrapper.getStyleClass().add("image-wrapper");
                     setGraphic(imageWrapper);
                     imageWrapper.setOnMouseClicked(event ->
                             largerImageView.setImage(largerImageView.getImage() == imageView.getImage() ? null : imageView.getImage()));
+
+                    itemProperty().addListener(it -> {
+                        imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library, getItem().getPath()));
+                    });
+
                 }
             });
 
