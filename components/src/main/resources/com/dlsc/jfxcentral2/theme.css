@@ -3360,7 +3360,7 @@
 /** ------------------------------------
  * AppTileView
  */
-.app-tile-view:md-lg {
+.app-tile-view:lg {
     -fx-min-width: 415px;
     -fx-min-height: 393px;
     -fx-pref-width: 415px;
@@ -3369,14 +3369,33 @@
     -fx-max-height: 393px;
 }
 
-.app-tile-view:md-lg > .content-box > .flip-view .front-box .custom-image-view {
+.app-tile-view:lg > .content-box > .flip-view .front-box .custom-image-view {
     -fx-fit-width: 415px;
     -fx-fit-height: 233px;
 }
 
-.app-tile-view:md-lg > .content-box > .flip-view .front-box .image-container {
+.app-tile-view:lg > .content-box > .flip-view .front-box .image-container {
     -fx-min-width: 415px;
     -fx-min-height: 233px;
+}
+
+.app-tile-view:md {
+    -fx-min-width: 223px;
+    -fx-min-height: 417px;
+    -fx-pref-width: 223px;
+    -fx-pref-height: 417px;
+    -fx-max-width: 223px;
+    -fx-max-height: 417px;
+}
+
+.app-tile-view:md > .content-box > .flip-view .front-box .custom-image-view {
+    -fx-fit-width: 223px;
+    -fx-fit-height: 125px;
+}
+
+.app-tile-view:md > .content-box > .flip-view .front-box .image-container {
+    -fx-min-width: 223px;
+    -fx-min-height: 125px;
 }
 
 .app-tile-view:sm {
@@ -3409,7 +3428,7 @@
 /** ------------------------------------
  * BookTileView
  */
-.book-tile-view:md-lg {
+.book-tile-view:lg {
     -fx-min-width: 415px;
     -fx-min-height: 417px;
     -fx-pref-width: 415px;
@@ -3418,7 +3437,7 @@
     -fx-max-height: 417px;
 }
 
-.book-tile-view:md-lg > .content-box > .flip-view .front-box .image-container {
+.book-tile-view:lg > .content-box > .flip-view .front-box .image-container {
     -fx-background-color: -light-blue;
     -fx-min-width: 415px;
     -fx-min-height: 233px;
@@ -3428,9 +3447,33 @@
     -fx-max-height: 233px;
 }
 
-.book-tile-view:md-lg > .content-box > .flip-view .front-box .custom-image-view {
+.book-tile-view:lg > .content-box > .flip-view .front-box .custom-image-view {
     -fx-fit-width: 115px;
     -fx-fit-height: 184px;
+}
+
+.book-tile-view:md {
+    -fx-min-width: 223px;
+    -fx-min-height: 358px;
+    -fx-pref-width: 223px;
+    -fx-pref-height: 358px;
+    -fx-max-width: 223px;
+    -fx-max-height: 358px;
+}
+
+.book-tile-view:md > .content-box > .flip-view .front-box .image-container {
+    -fx-background-color: -light-blue;
+    -fx-min-width: 230px;
+    -fx-min-height: 125px;
+    -fx-pref-width: 226px;
+    -fx-pref-height: 125px;
+    -fx-max-width: 226px;
+    -fx-max-height: 125px;
+}
+
+.book-tile-view:md > .content-box > .flip-view .front-box .custom-image-view {
+    -fx-fit-width: 64px;
+    -fx-fit-height: 100px;
 }
 
 .book-tile-view:md-lg > .content-box > .bottom-pane .button2 {
