@@ -240,6 +240,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             HBox cellBottom = new HBox();
             cellBottom.getStyleClass().addAll("save-like-box", "cell-bottom");
             SaveAndLikeButton saveButton = new SaveAndLikeButton();
+            saveButton.setFocusTraversable(false);
             saveButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
             saveButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(model));
             cellBottom.getChildren().add(saveButton);

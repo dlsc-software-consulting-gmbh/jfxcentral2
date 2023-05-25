@@ -78,10 +78,7 @@ public class VideoGalleryView extends PaneBase {
                 VideoGalleryTileView videoTileView = new VideoGalleryTileView(video);
                 videoTileView.sizeProperty().bind(pagination.sizeProperty());
                 //Play button action
-                videoTileView.getButton1().setOnAction(evt -> {
-                    centerPlayBox.getChildren().removeIf(node -> node != videosBox);
-                    centerPlayBox.getChildren().add(VideoViewFactory.createViewViewNode(video));
-                });
+                videoTileView.getButton1().setOnAction(evt -> centerPlayBox.getChildren().add(VideoViewFactory.createViewViewNode(video)));
                 videosBox.getChildren().add(videoTileView);
             }
 

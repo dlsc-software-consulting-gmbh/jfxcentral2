@@ -20,6 +20,7 @@ public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
         saveButton.visibleProperty().bind(control.saveButtonVisibleProperty());
         saveButton.managedProperty().bind(control.saveButtonVisibleProperty());
         saveButton.getStyleClass().add("save-button");
+        saveButton.setFocusTraversable(false);
         saveButton.selectedProperty().bindBidirectional(control.saveButtonSelectedProperty());
 
         ToggleButton likeButton = new ToggleButton();
@@ -28,6 +29,7 @@ public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
         likeButton.visibleProperty().bind(control.likeButtonVisibleProperty());
         likeButton.managedProperty().bind(control.likeButtonVisibleProperty());
         likeButton.getStyleClass().add("like-button");
+        likeButton.setFocusTraversable(false);
         likeButton.selectedProperty().bindBidirectional(control.likeButtonSelectedProperty());
 
         content = new HBox();

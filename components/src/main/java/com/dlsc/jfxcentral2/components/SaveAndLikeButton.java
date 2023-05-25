@@ -13,6 +13,8 @@ public class SaveAndLikeButton extends Control {
     public SaveAndLikeButton() {
         getStyleClass().add("save-and-like-button");
 
+        setFocusTraversable(false);
+
         visibleProperty().bind(saveButtonVisibleProperty().or(likeButtonVisibleProperty()));
         managedProperty().bind(saveButtonVisibleProperty().or(likeButtonVisibleProperty()));
     }

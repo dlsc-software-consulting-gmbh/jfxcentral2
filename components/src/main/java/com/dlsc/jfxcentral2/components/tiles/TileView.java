@@ -87,6 +87,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         });
 
         button1 = new Button();
+        button1.setFocusTraversable(false);
         button1.getStyleClass().addAll("bg-transparent-button", "button1");
         button1.textProperty().bind(button1TextProperty());
         button1.graphicProperty().bind(button1GraphicProperty());
@@ -98,6 +99,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         separator1.visibleProperty().bind(button1.visibleProperty());
 
         button2 = new Button();
+        button2.setFocusTraversable(false);
         button2.getStyleClass().addAll("bg-transparent-button", "button2");
         button2.textProperty().bind(button2TextProperty());
         button2.graphicProperty().bind(button2GraphicProperty());
@@ -240,6 +242,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         closeButton.getStyleClass().addAll("close-button", "blue-button");
         closeButton.setContentDisplay(ContentDisplay.RIGHT);
         closeButton.setOnAction(event -> flipView.flipToFront());
+        closeButton.setFocusTraversable(false);
 
         TextArea descriptionArea = new TextArea();
         descriptionArea.setContextMenu(new ContextMenu());

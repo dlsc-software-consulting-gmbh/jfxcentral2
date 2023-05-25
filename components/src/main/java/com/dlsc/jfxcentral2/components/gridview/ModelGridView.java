@@ -4,7 +4,6 @@ import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
-import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -105,7 +104,7 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
                             currentDetailView = getDetailNodeProvider().call(model);
                             currentDetailView.getStyleClass().add("detail-node");
                             gridPane.add(currentDetailView, 0, row * 2 + 1, columns, 1);
-                            Platform.runLater(() -> currentDetailView.requestFocus());
+//                            Platform.runLater(() -> currentDetailView.requestFocus());
                         }
                     });
                 }

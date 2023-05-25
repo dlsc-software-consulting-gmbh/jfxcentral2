@@ -41,6 +41,7 @@ public class FlipView extends ControlBase {
 
     public FlipView() {
         flipViewSkin = new FlipViewSkin(this);
+        setFocusTraversable(false);
         getStyleClass().add("flip-view");
     }
 

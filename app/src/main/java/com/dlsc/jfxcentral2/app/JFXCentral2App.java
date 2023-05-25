@@ -42,7 +42,6 @@ import one.jpro.routing.Response;
 import one.jpro.routing.Route;
 import one.jpro.routing.RouteApp;
 import one.jpro.routing.RouteUtils;
-import one.jpro.routing.dev.DevFilter;
 import simplefx.experimental.parts.FXFuture;
 
 import java.util.function.Supplier;
@@ -64,6 +63,7 @@ public class JFXCentral2App extends RouteApp {
         scene.widthProperty().addListener((it -> updateSize(scene)));
         scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
         scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/markdown.css").toExternalForm());
+        scene.focusOwnerProperty().addListener(it -> System.out.println("new focus owner: " + scene.getFocusOwner()));
 
         updateSize(scene);
 
@@ -89,8 +89,8 @@ public class JFXCentral2App extends RouteApp {
                 .and(RouteUtils.get("/links", r -> new LinksOfTheWeekPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
                 .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)))
-                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)))
-                .filter(DevFilter.create());
+                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)));
+//                .filter(DevFilter.create());
     }
 
     private Route createCategoryOrDetailRoute(String path, Supplier<Response> masterResponse, Callback<String, Response> detailedResponse) {
