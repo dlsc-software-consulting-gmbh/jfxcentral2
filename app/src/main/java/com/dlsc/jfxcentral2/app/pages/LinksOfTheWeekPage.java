@@ -58,7 +58,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
 
         // links of the week view
         LinksOfTheWeekView linksOfTheWeekView = new LinksOfTheWeekView();
-        linksOfTheWeekView.linksOfTheWeeksProperty().bind(DataRepository.getInstance().linksOfTheWeekProperty());
+        linksOfTheWeekView.setLinksOfTheWeeks(DataRepository.getInstance().getLinksOfTheWeek());
         linksOfTheWeekView.sizeProperty().bind(sizeProperty());
 
         // this is a category page, but we still need to use the details content pane for layout purposes

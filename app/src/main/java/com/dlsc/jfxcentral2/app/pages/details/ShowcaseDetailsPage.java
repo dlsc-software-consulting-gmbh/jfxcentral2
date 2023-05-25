@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.app.pages.details;
 
-import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
@@ -23,7 +22,6 @@ public class ShowcaseDetailsPage extends DetailsPageBase<RealWorldApp> {
         // header
         AppDetailHeader showcaseDetailHeader = new AppDetailHeader(app);
         showcaseDetailHeader.sizeProperty().bind(sizeProperty());
-        showcaseDetailHeader.backgroundImageProperty().bind(ImageManager.getInstance().realWorldAppLargeImageProperty(app));
 
         // overview box
         AppOverviewBox appOverviewBox = new AppOverviewBox(app);

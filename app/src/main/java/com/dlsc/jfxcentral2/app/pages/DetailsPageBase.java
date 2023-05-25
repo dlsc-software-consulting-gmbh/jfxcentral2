@@ -29,9 +29,9 @@ import com.dlsc.jfxcentral2.components.detailsbox.ToolsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.TutorialsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.VideosDetailsBox;
 import com.dlsc.jfxcentral2.model.Size;
-import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
@@ -105,10 +105,10 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
     }
 
     private <MO extends ModelObject> void maybeAddBox(ModelObject modelObject, Class<MO> clazz, Supplier<DetailsBoxBase<MO>> boxSupplier, List<DetailsBoxBase<?>> boxList) {
-        ListProperty<MO> linkedObjects = DataRepository.getInstance().getLinkedObjects(modelObject, clazz);
+        ObservableList<MO> linkedObjects = DataRepository.getInstance().getLinkedObjects(modelObject, clazz);
         if (!linkedObjects.isEmpty()) {
             DetailsBoxBase<MO> box = boxSupplier.get();
-            box.itemsProperty().bind(linkedObjects);
+            box.setItems(linkedObjects);
             box.sizeProperty().bind(sizeProperty());
             boxList.add(box);
         }

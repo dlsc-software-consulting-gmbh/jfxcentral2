@@ -50,12 +50,9 @@ public class JFXCentral2App extends RouteApp {
 
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
-    static {
-        DataRepository.getInstance().loadData();
-    }
-
     @Override
     public Route createRoute() {
+        DataRepository.getInstance().loadData();
 
         Scene scene = getScene();
 
