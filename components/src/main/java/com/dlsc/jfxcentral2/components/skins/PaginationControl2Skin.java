@@ -3,10 +3,12 @@ package com.dlsc.jfxcentral2.components.skins;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.Skin;
 import javafx.scene.control.SkinBase;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -94,14 +96,22 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
         controlBox.getChildren().addAll(ellipsisRightLabel, toLastButton, rightArrowButton);
         contentPane.setBottom(controlBox);
 
+        Pagination pagination = new Pagination();
+        pagination.pageFactoryProperty().bind(control.pageFactoryProperty());
+        pagination.pageCountProperty().bind(control.pageCountProperty());
+        pagination.currentPageIndexProperty().bindBidirectional(control.currentPageIndexProperty());
+        pagination.skinProperty().addListener(it -> {
+            Skin<?> skin = pagination.getSkin();
+            if (skin != null) {
+                Node paginationControl = pagination.lookup(".pagination-control");
+                paginationControl.setVisible(false);
+                paginationControl.setManaged(false);
+            }
+        });
+
         BorderPane.setAlignment(controlBox, Pos.CENTER);
-        contentPane.centerProperty().bind(Bindings.createObjectBinding(() -> {
-                    control.requestFocus();
-                    return control.getPageFactory().call(control.getCurrentPageIndex());
-                },
-                control.currentPageIndexProperty(),
-                control.pageFactoryProperty()
-        ));
+        contentPane.setCenter(pagination);
+
         getChildren().add(contentPane);
 
         updateControlBox();

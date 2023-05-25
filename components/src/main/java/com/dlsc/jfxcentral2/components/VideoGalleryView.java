@@ -25,7 +25,9 @@ public class VideoGalleryView extends PaneBase {
         contentPane = new VBox();
         contentPane.getStyleClass().add("content-pane");
         getChildren().setAll(contentPane);
+
         setMaxHeight(USE_PREF_SIZE);
+
         layoutBySize();
         videosProperty().addListener((ob, ov, nv) -> layoutBySize());
     }
@@ -46,13 +48,8 @@ public class VideoGalleryView extends PaneBase {
         pane.getStyleClass().add("title-box");
         contentPane.getChildren().add(pane);
 
-        HBox videosBox = new HBox();
-        videosBox.getStyleClass().add("videos-box");
-
-        VBox centerPlayBox = new VBox(videosBox);
-        centerPlayBox.getStyleClass().add("center-play-box");
-
         PaginationControl pagination = new PaginationControl();
+
         pagination.pageCountProperty().bind(Bindings.createIntegerBinding(() -> {
             int pageCount;
             if (isLarge()) {
@@ -67,8 +64,12 @@ public class VideoGalleryView extends PaneBase {
 
         pagination.sizeProperty().bind(sizeProperty());
         pagination.setPageFactory(index -> {
-            videosBox.getChildren().clear();
-            centerPlayBox.getChildren().removeIf(node -> node != videosBox);
+            HBox videosBox = new HBox();
+            videosBox.getStyleClass().add("videos-box");
+
+            VBox centerPlayBox = new VBox(videosBox);
+            centerPlayBox.getStyleClass().add("center-play-box");
+
             int maxItemsPerPage = isLarge() ? 3 : (isMedium() ? 2 : 1);
             int startIndex = index * maxItemsPerPage;
             int endIndex = Math.min(startIndex + maxItemsPerPage, videos.getSize());
