@@ -32,7 +32,7 @@ public class LibraryCoordinatesBox extends PaneBase {
     public LibraryCoordinatesBox(Coordinates coordinates) {
         Header headerBox = new Header();
         headerBox.setTitle("COORDINATES");
-        headerBox.setIcon(MaterialDesign.MDI_CODE_TAGS);
+        headerBox.setIcon(MaterialDesign.MDI_COMPASS);
 
         getStyleClass().addAll("overview-box", "library-coordinates-box");
 

@@ -19,7 +19,7 @@ public class LibraryEnsembleBox extends PaneBase {
 
         Header headerBox = new Header();
         headerBox.setTitle("ENSEMBLE / ONLINE DEMOS");
-        headerBox.setIcon(MaterialDesign.MDI_CODE_TAGS);
+        headerBox.setIcon(MaterialDesign.MDI_EARTH);
 
         ImageView imageView = new ImageView(LibraryEnsembleBox.class.getResource("jpro-logo.png").toExternalForm());
         imageView.setFitHeight(48);

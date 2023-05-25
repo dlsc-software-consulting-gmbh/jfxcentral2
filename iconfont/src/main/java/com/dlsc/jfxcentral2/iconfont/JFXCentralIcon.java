@@ -56,11 +56,9 @@ public enum JFXCentralIcon implements Ikon {
     VIDEOS("jfxc-icon-videos", '\ue932'),
     WWW("jfxc-icon-www", '\ue933'),
     YOUTUBE("jfxc-icon-youtube", '\ue934');
+
     private final String description;
     private final int icon;
-
-
-
 
     JFXCentralIcon(String description, int icon) {
         this.description = description;

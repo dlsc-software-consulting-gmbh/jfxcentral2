@@ -25,7 +25,12 @@ public class BookOverviewBox extends OverviewBox<Book> {
         super(book);
         getStyleClass().add("book-overview-box");
         setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "books/" + getModel().getId());
-        fillData();
+        writtenByLabel.setText(book.getAuthors());
+        publisherLabel.setText(book.getPublisher());
+        publishDateLabel.setText(book.getPublishedDate().format(DATE_FORMATTER));
+        isbnLabel.setText(book.getIsbn());
+        markdownProperty().bind(DataRepository.getInstance().bookTextProperty(book));
+        previewImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
     }
 
     @Override
@@ -81,35 +86,6 @@ public class BookOverviewBox extends OverviewBox<Book> {
         }
         topBoxWrapper.getChildren().add(topBox);
 
-        fillData();
         return topBoxWrapper;
     }
-
-    private void fillData() {
-        Book book = getModel();
-        if (!isSmall()) {
-            if (previewImageView.imageProperty().isBound()) {
-                previewImageView.imageProperty().unbind();
-            }
-            previewImageView.setImage(null);
-        }
-
-        if (book != null) {
-            writtenByLabel.setText(book.getAuthors());
-            publisherLabel.setText(book.getPublisher());
-            publishDateLabel.setText(book.getPublishedDate().format(DATE_FORMATTER));
-            isbnLabel.setText(book.getIsbn());
-            setMarkdown(book.getDescription());
-            if (!isSmall()) {
-                previewImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
-            }
-        } else {
-            writtenByLabel.setText("");
-            publisherLabel.setText("");
-            publishDateLabel.setText("");
-            isbnLabel.setText("");
-            setMarkdown("");
-        }
-    }
-
 }
