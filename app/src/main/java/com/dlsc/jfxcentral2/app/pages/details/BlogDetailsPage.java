@@ -17,14 +17,15 @@ public class BlogDetailsPage extends DetailsPageBase<Blog> {
 
     @Override
     public Node content() {
+        Blog blog = getItem();
 
         // header
-        BlogDetailHeader header = new BlogDetailHeader(getItem());
+        BlogDetailHeader header = new BlogDetailHeader(blog);
         header.sizeProperty().bind(sizeProperty());
 
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new BlogOverviewBox(getItem()));
+        detailsContentPane.getCenterNodes().add(new BlogOverviewBox(blog));
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(header, detailsContentPane);

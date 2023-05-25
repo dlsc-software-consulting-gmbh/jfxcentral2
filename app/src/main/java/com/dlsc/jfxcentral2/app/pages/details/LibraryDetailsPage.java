@@ -19,21 +19,22 @@ public class LibraryDetailsPage extends DetailsPageBase<Library> {
 
     @Override
     public Node content() {
+        Library library = getItem();
 
         // header
-        LibraryDetailHeader header = new LibraryDetailHeader(getItem());
+        LibraryDetailHeader header = new LibraryDetailHeader(library);
         header.sizeProperty().bind(sizeProperty());
 
         // overview box
-        LibraryOverviewBox libraryOverviewBox = new LibraryOverviewBox(getItem());
+        LibraryOverviewBox libraryOverviewBox = new LibraryOverviewBox(library);
         libraryOverviewBox.sizeProperty().bind(sizeProperty());
 
         // coordinates box
-        LibraryCoordinatesBox coordinatesBox = new LibraryCoordinatesBox(getItem());
+        LibraryCoordinatesBox coordinatesBox = new LibraryCoordinatesBox(library);
         coordinatesBox.sizeProperty().bind(sizeProperty());
 
         // ensemble box
-        LibraryEnsembleBox ensembleBox = new LibraryEnsembleBox(getItem());
+        LibraryEnsembleBox ensembleBox = new LibraryEnsembleBox(library);
         ensembleBox.sizeProperty().bind(sizeProperty());
 
         // details

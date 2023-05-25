@@ -2452,13 +2452,13 @@
     -fx-pref-width: 1px;
 }
 
+.dark-header .overlay {
+    -fx-background-color: rgba(0, 0, 0, .5);
+}
+
 /** ------------------------------------
  * AppDetailHeader
  */
-
-.app-detail-header:md-lg > .content-pane {
-    -fx-background-color: rgba(0, 0, 0, .5);
-}
 
 .app-detail-header:md-lg > .content-pane .content-box > .name {
     -fx-font-size: 44px;

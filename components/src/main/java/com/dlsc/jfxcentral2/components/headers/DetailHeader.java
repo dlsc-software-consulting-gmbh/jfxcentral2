@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
@@ -34,7 +33,7 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
         contentPane.centerProperty().bind(centerProperty());
         contentPane.setBottom(createBottomBox());
 
-        contentProperty().bind(Bindings.createObjectBinding(() -> contentPane));
+        setContent(contentPane);
     }
 
     public T getModel() {

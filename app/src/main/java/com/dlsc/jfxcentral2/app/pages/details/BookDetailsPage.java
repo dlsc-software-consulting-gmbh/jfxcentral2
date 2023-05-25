@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral2.components.overviewbox.BookOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 
 public class BookDetailsPage extends DetailsPageBase<Book> {
 
@@ -17,14 +18,15 @@ public class BookDetailsPage extends DetailsPageBase<Book> {
 
     @Override
     public Node content() {
+        Book book = getItem();
 
         // header
-        BookDetailHeader bookDetailHeader = new BookDetailHeader(getItem());
+        BookDetailHeader bookDetailHeader = new BookDetailHeader(book);
         bookDetailHeader.sizeProperty().bind(sizeProperty());
 
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new BookOverviewBox(getItem()));
+        detailsContentPane.getCenterNodes().add(new BookOverviewBox(book));
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(bookDetailHeader, detailsContentPane);

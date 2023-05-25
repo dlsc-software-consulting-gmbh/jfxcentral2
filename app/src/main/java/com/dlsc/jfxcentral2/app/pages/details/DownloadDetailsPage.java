@@ -17,13 +17,15 @@ public class DownloadDetailsPage extends DetailsPageBase<Download> {
 
     @Override
     public Node content() {
+        Download download = getItem();
+
         // header
-        DownloadDetailHeader header = new DownloadDetailHeader(getItem());
+        DownloadDetailHeader header = new DownloadDetailHeader(download);
         header.sizeProperty().bind(sizeProperty());
 
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new DownloadOverviewBox(getItem()));
+        detailsContentPane.getCenterNodes().add(new DownloadOverviewBox(download));
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(header, detailsContentPane);

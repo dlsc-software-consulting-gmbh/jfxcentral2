@@ -6,7 +6,7 @@ public class AppDetailHeader extends SimpleDetailHeader<RealWorldApp>  {
 
     public AppDetailHeader(RealWorldApp app) {
         super(app);
-        getStyleClass().add("app-detail-header");
+        getStyleClass().addAll("app-detail-header", "dark-header");
         setWebsite(getModel().getUrl());
     }
 }

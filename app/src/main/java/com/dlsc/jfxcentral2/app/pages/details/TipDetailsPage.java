@@ -17,14 +17,15 @@ public class TipDetailsPage extends DetailsPageBase<Tip> {
 
     @Override
     public Node content() {
+        Tip tip = getItem();
 
         // header
-        TipDetailHeader header = new TipDetailHeader(getItem());
+        TipDetailHeader header = new TipDetailHeader(tip);
         header.sizeProperty().bind(sizeProperty());
         
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new TipOverviewBox(getItem()));
+        detailsContentPane.getCenterNodes().add(new TipOverviewBox(tip));
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(header, detailsContentPane);

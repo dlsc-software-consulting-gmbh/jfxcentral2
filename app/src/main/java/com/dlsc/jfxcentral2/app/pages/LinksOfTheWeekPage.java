@@ -6,7 +6,7 @@ import com.dlsc.jfxcentral2.components.DetailsContentPane;
 import com.dlsc.jfxcentral2.components.LinksOfTheWeekView;
 import com.dlsc.jfxcentral2.components.MenuView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
+import com.dlsc.jfxcentral2.components.headers.LinksOfTheWeekHeader;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -53,9 +53,8 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
     public Node content() {
 
         // header
-        CategoryHeader header = createCategoryHeader();
-        header.setTitle("Links of the Week");
-        header.setIkon(IkonUtil.getModelIkon(LinksOfTheWeek.class));
+        LinksOfTheWeekHeader header = new LinksOfTheWeekHeader();
+        header.sizeProperty().bind(sizeProperty());
 
         // links of the week view
         LinksOfTheWeekView linksOfTheWeekView = new LinksOfTheWeekView();
