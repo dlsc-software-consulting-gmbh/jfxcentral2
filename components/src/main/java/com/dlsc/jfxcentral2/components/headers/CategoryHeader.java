@@ -20,6 +20,9 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.util.Objects;
 
 public class CategoryHeader extends PaneBase {
+    private static Image defaultLargeBgImage;
+    private static Image defaultMediumBgImg;
+    private static Image defaultSmallBgImg;
 
     public CategoryHeader() {
         getStyleClass().add("category-header");
@@ -50,8 +53,14 @@ public class CategoryHeader extends PaneBase {
 
     private Background createImageBackground(Image image) {
         if (image == null) {
-            String path = "/com/dlsc/jfxcentral2/components/header/bg-" + (isLarge() ? "lg" : (isMedium() ? "md" : "sm")) + ".jpg";
-            image = new Image(path);
+            switch (getSize()) {
+                case LARGE ->
+                        image = defaultLargeBgImage == null ? new Image("/com/dlsc/jfxcentral2/components/header/bg-lg.jpg") : defaultLargeBgImage;
+                case MEDIUM ->
+                        image = defaultMediumBgImg == null ? new Image("/com/dlsc/jfxcentral2/components/header/bg-md.jpg") : defaultMediumBgImg;
+                case SMALL ->
+                        image = defaultSmallBgImg == null ? new Image("/com/dlsc/jfxcentral2/components/header/bg-sm.jpg") : defaultSmallBgImg;
+            }
         }
         return new Background(new BackgroundImage(image,
                 BackgroundRepeat.NO_REPEAT,
