@@ -206,14 +206,19 @@
  * ContextMenu
 */
 .context-menu {
-    -hover-text-icon-color: -grey-100; /* (hover)label:textFill; (hover)ikonli-font-icon:iconColor */
-    -normal-text-icon-color: -grey-20; /* label:textFill; ikonli-font-icon:iconColor */
+    -hover-text-icon-color: -grey-20; /* (hover)label:textFill; (hover)ikonli-font-icon:iconColor */
+    -normal-text-icon-color: -grey-100; /* label:textFill; ikonli-font-icon:iconColor */
     -fx-background-color: -white;
     -fx-background-radius: 10px;
     -fx-effect: -blue-shadow;
     -fx-font-family: "Roboto Condensed";
     -fx-font-size: 20px;
     -fx-padding: 20px 30px 20px 30px;
+}
+
+.context-menu:hover {
+    -hover-text-icon-color: -grey-100;
+    -normal-text-icon-color: -grey-20;
 }
 
 .context-menu .menu-item {
