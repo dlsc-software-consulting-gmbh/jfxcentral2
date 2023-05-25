@@ -23,9 +23,13 @@ public class TutorialDetailsPage extends DetailsPageBase<Tutorial> {
         TutorialDetailHeader header = new TutorialDetailHeader(tutorial);
         header.sizeProperty().bind(sizeProperty());
 
+        // overview
+        TutorialOverviewBox tutorialOverviewBox = new TutorialOverviewBox(tutorial);
+        tutorialOverviewBox.sizeProperty().bind(sizeProperty());
+
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new TutorialOverviewBox(tutorial));
+        detailsContentPane.getCenterNodes().add(tutorialOverviewBox);
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(header, detailsContentPane);

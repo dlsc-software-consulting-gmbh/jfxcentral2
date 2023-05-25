@@ -23,9 +23,13 @@ public class CompanyDetailsPage extends DetailsPageBase<Company> {
         CompanyDetailHeader header = new CompanyDetailHeader(company);
         header.sizeProperty().bind(sizeProperty());
 
+        // overview
+        CompanyOverviewBox companyOverviewBox = new CompanyOverviewBox(company);
+        companyOverviewBox.sizeProperty().bind(sizeProperty());
+
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new CompanyOverviewBox(company));
+        detailsContentPane.getCenterNodes().add(companyOverviewBox);
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(header, detailsContentPane);

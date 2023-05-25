@@ -25,9 +25,13 @@ public class ShowcaseDetailsPage extends DetailsPageBase<RealWorldApp> {
         showcaseDetailHeader.sizeProperty().bind(sizeProperty());
         showcaseDetailHeader.backgroundImageProperty().bind(ImageManager.getInstance().realWorldAppLargeImageProperty(app));
 
+        // overview box
+        AppOverviewBox appOverviewBox = new AppOverviewBox(app);
+        appOverviewBox.sizeProperty().bind(sizeProperty());
+
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new AppOverviewBox(app));
+        detailsContentPane.getCenterNodes().add(appOverviewBox);
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(showcaseDetailHeader, detailsContentPane);

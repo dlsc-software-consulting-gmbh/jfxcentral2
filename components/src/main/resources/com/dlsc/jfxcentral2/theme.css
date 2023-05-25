@@ -5909,7 +5909,7 @@
 }
 
 .user-profile-view:md-lg .custom-tab-pane .toggle-button .header-icon {
-    visibility: false;
+    visibility: hidden;
 }
 
 .user-profile-view .custom-tab-pane .toggle-button:selected .header-title {
@@ -5917,7 +5917,7 @@
 }
 
 .user-profile-view:md-lg .custom-tab-pane .toggle-button:selected .header-icon {
-    visibility: true;
+    visibility: visible;
     -fx-rotate: 90;
 }
 

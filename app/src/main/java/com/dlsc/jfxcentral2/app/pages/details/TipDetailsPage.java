@@ -22,10 +22,14 @@ public class TipDetailsPage extends DetailsPageBase<Tip> {
         // header
         TipDetailHeader header = new TipDetailHeader(tip);
         header.sizeProperty().bind(sizeProperty());
-        
+
+        // overview
+        TipOverviewBox tipOverviewBox = new TipOverviewBox(tip);
+        tipOverviewBox.sizeProperty().bind(sizeProperty());
+
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new TipOverviewBox(tip));
+        detailsContentPane.getCenterNodes().add(tipOverviewBox);
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(header, detailsContentPane);

@@ -23,9 +23,13 @@ public class DownloadDetailsPage extends DetailsPageBase<Download> {
         DownloadDetailHeader header = new DownloadDetailHeader(download);
         header.sizeProperty().bind(sizeProperty());
 
+        // overview
+        DownloadOverviewBox downloadOverviewBox = new DownloadOverviewBox(download);
+        downloadOverviewBox.sizeProperty().bind(sizeProperty());
+
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new DownloadOverviewBox(download));
+        detailsContentPane.getCenterNodes().add(downloadOverviewBox);
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(header, detailsContentPane);
