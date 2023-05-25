@@ -29,7 +29,8 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
         if (box != null) {
             box.getChildren().clear();
         }
-        box = (control.getOrientation() == Orientation.VERTICAL) ? new VBox() : new HBox();
+        boolean isVertical = control.getOrientation() == Orientation.VERTICAL;
+        box = isVertical ? new VBox() : new HBox();
         box.getStyleClass().add("content");
         if (items != null) {
             ToggleGroup group = new ToggleGroup();
@@ -40,6 +41,9 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
                 button.setFocusTraversable(false);
                 button.getStyleClass().add("item");
                 button.setUserData(item);
+                if (isVertical) {
+                    button.setMaxWidth(Double.MAX_VALUE);
+                }
                 if (item.ikon() != null) {
                     button.setGraphic(new FontIcon(item.ikon()));
                 }
