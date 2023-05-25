@@ -4351,32 +4351,10 @@
  * LibraryPreviewBox
  */
 .library-preview-box > .content-box {
-    -fx-spacing: 15px;
+    -fx-spacing: 10px;
     -fx-background-color: -background;
     -fx-background-radius: 10px;
     -fx-padding: 10px;
-}
-
-.library-preview-box:md > .content-box {
-    -fx-spacing: 7px;
-}
-
-.library-preview-box:sm > .content-box {
-    -fx-spacing: 8px;
-}
-
-.library-preview-box > .content-box .more-label {
-    -fx-min-width: 70px;
-    -fx-pref-width: 70px;
-    -fx-max-width: 70px;
-    -fx-min-height: 65px;
-    -fx-pref-height: 65px;
-    -fx-max-height: 65px;
-    -fx-alignment: center;
-    -fx-font-size: 20px;
-    -fx-text-fill: -grey-60;
-    -fx-background-color: -grey-10;
-    -fx-background-radius: 10px;
 }
 
 .library-preview-box > .content-box .image-wrapper {
@@ -4390,9 +4368,66 @@
     -fx-background-radius: 5px;
 }
 
-.library-preview-box > .content-box > .image-wrapper > .custom-image-view {
+.library-preview-box > .content-box .image-wrapper > .custom-image-view {
     -fx-fit-width: 66px;
     -fx-fit-height: 45px;
+}
+
+.library-preview-box .previews-strip-view {
+    -fx-padding: 0;
+    -fx-min-height: 86px;
+}
+
+.library-preview-box .previews-strip-view .strip-cell {
+    -fx-cursor: hand;
+}
+
+.library-preview-box .previews-strip-view .strip-cell:selected {
+    -fx-background-color: transparent;
+}
+
+.library-preview-box .previews-strip-view .scroller {
+    -fx-background-color: -bright-blue;
+}
+
+.library-preview-box:md-lg .previews-strip-view .scroller {
+    -fx-pref-width: 26px;
+    -fx-pref-height: 26px;
+    -fx-background-color: -bright-blue;
+}
+
+.library-preview-box .previews-strip-view .strip-cell:selected .image-wrapper {
+    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.5), 12, 0.5, 0, 0);
+}
+
+.library-preview-box .larger-image-wrapper {
+    -fx-padding: 0 0 10px 0;
+}
+
+.library-preview-box .larger-image-wrapper > .custom-image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 15, 0.4, 0, 0)
+}
+
+.library-preview-box:lg .larger-image-wrapper > .custom-image-view {
+    -fx-fit-width: 750px;
+    -fx-fit-height: 750px;
+}
+
+.library-preview-box:md .larger-image-wrapper > .custom-image-view {
+    -fx-fit-width: 620px;
+    -fx-fit-height: 620px;
+}
+
+.library-preview-box:sm .larger-image-wrapper > .custom-image-view {
+    -fx-fit-width: 256px;
+    -fx-fit-height: 256px;
+}
+
+.library-preview-box .larger-image-wrapper .close-button {
+    -bg: -grey-100;
+    -fill: -white;
+    -fx-padding: 7px 9px;
+    -fx-background-radius: 50px;
 }
 
 /* ------------------------------------

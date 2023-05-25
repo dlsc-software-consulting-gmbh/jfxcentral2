@@ -2,14 +2,17 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.Image;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LibraryInfo;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;
 
@@ -28,66 +31,106 @@ public class LibraryPreviewBox extends PaneBase {
 
     @Override
     protected void layoutBySize() {
-        HBox previewsBox = new HBox();
-        previewsBox.getStyleClass().add("content-box");
-
         getChildren().clear();
 
         LibraryInfo info = getLibraryInfo();
         Library library = getLibrary();
 
         if (info != null && library != null) {
-            List<Image> images = info.getImages();
-            int max = isSmall() ? 2 : 7 - (isMedium() ? 1 : 0);
-            for (int i = 0; i < images.size() && i < max; i++) {
-                com.dlsc.jfxcentral.data.model.Image image = images.get(i);
-                CustomImageView imageView = new CustomImageView();
-                //if (isSmall()) {
-                //    StackPane.setAlignment(imageView, Pos.CENTER_LEFT);
-                //}
-                imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library, image.getPath()));
+            List<com.dlsc.jfxcentral.data.model.Image> images = info.getImages();
 
-                StackPane imageWrapper = new StackPane(imageView);
-                imageWrapper.getStyleClass().add("image-wrapper");
-                previewsBox.getChildren().add(imageWrapper);
-            }
+            CustomImageView largerImageView = new CustomImageView();
+            largerImageView.getStyleClass().add("larger-image");
 
-            if (images.size() > max) {
-                Label moreLabel = new Label("+" + (images.size() - max));
-                moreLabel.getStyleClass().add("more-label");
-                previewsBox.getChildren().add(moreLabel);
-            }
-            getChildren().setAll(previewsBox);
+            Button closeButton = new Button();
+            closeButton.setGraphic(new FontIcon(IkonUtil.close));
+            closeButton.getStyleClass().addAll("fill-button","close-button");
+            closeButton.setOnAction(event -> largerImageView.setImage(null));
+            StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
+
+            StackPane largerImageWrapper = new StackPane();
+            largerImageWrapper.getStyleClass().add("larger-image-wrapper");
+            largerImageWrapper.getChildren().addAll(largerImageView, closeButton);
+            largerImageWrapper.managedProperty().bind(largerImageWrapper.visibleProperty());
+            largerImageWrapper.visibleProperty().bind(largerImageView.imageProperty().isNotNull());
+
+            com.dlsc.gemsfx.StripView<com.dlsc.jfxcentral.data.model.Image> stripView = new com.dlsc.gemsfx.StripView <>();
+            stripView.getStyleClass().add("previews-strip-view");
+            stripView.setFadingSize(200);
+            stripView.setCellFactory(param -> new com.dlsc.gemsfx.StripView.StripCell<>(){
+                {
+                    setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                    CustomImageView imageView = new CustomImageView();
+                    imageView.setFittingWidth(100);
+                    imageView.setFittingHeight(100);
+                    imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library, getItem().getPath()));
+                    StackPane imageWrapper = new StackPane(imageView);
+                    imageWrapper.getStyleClass().add("image-wrapper");
+                    setGraphic(imageWrapper);
+                    imageWrapper.setOnMouseClicked(event ->
+                            largerImageView.setImage(largerImageView.getImage() == imageView.getImage() ? null : imageView.getImage()));
+                }
+            });
+
+            stripView.getItems().setAll(images);
+            VBox contentBox = new VBox(stripView, largerImageWrapper);
+            contentBox.getStyleClass().add("content-box");
+            getChildren().setAll(contentBox);
         }
 
-//        //add test images
-//        int max = isSmall() ? 2 : 7 - (isMedium() ? 1 : 0);
-//        List<Image> previews = List.of(
-//                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-//                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-//                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-//                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-//                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-//                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-//                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-//                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-//                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
-//                new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm())
-//        );
-//        for (int i = 0; i < previews.size() && i < max; i++) {
-//            CustomImageView imageView = new CustomImageView();
-//            imageView.setImage(previews.get(i));
-//            StackPane imageWrapper = new StackPane(imageView);
-//            imageWrapper.getStyleClass().add("image-wrapper");
-//            previewsBox.getChildren().add(imageWrapper);
-//        }
-//        if (previews.size() > max) {
-//            Label moreLabel = new Label("+" + (previews.size() - max));
-//            moreLabel.getStyleClass().add("more-label");
-//            previewsBox.getChildren().add(moreLabel);
-//        }
-//
-//        getChildren().setAll(previewsBox);
+        //////add test images
+        //int max = isSmall() ? 2 : 7 - (isMedium() ? 1 : 0);
+        //List<javafx.scene.image.Image> previews = List.of(
+        //        new javafx.scene.image.Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
+        //        new javafx.scene.image.Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
+        //        new javafx.scene.image.Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
+        //        new javafx.scene.image.Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
+        //        new javafx.scene.image.Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
+        //        new javafx.scene.image.Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
+        //        new javafx.scene.image.Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
+        //        new javafx.scene.image.Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
+        //        new javafx.scene.image.Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm()),
+        //        new javafx.scene.image.Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/details-box-preview0.png").toExternalForm())
+        //);
+        //
+        //CustomImageView largerImageView = new CustomImageView();
+        //largerImageView.getStyleClass().add("larger-image");
+        //
+        //Button closeButton = new Button();
+        //closeButton.setGraphic(new FontIcon(IkonUtil.close));
+        //closeButton.getStyleClass().addAll("fill-button","close-button");
+        //closeButton.setOnAction(event -> largerImageView.setImage(null));
+        //StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
+        //
+        //StackPane largerImageWrapper = new StackPane();
+        //largerImageWrapper.getStyleClass().add("larger-image-wrapper");
+        //largerImageWrapper.getChildren().addAll(largerImageView, closeButton);
+        //largerImageWrapper.managedProperty().bind(largerImageWrapper.visibleProperty());
+        //largerImageWrapper.visibleProperty().bind(largerImageView.imageProperty().isNotNull());
+        //
+        //com.dlsc.gemsfx.StripView<javafx.scene.image.Image> stripView = new com.dlsc.gemsfx.StripView<>();
+        //stripView.getStyleClass().add("previews-strip-view");
+        //stripView.setFadingSize(30);
+        //stripView.setCellFactory(param -> new com.dlsc.gemsfx.StripView.StripCell<>(){
+        //    {
+        //        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        //        CustomImageView imageView = new CustomImageView();
+        //        imageView.setFittingWidth(100);
+        //        imageView.setFittingHeight(100);
+        //        imageView.imageProperty().bind(itemProperty());
+        //        StackPane imageWrapper = new StackPane(imageView);
+        //        imageWrapper.getStyleClass().add("image-wrapper");
+        //        setGraphic(imageWrapper);
+        //        imageWrapper.setOnMouseClicked(event -> {
+        //            largerImageView.setImage(largerImageView.getImage() == getItem() ? null : getItem());
+        //        });
+        //    }
+        //});
+        //
+        //stripView.getItems().setAll(previews);
+        //VBox contentBox = new VBox(stripView, largerImageWrapper);
+        //contentBox.getStyleClass().add("content-box");
+        //getChildren().setAll(contentBox);
     }
 
     private final ObjectProperty<LibraryInfo> libraryInfo = new SimpleObjectProperty<>(this, "libraryInfo");
