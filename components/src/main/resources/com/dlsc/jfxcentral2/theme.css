@@ -2149,27 +2149,18 @@
     -fx-min-height: 300px;
     -fx-pref-height: 300px;
     -fx-max-height: 300px;
-    -fx-background-image: url("components/header/bg-lg.jpg");
-    -fx-background-position: center;
-    -fx-background-size: cover;
 }
 
 .category-header:md {
     -fx-min-height: 300px;
     -fx-pref-height: 300px;
     -fx-max-height: 300px;
-    -fx-background-image: url("components/header/bg-md.jpg");
-    -fx-background-position: center;
-    -fx-background-size: cover;
 }
 
 .category-header:sm {
     -fx-min-height: 240px;
     -fx-pref-height: 240px;
     -fx-max-height: 240px;
-    -fx-background-image: url("components/header/bg-sm.jpg");
-    -fx-background-position: center;
-    -fx-background-size: cover;
 }
 
 .category-header > .header-title {

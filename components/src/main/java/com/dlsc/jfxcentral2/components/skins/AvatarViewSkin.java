@@ -27,7 +27,7 @@ public class AvatarViewSkin extends SkinBase<AvatarView> {
         imageView.imageProperty().bind(control.imageProperty());
         imageView.smoothProperty().bind(control.smoothProperty());
         imageView.setPreserveRatio(true);
-        imageView.clipProperty().bind(Bindings.createObjectBinding(this::createClip, control.typeProperty()));
+        imageView.clipProperty().bind(Bindings.createObjectBinding(this::createClip, control.typeProperty(),control.roundSizeProperty(), control.avatarSizeProperty(), control.sizeProperty()));
         imageView.imageProperty().addListener((ob, ov, nv) -> {
             if (ov != null) {
                 ov.progressProperty().removeListener(progressChangeListener);
@@ -40,11 +40,6 @@ public class AvatarViewSkin extends SkinBase<AvatarView> {
                 }
             }
         });
-
-        control.sizeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
-        control.avatarSizeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
-        control.roundSizeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
-        control.typeProperty().addListener((ob, ov, nv) -> imageView.setClip(createClip()));
 
         wrapper.getChildren().setAll(new Group(imageView));
         wrapper.prefWidthProperty().bind(control.avatarSizeProperty());

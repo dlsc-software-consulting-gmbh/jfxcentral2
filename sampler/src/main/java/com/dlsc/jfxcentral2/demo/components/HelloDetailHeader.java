@@ -11,6 +11,7 @@ import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -25,6 +26,7 @@ public class HelloDetailHeader extends JFXCentralSampleBase {
 
         AppDetailHeader appDetailHeader = new AppDetailHeader(getApp());
         appDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
+        appDetailHeader.setBackgroundImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/quick-link-lg2.png").toExternalForm()));
 
         BookDetailHeader bookDetailHeader = new BookDetailHeader(getBook());
         bookDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
