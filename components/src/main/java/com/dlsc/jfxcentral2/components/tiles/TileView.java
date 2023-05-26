@@ -128,8 +128,10 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         contentBox.getChildren().setAll(flipView, bottomPane);
         getChildren().setAll(contentBox);
 
-        boolean isVideo = item instanceof Video;
-        StackPane.setAlignment(imageView, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
+        if (imageView != null) {
+            boolean isVideo = item instanceof Video;
+            StackPane.setAlignment(imageView, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
+        }
         setTitle(item.getName());
         setSaveSelected(SaveAndLikeUtil.isSaved(item));
         setLikeSelected(SaveAndLikeUtil.isLiked(item));
@@ -191,27 +193,6 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
     }
 
     private Node createFront() {
-        //Top image
-        imageView = new CustomImageView();
-        imageView.getStyleClass().add("tile-image-view");
-        imageView.managedProperty().bind(imageProperty().isNotNull());
-        imageView.visibleProperty().bind(imageProperty().isNotNull());
-        imageView.imageProperty().bind(imageProperty());
-
-        //remarkLabel Used to display the remark information,
-        // such as the duration of the video ,release date, etc.
-        Label remarkLabel = new Label();
-        remarkLabel.setGraphic(new FontIcon());
-        remarkLabel.textProperty().bind(remarkProperty());
-        remarkLabel.managedProperty().bind(remarkProperty().isNotEmpty());
-        remarkLabel.visibleProperty().bind(remarkProperty().isNotEmpty());
-        remarkLabel.getStyleClass().add("remark");
-        StackPane.setAlignment(remarkLabel, Pos.TOP_RIGHT);
-
-        StackPane imageContainer = new StackPane();
-        imageContainer.getStyleClass().add("image-container");
-        imageContainer.getChildren().setAll(imageView, remarkLabel);
-
         //Center title and description
         Label titleLabel = new Label();
         titleLabel.getStyleClass().add("title");
@@ -239,10 +220,34 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         centerBox.getStyleClass().add("center-box");
         VBox.setVgrow(centerBox, Priority.ALWAYS);
 
-        VBox frontBox = new VBox(imageContainer, centerBox);
+        VBox frontBox = new VBox(createFrontTop(), centerBox);
         frontBox.getStyleClass().add("front-box");
         frontBox.setAlignment(Pos.TOP_LEFT);
         return frontBox;
+    }
+
+    protected Node createFrontTop() {
+        //Top image
+        imageView = new CustomImageView();
+        imageView.getStyleClass().add("tile-image-view");
+        imageView.managedProperty().bind(imageProperty().isNotNull());
+        imageView.visibleProperty().bind(imageProperty().isNotNull());
+        imageView.imageProperty().bind(imageProperty());
+
+        //remarkLabel Used to display the remark information,
+        // such as the duration of the video ,release date, etc.
+        Label remarkLabel = new Label();
+        remarkLabel.setGraphic(new FontIcon());
+        remarkLabel.textProperty().bind(remarkProperty());
+        remarkLabel.managedProperty().bind(remarkProperty().isNotEmpty());
+        remarkLabel.visibleProperty().bind(remarkProperty().isNotEmpty());
+        remarkLabel.getStyleClass().add("remark");
+        StackPane.setAlignment(remarkLabel, Pos.TOP_RIGHT);
+
+        StackPane imageContainer = new StackPane();
+        imageContainer.getStyleClass().add("image-container");
+        imageContainer.getChildren().setAll(imageView, remarkLabel);
+        return imageContainer;
     }
 
     private Node createBack() {
