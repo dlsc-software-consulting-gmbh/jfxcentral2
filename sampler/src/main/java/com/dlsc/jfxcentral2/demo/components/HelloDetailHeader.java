@@ -6,8 +6,10 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.headers.AppDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.BookDetailHeader;
+import com.dlsc.jfxcentral2.components.headers.IconDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.PersonDetailHeader;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
+import com.dlsc.jfxcentral2.model.IconModel;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -31,7 +33,17 @@ public class HelloDetailHeader extends JFXCentralSampleBase {
         BookDetailHeader bookDetailHeader = new BookDetailHeader(getBook());
         bookDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
 
+        IconDetailHeader iconDetailHeader = new IconDetailHeader(getIcon());
+        iconDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
+
         return new ScrollPane(new VBox(30, personDetailHeader, appDetailHeader, bookDetailHeader));
+    }
+
+    private IconModel getIcon() {
+        IconModel icon = new IconModel();
+        icon.setName("Icons");
+        icon.setUrl("https://www.jfx-central.com/");
+        return icon;
     }
 
     private Book getBook() {

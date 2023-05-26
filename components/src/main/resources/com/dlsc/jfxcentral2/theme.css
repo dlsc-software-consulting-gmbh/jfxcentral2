@@ -3426,6 +3426,126 @@
 }
 
 /** ------------------------------------
+ * IconTileView
+ */
+.icon-tile-view:lg {
+    -fx-min-width: 415px;
+    -fx-min-height: 393px;
+    -fx-pref-width: 415px;
+    -fx-pref-height: 393px;
+    -fx-max-width: 415px;
+    -fx-max-height: 393px;
+}
+
+.icon-tile-view > .content-box > .bottom-pane .button2 .ikonli-font-icon {
+    -fx-scale-x: 1.4;
+    -fx-scale-y: 1.4;
+}
+
+.icon-tile-view > .content-box > .flip-view .front-box .icon-grid-wrapper {
+    -fx-border-color: -grey-10;
+}
+
+.icon-tile-view:lg > .content-box > .flip-view .front-box .icon-grid-wrapper {
+    -fx-min-width: 415px;
+    -fx-min-height: 233px;
+    -fx-max-width: 415px;
+    -fx-max-height: 233px;
+    -fx-background-color: #f0f0f050;
+}
+
+.icon-tile-view:lg > .content-box > .flip-view .front-box .icon-grid-pane {
+    -fx-hgap: 35px;
+    -fx-vgap: 25px;
+}
+
+.icon-tile-view:lg > .content-box > .flip-view .front-box .icon-grid-pane .icon-font {
+    -fx-icon-size: 29px;
+}
+
+.icon-tile-view > .content-box > .flip-view .front-box .info-box {
+    -fx-padding: 0 3px 3px 0;
+}
+
+.icon-tile-view > .content-box > .flip-view .front-box .info-box .label {
+    -fx-text-fill: -white;
+    -fx-background-color: rgba(128, 128, 128, 0.75);
+    -fx-background-radius: 15px;
+    -fx-padding: 5px 10px;
+    -fx-font-weight: bold;
+}
+
+.icon-tile-view:md {
+    -fx-min-width: 223px;
+    -fx-min-height: 417px;
+    -fx-pref-width: 223px;
+    -fx-pref-height: 417px;
+    -fx-max-width: 223px;
+    -fx-max-height: 417px;
+}
+
+.icon-tile-view:md > .content-box > .bottom-pane .button1,
+.icon-tile-view:md > .content-box > .bottom-pane .button2 {
+    -fx-content-display: graphic-only;
+}
+
+.icon-tile-view:md > .content-box > .flip-view .front-box .icon-grid-pane {
+    -fx-hgap: 28px;
+    -fx-vgap: 15px;
+}
+
+.icon-tile-view:md > .content-box > .flip-view .front-box .icon-grid-pane .icon-font {
+    -fx-icon-size: 26px;
+}
+
+.icon-tile-view:md > .content-box > .flip-view .front-box .icon-grid-wrapper {
+    -fx-min-width: 223px;
+    -fx-min-height: 256px;
+    -fx-max-width: 223px;
+    -fx-max-height: 256px;
+}
+
+.icon-tile-view:sm {
+    -fx-min-width: 317px;
+    -fx-min-height: 350px;
+    -fx-pref-width: 317px;
+    -fx-pref-height: 350px;
+    -fx-max-width: 317px;
+    -fx-max-height: 350px;
+}
+
+.icon-tile-view:sm > .content-box > .flip-view .front-box .icon-grid-pane {
+    -fx-hgap: 26px;
+    -fx-vgap: 22px;
+}
+
+.icon-tile-view:sm > .content-box > .flip-view .front-box .icon-grid-pane .icon-font {
+    -fx-icon-size: 26px;
+}
+
+.icon-tile-view:sm > .content-box > .flip-view .front-box .icon-grid-wrapper {
+    -fx-min-width: 317px;
+    -fx-min-height: 205px;
+    -fx-max-width: 317px;
+    -fx-max-height: 205px;
+    -fx-background-color: linear-gradient(from 35.873% 0.0% to 100.0% 58.4127%, #1c85ed1a 0.0%, #a70eed1f 100.0%);
+}
+
+.icon-tile-view:sm > .content-box > .flip-view .front-box .title {
+    -fx-padding: 8px 20px 5px 20px;
+    -fx-font-size: 18px;
+}
+
+.icon-tile-view:sm > .content-box > .flip-view .front-box .description {
+    -fx-padding: 0px 20px 5px 20px;
+}
+
+.icon-tile-view:sm-md > .content-box > .bottom-pane .save-button,
+.icon-tile-view:sm-md > .content-box > .bottom-pane .like-button {
+    -fx-content-display: graphic-only;
+}
+
+/** ------------------------------------
  * BookTileView
  */
 .book-tile-view:lg {

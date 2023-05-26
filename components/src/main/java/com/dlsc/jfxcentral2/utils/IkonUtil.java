@@ -14,6 +14,7 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.model.IconModel;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignN;
@@ -48,6 +49,8 @@ public interface IkonUtil {
     Ikon tool = JFXCentralIcon.TOOLS;
     Ikon tutorial = JFXCentralIcon.TUTORIALS;
     Ikon video = JFXCentralIcon.VIDEOS;
+    Ikon icons = MaterialDesign.MDI_EMOTICON;
+
     Ikon news = MaterialDesignN.NEWSPAPER_VARIANT_OUTLINE;
     Ikon linkOfTheWeek = JFXCentralIcon.LINKS_OF_THE_WEEK;
 
@@ -80,6 +83,8 @@ public interface IkonUtil {
             return video;
         } else if (clazz == LinksOfTheWeek.class) {
             return linkOfTheWeek;
+        } else if (clazz == IconModel.class) {
+            return icons;
         } else {
             return null;
         }

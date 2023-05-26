@@ -1,20 +1,22 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.filters.ShowcaseFilterView;
+import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.filters.BlogsFilterView;
 import com.dlsc.jfxcentral2.components.filters.BooksFilterView;
 import com.dlsc.jfxcentral2.components.filters.CompaniesFilterView;
 import com.dlsc.jfxcentral2.components.filters.DownloadsFilterView;
+import com.dlsc.jfxcentral2.components.filters.IkonliIconFilter;
+import com.dlsc.jfxcentral2.components.filters.IkonliPackFilter;
 import com.dlsc.jfxcentral2.components.filters.LibrariesFilterView;
 import com.dlsc.jfxcentral2.components.filters.PeopleFilterView;
 import com.dlsc.jfxcentral2.components.filters.PullRequestsFilterView;
-import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.components.SizeComboBox;
+import com.dlsc.jfxcentral2.components.filters.ShowcaseFilterView;
 import com.dlsc.jfxcentral2.components.filters.TipsAndTricksFilterView;
 import com.dlsc.jfxcentral2.components.filters.ToolsFilterView;
 import com.dlsc.jfxcentral2.components.filters.TutorialsFilterView;
 import com.dlsc.jfxcentral2.components.filters.VideosFilterView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
+import com.dlsc.jfxcentral2.model.Size;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -32,6 +34,12 @@ public class HelloSearchFilterView extends JFXCentralSampleBase {
 
         VideosFilterView videosFilterView = new VideosFilterView();
         videosFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
+
+        IkonliPackFilter ikonliPackFilter = new IkonliPackFilter();
+        ikonliPackFilter.sizeProperty().bind(sizeComboBox.valueProperty());
+
+        IkonliIconFilter ikonliIconFilter = new IkonliIconFilter();
+        ikonliIconFilter.sizeProperty().bind(sizeComboBox.valueProperty());
 
         ShowcaseFilterView appsFilterView = new ShowcaseFilterView();
         appsFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
@@ -66,7 +74,10 @@ public class HelloSearchFilterView extends JFXCentralSampleBase {
         LibrariesFilterView librariesFilterView = new LibrariesFilterView();
         librariesFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
 
-        box.getChildren().addAll(createTitledBox("Videos", videosFilterView),
+        box.getChildren().addAll(
+                createTitledBox("Videos", videosFilterView),
+                createTitledBox("Pack", ikonliPackFilter),
+                createTitledBox("Ikonli", ikonliIconFilter),
                 createTitledBox("People", peopleFilterView),
                 createTitledBox("Companies", companiesFilterView),
                 createTitledBox("App", appsFilterView),
