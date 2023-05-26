@@ -39,7 +39,6 @@ public class SimpleOverviewBox<T extends ModelObject> extends OverviewBox<T> {
 
     private void fillData() {
         T data = getModel();
-        setMarkdown(data == null ? "" : data.getDescription());
 
         if (previewImage.imageProperty().isBound()) {
             previewImage.imageProperty().unbind();
