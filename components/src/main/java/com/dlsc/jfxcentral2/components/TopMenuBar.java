@@ -1,11 +1,13 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SearchField;
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
+import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
@@ -32,6 +34,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.util.StringConverter;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -49,7 +52,7 @@ public class TopMenuBar extends PaneBase {
     private static final PseudoClass DARK_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("dark");
 
     private final CustomImageView dukeView;
-    private final SearchField<String> searchField;
+    private final SearchField<ModelObject> searchField;
     private final HBox contentBox;
 
     private Node searchTextField;
@@ -74,7 +77,23 @@ public class TopMenuBar extends PaneBase {
 
         searchField = new SearchField<>();
         searchField.setPromptText("Search");
+        searchField.setCellFactory(listView -> new SearchResultCell());
+        searchField.setSuggestionProvider(request -> DataRepository.getInstance().search(request.getUserText()));
+        searchField.setMatcher((modelObject, text) -> modelObject.getName().startsWith(text));
+        searchField.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(ModelObject object) {
+                if (object != null) {
+                    return object.getName();
+                }
+                return "";
+            }
 
+            @Override
+            public ModelObject fromString(String string) {
+                return null;
+            }
+        });
         layoutBySize();
     }
 
@@ -124,6 +143,7 @@ public class TopMenuBar extends PaneBase {
             Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));
             loginBtn.setMinWidth(Region.USE_PREF_SIZE);
             loginBtn.getStyleClass().add("login-button");
+            LinkUtil.setLink(loginBtn, "/login");
 
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);

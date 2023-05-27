@@ -578,45 +578,46 @@
 * LoginView
 */
 
-.login-view: lg{
+.login-view:lg {
     -fx-min-width: 1440px;
-    -fx-min-height:800px;
+    -fx-min-height: 800px;
 }
 
-.login-view: md{
+.login-view:md {
     -fx-min-width: 768px;
-    -fx-min-height:1024px;
+    -fx-min-height: 1024px;
 }
 
-.login-view: sm{
+.login-view:sm {
     -fx-min-width: 375px;
-    -fx-min-height:893px;
+    -fx-min-height: 893px;
 }
 
-.login-view .bg-overlay{
+.login-view .bg-overlay {
     -fx-background-color: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.460508) 55.25%, rgba(0, 0, 0, 0) 87.68%);
 }
 
-.login-view .bg-image{
+.login-view .bg-image {
     -fx-background-image: url("images/openjfx-background.jpg");
     -fx-scale-x: -1;
 }
-.login-view:lg .bg-image{
+
+.login-view:lg .bg-image {
     -fx-background-size: 1620px 2880px;
     -fx-background-position: -90px -1040px;
 }
 
-.login-view:md .bg-image{
+.login-view:md .bg-image {
     -fx-background-size: 768px 1300px;
     -fx-background-position: 0px -150px
 }
 
-.login-view:sm .bg-image{
+.login-view:sm .bg-image {
     -fx-background-size: 500px 893px;
     -fx-background-position: -50px 0px
 }
 
-.login-view .h-box{
+.login-view .h-box {
     -fx-spacing: 30px;
     -fx-min-width: 854px;
     -fx-min-height: 464px;
@@ -624,33 +625,33 @@
     -fx-max-width: 854px;
 }
 
-.login-view:md .v-box{
+.login-view:md .v-box {
     -fx-spacing: 30px;
     -fx-alignment: center;
     -fx-min-height: 741px;
     -fx-max-width: 465px;
 }
 
-.login-view:sm .v-box{
+.login-view:sm .v-box {
     -fx-spacing: 15px;
     -fx-alignment: center;
 }
 
-.login-view:lg .description-stack-pane{
+.login-view:lg .description-stack-pane {
     -fx-min-width: 414px;
     -fx-min-height: 464px;
     -fx-padding: 30px 20px;
     -fx-background-color: -bright-blue;
 }
 
-.login-view:md .description-stack-pane{
+.login-view:md .description-stack-pane {
     -fx-min-width: 465px;
     -fx-min-height: 247px;
     -fx-padding: 30px 20px;
     -fx-background-color: -bright-blue;
 }
 
-.login-view:sm .description-stack-pane{
+.login-view:sm .description-stack-pane {
     -fx-max-width: 317px;
     -fx-min-height: 247px;
     -fx-padding: 30px 20px;
@@ -678,54 +679,54 @@
     -fx-translate-y: 3px;
 }
 
-.login-view:lg .title{
+.login-view:lg .title {
     -fx-text-fill: white;
     -fx-font-size: 44px;
 }
 
-.login-view:md .title{
+.login-view:md .title {
     -fx-text-fill: white;
     -fx-font-size: 34px;
 }
 
-.login-view:sm .title{
+.login-view:sm .title {
     -fx-text-fill: white;
     -fx-font-size: 34px;
 }
 
 
-.login-view:lg .description-text-flow{
+.login-view:lg .description-text-flow {
     -fx-max-height: 0;
     -fx-font-size: 24;
 }
 
-.login-view:md .description-text-flow{
+.login-view:md .description-text-flow {
     -fx-max-height: 0;
     -fx-font-size: 20px;
 }
 
-.login-view:sm .description-text-flow{
+.login-view:sm .description-text-flow {
     -fx-max-height: 0;
     -fx-font-size: 20px;
 }
 
-.login-view .description-text{
+.login-view .description-text {
     -fx-fill: white;
 }
 
-.login-view .link{
+.login-view .link {
     -fx-text-fill: -bright-blue;
     -fx-font-zize: 13px;
 }
 
-.login-view .form-v-box{
+.login-view .form-v-box {
     -fx-font-size: 16px;
     -fx-background-color: white;
     -fx-spacing: 20px;
     -fx-alignment: center;
 }
 
-.login-view:lg .form-v-box{
+.login-view:lg .form-v-box {
     -fx-min-width: 414px;
     -fx-min-height: 464px;
     -fx-max-height: 464px;
@@ -733,19 +734,19 @@
     -fx-padding: 30px 40px;
 }
 
-.login-view:md .form-v-box{
+.login-view:md .form-v-box {
     -fx-max-width: 465px;
     -fx-min-height: 464px;
     -fx-padding: 30px 65px;
 }
 
-.login-view:sm .form-v-box{
+.login-view:sm .form-v-box {
     -fx-max-width: 317px;
     -fx-min-height: 464px;
     -fx-padding: 42px 0px;
 }
 
-.login-view .button{
+.login-view .button {
     -bg: white;
     -fx-background-color: -bg;
     -fx-background-raduis: 30px;
@@ -760,17 +761,17 @@
     -fx-content-display: right;
 }
 
-.login-view:lg .button{
+.login-view:lg .button {
     -fx-min-width: 334px;
     -fx-min-height: 40px;
 }
 
-.login-view:md .button{
+.login-view:md .button {
     -fx-min-width: 334px;
     -fx-min-height: 40px;
 }
 
-.login-view:sm .button{
+.login-view:sm .button {
     -fx-min-width: 237px;
     -fx-min-height: 40px;
 }
@@ -785,45 +786,45 @@
     -fx-background-radius: 30px;
 }
 
-.login-view .google-logo{
+.login-view .google-logo {
     -fx-image: url("images/google.png");
 }
 
-.login-view .microsoft-logo{
+.login-view .microsoft-logo {
     -fx-image: url("images/microsoft.png");
 }
 
-.login-view  .h-box-separator{
+.login-view .h-box-separator {
     -fx-alignment: center;
     -fx-spacing: 15px;
     -fx-max-height: 0px;
 }
 
-.login-view:sm  .h-box-separator{
+.login-view:sm .h-box-separator {
     -fx-alignment: center;
     -fx-spacing: 15px;
     -fx-max-height: 0px;
     -fx-padding: 0px 40px;
 }
 
-.login-view .separator .line{
+.login-view .separator .line {
     -fx-background-color: #E2E2E2;
     -fx-pref-height: 1px;
     -fx-border-color: null;
 }
 
-.login-view .separator-label{
+.login-view .separator-label {
     -fx-font-size: 13px;
     -fx-font-family: "Spline Sans";
     -fx-text-fill: #757676;
 }
 
-.login-view .registration{
-    -fx-text-alignment	: center;
+.login-view .registration {
+    -fx-text-alignment: center;
     -fx-font-size: 13px;
     -fx-font-family: "Spline Sans Medium";
 }
-    
+
 /** -------------------------------
 * OpenJFXProjectView
 */
@@ -6416,4 +6417,63 @@
 
 .library-ensemble-box .body-box .label {
     -fx-alignment: left;
+}
+
+/* ----------------------------------------------------------------------------
+ * SearchResultCell
+ */
+.search-result-list-cell {
+    -fx-background-color: white;
+    -fx-padding: 10px;
+    -fx-spacing: 5;
+}
+
+.search-result-list-cell .label {
+    -fx-text-alignment: left;
+    -fx-alignment: top-left;
+}
+
+.search-result-list-cell :focused {
+    -fx-background-color: -light-blue;
+}
+
+.search-result-list-cell :selected .label {
+    -fx-text-fill: white;
+}
+
+.search-result-list-cell .hbox {
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
+}
+
+.search-result-list-cell .hbox .icon-wrapper {
+    -fx-pref-width: 32px;
+    -fx-pref-height: 32px;
+    -fx-max-width: 32px;
+    -fx-max-height: 32px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 2px;
+}
+
+.search-result-list-cell .hbox .icon-wrapper .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-icon-color: white;
+}
+
+.search-result-list-cell .hbox .title-label {
+    -fx-text-fill: black;
+    -fx-font-family: "Inter Bold";
+}
+
+.search-result-list-cell .hbox .subtitle-label {
+    -fx-opacity: .8;
+    -fx-text-fill: black;
+}
+
+.search-result-list-cell .hbox .date-label {
+}
+
+.search-result-list-cell .hbox .vbox {
 }
