@@ -13,6 +13,7 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.model.ikon.IkonPackModel;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -189,7 +190,7 @@ public class TopMenuBar extends PaneBase {
         button.getItems().add(createMenuItem("Books", "/books", IkonUtil.getModelIkon(Book.class)));
         button.getItems().add(createMenuItem("Blogs", "/blogs", IkonUtil.getModelIkon(Blog.class)));
         button.getItems().add(createMenuItem("Tutorials", "/tutorials", IkonUtil.getModelIkon(Tutorial.class)));
-        button.getItems().add(createMenuItem("Icons", "/ikonli", IkonUtil.champion));
+        button.getItems().add(createMenuItem("Icons", "/icons", IkonUtil.getModelIkon(IkonPackModel.class)));
     }
 
     private void fillCommunityMenu(MenuButton button) {

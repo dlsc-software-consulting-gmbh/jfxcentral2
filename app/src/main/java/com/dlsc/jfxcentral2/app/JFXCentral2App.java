@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository;
-import com.dlsc.jfxcentral2.app.pages.IkonliPage;
+import com.dlsc.jfxcentral2.app.pages.category.IconsCategoryiPage;
 import com.dlsc.jfxcentral2.app.pages.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.app.pages.LoginPage;
@@ -80,7 +80,7 @@ public class JFXCentral2App extends RouteApp {
                 .and(createCategoryOrDetailRoute("/tools", () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/tutorials", () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/videos", () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
-                .and(RouteUtils.get("/ikonli", r -> new IkonliPage(size)))
+                .and(RouteUtils.get("/icons", r -> new IconsCategoryiPage(size)))
                 .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/cookies", r -> new LegalPage(size, LegalPage.Section.COOKIES)))
