@@ -43,6 +43,6 @@ public class HelloPackGridView extends JFXCentralSampleBase {
 
     @Override
     public String getSampleName() {
-        return "IconGridView";
+        return "ModelGridView<IkonPackModel>";
     }
 }
