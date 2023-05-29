@@ -14,6 +14,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -73,6 +74,19 @@ public class IkonModelUtil {
 
     public IkonData getIkonData(String simpleName) {
         return nameMap.get(simpleName);
+    }
+
+    public List<Ikon> getIkonList(IconPack iconPack) {
+        IkonProvider ikonProvider = iconPack.getIkonData().getIkonProvider();
+        EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
+        return List.copyOf(new ArrayList<Ikon>(enumSet));
+    }
+
+    /**
+     * @param ikonPackName ikonPackDescription or ikonPackModel #name
+     */
+    public List<Ikon> getIkonList(String ikonPackName) {
+        return getIkonList(IconPack.valueOf(ikonPackName));
     }
 
     /**
