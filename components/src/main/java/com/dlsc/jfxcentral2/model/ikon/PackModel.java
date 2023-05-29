@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.model.ikon;
 
+import com.dlsc.jfxcentral2.model.filter.IconStyle;
 import com.google.gson.annotations.SerializedName;
 
 public class PackModel {
