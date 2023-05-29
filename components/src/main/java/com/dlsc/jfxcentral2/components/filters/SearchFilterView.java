@@ -17,6 +17,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.css.CssMetaData;
 import javafx.css.Styleable;
@@ -35,6 +36,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
+import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.IndexedCheckModel;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
@@ -48,7 +51,11 @@ public class SearchFilterView extends PaneBase {
     private static final Orientation FILTER_BOX_DEFAULT_ORIENTATION = Orientation.HORIZONTAL;
     private static final String WITH_SEARCH_FIELD = "with-search-field";
 
-    public record FilterItem<E extends Enum<E>>(String title, Class<E> filterEnumClass, Enum<E> defaultValue) {
+    public record FilterItem<E extends Enum<E>>(String title, Class<E> filterEnumClass, Enum<E> defaultValue,
+                                                boolean multipleSelection) {
+        public FilterItem(String title, Class<E> filterEnumClass, Enum<E> defaultValue) {
+            this(title, filterEnumClass, defaultValue, false);
+        }
     }
 
     public SearchFilterView() {
@@ -145,7 +152,28 @@ public class SearchFilterView extends PaneBase {
         titleLabel.getStyleClass().add("filter-title");
 
         Object[] enumConstants = filterItem.filterEnumClass().getEnumConstants();
-        ComboBox<Enum<?>> comboBox = createComboBox();
+        Node comboBoxNode;
+        // MULTIPLE SELECTION
+        if (filterItem.multipleSelection) {
+            comboBoxNode = createMultipleSelectionNode(index,filterItem, (Enum<?>[]) enumConstants);
+        } else {
+            // SINGLE SELECTION
+            comboBoxNode = createSingleSelection(index, filterItem, (Enum<?>[]) enumConstants);
+        }
+
+        if (isSmall()) {
+            box.getChildren().setAll(titleLabel, new Spacer(), comboBoxNode);
+        } else {
+            box.getChildren().setAll(titleLabel, comboBoxNode);
+        }
+        return box;
+    }
+
+    /**
+     * ComboBox: single selection
+     */
+    private Node createSingleSelection(int index, FilterItem<?> filterItem, Enum<?>[] enumConstants) {
+        ComboBox<Enum<?>> comboBox = createSingleSelection();
         comboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(Enum<?> object) {
@@ -158,27 +186,84 @@ public class SearchFilterView extends PaneBase {
             }
         });
         comboBox.getStyleClass().addAll("filter-combo-box");
-        comboBox.getItems().addAll((Enum<?>[]) enumConstants);
+        comboBox.getItems().addAll(enumConstants);
         if (filterItem.defaultValue != null) {
             comboBox.getSelectionModel().select(filterItem.defaultValue);
         } else {
             comboBox.getSelectionModel().selectFirst();
         }
         comboBox.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> {
-            if (nv != null) {
-                updateSelectedFilter(index, nv);
+            updateSelectedFilter(index, nv != null ? List.of(nv) : List.of());
+        });
+        return comboBox;
+    }
+
+    /**
+     * CheckComboBox: multiple selection
+     */
+    private Node createMultipleSelectionNode(int index,FilterItem<?> filterItem, Enum<?>[] enumConstants) {
+        CheckComboBox<Enum<?>> checkComboBox = new CheckComboBox<>();
+        checkComboBox.getStyleClass().addAll("check-combo-box");
+        checkComboBox.getItems().addAll(enumConstants);
+        IndexedCheckModel<Enum<?>> checkModel = checkComboBox.getCheckModel();
+        checkComboBox.titleProperty().bind(Bindings.createStringBinding(() -> {
+            ObservableList<Enum<?>> items = checkModel.getCheckedItems();
+            if (items.isEmpty()) {
+                return "Please Select packs";
+            } else if (items.size() == checkComboBox.getItems().size()) {
+                return "All packs selected";
+            } else if (items.size() == 1) {
+                return items.get(0).toString();
+            } else {
+                return items.size() + " packs- selected";
+            }
+        }, checkModel.getCheckedItems()));
+
+        checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<>() {
+            // prevent recursive calls
+            private boolean updating = false;
+
+            @Override
+            public void onChanged(Change<? extends Enum<?>> c) {
+                if (updating) {
+                    return;
+                }
+
+                ObservableList<Enum<?>> checkedItems = checkComboBox.getCheckModel().getCheckedItems();
+                updateSelectedFilter(index, new ArrayList<>(checkedItems));
+                // Tip: If we want to support select all,
+                // then the first element of the enumeration class needs to be ALL
+                Enum<?> firstItem = checkComboBox.getCheckModel().getItem(0);
+                if (c.next()) {
+                    if (c.wasAdded()) {
+                        if (c.getAddedSubList().contains(firstItem)) {
+                            updating = true;
+                            checkComboBox.getCheckModel().checkAll();
+                            updating = false;
+                        }
+                    } else if (c.wasRemoved()) {
+                        if (c.getRemoved().contains(firstItem)) {
+                            updating = true;
+                            checkComboBox.getCheckModel().clearChecks();
+                            updating = false;
+                        } else {
+                            updating = true;
+                            checkComboBox.getCheckModel().clearCheck(firstItem);
+                            updating = false;
+                        }
+                    }
+                }
             }
         });
 
-        if (isSmall()) {
-            box.getChildren().setAll(titleLabel, new Spacer(), comboBox);
-        } else {
-            box.getChildren().setAll(titleLabel, comboBox);
+        if (filterItem.defaultValue != null) {
+            checkComboBox.getCheckModel().check(filterItem.defaultValue);
         }
-        return box;
+
+        return checkComboBox;
     }
 
-    private <T> ComboBox<T> createComboBox() {
+    private <T> ComboBox<T> createSingleSelection() {
         ComboBox<T> comboBox = new ComboBox<>();
         if (binding == null) {
             binding = Bindings.createBooleanBinding(comboBox::isShowing, comboBox.showingProperty());
@@ -202,8 +287,8 @@ public class SearchFilterView extends PaneBase {
         this.blocking.set(blocking);
     }
 
-    private void updateSelectedFilter(int index, Enum<?> newFilterValue) {
-        List<Enum> updatedFilters = new ArrayList<>(getSelectedFilters());
+    private void updateSelectedFilter(int index, List<Enum> newFilterValue) {
+        List<List<Enum>> updatedFilters = new ArrayList<>(getSelectedFilters());
         if (index >= 0 && index < updatedFilters.size()) {
             updatedFilters.set(index, newFilterValue);
         } else {
@@ -256,7 +341,7 @@ public class SearchFilterView extends PaneBase {
 
         @Override
         public CssMetaData<SearchFilterView, Orientation> getCssMetaData() {
-            return SearchFilterView.StyleableProperties.ORIENTATION;
+            return StyleableProperties.ORIENTATION;
         }
     };
 
@@ -272,17 +357,17 @@ public class SearchFilterView extends PaneBase {
         return filterBoxOrientation;
     }
 
-    private final ReadOnlyListWrapper<Enum> selectedFilters = new ReadOnlyListWrapper<>(this, "selectedFilters", FXCollections.observableArrayList());
+    private final ReadOnlyListWrapper<List<Enum>> selectedFilters = new ReadOnlyListWrapper<>(this, "selectedFilters", FXCollections.observableArrayList());
 
-    public List<Enum> getSelectedFilters() {
+    public List<List<Enum>> getSelectedFilters() {
         return Collections.unmodifiableList(selectedFilters.get());
     }
 
-    public ReadOnlyListWrapper<Enum> selectedFiltersProperty() {
+    public ReadOnlyListWrapper<List<Enum>> selectedFiltersProperty() {
         return selectedFilters;
     }
 
-    private void setSelectedFilters(ObservableList<Enum> selectedFilters) {
+    private void setSelectedFilters(ObservableList<List<Enum>> selectedFilters) {
         this.selectedFilters.set(selectedFilters);
     }
 
@@ -300,17 +385,17 @@ public class SearchFilterView extends PaneBase {
         this.onApplyFilters.set(onApplyFilters);
     }
 
-    private final ObjectProperty<BiConsumer<String, List<Enum>>> onSearch = new SimpleObjectProperty<>(this, "onSearch");
+    private final ObjectProperty<BiConsumer<String, List<List<Enum>>>> onSearch = new SimpleObjectProperty<>(this, "onSearch");
 
-    public BiConsumer<String, List<Enum>> getOnSearch() {
+    public BiConsumer<String, List<List<Enum>>> getOnSearch() {
         return onSearch.get();
     }
 
-    public ObjectProperty<BiConsumer<String, List<Enum>>> onSearchProperty() {
+    public ObjectProperty<BiConsumer<String, List<List<Enum>>>> onSearchProperty() {
         return onSearch;
     }
 
-    public void setOnSearch(BiConsumer<String, List<Enum>> onSearch) {
+    public void setOnSearch(BiConsumer<String, List<List<Enum>>> onSearch) {
         this.onSearch.set(onSearch);
     }
 
@@ -353,7 +438,7 @@ public class SearchFilterView extends PaneBase {
     }
 
     public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
-        return SearchFilterView.StyleableProperties.STYLEABLES;
+        return StyleableProperties.STYLEABLES;
     }
 
     @Override

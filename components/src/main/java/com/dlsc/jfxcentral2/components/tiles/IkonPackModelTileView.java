@@ -1,13 +1,13 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral2.components.IconPreviewPane;
-import com.dlsc.jfxcentral2.model.IconModel;
+import com.dlsc.jfxcentral2.model.ikon.IkonPackModel;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.Node;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class IconTileView extends TileView<IconModel> {
-    public IconTileView(IconModel item) {
+public class IkonPackModelTileView extends TileView<IkonPackModel> {
+    public IkonPackModelTileView(IkonPackModel item) {
         super(item);
         getStyleClass().addAll("icon-tile-view");
         setDescription(item.getDescription());

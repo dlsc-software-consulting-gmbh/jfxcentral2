@@ -20,6 +20,7 @@ open module com.dlsc.jfxcentral2.components {
     requires com.rometools.rome;
     requires commons.validator;
     requires com.dlsc.jfxcentral2.iconfont;
+    requires com.google.gson;
 
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;
@@ -95,6 +96,7 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.components.gridview;
     exports com.dlsc.jfxcentral2.components.overviewbox;
     exports com.dlsc.jfxcentral2.components.userprofile;
+    exports com.dlsc.jfxcentral2.model.ikon;
 
     uses IkonProvider;
 }

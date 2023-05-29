@@ -5,8 +5,8 @@ import com.dlsc.jfxcentral2.components.filters.BlogsFilterView;
 import com.dlsc.jfxcentral2.components.filters.BooksFilterView;
 import com.dlsc.jfxcentral2.components.filters.CompaniesFilterView;
 import com.dlsc.jfxcentral2.components.filters.DownloadsFilterView;
-import com.dlsc.jfxcentral2.components.filters.IkonliIconFilter;
-import com.dlsc.jfxcentral2.components.filters.IkonliPackFilter;
+import com.dlsc.jfxcentral2.components.filters.IkonliIconsFilter;
+import com.dlsc.jfxcentral2.components.filters.IkonliPacksFilter;
 import com.dlsc.jfxcentral2.components.filters.LibrariesFilterView;
 import com.dlsc.jfxcentral2.components.filters.PeopleFilterView;
 import com.dlsc.jfxcentral2.components.filters.PullRequestsFilterView;
@@ -35,11 +35,11 @@ public class HelloSearchFilterView extends JFXCentralSampleBase {
         VideosFilterView videosFilterView = new VideosFilterView();
         videosFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
 
-        IkonliPackFilter ikonliPackFilter = new IkonliPackFilter();
-        ikonliPackFilter.sizeProperty().bind(sizeComboBox.valueProperty());
+        IkonliIconsFilter ikonliIconsFilter = new IkonliIconsFilter();
+        ikonliIconsFilter.sizeProperty().bind(sizeComboBox.valueProperty());
 
-        IkonliIconFilter ikonliIconFilter = new IkonliIconFilter();
-        ikonliIconFilter.sizeProperty().bind(sizeComboBox.valueProperty());
+        IkonliPacksFilter ikonliPacksFilter = new IkonliPacksFilter();
+        ikonliPacksFilter.sizeProperty().bind(sizeComboBox.valueProperty());
 
         ShowcaseFilterView appsFilterView = new ShowcaseFilterView();
         appsFilterView.sizeProperty().bind(sizeComboBox.valueProperty());
@@ -76,8 +76,8 @@ public class HelloSearchFilterView extends JFXCentralSampleBase {
 
         box.getChildren().addAll(
                 createTitledBox("Videos", videosFilterView),
-                createTitledBox("Pack", ikonliPackFilter),
-                createTitledBox("Ikonli", ikonliIconFilter),
+                createTitledBox("Filter Icon", ikonliIconsFilter),
+                createTitledBox("Filter Pack", ikonliPacksFilter),
                 createTitledBox("People", peopleFilterView),
                 createTitledBox("Companies", companiesFilterView),
                 createTitledBox("App", appsFilterView),

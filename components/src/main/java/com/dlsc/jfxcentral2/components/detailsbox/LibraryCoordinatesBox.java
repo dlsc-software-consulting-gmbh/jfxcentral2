@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.MarkdownView;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -52,7 +53,7 @@ public class LibraryCoordinatesBox extends PaneBase {
 
         Button copyButton = new Button();
         copyButton.getStyleClass().addAll("blue-button", "copy-button");
-        copyButton.setGraphic(new FontIcon(MaterialDesign.MDI_CONTENT_COPY));
+        copyButton.setGraphic(new FontIcon(IkonUtil.copy));
         copyButton.setOnAction(evt -> {
             Clipboard clipboard = Clipboard.getSystemClipboard();
             ClipboardContent content = new ClipboardContent();

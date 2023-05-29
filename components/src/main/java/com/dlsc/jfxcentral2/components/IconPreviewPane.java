@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.model.IconModel;
-import com.dlsc.jfxcentral2.model.filter.IconStyle;
+import com.dlsc.jfxcentral2.model.ikon.IkonPackModel;
+import com.dlsc.jfxcentral2.utils.IkonModelUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -34,9 +34,9 @@ public class IconPreviewPane extends PaneBase {
         }
         GridPane gridPane = new GridPane();
         gridPane.getStyleClass().add("icon-grid-pane");
-        IconModel iconModel = getIconModel();
+        IkonPackModel ikonPackModel = getIconModel();
         ObservableList<? extends Ikon> icons = FXCollections.observableArrayList();
-        IkonProvider ikonProvider = iconModel.getIkonData().getIkonProvider();
+        IkonProvider ikonProvider = IkonModelUtil.getInstance().getIkonData(ikonPackModel.getName()).getIkonProvider();
         EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
         icons.addAll(enumSet);
         FXCollections.shuffle(icons);
@@ -52,9 +52,9 @@ public class IconPreviewPane extends PaneBase {
         Label countLabel = new Label("Icons: " + icons.size());
         countLabel.getStyleClass().add("count-label");
 
-        IconStyle iconStyle = iconModel.getIconStyle();
-        Label styleLabel = new Label("Style: " + iconStyle.toString());
-        styleLabel.getStyleClass().add("style-label");
+        //IconStyle iconStyle = iconModel.getIconStyle();
+        //Label styleLabel = new Label("Style: " + iconStyle.toString());
+        //styleLabel.getStyleClass().add("style-label");
 
         HBox infoBox = new HBox(new Spacer(), countLabel);
         infoBox.getStyleClass().add("info-box");
@@ -76,17 +76,17 @@ public class IconPreviewPane extends PaneBase {
         return new Color(red, green, blue, 1.0);
     }
 
-    private final ObjectProperty<IconModel> iconModel = new SimpleObjectProperty<>(this, "iconModel");
+    private final ObjectProperty<IkonPackModel> iconModel = new SimpleObjectProperty<>(this, "IkonPackModel");
 
-    public IconModel getIconModel() {
+    public IkonPackModel getIconModel() {
         return iconModel.get();
     }
 
-    public ObjectProperty<IconModel> iconModelProperty() {
+    public ObjectProperty<IkonPackModel> iconModelProperty() {
         return iconModel;
     }
 
-    public void setIconModel(IconModel iconModel) {
-        this.iconModel.set(iconModel);
+    public void setIconModel(IkonPackModel ikonPackModel) {
+        this.iconModel.set(ikonPackModel);
     }
 }
