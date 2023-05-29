@@ -14,7 +14,7 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
-import com.dlsc.jfxcentral2.model.IconModel;
+import com.dlsc.jfxcentral2.model.ikon.IkonPackModel;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignN;
@@ -32,6 +32,7 @@ public interface IkonUtil {
     Ikon delete = JFXCentralIcon.DELETE;
     Ikon close = JFXCentralIcon.COSS;
     Ikon people = JFXCentralIcon.PEOPLE;
+    Ikon copy = MaterialDesign.MDI_CONTENT_COPY;
 
     Ikon play = JFXCentralIcon.PLAY;
     Ikon github = JFXCentralIcon.GITHUB;
@@ -83,7 +84,7 @@ public interface IkonUtil {
             return video;
         } else if (clazz == LinksOfTheWeek.class) {
             return linkOfTheWeek;
-        } else if (clazz == IconModel.class) {
+        } else if (clazz == IkonPackModel.class) {
             return icons;
         } else {
             return null;

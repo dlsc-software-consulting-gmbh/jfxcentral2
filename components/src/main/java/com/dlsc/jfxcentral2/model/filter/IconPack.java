@@ -1,7 +1,10 @@
 package com.dlsc.jfxcentral2.model.filter;
 
+import com.dlsc.jfxcentral2.model.ikon.IkonData;
+import com.dlsc.jfxcentral2.utils.IkonModelUtil;
+
 public enum IconPack {
-    ALL("All"),
+    ALL("Select All"),
     ANTDESIGNICONSFILLED("AntDesignIconsFilled"),
     ANTDESIGNICONSOUTLINED("AntDesignIconsOutlined"),
     BOOTSTRAPICONS("BootstrapIcons"),
@@ -111,6 +114,7 @@ public enum IconPack {
     ZONDICONS("Zondicons");
 
     private final String description;
+    private IkonData ikonData;
 
     private IconPack(String description) {
         this.description = description;
@@ -118,6 +122,13 @@ public enum IconPack {
 
     public String getDescription() {
         return description;
+    }
+
+    public IkonData getIkonData() {
+        if (ikonData == null) {
+            this.ikonData = IkonModelUtil.getInstance().getIkonData(description);
+        }
+        return ikonData;
     }
 
     @Override

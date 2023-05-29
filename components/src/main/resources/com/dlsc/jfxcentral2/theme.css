@@ -3702,7 +3702,7 @@
     -fx-min-height: 233px;
     -fx-max-width: 415px;
     -fx-max-height: 233px;
-    -fx-background-color: #f0f0f050;
+    -fx-background-color: linear-gradient(from 35.873% 0.0% to 100.0% 58.4127%, #1c85ed1a 0.0%, #a70eed1f 100.0%);
 }
 
 .icon-tile-view:lg > .content-box > .flip-view .front-box .icon-grid-pane {
@@ -3754,6 +3754,7 @@
     -fx-min-height: 256px;
     -fx-max-width: 223px;
     -fx-max-height: 256px;
+    -fx-background-color: linear-gradient(from 35.873% 0.0% to 100.0% 58.4127%, #1c85ed1a 0.0%, #a70eed1f 100.0%);
 }
 
 .icon-tile-view:sm {
@@ -4501,9 +4502,6 @@
 .search-filter-view .content-box .filter-box > .filter-combo-box {
     -fx-font-size: 16px;
     -fx-background-color: -white;
-}
-
-.search-filter-view .content-box .filter-box > .filter-combo-box {
     -fx-padding: 0px 10px;
     -fx-background-radius: 26px;
 }
@@ -4724,6 +4722,63 @@
 
 .simple-filter-view:sm .filters-box > .filter-box > .filter-combo-box {
     -fx-pref-width: 260px;
+}
+
+/** ------------------------------------
+ * IkonliIconsFilter
+ */
+.ikonli-icons-filter .combo-box-base {
+    -fx-font-size: 16px;
+    -fx-background-color: -white;
+    -fx-padding: 6px 10px;
+    -fx-background-radius: 26px;
+}
+
+.ikonli-icons-filter:lg .combo-box-base {
+    -fx-pref-width: 610px;
+}
+
+.ikonli-icons-filter:md .combo-box-base {
+    -fx-pref-width: 265px;
+}
+
+.ikonli-icons-filter:sm .combo-box-base {
+    -fx-pref-width: 260px;
+}
+
+.ikonli-icons-filter .combo-box .combo-box-popup .list-view,
+.ikonli-icons-filter .combo-box .combo-box-popup .list-cell {
+    -fx-background-color: -white;
+    -fx-text-fill: -grey-100;
+}
+
+.ikonli-icons-filter .combo-box .combo-box-popup .list-view {
+    -fx-background-color: -white;
+    -fx-background-radius: 10px;
+    -fx-effect: -blue-shadow;
+    -fx-font-size: 16px;
+    -fx-padding: 20px 5px;
+    -fx-translate-y: 8px;
+}
+
+.ikonli-icons-filter .combo-box .combo-box-popup .list-view .list-cell {
+    -fx-cursor: hand;
+    -fx-text-fill: -grey-100;
+    -fx-padding: 3px 10px 3px 12px;
+    -fx-background-color: transparent;
+    -fx-cell-size: 45px;
+}
+
+.ikonli-icons-filter .combo-box .combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: derive(-grey-10, 50%);
+}
+
+.ikonli-icons-filter .combo-box .combo-box-popup .list-view .check-box {
+    -fx-border-color: -grey-20;
+}
+
+.ikonli-icons-filter .combo-box .combo-box-popup .list-view .check-box .box {
+    -fx-background-color: transparent;
 }
 
 /** ------------------------------------
@@ -6024,12 +6079,12 @@
     -fx-padding: 30px 20px;
 }
 
-.save-and-like-button:lg .custom-pagination-control2 .control-box,
-.save-and-like-button:sm .custom-pagination-control2 .control-box {
+.save-and-like-pane:lg .custom-pagination-control2 .control-box,
+.save-and-like-pane:sm .custom-pagination-control2 .control-box {
     -fx-padding: 20px 0 0 0;
 }
 
-.save-and-like-button:md .custom-pagination-control2 .control-box {
+.save-and-like-pane:md .custom-pagination-control2 .control-box {
     -fx-padding: 12px 0 0 0;
 }
 
@@ -6476,4 +6531,234 @@
 }
 
 .search-result-list-cell .hbox .vbox {
+}
+
+
+/** ----------------------------------------------------------------------------
+ * IkonCellView
+ */
+.ikon-cell-view,
+.ikon-cell-view:sm {
+    -cell-size: 95px;
+    -fx-min-width: -cell-size;
+    -fx-pref-width: -cell-size;
+    -fx-max-width: -cell-size;
+    -fx-min-height: -cell-size;
+    -fx-pref-height: -cell-size;
+    -fx-max-height: -cell-size;
+    -fx-padding: 5px;
+    -fx-background-color: -white;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.ikon-cell-view:md {
+    -cell-size: 80px;
+}
+
+.ikon-cell-view:hover {
+    -fx-background-color: -grey-10;
+    -fx-background-radius: 5px;
+}
+
+.ikon-cell-view:selected {
+    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.25), 15, 0.4, 0, 0);
+    -fx-background-color: -white;
+}
+
+.ikon-cell-view > .content-box > .preview-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: -grey-100;
+}
+
+.ikon-cell-view .ikon-label {
+    -fx-alignment: top-center;
+    -fx-text-alignment: center;
+    -fx-font-size: 13px;
+    -fx-font-family: "Roboto Condensed";
+    -fx-text-fill: -grey-30;
+}
+
+.ikon-cell-view > .content-box {
+    -fx-alignment: top-center;
+    -fx-spacing: 5px;
+}
+
+.ikon-cell-view:sm > .content-box {
+    -fx-alignment: center;
+}
+
+/** ----------------------------------------------------------------------------
+ * IkonDetailView
+ */
+.ikon-detail-view {
+    -fx-background-color: -white;
+    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.25), 15, 0.4, 0, 0);
+    -fx-padding: 10px;
+}
+
+.ikon-detail-view:sm {
+    -fx-padding: 3px;
+}
+
+.ikon-detail-view .ikon-preview-wrapper {
+    -size: 120px;
+    -fx-min-width: -size;
+    -fx-pref-width: -size;
+    -fx-max-width: -size;
+    -fx-min-heigth: -size;
+    -fx-pref-height: -size;
+    -fx-max-height: -size;
+    -fx-border-color: -grey-10;
+    -fx-background-color: -white;
+    -fx-background-radius: 10px;
+}
+
+.ikon-detail-view:md .ikon-preview-wrapper {
+    -size: 80px;
+}
+
+.ikon-detail-view:sm .ikon-preview-wrapper {
+    -size: 65px;
+}
+
+.ikon-detail-view .ikon-preview-wrapper .ikonli-font-icon {
+    -fx-icon-size: 108px;
+    -fx-icon-color: -bright-blue;
+}
+
+.ikon-detail-view:md .ikon-preview-wrapper .ikonli-font-icon {
+    -fx-icon-size: 70px;
+}
+
+.ikon-detail-view:sm .ikon-preview-wrapper .ikonli-font-icon {
+    -fx-icon-size: 50px;
+}
+
+.ikon-detail-view .ikon-info-grid-pane {
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+    -fx-alignment: center;
+}
+
+.ikon-detail-view:sm .ikon-info-grid-pane {
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+    -fx-alignment: center;
+}
+
+.ikon-detail-view .ikon-info-grid-pane .copy-button {
+    -fill: -white;
+    -bg: -bright-blue;
+    -fx-background-radius: 3px;
+    -fx-padding: 4px 7px;
+}
+
+.ikon-detail-view .ikon-info-grid-pane .text-field {
+    -fx-background-color: white;
+    -fx-pref-width: 280px;
+    -fx-text-fill: -grey-100;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: -grey-10;
+}
+
+.ikon-detail-view:md .ikon-info-grid-pane .text-field {
+    -fx-pref-width: 160px;
+}
+
+.ikon-detail-view:sm .ikon-info-grid-pane .text-field {
+    -fx-pref-width: 100px;
+}
+
+.ikon-detail-view .ikon-info-grid-pane .title {
+    -fx-font-family: "Roboto Condensed";
+}
+
+.ikon-detail-view .ikon-info-grid-pane .title-2 {
+    -fx-padding: 0 0 0 50px;
+}
+
+.ikon-detail-view:md .ikon-info-grid-pane .title-2 {
+    -fx-padding: 0 0 0 10px;
+}
+
+.ikon-detail-view .detail-content {
+    -fx-spacing: 50px;
+    -fx-alignment: center;
+}
+
+.ikon-detail-view:md .detail-content {
+    -fx-spacing: 10px;
+}
+
+.ikon-detail-view:sm .detail-content {
+    -fx-spacing: 5px;
+    -fx-alignment: center;
+}
+
+.ikon-detail-view:sm .right {
+    visibility: hidden;
+}
+
+/** ----------------------------------------------------------------------------
+ * IkonGridView
+ */
+.ikon-grid-view .custom-pagination-control2 .grid-pane {
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+    -fx-padding: 15px 0;
+}
+
+.ikon-grid-view:md .custom-pagination-control2 .grid-pane {
+    -fx-hgap: 8px;
+    -fx-vgap: 8px;
+}
+
+.ikon-grid-view {
+    -fx-background-color: -white;
+    -fx-padding: 0 0 10px 0;
+}
+
+.ikon-grid-view:lg {
+    -fx-min-width: 1302px;
+    -fx-pref-width: 1302px;
+    -fx-max-width: 1302px;
+}
+
+.ikon-grid-view:md {
+    -fx-min-width: 709px;
+    -fx-pref-width: 709px;
+    -fx-max-width: 709px;
+}
+
+.ikon-grid-view:sm {
+    -fx-min-width: 317px;
+    -fx-pref-width: 317px;
+    -fx-max-width: 317px;
+    -fx-background-color: -white;
+    -fx-padding: 10px 0;
+}
+
+
+.ikon-grid-view .custom-pagination-control2 .control-box {
+    -fx-padding: 10px 0 0 0;
+}
+
+.ikon-grid-view:sm .custom-pagination-control2 .control-box {
+    -fx-spacing: 2px;
+}
+
+.ikon-grid-view:sm .custom-pagination-control2 .control-box > .left-arrow-button,
+.ikon-grid-view:sm .custom-pagination-control2 .control-box > .right-arrow-button {
+    -fx-min-width: 38px;
+    -fx-min-height: 38px;
+    -fx-padding: 8px;
+}
+
+.ikon-grid-view:sm .custom-pagination-control2 > .content-pane .control-box .number-button,
+.ikon-grid-view:sm .custom-pagination-control2 > .content-pane .control-box .ellipsis-label {
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
 }

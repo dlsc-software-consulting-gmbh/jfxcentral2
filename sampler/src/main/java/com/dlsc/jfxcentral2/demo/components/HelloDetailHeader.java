@@ -9,8 +9,8 @@ import com.dlsc.jfxcentral2.components.headers.BookDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.IconDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.PersonDetailHeader;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.model.IconModel;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.model.ikon.IkonPackModel;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -39,8 +39,8 @@ public class HelloDetailHeader extends JFXCentralSampleBase {
         return new ScrollPane(new VBox(30, personDetailHeader, appDetailHeader, bookDetailHeader));
     }
 
-    private IconModel getIcon() {
-        IconModel icon = new IconModel();
+    private IkonPackModel getIcon() {
+        IkonPackModel icon = new IkonPackModel();
         icon.setName("Icons");
         icon.setUrl("https://www.jfx-central.com/");
         return icon;
