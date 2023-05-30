@@ -6761,3 +6761,122 @@
     -fx-max-width: 30px;
     -fx-max-height: 30px;
 }
+
+/** ----------------------------------------------------------------------------
+ * HamburgerMenuView
+ */
+.hamburger-menu-view {
+    -fx-background-color: -background;
+}
+
+.hamburger-menu-view:lg {
+    -fx-min-width: -lg-width;
+    -fx-pref-width: -lg-width;
+    -fx-max-width: -lg-width;
+}
+
+.hamburger-menu-view:md {
+    -fx-min-width: -md-width;
+    -fx-pref-width: -md-width;
+    -fx-max-width: -md-width;
+}
+
+.hamburger-menu-view:sm {
+    -fx-min-width: -sm-width;
+    -fx-pref-width: -sm-width;
+    -fx-max-width: -sm-width;
+}
+
+.hamburger-menu-view .top-header {
+    -fx-padding: 17px 20px 17px 25px;
+    -fx-background-color: -white;
+    -fx-alignment: center-left;
+    -fx-spacing: 13px;
+    -fx-effect: -blue-shadow;
+}
+
+.hamburger-menu-view .top-header .jfxcentral-region {
+    -fx-pref-width: 162px;
+    -fx-pref-height: 23px;
+    -fx-max-width: 162px;
+    -fx-max-height: 23px;
+    -fx-background-color: -grey-100;
+}
+
+.hamburger-menu-view .top-header > .custom-image-view {
+    -fx-fit-width: 50px;
+    -fx-fit-height: 50px;
+}
+
+.hamburger-menu-view .top-header > .close-button {
+    -fx-background-color: transparent;
+}
+
+.hamburger-menu-view .top-header > .close-button:hover > .ikonli-font-icon,
+.hamburger-menu-view .top-header > .close-button:pressed > .ikonli-font-icon {
+    -fx-icon-color: -red;
+}
+
+.hamburger-menu-view .top-header > .close-button > .ikonli-font-icon {
+    -fx-icon-size: 23px;
+    -fx-icon-color: -grey-100;
+}
+
+.hamburger-menu-view > .content-box > .menus-box {
+    -fx-padding: 40px 90px;
+    -fx-spacing: 40px;
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 20px;
+}
+
+.hamburger-menu-view:sm > .content-box > .menus-box {
+    -fx-padding: 40px 25px;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .submenu-wrapper {
+    -fx-padding: 30px 0 0 0;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .submenu-box {
+    -fx-padding: 30px 0;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 1px 0;
+    -fx-spacing: 30px;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .hamburger-menu-button,
+.hamburger-menu-view > .content-box > .menus-box .hamburger-item-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-alignment: center-left;
+    -fx-graphic-text-gap: 42px;
+    -fx-cursor: hand;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .hamburger-menu-button:hover,
+.hamburger-menu-view > .content-box > .menus-box .hamburger-item-button:hover {
+    -fx-background-color: #e2e2e299;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .hamburger-menu-button:pressed,
+.hamburger-menu-view > .content-box > .menus-box .hamburger-item-button:pressed {
+    -fx-background-color: -grey-10;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .hamburger-item-button .ikonli-font-icon {
+    -fx-icon-color: -grey-100;
+    -fx-icon-size: 25px;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .hamburger-menu-button .expand-indicator {
+    -fx-icon-color: -grey-100;
+    -fx-icon-size: 18px;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .hamburger-menu-button:selected .expand-indicator {
+    -fx-rotate: 180px;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .hamburger-menu-button .button-graphic {
+    -fx-alignment: center-left;
+}
