@@ -15,7 +15,7 @@ public class PullRequestsFilterView extends SearchFilterView {
                 new FilterItem<>("STATUS", PullRequestStatus.class, PullRequestStatus.ALL)
         );
 
-        setOnApplyFilters(() -> System.out.println("selectedFiltersProperty: " + getSelectedFilters()));
+//        setOnApplyFilters(() -> System.out.println("selectedFiltersProperty: " + getSelectedFilters()));
     }
 
 }

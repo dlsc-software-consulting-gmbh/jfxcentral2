@@ -21,6 +21,6 @@ public class IkonliPacksFilter extends SimpleSearchFilterView {
             System.out.println("Selected Filters: " + filterEnums);
         });
 
-        setOnApplyFilters(() -> System.out.println("selectedFiltersProperty: " + getSelectedFilters()));
+//        setOnApplyFilters(() -> System.out.println("selectedFiltersProperty: " + getSelectedFilters()));
     }
 }

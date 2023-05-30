@@ -15,7 +15,7 @@ public class VideosFilterView extends SearchFilterView {
                 new FilterItem<>("TYPE", VideoType.class, VideoType.INTERVIEW)
         );
 
-        setOnApplyFilters(() -> System.out.println("selectedFiltersProperty: " + getSelectedFilters()));
+//        setOnApplyFilters(() -> System.out.println("selectedFiltersProperty: " + getSelectedFilters()));
     }
 
 }

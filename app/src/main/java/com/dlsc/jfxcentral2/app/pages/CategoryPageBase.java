@@ -11,6 +11,7 @@ import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.scene.Node;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
@@ -33,10 +34,15 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         SearchFilterView filterView = createSearchFilterView();
         filterView.sizeProperty().bind(sizeProperty());
 
+        // data
+        ObservableList<T> categoryItems = getCategoryItems();
+        FilteredList<T> filteredItems = new FilteredList<>(categoryItems);
+        filteredItems.predicateProperty().bind(filterView.predicateProperty());
+
         // grid view
         ModelGridView<T> gridView = createGridView();
         gridView.sizeProperty().bind(sizeProperty());
-        gridView.setItems(getCategoryItems());
+        gridView.setItems(filteredItems);
         gridView.setTileViewProvider(getTileViewProvider());
         gridView.setDetailNodeProvider(getDetailNodeProvider());
         gridView.setColumns(getNumberOfGridViewColumns());

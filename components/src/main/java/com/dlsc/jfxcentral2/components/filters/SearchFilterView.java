@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-import com.dlsc.gemsfx.SearchField;
+import com.dlsc.gemsfx.SearchTextField;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
@@ -26,7 +26,6 @@ import javafx.css.StyleableProperty;
 import javafx.css.converter.EnumConverter;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -44,12 +43,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
-public class SearchFilterView extends PaneBase {
+public class SearchFilterView<T> extends PaneBase {
 
     private static final String DEFAULT_STYLE_CLASS = "search-filter-view";
     private static final Orientation FILTER_BOX_DEFAULT_ORIENTATION = Orientation.HORIZONTAL;
     private static final String WITH_SEARCH_FIELD = "with-search-field";
+
+    private final SearchTextField searchField = new SearchTextField(true);
 
     public record FilterItem<E extends Enum<E>>(String title, Class<E> filterEnumClass, Enum<E> defaultValue,
                                                 boolean multipleSelection) {
@@ -60,6 +62,10 @@ public class SearchFilterView extends PaneBase {
 
     public SearchFilterView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
+
+        searchField.promptTextProperty().bind(searchPromptTextProperty());
+        searchField.managedProperty().bind(searchField.visibleProperty());
+        searchField.visibleProperty().bind(onSearchProperty().isNotNull());
 
         filterBoxOrientation.addListener(it -> layoutBySize());
         filterItemsProperty().addListener((InvalidationListener) it -> layoutBySize());
@@ -76,6 +82,29 @@ public class SearchFilterView extends PaneBase {
         });
 
         layoutBySize();
+
+        InvalidationListener updateFilter = it -> {
+            if (getOnSearch() != null) {
+                getOnSearch().accept(searchField.getText(), getSelectedFilters());
+            }
+        };
+
+        selectedFilters.addListener(updateFilter);
+        searchField.textProperty().addListener(updateFilter);
+    }
+
+    private final ObjectProperty<Predicate<? extends T>> predicate = new SimpleObjectProperty<>(this, "predicate", item -> true);
+
+    public Predicate<? extends T> getPredicate() {
+        return predicate.get();
+    }
+
+    public ObjectProperty<Predicate<? extends T>> predicateProperty() {
+        return predicate;
+    }
+
+    public void setPredicate(Predicate<? extends T> predicate) {
+        this.predicate.set(predicate);
     }
 
     private BooleanBinding binding;
@@ -87,27 +116,6 @@ public class SearchFilterView extends PaneBase {
         Pane contentBox = isSmall() ? new VBox() : new HBox();
         contentBox.getStyleClass().add("content-box");
         contentBox.managedProperty().bind(contentBox.visibleProperty());
-
-        SearchField<String> searchField = new SearchField<>();
-        searchField.promptTextProperty().bind(searchPromptTextProperty());
-        searchField.managedProperty().bind(searchField.visibleProperty());
-        searchField.visibleProperty().bind(onSearchProperty().isNotNull());
-        searchField.setOnSearchStarted(evt -> {
-            if (onSearch.get() != null) {
-                onSearch.get().accept(searchField.getText(), getSelectedFilters());
-            }
-        });
-
-        Button applyFiltersButton = new Button("APPLY FILTERS");
-        applyFiltersButton.setMinWidth(Region.USE_PREF_SIZE);
-        applyFiltersButton.getStyleClass().addAll("apply-filters-button", "blue-button");
-        applyFiltersButton.managedProperty().bind(applyFiltersButton.visibleProperty());
-        applyFiltersButton.visibleProperty().bind(filterItemsProperty().sizeProperty().greaterThan(1));
-        applyFiltersButton.setOnAction(evt -> {
-            if (onApplyFilters.get() != null) {
-                onApplyFilters.get().run();
-            }
-        });
 
         Pane filtersBox = isSmall() ? new VBox() : new HBox();
         filtersBox.getStyleClass().add("filters-box");
@@ -122,7 +130,7 @@ public class SearchFilterView extends PaneBase {
         Spacer spacer = new Spacer();
         spacer.managedProperty().bind(spacer.visibleProperty());
 
-        contentBox.getChildren().setAll(searchField, filtersBox, spacer, applyFiltersButton);
+        contentBox.getChildren().setAll(searchField, filtersBox, spacer); //, applyFiltersButton);
         contentBox.getChildren().addAll(getExtraNodes());
 
         if (isSmall() && getOnSearch() == null) {
@@ -371,19 +379,19 @@ public class SearchFilterView extends PaneBase {
         this.selectedFilters.set(selectedFilters);
     }
 
-    private final ObjectProperty<Runnable> onApplyFilters = new SimpleObjectProperty<>(this, "onApplyFilters");
-
-    public Runnable getOnApplyFilters() {
-        return onApplyFilters.get();
-    }
-
-    public ObjectProperty<Runnable> onApplyFiltersProperty() {
-        return onApplyFilters;
-    }
-
-    public void setOnApplyFilters(Runnable onApplyFilters) {
-        this.onApplyFilters.set(onApplyFilters);
-    }
+//    private final ObjectProperty<Runnable> onApplyFilters = new SimpleObjectProperty<>(this, "onApplyFilters");
+//
+//    public Runnable getOnApplyFilters() {
+//        return onApplyFilters.get();
+//    }
+//
+//    public ObjectProperty<Runnable> onApplyFiltersProperty() {
+//        return onApplyFilters;
+//    }
+//
+//    public void setOnApplyFilters(Runnable onApplyFilters) {
+//        this.onApplyFilters.set(onApplyFilters);
+//    }
 
     private final ObjectProperty<BiConsumer<String, List<List<Enum>>>> onSearch = new SimpleObjectProperty<>(this, "onSearch");
 

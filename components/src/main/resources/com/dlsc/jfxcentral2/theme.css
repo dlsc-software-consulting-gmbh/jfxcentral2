@@ -4458,7 +4458,7 @@
     -fx-alignment: center;
 }
 
-.search-filter-view .search-field .text-field {
+.search-filter-view .search-text-field {
     -fx-background-radius: 26px;
     -fx-focus-color: -grey-10;
     -fx-faint-focus-color: transparent;
@@ -6592,8 +6592,10 @@
  * IkonDetailView
  */
 .ikon-detail-view {
-    -fx-background-color: -white;
-    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.25), 15, 0.4, 0, 0);
+    -fx-padding: 10px;
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 6px;
+    -fx-background-insets: 0px, 1px 0px 1px 0px;
     -fx-padding: 10px;
 }
 
@@ -6609,9 +6611,6 @@
     -fx-min-heigth: -size;
     -fx-pref-height: -size;
     -fx-max-height: -size;
-    -fx-border-color: -grey-10;
-    -fx-background-color: -white;
-    -fx-background-radius: 10px;
 }
 
 .ikon-detail-view:md .ikon-preview-wrapper {

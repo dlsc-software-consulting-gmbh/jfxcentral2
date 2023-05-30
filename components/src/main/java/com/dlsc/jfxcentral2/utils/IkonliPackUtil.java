@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.utils;
 
+import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.model.IkonData;
-import com.dlsc.jfxcentral2.model.filter.IconPack;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.IkonProvider;
 
@@ -61,8 +61,9 @@ public class IkonliPackUtil {
         return nameMap.get(simpleName);
     }
 
-    public List<Ikon> getIkonList(IconPack iconPack) {
-        IkonProvider ikonProvider = iconPack.getIkonData().getIkonProvider();
+    public List<Ikon> getIkonList(IkonliPack iconPack) {
+        IkonData ikonData = getIkonData(iconPack.getName());
+        IkonProvider ikonProvider = ikonData.getIkonProvider();
         EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
         return List.copyOf(new ArrayList<Ikon>(enumSet));
     }

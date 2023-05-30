@@ -13,6 +13,6 @@ public class ShowcaseFilterView extends SearchFilterView {
                 new FilterItem<>("DOMAIN", ShowcaseDomain.class, ShowcaseDomain.ALL)
         );
 
-        setOnApplyFilters(() -> System.out.println("selectedFiltersProperty: " + getSelectedFilters()));
+//        setOnApplyFilters(() -> System.out.println("selectedFiltersProperty: " + getSelectedFilters()));
     }
 }

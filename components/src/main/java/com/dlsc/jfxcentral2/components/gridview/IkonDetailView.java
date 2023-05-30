@@ -17,6 +17,7 @@ import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class IkonDetailView extends DetailView<Ikon> {
+
     public IkonDetailView(Ikon item) {
         super(item);
         getStyleClass().add("ikon-detail-view");
