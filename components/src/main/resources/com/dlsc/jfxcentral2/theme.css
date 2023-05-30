@@ -4308,6 +4308,10 @@
     -fx-background-color: -background;
 }
 
+.strip-view.light {
+    -fx-background-color: white;
+}
+
 .strip-view:lg {
     -fx-padding: 50px 0px;
 }

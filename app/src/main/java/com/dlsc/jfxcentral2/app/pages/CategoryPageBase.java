@@ -36,6 +36,7 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
 
         // data
         ObservableList<T> categoryItems = getCategoryItems();
+
         FilteredList<T> filteredItems = new FilteredList<>(categoryItems);
         filteredItems.predicateProperty().bind(filterView.predicateProperty());
 

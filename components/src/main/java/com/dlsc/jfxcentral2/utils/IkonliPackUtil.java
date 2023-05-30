@@ -2,13 +2,13 @@ package com.dlsc.jfxcentral2.utils;
 
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.model.IkonData;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.IkonProvider;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -61,10 +61,10 @@ public class IkonliPackUtil {
         return nameMap.get(simpleName);
     }
 
-    public List<Ikon> getIkonList(IkonliPack iconPack) {
+    public ObservableList<Ikon> getIkonList(IkonliPack iconPack) {
         IkonData ikonData = getIkonData(iconPack.getName());
         IkonProvider ikonProvider = ikonData.getIkonProvider();
         EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
-        return List.copyOf(new ArrayList<Ikon>(enumSet));
+        return FXCollections.observableArrayList(enumSet);
     }
 }

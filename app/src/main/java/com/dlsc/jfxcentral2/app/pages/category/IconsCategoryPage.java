@@ -14,10 +14,10 @@ import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
-public class IconsCategoryiPage extends CategoryPageBase<IkonliPack> {
+public class IconsCategoryPage extends CategoryPageBase<IkonliPack> {
 
 
-    public IconsCategoryiPage(ObjectProperty<Size> size) {
+    public IconsCategoryPage(ObjectProperty<Size> size) {
         super(size);
     }
 

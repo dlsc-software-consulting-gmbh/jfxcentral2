@@ -93,17 +93,17 @@ public class SearchFilterView<T> extends PaneBase {
         searchField.textProperty().addListener(updateFilter);
     }
 
-    private final ObjectProperty<Predicate<? extends T>> predicate = new SimpleObjectProperty<>(this, "predicate", item -> true);
+    private final ObjectProperty<Predicate<T>> predicate = new SimpleObjectProperty<>(this, "predicate", item -> true);
 
-    public Predicate<? extends T> getPredicate() {
+    public Predicate<T> getPredicate() {
         return predicate.get();
     }
 
-    public ObjectProperty<Predicate<? extends T>> predicateProperty() {
+    public ObjectProperty<Predicate<T>> predicateProperty() {
         return predicate;
     }
 
-    public void setPredicate(Predicate<? extends T> predicate) {
+    public void setPredicate(Predicate<T> predicate) {
         this.predicate.set(predicate);
     }
 
@@ -378,20 +378,6 @@ public class SearchFilterView<T> extends PaneBase {
     private void setSelectedFilters(ObservableList<List<Enum>> selectedFilters) {
         this.selectedFilters.set(selectedFilters);
     }
-
-//    private final ObjectProperty<Runnable> onApplyFilters = new SimpleObjectProperty<>(this, "onApplyFilters");
-//
-//    public Runnable getOnApplyFilters() {
-//        return onApplyFilters.get();
-//    }
-//
-//    public ObjectProperty<Runnable> onApplyFiltersProperty() {
-//        return onApplyFilters;
-//    }
-//
-//    public void setOnApplyFilters(Runnable onApplyFilters) {
-//        this.onApplyFilters.set(onApplyFilters);
-//    }
 
     private final ObjectProperty<BiConsumer<String, List<List<Enum>>>> onSearch = new SimpleObjectProperty<>(this, "onSearch");
 

@@ -2,12 +2,16 @@ package com.dlsc.jfxcentral2.app.pages.details;
 
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
+import com.dlsc.jfxcentral2.components.StripView;
+import com.dlsc.jfxcentral2.components.filters.IkonliIconsFilter;
 import com.dlsc.jfxcentral2.components.gridview.IkonGridView;
 import com.dlsc.jfxcentral2.components.headers.IconDetailHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.transformation.FilteredList;
 import javafx.scene.Node;
+import org.kordamp.ikonli.Ikon;
 
 public class IconPackDetailPage extends DetailsPageBase<IkonliPack> {
 
@@ -23,11 +27,23 @@ public class IconPackDetailPage extends DetailsPageBase<IkonliPack> {
         IconDetailHeader iconDetailHeader = new IconDetailHeader(ikonliPack);
         iconDetailHeader.sizeProperty().bind(sizeProperty());
 
+        // filter view
+        IkonliIconsFilter filter = new IkonliIconsFilter();
+        filter.sizeProperty().bind(sizeProperty());
+
+        // data
+        FilteredList<Ikon> filteredList = new FilteredList<>(IkonliPackUtil.getInstance().getIkonList(ikonliPack));
+        filteredList.predicateProperty().bind(filter.predicateProperty());
+
         // grid view
         IkonGridView gridView = new IkonGridView();
         gridView.sizeProperty().bind(sizeProperty());
-        gridView.getItems().setAll(IkonliPackUtil.getInstance().getIkonList(ikonliPack));
+        gridView.setItems(filteredList);
 
-        return wrapContent(iconDetailHeader, gridView);
+        // strip view
+        StripView stripView = new StripView(gridView);
+        stripView.getStyleClass().add("light");
+
+        return wrapContent(iconDetailHeader, filter, stripView);
     }
 }

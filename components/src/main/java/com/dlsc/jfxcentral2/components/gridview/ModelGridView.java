@@ -42,6 +42,8 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
 
     @Override
     protected void layoutBySize() {
+        System.out.println("changing grid view, size = " + getItems().size());
+
         currentDetailView = null;
         if (isSmall()) {
             VBox contentBox = new VBox();

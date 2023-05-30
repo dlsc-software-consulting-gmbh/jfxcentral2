@@ -1,22 +1,19 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-import com.dlsc.jfxcentral.data.model.IkonliPack;
+import org.apache.commons.lang3.StringUtils;
+import org.kordamp.ikonli.Ikon;
 
 /**
  * Filters for selecting specific icons
  */
-public class IkonliIconsFilter extends SimpleSearchFilterView<IkonliPack> {
+public class IkonliIconsFilter extends SimpleSearchFilterView<Ikon> {
 
     public IkonliIconsFilter() {
         getStyleClass().add("ikonli-icons-filter");
         setSearchPromptText("Search by name");
 
-        setOnSearch((keywords, filterEnums) -> {
-            System.out.println("------------Search icon ------------");
-            System.out.println("Search keywords: " + keywords);
-            System.out.println("Selected Filters: " + filterEnums);
+        setOnSearch((searchText, filterEnums) -> {
+            setPredicate(icon -> StringUtils.isBlank(searchText) || StringUtils.containsIgnoreCase(icon.getDescription(), searchText));
         });
-
-//        setOnApplyFilters(() -> System.out.println("selectedFiltersProperty: " + getSelectedFilters()));
     }
 }

@@ -12,7 +12,7 @@ import com.dlsc.jfxcentral2.app.pages.category.BlogsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.BooksCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.CompaniesCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.DownloadsCategoryPage;
-import com.dlsc.jfxcentral2.app.pages.category.IconsCategoryiPage;
+import com.dlsc.jfxcentral2.app.pages.category.IconsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.LibrariesCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.PeopleCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.ShowcasesCategoryPage;
@@ -82,7 +82,7 @@ public class JFXCentral2App extends RouteApp {
                 .and(createCategoryOrDetailRoute("/tools", () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/tutorials", () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/videos", () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/icons", () -> new IconsCategoryiPage(size), id -> new IconPackDetailPage(size, id)))
+                .and(createCategoryOrDetailRoute("/icons", () -> new IconsCategoryPage(size), id -> new IconPackDetailPage(size, id)))
                 .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/cookies", r -> new LegalPage(size, LegalPage.Section.COOKIES)))
