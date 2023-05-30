@@ -96,6 +96,7 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.components.gridview;
     exports com.dlsc.jfxcentral2.components.overviewbox;
     exports com.dlsc.jfxcentral2.components.userprofile;
+    exports com.dlsc.jfxcentral2.components.hamburger;
 
     uses IkonProvider;
 }
