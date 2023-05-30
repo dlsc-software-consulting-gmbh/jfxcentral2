@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.model.ikon.IkonPackModel;
-import com.dlsc.jfxcentral2.utils.IkonModelUtil;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -23,20 +23,20 @@ public class IconPreviewPane extends PaneBase {
 
     public IconPreviewPane() {
         getStyleClass().add("icon-preview-pane");
-        iconModelProperty().addListener(it -> requestLayout());
+        modelProperty().addListener(it -> requestLayout());
     }
 
     @Override
     protected void layoutBySize() {
-        if (getIconModel() == null) {
+        if (getModel() == null) {
             getChildren().clear();
             return;
         }
         GridPane gridPane = new GridPane();
         gridPane.getStyleClass().add("icon-grid-pane");
-        IkonPackModel ikonPackModel = getIconModel();
+        IkonliPack ikonPackModel = getModel();
         ObservableList<? extends Ikon> icons = FXCollections.observableArrayList();
-        IkonProvider ikonProvider = IkonModelUtil.getInstance().getIkonData(ikonPackModel.getName()).getIkonProvider();
+        IkonProvider ikonProvider = IkonliPackUtil.getInstance().getIkonData(ikonPackModel.getName()).getIkonProvider();
         EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
         icons.addAll(enumSet);
         FXCollections.shuffle(icons);
@@ -76,17 +76,17 @@ public class IconPreviewPane extends PaneBase {
         return new Color(red, green, blue, 1.0);
     }
 
-    private final ObjectProperty<IkonPackModel> iconModel = new SimpleObjectProperty<>(this, "IkonPackModel");
+    private final ObjectProperty<IkonliPack> model = new SimpleObjectProperty<>(this, "model");
 
-    public IkonPackModel getIconModel() {
-        return iconModel.get();
+    public IkonliPack getModel() {
+        return model.get();
     }
 
-    public ObjectProperty<IkonPackModel> iconModelProperty() {
-        return iconModel;
+    public ObjectProperty<IkonliPack> modelProperty() {
+        return model;
     }
 
-    public void setIconModel(IkonPackModel ikonPackModel) {
-        this.iconModel.set(ikonPackModel);
+    public void setModel(IkonliPack ikonPackModel) {
+        this.model.set(ikonPackModel);
     }
 }

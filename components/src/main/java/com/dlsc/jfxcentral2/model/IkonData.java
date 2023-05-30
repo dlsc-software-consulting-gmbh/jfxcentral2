@@ -3,7 +3,9 @@ package com.dlsc.jfxcentral2.model;
 import org.kordamp.ikonli.IkonProvider;
 
 public class IkonData implements Comparable<IkonData> {
+
     private String name;
+
     private IkonProvider ikonProvider;
 
     public IkonData() {
@@ -23,7 +25,7 @@ public class IkonData implements Comparable<IkonData> {
         return ikonProvider;
     }
 
-    static IkonData of(IkonProvider ikonProvider) {
+    public static IkonData of(IkonProvider ikonProvider) {
         IkonData ikonData = new IkonData();
         ikonData.name = ikonProvider.getIkon().getSimpleName();
         ikonData.ikonProvider = ikonProvider;

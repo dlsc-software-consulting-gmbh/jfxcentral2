@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.gridview.IkonGridView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.filter.IconPack;
-import com.dlsc.jfxcentral2.utils.IkonModelUtil;
+import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
@@ -19,10 +19,8 @@ public class HelloIkonGridView extends JFXCentralSampleBase {
     @Override
     protected Region createControl() {
         ikonGridView = new IkonGridView();
-        List<Ikon> ikonList = IkonModelUtil.getInstance().getIkonList(IconPack.MATERIAL);
+        List<Ikon> ikonList = IkonliPackUtil.getInstance().getIkonList(IconPack.MATERIAL);
         ikonGridView.getItems().addAll(ikonList);
-        ikonGridView.columnsProperty().bind(ikonGridView.sizeProperty().map(s -> s.isLarge() ? 12 : s.isMedium() ? 8 : 3));
-        ikonGridView.setRows(6);
         return new ScrollPane(ikonGridView);
     }
 

@@ -3,6 +3,7 @@ import org.kordamp.ikonli.IkonProvider;
 open module com.dlsc.jfxcentral2.components {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.web;
 
     requires fr.brouillard.oss.cssfx;
 
@@ -15,7 +16,6 @@ open module com.dlsc.jfxcentral2.components {
 
     requires jpro.webapi;
     requires one.jpro.routing.core;
-    requires javafx.web;
     requires java.desktop;
     requires com.rometools.rome;
     requires commons.validator;
@@ -96,7 +96,6 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.components.gridview;
     exports com.dlsc.jfxcentral2.components.overviewbox;
     exports com.dlsc.jfxcentral2.components.userprofile;
-    exports com.dlsc.jfxcentral2.model.ikon;
 
     uses IkonProvider;
 }

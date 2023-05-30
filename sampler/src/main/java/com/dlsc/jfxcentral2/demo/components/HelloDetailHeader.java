@@ -1,19 +1,17 @@
 package com.dlsc.jfxcentral2.demo.components;
 
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
-import com.dlsc.jfxcentral2.components.headers.AppDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.BookDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.IconDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.PersonDetailHeader;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.model.ikon.IkonPackModel;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -26,9 +24,9 @@ public class HelloDetailHeader extends JFXCentralSampleBase {
         PersonDetailHeader personDetailHeader = new PersonDetailHeader(getPerson());
         personDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
 
-        AppDetailHeader appDetailHeader = new AppDetailHeader(getApp());
-        appDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
-        appDetailHeader.setBackgroundImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/quick-link-lg2.png").toExternalForm()));
+//        AppDetailHeader appDetailHeader = new AppDetailHeader(getApp());
+//        appDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
+//        appDetailHeader.setBackgroundImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/quick-link-lg2.png").toExternalForm()));
 
         BookDetailHeader bookDetailHeader = new BookDetailHeader(getBook());
         bookDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
@@ -36,11 +34,11 @@ public class HelloDetailHeader extends JFXCentralSampleBase {
         IconDetailHeader iconDetailHeader = new IconDetailHeader(getIcon());
         iconDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
 
-        return new ScrollPane(new VBox(30, personDetailHeader, appDetailHeader, bookDetailHeader));
+        return new ScrollPane(new VBox(30, personDetailHeader, bookDetailHeader));
     }
 
-    private IkonPackModel getIcon() {
-        IkonPackModel icon = new IkonPackModel();
+    private IkonliPack getIcon() {
+        IkonliPack icon = new IkonliPack();
         icon.setName("Icons");
         icon.setUrl("https://www.jfx-central.com/");
         return icon;

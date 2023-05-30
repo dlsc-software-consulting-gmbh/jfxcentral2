@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.model.filter;
 
-import com.dlsc.jfxcentral2.model.ikon.IkonData;
-import com.dlsc.jfxcentral2.utils.IkonModelUtil;
+import com.dlsc.jfxcentral2.model.IkonData;
+import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 
 public enum IconPack {
     ALL("Select All"),
@@ -116,7 +116,7 @@ public enum IconPack {
     private final String description;
     private IkonData ikonData;
 
-    private IconPack(String description) {
+    IconPack(String description) {
         this.description = description;
     }
 
@@ -126,7 +126,7 @@ public enum IconPack {
 
     public IkonData getIkonData() {
         if (ikonData == null) {
-            this.ikonData = IkonModelUtil.getInstance().getIkonData(description);
+            ikonData = IkonliPackUtil.getInstance().getIkonData(description);
         }
         return ikonData;
     }

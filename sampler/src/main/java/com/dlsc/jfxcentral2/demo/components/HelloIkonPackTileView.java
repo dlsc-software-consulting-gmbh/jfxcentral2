@@ -1,25 +1,24 @@
 package com.dlsc.jfxcentral2.demo.components;
 
+import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
-import com.dlsc.jfxcentral2.components.tiles.IkonPackModelTileView;
+import com.dlsc.jfxcentral2.components.tiles.IkonliPackTileView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.model.filter.IconPack;
-import com.dlsc.jfxcentral2.model.ikon.IkonPackModel;
-import com.dlsc.jfxcentral2.utils.IkonModelUtil;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 public class HelloIkonPackTileView extends JFXCentralSampleBase {
 
-    private IkonPackModelTileView ikonPackModelTileView;
+    private IkonliPackTileView ikonPackModelTileView;
 
     @Override
     protected Region createControl() {
-        IkonPackModel ikonPackModel = IkonModelUtil.getInstance().getIkonPackModel(IconPack.ANTDESIGNICONSFILLED);
-        ikonPackModel.setDescription("Source files for the custom icon-font used by the File-Icons package./app experience.");
+        IkonliPack ikonPackModel = DataRepository.getInstance().getIkonliPacks().get(0);
+        ikonPackModel.setDescription("Some description");
 
-        ikonPackModelTileView = new IkonPackModelTileView(ikonPackModel);
+        ikonPackModelTileView = new IkonliPackTileView(ikonPackModel);
         return new StackPane(ikonPackModelTileView);
     }
 

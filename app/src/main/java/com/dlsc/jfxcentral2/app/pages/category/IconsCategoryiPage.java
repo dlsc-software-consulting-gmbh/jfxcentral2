@@ -1,21 +1,20 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
+import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.IkonliPacksFilter;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.tiles.IkonPackModelTileView;
+import com.dlsc.jfxcentral2.components.tiles.IkonliPackTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.model.ikon.IkonPackModel;
-import com.dlsc.jfxcentral2.utils.IkonModelUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
-public class IconsCategoryiPage extends CategoryPageBase<IkonPackModel> {
+public class IconsCategoryiPage extends CategoryPageBase<IkonliPack> {
 
 
     public IconsCategoryiPage(ObjectProperty<Size> size) {
@@ -32,30 +31,6 @@ public class IconsCategoryiPage extends CategoryPageBase<IkonPackModel> {
         return "A browser for all ikonli icon fonts that supports searching based on icon name.";
     }
 
-//    @Override
-//    public Node content() {
-//
-//        // category header
-//        CategoryHeader header = new CategoryHeader();
-//        header.sizeProperty().bind(sizeProperty());
-//        header.setTitle("Icons");
-//        header.setIkon(IkonUtil.champion);
-//
-//        // ikonli browser
-//        ModelGridView<IkonPackModel> gridView = new ModelGridView();
-//        gridView.sizeProperty().bind(sizeProperty());
-//
-//        // features container
-//        FeaturesContainer featuresContainer = new FeaturesContainer();
-//        featuresContainer.sizeProperty().bind(sizeProperty());
-//
-//        // strip view wrapper
-//        StripView stripView = new StripView(browser, featuresContainer);
-//        stripView.sizeProperty().bind(sizeProperty());
-//
-//        return wrapContent(header, stripView);
-//    }
-
     @Override
     protected String getCategoryTitle() {
         return "Icons";
@@ -63,17 +38,17 @@ public class IconsCategoryiPage extends CategoryPageBase<IkonPackModel> {
 
     @Override
     protected Ikon getCategoryIkon() {
-        return IkonUtil.getModelIkon(IkonPackModel.class);
+        return IkonUtil.getModelIkon(IkonliPack.class);
     }
 
     @Override
-    protected ObservableList<IkonPackModel> getCategoryItems() {
-        return FXCollections.observableArrayList(IkonModelUtil.getInstance().getIkonPackModelList());
+    protected ObservableList<IkonliPack> getCategoryItems() {
+        return DataRepository.getInstance().getIkonliPacks();
     }
 
     @Override
-    protected Callback<IkonPackModel, TileViewBase<IkonPackModel>> getTileViewProvider() {
-        return IkonPackModelTileView::new;
+    protected Callback<IkonliPack, TileViewBase<IkonliPack>> getTileViewProvider() {
+        return IkonliPackTileView::new;
     }
 
     @Override

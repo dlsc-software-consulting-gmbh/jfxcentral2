@@ -1,11 +1,11 @@
 package com.dlsc.jfxcentral2.components.headers;
 
-import com.dlsc.jfxcentral2.model.ikon.IkonPackModel;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
 
-public class IconDetailHeader extends SimpleDetailHeader<IkonPackModel>  {
+public class IconDetailHeader extends SimpleDetailHeader<IkonliPack>  {
 
-    public IconDetailHeader(IkonPackModel app) {
-        super(app);
+    public IconDetailHeader(IkonliPack pack) {
+        super(pack);
         getStyleClass().add("icon-detail-header");
         setWebsite(getModel().getUrl());
     }

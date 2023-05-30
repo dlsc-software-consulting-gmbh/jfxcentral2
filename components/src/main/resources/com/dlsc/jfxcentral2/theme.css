@@ -6722,23 +6722,19 @@
 .ikon-grid-view:lg {
     -fx-min-width: 1302px;
     -fx-pref-width: 1302px;
-    -fx-max-width: 1302px;
 }
 
 .ikon-grid-view:md {
     -fx-min-width: 709px;
     -fx-pref-width: 709px;
-    -fx-max-width: 709px;
 }
 
 .ikon-grid-view:sm {
     -fx-min-width: 317px;
     -fx-pref-width: 317px;
-    -fx-max-width: 317px;
     -fx-background-color: -white;
     -fx-padding: 10px 0;
 }
-
 
 .ikon-grid-view .custom-pagination-control2 .control-box {
     -fx-padding: 10px 0 0 0;
