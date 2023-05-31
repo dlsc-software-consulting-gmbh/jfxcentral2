@@ -28,6 +28,7 @@ import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -105,12 +106,13 @@ public class HamburgerMenuView extends PaneBase {
 
     private void refreshMenus() {
         menusBox.getChildren().clear();
+        ToggleGroup group = new ToggleGroup();
         for (HamburgerMenu menu : getMenus()) {
-            menusBox.getChildren().add(createMenuButton(menu));
+            menusBox.getChildren().add(createMenuButton(menu, group));
         }
     }
 
-    private Node createMenuButton(HamburgerMenu menu) {
+    private Node createMenuButton(HamburgerMenu menu,ToggleGroup group) {
         if (menu.getItems().isEmpty()) {
             Button button = new Button();
             button.getStyleClass().add("hamburger-menu-button");
@@ -119,6 +121,9 @@ public class HamburgerMenuView extends PaneBase {
         } else {
             ToggleButton toggleButton = new ToggleButton();
             toggleButton.getStyleClass().add("hamburger-menu-button");
+            if (group != null) {
+                toggleButton.setToggleGroup(group);
+            }
 
             Label menuLabel = new Label();
             menuLabel.getStyleClass().add("menu-label");
@@ -140,7 +145,7 @@ public class HamburgerMenuView extends PaneBase {
 
             for (HamburgerMenuItem item : menu.getItems()) {
                 if (item instanceof HamburgerMenu) {
-                    submenuBox.getChildren().add(createMenuButton((HamburgerMenu) item));
+                    submenuBox.getChildren().add(createMenuButton((HamburgerMenu) item,null));
                 } else {
                     Button itemButton = new Button();
                     itemButton.getStyleClass().add("hamburger-item-button");
