@@ -102,6 +102,8 @@ public abstract class PageBase extends View {
         return root;
     }
 
+    // flag to control the visibility of the hamburger menu
+
     private final BooleanProperty showHamburgerMenu = new SimpleBooleanProperty(this, "showHamburgerMenu");
 
     public boolean isShowHamburgerMenu() {
@@ -115,6 +117,8 @@ public abstract class PageBase extends View {
     public void setShowHamburgerMenu(boolean showHamburgerMenu) {
         this.showHamburgerMenu.set(showHamburgerMenu);
     }
+
+    // blocking property to control the glass pane
 
     private final BooleanProperty blocking = new SimpleBooleanProperty(this, "blocking");
 
