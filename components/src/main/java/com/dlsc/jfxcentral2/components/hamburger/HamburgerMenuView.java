@@ -87,6 +87,7 @@ public class HamburgerMenuView extends PaneBase {
 
             menuButton.setGraphic(buttonGraphic);
             menuButton.selectedProperty().bindBidirectional(menu.expandedProperty());
+            menuButton.onActionProperty().bind(menu.onActionProperty());
             menuButton.setMaxWidth(Double.MAX_VALUE);
 
             VBox submenuBox = new VBox();
@@ -122,11 +123,7 @@ public class HamburgerMenuView extends PaneBase {
             return icon;
         }, item.ikonProperty()));
         if (itemButton instanceof ButtonBase btn) {
-            btn.setOnAction(event -> {
-                if (item.getOnAction() != null) {
-                    item.getOnAction().handle(event);
-                }
-            });
+            btn.onActionProperty().bind(item.onActionProperty());
         }
         itemButton.setMaxWidth(Double.MAX_VALUE);
 
