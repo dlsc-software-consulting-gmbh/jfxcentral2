@@ -4844,8 +4844,29 @@
     -fx-min-height: 86px;
 }
 
+.library-preview-box .previews-strip-view.selected {
+    -fx-pref-width: 800px;
+}
+
+.library-preview-box:lg .previews-strip-view {
+    -fx-pref-width: 690px;
+}
+
+.library-preview-box:md .previews-strip-view {
+    -fx-pref-width: 535px;
+}
+
+.library-preview-box:sm .previews-strip-view {
+    -fx-pref-width: 168px;
+}
+
+.library-preview-box:sm .previews-strip-view .strip-cell {
+    -fx-padding: 0px 3px;
+}
+
 .library-preview-box .previews-strip-view .strip-cell {
     -fx-cursor: hand;
+    -fx-padding: 0px 7px;
 }
 
 .library-preview-box .previews-strip-view .strip-cell:selected {
@@ -4894,6 +4915,28 @@
     -fill: -white;
     -fx-padding: 7px 9px;
     -fx-background-radius: 50px;
+}
+
+.library-preview-box .previews-strip-view.selected .strip-cell:selected .image-wrapper {
+    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.5), 12, 0.5, 0, 0);
+}
+
+.library-preview-box .previews-box {
+    -fx-alignment: center-left;
+}
+
+.library-preview-box  .more-label {
+    -fx-min-width: 70px;
+    -fx-pref-width: 70px;
+    -fx-max-width: 70px;
+    -fx-min-height: 65px;
+    -fx-pref-height: 65px;
+    -fx-max-height: 65px;
+    -fx-alignment: center;
+    -fx-font-size: 20px;
+    -fx-text-fill: -grey-60;
+    -fx-background-color: -grey-10;
+    -fx-background-radius: 10px;
 }
 
 /* ------------------------------------
