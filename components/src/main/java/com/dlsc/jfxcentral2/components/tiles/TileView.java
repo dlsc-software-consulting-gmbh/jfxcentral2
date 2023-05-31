@@ -144,8 +144,6 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
                 }
                 return banner;
             }, ImageManager.getInstance().realWorldAppBannerImageProperty(app), ImageManager.getInstance().realWorldAppLargeImageProperty(app)));
-
-//            imageProperty().bind(ImageManager.getInstance().realWorldAppLargeImageProperty(app));
         } else if (item instanceof Video video) {
             imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
         } else if (item instanceof Book book) {

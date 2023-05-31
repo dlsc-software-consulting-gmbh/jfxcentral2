@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.Objects;
 
-public class TopPane extends StackPane {
+public class TopPane extends PaneBase {
 
     private TopMenuBar topMenuBar;
     private Region content;

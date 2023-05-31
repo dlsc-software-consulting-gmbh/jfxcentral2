@@ -15,12 +15,27 @@ public class HamburgerMenuItem {
     }
 
     public HamburgerMenuItem(String text) {
-        this(text, null);
+        this(text, null, null);
     }
 
-    public HamburgerMenuItem(String text, Ikon ikon) {
+    public HamburgerMenuItem(String text, Ikon ikon, String url) {
         setText(text);
         setIkon(ikon);
+        setUrl(url);
+    }
+
+    private final StringProperty url = new SimpleStringProperty();
+
+    public String getUrl() {
+        return url.get();
+    }
+
+    public StringProperty urlProperty() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url.set(url);
     }
 
     private final StringProperty text = new SimpleStringProperty();

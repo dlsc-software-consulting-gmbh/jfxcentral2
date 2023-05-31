@@ -38,3 +38,5 @@ build/
 .DS_Store
 /app/RUNNING_PID
 /app/logs/
+
+/scenicView.properties

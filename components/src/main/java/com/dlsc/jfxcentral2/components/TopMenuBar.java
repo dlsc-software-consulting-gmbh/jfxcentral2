@@ -57,6 +57,7 @@ public class TopMenuBar extends PaneBase {
     private final HBox contentBox;
 
     private Node searchTextField;
+    private MenuButton menuBtn;
 
     public enum Mode {
         LIGHT,
@@ -176,6 +177,17 @@ public class TopMenuBar extends PaneBase {
 
             MenuButton menuBtn = createMenuButton("Menu");
             menuBtn.getStyleClass().add("top-menu-button");
+            menuBtn.showingProperty().addListener(it -> {
+                if (menuBtn.isShowing()) {
+                    setShowHamburgerMenu(true);
+                }
+            });
+
+            showHamburgerMenuProperty().addListener(it -> {
+                if (!isShowHamburgerMenu()) {
+                    menuBtn.hide();
+                }
+            });
 
             contentBox.getChildren().setAll(createLogo(), new Spacer(), logOutBtn, createSeparatorRegion(), stackPane, createSeparatorRegion(), menuBtn);
         }
@@ -218,6 +230,20 @@ public class TopMenuBar extends PaneBase {
             blocking = blocking.or(Bindings.createBooleanBinding(menuButton::isShowing, menuButton.showingProperty()));
         }
         return menuButton;
+    }
+
+    private final BooleanProperty showHamburgerMenu = new SimpleBooleanProperty(this, "showHamburgerMenu");
+
+    public boolean isShowHamburgerMenu() {
+        return showHamburgerMenu.get();
+    }
+
+    public BooleanProperty showHamburgerMenuProperty() {
+        return showHamburgerMenu;
+    }
+
+    public void setShowHamburgerMenu(boolean showHamburgerMenu) {
+        this.showHamburgerMenu.set(showHamburgerMenu);
     }
 
     private Node getSearchTextField() {

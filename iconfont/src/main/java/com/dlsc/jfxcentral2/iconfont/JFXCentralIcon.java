@@ -46,7 +46,7 @@ public enum JFXCentralIcon implements Ikon {
     SEARCH("jfxc-icon-search", '\ue928'),
     SHARE("jfxc-icon-share", '\ue929'),
     SHOWCASES("jfxc-icon-showcases", '\ue92a'),
-    THIMB_UP_FILLED("jfxc-icon-thimb-up-filled", '\ue92b'),
+    THUMB_UP_FILLED("jfxc-icon-thumb-up-filled", '\ue92b'),
     THUMB_UP("jfxc-icon-thumb-up", '\ue92c'),
     TIMER("jfxc-icon-timer", '\ue92d'),
     TIPS_TRICKS("jfxc-icon-tips-tricks", '\ue92e'),

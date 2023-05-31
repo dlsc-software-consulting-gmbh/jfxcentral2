@@ -13,15 +13,19 @@ public class HamburgerMenu extends HamburgerMenuItem {
     }
 
     public HamburgerMenu(String text) {
-        this(text, null);
+        this(text, null, null);
     }
 
-    public HamburgerMenu(String text, Ikon ikon) {
-        this(text, ikon, (HamburgerMenuItem[]) null);
+    public HamburgerMenu(String text, String url) {
+        this(text, null, url);
     }
 
-    public HamburgerMenu(String text, Ikon ikon, HamburgerMenuItem... items) {
-        super(text, ikon);
+    public HamburgerMenu(String text, Ikon ikon, String url) {
+        this(text, ikon, url, (HamburgerMenuItem[]) null);
+    }
+
+    public HamburgerMenu(String text, Ikon ikon, String url, HamburgerMenuItem... items) {
+        super(text, ikon, url);
         if (items != null) {
             getItems().addAll(items);
         }
