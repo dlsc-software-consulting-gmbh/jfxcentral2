@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.JFXCentralUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -12,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class LoginView extends PaneBase{
 
@@ -43,19 +45,19 @@ public class LoginView extends PaneBase{
         Text text1 = new Text("Enter your details to save ");
         text1.getStyleClass().add("description-text");
 
-        ImageView floppy = new ImageView();
+        FontIcon floppy = new FontIcon(JFXCentralIcon.FLOPPY);
         floppy.getStyleClass().add("floppy");
 
         Text text2 = new Text(" and like ");
         text2.getStyleClass().add("description-text");
 
-        ImageView heart = new ImageView();
+        FontIcon heart = new FontIcon(JFXCentralIcon.HEART);
         heart.getStyleClass().add("heart");
 
         Text text3 = new Text(" pages, add comments ");
         text3.getStyleClass().add("description-text");
 
-        ImageView comment = new ImageView();
+        FontIcon comment = new FontIcon(JFXCentralIcon.COMMENTS);
         comment.getStyleClass().add("comment");
 
         Text text4 = new Text(" and edit your personal details");

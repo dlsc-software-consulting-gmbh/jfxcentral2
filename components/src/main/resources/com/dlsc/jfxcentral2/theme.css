@@ -658,27 +658,6 @@
     -fx-background-color: -bright-blue;
 }
 
-.login-view .floppy {
-    -fx-image: url("images/floppy.png");
-    -fx-pref-height: 16px;
-    -fx-pref-width: 16px;
-    -fx-translate-y: 3px;
-}
-
-.login-view .heart {
-    -fx-image: url("images/heart.png");
-    -fx-pref-height: 16px;
-    -fx-pref-width: 16px;
-    -fx-translate-y: 3px;
-}
-
-.login-view .comment {
-    -fx-image: url("images/comment.png");
-    -fx-pref-height: 16px;
-    -fx-pref-width: 16px;
-    -fx-translate-y: 3px;
-}
-
 .login-view:lg .title {
     -fx-text-fill: white;
     -fx-font-size: 44px;
@@ -694,6 +673,11 @@
     -fx-font-size: 34px;
 }
 
+.login-view .description-text-flow .ikonli-font-icon {
+    -fx-icon-color: -white;
+    -fx-icon-size: 24px;
+    -fx-translate-y: 3px;
+}
 
 .login-view:lg .description-text-flow {
     -fx-max-height: 0;
@@ -2256,6 +2240,10 @@
 .save-and-like-button .toggle-button:selected {
     -fx-background-color: -green;
     -fx-border-color: transparent;
+}
+
+.save-and-like-button:md .toggle-button {
+    -fx-content-display: graphic-only;
 }
 
 /** -------------------------------

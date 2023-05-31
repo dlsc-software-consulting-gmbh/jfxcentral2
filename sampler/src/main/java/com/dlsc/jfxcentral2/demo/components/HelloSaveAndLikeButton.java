@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.demo.components;
 
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
+import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -40,6 +41,9 @@ public class HelloSaveAndLikeButton extends JFXCentralSampleBase {
         TextField likeTextField = new TextField("Like");
         saveAndLikeButton.likeButtonTextProperty().bind(likeTextField.textProperty());
 
+        SizeComboBox sizeComboBox = new SizeComboBox();
+        saveAndLikeButton.sizeProperty().bind(sizeComboBox.valueProperty());
+
         VBox vBox = new VBox(10,
                 saveButtonVisibleCheckBox,
                 likeButtonVisibleCheckBox,
@@ -48,7 +52,9 @@ public class HelloSaveAndLikeButton extends JFXCentralSampleBase {
                 saveTextField,
                 new Separator(),
                 new Label("Like Text"),
-                likeTextField
+                likeTextField,
+                new Label("Change Size"),
+                sizeComboBox
         );
 
         saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, nv) -> {
