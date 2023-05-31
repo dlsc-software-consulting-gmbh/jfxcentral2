@@ -294,7 +294,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         ObjectProperty<Image> imageProperty = null;
         String mins = null;
         if (model instanceof RealWorldApp app) {
-            imageProperty = ImageManager.getInstance().realWorldAppImageProperty(app);
+            imageProperty = ImageManager.getInstance().realWorldAppBannerImageProperty(app);
         } else if (model instanceof Download download) {
             imageProperty = ImageManager.getInstance().downloadBannerImageProperty(download);
         } else if (model instanceof Book book) {

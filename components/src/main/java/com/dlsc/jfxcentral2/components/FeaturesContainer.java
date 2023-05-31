@@ -60,16 +60,20 @@ public class FeaturesContainer extends PaneBase {
         featuresProperty().addListener((ob, ov, nv) -> layoutBySize());
 
         List<ModelObject> allModelObjects = new ArrayList<>();
-//        allModelObjects.addAll(DataRepository.getInstance().getVideos());
-//        allModelObjects.addAll(DataRepository.getInstance().getTips());
-//        allModelObjects.addAll(DataRepository.getInstance().getTutorials());
+        allModelObjects.addAll(DataRepository.getInstance().getTips());
         allModelObjects.addAll(DataRepository.getInstance().getLibraries());
         allModelObjects.addAll(DataRepository.getInstance().getRealWorldApps());
-//        allModelObjects.addAll(DataRepository.getInstance().getPeople());
-//        allModelObjects.addAll(DataRepository.getInstance().getBlogs());
         allModelObjects.addAll(DataRepository.getInstance().getTools());
         allModelObjects.addAll(DataRepository.getInstance().getBooks());
         Collections.shuffle(allModelObjects);
+
+        /*
+         * For now we do not feature videos, tutorials, people, or blogs.
+         */
+//        allModelObjects.addAll(DataRepository.getInstance().getVideos());
+//        allModelObjects.addAll(DataRepository.getInstance().getTutorials());
+//        allModelObjects.addAll(DataRepository.getInstance().getPeople());
+//        allModelObjects.addAll(DataRepository.getInstance().getBlogs());
 
 
         allModelObjects
@@ -136,7 +140,7 @@ public class FeaturesContainer extends PaneBase {
         } else if (mo instanceof Library library) {
             return ImageManager.getInstance().libraryImageProperty(library);
         } else if (mo instanceof RealWorldApp app) {
-            return ImageManager.getInstance().realWorldAppImageProperty(app);
+            return ImageManager.getInstance().realWorldAppBannerImageProperty(app);
         } else if (mo instanceof Person person) {
             return ImageManager.getInstance().personImageProperty(person);
         } else if (mo instanceof Blog blog) {

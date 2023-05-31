@@ -10,11 +10,12 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class AppsDetailsBox extends DetailsBoxBase<RealWorldApp> {
+
     public AppsDetailsBox() {
         getStyleClass().add("apps-details-box");
         setTitle("APPS");
         setIkon(IkonUtil.app);
-        setMaxItemsPerPage(2);
+        setMaxItemsPerPage(5);
 
         setOnDetails(detailsObject -> {
             System.out.println("On Details: " + detailsObject.getName());

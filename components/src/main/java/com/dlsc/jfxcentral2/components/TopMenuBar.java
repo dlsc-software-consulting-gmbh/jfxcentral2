@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
@@ -201,6 +202,7 @@ public class TopMenuBar extends PaneBase {
         button.getItems().add(createMenuItem("Videos", "/videos", IkonUtil.getModelIkon(Video.class)));
         button.getItems().add(createMenuItem("Books", "/books", IkonUtil.getModelIkon(Book.class)));
         button.getItems().add(createMenuItem("Blogs", "/blogs", IkonUtil.getModelIkon(Blog.class)));
+        button.getItems().add(createMenuItem("Tips", "/tips", IkonUtil.getModelIkon(Tip.class)));
         button.getItems().add(createMenuItem("Tutorials", "/tutorials", IkonUtil.getModelIkon(Tutorial.class)));
         button.getItems().add(createMenuItem("Icons", "/icons", IkonUtil.getModelIkon(IkonliPack.class)));
     }

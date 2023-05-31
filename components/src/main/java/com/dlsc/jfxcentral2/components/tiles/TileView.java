@@ -137,13 +137,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         setLikeSelected(SaveAndLikeUtil.isLiked(item));
 
         if (item instanceof RealWorldApp app) {
-            imageProperty().bind(Bindings.createObjectBinding(() -> {
-                Image banner = ImageManager.getInstance().realWorldAppBannerImageProperty(app).get();
-                if (banner == null) {
-                    banner = ImageManager.getInstance().realWorldAppLargeImageProperty(app).get();
-                }
-                return banner;
-            }, ImageManager.getInstance().realWorldAppBannerImageProperty(app), ImageManager.getInstance().realWorldAppLargeImageProperty(app)));
+            imageProperty().bind(ImageManager.getInstance().realWorldAppBannerImageProperty(app));
         } else if (item instanceof Video video) {
             imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
         } else if (item instanceof Book book) {

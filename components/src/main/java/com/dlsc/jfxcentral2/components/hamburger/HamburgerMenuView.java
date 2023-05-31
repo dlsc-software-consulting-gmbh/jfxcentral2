@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
@@ -74,6 +75,7 @@ public class HamburgerMenuView extends PaneBase {
                 new HamburgerMenuItem("Videos", IkonUtil.getModelIkon(Video.class), "/videos"),
                 new HamburgerMenuItem("Books", IkonUtil.getModelIkon(Book.class), "/books"),
                 new HamburgerMenuItem("Blogs", IkonUtil.getModelIkon(Blog.class), "/blogs"),
+                new HamburgerMenuItem("Tips", IkonUtil.getModelIkon(Tip.class), "/tip"),
                 new HamburgerMenuItem("Tutorials", IkonUtil.getModelIkon(Tutorial.class), "/tutorials"),
                 new HamburgerMenuItem("Icons", IkonUtil.getModelIkon(IkonliPack.class), "/icons")
         );
