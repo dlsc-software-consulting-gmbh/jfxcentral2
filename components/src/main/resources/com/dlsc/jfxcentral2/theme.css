@@ -3400,8 +3400,6 @@
 .video-tile-view > .content-box > .bottom-pane .button1 .ikonli-font-icon {
     -fx-icon-color: -grey-100;
     -fx-icon-size: 18px;
-    -fx-scale-x: 1.4;
-    -fx-scale-y: 1.4;
 }
 
 /** ------------------------------------
@@ -6851,25 +6849,25 @@
 }
 
 .hamburger-menu-view > .content-box > .menus-box {
-    -fx-padding: 40px 90px;
-    -fx-spacing: 40px;
+    -fx-padding: 30px 90px;
+    -fx-spacing: 10px;
     -fx-font-family: "Roboto Condensed";
     -fx-font-size: 20px;
 }
 
 .hamburger-menu-view:sm > .content-box > .menus-box {
-    -fx-padding: 40px 25px;
+    -fx-padding: 30px 25px;
 }
 
 .hamburger-menu-view > .content-box > .menus-box .submenu-wrapper {
-    -fx-padding: 30px 0 0 0;
+    -fx-padding: 15px 0 0 0;
 }
 
 .hamburger-menu-view > .content-box > .menus-box .submenu-box {
-    -fx-padding: 30px 0;
+    -fx-padding: 15px 0;
     -fx-border-color: -grey-10;
     -fx-border-width: 1px 0;
-    -fx-spacing: 30px;
+    -fx-spacing: 5px;
 }
 
 .hamburger-menu-view > .content-box > .menus-box .hamburger-menu-button,
@@ -6879,6 +6877,7 @@
     -fx-alignment: center-left;
     -fx-graphic-text-gap: 42px;
     -fx-cursor: hand;
+    -fx-padding: 16px 10px;
 }
 
 .hamburger-menu-view > .content-box > .menus-box .hamburger-menu-button:hover,
