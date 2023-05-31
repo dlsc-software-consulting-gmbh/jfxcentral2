@@ -89,3 +89,19 @@
 .test-avatar-view {
     -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.8), 30, 0.2, 0, 0);
 }
+
+.bg-test {
+    -fx-pref-width: 304px;
+    -fx-max-width: 304px;
+    -fx-min-width: 304px;
+    -fx-pref-height: 228px;
+    -fx-max-height: 228px;
+    -fx-min-height: 228px;
+    -fx-background-color: -bright-blue;
+    -fx-border-color: -bright-blue;
+    -fx-border-width: 5px;
+    -fx-background-image: url('images/test-football.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
