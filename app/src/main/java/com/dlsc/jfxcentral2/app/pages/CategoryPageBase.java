@@ -43,11 +43,11 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         // grid view
         ModelGridView<T> gridView = createGridView();
         gridView.sizeProperty().bind(sizeProperty());
-        gridView.setItems(filteredItems);
         gridView.setTileViewProvider(getTileViewProvider());
         gridView.setDetailNodeProvider(getDetailNodeProvider());
         gridView.setColumns(getNumberOfGridViewColumns());
         gridView.setRows(getNumberOfGridViewRows());
+        gridView.setItems(filteredItems);
 
         // wrap grid view in a strip view
         StripView stripView = new StripView(gridView);
