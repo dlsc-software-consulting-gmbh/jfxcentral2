@@ -20,6 +20,7 @@ import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -73,6 +74,8 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         descriptionLabel.textProperty().bind(descriptionProperty());
         descriptionLabel.setWrapText(true);
         descriptionLabel.setMaxHeight(Double.MAX_VALUE);
+        descriptionLabel.setAlignment(Pos.TOP_LEFT);
+
         VBox.setVgrow(descriptionLabel, Priority.ALWAYS);
 
         linkedObjectBox = new HBox();
@@ -92,7 +95,6 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         HBox contentBox = new HBox(avatarView, leftBox);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
-
     }
 
     private final ObjectProperty<AvatarView.Type> avatarType = new SimpleObjectProperty<>(this, "avatarType", AvatarView.Type.CIRCLE);
