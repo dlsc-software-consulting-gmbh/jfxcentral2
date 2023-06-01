@@ -76,7 +76,7 @@ public class HamburgerMenuView extends PaneBase {
                 new HamburgerMenuItem("Videos", IkonUtil.getModelIkon(Video.class), "/videos"),
                 new HamburgerMenuItem("Books", IkonUtil.getModelIkon(Book.class), "/books"),
                 new HamburgerMenuItem("Blogs", IkonUtil.getModelIkon(Blog.class), "/blogs"),
-                new HamburgerMenuItem("Tips", IkonUtil.getModelIkon(Tip.class), "/tip"),
+                new HamburgerMenuItem("Tips", IkonUtil.getModelIkon(Tip.class), "/tips"),
                 new HamburgerMenuItem("Tutorials", IkonUtil.getModelIkon(Tutorial.class), "/tutorials"),
                 new HamburgerMenuItem("Icons", IkonUtil.getModelIkon(IkonliPack.class), "/icons")
         );

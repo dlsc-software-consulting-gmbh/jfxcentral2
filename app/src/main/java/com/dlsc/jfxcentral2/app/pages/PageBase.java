@@ -15,6 +15,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -48,6 +49,7 @@ public abstract class PageBase extends View {
         VBox vbox = new VBox();
         vbox.getStyleClass().add("ui");
         vbox.setFillWidth(true);
+        VBox.setVgrow(vbox, Priority.ALWAYS);
         updateStyleClassBasedOnSize(vbox);
         sizeProperty().addListener(it -> updateStyleClassBasedOnSize(vbox));
 
@@ -79,6 +81,7 @@ public abstract class PageBase extends View {
         StackPane.setAlignment(hamburgerMenuView, Pos.TOP_CENTER);
 
         VBox uiBox = new VBox(content);
+        VBox.setVgrow(uiBox, Priority.ALWAYS);
         uiBox.setAlignment(Pos.BOTTOM_CENTER);
 
         StackPane.setAlignment(uiBox, Pos.TOP_CENTER);
@@ -86,6 +89,7 @@ public abstract class PageBase extends View {
         TopPane topStackPane = new TopPane(topMenuBar, uiBox);
         topStackPane.sizeProperty().bind(sizeProperty());
         StackPane.setAlignment(topMenuBar, Pos.TOP_CENTER);
+        VBox.setVgrow(topStackPane, Priority.ALWAYS);
 
         StackPane.setAlignment(vbox, Pos.TOP_CENTER);
 

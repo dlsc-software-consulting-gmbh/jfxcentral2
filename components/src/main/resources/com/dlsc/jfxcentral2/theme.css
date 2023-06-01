@@ -575,9 +575,8 @@
 }
 
 /** -------------------------------
-* LoginView
-*/
-
+ * LoginView
+ */
 .login-view:lg {
     -fx-min-width: 1440px;
     -fx-min-height: 800px;
@@ -598,23 +597,21 @@
 }
 
 .login-view .bg-image {
-    -fx-background-image: url("images/openjfx-background.jpg");
     -fx-scale-x: -1;
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }
 
 .login-view:lg .bg-image {
-    -fx-background-size: 1620px 2880px;
-    -fx-background-position: -90px -1040px;
+    -fx-background-image: url("images/welcome.jpg");
 }
 
 .login-view:md .bg-image {
-    -fx-background-size: 768px 1300px;
-    -fx-background-position: 0px -150px
+    -fx-background-image: url("images/welcome-md.jpg");
 }
 
 .login-view:sm .bg-image {
-    -fx-background-size: 500px 893px;
-    -fx-background-position: -50px 0px
+    -fx-background-image: url("images/welcome-sm.jpg");
 }
 
 .login-view .h-box {
@@ -810,9 +807,8 @@
 }
 
 /** -------------------------------
-* OpenJFXProjectView
-*/
-
+ * OpenJFXProjectView
+ */
 .openjfx-project-view:lg {
     -fx-max-height: 674px;
     -fx-min-height: 674px;
@@ -5439,6 +5435,10 @@
 /** ------------------------------------
  * ModelGridView
  */
+.model-grid-view .grid-pane {
+    -fx-padding: 20px 10px; /* to ensure drop shadow visibility */
+}
+
 .model-grid-view:lg .custom-pagination-control2 .grid-pane {
     -fx-hgap: 29px;
     -fx-vgap: 10px;

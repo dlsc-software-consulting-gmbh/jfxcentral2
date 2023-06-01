@@ -5,6 +5,8 @@ import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 public class LoginPage extends PageBase {
 
@@ -24,9 +26,12 @@ public class LoginPage extends PageBase {
 
     @Override
     public Node content() {
+
         // login view
         LoginView loginView = new LoginView();
         loginView.sizeProperty().bind(sizeProperty());
+        VBox.setVgrow(loginView, Priority.ALWAYS);
+
         return wrapContent(loginView);
     }
 }

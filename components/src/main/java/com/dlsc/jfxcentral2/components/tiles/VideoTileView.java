@@ -18,6 +18,8 @@ public class VideoTileView extends TileView<Video> {
 
         getStyleClass().add("video-tile-view");
 
+        setDescription(video.getDescription());
+
         setButton1Text("PLAY");
         setButton1Graphic(new FontIcon(IkonUtil.play));
 

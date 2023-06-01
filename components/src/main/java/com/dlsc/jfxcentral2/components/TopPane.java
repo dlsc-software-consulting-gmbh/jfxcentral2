@@ -37,6 +37,7 @@ public class TopPane extends PaneBase {
             getChildren().setAll(content, topMenuBar);
         } else {
             VBox box = new VBox(topMenuBar, content);
+            VBox.setVgrow(box, Priority.ALWAYS);
             StackPane.setAlignment(box, Pos.TOP_CENTER);
             box.getStyleClass().add("vbox");
             box.setMaxWidth(Double.MAX_VALUE);

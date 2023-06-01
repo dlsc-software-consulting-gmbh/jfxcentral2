@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
-import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import one.jpro.routing.LinkUtil;
@@ -13,7 +12,7 @@ public class CompanyTileView extends TileView<Company> {
         getStyleClass().add("company-tile-view");
         setButton1Text("HOMEPAGE");
         setButton1Graphic(new FontIcon(IkonUtil.link));
-        descriptionProperty().bind(DataRepository.getInstance().companyDescriptionProperty(company));
+        setDescription(company.getDescription());
         LinkUtil.setLink(getButton1(), "/companies/" + company.getId());
     }
 }

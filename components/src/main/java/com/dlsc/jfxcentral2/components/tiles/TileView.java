@@ -35,6 +35,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -223,12 +228,15 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         //Top image
         mainImageRegion = new Region();
         mainImageRegion.getStyleClass().add("main-image-region");
-        imageProperty().addListener(it -> {
+        mainImageRegion.backgroundProperty().bind(Bindings.createObjectBinding(() -> {
             Image image = getImage();
-            mainImageRegion.setStyle("-fx-background-image: url('" + (image == null ? null : image.getUrl()) + "');");
-        });
+            if (image != null) {
+                return new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, true, true, false, true)));
+            }
+            return null;
+        }, imageProperty()));
 
-        //remarkLabel Used to display the remark information,
+        // remarkLabel Used to display the remark information,
         // such as the duration of the video ,release date, etc.
         Label remarkLabel = new Label();
         remarkLabel.setGraphic(new FontIcon());

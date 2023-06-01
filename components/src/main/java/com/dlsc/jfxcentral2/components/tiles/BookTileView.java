@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
-import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.image.Image;
@@ -16,7 +15,7 @@ public class BookTileView extends TileView<Book> {
 
         getStyleClass().add("book-tile-view");
 
-        descriptionProperty().bind(DataRepository.getInstance().bookTextProperty(book));
+        setDescription(book.getDescription());
 
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));

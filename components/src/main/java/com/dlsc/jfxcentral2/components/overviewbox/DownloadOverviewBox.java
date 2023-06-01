@@ -9,5 +9,6 @@ public class DownloadOverviewBox extends SimpleOverviewBox<Download> {
         super(download);
         getStyleClass().add("download-overview-box");
         setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "downloads/" + getModel().getId());
+        markdownProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
     }
 }

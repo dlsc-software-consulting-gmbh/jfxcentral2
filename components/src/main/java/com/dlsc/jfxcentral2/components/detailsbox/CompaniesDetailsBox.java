@@ -15,7 +15,6 @@ public class CompaniesDetailsBox extends SimpleDetailsBox<Company> {
         setOnDetails(detailsObject -> {
             System.out.println("On Details: " + detailsObject.getName());
         });
-
     }
 
     @Override
