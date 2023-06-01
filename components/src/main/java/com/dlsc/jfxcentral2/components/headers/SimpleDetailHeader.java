@@ -34,6 +34,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         super(model);
         getStyleClass().add("simple-detail-header");
         setCenter(createCenterNode());
+        setDescription(model.getDescription());
     }
 
     public Button getWebsiteButton() {
@@ -60,11 +61,13 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         nameLabel.setWrapText(true);
 
         Label descriptionLabel = null;
-        if (StringUtils.isNotBlank(model.getDescription())) {
-            descriptionLabel = new Label(model.getDescription());
-            descriptionLabel.getStyleClass().add("description");
-            descriptionLabel.setWrapText(true);
-        }
+
+        descriptionLabel = new Label();
+        descriptionLabel.visibleProperty().bind(descriptionLabel.textProperty().isNotEmpty());
+        descriptionLabel.managedProperty().bind(descriptionLabel.textProperty().isNotEmpty());
+        descriptionLabel.textProperty().bind(descriptionProperty());
+        descriptionLabel.getStyleClass().add("description");
+        descriptionLabel.setWrapText(true);
 
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
@@ -107,15 +110,25 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         HBox buttonBox = new HBox(saveAndLikeButton, separator, websiteButton);
         buttonBox.getStyleClass().add("button-box");
 
-        if (descriptionLabel != null) {
-            contentBox.getChildren().addAll(nameLabel, descriptionLabel, buttonBox);
-        } else {
-            contentBox.getChildren().addAll(nameLabel, buttonBox);
-        }
+        contentBox.getChildren().addAll(nameLabel, descriptionLabel, buttonBox);
 
         FlowPane contentPane = new FlowPane(logoImageView, contentBox);
         contentPane.getStyleClass().add("flow-pane");
         return contentPane;
+    }
+
+    private final StringProperty description = new SimpleStringProperty(this, "description");
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
     }
 
     private final StringProperty websiteButtonText = new SimpleStringProperty(this, "websiteButtonText", "WEBSITE");

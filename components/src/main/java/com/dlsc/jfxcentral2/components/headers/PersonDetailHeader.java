@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.headers;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.components.AvatarView;
@@ -31,15 +32,13 @@ public class PersonDetailHeader extends DetailHeader<Person> {
     private Pane createCenterNode() {
         Person person = getModel();
 
-        if (person == null) {
-            return null;
-        }
         AvatarView avatarImage = new AvatarView();
         avatarImage.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
 
         FlowPane nameBadgePane = createNameBadgePane(person);
 
-        Label descriptionLabel = new Label(person.getDescription());
+        Label descriptionLabel = new Label();
+        descriptionLabel.textProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
         descriptionLabel.setWrapText(true);
         descriptionLabel.getStyleClass().add("description");
 

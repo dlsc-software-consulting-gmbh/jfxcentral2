@@ -208,6 +208,9 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
                 actionButtonsPane.getStyleClass().add("action-buttons-pane");
                 for (int i = 0; i < actionButtons.size(); i++) {
                     Node actionButton = actionButtons.get(i);
+                    if (actionButton instanceof Region region) {
+                        region.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+                    }
                     actionButton.getStyleClass().addAll("action-button", "action-button-" + i);
                     actionButton.setFocusTraversable(false);
                     actionButtonsPane.getChildren().add(actionButton);

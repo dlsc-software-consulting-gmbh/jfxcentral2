@@ -11,5 +11,6 @@ public class BookDetailHeader extends SimpleDetailHeader<Book> {
         setWebsiteButtonText("amazon");
         setWebsite("https://www.amazon.com/dp/" + getModel().getAmazonASIN());
         setBackgroundImage(new Image(BookDetailHeader.class.getResource("books-banner.jpg").toExternalForm()));
+        setDescription(book.getSubtitle());
     }
 }
