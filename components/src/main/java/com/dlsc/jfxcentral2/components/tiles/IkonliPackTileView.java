@@ -13,7 +13,6 @@ public class IkonliPackTileView extends TileView<IkonliPack> {
         super(pack);
 
         getStyleClass().addAll("icon-tile-view");
-        setDescription(pack.getDescription());
 
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));

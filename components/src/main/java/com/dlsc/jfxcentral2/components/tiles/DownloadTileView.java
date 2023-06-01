@@ -12,8 +12,6 @@ public class DownloadTileView extends TileView<Download> {
 
         getStyleClass().add("download-tile-view");
 
-        setDescription(download.getDescription());
-
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));
 

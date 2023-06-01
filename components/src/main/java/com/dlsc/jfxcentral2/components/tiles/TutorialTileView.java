@@ -11,7 +11,6 @@ public class TutorialTileView extends TileView<Tutorial> {
     public TutorialTileView(Tutorial tutorial) {
         super(tutorial);
         getStyleClass().add("tutorial-tile-view");
-        setDescription(tutorial.getDescription());
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));
         imageProperty().bind(ImageManager.getInstance().tutorialImageLargeProperty(tutorial));

@@ -65,6 +65,8 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
         getStyleClass().add("tile-view");
 
+        setDescription(item.getDescription());
+
         VBox contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");
         //[Top] FlipView

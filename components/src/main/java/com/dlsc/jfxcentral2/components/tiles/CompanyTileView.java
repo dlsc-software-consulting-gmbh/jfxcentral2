@@ -12,7 +12,6 @@ public class CompanyTileView extends TileView<Company> {
         getStyleClass().add("company-tile-view");
         setButton1Text("HOMEPAGE");
         setButton1Graphic(new FontIcon(IkonUtil.link));
-        setDescription(company.getDescription());
         LinkUtil.setLink(getButton1(), "/companies/" + company.getId());
     }
 }

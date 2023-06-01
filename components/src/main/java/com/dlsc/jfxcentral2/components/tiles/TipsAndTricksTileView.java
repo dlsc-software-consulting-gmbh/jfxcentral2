@@ -21,8 +21,6 @@ public class TipsAndTricksTileView extends TileView<Tip> {
         setButton1Text("READ NOW");
         setButton1Graphic(new FontIcon(IkonUtil.link));
 
-        setDescription(tip.getDescription());
-
         LocalDate date = tip.getCreatedOn();
         if (date != null) {
             String formattedDate = date.format(DEFAULT_DATE_FORMATTER);
