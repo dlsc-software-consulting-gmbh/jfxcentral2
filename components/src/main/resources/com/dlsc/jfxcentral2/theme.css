@@ -2885,6 +2885,14 @@
     -fx-background-color: -white;
     -fx-border-width: 0 0 1px 0;
     -fx-border-color: -grey-10;
+    -tile-w: 100px;
+    -tile-h: 100px;
+    -fx-min-width: -tile-w;
+    -fx-pref-width: -tile-w;
+    -fx-max-width: -tile-w;
+    -fx-min-height: -tile-h;
+    -fx-pref-height: -tile-h;
+    -fx-max-height: -tile-h;
 }
 
 .tile-view-base:hover {
@@ -2964,12 +2972,8 @@
 }
 
 .tool-tile-view {
-    -fx-min-width: 410px;
-    -fx-pref-width: 410px;
-    -fx-max-width: 410px;
-    -fx-min-height: 130px;
-    -fx-pref-height: 130px;
-    -fx-max-height: 130px;
+    -tile-w: 410px;
+    -tile-h: 130px;
 }
 
 .tool-tile-view .bottom-box {
@@ -2984,42 +2988,26 @@
 }
 
 .blog-tile-view {
-    -fx-min-width: 413px;
-    -fx-pref-width: 413px;
-    -fx-max-width: 413px;
-    -fx-min-height: 138px;
-    -fx-pref-height: 138px;
-    -fx-max-height: 138px;
+    -tile-width: 413px;
+    -tile-height: 138px;
 }
 
 /** ------------------------------------
  * PersonTileView
  */
 .person-tile-view:lg {
-    -fx-min-width: 413px;
-    -fx-pref-width: 413px;
-    -fx-max-width: 413px;
-    -fx-min-height: 143px;
-    -fx-pref-height: 143px;
-    -fx-max-height: 143px;
+    -tile-w: 413px;
+    -tile-h: 143px;
 }
 
 .person-tile-view:md {
-    -fx-min-width: 344px;
-    -fx-pref-width: 344px;
-    -fx-max-width: 344px;
-    -fx-min-height: 140px;
-    -fx-pref-height: 140px;
-    -fx-max-height: 140px;
+    -tile-w: 344px;
+    -tile-h: 140px;
 }
 
 .person-tile-view:sm {
-    -fx-min-width: 317px;
-    -fx-pref-width: 317px;
-    -fx-max-width: 317px;
-    -fx-min-height: 136px;
-    -fx-pref-height: 136px;
-    -fx-max-height: 136px;
+    -tile-w: 317px;
+    -tile-h: 136px;
 }
 
 .person-tile-view:md-lg .avatar-view {
@@ -3089,30 +3077,18 @@
  * LibraryTileView
  */
 .library-tile-view:lg {
-    -fx-min-width: 413px;
-    -fx-pref-width: 413px;
-    -fx-max-width: 413px;
-    -fx-min-height: 143px;
-    -fx-pref-height: 143px;
-    -fx-max-height: 143px;
+    -tile-w: 413px;
+    -tile-h: 143px;
 }
 
 .library-tile-view:md {
-    -fx-min-width: 344px;
-    -fx-pref-width: 344px;
-    -fx-max-width: 344px;
-    -fx-min-height: 140px;
-    -fx-pref-height: 140px;
-    -fx-max-height: 140px;
+    -tile-w: 344px;
+    -tile-h: 140px;
 }
 
-.library-tile-view-tile-view:sm {
-    -fx-min-width: 317px;
-    -fx-pref-width: 317px;
-    -fx-max-width: 317px;
-    -fx-min-height: 136px;
-    -fx-pref-height: 136px;
-    -fx-max-height: 136px;
+.library-tile-view:sm {
+    -tile-w: 317px;
+    -tile-h: 136px;
 }
 
 /** ------------------------------------
@@ -3287,12 +3263,8 @@
  * VideoTileView
  */
 .video-tile-view:lg {
-    -fx-min-width: 415px;
-    -fx-min-height: 441px;
-    -fx-pref-width: 415px;
-    -fx-pref-height: 441px;
-    -fx-max-width: 415px;
-    -fx-max-height: 441px;
+    -tile-w: 415px;
+    -tile-h: 441px;
 }
 
 .video-tile-view:lg > .content-box > .flip-view .front-box .main-image-region {
@@ -3316,12 +3288,8 @@
 }
 
 .video-tile-view:md {
-    -fx-min-width: 223px;
-    -fx-min-height: 417px;
-    -fx-pref-width: 223px;
-    -fx-pref-height: 417px;
-    -fx-max-width: 223px;
-    -fx-max-height: 417px;
+    -tile-w: 223px;
+    -tile-h: 417px;
 }
 
 .video-tile-view:md > .content-box > .flip-view .front-box .main-image-region {
@@ -3344,12 +3312,8 @@
 }
 
 .video-tile-view:sm {
-    -fx-min-width: 317px;
-    -fx-min-height: 280px;
-    -fx-pref-width: 317px;
-    -fx-pref-height: 280px;
-    -fx-max-width: 317px;
-    -fx-max-height: 280px;
+    -tile-w: 317px;
+    -tile-h: 280px;
 }
 
 .video-tile-view:sm > .content-box > .flip-view .front-box {
@@ -3407,8 +3371,8 @@
 .video-tile-view > .content-box > .bottom-pane .button2 .ikonli-font-icon {
     -fx-icon-color: -youtube-red;
     -fx-icon-size: 20px;
-    -fx-scale-x: 1.4;
-    -fx-scale-y: 1.4;
+    -fx-scale-x: 1.3;
+    -fx-scale-y: 1.3;
 }
 
 .video-tile-view > .content-box > .bottom-pane .button1 .ikonli-font-icon {
@@ -3420,30 +3384,18 @@
  * video-gallery-tile (.video-tile-view)
  */
 .video-tile-view.video-gallery-tile:lg {
-    -fx-min-width: 303px;
-    -fx-min-height: 353px;
-    -fx-pref-width: 303px;
-    -fx-pref-height: 353px;
-    -fx-max-width: 303px;
-    -fx-max-height: 353px;
+    -tile-w: 303px;
+    -tile-h: 353px;
 }
 
 .video-tile-view.video-gallery-tile:md {
-    -fx-min-width: 287px;
-    -fx-min-height: 354px;
-    -fx-pref-width: 287px;
-    -fx-pref-height: 354px;
-    -fx-max-width: 287px;
-    -fx-max-height: 354px;
+    -tile-w: 287px;
+    -tile-h: 354px;
 }
 
 .video-tile-view.video-gallery-tile:sm {
-    -fx-min-width: 317px;
-    -fx-min-height: 375px;
-    -fx-pref-width: 317px;
-    -fx-pref-height: 375px;
-    -fx-max-width: 317px;
-    -fx-max-height: 375px;
+    -tile-w: 317px;
+    -tile-h: 375px;
 }
 
 .tile-view:md-lg > .content-box > .flip-view .front-box .title {
@@ -3612,12 +3564,8 @@
  * AppTileView
  */
 .app-tile-view:lg {
-    -fx-min-width: 415px;
-    -fx-min-height: 393px;
-    -fx-pref-width: 415px;
-    -fx-pref-height: 393px;
-    -fx-max-width: 415px;
-    -fx-max-height: 393px;
+    -tile-w: 415px;
+    -tile-h: 393px;
 }
 
 .app-tile-view:lg > .content-box > .flip-view .front-box .main-image-region {
@@ -3631,12 +3579,8 @@
 }
 
 .app-tile-view:md {
-    -fx-min-width: 223px;
-    -fx-min-height: 417px;
-    -fx-pref-width: 223px;
-    -fx-pref-height: 417px;
-    -fx-max-width: 223px;
-    -fx-max-height: 417px;
+    -tile-w: 223px;
+    -tile-h: 417px;
 }
 
 .app-tile-view:md > .content-box > .flip-view .front-box .main-image-region {
@@ -3650,12 +3594,8 @@
 }
 
 .app-tile-view:sm {
-    -fx-min-width: 317px;
-    -fx-min-height: 350px;
-    -fx-pref-width: 317px;
-    -fx-pref-height: 350px;
-    -fx-max-width: 317px;
-    -fx-max-height: 350px;
+    -tile-w: 317px;
+    -tile-h: 350px;
 }
 
 .app-tile-view:sm > .content-box > .flip-view .front-box .main-image-region {
@@ -3680,12 +3620,8 @@
  * IconTileView
  */
 .icon-tile-view:lg {
-    -fx-min-width: 415px;
-    -fx-min-height: 393px;
-    -fx-pref-width: 415px;
-    -fx-pref-height: 393px;
-    -fx-max-width: 415px;
-    -fx-max-height: 393px;
+    -tile-w: 415px;
+    -tile-h: 393px;
 }
 
 .icon-tile-view > .content-box > .bottom-pane .button2 .ikonli-font-icon {
@@ -3727,12 +3663,8 @@
 }
 
 .icon-tile-view:md {
-    -fx-min-width: 223px;
-    -fx-min-height: 417px;
-    -fx-pref-width: 223px;
-    -fx-pref-height: 417px;
-    -fx-max-width: 223px;
-    -fx-max-height: 417px;
+    -tile-w: 223px;
+    -tile-h: 417px;
 }
 
 .icon-tile-view:md > .content-box > .bottom-pane .button1,
@@ -3758,12 +3690,8 @@
 }
 
 .icon-tile-view:sm {
-    -fx-min-width: 317px;
-    -fx-min-height: 350px;
-    -fx-pref-width: 317px;
-    -fx-pref-height: 350px;
-    -fx-max-width: 317px;
-    -fx-max-height: 350px;
+    -tile-w: 317px;
+    -tile-h: 350px;
 }
 
 .icon-tile-view:sm > .content-box > .flip-view .front-box .icon-grid-pane {
@@ -3801,12 +3729,8 @@
  * BookTileView
  */
 .book-tile-view:lg {
-    -fx-min-width: 415px;
-    -fx-min-height: 417px;
-    -fx-pref-width: 415px;
-    -fx-pref-height: 417px;
-    -fx-max-width: 415px;
-    -fx-max-height: 417px;
+    -tile-w: 415px;
+    -tile-h: 417px;
 }
 
 .book-tile-view:lg > .content-box > .flip-view .front-box .image-container {
@@ -3825,12 +3749,8 @@
 }
 
 .book-tile-view:md {
-    -fx-min-width: 223px;
-    -fx-min-height: 358px;
-    -fx-pref-width: 223px;
-    -fx-pref-height: 358px;
-    -fx-max-width: 223px;
-    -fx-max-height: 358px;
+    -tile-w: 223px;
+    -tile-h: 358px;
 }
 
 .book-tile-view:md > .content-box > .flip-view .front-box .image-container {
@@ -3858,12 +3778,8 @@
 }
 
 .book-tile-view:sm {
-    -fx-min-width: 317px;
-    -fx-min-height: 350px;
-    -fx-pref-width: 317px;
-    -fx-pref-height: 350px;
-    -fx-max-width: 317px;
-    -fx-max-height: 350px;
+    -tile-w: 317px;
+    -tile-h: 350px;
 }
 
 .book-tile-view:sm > .content-box > .flip-view .front-box .image-container {
@@ -3902,12 +3818,8 @@
  * TutorialTileView
  */
 .tutorial-tile-view:md-lg {
-    -fx-min-width: 415px;
-    -fx-min-height: 417px;
-    -fx-pref-width: 415px;
-    -fx-pref-height: 417px;
-    -fx-max-width: 415px;
-    -fx-max-height: 417px;
+    -tile-w: 415px;
+    -tile-h: 417px;
 }
 
 .tutorial-tile-view:md-lg > .content-box > .flip-view .front-box .image-container {
@@ -3931,12 +3843,8 @@
 }
 
 .tutorial-tile-view:sm {
-    -fx-min-width: 317px;
-    -fx-min-height: 350px;
-    -fx-pref-width: 317px;
-    -fx-pref-height: 350px;
-    -fx-max-width: 317px;
-    -fx-max-height: 350px;
+    -tile-w: 317px;
+    -tile-h: 350px;
 }
 
 .tutorial-tile-view:sm > .content-box > .flip-view .front-box .image-container {
@@ -3975,12 +3883,8 @@
  * CompanyTileView
  **/
 .company-tile-view:lg {
-    -fx-min-width: 415px;
-    -fx-min-height: 425px;
-    -fx-pref-width: 415px;
-    -fx-pref-height: 425px;
-    -fx-max-width: 415px;
-    -fx-max-height: 425px;
+    -tile-w: 415px;
+    -tile-h: 425px;
 }
 
 .company-tile-view:lg > .content-box > .flip-view .front-box .image-container {
@@ -4003,16 +3907,68 @@
     -fx-text-fill: #ff9900;
 }
 
+.company-tile-view:md {
+    -tile-w: 223px;
+    -tile-h: 308px;
+}
+
+.company-tile-view:md > .content-box > .flip-view .front-box .image-container {
+    -fx-background-color: -grey-10;
+    -fx-min-width: 223px;
+    -fx-min-height: 108px;
+    -fx-pref-width: 223px;
+    -fx-pref-height: 108px;
+    -fx-max-width: 223px;
+    -fx-max-height: 108px;
+}
+
+.company-tile-view:md > .content-box > .flip-view .front-box .main-image-region {
+    -region-w: 200px;
+    -region-h: 40px;
+}
+
+.company-tile-view:sm {
+    -tile-w: 317px;
+    -tile-h: 350px;
+}
+
+.company-tile-view:sm > .content-box > .flip-view .front-box .image-container {
+    -fx-background-color: -grey-10;
+    -fx-min-width: 317px;
+    -fx-min-height: 145px;
+    -fx-pref-width: 317px;
+    -fx-pref-height: 145px;
+    -fx-max-width: 317px;
+    -fx-max-height: 145px;
+}
+
+.company-tile-view:sm > .content-box > .flip-view .front-box .main-image-region {
+    -region-w: 300px;
+    -region-h: 60px;
+}
+
+.company-tile-view:sm > .content-box > .flip-view .front-box .title {
+    -fx-padding: 8px 20px 10px 20px;
+}
+
+.company-tile-view:sm > .content-box > .flip-view .front-box .description {
+    -fx-padding: 0px 20px 5px 20px;
+}
+
 /** ------------------------------------
  * DownloadTileView
  */
 .download-tile-view:lg {
-    -fx-min-width: 415px;
-    -fx-min-height: 393px;
-    -fx-pref-width: 415px;
-    -fx-pref-height: 393px;
-    -fx-max-width: 415px;
-    -fx-max-height: 393px;
+    -tile-w: 415px;
+    -tile-h: 393px;
+}
+
+.download-tile-view > .content-box > .bottom-pane .button1 .ikonli-font-icon {
+    -fx-icon-size: 14px;
+}
+
+.download-tile-view > .content-box > .bottom-pane .button2 .ikonli-font-icon {
+    -fx-icon-size: 16px;
 }
 
 .download-tile-view:lg > .content-box > .flip-view .front-box .main-image-region {
@@ -4024,20 +3980,68 @@
     -fx-min-height: 233px;
 }
 
-.download-tile-view:lg > .content-box > .bottom-pane .button2 .ikonli-font-icon {
-    -fx-font-size: 20px;
+.download-tile-view:md {
+    -tile-w: 223px;
+    -tile-h: 308px;
+}
+
+.download-tile-view:md > .content-box > .flip-view .front-box .main-image-region {
+    -region-w: 223px;
+    -region-h: 128px;
+}
+
+.download-tile-view:md > .content-box > .flip-view .front-box .image-container {
+    -fx-min-width: 223px;
+    -fx-min-height: 128px;
+}
+
+.download-tile-view:md > .content-box > .bottom-pane .button1,
+.download-tile-view:md > .content-box > .bottom-pane .button2 {
+    -fx-content-display: graphic-only;
+}
+
+.download-tile-view:sm {
+    -tile-w: 317px;
+    -tile-h: 350px;
+}
+
+.download-tile-view:sm > .content-box > .bottom-pane .button1,
+.download-tile-view:sm > .content-box > .bottom-pane .button2 {
+    -fx-content-display: graphic-only;
+}
+
+.download-tile-view:sm > .content-box > .flip-view .front-box .image-container {
+    -fx-min-width: 317px;
+    -fx-min-height: 177px;
+    -fx-pref-width: 317px;
+    -fx-pref-height: 177px;
+    -fx-max-width: 317px;
+    -fx-max-height: 177px;
+}
+
+.download-tile-view:sm > .content-box > .flip-view .front-box .main-image-region {
+    -region-w: 317px;
+    -region-h: 177px;
+}
+
+.download-tile-view:sm > .content-box > .bottom-pane .button2 {
+    -fx-content-display: graphic-only;
+}
+
+.download-tile-view:sm > .content-box > .flip-view .front-box .title {
+    -fx-padding: 8px 20px 10px 20px;
+}
+
+.download-tile-view:sm > .content-box > .flip-view .front-box .description {
+    -fx-padding: 0px 20px 5px 20px;
 }
 
 /** ------------------------------------
  * TipsAndTricksTileView
  */
 .tips-tile-view:lg {
-    -fx-min-width: 415px;
-    -fx-min-height: 393px;
-    -fx-pref-width: 415px;
-    -fx-pref-height: 393px;
-    -fx-max-width: 415px;
-    -fx-max-height: 393px;
+    -tile-w: 415px;
+    -tile-h: 393px;
 }
 
 .tips-tile-view:lg > .content-box > .flip-view .front-box .image-container {
@@ -4057,6 +4061,58 @@
 
 .tips-tile-view > .content-box > .flip-view .front-box .remark .ikonli-font-icon {
     -fx-icon-code: "mdoal-date_range";
+}
+
+.tile-view:sm > .content-box > .flip-view .front-box .remark {
+    -fx-background-color: -white;
+    -fx-translate-x: -5px;
+    -fx-translate-y: 5px;
+}
+
+.tips-tile-view:md {
+    -tile-w: 223px;
+    -tile-h: 308px;
+}
+
+.tips-tile-view:md > .content-box > .flip-view .front-box .image-container {
+    -fx-min-width: 225px;
+    -fx-min-height: 98px;
+    -fx-pref-width: 225px;
+    -fx-pref-height: 98px;
+    -fx-max-width: 225px;
+    -fx-max-height: 98px;
+}
+
+.tips-tile-view:md > .content-box > .flip-view .front-box .main-image-region {
+    -region-w: 225px;
+    -region-h: 98px;
+}
+
+.tips-tile-view:sm {
+    -tile-w: 317px;
+    -tile-h: 350px;
+}
+
+.tips-tile-view:sm > .content-box > .flip-view .front-box .image-container {
+    -fx-min-width: 317px;
+    -fx-min-height: 145px;
+    -fx-pref-width: 317px;
+    -fx-pref-height: 145px;
+    -fx-max-width: 317px;
+    -fx-max-height: 145px;
+}
+
+.tips-tile-view:sm > .content-box > .flip-view .front-box .main-image-region {
+    -region-w: 317px;
+    -region-h: 145px;
+}
+
+.tips-tile-view:sm > .content-box > .flip-view .front-box .title {
+    -fx-padding: 8px 20px 10px 20px;
+}
+
+.tips-tile-view:sm > .content-box > .flip-view .front-box .description {
+    -fx-padding: 0px 20px 5px 20px;
 }
 
 /** ------------------------------------

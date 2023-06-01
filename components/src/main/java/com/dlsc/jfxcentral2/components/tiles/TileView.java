@@ -69,6 +69,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
         //[Bottom] nodes,save button,like button
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
+        saveAndLikeButton.sizeProperty().bind(sizeProperty());
         saveSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setSaveButtonSelected(nv));
         likeSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setLikeButtonSelected(nv));
 
