@@ -60,7 +60,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         nameLabel.setWrapText(true);
 
         Label descriptionLabel = null;
-        if (model.getDescription() != null && !model.getDescription().isEmpty()) {
+        if (StringUtils.isNotBlank(model.getDescription())) {
             descriptionLabel = new Label(model.getDescription());
             descriptionLabel.getStyleClass().add("description");
             descriptionLabel.setWrapText(true);

@@ -233,7 +233,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         mainImageRegion.backgroundProperty().bind(Bindings.createObjectBinding(() -> {
             Image image = getImage();
             if (image != null) {
-                return new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, true, true, false, true)));
+                return new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, false, true)));
             }
             return null;
         }, imageProperty()));
