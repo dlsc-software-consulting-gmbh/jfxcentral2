@@ -2943,6 +2943,7 @@
 .simple-tile-view .description {
     -fx-font-size: 13px;
     -fx-text-fill: -grey-60;
+    -fx-padding: 0px 0px 10px 0px;
 }
 
 .simple-tile-view:lg .title {
@@ -3005,7 +3006,7 @@
 
 .tool-tile-view {
     -tile-w: 410px;
-    -tile-h: 130px;
+    -tile-h: 200px;
 }
 
 .tool-tile-view .bottom-box {
@@ -3296,7 +3297,7 @@
  */
 .video-tile-view:lg {
     -tile-w: 415px;
-    -tile-h: 441px;
+    -tile-h: 500px;
 }
 
 .video-tile-view:lg > .content-box > .flip-view .front-box .main-image-region {
