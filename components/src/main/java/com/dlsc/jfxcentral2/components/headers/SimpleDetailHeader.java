@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
@@ -11,6 +12,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -42,6 +45,12 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         if (model == null) {
             return null;
         }
+
+        CustomImageView logoImageView = new CustomImageView();
+        logoImageView.getStyleClass().add("logo-image-view");
+        logoImageView.imageProperty().bind(imageProperty());
+        logoImageView.managedProperty().bind(logoImageView.visibleProperty());
+        logoImageView.visibleProperty().bind(imageProperty().isNotNull());
 
         VBox contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");
@@ -104,8 +113,9 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
             contentBox.getChildren().addAll(nameLabel, buttonBox);
         }
 
-        contentBox.setMaxWidth(Region.USE_PREF_SIZE);
-        return contentBox;
+        FlowPane contentPane = new FlowPane(logoImageView, contentBox);
+        contentPane.getStyleClass().add("flow-pane");
+        return contentPane;
     }
 
     private final StringProperty websiteButtonText = new SimpleStringProperty(this, "websiteButtonText", "WEBSITE");
@@ -148,5 +158,19 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
     public void setWebsite(String website) {
         this.website.set(website);
+    }
+
+    private final ObjectProperty<Image> image = new SimpleObjectProperty<>(this, "image");
+
+    public Image getImage() {
+        return image.get();
+    }
+
+    public ObjectProperty<Image> imageProperty() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image.set(image);
     }
 }

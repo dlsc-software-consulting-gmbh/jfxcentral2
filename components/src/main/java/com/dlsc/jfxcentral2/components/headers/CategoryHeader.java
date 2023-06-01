@@ -58,13 +58,26 @@ public class CategoryHeader extends PaneBase {
     private Background createImageBackground(Image image) {
         if (image == null) {
             switch (getSize()) {
-                case LARGE ->
-                        image = defaultLargeBgImage == null ? new Image("/com/dlsc/jfxcentral2/components/headers/bg-lg.jpg") : defaultLargeBgImage;
-                case MEDIUM ->
-                        image = defaultMediumBgImg == null ? new Image("/com/dlsc/jfxcentral2/components/headers/bg-md.jpg") : defaultMediumBgImg;
-                case SMALL ->
-                        image = defaultSmallBgImg == null ? new Image("/com/dlsc/jfxcentral2/components/headers/bg-sm.jpg") : defaultSmallBgImg;
+                case LARGE -> {
+                    if (defaultLargeBgImage == null) {
+                        defaultLargeBgImage = new Image("/com/dlsc/jfxcentral2/components/headers/bg-lg.jpg");
+                    }
+                    image = defaultLargeBgImage;
+                }
+                case MEDIUM -> {
+                    if (defaultMediumBgImg == null) {
+                        defaultMediumBgImg = new Image("/com/dlsc/jfxcentral2/components/headers/bg-md.jpg");
+                    }
+                    image = defaultMediumBgImg;
+                }
+                case SMALL -> {
+                    if (defaultSmallBgImg == null) {
+                        defaultSmallBgImg = new Image("/com/dlsc/jfxcentral2/components/headers/bg-sm.jpg");
+                    }
+                    image = defaultSmallBgImg;
+                }
             }
+
         }
         return new Background(new BackgroundImage(image,
                 BackgroundRepeat.NO_REPEAT,
