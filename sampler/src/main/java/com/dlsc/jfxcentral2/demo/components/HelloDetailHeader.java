@@ -4,14 +4,17 @@ import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.headers.BookDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.IconDetailHeader;
 import com.dlsc.jfxcentral2.components.headers.PersonDetailHeader;
+import com.dlsc.jfxcentral2.components.headers.ToolDetailHeader;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -34,7 +37,18 @@ public class HelloDetailHeader extends JFXCentralSampleBase {
         IconDetailHeader iconDetailHeader = new IconDetailHeader(getIcon());
         iconDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
 
-        return new ScrollPane(new VBox(30, personDetailHeader, bookDetailHeader));
+        ToolDetailHeader toolDetailHeader = new ToolDetailHeader(getTool());
+        toolDetailHeader.sizeProperty().bind(sizeComboBox.valueProperty());
+        toolDetailHeader.setImage(new Image(ToolDetailHeader.class.getResource("/com/dlsc/jfxcentral2/images/duke.png").toExternalForm()));
+
+        return new ScrollPane(new VBox(30, personDetailHeader, bookDetailHeader, toolDetailHeader));
+    }
+
+    private Tool getTool() {
+        Tool tool = new Tool();
+        tool.setName("JFXCentral");
+        tool.setDescription("JFXCentral is a community for JavaFX, gathering all news, tools, apps, blogs, videos, talks, podcasts, books, and training related to the JavaFX ecosystem.");
+        return tool;
     }
 
     private IkonliPack getIcon() {

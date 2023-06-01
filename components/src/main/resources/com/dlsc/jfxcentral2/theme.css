@@ -2616,17 +2616,62 @@
 /** ------------------------------------
  * SimpleDetailHeader
  */
-.simple-detail-header:md-lg > .content-pane .content-box {
+.simple-detail-header > .content-pane .flow-pane {
+    -fx-alignment: center;
+    -fx-column-halignment: center;
+    -fx-row-valignment: center;
+}
+
+.simple-detail-header:md-lg > .content-pane .flow-pane {
+    -fx-padding: 120px 0 0 0;
+    -fx-hgap: 56px;
+}
+
+.simple-detail-header:sm > .content-pane .flow-pane {
+    -fx-padding: 100px 0 0 0;
+    -fx-hgap: 56px;
+    -fx-vgap: 15px;
+}
+
+.simple-detail-header:md-lg .logo-image-view {
+    -fx-fit-width: 134px;
+    -fx-fit-height: 134px;
+}
+
+.simple-detail-header:sm .logo-image-view {
+    -fx-fit-width: 68px;
+    -fx-fit-height: 68px;
+}
+
+.simple-detail-header:lg > .content-pane .content-box {
     -fx-alignment: center;
     -fx-pref-width: 635px;
     -fx-max-width: 635px;
     -fx-min-width: 635px;
+    -fx-max-height: 202px;
+}
+
+.simple-detail-header:md > .content-pane .content-box {
+    -fx-alignment: center;
+    -fx-pref-width: 490px;
+    -fx-max-width: 490px;
+    -fx-min-width: 490px;
+    -fx-max-height: 200px;
+}
+
+.simple-detail-header:sm > .content-pane .content-box {
+    -fx-alignment: center;
+    -fx-min-width: 255px;
+    -fx-pref-width: 255px;
+    -fx-max-width: 255px;
+    -fx-max-height: 220px;
+    -fx-spacing: 10px;
+
 }
 
 .simple-detail-header:md-lg > .content-pane .content-box > .name {
     -fx-font-size: 44px;
     -fx-text-fill: -white;
-    -fx-padding: 120px 0 0 0;
 }
 
 .simple-detail-header:md-lg > .content-pane .content-box > .description {
@@ -2634,17 +2679,8 @@
     -fx-padding: 10px 0;
 }
 
-.simple-detail-header:sm > .content-pane .content-box {
-    -fx-min-width: 255px;
-    -fx-pref-width: 255px;
-    -fx-max-width: 255px;
-    -fx-spacing: 10px;
-    -fx-alignment: center;
-}
-
 .simple-detail-header:sm > .content-pane .content-box > .name {
     -fx-text-fill: -white;
-    -fx-padding: 100px 0 0 0;
     -fx-font-size: 34px;
 }
 
@@ -2984,8 +3020,8 @@
 }
 
 .blog-tile-view {
-    -tile-width: 413px;
-    -tile-height: 138px;
+    -tile-w: 413px;
+    -tile-h: 138px;
 }
 
 /** ------------------------------------
