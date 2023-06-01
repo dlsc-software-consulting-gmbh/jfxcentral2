@@ -25,6 +25,6 @@ public class ToolTileView extends SimpleTileView<Tool> {
 
         //imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
         titleProperty().set(tool.getName());
-        descriptionProperty().set(tool.getSummary());
+        setDescription(tool.getDescription());
     }
 }
