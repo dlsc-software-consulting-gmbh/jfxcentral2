@@ -15,6 +15,8 @@ public class BookTileView extends TileView<Book> {
 
         getStyleClass().add("book-tile-view");
 
+        setDescription(book.getSummary());
+
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));
 

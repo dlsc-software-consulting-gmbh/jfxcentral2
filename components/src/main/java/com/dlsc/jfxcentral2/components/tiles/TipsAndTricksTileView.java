@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import one.jpro.routing.LinkUtil;
@@ -20,6 +21,8 @@ public class TipsAndTricksTileView extends TileView<Tip> {
 
         setButton1Text("READ NOW");
         setButton1Graphic(new FontIcon(IkonUtil.link));
+
+        imageProperty().bind(ImageManager.getInstance().tipBannerImageProperty(tip));
 
         LocalDate date = tip.getCreatedOn();
         if (date != null) {
