@@ -8,7 +8,6 @@ import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Video;
-import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.FlipView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -39,6 +38,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -53,7 +53,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
     private final FlipView flipView = new FlipView();
     private final Button button1;
     private final Button button2;
-    private CustomImageView imageView;
+    private Region mainImageRegion;
 
     public TileView(T item) {
         super(item);
@@ -69,6 +69,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
         //[Bottom] nodes,save button,like button
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
+        saveAndLikeButton.sizeProperty().bind(sizeProperty());
         saveSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setSaveButtonSelected(nv));
         likeSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setLikeButtonSelected(nv));
 
@@ -128,9 +129,9 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         contentBox.getChildren().setAll(flipView, bottomPane);
         getChildren().setAll(contentBox);
 
-        if (imageView != null) {
+        if (mainImageRegion != null) {
             boolean isVideo = item instanceof Video;
-            StackPane.setAlignment(imageView, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
+            StackPane.setAlignment(mainImageRegion, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
         }
         setTitle(item.getName());
         setSaveSelected(SaveAndLikeUtil.isSaved(item));
@@ -147,7 +148,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         } else if (item instanceof Company company) {
             imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
         } else if (item instanceof Tip) {
-            imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm())));
+            imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/default-tips-tricks-bg.png").toExternalForm())));
         }
     }
 
@@ -220,11 +221,12 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
     protected Node createFrontTop() {
         //Top image
-        imageView = new CustomImageView();
-        imageView.getStyleClass().add("tile-image-view");
-        imageView.managedProperty().bind(imageProperty().isNotNull());
-        imageView.visibleProperty().bind(imageProperty().isNotNull());
-        imageView.imageProperty().bind(imageProperty());
+        mainImageRegion = new Region();
+        mainImageRegion.getStyleClass().add("main-image-region");
+        imageProperty().addListener(it -> {
+            Image image = getImage();
+            mainImageRegion.setStyle("-fx-background-image: url('" + (image == null ? null : image.getUrl()) + "');");
+        });
 
         //remarkLabel Used to display the remark information,
         // such as the duration of the video ,release date, etc.
@@ -238,7 +240,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
         StackPane imageContainer = new StackPane();
         imageContainer.getStyleClass().add("image-container");
-        imageContainer.getChildren().setAll(imageView, remarkLabel);
+        imageContainer.getChildren().setAll(mainImageRegion, remarkLabel);
         return imageContainer;
     }
 
