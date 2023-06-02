@@ -11,10 +11,6 @@ public class CompaniesDetailsBox extends SimpleDetailsBox<Company> {
         getStyleClass().add("companies-details-box");
         setTitle("COMPANIES");
         setIkon(IkonUtil.company);
-
-        setOnDetails(detailsObject -> {
-            System.out.println("On Details: " + detailsObject.getName());
-        });
     }
 
     @Override

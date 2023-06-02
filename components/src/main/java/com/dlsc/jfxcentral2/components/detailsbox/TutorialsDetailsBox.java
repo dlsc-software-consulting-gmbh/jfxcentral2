@@ -6,10 +6,11 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.util.Callback;
+import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class TutorialsDetailsBox extends DetailsBoxBase<Tutorial> {
 
@@ -17,42 +18,27 @@ public class TutorialsDetailsBox extends DetailsBoxBase<Tutorial> {
         getStyleClass().add("tutorials-details-box");
         setTitle("TUTORIALS");
         setIkon(IkonUtil.tutorial);
-
-        setOnDetails(detailsObject -> {
-            System.out.println("On Details: " + detailsObject.getName());
-        });
-
-        setOnVisitTutorial(detailsObject -> {
-            System.out.println("On Visit Blog: " + detailsObject.getName());
-        });
+        setVisitUrlProvider(Tutorial::getUrl);
     }
 
     @Override
-    protected List<Node> createActionButtons(Tutorial model) {
+    protected List<Node> createActionButtons(Tutorial tutorial) {
         Button visitBlogButton = new Button("VISIT TUTORIAL", new FontIcon(IkonUtil.link));
-        visitBlogButton.managedProperty().bind(visitBlogButton.visibleProperty());
-        visitBlogButton.visibleProperty().bind(onVisitTutorialProperty().isNotNull());
-        visitBlogButton.setOnAction(evt -> {
-            if (getOnVisitTutorial() != null) {
-                getOnVisitTutorial().accept(model);
-            }
-        });
-
-        return List.of(createDetailsButton(model), visitBlogButton);
+        LinkUtil.setExternalLink(visitBlogButton, getVisitUrlProvider().call(tutorial));
+        return List.of(createDetailsButton(tutorial), visitBlogButton);
     }
 
-    private final ObjectProperty<Consumer<Tutorial>> onVisitTutorial = new SimpleObjectProperty<>(this, "onVisitTutorial");
+    private final ObjectProperty<Callback<Tutorial, String>> visitUrlProvider = new SimpleObjectProperty<>(this, "onVisitTutorial");
 
-    public Consumer<Tutorial> getOnVisitTutorial() {
-        return onVisitTutorial.get();
+    public Callback<Tutorial, String> getVisitUrlProvider() {
+        return visitUrlProvider.get();
     }
 
-    public ObjectProperty<Consumer<Tutorial>> onVisitTutorialProperty() {
-        return onVisitTutorial;
+    public ObjectProperty<Callback<Tutorial, String>> visitUrlProviderProperty() {
+        return visitUrlProvider;
     }
 
-    public void setOnVisitTutorial(Consumer<Tutorial> onVisitTutorial) {
-        this.onVisitTutorial.set(onVisitTutorial);
+    public void setVisitUrlProvider(Callback<Tutorial, String> visitUrlProvider) {
+        this.visitUrlProvider.set(visitUrlProvider);
     }
-
 }

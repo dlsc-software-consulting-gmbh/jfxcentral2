@@ -6,9 +6,12 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.util.Callback;
+import one.jpro.routing.LinkUtil;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class BooksDetailsBox extends DetailsBoxBase<Book> {
 
@@ -16,62 +19,38 @@ public class BooksDetailsBox extends DetailsBoxBase<Book> {
         super();
 
         getStyleClass().add("books-details-box");
+
         setTitle("BOOKS");
         setIkon(IkonUtil.book);
         setMaxItemsPerPage(1);
-
-        setOnDetails(detailsObject -> {
-            System.out.println("On Details: " + detailsObject.getName());
-        });
-
-        setOnHomepage(detailsObject -> {
-            System.out.println("On Homepage: " + detailsObject.getName());
-        });
-
-        setOnAmazon(detailsObject -> {
-            System.out.println("On Amazon: " + detailsObject.getName());
-        });
+        setHomepageUrlProvider(Book::getUrl);
+        setOnAmazon(book -> "https://www.amazon.com/dp/" + book.getAmazonASIN());
     }
 
     @Override
-    protected List<Node> createActionButtons(Book model) {
-        Button amazonButton = new Button("amazon");
-        amazonButton.getStyleClass().add("amazon-button");
-        amazonButton.managedProperty().bind(amazonButton.visibleProperty());
-        amazonButton.visibleProperty().bind(onAmazonProperty().isNotNull());
-        amazonButton.setOnAction(e -> {
-            if (getOnAmazon() != null) {
-                getOnAmazon().accept(model);
-            }
-        });
-        return List.of(createDetailsButton(model), createHomepageButton(model, onHomepageProperty()), amazonButton);
+    protected List<Node> createActionButtons(Book book) {
+        String url = getOnAmazon().call(book);
+        if (StringUtils.isNotBlank(url)) {
+            Button amazonButton = new Button("amazon");
+            amazonButton.getStyleClass().add("amazon-button");
+            LinkUtil.setLink(amazonButton, url);
+            return List.of(createDetailsButton(book), createHomepageButton(book), amazonButton);
+        }
+
+        return Collections.emptyList();
     }
 
-    private final ObjectProperty<Consumer<Book>> onHomepage = new SimpleObjectProperty<>(this, "onHomepage");
+    private final ObjectProperty<Callback<Book, String>> onAmazon = new SimpleObjectProperty<>(this, "onAmazon");
 
-    public Consumer<Book> getOnHomepage() {
-        return onHomepage.get();
-    }
-
-    public ObjectProperty<Consumer<Book>> onHomepageProperty() {
-        return onHomepage;
-    }
-
-    public void setOnHomepage(Consumer<Book> onHomepage) {
-        this.onHomepage.set(onHomepage);
-    }
-
-    private final ObjectProperty<Consumer<Book>> onAmazon = new SimpleObjectProperty<>(this, "onAmazon");
-
-    public Consumer<Book> getOnAmazon() {
+    public Callback<Book, String> getOnAmazon() {
         return onAmazon.get();
     }
 
-    public ObjectProperty<Consumer<Book>> onAmazonProperty() {
+    public ObjectProperty<Callback<Book, String>> onAmazonProperty() {
         return onAmazon;
     }
 
-    public void setOnAmazon(Consumer<Book> onAmazon) {
+    public void setOnAmazon(Callback<Book, String> onAmazon) {
         this.onAmazon.set(onAmazon);
     }
 }

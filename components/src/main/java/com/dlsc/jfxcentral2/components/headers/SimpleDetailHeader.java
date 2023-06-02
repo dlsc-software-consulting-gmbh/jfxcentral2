@@ -67,6 +67,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         nameLabel.getStyleClass().add("name");
         nameLabel.setWrapText(true);
         nameLabel.textAlignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(TextAlignment.LEFT).otherwise(TextAlignment.CENTER));
+        nameLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         Label descriptionLabel = new Label();
         descriptionLabel.visibleProperty().bind(descriptionLabel.textProperty().isNotEmpty());
@@ -75,6 +76,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.setWrapText(true);
         descriptionLabel.textAlignmentProperty().bind(nameLabel.textAlignmentProperty());
+        descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));

@@ -7,9 +7,9 @@ import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class LibrariesDetailsBox extends DetailsBoxBase<Library> {
 
@@ -18,16 +18,14 @@ public class LibrariesDetailsBox extends DetailsBoxBase<Library> {
         setTitle("LIBRARIES");
         setIkon(IkonUtil.library);
         setMaxItemsPerPage(3);
+        setHomepageUrlProvider(library -> {
+            String url = library.getHomepage();
+            if (StringUtils.isBlank(url)) {
+                url = library.getRepository();
+            }
+            return url;
+        });
         libraryInfoProperty().addListener(it -> layoutBySize());
-
-        setOnDetails(detailsObject -> {
-            System.out.println("On Details: " + detailsObject.getName());
-        });
-
-        setOnHomepage(detailsObject -> {
-            System.out.println("On Homepage: " + detailsObject.getName());
-        });
-
     }
 
     @Override
@@ -41,21 +39,7 @@ public class LibrariesDetailsBox extends DetailsBoxBase<Library> {
 
     @Override
     protected List<Node> createActionButtons(Library model) {
-        return List.of(createDetailsButton(model), createHomepageButton(model, onHomepageProperty()));
-    }
-
-    private final ObjectProperty<Consumer<Library>> onHomepage = new SimpleObjectProperty<>(this, "onHomepage");
-
-    public Consumer<Library> getOnHomepage() {
-        return onHomepage.get();
-    }
-
-    public ObjectProperty<Consumer<Library>> onHomepageProperty() {
-        return onHomepage;
-    }
-
-    public void setOnHomepage(Consumer<Library> onHomepage) {
-        this.onHomepage.set(onHomepage);
+        return List.of(createDetailsButton(model), createHomepageButton(model));
     }
 
     private final ObjectProperty<LibraryInfo> libraryInfo = new SimpleObjectProperty<>(this, "libraryInfo");
