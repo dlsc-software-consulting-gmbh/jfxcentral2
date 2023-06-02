@@ -6,10 +6,12 @@ import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -18,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
@@ -53,21 +56,25 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         logoImageView.managedProperty().bind(logoImageView.visibleProperty());
         logoImageView.visibleProperty().bind(imageProperty().isNotNull());
 
+        BooleanBinding needAdjustmentToLeft = Bindings.createBooleanBinding(
+                () -> getImage() != null && !isSmall(), imageProperty(), sizeProperty());
+
         VBox contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");
+        contentBox.alignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(Pos.TOP_LEFT).otherwise(Pos.CENTER));
 
         Label nameLabel = new Label(model.getName());
         nameLabel.getStyleClass().add("name");
         nameLabel.setWrapText(true);
+        nameLabel.textAlignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(TextAlignment.LEFT).otherwise(TextAlignment.CENTER));
 
-        Label descriptionLabel = null;
-
-        descriptionLabel = new Label();
+        Label descriptionLabel = new Label();
         descriptionLabel.visibleProperty().bind(descriptionLabel.textProperty().isNotEmpty());
         descriptionLabel.managedProperty().bind(descriptionLabel.textProperty().isNotEmpty());
         descriptionLabel.textProperty().bind(descriptionProperty());
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.setWrapText(true);
+        descriptionLabel.textAlignmentProperty().bind(nameLabel.textAlignmentProperty());
 
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
@@ -106,9 +113,12 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
         Region separator = new Region();
         separator.getStyleClass().add("region-separator");
+        separator.managedProperty().bind(separator.visibleProperty());
+        separator.visibleProperty().bind(websiteButton.visibleProperty());
 
         HBox buttonBox = new HBox(saveAndLikeButton, separator, websiteButton);
         buttonBox.getStyleClass().add("button-box");
+        buttonBox.alignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(Pos.CENTER_LEFT).otherwise(Pos.CENTER));
 
         contentBox.getChildren().addAll(nameLabel, descriptionLabel, buttonBox);
 
