@@ -1,15 +1,19 @@
 package com.dlsc.jfxcentral2.components.filters;
 
+import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class PeopleFilterView extends SimpleSearchFilterView {
+import java.util.Comparator;
+
+public class PeopleFilterView extends SimpleSearchFilterView<Person> {
     public PeopleFilterView() {
         getStyleClass().add("people-filter-view");
         setSearchPromptText("Search for a JFX person");
+        setComparator(Comparator.comparing(Person::getName));
 
         Label keysLabel = new Label("*KEY");
         keysLabel.getStyleClass().add("keys-label");

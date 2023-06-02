@@ -1,9 +1,15 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class BlogsFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Blog;
+
+import java.util.Comparator;
+
+public class BlogsFilterView extends SimpleSearchFilterView<Blog> {
+
     public BlogsFilterView() {
         getStyleClass().add("blogs-filter-view");
         setSearchPromptText("Search for a blog");
+        setComparator(Comparator.comparing(Blog::getName));
 
         setOnSearch((keywords, filterEnums) -> {
             System.out.println("------------Search blogs ------------");

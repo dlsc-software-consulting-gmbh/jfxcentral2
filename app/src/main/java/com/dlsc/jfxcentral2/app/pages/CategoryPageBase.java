@@ -12,6 +12,7 @@ import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
@@ -35,10 +36,13 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         filterView.sizeProperty().bind(sizeProperty());
 
         // data
-        ObservableList<T> categoryItems = getCategoryItems();
+        ObservableList<T> itemsList = getCategoryItems();
 
-        FilteredList<T> filteredItems = new FilteredList<>(categoryItems);
-        filteredItems.predicateProperty().bind(filterView.predicateProperty());
+        FilteredList<T> filteredList = new FilteredList<>(itemsList);
+        filteredList.predicateProperty().bind(filterView.predicateProperty());
+
+        SortedList<T> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(filterView.comparatorProperty());
 
         // grid view
         ModelGridView<T> gridView = createGridView();
@@ -47,7 +51,7 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         gridView.setDetailNodeProvider(getDetailNodeProvider());
         gridView.setColumns(getNumberOfGridViewColumns());
         gridView.setRows(getNumberOfGridViewRows());
-        gridView.setItems(filteredItems);
+        gridView.setItems(sortedList);
 
         // wrap grid view in a strip view
         StripView stripView = new StripView(gridView);

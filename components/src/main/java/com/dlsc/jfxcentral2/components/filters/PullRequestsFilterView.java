@@ -1,13 +1,17 @@
 package com.dlsc.jfxcentral2.components.filters;
 
+import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral2.model.filter.PullRequestDate;
 import com.dlsc.jfxcentral2.model.filter.PullRequestLabel;
 import com.dlsc.jfxcentral2.model.filter.PullRequestStatus;
 
-public class PullRequestsFilterView extends SearchFilterView {
+import java.util.Comparator;
+
+public class PullRequestsFilterView extends SearchFilterView<PullRequest> {
 
     public PullRequestsFilterView() {
         getStyleClass().add("pull-requests-filter-view");
+        setComparator(Comparator.comparing(PullRequest::getUpdatedAt));
 
         getFilterItems().setAll(
                 new FilterItem<>("DATE", PullRequestDate.class, PullRequestDate.ALL),

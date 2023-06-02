@@ -1,9 +1,14 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class TipsAndTricksFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Tip;
+
+import java.util.Comparator;
+
+public class TipsAndTricksFilterView extends SimpleSearchFilterView<Tip> {
     public TipsAndTricksFilterView() {
         getStyleClass().add("tips-filter-view");
         setSearchPromptText("Search for tips and tricks");
+        setComparator(Comparator.comparing(Tip::getName));
 
         setOnSearch((keywords, filterEnums) -> {
             System.out.println("------------Search Tips Tricks------------");

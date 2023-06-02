@@ -1,10 +1,15 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class LibrariesFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Library;
+
+import java.util.Comparator;
+
+public class LibrariesFilterView extends SimpleSearchFilterView<Library> {
 
     public LibrariesFilterView() {
         getStyleClass().add("libraries-filter-view");
         setSearchPromptText("Search for libraries");
+        setComparator(Comparator.comparing(Library::getName));
 
         setOnSearch((keywords, filterEnums) -> {
             System.out.println("------------Search Libraries------------");

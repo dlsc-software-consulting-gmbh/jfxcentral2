@@ -1,9 +1,14 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class ToolsFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Tool;
+
+import java.util.Comparator;
+
+public class ToolsFilterView extends SimpleSearchFilterView<Tool> {
     public ToolsFilterView() {
         getStyleClass().add("tools-filter-view");
         setSearchPromptText("Search for a tool");
+        setComparator(Comparator.comparing(Tool::getName));
 
         setOnSearch((keywords, filterEnums) -> {
             System.out.println("------------Search tools------------");

@@ -1,10 +1,15 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class CompaniesFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Company;
+
+import java.util.Comparator;
+
+public class CompaniesFilterView extends SimpleSearchFilterView<Company> {
+
     public CompaniesFilterView() {
         getStyleClass().add("companies-filter-view");
         setSearchPromptText("Search for a company");
-
+        setComparator(Comparator.comparing(Company::getName));
         setOnSearch((keywords, filterEnums) -> {
             System.out.println("------------Search companies------------");
             System.out.println("Search keywords: " + keywords);

@@ -1,10 +1,15 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class DownloadsFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Download;
+
+import java.util.Comparator;
+
+public class DownloadsFilterView extends SimpleSearchFilterView<Download> {
 
     public DownloadsFilterView() {
         getStyleClass().add("companies-filter-view");
         setSearchPromptText("Search for a download");
+        setComparator(Comparator.comparing(Download::getName));
 
         setOnSearch((keywords, filterEnums) -> {
             System.out.println("------------Search downloads ------------");

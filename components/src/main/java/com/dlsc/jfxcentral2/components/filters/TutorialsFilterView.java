@@ -1,9 +1,14 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class TutorialsFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Tutorial;
+
+import java.util.Comparator;
+
+public class TutorialsFilterView extends SimpleSearchFilterView<Tutorial> {
     public TutorialsFilterView() {
         getStyleClass().add("tutorials-filter-view");
         setSearchPromptText("Search for a tutorial");
+        setComparator(Comparator.comparing(Tutorial::getName));
 
         setOnSearch((keywords, filterEnums) -> {
             System.out.println("------------Search tutorials------------");

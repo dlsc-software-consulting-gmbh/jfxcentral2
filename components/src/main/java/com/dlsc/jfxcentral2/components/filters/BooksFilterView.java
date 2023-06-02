@@ -1,9 +1,14 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class BooksFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Book;
+
+import java.util.Comparator;
+
+public class BooksFilterView extends SimpleSearchFilterView<Book> {
     public BooksFilterView() {
         getStyleClass().add("books-filter-view");
         setSearchPromptText("Search for a book");
+        setComparator(Comparator.comparing(Book::getName));
 
         setOnSearch((keywords, filterEnums) -> {
             System.out.println("------------Search book------------");

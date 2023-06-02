@@ -41,6 +41,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
@@ -53,8 +54,7 @@ public class SearchFilterView<T> extends PaneBase {
 
     private final SearchTextField searchField = new SearchTextField(true);
 
-    public record FilterItem<E extends Enum<E>>(String title, Class<E> filterEnumClass, Enum<E> defaultValue,
-                                                boolean multipleSelection) {
+    public record FilterItem<E extends Enum<E>>(String title, Class<E> filterEnumClass, Enum<E> defaultValue, boolean multipleSelection) {
         public FilterItem(String title, Class<E> filterEnumClass, Enum<E> defaultValue) {
             this(title, filterEnumClass, defaultValue, false);
         }
@@ -105,6 +105,20 @@ public class SearchFilterView<T> extends PaneBase {
 
     public void setPredicate(Predicate<T> predicate) {
         this.predicate.set(predicate);
+    }
+
+    private final ObjectProperty<Comparator<T>> comparator = new SimpleObjectProperty<>(this, "comparator", Comparator.comparing(T::toString));
+
+    public Comparator getComparator() {
+        return comparator.get();
+    }
+
+    public ObjectProperty<Comparator<T>> comparatorProperty() {
+        return comparator;
+    }
+
+    public void setComparator(Comparator comparator) {
+        this.comparator.set(comparator);
     }
 
     private BooleanBinding binding;
