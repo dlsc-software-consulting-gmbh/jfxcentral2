@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.LinkUtil;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
@@ -84,6 +85,8 @@ public class SinglePullRequestView extends HBox {
 
         sizeProperty().addListener(it -> updateView());
         updateView();
+
+        LinkUtil.setExternalLink(this, pr.getHtmlUrl());
     }
 
     private void updateView() {

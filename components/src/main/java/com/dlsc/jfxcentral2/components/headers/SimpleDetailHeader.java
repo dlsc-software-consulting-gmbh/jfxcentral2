@@ -90,8 +90,8 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         });
 
         websiteButton = new Button();
-        websiteButton.visibleProperty().bind(websiteProperty().isNotNull());
-        websiteButton.managedProperty().bind(websiteProperty().isNotNull());
+        websiteButton.visibleProperty().bind(websiteProperty().isNotEmpty());
+        websiteButton.managedProperty().bind(websiteProperty().isNotEmpty());
         websiteButton.getStyleClass().addAll("website-button", "link-button");
         websiteButton.textProperty().bind(websiteButtonTextProperty());
         websiteButton.graphicProperty().bind(Bindings.createObjectBinding(() -> {
