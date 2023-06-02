@@ -81,53 +81,56 @@ public class LibraryPreviewBox extends PaneBase {
             largerImageWrapper.visibleProperty().bind(largerImageView.imageProperty().isNotNull());
 
             if (!isSmall()) {
-                layoutMediumAndLarge( images, largerImageWrapper);
+                layoutMediumAndLarge(images, largerImageWrapper);
             } else {
-                IntegerProperty pageIndexProperty = new SimpleIntegerProperty(-1);
-                int maxCount = 3;
-
-                HBox previewBox = new HBox();
-                previewBox.getStyleClass().add("previews-box");
-                HBox.setHgrow(previewBox, Priority.ALWAYS);
-
-                Button prevButton = new Button();
-                prevButton.getStyleClass().addAll("fill-button", "prev-button");
-                prevButton.setFocusTraversable(false);
-                prevButton.setGraphic(new FontIcon(JFXCentralIcon.BULLET_POINT));
-                prevButton.setOnAction(event -> {
-                    pageIndexProperty.set(pageIndexProperty.get() - 1);
-                });
-
-                Button nextButton = new Button();
-                nextButton.getStyleClass().addAll("fill-button", "next-button");
-                nextButton.setFocusTraversable(false);
-                nextButton.setGraphic(new FontIcon(JFXCentralIcon.BULLET_POINT));
-                nextButton.setOnAction(event -> {
-                    pageIndexProperty.set(pageIndexProperty.get() + 1);
-                });
-
-                pageIndexProperty.addListener(it -> {
-                    int pageIndex = pageIndexProperty.get();
-                    prevButton.setDisable(pageIndex == 0);
-                    nextButton.setDisable(pageIndex == images.size() / maxCount);
-
-                    int startIndex = pageIndex * maxCount;
-                    int endIndex = Math.min((pageIndex + 1) * maxCount, images.size());
-                    List<Image> subList = images.subList(startIndex, endIndex);
-                    updateImageBox(previewBox, subList);
-                });
-
-                HBox navBox = new HBox(prevButton, previewBox, nextButton);
-                navBox.getStyleClass().add("nav-box");
-
-
-                VBox contentBox = new VBox(navBox, largerImageWrapper);
-                contentBox.getStyleClass().add("content-box");
-                getChildren().setAll(contentBox);
-
-                pageIndexProperty.set(0);
+                layoutSmall(images, largerImageWrapper);
             }
         }
+    }
+
+    private void layoutSmall(List<Image> images, StackPane largerImageWrapper) {
+        IntegerProperty pageIndexProperty = new SimpleIntegerProperty(-1);
+        int maxCount = 3;
+
+        HBox previewBox = new HBox();
+        previewBox.getStyleClass().add("previews-box");
+        HBox.setHgrow(previewBox, Priority.ALWAYS);
+
+        Button prevButton = new Button();
+        prevButton.getStyleClass().addAll("fill-button", "prev-button");
+        prevButton.setFocusTraversable(false);
+        prevButton.setGraphic(new FontIcon(JFXCentralIcon.BULLET_POINT));
+        prevButton.setOnAction(event -> {
+            pageIndexProperty.set(pageIndexProperty.get() - 1);
+        });
+
+        Button nextButton = new Button();
+        nextButton.getStyleClass().addAll("fill-button", "next-button");
+        nextButton.setFocusTraversable(false);
+        nextButton.setGraphic(new FontIcon(JFXCentralIcon.BULLET_POINT));
+        nextButton.setOnAction(event -> {
+            pageIndexProperty.set(pageIndexProperty.get() + 1);
+        });
+
+        pageIndexProperty.addListener(it -> {
+            int pageIndex = pageIndexProperty.get();
+            prevButton.setDisable(pageIndex == 0);
+            nextButton.setDisable(pageIndex == images.size() / maxCount);
+
+            int startIndex = pageIndex * maxCount;
+            int endIndex = Math.min((pageIndex + 1) * maxCount, images.size());
+            List<Image> subList = images.subList(startIndex, endIndex);
+            updateImageBox(previewBox, subList);
+        });
+
+        HBox navBox = new HBox(prevButton, previewBox, nextButton);
+        navBox.getStyleClass().add("nav-box");
+
+        VBox contentBox = new VBox(navBox, largerImageWrapper);
+        contentBox.getStyleClass().add("content-box");
+        getChildren().setAll(contentBox);
+
+        pageIndexProperty.set(0);
     }
 
     private void updateImageBox(HBox imageBox, List<com.dlsc.jfxcentral.data.model.Image> images) {
