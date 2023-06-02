@@ -4921,13 +4921,13 @@
  * LibraryPreviewBox
  */
 .library-preview-box > .content-box {
-    -fx-spacing: 10px;
+    -fx-spacing: 25px;
     -fx-background-color: -background;
     -fx-background-radius: 10px;
     -fx-padding: 10px;
 }
 
-.library-preview-box > .content-box .image-wrapper {
+.library-preview-box > .content-box .preview-button {
     -fx-min-width: 86px;
     -fx-pref-width: 86px;
     -fx-max-width: 86px;
@@ -4936,59 +4936,47 @@
     -fx-max-height: 65px;
     -fx-background-color: -grey-100;
     -fx-background-radius: 5px;
+    -fx-cursor: hand;
 }
 
-.library-preview-box > .content-box .image-wrapper > .custom-image-view {
+.library-preview-box:sm > .content-box {
+    -fx-spacing: 25px;
+    -fx-background-color: -background;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+}
+
+.library-preview-box:sm > .content-box .preview-button {
+    -fx-min-width: 52px;
+    -fx-pref-width: 52px;
+    -fx-max-width: 52px;
+    -fx-min-height: 48px;
+    -fx-pref-height: 48px;
+    -fx-max-height: 48px;
+    -fx-background-color: -grey-100;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.library-preview-box:sm .previews-box,
+.library-preview-box:sm .nav-box {
+    -fx-spacing: 4px;
+    -fx-alignment: center;
+}
+
+.library-preview-box > .content-box .previews-pane > .preview-button:selected,
+.library-preview-box > .content-box .previews-box > .preview-button:selected {
+    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.5), 12, 0.5, 0, 0);
+}
+
+.library-preview-box > .content-box .preview-button > .custom-image-view {
     -fx-fit-width: 66px;
     -fx-fit-height: 45px;
 }
 
-.library-preview-box .previews-strip-view {
-    -fx-padding: 0;
-    -fx-min-height: 86px;
-}
-
-.library-preview-box .previews-strip-view.selected {
-    -fx-pref-width: 800px;
-}
-
-.library-preview-box:lg .previews-strip-view {
-    -fx-pref-width: 690px;
-}
-
-.library-preview-box:md .previews-strip-view {
-    -fx-pref-width: 535px;
-}
-
-.library-preview-box:sm .previews-strip-view {
-    -fx-pref-width: 168px;
-}
-
-.library-preview-box:sm .previews-strip-view .strip-cell {
-    -fx-padding: 0px 3px;
-}
-
-.library-preview-box .previews-strip-view .strip-cell {
-    -fx-cursor: hand;
-    -fx-padding: 0px 7px;
-}
-
-.library-preview-box .previews-strip-view .strip-cell:selected {
-    -fx-background-color: transparent;
-}
-
-.library-preview-box .previews-strip-view .scroller {
-    -fx-background-color: -bright-blue;
-}
-
-.library-preview-box:md-lg .previews-strip-view .scroller {
-    -fx-pref-width: 26px;
-    -fx-pref-height: 26px;
-    -fx-background-color: -bright-blue;
-}
-
-.library-preview-box .previews-strip-view .strip-cell:selected .image-wrapper {
-    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.5), 12, 0.5, 0, 0);
+.library-preview-box:sm > .content-box .preview-button > .custom-image-view {
+    -fx-fit-width: 45px;
+    -fx-fit-height: 38px;
 }
 
 .library-preview-box .larger-image-wrapper {
@@ -5021,18 +5009,10 @@
     -fx-background-radius: 50px;
 }
 
-.library-preview-box .previews-strip-view.selected .strip-cell:selected .image-wrapper {
-    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.5), 12, 0.5, 0, 0);
-}
-
-.library-preview-box .previews-box {
-    -fx-alignment: center-left;
-}
-
-.library-preview-box  .more-label {
-    -fx-min-width: 70px;
-    -fx-pref-width: 70px;
-    -fx-max-width: 70px;
+.library-preview-box .more-label {
+    -fx-min-width: 86px;
+    -fx-pref-width: 86px;
+    -fx-max-width: 86px;
     -fx-min-height: 65px;
     -fx-pref-height: 65px;
     -fx-max-height: 65px;
@@ -5041,6 +5021,45 @@
     -fx-text-fill: -grey-60;
     -fx-background-color: -grey-10;
     -fx-background-radius: 10px;
+    -fx-background-insets: 0 10 0 10;
+    -fx-cursor: hand;
+}
+
+.library-preview-box  .more-label .ikonli-font-icon {
+    -fx-icon-size: 30px;
+    -fx-icon-color: -grey-60;
+}
+
+.library-preview-box .previews-pane {
+    -fx-alignment: center-left;
+}
+
+.library-preview-box:lg .previews-pane {
+    -fx-hgap: 12px;
+    -fx-vgap: 10px;
+    -fx-padding: 0 0 0 5px ;
+}
+
+.library-preview-box:md .previews-pane {
+    -fx-padding:0 0 0 3px ;
+    -fx-hgap: 4px;
+    -fx-vgap: 5px;
+}
+
+.library-preview-box:sm .nav-box .fill-button {
+    -bg: -bright-blue;
+    -fill: -white;
+    -fx-background-radius: 50px;
+    -fx-padding: 10px 11.5px;
+}
+
+.library-preview-box:sm .nav-box .fill-button .ikonli-font-icon {
+    -fx-scale-x: 1.5;
+    -fx-scale-y: 1.5;
+}
+
+.library-preview-box:sm .nav-box .prev-button {
+    -fx-rotate: 180;
 }
 
 /* ------------------------------------
