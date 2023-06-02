@@ -9,5 +9,6 @@ public class TutorialDetailHeader extends SimpleDetailHeader<Tutorial>  {
         super(tutorial);
         getStyleClass().addAll("tutorial-detail-header", "dark-header");
         setBackgroundImage(new Image(TutorialDetailHeader.class.getResource("tutorials-banner.jpg").toExternalForm()));
+        setWebsite(tutorial.getUrl());
     }
 }
