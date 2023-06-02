@@ -89,10 +89,10 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
         ModelObject modelObject = getItem();
         List<DetailsBoxBase<?>> boxes = new ArrayList<>();
 
-        maybeAddBox(modelObject, Video.class, VideosDetailsBox::new, boxes);
-        maybeAddBox(modelObject, Tool.class, ToolsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Library.class, LibrariesDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Tool.class, ToolsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Book.class, BooksDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Video.class, VideosDetailsBox::new, boxes);
         maybeAddBox(modelObject, Blog.class, BlogsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Tutorial.class, TutorialsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Download.class, DownloadsDetailsBox::new, boxes);

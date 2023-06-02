@@ -10,6 +10,7 @@ public class LibraryDetailHeader extends SimpleDetailHeader<Library>  {
         super(library);
         getStyleClass().add("library-detail-header");
         setWebsite(StringUtils.isNotBlank(getModel().getHomepage()) ? getModel().getHomepage() : getModel().getRepository());
+        setWebsiteButtonText(StringUtils.isNotBlank(getModel().getHomepage()) ? "WEBSITE" : "REPOSITORY");
         imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
     }
 }

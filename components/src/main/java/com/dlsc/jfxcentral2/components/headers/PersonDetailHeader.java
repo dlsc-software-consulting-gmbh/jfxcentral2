@@ -90,14 +90,14 @@ public class PersonDetailHeader extends DetailHeader<Person> {
         if (StringUtils.isNotBlank(person.getTwitter())) {
             Button twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
             twitterLinkBtn.getStyleClass().addAll("twitter-link-btn","link-button");
-            LinkUtil.setExternalLink(twitterLinkBtn, person.getTwitter());
+            LinkUtil.setExternalLink(twitterLinkBtn, "https://twitter.com/" + person.getTwitter());
             socialFlowPane.getChildren().add(twitterLinkBtn);
         }
 
         if (StringUtils.isNotBlank(person.getLinkedIn())) {
             Button linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(IkonUtil.linkedin));
             linkedInLinkBtn.getStyleClass().addAll("linkedin-link-btn","link-button");
-            LinkUtil.setExternalLink(linkedInLinkBtn, person.getLinkedIn());
+            LinkUtil.setExternalLink(linkedInLinkBtn, "https://www.linkedin.com/in/" + person.getLinkedIn());
             socialFlowPane.getChildren().add(linkedInLinkBtn);
         }
 
@@ -111,14 +111,14 @@ public class PersonDetailHeader extends DetailHeader<Person> {
         if (StringUtils.isNotBlank(person.getEmail())) {
             Button mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
             mailLinkBtn.getStyleClass().addAll("mail-link-btn","link-button");
-            LinkUtil.setExternalLink(mailLinkBtn, person.getEmail());
+            LinkUtil.setExternalLink(mailLinkBtn, "mailto:" + person.getEmail());
             socialFlowPane.getChildren().add(mailLinkBtn);
         }
 
         if (StringUtils.isNotBlank(person.getGitHub())) {
             Button githubLinkBtn = new Button("GITHUB", new FontIcon(IkonUtil.github));
             githubLinkBtn.getStyleClass().addAll("github-link-btn","link-button");
-            LinkUtil.setExternalLink(githubLinkBtn, person.getGitHub());
+            LinkUtil.setExternalLink(githubLinkBtn, "https://github.com/" + person.getGitHub());
             socialFlowPane.getChildren().add(githubLinkBtn);
         }
 

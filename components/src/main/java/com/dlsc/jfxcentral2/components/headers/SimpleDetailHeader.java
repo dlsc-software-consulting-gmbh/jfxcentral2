@@ -35,7 +35,9 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
     public SimpleDetailHeader(T model) {
         super(model);
+
         getStyleClass().add("simple-detail-header");
+
         setCenter(createCenterNode());
         setDescription(model.getDescription());
     }
@@ -56,8 +58,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         logoImageView.managedProperty().bind(logoImageView.visibleProperty());
         logoImageView.visibleProperty().bind(imageProperty().isNotNull());
 
-        BooleanBinding needAdjustmentToLeft = Bindings.createBooleanBinding(
-                () -> getImage() != null && !isSmall(), imageProperty(), sizeProperty());
+        BooleanBinding needAdjustmentToLeft = Bindings.createBooleanBinding(() -> getImage() != null && !isSmall(), imageProperty(), sizeProperty());
 
         VBox contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");

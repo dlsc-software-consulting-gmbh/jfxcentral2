@@ -15,10 +15,10 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.model.Feature;
 import com.dlsc.jfxcentral2.model.Feature.Type;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.PageUtil;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.CssMetaData;
@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class FeaturesContainer extends PaneBase {
+
     private static final PseudoClass VERTICAL_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("vertical");
 
     private static final PseudoClass HORIZONTAL_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("horizontal");
@@ -78,33 +79,7 @@ public class FeaturesContainer extends PaneBase {
 
         allModelObjects
                 .subList(0, Math.min(3, allModelObjects.size()))
-                .forEach(mo -> getFeatures().add(new Feature(mo.getName(), mo.getSummary(), "Featured", getRemark(mo), IkonUtil.getModelIkon(mo), getType(mo), getImageProperty(mo), getUrl(mo))));
-    }
-
-    private String getUrl(ModelObject mo) {
-        Objects.requireNonNull(mo, "model object can not be null");
-
-        if (mo instanceof Video video) {
-            return "/videos/" + video.getId();
-        } else if (mo instanceof Tip tip) {
-            return "/tips/" + tip.getId();
-        } else if (mo instanceof Tutorial tutorial) {
-            return "/tutorials/" + tutorial.getId();
-        } else if (mo instanceof Library library) {
-            return "/libraries/" + library.getId();
-        } else if (mo instanceof RealWorldApp app) {
-            return "/showcases/" + app.getId();
-        } else if (mo instanceof Person person) {
-            return "/people/" + person.getId();
-        } else if (mo instanceof Blog blog) {
-            return "/blogs/" + blog.getId();
-        } else if (mo instanceof Tool tool) {
-            return "/tools/" + tool.getId();
-        } else if (mo instanceof Book book) {
-            return "/books/" + book.getId();
-        } else {
-            throw new IllegalArgumentException("model object of type " + mo.getClass().getSimpleName() + " is not supported");
-        }
+                .forEach(mo -> getFeatures().add(new Feature(mo.getName(), mo.getSummary(), "Featured", getRemark(mo), IkonUtil.getModelIkon(mo), getType(mo), getImageProperty(mo), PageUtil.getLink(mo))));
     }
 
     private String getRemark(ModelObject mo) {
@@ -116,7 +91,7 @@ public class FeaturesContainer extends PaneBase {
             }
             return "Videos";
         } else if (mo instanceof RealWorldApp) {
-            return "Showcase applications";
+            return "Showcases";
         } else if (mo instanceof Library) {
             return "Libraries";
         } else if (mo instanceof Tool) {
@@ -134,7 +109,7 @@ public class FeaturesContainer extends PaneBase {
         if (mo instanceof Video video) {
             return ImageManager.getInstance().youTubeImageProperty(video);
         } else if (mo instanceof Tip tip) {
-            return new SimpleObjectProperty<>();
+            return ImageManager.getInstance().tipBannerImageProperty(tip);
         } else if (mo instanceof Tutorial tutorial) {
             return ImageManager.getInstance().tutorialImageProperty(tutorial);
         } else if (mo instanceof Library library) {
