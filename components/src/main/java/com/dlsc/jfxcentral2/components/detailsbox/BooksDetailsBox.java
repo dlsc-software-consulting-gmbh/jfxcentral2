@@ -33,7 +33,7 @@ public class BooksDetailsBox extends DetailsBoxBase<Book> {
         if (StringUtils.isNotBlank(url)) {
             Button amazonButton = new Button("amazon");
             amazonButton.getStyleClass().add("amazon-button");
-            LinkUtil.setLink(amazonButton, url);
+            LinkUtil.setExternalLink(amazonButton, url);
             return List.of(createDetailsButton(book), createHomepageButton(book), amazonButton);
         }
 
