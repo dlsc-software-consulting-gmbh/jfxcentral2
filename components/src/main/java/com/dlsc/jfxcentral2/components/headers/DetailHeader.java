@@ -85,12 +85,12 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
 
         if (StringUtils.isNotBlank(shareUrl) && StringUtils.isNotBlank(shareText) && StringUtils.isNotBlank(shareTitle)) {
             // TODO: make sure facebook url works well
-            String url = "https://www.jfx-central.com/" + shareUrl;
+            String url = URLEncoder.encode("https://www.jfx-central.com/" + shareUrl, StandardCharsets.UTF_8);
             String title = URLEncoder.encode(shareTitle, StandardCharsets.UTF_8);
-            String body = URLEncoder.encode(shareText, StandardCharsets.UTF_8);
+            String body = URLEncoder.encode(shareText + " ", StandardCharsets.UTF_8); // extra space for proper formatting on twitter
 
             socialLinksView.setFacebookUrl("https://www.facebook.com/sharer/sharer.php?u=" + url + "&t=" + body);
-            socialLinksView.setTwitterUrl("https://twitter.com/share?text=" + body + "&" + url + "&hashtags=javafx,java,ux,ui");
+            socialLinksView.setTwitterUrl("https://twitter.com/share?text=" + body + "&url=" + url + "&hashtags=javafx,java,ux,ui");
             socialLinksView.setLinkedInUrl("https://www.linkedin.com/shareArticle?mini=false&url=" + url + "&title=" + title + "&summary=" + body);
             socialLinksView.setMailUrl("mailto:?subject=" + title + "&body=" + url);
         }
