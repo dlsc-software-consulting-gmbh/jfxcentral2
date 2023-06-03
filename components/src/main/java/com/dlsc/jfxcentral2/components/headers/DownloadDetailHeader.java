@@ -12,7 +12,7 @@ public class DownloadDetailHeader extends SimpleDetailHeader<Download>  {
         setWebsite(getModel().getHomepage());
         setShareUrl("downloads/" + download.getId());
         setShareText("Found this download on @JFXCentral: " + download.getName());
-        setMailSubject("Download: " + download.getName());
+        setShareTitle("Download: " + download.getName());
         setBackText("ALL DOWNLOADS");
         setBackUrl("/downloads");
     }

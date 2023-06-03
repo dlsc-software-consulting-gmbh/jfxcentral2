@@ -12,7 +12,7 @@ public class BlogDetailHeader extends SimpleDetailHeader<Blog>  {
         setWebsite(blog.getUrl());
         setShareUrl("blogs/" + blog.getId());
         setShareText("Found this blog on @JFXCentral: " + blog.getName());
-        setMailSubject("JavaFX blog: " + blog.getName());
+        setShareTitle("JavaFX blog: " + blog.getName());
         setBackText("ALL BLOGS");
         setBackUrl("/blogs");
     }

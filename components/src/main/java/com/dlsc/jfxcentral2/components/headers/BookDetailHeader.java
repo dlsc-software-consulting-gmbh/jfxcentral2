@@ -16,7 +16,7 @@ public class BookDetailHeader extends SimpleDetailHeader<Book> {
         setDescription(book.getSubtitle());
         setShareUrl("books/" + book.getId());
         setShareText("Found this book on @JFXCentral: " + book.getName() + " - " + book.getSubtitle());
-        setMailSubject("JavaFX book: " + book.getName());
+        setShareTitle("JavaFX book: " + book.getName());
         setBackText("ALL BOOKS");
         setBackUrl("/books");
     }

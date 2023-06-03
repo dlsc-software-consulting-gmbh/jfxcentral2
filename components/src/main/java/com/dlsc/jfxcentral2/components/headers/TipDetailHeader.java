@@ -14,7 +14,7 @@ public class TipDetailHeader extends SimpleDetailHeader<Tip>  {
 
         setShareUrl("tips/" + tip.getId());
         setShareText("Found this tip on @JFXCentral: " + tip.getName());
-        setMailSubject("Tip: " + tip.getName());
+        setShareTitle("Tip: " + tip.getName());
         setBackText("ALL TIPS & TRICKS");
         setBackUrl("/tips");
     }

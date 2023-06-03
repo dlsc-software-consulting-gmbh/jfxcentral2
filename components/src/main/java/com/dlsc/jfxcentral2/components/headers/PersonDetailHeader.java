@@ -30,7 +30,7 @@ public class PersonDetailHeader extends DetailHeader<Person> {
 
         setShareUrl("people/" + person.getId());
         setShareText("Found this person on @JFXCentral: " + person.getName());
-        setMailSubject(person.getName());
+        setShareTitle(person.getName());
         setBackText("ALL PEOPLE");
         setBackUrl("/people");
     }

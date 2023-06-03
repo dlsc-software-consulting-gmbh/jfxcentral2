@@ -71,7 +71,7 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
 
         shareUrlProperty().addListener(updateShareButtonLinks);
         shareTextProperty().addListener(updateShareButtonLinks);
-        mailSubjectProperty().addListener(updateShareButtonLinks);
+        shareTitleProperty().addListener(updateShareButtonLinks);
 
         HBox bottomBox = new HBox(backButton, new Spacer(), menuButton);
         bottomBox.getStyleClass().add("bottom-box");
@@ -81,15 +81,18 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
     private void updateShareButton(SocialLinksView socialLinksView) {
         String shareText = getShareText();
         String shareUrl = getShareUrl();
+        String shareTitle = getShareTitle();
 
-        if (StringUtils.isNotBlank(shareUrl) && StringUtils.isNotBlank(shareText)) {
+        if (StringUtils.isNotBlank(shareUrl) && StringUtils.isNotBlank(shareText) && StringUtils.isNotBlank(shareTitle)) {
             // TODO: make sure facebook url works well
-            socialLinksView.setFacebookUrl("https://www.facebook.com/sharer/sharer.php?u=https://www.jfx-central.com/" + shareUrl + "&t=" + URLEncoder.encode(shareText, StandardCharsets.UTF_8));
-            socialLinksView.setTwitterUrl("https://twitter.com/share?text=" + URLEncoder.encode(shareText, StandardCharsets.UTF_8) + "&url=https://www.jfx-central.com/" + shareUrl + "&hashtags=javafx,java,ux,ui");
+            String url = "https://www.jfx-central.com/" + shareUrl;
+            String title = URLEncoder.encode(shareTitle, StandardCharsets.UTF_8);
+            String body = URLEncoder.encode(shareText, StandardCharsets.UTF_8);
 
-            if (getMailSubject() != null) {
-                socialLinksView.setMailUrl("mailto:?subject=" + URLEncoder.encode(getMailSubject(), StandardCharsets.ISO_8859_1) + "&body=" + URLEncoder.encode(shareText + " " + "https://www.jfx-central.com/" + shareUrl, StandardCharsets.ISO_8859_1));
-            }
+            socialLinksView.setFacebookUrl("https://www.facebook.com/sharer/sharer.php?u=" + url + "&t=" + body);
+            socialLinksView.setTwitterUrl("https://twitter.com/share?text=" + body + "&" + url + "&hashtags=javafx,java,ux,ui");
+            socialLinksView.setLinkedInUrl("https://www.linkedin.com/shareArticle?mini=false&url=" + url + "&title=" + title + "&summary=" + body);
+            socialLinksView.setMailUrl("mailto:?subject=" + title + "&body=" + url);
         }
     }
 
@@ -121,18 +124,18 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
         this.backText.set(backText);
     }
 
-    private final StringProperty mailSubject = new SimpleStringProperty(this, "mailSubject");
+    private final StringProperty shareTitle = new SimpleStringProperty(this, "shareTitle");
 
-    public String getMailSubject() {
-        return mailSubject.get();
+    public String getShareTitle() {
+        return shareTitle.get();
     }
 
-    public StringProperty mailSubjectProperty() {
-        return mailSubject;
+    public StringProperty shareTitleProperty() {
+        return shareTitle;
     }
 
-    public void setMailSubject(String mailSubject) {
-        this.mailSubject.set(mailSubject);
+    public void setShareTitle(String shareTitle) {
+        this.shareTitle.set(shareTitle);
     }
 
     private final StringProperty shareText = new SimpleStringProperty(this, "shareText");

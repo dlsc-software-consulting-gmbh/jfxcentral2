@@ -17,7 +17,7 @@ public class ToolDetailHeader extends SimpleDetailHeader<Tool>  {
         setWebsiteButtonText(StringUtils.isNotBlank(getModel().getHomepage()) ? "WEBSITE" : "REPOSITORY");
         setShareUrl("tools/" + tool.getId());
         setShareText("Found this tool on @JFXCentral: " + tool.getName());
-        setMailSubject("Tool: " + tool.getName());
+        setShareTitle("Tool: " + tool.getName());
         setBackText("ALL TOOLS");
         setBackUrl("/tools");
     }

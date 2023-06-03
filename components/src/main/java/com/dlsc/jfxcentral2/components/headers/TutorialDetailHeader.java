@@ -14,7 +14,7 @@ public class TutorialDetailHeader extends SimpleDetailHeader<Tutorial>  {
         setWebsite(tutorial.getUrl());
         setShareUrl("tutorials/" + tutorial.getId());
         setShareText("Found this tutorial on @JFXCentral: " + tutorial.getName());
-        setMailSubject("Tutorial: " + tutorial.getName());
+        setShareTitle("Tutorial: " + tutorial.getName());
         setBackText("ALL TUTORIALS");
         setBackUrl("/tutorials");
     }

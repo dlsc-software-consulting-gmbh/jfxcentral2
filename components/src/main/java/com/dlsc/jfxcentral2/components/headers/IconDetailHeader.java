@@ -12,7 +12,7 @@ public class IconDetailHeader extends SimpleDetailHeader<IkonliPack>  {
         setWebsite(getModel().getUrl());
         setShareUrl("icons/" + pack.getId());
         setShareText("Found this icon pack on @JFXCentral: " + pack.getName());
-        setMailSubject("Icon pack: " + pack.getName());
+        setShareTitle("Icon pack: " + pack.getName());
         setBackText("ALL ICON PACKS");
         setBackUrl("/icons");
     }

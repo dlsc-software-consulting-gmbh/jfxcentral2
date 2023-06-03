@@ -16,7 +16,7 @@ public class LibraryDetailHeader extends SimpleDetailHeader<Library>  {
         setWebsiteButtonText(StringUtils.isNotBlank(getModel().getHomepage()) ? "WEBSITE" : "REPOSITORY");
         setShareUrl("libraries/" + library.getId());
         setShareText("Found this library on @JFXCentral: " + library.getName());
-        setMailSubject("Library: " + library.getName());
+        setShareTitle("Library: " + library.getName());
         setBackText("ALL LIBRARIES");
         setBackUrl("/libraries");
     }

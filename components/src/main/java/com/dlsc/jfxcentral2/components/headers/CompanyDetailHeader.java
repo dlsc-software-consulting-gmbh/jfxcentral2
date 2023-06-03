@@ -12,7 +12,7 @@ public class CompanyDetailHeader extends SimpleDetailHeader<Company>  {
         setWebsite(getModel().getHomepage());
         setShareUrl("companies/" + company.getId());
         setShareText("Found this company on @JFXCentral: " + company.getName());
-        setMailSubject("Company: " + company.getName());
+        setShareTitle("Company: " + company.getName());
         setBackText("ALL COMPANIES");
         setBackUrl("/companies");
     }

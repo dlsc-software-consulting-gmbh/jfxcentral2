@@ -9,7 +9,7 @@ public class VideoDetailHeader extends DetailHeader<Video> {
 
         setShareUrl("videos/" + video.getId());
         setShareText("Found this video on @JFXCentral: " + video.getName());
-        setMailSubject(video.getName());
+        setShareTitle(video.getName());
         setBackText("ALL VIDEOS");
         setBackUrl("/videos");
     }
