@@ -7,10 +7,17 @@ public class BookDetailHeader extends SimpleDetailHeader<Book> {
 
     public BookDetailHeader(Book book) {
         super(book);
+
         getStyleClass().addAll("book-detail-header", "dark-header");
+
         setWebsiteButtonText("amazon");
         setWebsite("https://www.amazon.com/dp/" + getModel().getAmazonASIN());
         setBackgroundImage(new Image(BookDetailHeader.class.getResource("books-banner.jpg").toExternalForm()));
         setDescription(book.getSubtitle());
+        setShareUrl("books/" + book.getId());
+        setShareText("Found this book on @JFXCentral: " + book.getName() + " - " + book.getSubtitle());
+        setMailSubject("JavaFX book: " + book.getName());
+        setBackText("ALL BOOKS");
+        setBackUrl("/books");
     }
 }

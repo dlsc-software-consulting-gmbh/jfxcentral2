@@ -2250,13 +2250,10 @@
     -fx-padding: 15px 15px 15px 11px;
     -fx-background-radius: 10px;
     -fx-effect: -blue-shadow;
+    -fx-spacing: 5px;
     -fx-hgap: 5px;
     -fx-vgap: 10px;
     -fx-alignment: center-right;
-    -fx-pref-width: 302px;
-    -fx-pref-height: 90px;
-    -fx-max-width: 302px;
-    -fx-max-height: 90px;
 }
 
 .social-links-view .button {
@@ -2477,9 +2474,13 @@
     -fx-background-radius: 30px;
 }
 
-.detail-header > .content-pane > .bottom-box > .share-button {
-    -bg: -white-a20;
+.detail-header > .content-pane > .bottom-box > .share-button > .label {
     -fx-content-display: right;
+    -fx-text-fill: -white;
+}
+
+.detail-header > .content-pane > .bottom-box > .share-button .ikonli-font-icon {
+    -fx-icon-color: -white;
 }
 
 .detail-header > .content-pane > .bottom-box > .button:hover {
@@ -2520,6 +2521,63 @@
 
 .detail-header .link-button:pressed {
     -fx-background-color: derive(-bg, -20%);
+}
+
+.detail-header .share-button > .arrow-button {
+    visibility: hidden !important;
+    -fx-pref-width: 0px;
+}
+
+.detail-header .share-button {
+    -bg: -bright-blue;
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-weight: bold;
+    -fx-text-fill: -white;
+    -fx-graphic-text-gap: 10px;
+    -fx-padding: 5px 20px;
+    -fx-background-color: -bg;
+    -fx-background-radius: 30px;
+}
+
+.detail-header .share-button > .label {
+    -fx-padding: 0px;
+}
+
+.detail-header .share-button .context-menu {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-padding: 0px;
+}
+
+.detail-header .share-button .custom-menu-item,
+.detail-header .share-button .custom-menu-item:hover,
+.detail-header .share-button .custom-menu-item:pressed,
+.detail-header .share-button .custom-menu-item:focused {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.detail-header .social-links-view {
+    -fx-background-color: -white;
+    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.35), 15, 0.2, 0, 0);
+}
+
+.detail-header .social-links-view .button {
+    -fx-background-color: -bright-blue;
+    -fx-text-fill: -white;
+}
+
+.detail-header .social-links-view .button:hover {
+    -fx-background-color: derive(-bright-blue, -5%);
+}
+
+.detail-header .social-links-view .button:pressed {
+    -fx-background-color: derive(-bright-blue, -10%);
+}
+
+.detail-header .social-links-view .button .ikonli-font-icon {
+    -fx-icon-color: -white;
 }
 
 /** ------------------------------------
@@ -4914,7 +4972,7 @@
  */
 .glass-pane {
     -fx-background-color: black;
-    -fx-opacity: 0.75;
+    -fx-opacity: 0.5;
 }
 
 /** ------------------------------------

@@ -1,19 +1,28 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral2.components.SocialLinksView;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.jpro.webapi.WebAPI;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CustomMenuItem;
+import javafx.scene.control.MenuButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import one.jpro.routing.LinkUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class DetailHeader<T extends ModelObject> extends CategoryHeader {
@@ -41,23 +50,115 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
     }
 
     private HBox createBottomBox() {
-        Button backButton = new Button("BACK", new FontIcon(Material.ARROW_BACK_IOS));
+        Button backButton = new Button();
+        backButton.visibleProperty().bind(backUrlProperty().isNotEmpty());
+        backButton.managedProperty().bind(backUrlProperty().isNotEmpty());
+        backButton.textProperty().bind(backTextProperty());
+        backButton.setGraphic(new FontIcon(Material.ARROW_BACK_IOS));
         backButton.getStyleClass().addAll("back-button");
-        backButton.setOnAction(event -> WebAPI.getWebAPI(getScene()).executeScript("history.back()"));
+        backUrlProperty().addListener(it -> LinkUtil.setLink(backButton, getBackUrl()));
 
-        Button shareButton = new Button("SHARE", new FontIcon(JFXCentralIcon.SHARE));
-        shareButton.getStyleClass().add("share-button");
-        shareButton.managedProperty().bind(shareButton.visibleProperty());
-        shareButton.visibleProperty().bind(onShareProperty().isNotNull());
-        shareButton.setOnAction(event -> {
-            if (getOnShare() != null) {
-                getOnShare().run();
-            }
-        });
+        SocialLinksView socialLinksView = new SocialLinksView();
 
-        HBox bottomBox = new HBox(backButton, new Spacer(), shareButton);
+        CustomMenuItem customMenuItem = new CustomMenuItem(socialLinksView);
+        customMenuItem.setHideOnClick(false);
+
+        MenuButton menuButton = new MenuButton("SHARE", new FontIcon(JFXCentralIcon.SHARE));
+        menuButton.getStyleClass().add("share-button");
+        menuButton.getItems().addAll(customMenuItem);
+
+        InvalidationListener updateShareButtonLinks = it -> updateShareButton(socialLinksView);
+
+        shareUrlProperty().addListener(updateShareButtonLinks);
+        shareTextProperty().addListener(updateShareButtonLinks);
+        mailSubjectProperty().addListener(updateShareButtonLinks);
+
+        HBox bottomBox = new HBox(backButton, new Spacer(), menuButton);
         bottomBox.getStyleClass().add("bottom-box");
         return bottomBox;
+    }
+
+    private void updateShareButton(SocialLinksView socialLinksView) {
+        String shareText = getShareText();
+        String shareUrl = getShareUrl();
+
+        if (StringUtils.isNotBlank(shareUrl) && StringUtils.isNotBlank(shareText)) {
+            socialLinksView.setTwitterUrl("https://twitter.com/share?text=" + URLEncoder.encode(shareText, StandardCharsets.UTF_8) + "&url=https://www.jfx-central.com/" + shareUrl + "&hashtags=javafx,java,ux,ui");
+            if (getMailSubject() != null) {
+                socialLinksView.setMailUrl("mailto:?subject=" + URLEncoder.encode(getMailSubject(), StandardCharsets.ISO_8859_1) + "&body=" + URLEncoder.encode(shareText + " " + "https://www.jfx-central.com/" + shareUrl, StandardCharsets.ISO_8859_1));
+            }
+            socialLinksView.setWebsiteUrl("https://www.facebook.com/sharer/sharer.php?u=https://www.jfx-central.com/" + shareUrl + "&t=" + URLEncoder.encode(shareText, StandardCharsets.UTF_8));
+        }
+    }
+
+    private final StringProperty backUrl = new SimpleStringProperty(this, "backUrl");
+
+    public String getBackUrl() {
+        return backUrl.get();
+    }
+
+    public StringProperty backUrlProperty() {
+        return backUrl;
+    }
+
+    public void setBackUrl(String backUrl) {
+        this.backUrl.set(backUrl);
+    }
+
+    private final StringProperty backText = new SimpleStringProperty(this, "backText", "BACK");
+
+    public String getBackText() {
+        return backText.get();
+    }
+
+    public StringProperty backTextProperty() {
+        return backText;
+    }
+
+    public void setBackText(String backText) {
+        this.backText.set(backText);
+    }
+
+    private final StringProperty mailSubject = new SimpleStringProperty(this, "mailSubject");
+
+    public String getMailSubject() {
+        return mailSubject.get();
+    }
+
+    public StringProperty mailSubjectProperty() {
+        return mailSubject;
+    }
+
+    public void setMailSubject(String mailSubject) {
+        this.mailSubject.set(mailSubject);
+    }
+
+    private final StringProperty shareText = new SimpleStringProperty(this, "shareText");
+
+    public String getShareText() {
+        return shareText.get();
+    }
+
+    public StringProperty shareTextProperty() {
+        return shareText;
+    }
+
+    public void setShareText(String shareText) {
+        this.shareText.set(shareText);
+    }
+
+    private final StringProperty shareUrl = new SimpleStringProperty(this, "shareUrl");
+
+    public String getShareUrl() {
+        return shareUrl.get();
+    }
+
+    public StringProperty shareUrlProperty() {
+        return shareUrl;
+    }
+
+    public void setShareUrl(String shareUrl) {
+        this.shareUrl.set(shareUrl);
     }
 
     private final ObjectProperty<Node> center = new SimpleObjectProperty<>(this, "center");
@@ -72,19 +173,5 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
 
     public void setCenter(Node center) {
         this.center.set(center);
-    }
-
-    private final ObjectProperty<Runnable> onShare = new SimpleObjectProperty<>(this, "onShare");
-
-    public Runnable getOnShare() {
-        return onShare.get();
-    }
-
-    public ObjectProperty<Runnable> onShareProperty() {
-        return onShare;
-    }
-
-    public void setOnShare(Runnable onShare) {
-        this.onShare.set(onShare);
     }
 }

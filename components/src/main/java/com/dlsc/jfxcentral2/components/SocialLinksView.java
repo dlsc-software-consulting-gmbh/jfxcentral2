@@ -5,12 +5,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class SocialLinksView extends FlowPane {
+public class SocialLinksView extends HBox {
 
     private final Button twitterLinkBtn;
     private final Button linkedInLinkBtn;
@@ -21,37 +22,65 @@ public class SocialLinksView extends FlowPane {
     public SocialLinksView() {
         getStyleClass().add("social-links-view");
 
+        setMaxWidth(Region.USE_PREF_SIZE);
+
         twitterLinkBtn = new Button("Twitter", new FontIcon(IkonUtil.twitter));
         twitterLinkBtn.getStyleClass().add("twitter-link-btn");
-        twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
         twitterLinkBtn.visibleProperty().bind(twitterUrlProperty().isNotEmpty());
+        twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
         twitterUrl.addListener(it -> updateLink(twitterLinkBtn, getTwitterUrl()));
 
         linkedInLinkBtn = new Button("LinkedIn", new FontIcon(IkonUtil.linkedin));
         linkedInLinkBtn.getStyleClass().add("linkedin-link-btn");
-        linkedInLinkBtn.managedProperty().bind(linkedInLinkBtn.visibleProperty());
         linkedInLinkBtn.visibleProperty().bind(linkedInUrlProperty().isNotEmpty());
-        linkedInUrl.addListener(it -> updateLink(linkedInLinkBtn, getTwitterUrl()));
+        linkedInLinkBtn.managedProperty().bind(linkedInLinkBtn.visibleProperty());
+        linkedInUrl.addListener(it -> updateLink(linkedInLinkBtn, getLinkedInUrl()));
 
         websiteLinkBtn = new Button("Website", new FontIcon(IkonUtil.website));
         websiteLinkBtn.getStyleClass().add("website-link-btn");
-        websiteLinkBtn.managedProperty().bind(websiteLinkBtn.visibleProperty());
         websiteLinkBtn.visibleProperty().bind(websiteUrlProperty().isNotEmpty());
-        websiteUrl.addListener(it -> updateLink(websiteLinkBtn, getTwitterUrl()));
-
-        mailLinkBtn = new Button("Mail", new FontIcon(IkonUtil.mail));
-        mailLinkBtn.getStyleClass().add("mail-link-btn");
-        mailLinkBtn.managedProperty().bind(mailLinkBtn.visibleProperty());
-        mailLinkBtn.visibleProperty().bind(mailUrlProperty().isNotEmpty());
-        mailUrl.addListener(it -> updateLink(mailLinkBtn, getTwitterUrl()));
+        websiteLinkBtn.managedProperty().bind(websiteLinkBtn.visibleProperty());
+        websiteUrl.addListener(it -> updateLink(websiteLinkBtn, getWebsiteUrl()));
 
         githubLinkBtn = new Button("GitHub", new FontIcon(IkonUtil.github));
         githubLinkBtn.getStyleClass().add("github-link-btn");
-        githubLinkBtn.managedProperty().bind(githubLinkBtn.visibleProperty());
         githubLinkBtn.visibleProperty().bind(githubUrlProperty().isNotEmpty());
-        githubUrl.addListener(it -> updateLink(githubLinkBtn, getTwitterUrl()));
+        githubLinkBtn.managedProperty().bind(githubLinkBtn.visibleProperty());
+        githubUrl.addListener(it -> updateLink(githubLinkBtn, getGithubUrl()));
 
-        getChildren().setAll(twitterLinkBtn, linkedInLinkBtn, websiteLinkBtn, mailLinkBtn, githubLinkBtn);
+        mailLinkBtn = new Button("Mail", new FontIcon(IkonUtil.mail));
+        mailLinkBtn.getStyleClass().add("mail-link-btn");
+        mailLinkBtn.visibleProperty().bind(mailUrlProperty().isNotEmpty());
+        mailLinkBtn.managedProperty().bind(mailLinkBtn.visibleProperty());
+        mailUrl.addListener(it -> updateLink(mailLinkBtn, getMailUrl()));
+
+        twitterUrl.addListener(it -> updateView());
+        linkedInUrl.addListener(it -> updateView());
+        websiteUrl.addListener(it -> updateView());
+        githubUrl.addListener(it -> updateView());
+        mailUrl.addListener(it -> updateView());
+
+        updateView();
+    }
+
+    private void updateView() {
+        getChildren().clear();
+
+        if (getTwitterUrl() != null) {
+            getChildren().add(twitterLinkBtn);
+        }
+        if (getLinkedInUrl() != null) {
+            getChildren().add(linkedInLinkBtn);
+        }
+        if (getWebsiteUrl() != null) {
+            getChildren().add(websiteLinkBtn);
+        }
+        if (getGithubUrl() != null) {
+            getChildren().add(githubLinkBtn);
+        }
+        if (getMailUrl() != null) {
+            getChildren().add(mailLinkBtn);
+        }
     }
 
     private void updateLink(Node node, String url) {
