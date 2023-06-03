@@ -6,5 +6,11 @@ public class VideoDetailHeader extends DetailHeader<Video> {
 
     public VideoDetailHeader(Video video) {
         super(video);
+
+        setShareUrl("videos/" + video.getId());
+        setShareText("Found this video on @JFXCentral: " + video.getName());
+        setMailSubject(video.getName());
+        setBackText("ALL VIDEOS");
+        setBackUrl("/videos");
     }
 }

@@ -11,6 +11,11 @@ public class AppDetailHeader extends SimpleDetailHeader<RealWorldApp>  {
         setWebsite(getModel().getUrl());
         setDescription(app.getSummary());
         backgroundImageProperty().bind(ImageManager.getInstance().realWorldAppBannerImageProperty(app));
+
         setShareUrl("showcases/" + app.getId());
+        setShareText("Found this application on @JFXCentral: " + app.getName());
+        setMailSubject("Application: " + app.getName());
+        setBackText("ALL SHOWCASES");
+        setBackUrl("/showcases");
     }
 }

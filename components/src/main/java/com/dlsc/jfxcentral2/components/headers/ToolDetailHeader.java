@@ -8,9 +8,17 @@ public class ToolDetailHeader extends SimpleDetailHeader<Tool>  {
 
     public ToolDetailHeader(Tool tool) {
         super(tool);
+
         getStyleClass().add("tool-detail-header");
+
+        imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
+
         setWebsite(StringUtils.isNotBlank(getModel().getHomepage()) ? getModel().getHomepage() : getModel().getRepository());
         setWebsiteButtonText(StringUtils.isNotBlank(getModel().getHomepage()) ? "WEBSITE" : "REPOSITORY");
-        imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
+        setShareUrl("tools/" + tool.getId());
+        setShareText("Found this tool on @JFXCentral: " + tool.getName());
+        setMailSubject("Tool: " + tool.getName());
+        setBackText("ALL TOOLS");
+        setBackUrl("/tools");
     }
 }

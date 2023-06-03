@@ -37,6 +37,7 @@ public interface IkonUtil {
     Ikon play = JFXCentralIcon.PLAY;
     Ikon github = JFXCentralIcon.GITHUB;
     Ikon twitter = JFXCentralIcon.TWITTER;
+    Ikon facebook = JFXCentralIcon.FACEBOOK;
     Ikon linkedin = JFXCentralIcon.LINKEDIN;
     Ikon mail = JFXCentralIcon.EMAIL;
     Ikon app = JFXCentralIcon.APP;

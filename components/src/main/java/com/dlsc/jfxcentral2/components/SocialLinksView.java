@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
@@ -18,6 +19,9 @@ public class SocialLinksView extends HBox {
     private final Button websiteLinkBtn;
     private final Button mailLinkBtn;
     private final Button githubLinkBtn;
+    private final Button facebookLinkBtn;
+
+    // TODO: add reddit button, add whatsapp button, others????
 
     public SocialLinksView() {
         getStyleClass().add("social-links-view");
@@ -48,17 +52,26 @@ public class SocialLinksView extends HBox {
         githubLinkBtn.managedProperty().bind(githubLinkBtn.visibleProperty());
         githubUrl.addListener(it -> updateLink(githubLinkBtn, getGithubUrl()));
 
+        facebookLinkBtn = new Button("Facebook", new FontIcon(IkonUtil.facebook));
+        facebookLinkBtn.getStyleClass().add("facebook-link-btn");
+        facebookLinkBtn.visibleProperty().bind(facebookUrlProperty().isNotEmpty());
+        facebookLinkBtn.managedProperty().bind(facebookLinkBtn.visibleProperty());
+        facebookUrl.addListener(it -> updateLink(facebookLinkBtn, getFacebookUrl()));
+
         mailLinkBtn = new Button("Mail", new FontIcon(IkonUtil.mail));
         mailLinkBtn.getStyleClass().add("mail-link-btn");
         mailLinkBtn.visibleProperty().bind(mailUrlProperty().isNotEmpty());
         mailLinkBtn.managedProperty().bind(mailLinkBtn.visibleProperty());
         mailUrl.addListener(it -> updateLink(mailLinkBtn, getMailUrl()));
 
-        twitterUrl.addListener(it -> updateView());
-        linkedInUrl.addListener(it -> updateView());
-        websiteUrl.addListener(it -> updateView());
-        githubUrl.addListener(it -> updateView());
-        mailUrl.addListener(it -> updateView());
+        InvalidationListener updateViewListener = it -> updateView();
+
+        twitterUrl.addListener(updateViewListener);
+        linkedInUrl.addListener(updateViewListener);
+        websiteUrl.addListener(updateViewListener);
+        githubUrl.addListener(updateViewListener);
+        mailUrl.addListener(updateViewListener);
+        facebookUrl.addListener(updateViewListener);
 
         updateView();
     }
@@ -77,6 +90,9 @@ public class SocialLinksView extends HBox {
         }
         if (getGithubUrl() != null) {
             getChildren().add(githubLinkBtn);
+        }
+        if (getMailUrl() != null) {
+            getChildren().add(facebookLinkBtn);
         }
         if (getMailUrl() != null) {
             getChildren().add(mailLinkBtn);
@@ -101,6 +117,20 @@ public class SocialLinksView extends HBox {
 
     public void setTwitterUrl(String twitterUrl) {
         this.twitterUrl.set(twitterUrl);
+    }
+
+    private final StringProperty facebookUrl = new SimpleStringProperty(this, "facebookUrl");
+
+    public String getFacebookUrl() {
+        return facebookUrl.get();
+    }
+
+    public StringProperty facebookUrlProperty() {
+        return facebookUrl;
+    }
+
+    public void setFacebookUrl(String facebookUrl) {
+        this.facebookUrl.set(facebookUrl);
     }
 
     private final StringProperty linkedInUrl = new SimpleStringProperty(this, "linkedInUrl");

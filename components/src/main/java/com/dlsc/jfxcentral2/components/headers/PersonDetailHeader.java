@@ -27,6 +27,12 @@ public class PersonDetailHeader extends DetailHeader<Person> {
         super(person);
         getStyleClass().add("person-detail-header");
         centerProperty().bind(Bindings.createObjectBinding(this::createCenterNode, sizeProperty()));
+
+        setShareUrl("people/" + person.getId());
+        setShareText("Found this person on @JFXCentral: " + person.getName());
+        setMailSubject(person.getName());
+        setBackText("ALL PEOPLE");
+        setBackUrl("/people");
     }
 
     private Pane createCenterNode() {

@@ -83,11 +83,13 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
         String shareUrl = getShareUrl();
 
         if (StringUtils.isNotBlank(shareUrl) && StringUtils.isNotBlank(shareText)) {
+            // TODO: make sure facebook url works well
+            socialLinksView.setFacebookUrl("https://www.facebook.com/sharer/sharer.php?u=https://www.jfx-central.com/" + shareUrl + "&t=" + URLEncoder.encode(shareText, StandardCharsets.UTF_8));
             socialLinksView.setTwitterUrl("https://twitter.com/share?text=" + URLEncoder.encode(shareText, StandardCharsets.UTF_8) + "&url=https://www.jfx-central.com/" + shareUrl + "&hashtags=javafx,java,ux,ui");
+
             if (getMailSubject() != null) {
                 socialLinksView.setMailUrl("mailto:?subject=" + URLEncoder.encode(getMailSubject(), StandardCharsets.ISO_8859_1) + "&body=" + URLEncoder.encode(shareText + " " + "https://www.jfx-central.com/" + shareUrl, StandardCharsets.ISO_8859_1));
             }
-            socialLinksView.setWebsiteUrl("https://www.facebook.com/sharer/sharer.php?u=https://www.jfx-central.com/" + shareUrl + "&t=" + URLEncoder.encode(shareText, StandardCharsets.UTF_8));
         }
     }
 

@@ -9,8 +9,15 @@ public class LibraryDetailHeader extends SimpleDetailHeader<Library>  {
     public LibraryDetailHeader(Library library) {
         super(library);
         getStyleClass().add("library-detail-header");
+
+        imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
+
         setWebsite(StringUtils.isNotBlank(getModel().getHomepage()) ? getModel().getHomepage() : getModel().getRepository());
         setWebsiteButtonText(StringUtils.isNotBlank(getModel().getHomepage()) ? "WEBSITE" : "REPOSITORY");
-        imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
+        setShareUrl("libraries/" + library.getId());
+        setShareText("Found this library on @JFXCentral: " + library.getName());
+        setMailSubject("Library: " + library.getName());
+        setBackText("ALL LIBRARIES");
+        setBackUrl("/libraries");
     }
 }

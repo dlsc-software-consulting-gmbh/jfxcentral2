@@ -7,7 +7,15 @@ public class TipDetailHeader extends SimpleDetailHeader<Tip>  {
 
     public TipDetailHeader(Tip tip) {
         super(tip);
+
         getStyleClass().addAll("tip-detail-header", "dark-header");
+
         backgroundImageProperty().bind(ImageManager.getInstance().tipBannerImageProperty(tip));
+
+        setShareUrl("tips/" + tip.getId());
+        setShareText("Found this tip on @JFXCentral: " + tip.getName());
+        setMailSubject("Tip: " + tip.getName());
+        setBackText("ALL TIPS & TRICKS");
+        setBackUrl("/tips");
     }
 }
