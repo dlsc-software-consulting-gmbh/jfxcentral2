@@ -5,19 +5,20 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyListWrapper;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.css.CssMetaData;
 import javafx.css.Styleable;
@@ -35,29 +36,50 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
-import org.controlsfx.control.CheckComboBox;
-import org.controlsfx.control.IndexedCheckModel;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.BiConsumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class SearchFilterView<T> extends PaneBase {
 
     private static final String DEFAULT_STYLE_CLASS = "search-filter-view";
     private static final Orientation FILTER_BOX_DEFAULT_ORIENTATION = Orientation.HORIZONTAL;
     private static final String WITH_SEARCH_FIELD = "with-search-field";
-
     private final SearchTextField searchField = new SearchTextField(true);
-
-    public record FilterItem<E extends Enum<E>>(String title, Class<E> filterEnumClass, Enum<E> defaultValue, boolean multipleSelection) {
-        public FilterItem(String title, Class<E> filterEnumClass, Enum<E> defaultValue) {
-            this(title, filterEnumClass, defaultValue, false);
+    private final StringConverter<FilterItem<T>> predicateItemStringConverter = new StringConverter<>() {
+        @Override
+        public String toString(FilterItem<T> object) {
+            return object == null ? "" : object.name;
         }
+
+        @Override
+        public FilterItem<T> fromString(String string) {
+            return null;
+        }
+    };
+
+    public record FilterItem<T>(String name, Predicate<T> predicate, boolean isApplied) {
+        public FilterItem(String name, Predicate<T> predicate) {
+            this(name, predicate, false);
+        }
+    }
+
+    public record FilterGroup<T>(String title, List<FilterItem<T>> filterItems) {
+    }
+
+    public record SortItem<T>(String name, Comparator<T> comparator, boolean isApplied) {
+        public SortItem(String name, Comparator<T> comparator) {
+            this(name, comparator, false);
+        }
+    }
+
+    public record SortGroup<T>(String title, List<SortItem<T>> sortItems) {
     }
 
     public SearchFilterView() {
@@ -68,7 +90,8 @@ public class SearchFilterView<T> extends PaneBase {
         searchField.visibleProperty().bind(onSearchProperty().isNotNull());
 
         filterBoxOrientation.addListener(it -> layoutBySize());
-        filterItemsProperty().addListener((InvalidationListener) it -> layoutBySize());
+        filterGroupsProperty().addListener((InvalidationListener) it -> layoutBySize());
+        sortGroupProperty().addListener(it -> layoutBySize());
         extraNodesProperty().addListener((InvalidationListener) it -> layoutBySize());
         onSearchProperty().addListener((ob, ov, nv) -> {
             if (nv != null) {
@@ -83,41 +106,33 @@ public class SearchFilterView<T> extends PaneBase {
 
         layoutBySize();
 
-        InvalidationListener updateFilter = it -> {
-            if (getOnSearch() != null) {
-                getOnSearch().accept(searchField.getText(), getSelectedFilters());
-            }
-        };
-
-        selectedFilters.addListener(updateFilter);
-        searchField.textProperty().addListener(updateFilter);
     }
 
-    private final ObjectProperty<Predicate<T>> predicate = new SimpleObjectProperty<>(this, "predicate", item -> true);
+    private final ReadOnlyObjectWrapper<Predicate<T>> predicate = new ReadOnlyObjectWrapper<>(this, "predicate", item -> true);
 
     public Predicate<T> getPredicate() {
         return predicate.get();
     }
 
-    public ObjectProperty<Predicate<T>> predicateProperty() {
-        return predicate;
+    public ReadOnlyObjectProperty<Predicate<T>> predicateProperty() {
+        return predicate.getReadOnlyProperty();
     }
 
-    public void setPredicate(Predicate<T> predicate) {
+    private void setPredicate(Predicate<T> predicate) {
         this.predicate.set(predicate);
     }
 
-    private final ObjectProperty<Comparator<T>> comparator = new SimpleObjectProperty<>(this, "comparator", Comparator.comparing(T::toString));
+    private final ReadOnlyObjectWrapper<Comparator<T>> comparator = new ReadOnlyObjectWrapper<>(this, "comparator");
 
-    public Comparator getComparator() {
+    public Comparator<T> getComparator() {
         return comparator.get();
     }
 
-    public ObjectProperty<Comparator<T>> comparatorProperty() {
-        return comparator;
+    public ReadOnlyObjectProperty<Comparator<T>> comparatorProperty() {
+        return comparator.getReadOnlyProperty();
     }
 
-    public void setComparator(Comparator comparator) {
+    private void setComparator(Comparator<T> comparator) {
         this.comparator.set(comparator);
     }
 
@@ -131,20 +146,11 @@ public class SearchFilterView<T> extends PaneBase {
         contentBox.getStyleClass().add("content-box");
         contentBox.managedProperty().bind(contentBox.visibleProperty());
 
-        Pane filtersBox = isSmall() ? new VBox() : new HBox();
-        filtersBox.getStyleClass().add("filters-box");
-        ObservableList<FilterItem> items = getFilterItems();
-        for (int i = 0; i < items.size(); i++) {
-            FilterItem filterItem = items.get(i);
-            filtersBox.getChildren().add(createFilterBox(i, filterItem));
-        }
-
-        selectedFilters.setAll(getFilterItems().stream().map(filterItem -> filterItem.defaultValue).toList());
-
+        Pane filtersBox = initFiltersSortGroupBox();
         Spacer spacer = new Spacer();
         spacer.managedProperty().bind(spacer.visibleProperty());
 
-        contentBox.getChildren().setAll(searchField, filtersBox, spacer); //, applyFiltersButton);
+        contentBox.getChildren().setAll(searchField, filtersBox, spacer);
         contentBox.getChildren().addAll(getExtraNodes());
 
         if (isSmall() && getOnSearch() == null) {
@@ -165,24 +171,89 @@ public class SearchFilterView<T> extends PaneBase {
         }
     }
 
-    private Node createFilterBox(int index, FilterItem<?> filterItem) {
+    private Pane initFiltersSortGroupBox() {
+        if (predicate.isBound()) {
+            predicate.unbind();
+        }
+        setPredicate(item -> true);
+
+        Pane filtersBox = isSmall() ? new VBox() : new HBox();
+        filtersBox.getStyleClass().add("filters-box");
+        ObservableList<FilterGroup<T>> items = getFilterGroups();
+        List<ObjectProperty<Predicate<T>>> childPredicateProperties = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            FilterGroup<T> filterGroup = items.get(i);
+            ObjectProperty<Predicate<T>> childPredicateProperty = new SimpleObjectProperty<>(this, "childPredicate", item -> true);
+            filtersBox.getChildren().add(createFilterBox(i, filterGroup, childPredicateProperty));
+            childPredicateProperties.add(childPredicateProperty);
+        }
+
+        Stream.Builder<Observable> builder = Stream.builder();
+        builder.add(onSearchProperty());
+        builder.add(searchField.textProperty());
+        childPredicateProperties.forEach(builder::add);
+
+        predicate.bind(Bindings.createObjectBinding(() -> {
+            Predicate<T> predicate = item -> true;
+            if (getOnSearch() != null) {
+                predicate = predicate.and(getOnSearch().apply(searchField.getText()));
+            }
+            for (ObjectProperty<Predicate<T>> childPredicateProperty : childPredicateProperties) {
+                predicate = predicate.and(childPredicateProperty.get());
+            }
+            return predicate;
+        }, builder.build().toArray(Observable[]::new)));
+
+        if (getSortGroup() != null) {
+            if (comparator.isBound()) {
+                comparator.unbind();
+            }
+            ComboBox<SortItem<T>> sortComboBox = new ComboBox<>();
+            sortComboBox.getStyleClass().addAll("filter-combo-box", "sort-combo-box");
+            sortComboBox.setConverter(new StringConverter<>() {
+                @Override
+                public String toString(SortItem<T> object) {
+                    return object == null ? null : object.name();
+                }
+
+                @Override
+                public SortItem<T> fromString(String string) {
+                    return null;
+                }
+            });
+            sortComboBox.getItems().setAll(getSortGroup().sortItems());
+            comparator.bind(sortComboBox.getSelectionModel().selectedItemProperty().map(SortItem::comparator));
+            getSortGroup().sortItems().stream().filter(it -> it.isApplied).findFirst()
+                    .ifPresentOrElse(
+                            it -> sortComboBox.getSelectionModel().select(it),
+                            () -> sortComboBox.getSelectionModel().selectFirst()
+                    );
+
+            Pane box = getFilterBoxOrientation() == Orientation.VERTICAL ? new VBox() : new HBox();
+            box.getStyleClass().addAll("filter-box", "sort-box");
+            Label titleLabel = new Label(getSortGroup().title);
+            titleLabel.setMinWidth(Region.USE_PREF_SIZE);
+            titleLabel.getStyleClass().add("filter-title");
+            if (isSmall()) {
+                box.getChildren().setAll(titleLabel, new Spacer(), sortComboBox);
+            } else {
+                box.getChildren().setAll(titleLabel, sortComboBox);
+            }
+            filtersBox.getChildren().add(box);
+        }
+
+        return filtersBox;
+    }
+
+    private Node createFilterBox(int index, FilterGroup<T> filterGroup, ObjectProperty<Predicate<T>> childPredicateProperty) {
         Pane box = getFilterBoxOrientation() == Orientation.VERTICAL ? new VBox() : new HBox();
         box.getStyleClass().addAll("filter-box", "filter-box-" + index);
 
-        Label titleLabel = new Label(filterItem.title());
+        Label titleLabel = new Label(filterGroup.title());
         titleLabel.setMinWidth(Region.USE_PREF_SIZE);
         titleLabel.getStyleClass().add("filter-title");
 
-        Object[] enumConstants = filterItem.filterEnumClass().getEnumConstants();
-        Node comboBoxNode;
-        // MULTIPLE SELECTION
-        if (filterItem.multipleSelection) {
-            comboBoxNode = createMultipleSelectionNode(index,filterItem, (Enum<?>[]) enumConstants);
-        } else {
-            // SINGLE SELECTION
-            comboBoxNode = createSingleSelection(index, filterItem, (Enum<?>[]) enumConstants);
-        }
-
+        Node comboBoxNode = createSingleSelection(filterGroup, childPredicateProperty);
         if (isSmall()) {
             box.getChildren().setAll(titleLabel, new Spacer(), comboBoxNode);
         } else {
@@ -194,95 +265,18 @@ public class SearchFilterView<T> extends PaneBase {
     /**
      * ComboBox: single selection
      */
-    private Node createSingleSelection(int index, FilterItem<?> filterItem, Enum<?>[] enumConstants) {
-        ComboBox<Enum<?>> comboBox = createSingleSelection();
-        comboBox.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(Enum<?> object) {
-                return object.toString();
-            }
-
-            @Override
-            public Enum<?> fromString(String string) {
-                return null;
-            }
-        });
+    private Node createSingleSelection(FilterGroup<T> filterGroup, ObjectProperty<Predicate<T>> childPredicateProperty) {
+        ComboBox<FilterItem<T>> comboBox = createSingleSelection();
+        comboBox.setConverter(predicateItemStringConverter);
         comboBox.getStyleClass().addAll("filter-combo-box");
-        comboBox.getItems().addAll(enumConstants);
-        if (filterItem.defaultValue != null) {
-            comboBox.getSelectionModel().select(filterItem.defaultValue);
-        } else {
-            comboBox.getSelectionModel().selectFirst();
-        }
-        comboBox.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> {
-            updateSelectedFilter(index, nv != null ? List.of(nv) : List.of());
-        });
+        comboBox.getItems().addAll(filterGroup.filterItems);
+
+        childPredicateProperty.bind(comboBox.getSelectionModel().selectedItemProperty().map(it -> it == null ? item -> true : it.predicate));
+        filterGroup.filterItems.stream()
+                .filter(FilterItem::isApplied).findFirst()
+                .ifPresentOrElse(it -> comboBox.getSelectionModel().select(it), () -> comboBox.getSelectionModel().selectFirst());
+
         return comboBox;
-    }
-
-    /**
-     * CheckComboBox: multiple selection
-     */
-    private Node createMultipleSelectionNode(int index,FilterItem<?> filterItem, Enum<?>[] enumConstants) {
-        CheckComboBox<Enum<?>> checkComboBox = new CheckComboBox<>();
-        checkComboBox.getStyleClass().addAll("check-combo-box");
-        checkComboBox.getItems().addAll(enumConstants);
-        IndexedCheckModel<Enum<?>> checkModel = checkComboBox.getCheckModel();
-        checkComboBox.titleProperty().bind(Bindings.createStringBinding(() -> {
-            ObservableList<Enum<?>> items = checkModel.getCheckedItems();
-            if (items.isEmpty()) {
-                return "Please Select packs";
-            } else if (items.size() == checkComboBox.getItems().size()) {
-                return "All packs selected";
-            } else if (items.size() == 1) {
-                return items.get(0).toString();
-            } else {
-                return items.size() + " packs- selected";
-            }
-        }, checkModel.getCheckedItems()));
-
-        checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<>() {
-            // prevent recursive calls
-            private boolean updating = false;
-
-            @Override
-            public void onChanged(Change<? extends Enum<?>> c) {
-                if (updating) {
-                    return;
-                }
-
-                ObservableList<Enum<?>> checkedItems = checkComboBox.getCheckModel().getCheckedItems();
-                updateSelectedFilter(index, new ArrayList<>(checkedItems));
-                // Tip: If we want to support select all,
-                // then the first element of the enumeration class needs to be ALL
-                Enum<?> firstItem = checkComboBox.getCheckModel().getItem(0);
-                if (c.next()) {
-                    if (c.wasAdded()) {
-                        if (c.getAddedSubList().contains(firstItem)) {
-                            updating = true;
-                            checkComboBox.getCheckModel().checkAll();
-                            updating = false;
-                        }
-                    } else if (c.wasRemoved()) {
-                        if (c.getRemoved().contains(firstItem)) {
-                            updating = true;
-                            checkComboBox.getCheckModel().clearChecks();
-                            updating = false;
-                        } else {
-                            updating = true;
-                            checkComboBox.getCheckModel().clearCheck(firstItem);
-                            updating = false;
-                        }
-                    }
-                }
-            }
-        });
-
-        if (filterItem.defaultValue != null) {
-            checkComboBox.getCheckModel().check(filterItem.defaultValue);
-        }
-
-        return checkComboBox;
     }
 
     private <T> ComboBox<T> createSingleSelection() {
@@ -309,18 +303,6 @@ public class SearchFilterView<T> extends PaneBase {
         this.blocking.set(blocking);
     }
 
-    private void updateSelectedFilter(int index, List<Enum> newFilterValue) {
-        List<List<Enum>> updatedFilters = new ArrayList<>(getSelectedFilters());
-        if (index >= 0 && index < updatedFilters.size()) {
-            updatedFilters.set(index, newFilterValue);
-        } else {
-            updatedFilters.add(newFilterValue);
-        }
-        if (!updatedFilters.equals(getSelectedFilters())) {
-            setSelectedFilters(FXCollections.observableArrayList(updatedFilters));
-        }
-    }
-
     private final StringProperty searchPromptText = new SimpleStringProperty(this, "searchPromptText");
 
     public String getSearchPromptText() {
@@ -335,18 +317,46 @@ public class SearchFilterView<T> extends PaneBase {
         this.searchPromptText.set(searchPromptText);
     }
 
-    private final ListProperty<FilterItem> filterItems = new SimpleListProperty<>(this, "filterItems", FXCollections.observableArrayList());
+    private final ObjectProperty<Function<String, Predicate<T>>> onSearch = new SimpleObjectProperty<>(this, "onSearch");
 
-    public ObservableList<FilterItem> getFilterItems() {
-        return filterItems.get();
+    public Function<String, Predicate<T>> getOnSearch() {
+        return onSearch.get();
     }
 
-    public ListProperty<FilterItem> filterItemsProperty() {
-        return filterItems;
+    public ObjectProperty<Function<String, Predicate<T>>> onSearchProperty() {
+        return onSearch;
     }
 
-    public void setFilterItems(ObservableList<FilterItem> filterItems) {
-        this.filterItems.set(filterItems);
+    public void setOnSearch(Function<String, Predicate<T>> onSearch) {
+        this.onSearch.set(onSearch);
+    }
+
+    private final ListProperty<FilterGroup<T>> filterGroups = new SimpleListProperty<>(this, "filterGroups", FXCollections.observableArrayList());
+
+    public ObservableList<FilterGroup<T>> getFilterGroups() {
+        return filterGroups.get();
+    }
+
+    public ListProperty<FilterGroup<T>> filterGroupsProperty() {
+        return filterGroups;
+    }
+
+    public void FilterGroup(ObservableList<FilterGroup<T>> filterGroups) {
+        this.filterGroups.set(filterGroups);
+    }
+
+    private final ObjectProperty<SortGroup<T>> sortGroup = new SimpleObjectProperty<>(this, "sortGroups");
+
+    public SortGroup<T> getSortGroup() {
+        return sortGroup.get();
+    }
+
+    public ObjectProperty<SortGroup<T>> sortGroupProperty() {
+        return sortGroup;
+    }
+
+    public void setSortGroup(SortGroup<T> sortGroup) {
+        this.sortGroup.set(sortGroup);
     }
 
     private final ObjectProperty<Orientation> filterBoxOrientation = new StyleableObjectProperty<>(FILTER_BOX_DEFAULT_ORIENTATION) {
@@ -377,34 +387,6 @@ public class SearchFilterView<T> extends PaneBase {
 
     public final ObjectProperty<Orientation> filterBoxOrientationProperty() {
         return filterBoxOrientation;
-    }
-
-    private final ReadOnlyListWrapper<List<Enum>> selectedFilters = new ReadOnlyListWrapper<>(this, "selectedFilters", FXCollections.observableArrayList());
-
-    public List<List<Enum>> getSelectedFilters() {
-        return Collections.unmodifiableList(selectedFilters.get());
-    }
-
-    public ReadOnlyListWrapper<List<Enum>> selectedFiltersProperty() {
-        return selectedFilters;
-    }
-
-    private void setSelectedFilters(ObservableList<List<Enum>> selectedFilters) {
-        this.selectedFilters.set(selectedFilters);
-    }
-
-    private final ObjectProperty<BiConsumer<String, List<List<Enum>>>> onSearch = new SimpleObjectProperty<>(this, "onSearch");
-
-    public BiConsumer<String, List<List<Enum>>> getOnSearch() {
-        return onSearch.get();
-    }
-
-    public ObjectProperty<BiConsumer<String, List<List<Enum>>>> onSearchProperty() {
-        return onSearch;
-    }
-
-    public void setOnSearch(BiConsumer<String, List<List<Enum>>> onSearch) {
-        this.onSearch.set(onSearch);
     }
 
     private final ListProperty<Node> extraNodes = new SimpleListProperty<>(this, "extraNodes", FXCollections.observableArrayList());

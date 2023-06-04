@@ -4760,6 +4760,20 @@
     -fx-padding: 10px 15px;
 }
 
+.search-filter-view .content-box .search-text-field {
+    -fx-padding: 14px 5px;
+}
+
+.search-filter-view .content-box .search-text-field .clear-icon-wrapper {
+    -fx-cursor: hand;
+}
+
+.search-filter-view .content-box .search-text-field .clear-icon {
+    -fx-cursor: hand;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
 /** ------------------------------------
  * VideosFilterView
  */
@@ -4965,6 +4979,13 @@
 
 .people-filter-view:md .content-box .search-field {
     -fx-pref-width: 216px;
+}
+
+/** ------------------------------------
+ * ikonli-packs-filter
+ */
+.ikonli-packs-filter:lg .filter-box > .filter-combo-box {
+    -fx-pref-width: 385px;
 }
 
 /* ----------------------------------------------------------------------------
