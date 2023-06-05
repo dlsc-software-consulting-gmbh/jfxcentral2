@@ -25,9 +25,8 @@ public class LibraryOverviewBox extends PaneBase {
         MarkdownView markdownView = new MarkdownView();
         markdownView.mdStringProperty().bind(markdownProperty());
 
-        LibraryPreviewBox libraryPreviewBox = new LibraryPreviewBox();
+        LibraryPreviewBox libraryPreviewBox = new LibraryPreviewBox(library);
         libraryPreviewBox.sizeProperty().bind(sizeProperty());
-        libraryPreviewBox.setLibrary(library);
 
         VBox bodyBox = new VBox(markdownView, libraryPreviewBox);
         bodyBox.getStyleClass().add("body-box");

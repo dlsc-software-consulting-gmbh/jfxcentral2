@@ -33,14 +33,17 @@ public class LibraryDetailsPage extends DetailsPageBase<Library> {
         LibraryCoordinatesBox coordinatesBox = new LibraryCoordinatesBox(library);
         coordinatesBox.sizeProperty().bind(sizeProperty());
 
-        // ensemble box
-        LibraryEnsembleBox ensembleBox = new LibraryEnsembleBox(library);
-        ensembleBox.sizeProperty().bind(sizeProperty());
-
         // details
         DetailsContentPane detailsContentPane = createContentPane();
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
-        detailsContentPane.getCenterNodes().addAll(libraryOverviewBox, ensembleBox, coordinatesBox);
+        detailsContentPane.getCenterNodes().addAll(libraryOverviewBox, coordinatesBox);
+
+        // ensemble box if online demos are indeed available
+        if (library.isEnsemble()) {
+            LibraryEnsembleBox ensembleBox = new LibraryEnsembleBox(library);
+            ensembleBox.sizeProperty().bind(sizeProperty());
+            detailsContentPane.getCenterNodes().add(1, ensembleBox);
+        }
 
         return wrapContent(header, detailsContentPane);
     }

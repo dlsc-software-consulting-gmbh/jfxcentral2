@@ -30,10 +30,8 @@ public class LibrariesDetailsBox extends DetailsBoxBase<Library> {
 
     @Override
     protected Node createPreviewsBox(Library library) {
-        LibraryPreviewBox previewsBox = new LibraryPreviewBox();
+        LibraryPreviewBox previewsBox = new LibraryPreviewBox(library);
         previewsBox.sizeProperty().bind(sizeProperty());
-        previewsBox.setLibrary(library);
-        previewsBox.libraryInfoProperty().bind(libraryInfoProperty());
         return previewsBox;
     }
 

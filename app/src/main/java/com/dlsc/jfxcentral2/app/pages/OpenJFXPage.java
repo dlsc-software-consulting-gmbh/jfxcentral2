@@ -14,11 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 public class OpenJFXPage extends PageBase {
 
@@ -70,13 +66,6 @@ public class OpenJFXPage extends PageBase {
         // strip view for pull requests and features
         StripView stripView = new StripView(pullRequestsView, featuresContainer);
 
-        VBox uiBox = new VBox(openJFXProjectView, pullRequestsFilterView, stripView);
-
-        uiBox.setAlignment(Pos.BOTTOM_CENTER);
-        uiBox.setMaxWidth(Region.USE_PREF_SIZE);
-
-        StackPane.setAlignment(uiBox, Pos.TOP_CENTER);
-
-        return wrapContent(uiBox);
+        return wrapContent(openJFXProjectView, pullRequestsFilterView, stripView);
     }
 }

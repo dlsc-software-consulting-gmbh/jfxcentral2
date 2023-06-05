@@ -987,7 +987,6 @@
     -fx-font-family: "Spline Sans SemiBold";
 }
 
-
 .openjfx-project-view:lg .fill-button {
     -fx-pref-width: 270px;
 }
@@ -5063,7 +5062,7 @@
 }
 
 .library-preview-box .larger-image-wrapper > .custom-image-view {
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 15, 0.4, 0, 0)
+    /*-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 15, 0.4, 0, 0)*/
 }
 
 .library-preview-box:lg .larger-image-wrapper > .custom-image-view {

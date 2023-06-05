@@ -20,8 +20,7 @@ public class SocialLinksView extends HBox {
     private final Button mailLinkBtn;
     private final Button githubLinkBtn;
     private final Button facebookLinkBtn;
-
-    // TODO: add reddit button, add whatsapp button, others????
+    private final Button redditLinkBtn;
 
     public SocialLinksView() {
         getStyleClass().add("social-links-view");
@@ -33,6 +32,12 @@ public class SocialLinksView extends HBox {
         twitterLinkBtn.visibleProperty().bind(twitterUrlProperty().isNotEmpty());
         twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
         twitterUrl.addListener(it -> updateLink(twitterLinkBtn, getTwitterUrl()));
+
+        redditLinkBtn = new Button("Reddit", new FontIcon(IkonUtil.reddit));
+        redditLinkBtn.getStyleClass().add("reddit-link-btn");
+        redditLinkBtn.visibleProperty().bind(redditUrlProperty().isNotEmpty());
+        redditLinkBtn.managedProperty().bind(redditLinkBtn.visibleProperty());
+        redditUrl.addListener(it -> updateLink(redditLinkBtn, getRedditUrl()));
 
         linkedInLinkBtn = new Button("LinkedIn", new FontIcon(IkonUtil.linkedin));
         linkedInLinkBtn.getStyleClass().add("linkedin-link-btn");
@@ -72,6 +77,7 @@ public class SocialLinksView extends HBox {
         githubUrl.addListener(updateViewListener);
         mailUrl.addListener(updateViewListener);
         facebookUrl.addListener(updateViewListener);
+        redditUrl.addListener(updateViewListener);
 
         updateView();
     }
@@ -93,6 +99,9 @@ public class SocialLinksView extends HBox {
         }
         if (getMailUrl() != null) {
             getChildren().add(facebookLinkBtn);
+        }
+        if (getRedditUrl() != null) {
+            getChildren().add(redditLinkBtn);
         }
         if (getMailUrl() != null) {
             getChildren().add(mailLinkBtn);
@@ -159,6 +168,20 @@ public class SocialLinksView extends HBox {
 
     public void setWebsiteUrl(String websiteUrl) {
         this.websiteUrl.set(websiteUrl);
+    }
+
+    private final StringProperty redditUrl = new SimpleStringProperty(this, "redditUrl");
+
+    public String getRedditUrl() {
+        return redditUrl.get();
+    }
+
+    public StringProperty redditUrlProperty() {
+        return redditUrl;
+    }
+
+    public void setRedditUrl(String redditUrl) {
+        this.redditUrl.set(redditUrl);
     }
 
     private final StringProperty mailUrl = new SimpleStringProperty(this, "mailUrl");

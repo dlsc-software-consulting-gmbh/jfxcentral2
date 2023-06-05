@@ -87,12 +87,15 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
             // TODO: make sure facebook url works well
             String url = URLEncoder.encode("https://www.jfx-central.com/" + shareUrl, StandardCharsets.UTF_8);
             String title = URLEncoder.encode(shareTitle, StandardCharsets.UTF_8);
+            String titleWithBody = URLEncoder.encode(shareTitle + " " + shareText, StandardCharsets.UTF_8);
             String body = URLEncoder.encode(shareText + " ", StandardCharsets.UTF_8); // extra space for proper formatting on twitter
+            String bodyWithUrl = URLEncoder.encode(shareText + " https://www.jfx-central.com/" + shareUrl, StandardCharsets.UTF_8);
 
-            socialLinksView.setFacebookUrl("https://www.facebook.com/sharer/sharer.php?u=" + url + "&t=" + body);
+            socialLinksView.setFacebookUrl("https://www.facebook.com/sharer/sharer.php?u=" + url + "&t=" + titleWithBody);
             socialLinksView.setTwitterUrl("https://twitter.com/share?text=" + body + "&url=" + url + "&hashtags=javafx,java,ux,ui");
             socialLinksView.setLinkedInUrl("https://www.linkedin.com/shareArticle?mini=false&url=" + url + "&title=" + title + "&summary=" + body);
-            socialLinksView.setMailUrl("mailto:?subject=" + title + "&body=" + url);
+            socialLinksView.setMailUrl("mailto:?subject=" + title + "&body=" + body);
+            socialLinksView.setRedditUrl("https://www.reddit.com/r/JavaFX/submit?title=" + title + "&selftext=true&text=" + bodyWithUrl + "&link=" + url);
         }
     }
 

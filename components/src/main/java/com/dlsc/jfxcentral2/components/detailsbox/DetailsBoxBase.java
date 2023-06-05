@@ -194,7 +194,8 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
             Label titleLabel = new Label(model.getName());
             titleLabel.setWrapText(true);
-            //library may have a company image
+
+            //library may have a logo
             if (model instanceof Library library) {
                 CustomImageView graphic = new CustomImageView();
                 graphic.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
@@ -202,6 +203,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
                 graphic.visibleProperty().bind(graphic.imageProperty().isNotNull());
                 titleLabel.setGraphic(graphic);
             }
+
             titleLabel.getStyleClass().add("title-label");
 
             titleBox.getChildren().addAll(titleLabel, new Spacer());
@@ -305,8 +307,8 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             imageProperty = ImageManager.getInstance().downloadBannerImageProperty(download);
         } else if (model instanceof Book book) {
             imageProperty = ImageManager.getInstance().bookCoverImageProperty(book);
-        } else if (model instanceof Tip) {
-            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm()));
+        } else if (model instanceof Tip tip) {
+            imageProperty = ImageManager.getInstance().tipBannerImageProperty(tip);
         } else if (model instanceof Company company) {
             imageProperty = ImageManager.getInstance().companyImageProperty(company);
         } else if (model instanceof Person person) {
@@ -315,6 +317,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             imageProperty = ImageManager.getInstance().youTubeImageProperty(video);
             mins = video.getMinutes() + " mins";
         }
+
         if (imageProperty != null && imageProperty.get() != null) {
             CustomImageView imageView = new CustomImageView();
             if (isSmall()) {

@@ -28,23 +28,21 @@ import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LibraryPreviewBox extends PaneBase {
 
     private ToggleGroup group = new ToggleGroup();
     private CustomImageView largerImageView;
+    private Library library;
 
-    public LibraryPreviewBox() {
+    public LibraryPreviewBox(Library library) {
+        this.library = Objects.requireNonNull(library);
+
         getStyleClass().add("library-preview-box");
-
         libraryInfoProperty().addListener(it -> layoutBySize());
-
-        libraryProperty().addListener(it -> {
-            libraryInfoProperty().bind(DataRepository.getInstance().libraryInfoProperty(getLibrary()));
-            layoutBySize();
-        });
-
-        libraryInfoProperty().addListener(it -> layoutBySize());
+        libraryInfoProperty().bind(DataRepository.getInstance().libraryInfoProperty(library));
+        layoutBySize();
     }
 
     @Override
@@ -53,7 +51,6 @@ public class LibraryPreviewBox extends PaneBase {
         group.getToggles().clear();
 
         LibraryInfo info = getLibraryInfo();
-        Library library = getLibrary();
 
         if (info != null && library != null) {
             List<com.dlsc.jfxcentral.data.model.Image> images = info.getImages();
@@ -191,7 +188,7 @@ public class LibraryPreviewBox extends PaneBase {
         previewButton.setToggleGroup(group);
 
         CustomImageView imageView = new CustomImageView();
-        imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(getLibrary(), modelImage.getPath()));
+        imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library, modelImage.getPath()));
         previewButton.setGraphic(imageView);
 
         previewButton.setSelected(largerImageView.getUserData() == modelImage);
@@ -220,19 +217,5 @@ public class LibraryPreviewBox extends PaneBase {
 
     public void setLibraryInfo(LibraryInfo libraryInfo) {
         this.libraryInfo.set(libraryInfo);
-    }
-
-    private final ObjectProperty<Library> library = new SimpleObjectProperty<>(this, "library");
-
-    public Library getLibrary() {
-        return library.get();
-    }
-
-    public ObjectProperty<Library> libraryProperty() {
-        return library;
-    }
-
-    public void setLibrary(Library library) {
-        this.library.set(library);
     }
 }
