@@ -3181,6 +3181,18 @@
     -tile-h: 136px;
 }
 
+.library-tile-view:lg .avatar-view {
+    -fx-avatar-size: 28px;
+}
+
+.library-tile-view:md .avatar-view {
+    -fx-avatar-size: 25px;
+}
+
+.library-tile-view:sm .avatar-view {
+    -fx-avatar-size: 22px;
+}
+
 /** ------------------------------------
  * TileView
  */

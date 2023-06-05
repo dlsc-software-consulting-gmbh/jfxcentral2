@@ -54,6 +54,9 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         Label nameLabel = new Label();
         nameLabel.getStyleClass().add("title");
         nameLabel.textProperty().bind(titleProperty());
+        if (item instanceof Library) {
+            nameLabel.setGraphic(avatarView);
+        }
 
         Button detailButton = new Button();
         detailButton.getStyleClass().add("detail-button");
@@ -87,7 +90,10 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         leftBox.getStyleClass().add("left-box");
         HBox.setHgrow(leftBox, Priority.ALWAYS);
 
-        HBox contentBox = new HBox(avatarView, leftBox);
+        HBox contentBox = new HBox(leftBox);
+        if (!(item instanceof Library)) {
+            contentBox.getChildren().add(0,avatarView);
+        }
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
     }
