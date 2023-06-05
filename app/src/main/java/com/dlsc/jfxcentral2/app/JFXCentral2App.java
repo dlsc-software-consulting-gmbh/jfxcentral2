@@ -49,13 +49,14 @@ import simplefx.experimental.parts.FXFuture;
 import java.util.function.Supplier;
 
 public class JFXCentral2App extends RouteApp {
+    static {
+        LoadRepository.requestInitialUpdate();
+    }
 
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
     @Override
     public Route createRoute() {
-        DataRepository.getInstance().loadData();
-
         Scene scene = getScene();
 //        scene.rootProperty().addListener(it -> {
 //            ScrollPane scrollPane = (ScrollPane) scene.getRoot().lookup("scroll-pane");
