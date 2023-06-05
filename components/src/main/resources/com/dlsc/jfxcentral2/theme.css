@@ -5920,90 +5920,138 @@
  */
 .downloads-box {
     -fx-background-color: -white;
-    -fx-background-radius: 10px;
-    -fx-border-color: -grey-10;
-    -fx-border-radius: 10px;
+    -fx-min-width: 858px;
+    -fx-pref-width: 858px;
+    -fx-max-width: 858px;
 }
 
-.downloads-box:md-lg {
-    -fx-min-width: 415px;
-    -fx-pref-width: 415px;
-    -fx-max-width: 415px;
-    -fx-padding: 0 0 30px 0;
+.downloads-box > .content-box > .header {
+    -fx-background-color: -bright-blue;
+    -fx-padding: 5px 30px;
+    -fx-alignment: center-left;
 }
 
-.downloads-box:sm {
-    -fx-min-width: 315px;
-    -fx-pref-width: 315px;
-    -fx-max-width: 315px;
-    -fx-padding: 0 0 30px 0;
+.downloads-box .header > .header-title {
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-weight: bold;
+    -fx-text-fill: -white;
+}
+
+.downloads-box .header > .header-icon {
+    -fx-icon-color: -white;
+    -fx-icon-size: 25px;
 }
 
 .downloads-box > .content-box {
     -fx-spacing: 15px;
-    -fx-alignment: top-center;
+    -fx-alignment: center-left;
 }
 
-.downloads-box > .content-box .custom-image-view {
-    -fx-fit-width: 415px;
-    -fx-fit-height: 500px;
-}
-
-.downloads-box:sm > .content-box .custom-image-view {
-    -fx-fit-width: 317px;
-    -fx-fit-height: 500px;
-}
-
-.downloads-box > .content-box .label,
-.downloads-box > .content-box .button {
-    -fx-pref-width: 355px;
-    -fx-max-width: 355px;
-}
-
-.downloads-box:sm > .content-box .label,
-.downloads-box:sm > .content-box .button {
-    -fx-pref-width: 257px;
-    -fx-max-width: 257px;
-}
-
-.downloads-box > .content-box > .name {
-    -fx-padding: 15px 0;
-    -fx-font-size: 20px;
-    -fx-alignment: center;
-    -fx-text-alignment: center;
-}
-
-.downloads-box > .content-box > .download-button {
-    -fx-font-size: 16px;
+.downloads-box > .content-box .download-name {
+    -fx-font-size: 23px;
     -fx-font-weight: bold;
-    -fx-graphic-text-gap: 15px;
-    -fx-content-display: right;
-    -fx-padding: 18px 0;
-    -fx-background-radius: 10px;
-    -fx-background-insets: 0;
-    -fx-background-color: -light-blue;
-    -fx-text-fill: -grey-100;
+    -fx-font-family: "Roboto Condensed";
+    -fx-text-fill: -grey-60;
 }
 
-.downloads-box > .content-box > .download-button .ikonli-font-icon {
+.downloads-box > .content-box .top-box {
+    -fx-padding: 15px 30px 0px 30px;
+}
+
+.downloads-box > .content-box .tags-box {
+    -fx-border-color: -grey-10;
+    -fx-border-width: 0 0 0px 0;
+    -fx-spacing: 5px;
+}
+
+.downloads-box > .content-box .tags-box .download-tag {
+    -fx-padding: 5px 8px;
+    -fx-background-radius: 15px;
+    -fx-font-size: 14px;
+}
+
+.downloads-box > .content-box .os-label .ikonli-font-icon {
+    -fx-icon-color: -grey-60;
+    -fx-icon-size: 25px;
+}
+
+.downloads-box > .content-box .os-label {
+    -fx-alignment: center;
+    -fx-text-fill: -grey-60;
+}
+
+.downloads-box > .content-box .windows-os-label .ikonli-font-icon {
+    -fx-icon-code: "anto-windows";
+}
+
+.downloads-box > .content-box .mac-os-label .ikonli-font-icon {
+    -fx-icon-code: "anto-apple";
+}
+
+.downloads-box > .content-box .linux-os-label .ikonli-font-icon {
+    -fx-icon-code: "ci-linux";
+}
+
+.downloads-box > .content-box .generic-os-label .ikonli-font-icon {
+    -fx-icon-code: "anto-cloud-download";
+}
+
+.downloads-box > .content-box .download-button {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-graphic-text-gap: 5px;
+    -fx-content-display: right;
+    -fx-padding: 10px 12px;
+    -fx-background-radius: 0px;
+    -fx-background-insets: 0;
+    -fx-background-color: -white;
+    -fx-border-color: -grey-30;
+    -fx-text-fill: -grey-100;
+    -fx-min-width: 240px;
+}
+
+.downloads-box > .content-box .download-button .ikonli-font-icon {
     -fx-icon-color: -grey-100;
     -fx-icon-size: 20px;
     -fx-scale-x: 1.2;
     -fx-scale-y: 1.2;
 }
 
-.downloads-box > .content-box > .download-button:hover {
+.downloads-box > .content-box .download-button:hover {
     -fx-background-color: -bright-blue;
     -fx-text-fill: -white;
 }
 
-.downloads-box > .content-box > .download-button:pressed {
+.downloads-box > .content-box .download-button:pressed {
     -fx-background-color: derive(-bright-blue, -20%);
     -fx-text-fill: -white;
 }
 
-.downloads-box > .content-box > .download-button:hover .ikonli-font-icon {
+.downloads-box > .content-box .download-button:pressed .ikonli-font-icon,
+.downloads-box > .content-box .download-button:hover .ikonli-font-icon {
     -fx-icon-color: -white;
+}
+
+.downloads-box > .content-box .tile-pane {
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+}
+
+.downloads-box > .content-box .main-container {
+    -fx-spacing: 10px;
+    -fx-padding: 0px 30px 25px 30px;
+}
+
+.downloads-box > .content-box .title-wrapper  {
+    -fx-spacing: 10px;
+    -fx-alignment: center-left;
+    -fx-padding: 15px 0 0 0;
+}
+
+.downloads-box .dividing-line {
+    -fx-background-color: -grey-10;
+    -fx-max-height: 1px;
 }
 
 /** ------------------------------------
