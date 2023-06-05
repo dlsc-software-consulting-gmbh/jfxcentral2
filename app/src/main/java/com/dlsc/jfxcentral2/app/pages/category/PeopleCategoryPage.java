@@ -5,16 +5,20 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.PeopleFilterView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
+import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.components.tiles.PersonTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
 public class PeopleCategoryPage extends CategoryPageBase<Person> {
+
+    private static final Image BANNER_IMAGE = new Image(PeopleCategoryPage.class.getResource("people-banner.jpg").toExternalForm());
 
     public PeopleCategoryPage(ObjectProperty<Size> size) {
         super(size);
@@ -28,6 +32,14 @@ public class PeopleCategoryPage extends CategoryPageBase<Person> {
     @Override
     public String description() {
         return "A curated list of people connected to JavaFX. They develop libraries, applications, tools or they present at conferences and evangelise JavaFX.";
+    }
+
+    @Override
+    protected CategoryHeader createCategoryHeader() {
+        CategoryHeader header = super.createCategoryHeader();
+        header.setBackgroundImage(BANNER_IMAGE);
+        header.getStyleClass().add("dark-header");
+        return header;
     }
 
     @Override

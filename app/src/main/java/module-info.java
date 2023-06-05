@@ -73,4 +73,5 @@ open module com.dlsc.jfxcentral2.app {
     // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.app;
+    exports com.dlsc.jfxcentral2.app.pages;
 }

@@ -32,6 +32,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -146,9 +147,12 @@ public class SearchFilterView<T> extends PaneBase {
         contentBox.getStyleClass().add("content-box");
         contentBox.managedProperty().bind(contentBox.visibleProperty());
 
-        Pane filtersBox = initFiltersSortGroupBox();
         Spacer spacer = new Spacer();
         spacer.managedProperty().bind(spacer.visibleProperty());
+
+        Pane filtersBox = initFiltersSortGroupBox();
+        HBox.setHgrow(filtersBox, Priority.ALWAYS);
+        HBox.setHgrow(searchField, Priority.ALWAYS);
 
         contentBox.getChildren().setAll(searchField, filtersBox, spacer);
         contentBox.getChildren().addAll(getExtraNodes());
@@ -184,7 +188,9 @@ public class SearchFilterView<T> extends PaneBase {
         for (int i = 0; i < items.size(); i++) {
             FilterGroup<T> filterGroup = items.get(i);
             ObjectProperty<Predicate<T>> childPredicateProperty = new SimpleObjectProperty<>(this, "childPredicate", item -> true);
-            filtersBox.getChildren().add(createFilterBox(i, filterGroup, childPredicateProperty));
+            Node filterBox = createFilterBox(i, filterGroup, childPredicateProperty);
+            HBox.setHgrow(filterBox, Priority.ALWAYS);
+            filtersBox.getChildren().add(filterBox);
             childPredicateProperties.add(childPredicateProperty);
         }
 
@@ -231,9 +237,12 @@ public class SearchFilterView<T> extends PaneBase {
 
             Pane box = getFilterBoxOrientation() == Orientation.VERTICAL ? new VBox() : new HBox();
             box.getStyleClass().addAll("filter-box", "sort-box");
+            HBox.setHgrow(box, Priority.ALWAYS);
             Label titleLabel = new Label(getSortGroup().title);
             titleLabel.setMinWidth(Region.USE_PREF_SIZE);
             titleLabel.getStyleClass().add("filter-title");
+            HBox.setHgrow(sortComboBox, Priority.ALWAYS);
+            sortComboBox.setMaxWidth(Double.MAX_VALUE);
             if (isSmall()) {
                 box.getChildren().setAll(titleLabel, new Spacer(), sortComboBox);
             } else {

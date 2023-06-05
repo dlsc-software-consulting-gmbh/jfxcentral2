@@ -8,10 +8,13 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.model.DateQuickLink;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
 import com.dlsc.jfxcentral2.model.Size;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +40,7 @@ public class QuickLinksGenerator {
         List<ModelObject> dataList = createShuffledSublist(count);
         for (int i = 0; i < count; i++) {
             ModelObject mo = dataList.get(i);
-            list.add(new NormalQuickLink(getTitle(mo), mo.getName(), IkonUtil.getModelIkon(mo), PageUtil.getLink(mo)));
+            list.add(new NormalQuickLink(getCategoryName(mo), mo.getName(), IkonUtil.getModelIkon(mo), PageUtil.getLink(mo)));
         }
         return list;
     }
@@ -55,17 +58,15 @@ public class QuickLinksGenerator {
 
         //Randomly generate 1~3 QuickLinks for image placeholders
         int count2 = new Random().nextInt(3) + 1;
-        List<String> imageUrlList = new ArrayList<>();
+        List<String> imageName = new ArrayList<>();
 
         //currently there are only 3 images for testing
         for (int i = 0; i < 3; i++) {
-            imageUrlList.add("/com/dlsc/jfxcentral2/test/images/quick-link-" + (size == Size.LARGE ? "lg" : "md") + i + ".png");
+            imageName.add("quick-link-image" + (i + 1) + ".jpg");
         }
 
-        Collections.shuffle(imageUrlList);
-        imageUrlList.subList(0, count2).forEach(url -> {
-            list.add(new ImageQuickLink(QuickLinksGenerator.class.getResource(url).toExternalForm()));
-        });
+        Collections.shuffle(imageName);
+        imageName.subList(0, count2).forEach(url -> list.add(new ImageQuickLink(QuickLinksGenerator.class.getResource(url).toExternalForm())));
 
         //If the above QuickLinks are less than 9, fill null
         for (int i = 0; i < 9 - count - count2; i++) {
@@ -78,7 +79,7 @@ public class QuickLinksGenerator {
         return list;
     }
 
-    private static String getTitle(ModelObject mo) {
+    private static String getCategoryName(ModelObject mo) {
         Objects.requireNonNull(mo, "model object can not be null");
 
         if (mo instanceof Video video) {
@@ -104,6 +105,7 @@ public class QuickLinksGenerator {
     public static boolean checkArrayList(List<QuickLink> list) {
         int rows = 3;
         int cols = 3;
+
         // Cannot have 3 null values or 3 QuickLinks without images in the same row
         for (int i = 0; i < rows; i++) {
             int normalView = 0;
@@ -123,6 +125,7 @@ public class QuickLinksGenerator {
                 return false;
             }
         }
+
         // Cannot have 3 null values or 3 QuickLinks without images in the same row
         for (int j = 0; j < cols; j++) {
             int nullCount = 0;
@@ -153,16 +156,50 @@ public class QuickLinksGenerator {
         allModelObjects.addAll(DataRepository.getInstance().getTools());
         allModelObjects.addAll(DataRepository.getInstance().getBooks());
         Collections.shuffle(allModelObjects);
-
-        /*
-         * For now we do not feature videos, tutorials, people, or blogs.
-         */
-//        allModelObjects.addAll(DataRepository.getInstance().getVideos());
-//        allModelObjects.addAll(DataRepository.getInstance().getTutorials());
-//        allModelObjects.addAll(DataRepository.getInstance().getPeople());
-//        allModelObjects.addAll(DataRepository.getInstance().getBlogs());
-
-
         return allModelObjects.subList(0, size);
+    }
+
+    public static List<QuickLink> generateWebsiteChangesQuickLinks(ObjectProperty<Size> sizeProperty) {
+        ObservableList<ModelObject> recentItems = DataRepository.getInstance().getRecentItems();
+        Collections.shuffle(recentItems);
+
+        List<QuickLink> quickLinks = new ArrayList<>();
+        if (sizeProperty.get() != Size.SMALL) {
+            Random random = new Random();
+            int imageQuickLinkCount = random.nextInt(2) + 1;
+            int dateQuickLinkCount = Math.min(5, recentItems.size());
+            int nullCount = 7 - imageQuickLinkCount - dateQuickLinkCount;
+
+            // normal QuickLinks
+            for (int i = 0; i < dateQuickLinkCount; i++) {
+                ModelObject changedModelObject = recentItems.get(i);
+                quickLinks.add(createDateQuickLine(changedModelObject));
+            }
+
+            // image QuickLinks
+            for (int i = 0; i < imageQuickLinkCount; i++) {
+                String imgUrl = "quick-link-image" + (i + 1) + ".jpg";
+                quickLinks.add(new ImageQuickLink(QuickLinksGenerator.class.getResource(imgUrl).toExternalForm()));
+            }
+
+            // empty QuickLinks
+            for (int i = 0; i < nullCount; i++) {
+                quickLinks.add(null);
+            }
+            Collections.shuffle(quickLinks);
+        } else { // small size
+
+            // normal QuickLinks
+            for (int i = 0; i < recentItems.size(); i++) {
+                ModelObject changedModelObject = recentItems.get(i);
+                quickLinks.add(createDateQuickLine(changedModelObject));
+            }
+        }
+
+        return quickLinks;
+    }
+
+    private static DateQuickLink createDateQuickLine(ModelObject changedModelObject) {
+        return new DateQuickLink(changedModelObject.getName(), getCategoryName(changedModelObject), null, PageUtil.getLink(changedModelObject), changedModelObject.getCreationOrUpdateDate());
     }
 }

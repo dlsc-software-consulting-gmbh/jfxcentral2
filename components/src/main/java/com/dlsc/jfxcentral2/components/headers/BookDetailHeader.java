@@ -13,7 +13,6 @@ public class BookDetailHeader extends SimpleDetailHeader<Book> {
         setWebsiteButtonText("amazon");
         setWebsite("https://www.amazon.com/dp/" + getModel().getAmazonASIN());
         setBackgroundImage(new Image(BookDetailHeader.class.getResource("books-banner.jpg").toExternalForm()));
-        setDescription(book.getSubtitle());
         setShareUrl("books/" + book.getId());
         setShareText("Found this book on @JFXCentral: " + book.getName() + " - " + book.getSubtitle());
         setShareTitle("JavaFX book: " + book.getName());

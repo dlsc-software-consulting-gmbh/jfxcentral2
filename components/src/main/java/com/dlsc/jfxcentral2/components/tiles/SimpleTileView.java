@@ -1,18 +1,13 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral.data.DataRepository;
-import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral.data.model.News;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
-import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
@@ -143,17 +138,12 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         DataRepository dataRepository = DataRepository.getInstance();
         List<LinkedObjectBadge> linkedObjectBadge = List.of(
                 new LinkedObjectBadge("Books", IkonUtil.getModelIkon(Book.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("Apps", IkonUtil.getModelIkon(RealWorldApp.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("Libraries", IkonUtil.getModelIkon(Library.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("Tutorials", IkonUtil.getModelIkon(Tutorial.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("Downloads", IkonUtil.getModelIkon(Download.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("Tools", IkonUtil.getModelIkon(Tool.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("Videos", IkonUtil.getModelIkon(Video.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("Companies", IkonUtil.getModelIkon(Company.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("Blogs", IkonUtil.getModelIkon(Blog.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("Tips", IkonUtil.getModelIkon(Tip.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("News", IkonUtil.getModelIkon(News.class), dataRepository.getLinkedObjects(data, Book.class).size()),
-                new LinkedObjectBadge("Links", IkonUtil.getModelIkon(LinksOfTheWeek.class), dataRepository.getLinkedObjects(data, Book.class).size())
+                new LinkedObjectBadge("Apps", IkonUtil.getModelIkon(RealWorldApp.class), dataRepository.getLinkedObjects(data, RealWorldApp.class).size()),
+                new LinkedObjectBadge("Libraries", IkonUtil.getModelIkon(Library.class), dataRepository.getLinkedObjects(data, Library.class).size()),
+                new LinkedObjectBadge("Downloads", IkonUtil.getModelIkon(Download.class), dataRepository.getLinkedObjects(data, Download.class).size()),
+                new LinkedObjectBadge("Tools", IkonUtil.getModelIkon(Tool.class), dataRepository.getLinkedObjects(data, Tool.class).size()),
+                new LinkedObjectBadge("Videos", IkonUtil.getModelIkon(Video.class), dataRepository.getLinkedObjects(data, Video.class).size()),
+                new LinkedObjectBadge("Tips", IkonUtil.getModelIkon(Tip.class), dataRepository.getLinkedObjects(data, Tip.class).size())
         );
 
         AtomicInteger index = new AtomicInteger(0);

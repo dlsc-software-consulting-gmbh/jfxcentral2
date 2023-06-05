@@ -23,6 +23,7 @@ import java.util.List;
 
 public class PersonDetailHeader extends DetailHeader<Person> {
 
+
     public PersonDetailHeader(Person person) {
         super(person);
         getStyleClass().add("person-detail-header");

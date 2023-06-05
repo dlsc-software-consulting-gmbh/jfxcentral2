@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
@@ -23,5 +24,7 @@ public class LibraryTileView extends SimpleTileView<Library> {
 
         setTitle(library.getName());
         setDescription(library.getDescription());
+
+        imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
     }
 }
