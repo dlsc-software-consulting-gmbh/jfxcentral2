@@ -206,23 +206,21 @@
  * ContextMenu
 */
 .context-menu {
-    -hover-text-icon-color: -grey-20; /* (hover)label:textFill; (hover)ikonli-font-icon:iconColor */
+    -hover-text-icon-color: -grey-100; /* (hover)label:textFill; (hover)ikonli-font-icon:iconColor */
     -normal-text-icon-color: -grey-100; /* label:textFill; ikonli-font-icon:iconColor */
     -fx-background-color: -white;
     -fx-background-radius: 10px;
     -fx-effect: -blue-shadow;
     -fx-font-family: "Roboto Condensed";
     -fx-font-size: 20px;
-    -fx-padding: 20px 30px 20px 30px;
-}
-
-.context-menu:hover {
-    -hover-text-icon-color: -grey-100;
-    -normal-text-icon-color: -grey-20;
+    -fx-padding: 20px 30px 20px 8px;
 }
 
 .context-menu .menu-item {
     -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 0 5px;
+    -fx-padding: 7px 0 7px 15px;
 }
 
 .context-menu .menu-item > .label,
@@ -249,6 +247,8 @@
 .context-menu .menu-item:hover,
 .context-menu .menu-item:focused {
     -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #ffffff00 0.0%, #ffffff00 0.6667%, #ffffff00 12%, #ffffff 20.0%, #0e4ae4 20.1%, #0e4ae4 80%, #ffffff00 80.1%, #ffffff00 100.0%);
+    -fx-border-width: 0 0 0 5px;
 }
 
 /** -------------------------------
