@@ -71,6 +71,14 @@ public class SocialLinksView extends HBox {
 
         InvalidationListener updateViewListener = it -> updateView();
 
+        twitterLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        linkedInLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        websiteLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        githubLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        mailLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        facebookLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        redditLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+
         twitterUrl.addListener(updateViewListener);
         linkedInUrl.addListener(updateViewListener);
         websiteUrl.addListener(updateViewListener);
