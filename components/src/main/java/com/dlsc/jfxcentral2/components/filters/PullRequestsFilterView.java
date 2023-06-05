@@ -23,13 +23,13 @@ public class PullRequestsFilterView extends SearchFilterView<PullRequest> {
                 )),
                 new FilterGroup<>("LABEL", List.of(
                         new FilterItem<>("ALL", item -> true),
-                        new FilterItem<>("Request for Review", item -> true),
-                        new FilterItem<>("Integrated", item -> true),
-                        new FilterItem<>("Ready", item -> true),
-                        new FilterItem<>("Change Specification Request", item -> true),
-                        new FilterItem<>("Oracle Contributor Agreement", item -> true),
-                        new FilterItem<>("OCA Verify", item -> true)
-                )),
+                        new FilterItem<>("Request for Review", item -> item.getLabels().stream().anyMatch(label -> "rfr".equalsIgnoreCase(label.getName()))),
+                        new FilterItem<>("Integrated", item -> item.getLabels().stream().anyMatch(label -> "integrated".equalsIgnoreCase(label.getName()))),
+                        new FilterItem<>("Ready", item -> item.getLabels().stream().anyMatch(label -> "ready".equalsIgnoreCase(label.getName()))),
+                        new FilterItem<>("Change Specification Request", item -> item.getLabels().stream().anyMatch(label -> "csr".equalsIgnoreCase(label.getName()))),
+                        new FilterItem<>("Oracle Contributor Agreement", item -> item.getLabels().stream().anyMatch(label -> "oca".equalsIgnoreCase(label.getName()))),
+                        new FilterItem<>("OCA Verify", item -> item.getLabels().stream().anyMatch(label -> "oca-verify".equalsIgnoreCase(label.getName())))
+                        )),
                 new FilterGroup<>("STATUS", List.of(
                         new FilterItem<>("ALL", item -> true),
                         new FilterItem<>("Open", item -> "open".equalsIgnoreCase(item.getState())),
