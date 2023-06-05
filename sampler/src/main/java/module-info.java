@@ -12,6 +12,7 @@ open module com.dlsc.jfxcentral.sampler {
 
     requires org.controlsfx.controls;
     requires org.controlsfx.fxsampler;
+    requires org.apache.commons.lang3;
 
     requires com.dlsc.jfxcentral2.components;
     requires com.sandec.mdfx;
