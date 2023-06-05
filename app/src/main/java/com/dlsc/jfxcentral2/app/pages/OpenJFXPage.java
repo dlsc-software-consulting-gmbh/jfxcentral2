@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral2.components.FeaturesContainer;
 import com.dlsc.jfxcentral2.components.OpenJFXProjectView;
 import com.dlsc.jfxcentral2.components.PullRequestsView;
@@ -9,6 +10,10 @@ import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.filters.PullRequestsFilterView;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
@@ -46,7 +51,17 @@ public class OpenJFXPage extends PageBase {
         // pull requests
         PullRequestsView pullRequestsView = new PullRequestsView();
         pullRequestsView.sizeProperty().bind(sizeProperty());
-        pullRequestsView.getPullRequests().setAll(DataRepository.getInstance().loadPullRequests());
+
+        // data
+        ObservableList<PullRequest> itemsList = FXCollections.observableArrayList(DataRepository.getInstance().loadPullRequests());
+
+        FilteredList<PullRequest> filteredList = new FilteredList<>(itemsList);
+        filteredList.predicateProperty().bind(pullRequestsFilterView.predicateProperty());
+
+        SortedList<PullRequest> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(pullRequestsFilterView.comparatorProperty());
+
+        pullRequestsView.setPullRequests(sortedList);
 
         // features
         FeaturesContainer featuresContainer = new FeaturesContainer();
