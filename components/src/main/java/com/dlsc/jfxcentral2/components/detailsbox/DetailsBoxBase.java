@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
@@ -179,6 +180,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
     }
 
     private class DetailsCell extends VBox {
+
         private final StackPane extrasWrapper;
         private T model;
 
@@ -316,6 +318,10 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         } else if (model instanceof Video video) {
             imageProperty = ImageManager.getInstance().youTubeImageProperty(video);
             mins = video.getMinutes() + " mins";
+//        } else if (model instanceof Blog blog) {
+//            imageProperty = ImageManager.getInstance().blogIconImageProperty(blog);
+        } else if (model instanceof Tool tool) {
+            imageProperty = ImageManager.getInstance().toolImageProperty(tool);
         }
 
         if (imageProperty != null && imageProperty.get() != null) {

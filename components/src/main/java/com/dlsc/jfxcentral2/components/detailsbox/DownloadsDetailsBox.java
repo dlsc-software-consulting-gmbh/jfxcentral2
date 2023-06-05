@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import javafx.scene.Node;
