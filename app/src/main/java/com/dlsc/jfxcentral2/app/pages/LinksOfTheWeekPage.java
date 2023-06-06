@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
 import com.dlsc.jfxcentral2.components.LinksOfTheWeekView;
@@ -11,6 +11,7 @@ import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.util.Callback;
@@ -58,7 +59,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
 
         // links of the week view
         LinksOfTheWeekView linksOfTheWeekView = new LinksOfTheWeekView();
-        linksOfTheWeekView.setLinksOfTheWeeks(DataRepository.getInstance().getLinksOfTheWeek());
+        linksOfTheWeekView.getLinksOfTheWeeks().setAll(DataRepository2.getInstance().getLinksOfTheWeek());
         linksOfTheWeekView.sizeProperty().bind(sizeProperty());
 
         // this is a category page, but we still need to use the details content pane for layout purposes
@@ -72,7 +73,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
 
     @Override
     protected ObservableList<LinksOfTheWeek> getCategoryItems() {
-        return DataRepository.getInstance().getLinksOfTheWeek();
+        return FXCollections.observableArrayList(DataRepository2.getInstance().getLinksOfTheWeek());
     }
 
     @Override
@@ -86,7 +87,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
     }
 
     protected List<MenuView.Item> createMenuItems() {
-        return DataRepository.getInstance().getLinksOfTheWeek()
+        return DataRepository2.getInstance().getLinksOfTheWeek()
                 .stream()
                 .limit(5)
                 .sorted(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed())

@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Tip;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -26,7 +26,7 @@ public class TipOverviewBox extends OverviewBox<Tip> {
     public TipOverviewBox(Tip tip) {
         super(tip);
         getStyleClass().add("tip-overview-box");
-        setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "tips/" + getModel().getId());
+        setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "tips/" + getModel().getId());
 
 //            locationLabel.setText(tip.getLocation());
 //            domainLabel.setText(tip.getDomain());
@@ -34,7 +34,7 @@ public class TipOverviewBox extends OverviewBox<Tip> {
         if (tip.getCreatedOn() != null) {
             createdOnLabel.setText(tip.getCreatedOn().format(DEFAULT_DATE_FORMATTER));
         }
-        markdownProperty().bind(DataRepository.getInstance().tipDescriptionProperty(tip));
+        setMarkdown(DataRepository2.getInstance().getTipReadMe(tip));
     }
 
     @Override

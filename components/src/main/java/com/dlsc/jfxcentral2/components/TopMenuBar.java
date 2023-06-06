@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SearchField;
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
@@ -81,7 +81,7 @@ public class TopMenuBar extends PaneBase {
         searchField = new SearchField<>();
         searchField.setPromptText("Search");
         searchField.setCellFactory(listView -> new SearchResultCell());
-        searchField.setSuggestionProvider(request -> DataRepository.getInstance().search(request.getUserText()));
+        searchField.setSuggestionProvider(request -> DataRepository2.getInstance().search(request.getUserText()));
         searchField.setMatcher((modelObject, text) -> modelObject.getName().startsWith(text));
         searchField.setConverter(new StringConverter<>() {
             @Override

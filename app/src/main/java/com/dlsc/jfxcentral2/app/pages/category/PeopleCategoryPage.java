@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.PeopleFilterView;
@@ -11,6 +11,7 @@ import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.util.Callback;
@@ -69,6 +70,6 @@ public class PeopleCategoryPage extends CategoryPageBase<Person> {
 
     @Override
     protected ObservableList<Person> getCategoryItems() {
-        return DataRepository.getInstance().getPeople();
+        return FXCollections.observableArrayList(DataRepository2.getInstance().getPeople());
     }
 }

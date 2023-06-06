@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Coordinates;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.MarkdownView;
@@ -85,7 +85,7 @@ public class LibraryCoordinatesBox extends PaneBase {
         String artifactId = coordinates.getArtifactId();
 
         if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
-            StringProperty versionProperty = DataRepository.getInstance().getArtifactVersion(coordinates);
+            StringProperty versionProperty = DataRepository2.getInstance().getArtifactVersion(coordinates);
             repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
                 if (getBuildTool().equals(BuildTool.MAVEN)) {
                     return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + versionProperty.get() + "</version>\n</dependency>";

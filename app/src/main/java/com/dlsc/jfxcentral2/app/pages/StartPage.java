@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.HomePageTopView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
@@ -10,8 +10,9 @@ import com.dlsc.jfxcentral2.components.WeekLinksLiteView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.QuickLinksGenerator;
 import javafx.beans.property.ObjectProperty;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
+
+import java.util.List;
 
 public class StartPage extends PageBase {
 
@@ -36,23 +37,23 @@ public class StartPage extends PageBase {
         homePageTopView.sizeProperty().bind(sizeProperty());
 
         // links of the Week
-        ObservableList<LinksOfTheWeek> linksOfTheWeek = DataRepository.getInstance().getLinksOfTheWeek();
+        List<LinksOfTheWeek> linksOfTheWeek = DataRepository2.getInstance().getLinksOfTheWeek();
 
         WeekLinksLiteView weekLinksLiteView = new WeekLinksLiteView();
         weekLinksLiteView.sizeProperty().bind(sizeProperty());
-        weekLinksLiteView.mdStringProperty().bind(DataRepository.getInstance().linksOfTheWeekTextProperty(linksOfTheWeek.get(linksOfTheWeek.size() - 1)));
+        weekLinksLiteView.setMdString(DataRepository2.getInstance().getLinksOfTheWeekReadMe(linksOfTheWeek.get(linksOfTheWeek.size() - 1)));
 
         // website changes
         WebsiteChangesView websiteChangesView = new WebsiteChangesView();
         websiteChangesView.sizeProperty().bind(sizeProperty());
         websiteChangesView.getQuickLinks().setAll(QuickLinksGenerator.generateWebsiteChangesQuickLinks(sizeProperty()));
-        websiteChangesView.setVisible(DataRepository.getInstance().getRecentItems().size() > 0);
-        websiteChangesView.setManaged(DataRepository.getInstance().getRecentItems().size() > 0);
+        websiteChangesView.setVisible(DataRepository2.getInstance().getRecentItems().size() > 0);
+        websiteChangesView.setManaged(DataRepository2.getInstance().getRecentItems().size() > 0);
 
         // video gallery
         VideoGalleryView videoGallery = new VideoGalleryView();
         videoGallery.sizeProperty().bind(sizeProperty());
-        videoGallery.getVideos().setAll(randomSubList(DataRepository.getInstance().getVideos(), 12));
+        videoGallery.getVideos().setAll(randomSubList(DataRepository2.getInstance().getVideos(), 12));
 
         return wrapContent(homePageTopView, weekLinksLiteView, websiteChangesView, videoGallery);
     }

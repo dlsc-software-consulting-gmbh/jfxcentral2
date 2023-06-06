@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
@@ -31,7 +31,6 @@ import com.dlsc.jfxcentral2.components.detailsbox.VideosDetailsBox;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
@@ -45,7 +44,7 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
 
     public DetailsPageBase(ObjectProperty<Size> size, Class<? extends T> clazz, String itemId) {
         super(size, TopMenuBar.Mode.DARK);
-        setItem((T) DataRepository.getInstance().getByID(clazz, itemId));
+        setItem((T) DataRepository2.getInstance().getByID(clazz, itemId));
     }
 
     public T getItem() {
@@ -105,10 +104,10 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
     }
 
     private <MO extends ModelObject> void maybeAddBox(ModelObject modelObject, Class<MO> clazz, Supplier<DetailsBoxBase<MO>> boxSupplier, List<DetailsBoxBase<?>> boxList) {
-        ObservableList<MO> linkedObjects = DataRepository.getInstance().getLinkedObjects(modelObject, clazz);
+        List<MO> linkedObjects = DataRepository2.getInstance().getLinkedObjects(modelObject, clazz);
         if (!linkedObjects.isEmpty()) {
             DetailsBoxBase<MO> box = boxSupplier.get();
-            box.setItems(linkedObjects);
+            box.getItems().setAll(linkedObjects);
             box.sizeProperty().bind(sizeProperty());
             boxList.add(box);
         }

@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.BooksFilterView;
@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
@@ -52,6 +53,6 @@ public class BooksCategoryPage extends CategoryPageBase<Book> {
 
     @Override
     protected ObservableList<Book> getCategoryItems() {
-        return DataRepository.getInstance().getBooks();
+        return FXCollections.observableArrayList(DataRepository2.getInstance().getBooks());
     }
 }

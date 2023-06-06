@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Library;
@@ -141,7 +141,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
             return;
         }
 
-        DataRepository dataRepository = DataRepository.getInstance();
+        DataRepository2 dataRepository = DataRepository2.getInstance();
         List<LinkedObjectBadge> linkedObjectBadge = List.of(
                 new LinkedObjectBadge("Books", IkonUtil.getModelIkon(Book.class), dataRepository.getLinkedObjects(data, Book.class).size()),
                 new LinkedObjectBadge("Apps", IkonUtil.getModelIkon(RealWorldApp.class), dataRepository.getLinkedObjects(data, RealWorldApp.class).size()),

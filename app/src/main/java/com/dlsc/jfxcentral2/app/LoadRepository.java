@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.merge.ContentMergeStrategy;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
@@ -29,7 +29,7 @@ public class LoadRepository {
 
     private static void initialLoad() throws Exception {
         if (System.getProperty("jfxcentral.repo") == null) {
-            File repoDirectory = DataRepository.getInstance().getRepositoryDirectory();
+            File repoDirectory = DataRepository2.getInstance().getRepositoryDirectory();
             if (!repoDirectory.exists()) {
                 Git.cloneRepository()
                         .setURI("https://github.com/dlemmermann/jfxcentral-data.git") //
@@ -37,7 +37,7 @@ public class LoadRepository {
                         .setDirectory(repoDirectory)
                         .call();
             } else {
-                repoDirectory = new File(DataRepository.getInstance().getRepositoryDirectory(), "/.git");
+                repoDirectory = new File(DataRepository2.getInstance().getRepositoryDirectory(), "/.git");
                 Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
                 git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
             }
@@ -45,7 +45,7 @@ public class LoadRepository {
             Git.shutdown();
         }
 
-        DataRepository.getInstance().loadData();
+        DataRepository2.getInstance().loadData();
     }
 
     // trigger the data loading inside the data repository if needed

@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
@@ -157,7 +157,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         return pageBox;
     }
 
-    protected StringProperty getDescriptionProperty(T model) {
+    protected String getDescription(T model) {
         // description
         String description = model.getDescription();
         if (StringUtils.isBlank(description)) {
@@ -165,18 +165,18 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         }
 
         if (StringUtils.isNotBlank(description)) {
-            return new SimpleStringProperty(description);
+            return description;
         }
 
         if (model instanceof Download download) {
-            return DataRepository.getInstance().downloadTextProperty(download);
+            return DataRepository2.getInstance().getDownloadReadMe(download);
         } else if (model instanceof Person person) {
-            return DataRepository.getInstance().personDescriptionProperty(person);
+            return DataRepository2.getInstance().getPersonReadMe(person);
         } else if (model instanceof Company company) {
-            return DataRepository.getInstance().companyDescriptionProperty(company);
+            return DataRepository2.getInstance().getCompanyReadMe(company);
         }
 
-        return new SimpleStringProperty("(Missing description)");
+        return "(Missing description)";
     }
 
     private class DetailsCell extends VBox {
@@ -233,8 +233,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             cellRight.getChildren().addAll(titleBox);
 
             // description
-            MarkdownView descMD = new MarkdownView();
-            descMD.mdStringProperty().bind(getDescriptionProperty(model));
+            MarkdownView descMD = new MarkdownView(getDescription(model));
             descMD.getStyleClass().add("description-markdown");
             cellRight.getChildren().add(descMD);
 

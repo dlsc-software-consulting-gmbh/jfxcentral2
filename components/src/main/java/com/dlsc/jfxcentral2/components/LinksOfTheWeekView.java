@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -57,7 +57,7 @@ public class LinksOfTheWeekView extends PaneBase {
                 title.setMaxWidth(Double.MAX_VALUE);
 
                 MarkdownView markdownView = new MarkdownView();
-                markdownView.mdStringProperty().bind(DataRepository.getInstance().linksOfTheWeekTextProperty(week));
+                markdownView.setMdString(DataRepository2.getInstance().getLinksOfTheWeekReadMe(week));
                 markdownView.setPrefHeight(markdownView.getWidth());
 
                 VBox weekBox = new VBox(title, markdownView);
@@ -70,7 +70,7 @@ public class LinksOfTheWeekView extends PaneBase {
     }
 
     protected List<LinksOfTheWeek> getSortedList() {
-        return DataRepository.getInstance().getLinksOfTheWeek()
+        return DataRepository2.getInstance().getLinksOfTheWeek()
                 .stream()
                 .sorted(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed())
                 .toList();

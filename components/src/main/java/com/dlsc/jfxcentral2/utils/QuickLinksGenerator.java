@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.utils;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
@@ -14,7 +14,6 @@ import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -149,18 +148,23 @@ public class QuickLinksGenerator {
     }
 
     private static List<ModelObject> createShuffledSublist(int size) {
+        DataRepository2 repository = DataRepository2.getInstance();
+
         List<ModelObject> allModelObjects = new ArrayList<>();
-        allModelObjects.addAll(DataRepository.getInstance().getTips());
-        allModelObjects.addAll(DataRepository.getInstance().getLibraries());
-        allModelObjects.addAll(DataRepository.getInstance().getRealWorldApps());
-        allModelObjects.addAll(DataRepository.getInstance().getTools());
-        allModelObjects.addAll(DataRepository.getInstance().getBooks());
+        allModelObjects.addAll(repository.getTips());
+        allModelObjects.addAll(repository.getLibraries());
+        allModelObjects.addAll(repository.getRealWorldApps());
+        allModelObjects.addAll(repository.getTools());
+        allModelObjects.addAll(repository.getBooks());
+
         Collections.shuffle(allModelObjects);
+
         return allModelObjects.subList(0, size);
     }
 
     public static List<QuickLink> generateWebsiteChangesQuickLinks(ObjectProperty<Size> sizeProperty) {
-        ObservableList<ModelObject> recentItems = DataRepository.getInstance().getRecentItems();
+        // new list, we do not want to shuffle the original list
+        List<ModelObject> recentItems = new ArrayList<>(DataRepository2.getInstance().getRecentItems());
         Collections.shuffle(recentItems);
 
         List<QuickLink> quickLinks = new ArrayList<>();

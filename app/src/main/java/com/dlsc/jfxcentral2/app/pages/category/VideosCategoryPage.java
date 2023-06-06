@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
@@ -11,6 +11,7 @@ import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.util.Callback;
@@ -63,6 +64,6 @@ public class VideosCategoryPage extends CategoryPageBase<Video> {
 
     @Override
     protected ObservableList<Video> getCategoryItems() {
-        return DataRepository.getInstance().getVideos();
+        return FXCollections.observableArrayList(DataRepository2.getInstance().getVideos());
     }
 }

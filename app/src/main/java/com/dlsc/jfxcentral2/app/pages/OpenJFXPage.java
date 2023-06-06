@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral2.components.FeaturesContainer;
 import com.dlsc.jfxcentral2.components.OpenJFXProjectView;
@@ -49,7 +49,7 @@ public class OpenJFXPage extends PageBase {
         pullRequestsView.sizeProperty().bind(sizeProperty());
 
         // data
-        ObservableList<PullRequest> itemsList = FXCollections.observableArrayList(DataRepository.getInstance().loadPullRequests());
+        ObservableList<PullRequest> itemsList = FXCollections.observableArrayList(DataRepository2.getInstance().loadPullRequests());
 
         FilteredList<PullRequest> filteredList = new FilteredList<>(itemsList);
         filteredList.predicateProperty().bind(pullRequestsFilterView.predicateProperty());

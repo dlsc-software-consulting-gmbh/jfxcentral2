@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Post;
@@ -41,7 +41,7 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
     protected Node createTopNode() {
         VBox box = new VBox();
         box.getStyleClass().add("posts-box");
-        DataRepository.getInstance().loadPosts(getModel()).forEach(post -> box.getChildren().add(new PostView(post)));
+        DataRepository2.getInstance().loadPosts(getModel()).forEach(post -> box.getChildren().add(new PostView(post)));
         return box;
     }
 

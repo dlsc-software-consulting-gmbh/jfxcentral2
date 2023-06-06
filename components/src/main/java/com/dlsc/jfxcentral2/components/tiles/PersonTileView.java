@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.components.SocialLinksView;
@@ -36,7 +36,7 @@ public class PersonTileView extends SimpleTileView<Person> {
         imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
 
         setTitle(person.getName());
-        descriptionProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
+        setDescription(DataRepository2.getInstance().getPersonReadMe(person));
 
         //add badges
         badgeBox.getChildren().clear();

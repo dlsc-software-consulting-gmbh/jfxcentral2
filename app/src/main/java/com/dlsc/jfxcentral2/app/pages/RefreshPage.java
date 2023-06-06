@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import javafx.beans.property.ObjectProperty;
@@ -93,7 +93,7 @@ public class RefreshPage extends PageBase {
 
     public void updateRepository(ProgressMonitor monitor) throws GitAPIException, IOException {
         System.out.println("updating repository, monitor = " + monitor);
-        File repoDirectory = DataRepository.getInstance().getRepositoryDirectory();
+        File repoDirectory = DataRepository2.getInstance().getRepositoryDirectory();
         if (!repoDirectory.exists()) {
             Git.cloneRepository()
                     .setURI("https://github.com/dlemmermann/jfxcentral-data.git")
@@ -102,7 +102,7 @@ public class RefreshPage extends PageBase {
                     .setProgressMonitor(monitor)
                     .call();
         } else {
-            repoDirectory = new File(DataRepository.getInstance().getRepositoryDirectory(), "/.git");
+            repoDirectory = new File(DataRepository2.getInstance().getRepositoryDirectory(), "/.git");
             Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
             git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
         }
@@ -110,7 +110,7 @@ public class RefreshPage extends PageBase {
         Git.shutdown();
 
         // trigger the data loading inside the data repository if needed
-        DataRepository.getInstance().loadData();
+        DataRepository2.getInstance().loadData();
 
         monitor.endTask();
     }
