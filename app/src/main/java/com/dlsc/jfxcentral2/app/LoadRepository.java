@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository;
-import javafx.application.Platform;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.merge.ContentMergeStrategy;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
@@ -46,7 +45,7 @@ public class LoadRepository {
             Git.shutdown();
         }
 
-        Platform.runLater(() -> DataRepository.getInstance().loadData());
+        DataRepository.getInstance().loadData();
     }
 
     // trigger the data loading inside the data repository if needed
