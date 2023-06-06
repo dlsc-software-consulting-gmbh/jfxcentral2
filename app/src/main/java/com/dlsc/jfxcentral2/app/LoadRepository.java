@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository;
+import javafx.application.Platform;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.merge.ContentMergeStrategy;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
@@ -10,21 +11,20 @@ import java.io.File;
 public class LoadRepository {
 
     /* This main is called by JPro during startup! */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         requestInitialUpdate();
     }
 
-    static boolean isRequested = false;
+    static boolean isRequested;
+
     public static void requestInitialUpdate() {
-        if(!isRequested) {
+        if (!isRequested) {
             isRequested = true;
-            new Thread(() -> {
-                try {
-                    initialLoad();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }).start();
+            try {
+                initialLoad();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -45,7 +45,8 @@ public class LoadRepository {
 
             Git.shutdown();
         }
-        DataRepository.getInstance().loadData();
+
+        Platform.runLater(() -> DataRepository.getInstance().loadData());
     }
 
     // trigger the data loading inside the data repository if needed
