@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
+import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Download;
@@ -168,12 +169,11 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             return description;
         }
 
+        // some model objects have a more suitable description (currently) in their readme files
         if (model instanceof Download download) {
             return DataRepository2.getInstance().getDownloadReadMe(download);
         } else if (model instanceof Person person) {
             return DataRepository2.getInstance().getPersonReadMe(person);
-        } else if (model instanceof Company company) {
-            return DataRepository2.getInstance().getCompanyReadMe(company);
         }
 
         return "(Missing description)";
@@ -317,8 +317,8 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         } else if (model instanceof Video video) {
             imageProperty = ImageManager.getInstance().youTubeImageProperty(video);
             mins = video.getMinutes() + " mins";
-//        } else if (model instanceof Blog blog) {
-//            imageProperty = ImageManager.getInstance().blogIconImageProperty(blog);
+        } else if (model instanceof Blog blog) {
+            imageProperty = ImageManager.getInstance().blogIconImageProperty(blog);
         } else if (model instanceof Tool tool) {
             imageProperty = ImageManager.getInstance().toolImageProperty(tool);
         }

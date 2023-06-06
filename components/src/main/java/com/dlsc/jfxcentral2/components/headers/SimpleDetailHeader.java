@@ -14,12 +14,14 @@ import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -57,6 +59,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         logoImageView.imageProperty().bind(imageProperty());
         logoImageView.managedProperty().bind(logoImageView.visibleProperty());
         logoImageView.visibleProperty().bind(imageProperty().isNotNull());
+        logoImageView.setEffect(new DropShadow(10, Color.web("#58a6ff")));
 
         BooleanBinding needAdjustmentToLeft = Bindings.createBooleanBinding(() -> getImage() != null && !isSmall(), imageProperty(), sizeProperty());
 

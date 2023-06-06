@@ -5350,7 +5350,6 @@
  * BooksDetailsBox
  */
 .books-details-box > .content-box .details-cell .main-preview-wrapper {
-    -fx-background-color: -light-blue;
 }
 
 .books-details-box > .content-box .title-box .amazon-button {
