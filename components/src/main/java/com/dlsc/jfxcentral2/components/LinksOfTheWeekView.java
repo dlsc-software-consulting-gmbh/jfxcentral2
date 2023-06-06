@@ -24,6 +24,7 @@ public class LinksOfTheWeekView extends PaneBase {
 
     public LinksOfTheWeekView() {
         getStyleClass().add("links-of-the-week-view");
+
         linksBox = new VBox();
         linksBox.getStyleClass().add("links-box");
 
@@ -76,7 +77,7 @@ public class LinksOfTheWeekView extends PaneBase {
                 .toList();
     }
 
-    private final IntegerProperty weekCount = new SimpleIntegerProperty(this, "weekCount", 3);
+    private final IntegerProperty weekCount = new SimpleIntegerProperty(this, "weekCount", 1);
 
     public int getWeekCount() {
         return weekCount.get();
