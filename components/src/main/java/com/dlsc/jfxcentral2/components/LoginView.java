@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.JFXCentralUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -45,7 +46,7 @@ public class LoginView extends PaneBase{
         Text text1 = new Text("Enter your details to save ");
         text1.getStyleClass().add("description-text");
 
-        FontIcon floppy = new FontIcon(JFXCentralIcon.FLOPPY);
+        FontIcon floppy = new FontIcon(IkonUtil.floppy);
         floppy.getStyleClass().add("floppy");
 
         Text text2 = new Text(" and like ");

@@ -2557,6 +2557,12 @@
     -fx-background-color: transparent;
 }
 
+.detail-header .share-button .context-menu .menu-item:hover,
+.detail-header .share-button .context-menu .menu-item:focused {
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 0 5px;
+}
+
 .detail-header .social-links-view {
     -fx-background-color: -white;
     -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.35), 15, 0.2, 0, 0);
@@ -5933,7 +5939,6 @@
     -fx-background-color: -white;
     -fx-min-width: 858px;
     -fx-pref-width: 858px;
-    -fx-max-width: 858px;
 }
 
 .downloads-box > .content-box > .header {
@@ -6894,7 +6899,6 @@
     -fx-background-color: #e0e0e0;
     -fx-background-radius: 6px;
     -fx-background-insets: 0px, 1px 0px 1px 0px;
-    -fx-padding: 10px;
 }
 
 .ikon-detail-view:sm {
