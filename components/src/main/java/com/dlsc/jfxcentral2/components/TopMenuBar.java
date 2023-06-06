@@ -58,7 +58,6 @@ public class TopMenuBar extends PaneBase {
     private final HBox contentBox;
 
     private Node searchTextField;
-    private MenuButton menuBtn;
 
     public enum Mode {
         LIGHT,
@@ -81,7 +80,7 @@ public class TopMenuBar extends PaneBase {
         searchField = new SearchField<>();
         searchField.setPromptText("Search");
         searchField.setCellFactory(listView -> new SearchResultCell());
-        searchField.setSuggestionProvider(request -> DataRepository2.getInstance().search(request.getUserText()));
+        searchField.setSuggestionProvider(request -> search(request.getUserText()));
         searchField.setMatcher((modelObject, text) -> modelObject.getName().startsWith(text));
         searchField.setConverter(new StringConverter<>() {
             @Override
@@ -98,6 +97,34 @@ public class TopMenuBar extends PaneBase {
             }
         });
         layoutBySize();
+    }
+
+    public List<ModelObject> search(String pattern) {
+        DataRepository2 repository = DataRepository2.getInstance();
+
+        List<ModelObject> result = new ArrayList<>();
+        search(repository.getBooks(), pattern, result);
+        search(repository.getBlogs(), pattern, result);
+        search(repository.getCompanies(), pattern, result);
+        search(repository.getPeople(), pattern, result);
+        search(repository.getLibraries(), pattern, result);
+        search(repository.getRealWorldApps(), pattern, result);
+        search(repository.getTools(), pattern, result);
+        search(repository.getVideos(), pattern, result);
+        search(repository.getNews(), pattern, result);
+        search(repository.getDownloads(), pattern, result);
+        search(repository.getTutorials(), pattern, result);
+        search(repository.getTips(), pattern, result);
+        search(repository.getIkonliPacks(), pattern, result);
+        return result;
+    }
+
+    private void search(List<? extends ModelObject> modelObjects, String pattern, List<ModelObject> result) {
+        modelObjects.forEach(mo -> {
+            if (mo.matches(pattern)) {
+                result.add(mo);
+            }
+        });
     }
 
     private final BooleanProperty used = new SimpleBooleanProperty(this, "used");
