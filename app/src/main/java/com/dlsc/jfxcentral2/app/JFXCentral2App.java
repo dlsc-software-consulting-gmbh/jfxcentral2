@@ -36,6 +36,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import one.jpro.routing.Request;
 import one.jpro.routing.Response;
@@ -52,6 +53,14 @@ public class JFXCentral2App extends RouteApp {
 
     static {
         DataRepository.getInstance().loadData();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        super.start(stage);
+
+        // Can't use Platform.exit because something is leaking a non-daemon thread pool.
+        stage.setOnCloseRequest(t -> System.exit(0));
     }
 
     @Override
