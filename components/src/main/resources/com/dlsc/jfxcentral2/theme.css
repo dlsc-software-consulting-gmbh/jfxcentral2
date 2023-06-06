@@ -2418,31 +2418,31 @@
     -fx-max-height: 240px;
 }
 
-.category-header > .header-title {
+.category-header .header-title {
     -fx-text-fill: -white;
 }
 
-.category-header > .header-title > .ikonli-font-icon {
+.category-header .header-title > .ikonli-font-icon {
     -fx-icon-color: -white;
 }
 
-.category-header > .header-title > .ikonli-font-icon {
+.category-header .header-title > .ikonli-font-icon {
     -fx-icon-size: 58px;
 }
 
-.category-header:lg > .header-title {
+.category-header:lg .header-title {
     -fx-graphic-text-gap: 35px;
     -fx-font-size: 54px;
     -fx-padding: 56px 0 0 0;
 }
 
-.category-header:md > .header-title {
+.category-header:md .header-title {
     -fx-graphic-text-gap: 35px;
     -fx-font-size: 44px;
     -fx-padding: 26px 0 0 0;
 }
 
-.category-header:sm > .header-title {
+.category-header:sm .header-title {
     -fx-graphic-text-gap: 20px;
     -fx-font-size: 34px;
     -fx-padding: 50px 0 0 0;
@@ -2597,6 +2597,18 @@
 
 .detail-header .social-links-view .button .ikonli-font-icon {
     -fx-icon-color: -white;
+}
+
+/** ------------------------------------
+ * LinksOfTheWeekHeader
+ */
+.links-of-the-week-header .rss-box {
+    -fx-spacing: 20px;
+}
+
+.links-of-the-week-header .rss-box .custom-image-view {
+    -fx-fit-width: 32px;
+    -fx-fit-height: 32px;
 }
 
 /** ------------------------------------

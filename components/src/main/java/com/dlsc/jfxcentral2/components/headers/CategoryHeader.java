@@ -21,6 +21,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.util.Objects;
 
 public class CategoryHeader extends PaneBase {
+
     private static Image defaultLargeBgImage;
     private static Image defaultMediumBgImg;
     private static Image defaultSmallBgImg;
