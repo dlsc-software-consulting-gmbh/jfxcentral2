@@ -251,6 +251,20 @@
     -fx-border-width: 0 0 0 5px;
 }
 
+.resources-button .context-menu .menu-item:hover,
+.resources-button .context-menu .menu-item:focused {
+    -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, -bright-blue 0.0%, -bright-blue 3.2%, #ffffff00 3.201%, #ffffff00 100.0%);
+    -fx-background-insets: 12px 0 12px 0;
+    -fx-border-color: transparent;
+}
+
+.community-button .context-menu .menu-item:hover,
+.community-button .context-menu .menu-item:focused {
+    -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, -bright-blue 0.0%, -bright-blue 2.1%, #ffffff00 2.101%, #ffffff00 100.0%);
+    -fx-background-insets: 12px 0 12px 0;
+    -fx-border-color: transparent;
+}
+
 /** -------------------------------
  * JFXCentral Logo Shape
  */
@@ -5942,7 +5956,7 @@
 }
 
 .downloads-box > .content-box > .header {
-    -fx-background-color: -bright-blue;
+    -fx-background-color: -light-blue;
     -fx-padding: 5px 30px;
     -fx-alignment: center-left;
 }
@@ -5951,11 +5965,11 @@
     -fx-font-size: 16px;
     -fx-font-family: "Roboto Condensed";
     -fx-font-weight: bold;
-    -fx-text-fill: -white;
+    -fx-text-fill: -grey-100;
 }
 
 .downloads-box .header > .header-icon {
-    -fx-icon-color: -white;
+    -fx-icon-color: -grey-100;
     -fx-icon-size: 25px;
 }
 
