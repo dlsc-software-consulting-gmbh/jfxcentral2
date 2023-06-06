@@ -16,6 +16,8 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import org.kordamp.ikonli.Ikon;
+import org.kordamp.ikonli.hawcons.HawconsStroke;
+import org.kordamp.ikonli.lineawesome.LineAwesomeSolid;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignN;
 
@@ -24,7 +26,8 @@ public interface IkonUtil {
     Ikon link = JFXCentralIcon.OPEN_LINK;
     Ikon timer = JFXCentralIcon.TIMER;
     Ikon champion = JFXCentralIcon.CHAMPION;
-    Ikon rockstar = JFXCentralIcon.ROCKSTAR;
+    Ikon rockstar = HawconsStroke.ROCK_N_ROLL;
+    Ikon floppy = LineAwesomeSolid.SAVE;
     Ikon arrowLeft = MaterialDesign.MDI_ARROW_LEFT;
     Ikon arrowRight = MaterialDesign.MDI_ARROW_RIGHT;
     Ikon website = JFXCentralIcon.WWW;
