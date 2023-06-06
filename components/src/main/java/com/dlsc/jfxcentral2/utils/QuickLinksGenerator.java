@@ -167,6 +167,9 @@ public class QuickLinksGenerator {
     public static List<QuickLink> generateWebsiteChangesQuickLinks(ObjectProperty<Size> sizeProperty) {
         // new list, we do not want to shuffle the original list
         List<ModelObject> recentItems = findRecentItems();
+        if (recentItems.isEmpty()) {
+            return Collections.emptyList();
+        }
 
         Collections.shuffle(recentItems);
 

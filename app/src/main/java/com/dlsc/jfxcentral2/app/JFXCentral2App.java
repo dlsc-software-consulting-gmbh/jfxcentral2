@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.app;
 
-import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral2.app.pages.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.app.pages.LoginPage;
@@ -49,6 +48,7 @@ import simplefx.experimental.parts.FXFuture;
 import java.util.function.Supplier;
 
 public class JFXCentral2App extends RouteApp {
+
     static {
         LoadRepository.requestInitialUpdate();
     }
@@ -58,12 +58,6 @@ public class JFXCentral2App extends RouteApp {
     @Override
     public Route createRoute() {
         Scene scene = getScene();
-//        scene.rootProperty().addListener(it -> {
-//            ScrollPane scrollPane = (ScrollPane) scene.getRoot().lookup("scroll-pane");
-//            scrollPane.setFitToHeight(true);
-//        });
-
-//        getStage().setTitle("JFXCentral");
 
         scene.setFill(Color.web("070B32"));
         scene.widthProperty().addListener((it -> updateSize(scene)));

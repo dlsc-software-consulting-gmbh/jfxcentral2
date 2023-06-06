@@ -58,7 +58,6 @@ public class RefreshPage extends PageBase {
 
             @Override
             public void update(int i) {
-
             }
 
             @Override
@@ -93,7 +92,7 @@ public class RefreshPage extends PageBase {
 
     public void updateRepository(ProgressMonitor monitor) throws GitAPIException, IOException {
         System.out.println("updating repository, monitor = " + monitor);
-        File repoDirectory = DataRepository2.getInstance().getRepositoryDirectory();
+        File repoDirectory = DataRepository2.getRepositoryDirectory();
         if (!repoDirectory.exists()) {
             Git.cloneRepository()
                     .setURI("https://github.com/dlemmermann/jfxcentral-data.git")
@@ -102,15 +101,16 @@ public class RefreshPage extends PageBase {
                     .setProgressMonitor(monitor)
                     .call();
         } else {
-            repoDirectory = new File(DataRepository2.getInstance().getRepositoryDirectory(), "/.git");
-            Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
+            repoDirectory = new File(DataRepository2.getRepositoryDirectory(), "/.git");
+            new FileRepositoryBuilder();
+            Git git = new Git(FileRepositoryBuilder.create(repoDirectory));
             git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
         }
 
         Git.shutdown();
 
         // trigger the data loading inside the data repository if needed
-        DataRepository2.getInstance().loadData();
+        DataRepository2.getInstance().reload();
 
         monitor.endTask();
     }

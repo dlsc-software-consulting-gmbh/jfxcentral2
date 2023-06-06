@@ -16,10 +16,6 @@ public class HelloIkonGridView extends JFXCentralSampleBase {
 
     private IkonGridView ikonGridView;
 
-    static {
-        DataRepository2.getInstance().loadData();
-    }
-
     @Override
     protected Region createControl() {
         ikonGridView = new IkonGridView();

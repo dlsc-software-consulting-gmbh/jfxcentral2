@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.VideoGalleryView;
 import com.dlsc.jfxcentral2.components.WebsiteChangesView;
 import com.dlsc.jfxcentral2.components.WeekLinksLiteView;
+import com.dlsc.jfxcentral2.model.QuickLink;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.QuickLinksGenerator;
 import javafx.beans.property.ObjectProperty;
@@ -44,11 +45,13 @@ public class StartPage extends PageBase {
         weekLinksLiteView.setMdString(DataRepository2.getInstance().getLinksOfTheWeekReadMe(linksOfTheWeek.get(linksOfTheWeek.size() - 1)));
 
         // website changes
+        List<QuickLink> changes = QuickLinksGenerator.generateWebsiteChangesQuickLinks(sizeProperty());
+
         WebsiteChangesView websiteChangesView = new WebsiteChangesView();
         websiteChangesView.sizeProperty().bind(sizeProperty());
-        websiteChangesView.getQuickLinks().setAll(QuickLinksGenerator.generateWebsiteChangesQuickLinks(sizeProperty()));
-        websiteChangesView.setVisible(DataRepository2.getInstance().getRecentItems().size() > 0);
-        websiteChangesView.setManaged(DataRepository2.getInstance().getRecentItems().size() > 0);
+        websiteChangesView.getQuickLinks().setAll(changes);
+        websiteChangesView.setVisible(!changes.isEmpty());
+        websiteChangesView.setManaged(!changes.isEmpty());
 
         // video gallery
         VideoGalleryView videoGallery = new VideoGalleryView();

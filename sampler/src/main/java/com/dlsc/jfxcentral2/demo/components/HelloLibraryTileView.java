@@ -15,7 +15,6 @@ public class HelloLibraryTileView extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        DataRepository2.getInstance().loadData();
         Library library = DataRepository2.getInstance().getLibraries().stream().filter(l -> l.getId().equalsIgnoreCase("FXGL")).findFirst().get();
 
         libraryTileView = new LibraryTileView(library);

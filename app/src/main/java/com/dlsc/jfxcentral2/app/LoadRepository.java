@@ -29,7 +29,7 @@ public class LoadRepository {
 
     private static void initialLoad() throws Exception {
         if (System.getProperty("jfxcentral.repo") == null) {
-            File repoDirectory = DataRepository2.getInstance().getRepositoryDirectory();
+            File repoDirectory = DataRepository2.getRepositoryDirectory();
             if (!repoDirectory.exists()) {
                 Git.cloneRepository()
                         .setURI("https://github.com/dlemmermann/jfxcentral-data.git") //
@@ -37,16 +37,12 @@ public class LoadRepository {
                         .setDirectory(repoDirectory)
                         .call();
             } else {
-                repoDirectory = new File(DataRepository2.getInstance().getRepositoryDirectory(), "/.git");
-                Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
+                repoDirectory = new File(DataRepository2.getRepositoryDirectory(), "/.git");
+                Git git = new Git(FileRepositoryBuilder.create(repoDirectory));
                 git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
             }
 
             Git.shutdown();
         }
-
-        DataRepository2.getInstance().loadData();
     }
-
-    // trigger the data loading inside the data repository if needed
 }
