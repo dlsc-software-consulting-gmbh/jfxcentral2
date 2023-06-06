@@ -1,19 +1,14 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class BooksFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Book;
+import org.apache.commons.lang3.StringUtils;
+
+public class BooksFilterView extends SimpleSearchFilterView<Book> {
     public BooksFilterView() {
         getStyleClass().add("books-filter-view");
         setSearchPromptText("Search for a book");
 
-        setOnSearch((keywords, filterEnums) -> {
-            System.out.println("------------Search book------------");
-            System.out.println("Search keywords: " + keywords);
-            System.out.println("Selected Filters: " + filterEnums);
-        });
+        setOnSearch(text -> book -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(book.getName(), text));
 
-        selectedFiltersProperty().addListener((ob, ov, nv) -> {
-            System.out.println("------------Books Selected filters ------------");
-            System.out.println("Selected filters: " + nv);
-        });
     }
 }

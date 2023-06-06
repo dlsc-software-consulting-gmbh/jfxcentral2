@@ -19,18 +19,11 @@ import java.time.format.FormatStyle;
 
 public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 
     public QuickLinkViewSkin(QuickLinkView control) {
         super(control);
         control.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> control.toFront());
-        control.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-            if (event.isPrimaryButtonDown()) {
-                if (control.getQuickLink() != null && control.getQuickLink().getLinkUrl() != null) {
-                    System.out.println(control.getQuickLink().getLinkUrl());
-                }
-            }
-        });
         layoutBySize();
     }
 
@@ -58,7 +51,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             Label descriptionLabel = new Label(temp.getDescription());
             descriptionLabel.getStyleClass().add("description-label");
 
-            Label dateLabel = new Label(temp.getDate() == null ? null : temp.getDate().format(DATE_TIME_FORMATTER));
+            Label dateLabel = new Label(temp.getDate() == null ? null : temp.getDate().format(DATE_FORMATTER));
             dateLabel.getStyleClass().add("date-label");
 
             HBox bottomBox = new HBox(descriptionLabel, new Spacer(), dateLabel);
@@ -92,7 +85,6 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             getChildren().setAll(contentBox);
         } else if (quickLink instanceof ImageQuickLink temp) {
             control.getStyleClass().add("image-link-view");
-
             control.setStyle("-fx-background-image: url(" + temp.getImageUrl() + ");");
         } else if (quickLink == null) {
             control.getStyleClass().add("empty-link-view");

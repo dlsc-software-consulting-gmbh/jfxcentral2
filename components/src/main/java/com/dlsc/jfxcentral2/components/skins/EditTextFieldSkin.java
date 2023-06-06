@@ -30,7 +30,7 @@ public class EditTextFieldSkin extends ControlBaseSkin<EditTextField> {
         saveButton.managedProperty().bind(saveButton.visibleProperty());
         saveButton.visibleProperty().bind(editState.and(control.validProperty()));
         saveButton.textProperty().bind(control.saveButtonTextProperty());
-        saveButton.setGraphic(new FontIcon(JFXCentralIcon.FLOPPY));
+        saveButton.setGraphic(new FontIcon(IkonUtil.floppy));
         saveButton.setOnAction(it -> {
            if (control.getOnSave()!=null) {
                control.getOnSave().accept(control.getText());

@@ -17,13 +17,19 @@ public class VideoDetailsPage extends DetailsPageBase<Video> {
 
     @Override
     public Node content() {
+        Video video = getItem();
+
         // header
-        VideoDetailHeader header = new VideoDetailHeader(getItem());
+        VideoDetailHeader header = new VideoDetailHeader(video);
         header.sizeProperty().bind(sizeProperty());
+
+        // overview
+        VideoOverviewBox videoOverviewBox = new VideoOverviewBox(video);
+        videoOverviewBox.sizeProperty().bind(sizeProperty());
 
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new VideoOverviewBox(getItem()));
+        detailsContentPane.getCenterNodes().add(videoOverviewBox);
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(header, detailsContentPane);

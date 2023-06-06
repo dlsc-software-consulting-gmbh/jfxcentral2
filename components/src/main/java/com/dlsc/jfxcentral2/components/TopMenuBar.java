@@ -1,12 +1,16 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SearchField;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
+import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
@@ -32,6 +36,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.util.StringConverter;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -49,7 +54,7 @@ public class TopMenuBar extends PaneBase {
     private static final PseudoClass DARK_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("dark");
 
     private final CustomImageView dukeView;
-    private final SearchField<String> searchField;
+    private final SearchField<ModelObject> searchField;
     private final HBox contentBox;
 
     private Node searchTextField;
@@ -74,8 +79,52 @@ public class TopMenuBar extends PaneBase {
 
         searchField = new SearchField<>();
         searchField.setPromptText("Search");
+        searchField.setCellFactory(listView -> new SearchResultCell());
+        searchField.setSuggestionProvider(request -> search(request.getUserText()));
+        searchField.setMatcher((modelObject, text) -> modelObject.getName().startsWith(text));
+        searchField.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(ModelObject object) {
+                if (object != null) {
+                    return object.getName();
+                }
+                return "";
+            }
 
+            @Override
+            public ModelObject fromString(String string) {
+                return null;
+            }
+        });
         layoutBySize();
+    }
+
+    public List<ModelObject> search(String pattern) {
+        DataRepository2 repository = DataRepository2.getInstance();
+
+        List<ModelObject> result = new ArrayList<>();
+        search(repository.getBooks(), pattern, result);
+        search(repository.getBlogs(), pattern, result);
+        search(repository.getCompanies(), pattern, result);
+        search(repository.getPeople(), pattern, result);
+        search(repository.getLibraries(), pattern, result);
+        search(repository.getRealWorldApps(), pattern, result);
+        search(repository.getTools(), pattern, result);
+        search(repository.getVideos(), pattern, result);
+        search(repository.getNews(), pattern, result);
+        search(repository.getDownloads(), pattern, result);
+        search(repository.getTutorials(), pattern, result);
+        search(repository.getTips(), pattern, result);
+        search(repository.getIkonliPacks(), pattern, result);
+        return result;
+    }
+
+    private void search(List<? extends ModelObject> modelObjects, String pattern, List<ModelObject> result) {
+        modelObjects.forEach(mo -> {
+            if (mo.matches(pattern)) {
+                result.add(mo);
+            }
+        });
     }
 
     private final BooleanProperty used = new SimpleBooleanProperty(this, "used");
@@ -124,6 +173,7 @@ public class TopMenuBar extends PaneBase {
             Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));
             loginBtn.setMinWidth(Region.USE_PREF_SIZE);
             loginBtn.getStyleClass().add("login-button");
+            LinkUtil.setLink(loginBtn, "/login");
 
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
@@ -155,6 +205,17 @@ public class TopMenuBar extends PaneBase {
 
             MenuButton menuBtn = createMenuButton("Menu");
             menuBtn.getStyleClass().add("top-menu-button");
+            menuBtn.showingProperty().addListener(it -> {
+                if (menuBtn.isShowing()) {
+                    setShowHamburgerMenu(true);
+                }
+            });
+
+            showHamburgerMenuProperty().addListener(it -> {
+                if (!isShowHamburgerMenu()) {
+                    menuBtn.hide();
+                }
+            });
 
             contentBox.getChildren().setAll(createLogo(), new Spacer(), logOutBtn, createSeparatorRegion(), stackPane, createSeparatorRegion(), menuBtn);
         }
@@ -168,8 +229,9 @@ public class TopMenuBar extends PaneBase {
         button.getItems().add(createMenuItem("Videos", "/videos", IkonUtil.getModelIkon(Video.class)));
         button.getItems().add(createMenuItem("Books", "/books", IkonUtil.getModelIkon(Book.class)));
         button.getItems().add(createMenuItem("Blogs", "/blogs", IkonUtil.getModelIkon(Blog.class)));
+        button.getItems().add(createMenuItem("Tips", "/tips", IkonUtil.getModelIkon(Tip.class)));
         button.getItems().add(createMenuItem("Tutorials", "/tutorials", IkonUtil.getModelIkon(Tutorial.class)));
-        button.getItems().add(createMenuItem("Icons", "/ikonli", IkonUtil.champion));
+        button.getItems().add(createMenuItem("Icons", "/icons", IkonUtil.getModelIkon(IkonliPack.class)));
     }
 
     private void fillCommunityMenu(MenuButton button) {
@@ -181,8 +243,11 @@ public class TopMenuBar extends PaneBase {
 
     private MenuItem createMenuItem(String text, String url, Ikon ikon) {
         Label label = new Label(text, ikon != null ? new FontIcon(ikon) : null);
+        // The StackPane is a workaround for the setLink.
+        // setLink currently only works when the Parent is a Pane.
+        StackPane wrapper = new StackPane(label);
         LinkUtil.setLink(label, url);
-        return new CustomMenuItem(label);
+        return new CustomMenuItem(wrapper);
     }
 
     private MenuButton createMenuButton(String text) {
@@ -194,6 +259,20 @@ public class TopMenuBar extends PaneBase {
             blocking = blocking.or(Bindings.createBooleanBinding(menuButton::isShowing, menuButton.showingProperty()));
         }
         return menuButton;
+    }
+
+    private final BooleanProperty showHamburgerMenu = new SimpleBooleanProperty(this, "showHamburgerMenu");
+
+    public boolean isShowHamburgerMenu() {
+        return showHamburgerMenu.get();
+    }
+
+    public BooleanProperty showHamburgerMenuProperty() {
+        return showHamburgerMenu;
+    }
+
+    public void setShowHamburgerMenu(boolean showHamburgerMenu) {
+        this.showHamburgerMenu.set(showHamburgerMenu);
     }
 
     private Node getSearchTextField() {

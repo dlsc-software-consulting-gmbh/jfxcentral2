@@ -2,12 +2,12 @@ package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
-import javafx.scene.control.SkinBase;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
+public class SaveAndLikeButtonSkin extends ControlBaseSkin<SaveAndLikeButton> {
 
     private final HBox content;
 
@@ -15,7 +15,7 @@ public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
         super(control);
 
         ToggleButton saveButton = new ToggleButton();
-        saveButton.setGraphic(new FontIcon(JFXCentralIcon.FLOPPY));
+        saveButton.setGraphic(new FontIcon(IkonUtil.floppy));
         saveButton.textProperty().bind(control.saveButtonTextProperty());
         saveButton.visibleProperty().bind(control.saveButtonVisibleProperty());
         saveButton.managedProperty().bind(control.saveButtonVisibleProperty());

@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.headers;
 
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.components.AvatarView;
@@ -22,24 +23,29 @@ import java.util.List;
 
 public class PersonDetailHeader extends DetailHeader<Person> {
 
+
     public PersonDetailHeader(Person person) {
         super(person);
         getStyleClass().add("person-detail-header");
         centerProperty().bind(Bindings.createObjectBinding(this::createCenterNode, sizeProperty()));
+
+        setShareUrl("people/" + person.getId());
+        setShareText("Found this person on @JFXCentral: " + person.getName());
+        setShareTitle(person.getName());
+        setBackText("ALL PEOPLE");
+        setBackUrl("/people");
     }
 
     private Pane createCenterNode() {
         Person person = getModel();
 
-        if (person == null) {
-            return null;
-        }
         AvatarView avatarImage = new AvatarView();
         avatarImage.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
 
         FlowPane nameBadgePane = createNameBadgePane(person);
 
-        Label descriptionLabel = new Label(person.getDescription());
+        Label descriptionLabel = new Label();
+        descriptionLabel.setText(DataRepository2.getInstance().getPersonReadMe(person));
         descriptionLabel.setWrapText(true);
         descriptionLabel.getStyleClass().add("description");
 
@@ -91,14 +97,14 @@ public class PersonDetailHeader extends DetailHeader<Person> {
         if (StringUtils.isNotBlank(person.getTwitter())) {
             Button twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
             twitterLinkBtn.getStyleClass().addAll("twitter-link-btn","link-button");
-            LinkUtil.setExternalLink(twitterLinkBtn, person.getTwitter());
+            LinkUtil.setExternalLink(twitterLinkBtn, "https://twitter.com/" + person.getTwitter());
             socialFlowPane.getChildren().add(twitterLinkBtn);
         }
 
         if (StringUtils.isNotBlank(person.getLinkedIn())) {
             Button linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(IkonUtil.linkedin));
             linkedInLinkBtn.getStyleClass().addAll("linkedin-link-btn","link-button");
-            LinkUtil.setExternalLink(linkedInLinkBtn, person.getLinkedIn());
+            LinkUtil.setExternalLink(linkedInLinkBtn, "https://www.linkedin.com/in/" + person.getLinkedIn());
             socialFlowPane.getChildren().add(linkedInLinkBtn);
         }
 
@@ -112,14 +118,14 @@ public class PersonDetailHeader extends DetailHeader<Person> {
         if (StringUtils.isNotBlank(person.getEmail())) {
             Button mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
             mailLinkBtn.getStyleClass().addAll("mail-link-btn","link-button");
-            LinkUtil.setExternalLink(mailLinkBtn, person.getEmail());
+            LinkUtil.setExternalLink(mailLinkBtn, "mailto:" + person.getEmail());
             socialFlowPane.getChildren().add(mailLinkBtn);
         }
 
         if (StringUtils.isNotBlank(person.getGitHub())) {
             Button githubLinkBtn = new Button("GITHUB", new FontIcon(IkonUtil.github));
             githubLinkBtn.getStyleClass().addAll("github-link-btn","link-button");
-            LinkUtil.setExternalLink(githubLinkBtn, person.getGitHub());
+            LinkUtil.setExternalLink(githubLinkBtn, "https://github.com/" + person.getGitHub());
             socialFlowPane.getChildren().add(githubLinkBtn);
         }
 

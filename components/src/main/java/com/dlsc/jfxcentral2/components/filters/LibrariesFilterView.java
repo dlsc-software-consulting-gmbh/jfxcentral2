@@ -1,20 +1,15 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class LibrariesFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Library;
+import org.apache.commons.lang3.StringUtils;
+
+public class LibrariesFilterView extends SimpleSearchFilterView<Library> {
 
     public LibrariesFilterView() {
         getStyleClass().add("libraries-filter-view");
         setSearchPromptText("Search for libraries");
 
-        setOnSearch((keywords, filterEnums) -> {
-            System.out.println("------------Search Libraries------------");
-            System.out.println("Search keywords: " + keywords);
-            System.out.println("Selected Filters: " + filterEnums);
-        });
+        setOnSearch(text -> library -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(library.getName(), text));
 
-        selectedFiltersProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("------------Libraries Selected Filters------------");
-            System.out.println("Selected Filters: " + newValue);
-        });
     }
 }

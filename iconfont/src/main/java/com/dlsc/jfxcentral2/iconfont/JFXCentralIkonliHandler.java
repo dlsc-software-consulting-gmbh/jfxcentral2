@@ -10,7 +10,7 @@ public class JFXCentralIkonliHandler extends AbstractIkonHandler {
 
     @Override
     public boolean supports(String description) {
-        return description != null && description.startsWith("jfxc-icon-");
+        return description != null && description.startsWith("jfx-icon-");
     }
 
     @Override

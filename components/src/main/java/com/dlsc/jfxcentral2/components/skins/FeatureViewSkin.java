@@ -11,10 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
+
     public FeatureViewSkin(FeatureView control) {
         super(control);
         layoutBySize();
@@ -71,7 +71,5 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
         VBox.setVgrow(descriptionLabel, Priority.ALWAYS);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
-
-        LinkUtil.setLink(contentBox, feature.url());
     }
 }

@@ -17,14 +17,19 @@ public class BookDetailsPage extends DetailsPageBase<Book> {
 
     @Override
     public Node content() {
+        Book book = getItem();
 
         // header
-        BookDetailHeader bookDetailHeader = new BookDetailHeader(getItem());
+        BookDetailHeader bookDetailHeader = new BookDetailHeader(book);
         bookDetailHeader.sizeProperty().bind(sizeProperty());
+
+        // overview box
+        BookOverviewBox bookOverviewBox = new BookOverviewBox(book);
+        bookOverviewBox.sizeProperty().bind(sizeProperty());
 
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new BookOverviewBox(getItem()));
+        detailsContentPane.getCenterNodes().add(bookOverviewBox);
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(bookDetailHeader, detailsContentPane);

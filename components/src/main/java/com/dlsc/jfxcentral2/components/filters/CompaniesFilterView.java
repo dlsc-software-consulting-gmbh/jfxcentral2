@@ -1,19 +1,14 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class CompaniesFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Company;
+import org.apache.commons.lang3.StringUtils;
+
+public class CompaniesFilterView extends SimpleSearchFilterView<Company> {
+
     public CompaniesFilterView() {
         getStyleClass().add("companies-filter-view");
         setSearchPromptText("Search for a company");
 
-        setOnSearch((keywords, filterEnums) -> {
-            System.out.println("------------Search companies------------");
-            System.out.println("Search keywords: " + keywords);
-            System.out.println("Selected Filters: " + filterEnums);
-        });
-
-        selectedFiltersProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("------------Companies Selected Filters------------");
-            System.out.println("Selected Filters: " + newValue);
-        });
+        setOnSearch(text -> company -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(company.getName(), text));
     }
 }

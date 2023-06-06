@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
@@ -29,7 +29,6 @@ import com.dlsc.jfxcentral2.components.detailsbox.ToolsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.TutorialsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.VideosDetailsBox;
 import com.dlsc.jfxcentral2.model.Size;
-import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
@@ -45,7 +44,7 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
 
     public DetailsPageBase(ObjectProperty<Size> size, Class<? extends T> clazz, String itemId) {
         super(size, TopMenuBar.Mode.DARK);
-        setItem((T) DataRepository.getInstance().getByID(clazz, itemId));
+        setItem((T) DataRepository2.getInstance().getByID(clazz, itemId));
     }
 
     public T getItem() {
@@ -89,10 +88,10 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
         ModelObject modelObject = getItem();
         List<DetailsBoxBase<?>> boxes = new ArrayList<>();
 
-        maybeAddBox(modelObject, Video.class, VideosDetailsBox::new, boxes);
-        maybeAddBox(modelObject, Tool.class, ToolsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Library.class, LibrariesDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Tool.class, ToolsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Book.class, BooksDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Video.class, VideosDetailsBox::new, boxes);
         maybeAddBox(modelObject, Blog.class, BlogsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Tutorial.class, TutorialsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Download.class, DownloadsDetailsBox::new, boxes);
@@ -105,10 +104,10 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
     }
 
     private <MO extends ModelObject> void maybeAddBox(ModelObject modelObject, Class<MO> clazz, Supplier<DetailsBoxBase<MO>> boxSupplier, List<DetailsBoxBase<?>> boxList) {
-        ListProperty<MO> linkedObjects = DataRepository.getInstance().getLinkedObjects(modelObject, clazz);
+        List<MO> linkedObjects = DataRepository2.getInstance().getLinkedObjects(modelObject, clazz);
         if (!linkedObjects.isEmpty()) {
             DetailsBoxBase<MO> box = boxSupplier.get();
-            box.itemsProperty().bind(linkedObjects);
+            box.getItems().setAll(linkedObjects);
             box.sizeProperty().bind(sizeProperty());
             boxList.add(box);
         }

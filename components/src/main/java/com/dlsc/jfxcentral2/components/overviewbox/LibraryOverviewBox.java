@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.LibraryPreviewBox;
@@ -23,11 +24,11 @@ public class LibraryOverviewBox extends PaneBase {
         header.iconProperty().bind(iconProperty());
 
         MarkdownView markdownView = new MarkdownView();
-        markdownView.mdStringProperty().bind(markdownProperty());
+        markdownView.setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "libraries");
+        markdownView.setMdString(DataRepository2.getInstance().getLibraryReadMe(library));
 
-        LibraryPreviewBox libraryPreviewBox = new LibraryPreviewBox();
+        LibraryPreviewBox libraryPreviewBox = new LibraryPreviewBox(library);
         libraryPreviewBox.sizeProperty().bind(sizeProperty());
-        libraryPreviewBox.setLibrary(library);
 
         VBox bodyBox = new VBox(markdownView, libraryPreviewBox);
         bodyBox.getStyleClass().add("body-box");
@@ -38,22 +39,6 @@ public class LibraryOverviewBox extends PaneBase {
 
         layoutBySize();
         getChildren().setAll(contentBox);
-
-        setMarkdown(library.getDescription());
-    }
-
-    private final StringProperty markdown = new SimpleStringProperty(this, "markdown");
-
-    public String getMarkdown() {
-        return markdown.get();
-    }
-
-    public StringProperty markdownProperty() {
-        return markdown;
-    }
-
-    public void setMarkdown(String markdown) {
-        this.markdown.set(markdown);
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title", "Overview");

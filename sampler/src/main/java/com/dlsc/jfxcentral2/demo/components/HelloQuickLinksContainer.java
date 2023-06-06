@@ -47,7 +47,7 @@ public class HelloQuickLinksContainer extends JFXCentralSampleBase {
     private List<QuickLink> getSmallQuickLinks() {
         List<QuickLink> list = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            list.add(new NormalQuickLink("Tools", "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", IkonUtil.tool, "xxx url..."));
+            list.add(new NormalQuickLink("Tools", "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", IkonUtil.tool, "https://www.jfx-central.com"));
         }
         Collections.shuffle(list);
         return list;
@@ -58,7 +58,7 @@ public class HelloQuickLinksContainer extends JFXCentralSampleBase {
         // Randomly generate 4 to 6 QuickLinks
         int count = new Random().nextInt(3) + 4;
         for (int i = 0; i < count; i++) {
-            list.add(new NormalQuickLink("Tools", i + " Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", IkonUtil.tool, "xxx url..."));
+            list.add(new NormalQuickLink("Tools", i + " Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", IkonUtil.tool, "https://www.jfx-central.com"));
         }
         //Randomly generate 1~3 QuickLinks for image placeholders
         int count2 = new Random().nextInt(3) + 1;

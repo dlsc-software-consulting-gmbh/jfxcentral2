@@ -17,13 +17,19 @@ public class CompanyDetailsPage extends DetailsPageBase<Company> {
 
     @Override
     public Node content() {
+        Company company = getItem();
+
         // header
-        CompanyDetailHeader header = new CompanyDetailHeader(getItem());
+        CompanyDetailHeader header = new CompanyDetailHeader(company);
         header.sizeProperty().bind(sizeProperty());
+
+        // overview
+        CompanyOverviewBox companyOverviewBox = new CompanyOverviewBox(company);
+        companyOverviewBox.sizeProperty().bind(sizeProperty());
 
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new CompanyOverviewBox(getItem()));
+        detailsContentPane.getCenterNodes().add(companyOverviewBox);
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(header, detailsContentPane);

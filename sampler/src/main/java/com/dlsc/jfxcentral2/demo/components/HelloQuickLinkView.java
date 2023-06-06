@@ -22,7 +22,7 @@ public class HelloQuickLinkView extends JFXCentralSampleBase {
                 "Tools",
                 "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur",
                 IkonUtil.tool,
-                "xxx url...");
+                "https://www.jfx-central.com");
         quickLinkView = new QuickLinkView(quickLink);
 
         return new ScrollPane(new VBox(30, quickLinkView));

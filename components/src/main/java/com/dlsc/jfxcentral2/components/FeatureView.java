@@ -8,6 +8,7 @@ import javafx.scene.control.Skin;
 import one.jpro.routing.LinkUtil;
 
 public class FeatureView extends ControlBase {
+
     public FeatureView() {
         this(null);
     }

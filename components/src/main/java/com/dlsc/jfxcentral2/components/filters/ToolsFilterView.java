@@ -1,19 +1,14 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class ToolsFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Tool;
+import org.apache.commons.lang3.StringUtils;
+
+public class ToolsFilterView extends SimpleSearchFilterView<Tool> {
     public ToolsFilterView() {
         getStyleClass().add("tools-filter-view");
         setSearchPromptText("Search for a tool");
 
-        setOnSearch((keywords, filterEnums) -> {
-            System.out.println("------------Search tools------------");
-            System.out.println("Search keywords: " + keywords);
-            System.out.println("Selected Filters: " + filterEnums);
-        });
+        setOnSearch(text -> tool -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(tool.getName(), text));
 
-        selectedFiltersProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("------------Tools Selected Filters------------");
-            System.out.println("Selected Filters: " + newValue);
-        });
     }
 }

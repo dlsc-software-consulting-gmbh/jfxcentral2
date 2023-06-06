@@ -5,10 +5,9 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 
-public class SaveAndLikeButton extends Control {
+public class SaveAndLikeButton extends ControlBase {
 
     public SaveAndLikeButton() {
         getStyleClass().add("save-and-like-button");

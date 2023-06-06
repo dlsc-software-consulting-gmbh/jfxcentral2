@@ -8,7 +8,6 @@ import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Video;
-import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.FlipView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -36,9 +35,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -53,12 +58,14 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
     private final FlipView flipView = new FlipView();
     private final Button button1;
     private final Button button2;
-    private CustomImageView imageView;
+    private Region mainImageRegion;
 
     public TileView(T item) {
         super(item);
 
         getStyleClass().add("tile-view");
+
+        setDescription(item.getDescription());
 
         VBox contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");
@@ -69,6 +76,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
         //[Bottom] nodes,save button,like button
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
+        saveAndLikeButton.sizeProperty().bind(sizeProperty());
         saveSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setSaveButtonSelected(nv));
         likeSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setLikeButtonSelected(nv));
 
@@ -128,14 +136,16 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         contentBox.getChildren().setAll(flipView, bottomPane);
         getChildren().setAll(contentBox);
 
-        boolean isVideo = item instanceof Video;
-        StackPane.setAlignment(imageView, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
+        if (mainImageRegion != null) {
+            boolean isVideo = item instanceof Video;
+            StackPane.setAlignment(mainImageRegion, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
+        }
         setTitle(item.getName());
         setSaveSelected(SaveAndLikeUtil.isSaved(item));
         setLikeSelected(SaveAndLikeUtil.isLiked(item));
 
         if (item instanceof RealWorldApp app) {
-            imageProperty().bind(ImageManager.getInstance().realWorldAppLargeImageProperty(app));
+            imageProperty().bind(ImageManager.getInstance().realWorldAppBannerImageProperty(app));
         } else if (item instanceof Video video) {
             imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
         } else if (item instanceof Book book) {
@@ -145,7 +155,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         } else if (item instanceof Company company) {
             imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
         } else if (item instanceof Tip) {
-            imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm())));
+            imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/default-tips-tricks-bg.png").toExternalForm())));
         }
     }
 
@@ -183,27 +193,6 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
     }
 
     private Node createFront() {
-        //Top image
-        imageView = new CustomImageView();
-        imageView.getStyleClass().add("tile-image-view");
-        imageView.managedProperty().bind(imageProperty().isNotNull());
-        imageView.visibleProperty().bind(imageProperty().isNotNull());
-        imageView.imageProperty().bind(imageProperty());
-
-        //remarkLabel Used to display the remark information,
-        // such as the duration of the video ,release date, etc.
-        Label remarkLabel = new Label();
-        remarkLabel.setGraphic(new FontIcon());
-        remarkLabel.textProperty().bind(remarkProperty());
-        remarkLabel.managedProperty().bind(remarkProperty().isNotEmpty());
-        remarkLabel.visibleProperty().bind(remarkProperty().isNotEmpty());
-        remarkLabel.getStyleClass().add("remark");
-        StackPane.setAlignment(remarkLabel, Pos.TOP_RIGHT);
-
-        StackPane imageContainer = new StackPane();
-        imageContainer.getStyleClass().add("image-container");
-        imageContainer.getChildren().setAll(imageView, remarkLabel);
-
         //Center title and description
         Label titleLabel = new Label();
         titleLabel.getStyleClass().add("title");
@@ -212,8 +201,8 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         titleLabel.visibleProperty().bind(titleProperty().isNotEmpty());
         titleLabel.setWrapText(true);
         titleLabel.minHeightProperty().bind(Bindings.createDoubleBinding(() -> {
-            boolean isGalley = getStyleClass().contains("video-gallery-tile");
-            double height = titleLabel.getFont().getSize() * 1.5 * (isGalley ? 2 : isSmall() ? 2 : 2.2);
+            boolean isVideoGallery = getStyleClass().contains("video-gallery-tile");
+            double height = titleLabel.getFont().getSize() * 1.5 * (isVideoGallery ? 2 : isSmall() ? 2 : 2.2);
             double prefH = titleLabel.prefHeight(titleLabel.getWidth());
             return Math.min(prefH, height);
         }, sizeProperty(), titleLabel.fontProperty(), titleLabel.widthProperty(), getStyleClass()));
@@ -231,10 +220,38 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         centerBox.getStyleClass().add("center-box");
         VBox.setVgrow(centerBox, Priority.ALWAYS);
 
-        VBox frontBox = new VBox(imageContainer, centerBox);
+        VBox frontBox = new VBox(createFrontTop(), centerBox);
         frontBox.getStyleClass().add("front-box");
         frontBox.setAlignment(Pos.TOP_LEFT);
         return frontBox;
+    }
+
+    protected Node createFrontTop() {
+        //Top image
+        mainImageRegion = new Region();
+        mainImageRegion.getStyleClass().add("main-image-region");
+        mainImageRegion.backgroundProperty().bind(Bindings.createObjectBinding(() -> {
+            Image image = getImage();
+            if (image != null) {
+                return new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, false, true)));
+            }
+            return null;
+        }, imageProperty()));
+
+        // remarkLabel Used to display the remark information,
+        // such as the duration of the video ,release date, etc.
+        Label remarkLabel = new Label();
+        remarkLabel.setGraphic(new FontIcon());
+        remarkLabel.textProperty().bind(remarkProperty());
+        remarkLabel.managedProperty().bind(remarkProperty().isNotEmpty());
+        remarkLabel.visibleProperty().bind(remarkProperty().isNotEmpty());
+        remarkLabel.getStyleClass().add("remark");
+        StackPane.setAlignment(remarkLabel, Pos.TOP_RIGHT);
+
+        StackPane imageContainer = new StackPane();
+        imageContainer.getStyleClass().add("image-container");
+        imageContainer.getChildren().setAll(mainImageRegion, remarkLabel);
+        return imageContainer;
     }
 
     private Node createBack() {

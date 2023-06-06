@@ -1,11 +1,12 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Coordinates;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.MarkdownView;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -52,7 +53,7 @@ public class LibraryCoordinatesBox extends PaneBase {
 
         Button copyButton = new Button();
         copyButton.getStyleClass().addAll("blue-button", "copy-button");
-        copyButton.setGraphic(new FontIcon(MaterialDesign.MDI_CONTENT_COPY));
+        copyButton.setGraphic(new FontIcon(IkonUtil.copy));
         copyButton.setOnAction(evt -> {
             Clipboard clipboard = Clipboard.getSystemClipboard();
             ClipboardContent content = new ClipboardContent();
@@ -84,7 +85,7 @@ public class LibraryCoordinatesBox extends PaneBase {
         String artifactId = coordinates.getArtifactId();
 
         if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
-            StringProperty versionProperty = DataRepository.getInstance().getArtifactVersion(coordinates);
+            StringProperty versionProperty = DataRepository2.getInstance().getArtifactVersion(coordinates);
             repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
                 if (getBuildTool().equals(BuildTool.MAVEN)) {
                     return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + versionProperty.get() + "</version>\n</dependency>";

@@ -1,13 +1,14 @@
 package com.dlsc.jfxcentral2.components.filters;
 
+import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignS;
 
-public class PeopleFilterView extends SimpleSearchFilterView {
+public class PeopleFilterView extends SimpleSearchFilterView<Person> {
     public PeopleFilterView() {
         getStyleClass().add("people-filter-view");
         setSearchPromptText("Search for a JFX person");
@@ -29,16 +30,9 @@ public class PeopleFilterView extends SimpleSearchFilterView {
 
         getExtraNodes().add(badgeBox);
 
-        setOnSearch((keywords, filterEnums) -> {
-            System.out.println("------------Search people ------------");
-            System.out.println("Search keywords: " + keywords);
-            System.out.println("Selected Filters: " + filterEnums);
-        });
+        setOnSearch(text -> person -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(person.getName(), text));
 
-        selectedFiltersProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("------------People Selected Filters------------");
-            System.out.println("Selected Filters: " + newValue);
-        });
+
 
     }
 }

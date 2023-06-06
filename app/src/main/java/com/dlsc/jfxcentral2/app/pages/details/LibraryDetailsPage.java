@@ -19,27 +19,31 @@ public class LibraryDetailsPage extends DetailsPageBase<Library> {
 
     @Override
     public Node content() {
+        Library library = getItem();
 
         // header
-        LibraryDetailHeader header = new LibraryDetailHeader(getItem());
+        LibraryDetailHeader header = new LibraryDetailHeader(library);
         header.sizeProperty().bind(sizeProperty());
 
         // overview box
-        LibraryOverviewBox libraryOverviewBox = new LibraryOverviewBox(getItem());
+        LibraryOverviewBox libraryOverviewBox = new LibraryOverviewBox(library);
         libraryOverviewBox.sizeProperty().bind(sizeProperty());
 
         // coordinates box
-        LibraryCoordinatesBox coordinatesBox = new LibraryCoordinatesBox(getItem());
+        LibraryCoordinatesBox coordinatesBox = new LibraryCoordinatesBox(library);
         coordinatesBox.sizeProperty().bind(sizeProperty());
-
-        // ensemble box
-        LibraryEnsembleBox ensembleBox = new LibraryEnsembleBox(getItem());
-        ensembleBox.sizeProperty().bind(sizeProperty());
 
         // details
         DetailsContentPane detailsContentPane = createContentPane();
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
-        detailsContentPane.getCenterNodes().addAll(libraryOverviewBox, ensembleBox, coordinatesBox);
+        detailsContentPane.getCenterNodes().addAll(libraryOverviewBox, coordinatesBox);
+
+        // ensemble box if online demos are indeed available
+        if (library.isEnsemble()) {
+            LibraryEnsembleBox ensembleBox = new LibraryEnsembleBox(library);
+            ensembleBox.sizeProperty().bind(sizeProperty());
+            detailsContentPane.getCenterNodes().add(1, ensembleBox);
+        }
 
         return wrapContent(header, detailsContentPane);
     }

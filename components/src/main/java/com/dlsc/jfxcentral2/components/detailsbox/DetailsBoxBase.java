@@ -1,7 +1,8 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
+import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Download;
@@ -10,6 +11,7 @@ import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
@@ -17,6 +19,7 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import com.sandec.mdfx.MarkdownView;
 import javafx.beans.property.IntegerProperty;
@@ -42,13 +45,13 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
@@ -58,6 +61,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
     public DetailsBoxBase() {
         getStyleClass().add("details-box");
         itemsProperty().addListener((ob, ov, nv) -> layoutBySize());
+
         selectedItemProperty().addListener((ob, ov, item) -> {
             int index = getItems().indexOf(item);
             if (index >= 0) {
@@ -75,6 +79,8 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
                 }
             }
         });
+
+        setDetailUrlProvider(PageUtil::getLink);
     }
 
     private final ObjectProperty<T> selectedItem = new SimpleObjectProperty<>(this, "selectedItem");
@@ -152,7 +158,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         return pageBox;
     }
 
-    protected StringProperty getDescriptionProperty(T model) {
+    protected String getDescription(T model) {
         // description
         String description = model.getDescription();
         if (StringUtils.isBlank(description)) {
@@ -160,21 +166,21 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         }
 
         if (StringUtils.isNotBlank(description)) {
-            return new SimpleStringProperty(description);
+            return description;
         }
 
+        // some model objects have a more suitable description (currently) in their readme files
         if (model instanceof Download download) {
-            return DataRepository.getInstance().downloadTextProperty(download);
+            return DataRepository2.getInstance().getDownloadReadMe(download);
         } else if (model instanceof Person person) {
-            return DataRepository.getInstance().personDescriptionProperty(person);
-        } else if (model instanceof Company company) {
-            return DataRepository.getInstance().companyDescriptionProperty(company);
+            return DataRepository2.getInstance().getPersonReadMe(person);
         }
 
-        return new SimpleStringProperty("(Missing description)");
+        return "(Missing description)";
     }
 
     private class DetailsCell extends VBox {
+
         private final StackPane extrasWrapper;
         private T model;
 
@@ -190,7 +196,8 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
             Label titleLabel = new Label(model.getName());
             titleLabel.setWrapText(true);
-            //library may have a company image
+
+            //library may have a logo
             if (model instanceof Library library) {
                 CustomImageView graphic = new CustomImageView();
                 graphic.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
@@ -198,6 +205,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
                 graphic.visibleProperty().bind(graphic.imageProperty().isNotNull());
                 titleLabel.setGraphic(graphic);
             }
+
             titleLabel.getStyleClass().add("title-label");
 
             titleBox.getChildren().addAll(titleLabel, new Spacer());
@@ -205,10 +213,12 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             List<Node> actionButtons = createActionButtons(model);
             if (actionButtons != null && !actionButtons.isEmpty()) {
                 Pane actionButtonsPane = isSmall() ? new FlowPane() : new HBox();
-                actionButtonsPane.setMinWidth(Region.USE_PREF_SIZE);
                 actionButtonsPane.getStyleClass().add("action-buttons-pane");
                 for (int i = 0; i < actionButtons.size(); i++) {
                     Node actionButton = actionButtons.get(i);
+                    if (actionButton instanceof Region region) {
+                        region.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+                    }
                     actionButton.getStyleClass().addAll("action-button", "action-button-" + i);
                     actionButton.setFocusTraversable(false);
                     actionButtonsPane.getChildren().add(actionButton);
@@ -223,8 +233,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             cellRight.getChildren().addAll(titleBox);
 
             // description
-            MarkdownView descMD = new MarkdownView();
-            descMD.mdStringProperty().bind(getDescriptionProperty(model));
+            MarkdownView descMD = new MarkdownView(getDescription(model));
             descMD.getStyleClass().add("description-markdown");
             cellRight.getChildren().add(descMD);
 
@@ -294,13 +303,13 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         ObjectProperty<Image> imageProperty = null;
         String mins = null;
         if (model instanceof RealWorldApp app) {
-            imageProperty = ImageManager.getInstance().realWorldAppImageProperty(app);
+            imageProperty = ImageManager.getInstance().realWorldAppBannerImageProperty(app);
         } else if (model instanceof Download download) {
             imageProperty = ImageManager.getInstance().downloadBannerImageProperty(download);
         } else if (model instanceof Book book) {
             imageProperty = ImageManager.getInstance().bookCoverImageProperty(book);
-        } else if (model instanceof Tip) {
-            imageProperty = new SimpleObjectProperty<>(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/tips-tricks-thumbnail-01.png").toExternalForm()));
+        } else if (model instanceof Tip tip) {
+            imageProperty = ImageManager.getInstance().tipBannerImageProperty(tip);
         } else if (model instanceof Company company) {
             imageProperty = ImageManager.getInstance().companyImageProperty(company);
         } else if (model instanceof Person person) {
@@ -308,7 +317,12 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         } else if (model instanceof Video video) {
             imageProperty = ImageManager.getInstance().youTubeImageProperty(video);
             mins = video.getMinutes() + " mins";
+        } else if (model instanceof Blog blog) {
+            imageProperty = ImageManager.getInstance().blogIconImageProperty(blog);
+        } else if (model instanceof Tool tool) {
+            imageProperty = ImageManager.getInstance().toolImageProperty(tool);
         }
+
         if (imageProperty != null && imageProperty.get() != null) {
             CustomImageView imageView = new CustomImageView();
             if (isSmall()) {
@@ -357,27 +371,45 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         Button detailsButton = new Button("DETAILS", new FontIcon(IkonUtil.link));
         detailsButton.getStyleClass().add("details-button");
         detailsButton.setMinWidth(Region.USE_PREF_SIZE);
-        detailsButton.managedProperty().bind(detailsButton.visibleProperty());
-        detailsButton.visibleProperty().bind(onDetailsProperty().isNotNull());
-        detailsButton.setOnAction(event -> {
-            if (onDetailsProperty().get() != null) {
-                onDetailsProperty().get().accept(model);
-            }
-        });
+        setLinkOnDetailsButton(model, detailsButton);
+        detailUrlProviderProperty().addListener(it -> setLinkOnDetailsButton(model, detailsButton));
         return detailsButton;
     }
 
-    protected Button createHomepageButton(T model, ObjectProperty<Consumer<T>> onHomepageProperty) {
+    private void setLinkOnDetailsButton(T model, Button detailsButton) {
+        Callback<T, String> provider = getDetailUrlProvider();
+        detailsButton.setVisible(false);
+        detailsButton.setManaged(false);
+        if (provider != null) {
+            String url = provider.call(model);
+            if (StringUtils.isNotBlank(url)) {
+                detailsButton.setVisible(true);
+                detailsButton.setManaged(true);
+                LinkUtil.setLink(detailsButton, url);
+            }
+        }
+    }
+
+    protected Button createHomepageButton(T model) {
         Button homepageButton = new Button("HOMEPAGE", new FontIcon(IkonUtil.link));
         homepageButton.setMinWidth(Region.USE_PREF_SIZE);
-        homepageButton.managedProperty().bind(homepageButton.visibleProperty());
-        homepageButton.visibleProperty().bind(onHomepageProperty.isNotNull());
-        homepageButton.setOnAction(event -> {
-            if (onHomepageProperty.get() != null) {
-                onHomepageProperty.get().accept(model);
-            }
-        });
+        setLinkOnHomepageButton(model, homepageButton);
+        homepageUrlProviderProperty().addListener(it -> setLinkOnHomepageButton(model, homepageButton));
         return homepageButton;
+    }
+
+    private void setLinkOnHomepageButton(T model, Button homepageButton) {
+        Callback<T, String> provider = getHomepageUrlProvider();
+        homepageButton.setVisible(false);
+        homepageButton.setManaged(false);
+        if (provider != null) {
+            String url = provider.call(model);
+            if (StringUtils.isNotBlank(url)) {
+                homepageButton.setVisible(true);
+                homepageButton.setManaged(true);
+                LinkUtil.setExternalLink(homepageButton, homepageUrlProvider.get().call(model));
+            }
+        }
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title", "Header");
@@ -436,18 +468,31 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         this.items.set(items);
     }
 
-    private final ObjectProperty<Consumer<T>> onDetails = new SimpleObjectProperty<>(this, "onDetails");
+    private final ObjectProperty<Callback<T, String>> detailUrlProvider = new SimpleObjectProperty<>(this, "detailUrlProvider");
 
-    public Consumer<T> getOnDetails() {
-        return onDetails.get();
+    public Callback<T, String> getDetailUrlProvider() {
+        return detailUrlProvider.get();
     }
 
-    public ObjectProperty<Consumer<T>> onDetailsProperty() {
-        return onDetails;
+    public ObjectProperty<Callback<T, String>> detailUrlProviderProperty() {
+        return detailUrlProvider;
     }
 
-    public void setOnDetails(Consumer<T> onDetails) {
-        this.onDetails.set(onDetails);
+    public void setDetailUrlProvider(Callback<T, String> detailUrlProvider) {
+        this.detailUrlProvider.set(detailUrlProvider);
     }
 
+    private final ObjectProperty<Callback<T, String>> homepageUrlProvider = new SimpleObjectProperty<>(this, "homepageUrlProvider");
+
+    public Callback<T, String> getHomepageUrlProvider() {
+        return homepageUrlProvider.get();
+    }
+
+    public ObjectProperty<Callback<T, String>> homepageUrlProviderProperty() {
+        return homepageUrlProvider;
+    }
+
+    public void setHomepageUrlProvider(Callback<T, String> homepageUrlProvider) {
+        this.homepageUrlProvider.set(homepageUrlProvider);
+    }
 }

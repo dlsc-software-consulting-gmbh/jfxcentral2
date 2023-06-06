@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.Objects;
 
-public class TopPane extends StackPane {
+public class TopPane extends PaneBase {
 
     private TopMenuBar topMenuBar;
     private Region content;
@@ -37,6 +37,7 @@ public class TopPane extends StackPane {
             getChildren().setAll(content, topMenuBar);
         } else {
             VBox box = new VBox(topMenuBar, content);
+            VBox.setVgrow(box, Priority.ALWAYS);
             StackPane.setAlignment(box, Pos.TOP_CENTER);
             box.getStyleClass().add("vbox");
             box.setMaxWidth(Double.MAX_VALUE);

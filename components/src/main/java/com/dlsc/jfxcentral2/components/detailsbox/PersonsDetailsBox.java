@@ -13,24 +13,16 @@ public class PersonsDetailsBox extends DetailsBoxBase<Person> {
 
     public PersonsDetailsBox() {
         getStyleClass().add("persons-details-box");
+
         setTitle("PEOPLE");
         setIkon(IkonUtil.person);
-
-        // can't have people show up on second page :-)
         setMaxItemsPerPage(Integer.MAX_VALUE);
-
-        setOnDetails(detailsObject -> {
-            System.out.println("On Details: " + detailsObject.getName());
-        });
-
-        setOnHomepage(detailsObject -> {
-            System.out.println("On Homepage: " + detailsObject.getName());
-        });
+        setOnHomepage(Person::getWebsite);
     }
 
     @Override
     protected List<Node> createActionButtons(Person model) {
-        return List.of(createDetailsButton(model), createHomepageButton(model, onHomepageProperty()));
+        return List.of(createDetailsButton(model), createHomepageButton(model));
     }
 
     private final ObjectProperty<Consumer<Person>> onHomepage = new SimpleObjectProperty<>(this, "onHomepage");

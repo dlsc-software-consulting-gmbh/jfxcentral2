@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
@@ -15,6 +16,8 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import org.kordamp.ikonli.Ikon;
+import org.kordamp.ikonli.hawcons.HawconsStroke;
+import org.kordamp.ikonli.lineawesome.LineAwesomeSolid;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignN;
 
@@ -23,7 +26,8 @@ public interface IkonUtil {
     Ikon link = JFXCentralIcon.OPEN_LINK;
     Ikon timer = JFXCentralIcon.TIMER;
     Ikon champion = JFXCentralIcon.CHAMPION;
-    Ikon rockstar = JFXCentralIcon.ROCKSTAR;
+    Ikon rockstar = HawconsStroke.ROCK_N_ROLL;
+    Ikon floppy = LineAwesomeSolid.SAVE;
     Ikon arrowLeft = MaterialDesign.MDI_ARROW_LEFT;
     Ikon arrowRight = MaterialDesign.MDI_ARROW_RIGHT;
     Ikon website = JFXCentralIcon.WWW;
@@ -31,10 +35,13 @@ public interface IkonUtil {
     Ikon delete = JFXCentralIcon.DELETE;
     Ikon close = JFXCentralIcon.COSS;
     Ikon people = JFXCentralIcon.PEOPLE;
+    Ikon copy = MaterialDesign.MDI_CONTENT_COPY;
 
     Ikon play = JFXCentralIcon.PLAY;
     Ikon github = JFXCentralIcon.GITHUB;
     Ikon twitter = JFXCentralIcon.TWITTER;
+    Ikon reddit = MaterialDesign.MDI_REDDIT;
+    Ikon facebook = JFXCentralIcon.FACEBOOK;
     Ikon linkedin = JFXCentralIcon.LINKEDIN;
     Ikon mail = JFXCentralIcon.EMAIL;
     Ikon app = JFXCentralIcon.APP;
@@ -48,6 +55,8 @@ public interface IkonUtil {
     Ikon tool = JFXCentralIcon.TOOLS;
     Ikon tutorial = JFXCentralIcon.TUTORIALS;
     Ikon video = JFXCentralIcon.VIDEOS;
+    Ikon icons = MaterialDesign.MDI_EMOTICON;
+
     Ikon news = MaterialDesignN.NEWSPAPER_VARIANT_OUTLINE;
     Ikon linkOfTheWeek = JFXCentralIcon.LINKS_OF_THE_WEEK;
 
@@ -80,6 +89,8 @@ public interface IkonUtil {
             return video;
         } else if (clazz == LinksOfTheWeek.class) {
             return linkOfTheWeek;
+        } else if (clazz == IkonliPack.class) {
+            return icons;
         } else {
             return null;
         }

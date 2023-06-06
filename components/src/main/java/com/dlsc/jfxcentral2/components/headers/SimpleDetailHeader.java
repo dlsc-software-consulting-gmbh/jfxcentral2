@@ -1,20 +1,28 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
@@ -29,8 +37,11 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
     public SimpleDetailHeader(T model) {
         super(model);
+
         getStyleClass().add("simple-detail-header");
+
         setCenter(createCenterNode());
+        setDescription(model.getDescription());
     }
 
     public Button getWebsiteButton() {
@@ -43,19 +54,33 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
             return null;
         }
 
+        CustomImageView logoImageView = new CustomImageView();
+        logoImageView.getStyleClass().add("logo-image-view");
+        logoImageView.imageProperty().bind(imageProperty());
+        logoImageView.managedProperty().bind(logoImageView.visibleProperty());
+        logoImageView.visibleProperty().bind(imageProperty().isNotNull());
+        logoImageView.setEffect(new DropShadow(10, Color.web("#58a6ff")));
+
+        BooleanBinding needAdjustmentToLeft = Bindings.createBooleanBinding(() -> getImage() != null && !isSmall(), imageProperty(), sizeProperty());
+
         VBox contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");
+        contentBox.alignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(Pos.TOP_LEFT).otherwise(Pos.CENTER));
 
         Label nameLabel = new Label(model.getName());
         nameLabel.getStyleClass().add("name");
         nameLabel.setWrapText(true);
+        nameLabel.textAlignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(TextAlignment.LEFT).otherwise(TextAlignment.CENTER));
+        nameLabel.setMinHeight(Region.USE_PREF_SIZE);
 
-        Label descriptionLabel = null;
-        if (model.getDescription() != null && !model.getDescription().isEmpty()) {
-            descriptionLabel = new Label(model.getDescription());
-            descriptionLabel.getStyleClass().add("description");
-            descriptionLabel.setWrapText(true);
-        }
+        Label descriptionLabel = new Label();
+        descriptionLabel.visibleProperty().bind(descriptionLabel.textProperty().isNotEmpty());
+        descriptionLabel.managedProperty().bind(descriptionLabel.textProperty().isNotEmpty());
+        descriptionLabel.textProperty().bind(descriptionProperty());
+        descriptionLabel.getStyleClass().add("description");
+        descriptionLabel.setWrapText(true);
+        descriptionLabel.textAlignmentProperty().bind(nameLabel.textAlignmentProperty());
+        descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
@@ -68,8 +93,8 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         });
 
         websiteButton = new Button();
-        websiteButton.visibleProperty().bind(websiteProperty().isNotNull());
-        websiteButton.managedProperty().bind(websiteProperty().isNotNull());
+        websiteButton.visibleProperty().bind(websiteProperty().isNotEmpty());
+        websiteButton.managedProperty().bind(websiteProperty().isNotEmpty());
         websiteButton.getStyleClass().addAll("website-button", "link-button");
         websiteButton.textProperty().bind(websiteButtonTextProperty());
         websiteButton.graphicProperty().bind(Bindings.createObjectBinding(() -> {
@@ -94,18 +119,32 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
         Region separator = new Region();
         separator.getStyleClass().add("region-separator");
+        separator.managedProperty().bind(separator.visibleProperty());
+        separator.visibleProperty().bind(websiteButton.visibleProperty());
 
         HBox buttonBox = new HBox(saveAndLikeButton, separator, websiteButton);
         buttonBox.getStyleClass().add("button-box");
+        buttonBox.alignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(Pos.CENTER_LEFT).otherwise(Pos.CENTER));
 
-        if (descriptionLabel != null) {
-            contentBox.getChildren().addAll(nameLabel, descriptionLabel, buttonBox);
-        } else {
-            contentBox.getChildren().addAll(nameLabel, buttonBox);
-        }
+        contentBox.getChildren().addAll(nameLabel, descriptionLabel, buttonBox);
 
-        contentBox.setMaxWidth(Region.USE_PREF_SIZE);
-        return contentBox;
+        FlowPane contentPane = new FlowPane(logoImageView, contentBox);
+        contentPane.getStyleClass().add("flow-pane");
+        return contentPane;
+    }
+
+    private final StringProperty description = new SimpleStringProperty(this, "description");
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
     }
 
     private final StringProperty websiteButtonText = new SimpleStringProperty(this, "websiteButtonText", "WEBSITE");
@@ -148,5 +187,19 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
     public void setWebsite(String website) {
         this.website.set(website);
+    }
+
+    private final ObjectProperty<Image> image = new SimpleObjectProperty<>(this, "image");
+
+    public Image getImage() {
+        return image.get();
+    }
+
+    public ObjectProperty<Image> imageProperty() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image.set(image);
     }
 }

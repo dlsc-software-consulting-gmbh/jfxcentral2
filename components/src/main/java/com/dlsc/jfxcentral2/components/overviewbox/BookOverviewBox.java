@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.components.CustomImageView;
@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class BookOverviewBox extends OverviewBox<Book> {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+
     private Label writtenByLabel;
     private Label publisherLabel;
     private Label publishDateLabel;
@@ -24,43 +25,50 @@ public class BookOverviewBox extends OverviewBox<Book> {
     public BookOverviewBox(Book book) {
         super(book);
         getStyleClass().add("book-overview-box");
-        setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "books/" + getModel().getId());
-        writtenByLabel.setText(book.getAuthors());
-        publisherLabel.setText(book.getPublisher());
-        publishDateLabel.setText(book.getPublishedDate().format(DATE_FORMATTER));
-        isbnLabel.setText(book.getIsbn());
-        markdownProperty().bind(DataRepository.getInstance().bookTextProperty(book));
-        previewImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
+        setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "books/" + getModel().getId());
+        setMarkdown(DataRepository2.getInstance().getBookReadMe(book));
     }
 
     @Override
     protected Node createTopNode() {
-        Label writtenBy = new Label("WRITTEN BY");
-        writtenBy.getStyleClass().add("field-title");
+        Book book = getModel();
 
         writtenByLabel = new Label();
+        publisherLabel = new Label();
+        publishDateLabel = new Label();
+        isbnLabel = new Label();
+
+        previewImageView = new CustomImageView();
+        previewImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
+
         writtenByLabel.getStyleClass().add("field-value");
         writtenByLabel.setWrapText(true);
+        writtenByLabel.setText(book.getAuthors());
+
+        publisherLabel.getStyleClass().add("field-value");
+        publisherLabel.setWrapText(true);
+        publisherLabel.setText(book.getPublisher());
+
+        publishDateLabel.setText(book.getPublishedDate().format(DATE_FORMATTER));
+        publishDateLabel.getStyleClass().add("field-value");
+        publishDateLabel.setWrapText(true);
+
+        isbnLabel.getStyleClass().add("last");
+        isbnLabel.getStyleClass().add("field-value");
+        isbnLabel.setText(book.getIsbn());
+
+
+        Label writtenBy = new Label("WRITTEN BY");
+        writtenBy.getStyleClass().add("field-title");
 
         Label publisher = new Label("PUBLISHER");
         publisher.getStyleClass().add("field-title");
 
-        publisherLabel = new Label();
-        publisherLabel.getStyleClass().add("field-value");
-        publisherLabel.setWrapText(true);
-
         Label publishDate = new Label("PUBLISH DATE");
         publishDate.getStyleClass().add("field-title");
 
-        publishDateLabel = new Label();
-        publishDateLabel.getStyleClass().add("field-value");
-        publishDateLabel.setWrapText(true);
-
         Label isbn = new Label("ISBN");
         isbn.getStyleClass().add("field-title");
-
-        isbnLabel = new Label();
-        isbnLabel.getStyleClass().add("field-value");
 
         VBox topBox = new VBox(
                 writtenBy,
@@ -72,12 +80,10 @@ public class BookOverviewBox extends OverviewBox<Book> {
                 isbn,
                 isbnLabel
         );
-        isbnLabel.getStyleClass().add("last");
         topBox.getStyleClass().add("top-box");
         HBox topBoxWrapper = new HBox();
         topBoxWrapper.getStyleClass().add("top-box-wrapper");
         if (!isSmall()) {
-            previewImageView = new CustomImageView();
             previewImageView.getStyleClass().add("preview-image");
 
             StackPane imageWrapper = new StackPane(previewImageView);

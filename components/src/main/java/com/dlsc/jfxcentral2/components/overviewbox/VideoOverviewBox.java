@@ -1,5 +1,8 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
+import com.dlsc.jfxcentral.data.ImageManager;
+import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.scene.Node;

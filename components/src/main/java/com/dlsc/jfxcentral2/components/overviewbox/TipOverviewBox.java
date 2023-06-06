@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Tip;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -26,9 +26,15 @@ public class TipOverviewBox extends OverviewBox<Tip> {
     public TipOverviewBox(Tip tip) {
         super(tip);
         getStyleClass().add("tip-overview-box");
-        markdownProperty().bind(DataRepository.getInstance().tipDescriptionProperty(tip));
-        setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "tips/" + getModel().getId());
-        fillData();
+        setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "tips/" + getModel().getId());
+
+//            locationLabel.setText(tip.getLocation());
+//            domainLabel.setText(tip.getDomain());
+//            createdByLabel.setText(tip.getCompany());
+        if (tip.getCreatedOn() != null) {
+            createdOnLabel.setText(tip.getCreatedOn().format(DEFAULT_DATE_FORMATTER));
+        }
+        setMarkdown(DataRepository2.getInstance().getTipReadMe(tip));
     }
 
     @Override
@@ -59,7 +65,6 @@ public class TipOverviewBox extends OverviewBox<Tip> {
 
         createdOnLabel = new Label();
         createdOnLabel.getStyleClass().add("field-value");
-        fillData();
 
         if (!isSmall()) {
             GridPane gridPane = new GridPane();
@@ -98,25 +103,6 @@ public class TipOverviewBox extends OverviewBox<Tip> {
             createdOnLabel.getStyleClass().add("last");
             topBox.getStyleClass().add("top-box");
             return topBox;
-        }
-    }
-
-    private void fillData() {
-        Tip tip = getModel();
-        if (tip != null) {
-//            locationLabel.setText(tip.getLocation());
-//            domainLabel.setText(tip.getDomain());
-//            createdByLabel.setText(tip.getCompany());
-            if (tip.getCreatedOn() != null) {
-                createdOnLabel.setText(tip.getCreatedOn().format(DEFAULT_DATE_FORMATTER));
-            }
-            markdownProperty().bind(DataRepository.getInstance().tipDescriptionProperty(tip));
-        } else {
-            locationLabel.setText("");
-            domainLabel.setText("");
-            createdByLabel.setText("");
-            createdOnLabel.setText("");
-            setMarkdown("");
         }
     }
 }

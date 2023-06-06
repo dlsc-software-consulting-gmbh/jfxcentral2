@@ -17,8 +17,7 @@ public class HelloDownloadsBox extends JFXCentralSampleBase {
     @Override
     protected Region createControl() {
         Download download = createDownload();
-        downloadsBox = new DownloadsBox();
-        downloadsBox.setDownload(download);
+        downloadsBox = new DownloadsBox(download);
         return new StackPane(downloadsBox);
     }
 

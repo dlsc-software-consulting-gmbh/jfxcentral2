@@ -104,7 +104,6 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
                             currentDetailView = getDetailNodeProvider().call(model);
                             currentDetailView.getStyleClass().add("detail-node");
                             gridPane.add(currentDetailView, 0, row * 2 + 1, columns, 1);
-//                            Platform.runLater(() -> currentDetailView.requestFocus());
                         }
                     });
                 }

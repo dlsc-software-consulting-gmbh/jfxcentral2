@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.components.MenuView;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.TopPane;
+import com.dlsc.jfxcentral2.components.hamburger.HamburgerMenuView;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -14,6 +15,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -47,6 +49,7 @@ public abstract class PageBase extends View {
         VBox vbox = new VBox();
         vbox.getStyleClass().add("ui");
         vbox.setFillWidth(true);
+        VBox.setVgrow(vbox, Priority.ALWAYS);
         updateStyleClassBasedOnSize(vbox);
         sizeProperty().addListener(it -> updateStyleClassBasedOnSize(vbox));
 
@@ -54,6 +57,7 @@ public abstract class PageBase extends View {
         TopMenuBar topMenuBar = new TopMenuBar();
         topMenuBar.sizeProperty().bind(sizeProperty());
         topMenuBar.setMode(menuMode);
+        topMenuBar.showHamburgerMenuProperty().bindBidirectional(showHamburgerMenuProperty());
 
         // footer
         FooterView footerView = new FooterView();
@@ -67,14 +71,25 @@ public abstract class PageBase extends View {
         CopyrightView copyrightView = new CopyrightView();
         copyrightView.sizeProperty().bind(sizeProperty());
 
+        // hamburger menu
+        HamburgerMenuView hamburgerMenuView = new HamburgerMenuView();
+        hamburgerMenuView.sizeProperty().bind(sizeProperty());
+        hamburgerMenuView.visibleProperty().bind(sizeProperty().isNotEqualTo(Size.LARGE).and(showHamburgerMenuProperty()));
+        hamburgerMenuView.managedProperty().bind(sizeProperty().isNotEqualTo(Size.LARGE).and(showHamburgerMenuProperty()));
+        hamburgerMenuView.setOnClose(() -> setShowHamburgerMenu(false));
+
+        StackPane.setAlignment(hamburgerMenuView, Pos.TOP_CENTER);
+
         VBox uiBox = new VBox(content);
+        VBox.setVgrow(uiBox, Priority.ALWAYS);
         uiBox.setAlignment(Pos.BOTTOM_CENTER);
 
         StackPane.setAlignment(uiBox, Pos.TOP_CENTER);
 
         TopPane topStackPane = new TopPane(topMenuBar, uiBox);
-        updateStyleClassBasedOnSize(topStackPane);
+        topStackPane.sizeProperty().bind(sizeProperty());
         StackPane.setAlignment(topMenuBar, Pos.TOP_CENTER);
+        VBox.setVgrow(topStackPane, Priority.ALWAYS);
 
         StackPane.setAlignment(vbox, Pos.TOP_CENTER);
 
@@ -85,11 +100,29 @@ public abstract class PageBase extends View {
         glassPane.setMouseTransparent(true);
         glassPane.visibleProperty().bind(topMenuBar.usedProperty().or(blockingProperty()));
 
-        StackPane root = new StackPane(vbox, glassPane);
+        StackPane root = new StackPane(vbox, glassPane, hamburgerMenuView);
         root.getStyleClass().add("background");
 
         return root;
     }
+
+    // flag to control the visibility of the hamburger menu
+
+    private final BooleanProperty showHamburgerMenu = new SimpleBooleanProperty(this, "showHamburgerMenu");
+
+    public boolean isShowHamburgerMenu() {
+        return showHamburgerMenu.get();
+    }
+
+    public BooleanProperty showHamburgerMenuProperty() {
+        return showHamburgerMenu;
+    }
+
+    public void setShowHamburgerMenu(boolean showHamburgerMenu) {
+        this.showHamburgerMenu.set(showHamburgerMenu);
+    }
+
+    // blocking property to control the glass pane
 
     private final BooleanProperty blocking = new SimpleBooleanProperty(this, "blocking");
 

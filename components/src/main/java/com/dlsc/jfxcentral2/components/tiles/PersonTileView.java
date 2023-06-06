@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.components.SocialLinksView;
@@ -14,6 +14,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.Region;
 import one.jpro.routing.LinkUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class PersonTileView extends SimpleTileView<Person> {
         imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
 
         setTitle(person.getName());
-        descriptionProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
+        setDescription(DataRepository2.getInstance().getPersonReadMe(person));
 
         //add badges
         badgeBox.getChildren().clear();
@@ -56,7 +57,9 @@ public class PersonTileView extends SimpleTileView<Person> {
         socialLinksView.setTwitterUrl(person.getTwitter());
         socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + person.getLinkedIn());
         socialLinksView.setWebsiteUrl(person.getWebsite());
-        socialLinksView.setMailUrl("mailto:" + person.getEmail());
+        if (StringUtils.isNotBlank(person.getEmail().trim())) {
+            socialLinksView.setMailUrl("mailto:" + person.getEmail());
+        }
         socialLinksView.setGithubUrl(person.getGitHub());
 
         sizeUpdated();

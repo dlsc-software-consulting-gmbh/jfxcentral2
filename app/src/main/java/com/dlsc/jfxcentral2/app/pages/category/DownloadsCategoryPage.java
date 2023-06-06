@@ -1,8 +1,9 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
+import com.dlsc.jfxcentral2.components.DownloadsBox;
 import com.dlsc.jfxcentral2.components.filters.DownloadsFilterView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.tiles.DownloadTileView;
@@ -10,7 +11,9 @@ import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
@@ -42,9 +45,12 @@ public class DownloadsCategoryPage extends CategoryPageBase<Download> {
 
     @Override
     protected Callback<Download, TileViewBase<Download>> getTileViewProvider() {
-        return DownloadTileView::new;
+        return download -> {
+            DownloadTileView tileView = new DownloadTileView(download);
+            tileView.getButton2().setOnAction(evt -> tileView.getOnShowDetailNode().run());
+            return tileView;
+        };
     }
-
     @Override
     protected SearchFilterView createSearchFilterView() {
         return new DownloadsFilterView();
@@ -52,6 +58,12 @@ public class DownloadsCategoryPage extends CategoryPageBase<Download> {
 
     @Override
     protected ObservableList<Download> getCategoryItems() {
-        return DataRepository.getInstance().getDownloads();
+        return FXCollections.observableArrayList(DataRepository2.getInstance().getDownloads());
+    }
+
+    @Override
+    protected Callback<Download, Node> getDetailNodeProvider() {
+        System.out.println("DownloadsCategoryPage.getDetailNodeProvider()");
+        return DownloadsBox::new;
     }
 }

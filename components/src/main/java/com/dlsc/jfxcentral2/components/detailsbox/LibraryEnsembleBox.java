@@ -12,6 +12,9 @@ import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 public class LibraryEnsembleBox extends PaneBase {
 
     public LibraryEnsembleBox(Library library) {
@@ -30,7 +33,7 @@ public class LibraryEnsembleBox extends PaneBase {
 
         HBox.setHgrow(markdownView, Priority.ALWAYS);
 
-        String url = "https://www.jfx-ensemble.com/?page=project/" + library.getName();
+        String url = "https://www.jfx-ensemble.com/?page=project/" + URLEncoder.encode(library.getName(), StandardCharsets.UTF_8);
         markdownView.setMdString("Online demos are available for this library on the JFX-Ensemble website. These demos can be [run in the browser](" + url + ") via JPro (free for open source projects).");
         LinkUtil.setExternalLink(markdownView, url, library.getName());
         LinkUtil.setExternalLink(imageView, url, library.getName());

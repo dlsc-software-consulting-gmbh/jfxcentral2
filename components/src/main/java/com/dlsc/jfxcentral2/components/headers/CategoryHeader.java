@@ -14,12 +14,14 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Region;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.Objects;
 
 public class CategoryHeader extends PaneBase {
+
     private static Image defaultLargeBgImage;
     private static Image defaultMediumBgImg;
     private static Image defaultSmallBgImg;
@@ -42,25 +44,41 @@ public class CategoryHeader extends PaneBase {
         label.managedProperty().bind(label.visibleProperty());
         label.visibleProperty().bind(titleProperty().isNotEmpty().or(ikonProperty().isNotNull()));
 
-        getChildren().setAll(label);
+        Region overlay = new Region();
+        overlay.getStyleClass().add("overlay");
+
+        getChildren().setAll(overlay, label);
 
         /*
          * Only one label and content can be displayed. If the content is not empty, the content will be displayed,
          * otherwise the label will be displayed
          */
-        contentProperty().addListener((ob, ov, nv) -> getChildren().setAll(Objects.requireNonNullElse(getContent(), label)));
+        contentProperty().addListener((ob, ov, nv) -> getChildren().setAll(overlay, Objects.requireNonNullElse(getContent(), label)));
     }
 
     private Background createImageBackground(Image image) {
         if (image == null) {
             switch (getSize()) {
-                case LARGE ->
-                        image = defaultLargeBgImage == null ? new Image("/com/dlsc/jfxcentral2/components/header/bg-lg.jpg") : defaultLargeBgImage;
-                case MEDIUM ->
-                        image = defaultMediumBgImg == null ? new Image("/com/dlsc/jfxcentral2/components/header/bg-md.jpg") : defaultMediumBgImg;
-                case SMALL ->
-                        image = defaultSmallBgImg == null ? new Image("/com/dlsc/jfxcentral2/components/header/bg-sm.jpg") : defaultSmallBgImg;
+                case LARGE -> {
+                    if (defaultLargeBgImage == null) {
+                        defaultLargeBgImage = new Image("/com/dlsc/jfxcentral2/components/headers/bg-lg.jpg");
+                    }
+                    image = defaultLargeBgImage;
+                }
+                case MEDIUM -> {
+                    if (defaultMediumBgImg == null) {
+                        defaultMediumBgImg = new Image("/com/dlsc/jfxcentral2/components/headers/bg-md.jpg");
+                    }
+                    image = defaultMediumBgImg;
+                }
+                case SMALL -> {
+                    if (defaultSmallBgImg == null) {
+                        defaultSmallBgImg = new Image("/com/dlsc/jfxcentral2/components/headers/bg-sm.jpg");
+                    }
+                    image = defaultSmallBgImg;
+                }
             }
+
         }
         return new Background(new BackgroundImage(image,
                 BackgroundRepeat.NO_REPEAT,

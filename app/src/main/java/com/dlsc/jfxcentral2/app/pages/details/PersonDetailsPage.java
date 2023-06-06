@@ -16,9 +16,10 @@ public class PersonDetailsPage extends DetailsPageBase<Person> {
 
     @Override
     public Node content() {
+        Person person = getItem();
 
         // header
-        PersonDetailHeader personDetailHeader = new PersonDetailHeader(getItem());
+        PersonDetailHeader personDetailHeader = new PersonDetailHeader(person);
         personDetailHeader.sizeProperty().bind(sizeProperty());
 
         // details

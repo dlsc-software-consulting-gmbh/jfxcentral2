@@ -18,13 +18,19 @@ public class ToolDetailsPage extends DetailsPageBase<Tool> {
 
     @Override
     public Node content() {
+        Tool tool = getItem();
+
         // header
-        ToolDetailHeader header = new ToolDetailHeader(getItem());
+        ToolDetailHeader header = new ToolDetailHeader(tool);
         header.sizeProperty().bind(sizeProperty());
+
+        // overview
+        ToolOverviewBox toolOverviewBox = new ToolOverviewBox(tool);
+        toolOverviewBox.sizeProperty().bind(sizeProperty());
 
         // details
         DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(new ToolOverviewBox(getItem()));
+        detailsContentPane.getCenterNodes().add(toolOverviewBox);
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
 
         return wrapContent(header, detailsContentPane);

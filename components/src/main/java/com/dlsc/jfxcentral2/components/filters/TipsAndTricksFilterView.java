@@ -1,19 +1,14 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-public class TipsAndTricksFilterView extends SimpleSearchFilterView {
+import com.dlsc.jfxcentral.data.model.Tip;
+import org.apache.commons.lang3.StringUtils;
+
+public class TipsAndTricksFilterView extends SimpleSearchFilterView<Tip> {
     public TipsAndTricksFilterView() {
         getStyleClass().add("tips-filter-view");
         setSearchPromptText("Search for tips and tricks");
 
-        setOnSearch((keywords, filterEnums) -> {
-            System.out.println("------------Search Tips Tricks------------");
-            System.out.println("Search keywords: " + keywords);
-            System.out.println("Selected Filters: " + filterEnums);
-        });
+        setOnSearch(text -> tip -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(tip.getName(), text));
 
-        selectedFiltersProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("------------Tips Tricks Selected Filters------------");
-            System.out.println("Selected Filters: " + newValue);
-        });
     }
 }
