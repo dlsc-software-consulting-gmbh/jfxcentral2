@@ -43,6 +43,7 @@ import one.jpro.routing.Response;
 import one.jpro.routing.Route;
 import one.jpro.routing.RouteApp;
 import one.jpro.routing.RouteUtils;
+import one.jpro.routing.dev.DevFilter;
 import simplefx.experimental.parts.FXFuture;
 
 import java.util.function.Supplier;
@@ -68,7 +69,7 @@ public class JFXCentral2App extends RouteApp {
 
         updateSize(scene);
 
-        return Route.empty()
+        Route route = Route.empty()
                 .and(RouteUtils.get("/", r -> new StartPage(size)))
                 .and(createCategoryOrDetailRoute("/blogs", () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/books", () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
@@ -92,7 +93,12 @@ public class JFXCentral2App extends RouteApp {
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
                 .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)))
                 .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)));
-//                .filter(DevFilter.create());
+
+        if (Boolean.getBoolean("develop")) {
+            route = route.filter(DevFilter.create());
+        }
+
+        return route;
     }
 
     private Route createCategoryOrDetailRoute(String path, Supplier<Response> masterResponse, Callback<String, Response> detailedResponse) {
