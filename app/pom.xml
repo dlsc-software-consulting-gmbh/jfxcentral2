@@ -131,6 +131,27 @@
 					<mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
 				</configuration>
 			</plugin>
+
+			<!-- For Conveyor: Copy all dependencies excluding JavaFX which will be jlinked in for each platform. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/classpath-jars</outputDirectory>
+							<includeScope>runtime</includeScope>
+							<excludeGroupIds>org.openjfx</excludeGroupIds>
+							<overWriteReleases>true</overWriteReleases>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
