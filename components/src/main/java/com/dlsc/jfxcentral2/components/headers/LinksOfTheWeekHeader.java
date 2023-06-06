@@ -6,7 +6,7 @@ import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -31,10 +31,10 @@ public class LinksOfTheWeekHeader extends CategoryHeader  {
         rssImageView.setImage(new Image(LinksOfTheWeekHeader.class.getResource("rss.png").toExternalForm()));
         LinkUtil.setLink(rssImageView, "/links/rss");
 
-        VBox box = new VBox(label, rssImageView);
+        HBox box = new HBox(label, rssImageView);
         box.getStyleClass().add("rss-box");
-
         box.setAlignment(Pos.CENTER);
+
         setContent(box);
         setTitle("Links of the Week");
         setIkon(IkonUtil.getModelIkon(LinksOfTheWeek.class));
