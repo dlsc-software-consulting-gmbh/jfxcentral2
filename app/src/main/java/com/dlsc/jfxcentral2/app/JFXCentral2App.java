@@ -57,6 +57,8 @@ public class JFXCentral2App extends RouteApp {
 
     @Override
     public Route createRoute() {
+        DataRepository.getInstance().loadData();
+
         Scene scene = getScene();
 //        scene.rootProperty().addListener(it -> {
 //            ScrollPane scrollPane = (ScrollPane) scene.getRoot().lookup("scroll-pane");
