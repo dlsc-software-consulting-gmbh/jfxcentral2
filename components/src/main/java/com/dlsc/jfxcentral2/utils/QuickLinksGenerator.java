@@ -15,8 +15,10 @@ import com.dlsc.jfxcentral2.model.QuickLink;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -164,7 +166,8 @@ public class QuickLinksGenerator {
 
     public static List<QuickLink> generateWebsiteChangesQuickLinks(ObjectProperty<Size> sizeProperty) {
         // new list, we do not want to shuffle the original list
-        List<ModelObject> recentItems = new ArrayList<>(DataRepository2.getInstance().getRecentItems());
+        List<ModelObject> recentItems = findRecentItems();
+
         Collections.shuffle(recentItems);
 
         List<QuickLink> quickLinks = new ArrayList<>();
@@ -177,7 +180,7 @@ public class QuickLinksGenerator {
             // normal QuickLinks
             for (int i = 0; i < dateQuickLinkCount; i++) {
                 ModelObject changedModelObject = recentItems.get(i);
-                quickLinks.add(createDateQuickLine(changedModelObject));
+                quickLinks.add(createDateQuickLink(changedModelObject));
             }
 
             // image QuickLinks
@@ -196,14 +199,58 @@ public class QuickLinksGenerator {
             // normal QuickLinks
             for (int i = 0; i < recentItems.size(); i++) {
                 ModelObject changedModelObject = recentItems.get(i);
-                quickLinks.add(createDateQuickLine(changedModelObject));
+                quickLinks.add(createDateQuickLink(changedModelObject));
             }
         }
 
         return quickLinks;
     }
 
-    private static DateQuickLink createDateQuickLine(ModelObject changedModelObject) {
+    private static List<ModelObject> findRecentItems() {
+        DataRepository2 repository = DataRepository2.getInstance();
+
+        List<ModelObject> result = new ArrayList<>();
+
+        result.addAll(findRecentItems(repository.getPeople()));
+        result.addAll(findRecentItems(repository.getBooks()));
+        result.addAll(findRecentItems(repository.getLibraries()));
+        result.addAll(findRecentItems(repository.getVideos()));
+        result.addAll(findRecentItems(repository.getBlogs()));
+        result.addAll(findRecentItems(repository.getCompanies()));
+        result.addAll(findRecentItems(repository.getTools()));
+        result.addAll(findRecentItems(repository.getTutorials()));
+        result.addAll(findRecentItems(repository.getRealWorldApps()));
+        result.addAll(findRecentItems(repository.getDownloads()));
+        result.addAll(findRecentItems(repository.getTips()));
+        result.addAll(findRecentItems(repository.getIkonliPacks()));
+
+        // newest ones on top
+        result.sort(Comparator.comparing(ModelObject::getCreationOrUpdateDate).reversed());
+
+        return result;
+    }
+
+    private static List<ModelObject> findRecentItems(List<? extends ModelObject> items) {
+        List<ModelObject> result = new ArrayList<>();
+
+        LocalDate today = LocalDate.now();
+
+        items.forEach(item -> {
+            LocalDate date = item.getModifiedOn();
+            if (date == null) {
+                date = item.getCreatedOn();
+            }
+            if (date != null) {
+                if (date.isAfter(today.minusWeeks(8))) {
+                    result.add(item);
+                }
+            }
+        });
+
+        return result;
+    }
+
+    private static DateQuickLink createDateQuickLink(ModelObject changedModelObject) {
         return new DateQuickLink(changedModelObject.getName(), getCategoryName(changedModelObject), null, PageUtil.getLink(changedModelObject), changedModelObject.getCreationOrUpdateDate());
     }
 }
