@@ -4,13 +4,16 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Post;
+import com.dlsc.jfxcentral2.components.CustomImageView;
+import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
 import com.rometools.rome.feed.synd.SyndEntry;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -41,18 +44,18 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
     protected Node createTopNode() {
         VBox box = new VBox();
         box.getStyleClass().add("posts-box");
-        DataRepository2.getInstance().loadPosts(getModel()).forEach(post -> box.getChildren().add(new PostView(post)));
+        DataRepository2.getInstance().loadPosts(getModel()).forEach(post -> box.getChildren().add(new PostViewBuilder(post,getSize()).build()));
         return box;
     }
 
-    public static class PostView extends HBox {
-
+    public static class PostViewBuilder {
+        private final Pane postView;
         private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 
-        public PostView(Post post) {
-            getStyleClass().add("post-view");
-
-            setPrefWidth(0);
+        public PostViewBuilder(Post post, Size size) {
+            postView = size==Size.SMALL? new VBox() : new HBox();
+            postView.getStyleClass().add("post-view");
+            postView.setPrefWidth(0);
 
             Label titleLabel = new Label(post.getSyndEntry().getTitle());
             titleLabel.getStyleClass().add("title-label");
@@ -60,23 +63,26 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
             titleLabel.setWrapText(true);
             titleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
-            ImageView imageView = new ImageView();
-            imageView.setFitHeight(32);
-            imageView.setFitWidth(32);
-            imageView.setPreserveRatio(true);
+            CustomImageView imageView = new CustomImageView();
             imageView.imageProperty().bind(ImageManager.getInstance().blogIconImageProperty(post.getBlog()));
 
             Label ageLabel = new Label(getAge(post));
             ageLabel.getStyleClass().add("age-label");
             ageLabel.setMinWidth(Region.USE_PREF_SIZE);
 
-            getChildren().setAll(imageView, titleLabel, ageLabel);
-            HBox.setHgrow(titleLabel, Priority.ALWAYS);
+            if (size == Size.SMALL) {
+                HBox topBox = new HBox(imageView, new Spacer(), ageLabel);
+                topBox.getStyleClass().add("top-box");
+                postView.getChildren().setAll(topBox, titleLabel);
+            }else {
+                postView.getChildren().setAll(imageView, titleLabel, ageLabel);
+                HBox.setHgrow(titleLabel, Priority.ALWAYS);
+            }
 
             if (WebAPI.isBrowser()) {
-                LinkUtil.setExternalLink(this, post.getSyndEntry().getLink());
+                LinkUtil.setExternalLink(postView, post.getSyndEntry().getLink());
             } else {
-                setOnMouseClicked(evt -> {
+                postView.setOnMouseClicked(evt -> {
                     try {
                         Desktop.getDesktop().browse(URI.create(post.getSyndEntry().getLink()));
                     } catch (IOException e) {
@@ -84,6 +90,10 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
                     }
                 });
             }
+        }
+
+        private Node build() {
+            return postView;
         }
 
         private String getAge(Post post) {
