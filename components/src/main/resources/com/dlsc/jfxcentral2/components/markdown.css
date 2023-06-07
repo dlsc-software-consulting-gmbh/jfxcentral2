@@ -32,49 +32,52 @@
 }
 
 .markdown-heading .markdown-text {
-    -fx-font-size: 1em !important;
+    -fx-font-size: 1em;
 }
 
 .markdown-heading-1 {
-    -fx-padding: 0em 0em 1em 0em !important;
+    -fx-padding: 0em 0em 1em 0em;
 }
 
 .markdown-heading-2 {
-    -fx-padding: 1.4285em 0em 0em 0em !important;
+    -fx-padding: 1.4285em 0em 0em 0em;
 }
 
 .markdown-heading-3 {
-    -fx-padding: 1.4285em 0em 0em 0em !important;
+    -fx-padding: 1.4285em 0em 0em 0em;
 }
 
 .markdown-heading-4 {
-    -fx-padding: 1.4285em 0em 0em 0em !important;
+    -fx-padding: 1.4285em 0em 0em 0em;
+}
+
+.markdown-heading-5 {
+    -fx-padding: 1.4285em 0em 0em 0em;
 }
 
 .markdown-heading-1 .markdown-text {
-    -fx-font-size: 1.714em !important;
-    -fx-font-family: "Spline Sans SemiBold" !important;
+    -fx-font-size: 1.714em;
+    -fx-font-family: "Spline Sans SemiBold";
 }
 
 .markdown-heading-2 .markdown-text {
-    -fx-font-size: 1.2857em !important;
-    -fx-font-family: "Spline Sans SemiBold" !important;
+    -fx-font-size: 1.2857em;
+    -fx-font-family: "Spline Sans SemiBold";
 }
 
 .markdown-heading-3 .markdown-text {
-    -fx-font-size: 1em !important;
-    -fx-font-family: "Spline Sans SemiBold" !important;
+    -fx-font-size: 1em;
+    -fx-font-family: "Spline Sans SemiBold";
 }
 
 .markdown-heading-4 .markdown-text {
-    -fx-font-size: 1em !important;
-    -fx-font-family: "Spline Sans SemiBold" !important;
+    -fx-font-size: 1em;
+    -fx-font-family: "Spline Sans SemiBold";
 }
 
 .markdown-heading-5 .markdown-text {
-    -fx-padding: 1.4285em 0em 0em 0em !important;
-    -fx-font-size: 1em !important;
-    -fx-font-family: "Spline Sans SemiBold" !important;
+    -fx-font-size: 1em;
+    -fx-font-family: "Spline Sans SemiBold";
 }
 
 .markdown-link {
@@ -161,7 +164,7 @@
 }
 
 .markdown-table-cell-top .text {
-    -fx-text-fill: white !important;
+    -fx-text-fill: white;
 }
 
 .markdown-table-cell-top .markdown-normal-flow {

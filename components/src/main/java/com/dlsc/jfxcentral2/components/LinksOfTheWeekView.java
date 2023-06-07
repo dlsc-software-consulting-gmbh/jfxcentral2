@@ -57,7 +57,7 @@ public class LinksOfTheWeekView extends PaneBase {
                 title.getStyleClass().add("title");
                 title.setMaxWidth(Double.MAX_VALUE);
 
-                MarkdownView markdownView = new MarkdownView();
+                CustomMarkdownView markdownView = new CustomMarkdownView();
                 markdownView.setMdString(DataRepository2.getInstance().getLinksOfTheWeekReadMe(week));
                 markdownView.setPrefHeight(markdownView.getWidth());
 

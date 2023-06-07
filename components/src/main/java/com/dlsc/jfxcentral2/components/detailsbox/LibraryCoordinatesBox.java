@@ -3,9 +3,10 @@ package com.dlsc.jfxcentral2.components.detailsbox;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Coordinates;
 import com.dlsc.jfxcentral2.components.Header;
-import com.dlsc.jfxcentral2.components.MarkdownView;
+import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
@@ -26,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-public class LibraryCoordinatesBox extends PaneBase {
+public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
 
     private final Label repositoryCoordinatesLabel;
 
@@ -67,7 +68,7 @@ public class LibraryCoordinatesBox extends PaneBase {
             buttonsBox.getChildren().add(copyButton);
         }
 
-        MarkdownView descriptionLabel = new MarkdownView();
+        CustomMarkdownView descriptionLabel = new CustomMarkdownView();
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.mdStringProperty().bind(descriptionProperty());
 
@@ -110,6 +111,11 @@ public class LibraryCoordinatesBox extends PaneBase {
 
     public void setDescription(String description) {
         this.description.set(description);
+    }
+
+    @Override
+    public String getName() {
+        return "Coordinates";
     }
 
     public enum BuildTool {

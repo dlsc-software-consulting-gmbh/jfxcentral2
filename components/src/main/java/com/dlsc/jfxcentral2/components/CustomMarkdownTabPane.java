@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.model.MarkdownTab;
-import com.sandec.mdfx.MarkdownView;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,7 +24,7 @@ import javafx.scene.layout.VBox;
 
 public class CustomMarkdownTabPane extends PaneBase {
 
-    private final MarkdownView markdownView;
+    private final CustomMarkdownView markdownView;
     private final VBox contentBox;
     ToggleGroup group;
 
@@ -33,7 +32,7 @@ public class CustomMarkdownTabPane extends PaneBase {
         getStyleClass().add("custom-markdown-tab-pane");
         group = new ToggleGroup();
 
-        markdownView = new MarkdownView();
+        markdownView = new CustomMarkdownView();
         markdownView.getStyleClass().add("md-view");
 
         contentBox = new VBox();

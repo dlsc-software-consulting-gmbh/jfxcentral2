@@ -14,10 +14,16 @@ import one.jpro.routing.LinkUtil;
 
 import java.util.function.Consumer;
 
-public class MarkdownView extends com.sandec.mdfx.MarkdownView {
+public class CustomMarkdownView extends com.sandec.mdfx.MarkdownView {
 
-    public MarkdownView() {
-        getStyleClass().add("markdown-view");
+    public CustomMarkdownView() {
+        getStyleClass().add("custom-markdown-view");
+        getStylesheets().add(CustomMarkdownView.class.getResource("markdown.css").toExternalForm());
+    }
+
+    public CustomMarkdownView(String mdString) {
+        this();
+        setMdString(mdString);
     }
 
     private final ObjectProperty<Consumer<Image>> onImageClick = new SimpleObjectProperty<>(this, "onImageClick");

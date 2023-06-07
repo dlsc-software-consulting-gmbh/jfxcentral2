@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.components.detailsbox.DetailsBoxBase;
+import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -34,6 +35,9 @@ public class DetailsContentPane extends PaneBase {
 
         commentsView.sizeProperty().bind(sizeProperty());
 
+        detailBoxes.addListener((Observable it) -> updateMenuView());
+        centerNodes.addListener((Observable it) -> updateMenuView());
+
         // TODO: maybe pass in the list of center nodes and save additional layouting?
         centerNodesProperty().addListener((Observable it) -> layoutBySize());
 
@@ -62,6 +66,23 @@ public class DetailsContentPane extends PaneBase {
         contentBox = new HBox();
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
+    }
+
+    private void updateMenuView() {
+        menuView.getItems().clear();
+
+        centerNodes.forEach(item -> {
+            if (item instanceof NameProvider nameProvider) {
+                MenuView.Item overviewItem = new MenuView.Item(nameProvider.getName().toUpperCase(), null, null);
+                menuView.getItems().add(overviewItem);
+            }
+        });
+
+        detailBoxes.forEach(box -> {
+            String title = box.getTitle();
+            MenuView.Item boxItem = new MenuView.Item(title.toUpperCase(), null, null);
+            menuView.getItems().add(boxItem);
+        });
     }
 
     public MenuView getMenuView() {

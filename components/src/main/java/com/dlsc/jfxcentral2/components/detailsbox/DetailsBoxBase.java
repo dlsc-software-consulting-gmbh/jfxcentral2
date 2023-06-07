@@ -14,6 +14,7 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomImageView;
+import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
@@ -21,7 +22,6 @@ import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
-import com.sandec.mdfx.MarkdownView;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -233,7 +233,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             cellRight.getChildren().addAll(titleBox);
 
             // description
-            MarkdownView descMD = new MarkdownView(getDescription(model));
+            CustomMarkdownView descMD = new CustomMarkdownView(getDescription(model));
             descMD.getStyleClass().add("description-markdown");
             cellRight.getChildren().add(descMD);
 

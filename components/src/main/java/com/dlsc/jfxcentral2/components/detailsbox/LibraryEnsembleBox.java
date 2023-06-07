@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral2.components.Header;
-import com.dlsc.jfxcentral2.components.MarkdownView;
+import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -28,7 +28,7 @@ public class LibraryEnsembleBox extends PaneBase {
         imageView.setFitHeight(48);
         imageView.setPreserveRatio(true);
 
-        MarkdownView markdownView = new MarkdownView();
+        CustomMarkdownView markdownView = new CustomMarkdownView();
         markdownView.setMinHeight(Region.USE_PREF_SIZE);
 
         HBox.setHgrow(markdownView, Priority.ALWAYS);

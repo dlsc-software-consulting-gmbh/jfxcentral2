@@ -3,8 +3,8 @@ package com.dlsc.jfxcentral2.app.pages.details;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.headers.AppDetailHeader;
-import com.dlsc.jfxcentral2.components.overviewbox.AppOverviewBox;
+import com.dlsc.jfxcentral2.components.headers.ShowcaseDetailHeader;
+import com.dlsc.jfxcentral2.components.overviewbox.ShowcaseOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
@@ -20,11 +20,11 @@ public class ShowcaseDetailsPage extends DetailsPageBase<RealWorldApp> {
         RealWorldApp app = getItem();
 
         // header
-        AppDetailHeader showcaseDetailHeader = new AppDetailHeader(app);
+        ShowcaseDetailHeader showcaseDetailHeader = new ShowcaseDetailHeader(app);
         showcaseDetailHeader.sizeProperty().bind(sizeProperty());
 
         // overview box
-        AppOverviewBox appOverviewBox = new AppOverviewBox(app);
+        ShowcaseOverviewBox appOverviewBox = new ShowcaseOverviewBox(app);
         appOverviewBox.sizeProperty().bind(sizeProperty());
 
         // details

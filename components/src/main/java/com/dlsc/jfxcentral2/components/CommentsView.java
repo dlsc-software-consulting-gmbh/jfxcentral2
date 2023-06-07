@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.model.Badge;
 import com.dlsc.jfxcentral2.model.Comment;
+import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.model.User;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;
@@ -33,7 +34,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-public class CommentsView extends PaneBase {
+public class CommentsView extends PaneBase implements NameProvider {
 
     private final VBox commentsBox;
 
@@ -231,5 +232,10 @@ public class CommentsView extends PaneBase {
 
     public void setTitle(String title) {
         this.title.set(title);
+    }
+
+    @Override
+    public String getName() {
+        return "Comments";
     }
 }

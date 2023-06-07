@@ -65,8 +65,10 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
         // this is a category page, but we still need to use the details content pane for layout purposes
         DetailsContentPane detailsContentPane = new DetailsContentPane();
         detailsContentPane.sizeProperty().bind(sizeProperty());
-        detailsContentPane.getMenuView().getItems().setAll(createMenuItems());
         detailsContentPane.getCenterNodes().add(linksOfTheWeekView);
+
+        // this must be the last change to the details content pane, otherwise the menu shows wrong items
+        detailsContentPane.getMenuView().getItems().setAll(createMenuItems());
 
         return wrapContent(header, detailsContentPane);
     }

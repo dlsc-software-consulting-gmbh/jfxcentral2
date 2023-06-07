@@ -12,8 +12,6 @@ import javafx.scene.layout.StackPane;
  */
 public class SimpleOverviewBox<T extends ModelObject> extends OverviewBox<T> {
 
-    private CustomImageView previewImage;
-
     public SimpleOverviewBox(T model) {
         super(model);
         getStyleClass().add("simple-overview-box");
@@ -21,7 +19,7 @@ public class SimpleOverviewBox<T extends ModelObject> extends OverviewBox<T> {
 
     @Override
     protected Node createTopNode() {
-        previewImage = new CustomImageView();
+        CustomImageView previewImage = new CustomImageView();
         previewImage.imageProperty().bind(imageProperty());
         previewImage.getStyleClass().add("preview-image");
 

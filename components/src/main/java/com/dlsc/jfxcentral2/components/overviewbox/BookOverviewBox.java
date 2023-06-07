@@ -16,12 +16,6 @@ public class BookOverviewBox extends OverviewBox<Book> {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
-    private Label writtenByLabel;
-    private Label publisherLabel;
-    private Label publishDateLabel;
-    private Label isbnLabel;
-    private CustomImageView previewImageView;
-
     public BookOverviewBox(Book book) {
         super(book);
         getStyleClass().add("book-overview-box");
@@ -33,12 +27,12 @@ public class BookOverviewBox extends OverviewBox<Book> {
     protected Node createTopNode() {
         Book book = getModel();
 
-        writtenByLabel = new Label();
-        publisherLabel = new Label();
-        publishDateLabel = new Label();
-        isbnLabel = new Label();
+        Label writtenByLabel = new Label();
+        Label publisherLabel = new Label();
+        Label publishDateLabel = new Label();
+        Label isbnLabel = new Label();
 
-        previewImageView = new CustomImageView();
+        CustomImageView previewImageView = new CustomImageView();
         previewImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
 
         writtenByLabel.getStyleClass().add("field-value");
@@ -56,7 +50,6 @@ public class BookOverviewBox extends OverviewBox<Book> {
         isbnLabel.getStyleClass().add("last");
         isbnLabel.getStyleClass().add("field-value");
         isbnLabel.setText(book.getIsbn());
-
 
         Label writtenBy = new Label("WRITTEN BY");
         writtenBy.getStyleClass().add("field-title");
@@ -81,6 +74,7 @@ public class BookOverviewBox extends OverviewBox<Book> {
                 isbnLabel
         );
         topBox.getStyleClass().add("top-box");
+
         HBox topBoxWrapper = new HBox();
         topBoxWrapper.getStyleClass().add("top-box-wrapper");
         if (!isSmall()) {
@@ -90,6 +84,7 @@ public class BookOverviewBox extends OverviewBox<Book> {
             imageWrapper.getStyleClass().add("image-wrapper");
             topBoxWrapper.getChildren().add(imageWrapper);
         }
+
         topBoxWrapper.getChildren().add(topBox);
 
         return topBoxWrapper;

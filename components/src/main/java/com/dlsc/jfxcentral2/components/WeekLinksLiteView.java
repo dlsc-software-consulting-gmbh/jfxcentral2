@@ -13,7 +13,7 @@ import one.jpro.routing.LinkUtil;
 public class WeekLinksLiteView extends PaneBase {
 
     private final VBox contentBox;
-    private final MarkdownView markdownView;
+    private final CustomMarkdownView markdownView;
     private final Label title;
     private final Label subtitle;
     private final Button viewAllButton;
@@ -32,7 +32,7 @@ public class WeekLinksLiteView extends PaneBase {
         viewAllButton.getStyleClass().add("view-all-button");
         LinkUtil.setLink(viewAllButton, "/links");
 
-        markdownView = new MarkdownView();
+        markdownView = new CustomMarkdownView();
         markdownView.getStyleClass().add("md-view");
         markdownView.mdStringProperty().bind(mdStringProperty());
 

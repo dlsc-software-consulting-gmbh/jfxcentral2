@@ -9,6 +9,7 @@ public class CompanyDetailHeader extends SimpleDetailHeader<Company>  {
 
         getStyleClass().add("company-detail-header");
 
+        setDescription(company.getSummary());
         setWebsite(getModel().getHomepage());
         setShareUrl("companies/" + company.getId());
         setShareText("Found this company on @JFXCentral: " + company.getName());

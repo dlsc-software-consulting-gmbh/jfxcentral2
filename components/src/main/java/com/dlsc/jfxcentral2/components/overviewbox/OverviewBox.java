@@ -2,8 +2,9 @@ package com.dlsc.jfxcentral2.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.Header;
-import com.dlsc.jfxcentral2.components.MarkdownView;
+import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.PaneBase;
+import com.dlsc.jfxcentral2.model.NameProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,7 +18,7 @@ import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 
 import java.util.Objects;
 
-public class OverviewBox<T extends ModelObject> extends PaneBase {
+public class OverviewBox<T extends ModelObject> extends PaneBase implements NameProvider {
 
     private final StackPane topWrapper;
     private final StackPane bottomWrapper;
@@ -35,7 +36,7 @@ public class OverviewBox<T extends ModelObject> extends PaneBase {
         topWrapper = new StackPane();
         topWrapper.getStyleClass().add("top-wrapper");
 
-        MarkdownView markdownView = new MarkdownView();
+        CustomMarkdownView markdownView = new CustomMarkdownView();
         markdownView.mdStringProperty().bind(markdownProperty());
         markdownView.baseURLProperty().bind(baseURLProperty());
 
@@ -148,5 +149,10 @@ public class OverviewBox<T extends ModelObject> extends PaneBase {
 
     public void setImage(Image image) {
         this.image.set(image);
+    }
+
+    @Override
+    public String getName() {
+        return "Overview";
     }
 }

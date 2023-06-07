@@ -73,7 +73,6 @@ public class JFXCentral2App extends RouteApp {
         scene.widthProperty().addListener((it -> updateSize(scene)));
         scene.widthProperty().addListener(it -> System.out.println("width: " + scene.getWidth()));
         scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
-        scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/markdown.css").toExternalForm());
         scene.focusOwnerProperty().addListener(it -> System.out.println("new focus owner: " + scene.getFocusOwner()));
 
         updateSize(scene);
@@ -135,7 +134,7 @@ public class JFXCentral2App extends RouteApp {
         double sceneWidth = scene.getWidth();
         if (sceneWidth < 768) {
             size.set(Size.SMALL);
-        } else if (sceneWidth < 1320) {
+        } else if (sceneWidth < 1172) {
             size.set(Size.MEDIUM);
         } else {
             size.set(Size.LARGE);

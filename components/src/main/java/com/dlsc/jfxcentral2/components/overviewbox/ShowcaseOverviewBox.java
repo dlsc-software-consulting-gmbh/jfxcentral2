@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 
 import java.time.format.DateTimeFormatter;
 
-public class AppOverviewBox extends OverviewBox<RealWorldApp> {
+public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
 
     private static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM yyyy");
 
@@ -23,9 +23,9 @@ public class AppOverviewBox extends OverviewBox<RealWorldApp> {
     private Label createdByLabel;
     private Label createdOnLabel;
 
-    public AppOverviewBox(RealWorldApp app) {
+    public ShowcaseOverviewBox(RealWorldApp app) {
         super(app);
-        getStyleClass().add("app-overview-box");
+        getStyleClass().add("showcase-overview-box");
         fillData();
     }
 
@@ -107,8 +107,8 @@ public class AppOverviewBox extends OverviewBox<RealWorldApp> {
             locationLabel.setText(app.getLocation());
             domainLabel.setText(app.getDomain());
             createdByLabel.setText(app.getCompany());
-            if (app.getCreatedOn() != null) {
-                createdOnLabel.setText(app.getCreatedOn().format(DEFAULT_DATE_FORMATTER));
+            if (app.getCreationOrUpdateDate() != null) {
+                createdOnLabel.setText(app.getCreationOrUpdateDate().format(DEFAULT_DATE_FORMATTER));
             }
             setMarkdown(DataRepository2.getInstance().getRealWorldReadMe(app));
         } else {

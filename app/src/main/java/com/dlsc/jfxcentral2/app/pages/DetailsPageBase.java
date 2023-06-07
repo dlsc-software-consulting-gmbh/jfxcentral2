@@ -14,7 +14,6 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.MenuView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.detailsbox.AppsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.BlogsDetailsBox;
@@ -30,7 +29,6 @@ import com.dlsc.jfxcentral2.components.detailsbox.TutorialsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.VideosDetailsBox;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
@@ -80,7 +78,6 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
     protected DetailsContentPane createContentPane() {
         DetailsContentPane detailsContentPane = new DetailsContentPane();
         detailsContentPane.sizeProperty().bind(sizeProperty());
-        detailsContentPane.getMenuView().getItems().setAll(createMenuItems());
         return detailsContentPane;
     }
 
@@ -111,18 +108,5 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
             box.sizeProperty().bind(sizeProperty());
             boxList.add(box);
         }
-    }
-
-    protected List<MenuView.Item> createMenuItems() {
-        return FXCollections.observableArrayList(
-                new MenuView.Item("TOOLS", null, "Tools url"),
-                new MenuView.Item("BLOGS", null, "Blogs url"),
-                new MenuView.Item("DOWNLOADS", null, "Downloads url"),
-                new MenuView.Item("LIBRARIES", null, "Libraries url"),
-                new MenuView.Item("VIDEOS", null, "Videos url"),
-                new MenuView.Item("APP", null, "app url"),
-                new MenuView.Item("BOOK", null, "book url"),
-                new MenuView.Item("TIPS & TRICKS", null, "Tips & Tricks url")
-        );
     }
 }

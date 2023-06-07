@@ -4,8 +4,9 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.LibraryPreviewBox;
-import com.dlsc.jfxcentral2.components.MarkdownView;
+import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.PaneBase;
+import com.dlsc.jfxcentral2.model.NameProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +15,7 @@ import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 
-public class LibraryOverviewBox extends PaneBase {
+public class LibraryOverviewBox extends PaneBase implements NameProvider {
 
     public LibraryOverviewBox(Library library) {
         getStyleClass().add("overview-box");
@@ -23,14 +24,14 @@ public class LibraryOverviewBox extends PaneBase {
         header.titleProperty().bind(titleProperty());
         header.iconProperty().bind(iconProperty());
 
-        MarkdownView markdownView = new MarkdownView();
+        CustomMarkdownView markdownView = new CustomMarkdownView();
         markdownView.setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "libraries");
         markdownView.setMdString(DataRepository2.getInstance().getLibraryReadMe(library));
 
         LibraryPreviewBox libraryPreviewBox = new LibraryPreviewBox(library);
         libraryPreviewBox.sizeProperty().bind(sizeProperty());
 
-        VBox bodyBox = new VBox(markdownView, libraryPreviewBox);
+        VBox bodyBox = new VBox(libraryPreviewBox, markdownView);
         bodyBox.getStyleClass().add("body-box");
 
         VBox contentBox = new VBox();
@@ -67,5 +68,10 @@ public class LibraryOverviewBox extends PaneBase {
 
     public void setIcon(Ikon icon) {
         this.icon.set(icon);
+    }
+
+    @Override
+    public String getName() {
+        return "Overview";
     }
 }

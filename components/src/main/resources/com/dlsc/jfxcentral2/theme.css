@@ -2824,15 +2824,15 @@
  * AppDetailHeader
  */
 
-.app-detail-header:md-lg > .content-pane .content-box > .name {
+.showcase-detail-header:md-lg > .content-pane .content-box > .name {
     -fx-font-size: 44px;
 }
 
-.app-detail-header:sm > .content-pane .content-box > .name {
+.showcase-detail-header:sm > .content-pane .content-box > .name {
     -fx-font-size: 34px;
 }
 
-.app-detail-header > .content-pane .button-box .website-button {
+.showcase-detail-header > .content-pane .button-box .website-button {
     -bg: -light-blue;
     -fill: -grey-100;
     -fx-padding: 3px 9px;
@@ -4252,23 +4252,19 @@
  * CommentsView
  */
 .comments-view:lg {
-    -fx-min-width: 858px;
     -fx-pref-width: 858px;
-    -fx-max-width: 858px;
     -fx-background-color: -white;
 }
 
 .comments-view:md {
     -fx-min-width: 708px;
     -fx-pref-width: 708px;
-    -fx-max-width: 708px;
     -fx-background-color: -white;
 }
 
 .comments-view:sm {
     -fx-min-width: 317px;
     -fx-pref-width: 317px;
-    -fx-max-width: 317px;
     -fx-background-color: -white;
 }
 
@@ -5190,21 +5186,17 @@
 }
 
 .details-box:lg {
-    -fx-min-width: 857px;
     -fx-pref-width: 857px;
-    -fx-max-width: 857px;
 }
 
 .details-box:md {
     -fx-min-width: 709px;
     -fx-pref-width: 709px;
-    -fx-max-width: 709px;
 }
 
 .details-box:sm {
     -fx-min-width: 317px;
     -fx-pref-width: 317px;
-    -fx-max-width: 317px;
 }
 
 .details-box > .content-box .custom-pagination-control2 {
@@ -5558,18 +5550,22 @@
 }
 
 .details-content-pane:sm-md > .content-box > .intermediate-box {
-    -fx-spacing: 40px;
+    -fx-spacing: 0px;
     -fx-padding: 0px 0px 40px 0px;
 }
 
 .details-content-pane > .content-box {
     -fx-spacing: 30px;
     -fx-alignment: top-center;
-    -fx-padding: 40px 0px;
+    -fx-padding: 40px 10px;
     -fx-max-width: 1330px;
 }
 
 .details-content-pane:sm-md > .content-box {
+    -fx-padding: 0px 0px;
+}
+
+.details-content-pane:sm-md .center-box {
     -fx-padding: 0px 0px;
 }
 
@@ -5583,6 +5579,16 @@
 .details-content-pane > .content-box > * > .center-box > .boxes-container {
     -fx-spacing: 10px;
     -fx-alignment: top-center;
+}
+
+.details-content-pane:sm-md > .content-box > .center-box,
+.details-content-pane:sm-md > .content-box > * > .center-box {
+    -fx-spacing: 0px;
+}
+
+.details-content-pane:sm-md > .content-box > .center-box > .boxes-container,
+.details-content-pane:sm-md > .content-box > * > .center-box > .boxes-container {
+    -fx-spacing: 0px;
 }
 
 /** ------------------------------------
@@ -5644,7 +5650,6 @@
 }
 
 .overview-box:lg {
-    -fx-min-width: 858px;
     -fx-pref-width: 858px;
     -fx-max-width: 858px;
 }
@@ -5652,13 +5657,10 @@
 .overview-box:md {
     -fx-min-width: 709px;
     -fx-pref-width: 709px;
-    -fx-max-width: 709px;
 }
 
 .overview-box:sm {
-    -fx-min-width: 317px;
     -fx-pref-width: 317px;
-    -fx-max-width: 317px;
 }
 
 .overview-box:md-lg .body-box {
@@ -5724,13 +5726,13 @@
 }
 
 /** ------------------------------------
- * AppOverviewBox
+ * ShowcaseOverviewBox
  */
-.app-overview-box .body-box .top-grid {
+.showcase-overview-box .body-box .top-grid {
     -fx-vgap: 5px;
 }
 
-.app-overview-box:sm .body-box .top-box {
+.showcase-overview-box:sm .body-box .top-box {
     -fx-spacing: 5px;
 }
 
@@ -5739,6 +5741,9 @@
  */
 .tip-overview-box .body-box .top-grid {
     -fx-vgap: 5px;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: -grey-10;
+    -fx-padding: 0 0 15px 0;
 }
 
 .tip-overview-box:sm .body-box .top-box {
@@ -5804,7 +5809,7 @@
     -fx-border-width: 0px 0px 1px 0px;
 }
 
-.simple-overview-box .body-box .markdown-view {
+.simple-overview-box .body-box .custom-markdown-view {
     -fx-border-color: -grey-10;
     -fx-padding: 15px;
     -fx-border-width: 0px;
@@ -5941,11 +5946,11 @@
     -fx-alignment: center;
 }
 
-.links-of-the-week-view:md-lg .links-box .week-box .markdown-view {
+.links-of-the-week-view:md-lg .links-box .week-box .custom-markdown-view {
     -fx-padding: 20px 30px;
 }
 
-.links-of-the-week-view:sm .links-box .week-box .markdown-view {
+.links-of-the-week-view:sm .links-box .week-box .custom-markdown-view {
     -fx-padding: 20px 15px;
 }
 

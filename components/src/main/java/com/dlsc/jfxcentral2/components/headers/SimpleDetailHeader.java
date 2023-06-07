@@ -42,10 +42,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
         setCenter(createCenterNode());
         setDescription(model.getDescription());
-        sizeProperty().addListener(it->{
-            setCenter(createCenterNode());
-            setDescription(model.getDescription());
-        });
+        sizeProperty().addListener(it-> setCenter(createCenterNode()));
     }
 
     public Button getWebsiteButton() {

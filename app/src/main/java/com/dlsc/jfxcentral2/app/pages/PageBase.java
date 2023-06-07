@@ -2,7 +2,6 @@ package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral2.components.CopyrightView;
 import com.dlsc.jfxcentral2.components.FooterView;
-import com.dlsc.jfxcentral2.components.MenuView;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.TopPane;
@@ -12,7 +11,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
@@ -145,19 +143,6 @@ public abstract class PageBase extends View {
             case MEDIUM -> node.getStyleClass().add("md");
             case LARGE -> node.getStyleClass().add("lg");
         }
-    }
-
-    protected List<MenuView.Item> createMenuItems() {
-        return FXCollections.observableArrayList(
-                new MenuView.Item("TOOLS", null, "Tools url"),
-                new MenuView.Item("BLOGS", null, "Blogs url"),
-                new MenuView.Item("DOWNLOADS", null, "Downloads url"),
-                new MenuView.Item("LIBRARIES", null, "Libraries url"),
-                new MenuView.Item("VIDEOS", null, "Videos url"),
-                new MenuView.Item("APP", null, "app url"),
-                new MenuView.Item("BOOK", null, "book url"),
-                new MenuView.Item("TIPS & TRICKS", null, "Tips & Tricks url")
-        );
     }
 
     /**

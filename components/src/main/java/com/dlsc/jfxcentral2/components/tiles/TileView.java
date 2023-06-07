@@ -47,6 +47,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
@@ -69,6 +70,12 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
         VBox contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");
+
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(widthProperty());
+        clip.heightProperty().bind(heightProperty());
+        contentBox.setClip(clip);
+
         //[Top] FlipView
         flipView.setFrontNode(createFront());
         flipView.setBackNode(createBack());
