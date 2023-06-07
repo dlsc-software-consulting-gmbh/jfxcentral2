@@ -2718,8 +2718,7 @@
 
 .simple-detail-header:sm > .content-pane .flow-pane {
     -fx-padding: 100px 0 0 0;
-    -fx-hgap: 56px;
-    -fx-vgap: 15px;
+    -fx-spacing: 15px; /* use vbox at small size */
 }
 
 .simple-detail-header:md-lg .logo-image-view {

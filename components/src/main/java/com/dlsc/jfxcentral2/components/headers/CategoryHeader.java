@@ -54,6 +54,7 @@ public class CategoryHeader extends PaneBase {
          * otherwise the label will be displayed
          */
         contentProperty().addListener((ob, ov, nv) -> getChildren().setAll(overlay, Objects.requireNonNullElse(getContent(), label)));
+        sizeProperty().addListener((ob, ov, nv) -> getChildren().setAll(overlay, Objects.requireNonNullElse(getContent(), label)));
     }
 
     private Background createImageBackground(Image image) {

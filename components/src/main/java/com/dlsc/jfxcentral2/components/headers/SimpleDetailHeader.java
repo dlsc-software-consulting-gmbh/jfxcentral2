@@ -42,6 +42,10 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
         setCenter(createCenterNode());
         setDescription(model.getDescription());
+        sizeProperty().addListener(it->{
+            setCenter(createCenterNode());
+            setDescription(model.getDescription());
+        });
     }
 
     public Button getWebsiteButton() {
@@ -128,7 +132,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
         contentBox.getChildren().addAll(nameLabel, descriptionLabel, buttonBox);
 
-        FlowPane contentPane = new FlowPane(logoImageView, contentBox);
+        Pane contentPane = isSmall() ? new VBox(logoImageView, contentBox) : new FlowPane(logoImageView, contentBox);
         contentPane.getStyleClass().add("flow-pane");
         return contentPane;
     }
