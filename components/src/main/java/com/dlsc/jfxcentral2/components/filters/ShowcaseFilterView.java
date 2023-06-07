@@ -1,10 +1,11 @@
 package com.dlsc.jfxcentral2.components.filters;
 
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
-public class ShowcaseFilterView extends SearchFilterView<RealWorldApp> {
+public class ShowcaseFilterView extends SimpleSearchFilterView<RealWorldApp> {
 
     public ShowcaseFilterView() {
         getStyleClass().add("showcases-filter-view");
@@ -23,5 +24,7 @@ public class ShowcaseFilterView extends SearchFilterView<RealWorldApp> {
                         new FilterItem<>("Education", item -> true)
                 ))
         );
+
+        setOnSearch(text -> app -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(app.getName(), text));
     }
 }
