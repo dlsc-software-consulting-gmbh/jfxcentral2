@@ -121,7 +121,7 @@
     -fx-border-color: -mdfx-border-color-1;
     -fx-border-width: 0.0357em;
     -fx-background-radius: 0.1428em;
-    -fx-background-color: oldlace;
+    -fx-background-color: -light-blue;
     -fx-font-family: "JetBrains Mono Regular";
 }
 
@@ -131,7 +131,7 @@
     -fx-border-color: -mdfx-border-color-1;
     -fx-border-width: 0.0357em;
     -fx-background-radius: 0.1428em;
-    -fx-background-color: oldlace;
+    -fx-background-color: -light-blue;
 }
 
 .markdown-code-anti-padding {

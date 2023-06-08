@@ -1,20 +1,21 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Company;
-import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import javafx.scene.Node;
 
-public class CompaniesDetailsBox extends SimpleDetailsBox<Company> {
+import java.util.List;
+
+public class CompaniesDetailsBox extends DetailsBoxBase<Company> {
 
     public CompaniesDetailsBox() {
         getStyleClass().add("companies-details-box");
         setTitle("COMPANIES");
-        setIkon(IkonUtil.company);
+        setIkon(IkonUtil.getModelIkon(Company.class));
     }
 
     @Override
-    protected CustomImageView createImageView(Company model) {
-        return new CustomImageView();
+    protected List<Node> createActionButtons(Company company) {
+        return List.of(createDetailsButton(company));
     }
-
 }

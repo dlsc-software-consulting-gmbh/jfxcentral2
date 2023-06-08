@@ -1,19 +1,21 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Tip;
-import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import javafx.scene.Node;
 
-public class TipsAndTricksDetailsBox extends SimpleDetailsBox<Tip> {
+import java.util.List;
+
+public class TipsAndTricksDetailsBox extends DetailsBoxBase<Tip> {
 
     public TipsAndTricksDetailsBox() {
         getStyleClass().add("tips-details-box");
         setTitle("TIPS & TRICKS");
-        setIkon(IkonUtil.tip);
+        setIkon(IkonUtil.getModelIkon(Tip.class));
     }
 
     @Override
-    protected CustomImageView createImageView(Tip tip) {
-        return new CustomImageView();
+    protected List<Node> createActionButtons(Tip tip) {
+        return List.of(createDetailsButton(tip));
     }
 }
