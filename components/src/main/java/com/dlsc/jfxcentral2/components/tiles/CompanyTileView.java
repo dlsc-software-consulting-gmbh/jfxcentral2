@@ -1,14 +1,11 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral.data.model.Company;
-import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import javafx.scene.Node;
-import javafx.scene.layout.StackPane;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class CompanyTileView extends TileView<Company> {
+public class CompanyTileView extends PreviewTileView<Company> {
 
     public CompanyTileView(Company company) {
         super(company);
@@ -18,17 +15,8 @@ public class CompanyTileView extends TileView<Company> {
         LinkUtil.setLink(getButton1(), "/companies/" + company.getId());
     }
 
-    protected Node createFrontTop() {
-        //company logo
-        CustomImageView logoView = new CustomImageView();
-        logoView.imageProperty().bind(imageProperty());
-
-        StackPane imageContainer = new StackPane();
-        imageContainer.getStyleClass().add("image-container");
-        imageContainer.getChildren().setAll(logoView);
-        logoView.fitWidthProperty().bind(imageContainer.widthProperty().subtract(20));
-        logoView.fitHeightProperty().bind(imageContainer.heightProperty().subtract(20));
-
-        return imageContainer;
+    @Override
+    protected int getSizeReduction() {
+        return 20;
     }
 }

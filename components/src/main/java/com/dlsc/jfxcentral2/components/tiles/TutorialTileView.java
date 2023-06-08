@@ -6,7 +6,7 @@ import com.dlsc.jfxcentral2.utils.IkonUtil;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class TutorialTileView extends TileView<Tutorial> {
+public class TutorialTileView extends PreviewTileView<Tutorial> {
 
     public TutorialTileView(Tutorial tutorial) {
         super(tutorial);
@@ -17,4 +17,5 @@ public class TutorialTileView extends TileView<Tutorial> {
         imageProperty().bind(ImageManager.getInstance().tutorialImageLargeProperty(tutorial));
         LinkUtil.setLink(getButton1(), "/tutorials/" + tutorial.getId());
     }
+
 }
