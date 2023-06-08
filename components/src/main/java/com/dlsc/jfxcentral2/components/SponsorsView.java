@@ -46,14 +46,14 @@ public class SponsorsView extends ControlBase {
                         "https://www.jpro.one/"),
                 new SponsorsView.Sponsor("DLSC",
                         getClass().getResource("logos/dlsc.png").toExternalForm(),
-                        "https://www.jpro.one/"),
+                        "https://www.dlsc.com/"),
                 new SponsorsView.Sponsor("NAVIELEKTRO",
                         getClass().getResource("logos/navielektro.png").toExternalForm(),
-                        "https://www.jpro.one/"),
+                        "https://www.navielektro.fi/"),
                 new SponsorsView.Sponsor(
                         "Hydraulic",
                         getClass().getResource("logos/hydraulic.png").toExternalForm(),
-                        "https://www.jpro.one/"));
+                        "https://www.hydraulic.dev/"));
     }
 
     public record Sponsor(String name, String logoUrl, String url) {
