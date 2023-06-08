@@ -58,7 +58,7 @@ public class WelcomeView extends PaneBase {
         downloadRegion.getStyleClass().add("download-region");
         installLocallyButton = new Button("Install Locally", downloadRegion);
         installLocallyButton.getStyleClass().addAll("fill-button", "install-button");
-        LinkUtil.setLink(installLocallyButton, "/download");
+        LinkUtil.setLink(installLocallyButton, "https://downloads.hydraulic.dev/jfxcentral2/download.html");
 
         Region openjfxRegion = new Region();
         openjfxRegion.getStyleClass().add("openjfx-region");
