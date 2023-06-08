@@ -20,10 +20,18 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.util.EnumSet;
 
 public class IconPreviewPane extends PaneBase {
-
+    private int columnCount = 4;
     public IconPreviewPane() {
-        getStyleClass().add("icon-preview-pane");
+        getStyleClass().addAll("icon-preview-pane", "icon-grid-wrapper");
         modelProperty().addListener(it -> requestLayout());
+        widthProperty().addListener((ob, ov, nv) -> {
+            int tempColumnCount = (int) (isSmall() ? nv.doubleValue() / 60 : isMedium() ? nv.doubleValue() / 55 : nv.doubleValue() / 76);
+            if (tempColumnCount == columnCount || tempColumnCount < 1) {
+                return;
+            }
+            columnCount = tempColumnCount;
+            layoutBySize();
+        });
     }
 
     @Override
@@ -35,13 +43,18 @@ public class IconPreviewPane extends PaneBase {
         GridPane gridPane = new GridPane();
         gridPane.getStyleClass().add("icon-grid-pane");
         IkonliPack ikonPackModel = getModel();
+        //PaymentFont is a very big ,the width is too large;
+        if (ikonPackModel.getName().equalsIgnoreCase("PaymentFont")) {
+            getStyleClass().add("payment-font-preview");
+        }
+
         ObservableList<? extends Ikon> icons = FXCollections.observableArrayList();
         IkonProvider ikonProvider = IkonliPackUtil.getInstance().getIkonData(ikonPackModel.getName()).getIkonProvider();
         EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
         icons.addAll(enumSet);
         FXCollections.shuffle(icons);
-        int columnCount = isMedium() ? 4 : 6;
-        for (int i = 0; i < 24 && i < icons.size(); i++) {
+
+        for (int i = 0; i < columnCount * 4 && i < icons.size(); i++) {
             FontIcon fontIcon = new FontIcon(icons.get(i));
             fontIcon.getStyleClass().add("icon-font");
             fontIcon.setFill(generateColor());
