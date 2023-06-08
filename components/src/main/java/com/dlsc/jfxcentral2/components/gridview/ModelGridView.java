@@ -17,7 +17,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
@@ -85,8 +87,17 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
                 GridPane gridPane = new GridPane();
                 gridPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
                 gridPane.getStyleClass().add("grid-pane");
+
                 int startIndex = pageIndex * columns * rows;
                 int endIndex = Math.min(startIndex + columns * rows, items.size());
+
+                ColumnConstraints colConstraints = new ColumnConstraints();
+                colConstraints.setHgrow(Priority.ALWAYS);
+                colConstraints.setPercentWidth(100.0 / columns);
+                for (int i = 0; i < columns; i++) {
+                    gridPane.getColumnConstraints().addAll(colConstraints);
+                }
+
                 for (int i = startIndex; i < endIndex; i++) {
                     int row = (i - startIndex) / columns;
                     int column = (i - startIndex) % columns;

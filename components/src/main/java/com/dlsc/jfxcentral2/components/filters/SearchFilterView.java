@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.filters;
 
 import com.dlsc.gemsfx.SearchTextField;
+import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
@@ -37,7 +38,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,7 +90,7 @@ public class SearchFilterView<T> extends PaneBase {
         searchField.managedProperty().bind(searchField.visibleProperty());
         searchField.visibleProperty().bind(onSearchProperty().isNotNull());
 
-        filterBoxOrientation.addListener(it -> layoutBySize());
+        filterBoxOrientationProperty().addListener(it -> layoutBySize());
         filterGroupsProperty().addListener((InvalidationListener) it -> layoutBySize());
         sortGroupProperty().addListener(it -> layoutBySize());
         extraNodesProperty().addListener((InvalidationListener) it -> layoutBySize());
@@ -158,9 +158,14 @@ public class SearchFilterView<T> extends PaneBase {
         contentBox.getChildren().addAll(getExtraNodes());
 
         if (isSmall() && getOnSearch() == null) {
-            ToggleButton collapsibleButton = new ToggleButton("FILTERS", new FontIcon(JFXCentralIcon.CHEVRON_TOP));
+            ToggleButton collapsibleButton = new ToggleButton();
             collapsibleButton.getStyleClass().add("collapsible-button");
             collapsibleButton.setMaxWidth(Double.MAX_VALUE);
+            Header header = new Header();
+            header.setTitle("FILTERS");
+            header.setIcon(JFXCentralIcon.CHEVRON_TOP);
+            collapsibleButton.setGraphic(header);
+
             collapsibleButton.setSelected(true);
             contentBox.visibleProperty().bind(collapsibleButton.selectedProperty());
             VBox contentBoxWrapper = new VBox(collapsibleButton, contentBox);
@@ -256,6 +261,7 @@ public class SearchFilterView<T> extends PaneBase {
 
     private Node createFilterBox(int index, FilterGroup<T> filterGroup, ObjectProperty<Predicate<T>> childPredicateProperty) {
         Pane box = getFilterBoxOrientation() == Orientation.VERTICAL ? new VBox() : new HBox();
+        System.out.println(getFilterBoxOrientation());
         box.getStyleClass().addAll("filter-box", "filter-box-" + index);
 
         Label titleLabel = new Label(filterGroup.title());
