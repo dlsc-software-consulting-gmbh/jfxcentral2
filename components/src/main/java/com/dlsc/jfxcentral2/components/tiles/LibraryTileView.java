@@ -15,8 +15,6 @@ public class LibraryTileView extends SimpleTileView<Library> {
 
         setAvatarType(AvatarView.Type.PLAIN);
 
-        setPrefWidth(1);
-
         LinkUtil.setLink(this, "/libraries/" + getData().getId());
 
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(library));

@@ -8,7 +8,7 @@ import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class BookTileView extends TileView<Book> {
+public class BookTileView extends PreviewTileView<Book> {
 
     public BookTileView(Book book) {
         super(book);
@@ -31,5 +31,10 @@ public class BookTileView extends TileView<Book> {
         } else {
             setButton2Visible(false);
         }
+    }
+
+    @Override
+    protected int getSizeReduction() {
+        return 10;
     }
 }
