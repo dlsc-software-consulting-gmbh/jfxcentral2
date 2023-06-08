@@ -17,7 +17,7 @@ public class VideosDetailsBox extends DetailsBoxBase<Video> {
         setTitle("VIDEOS");
         setIkon(IkonUtil.video);
         setMaxItemsPerPage(3);
-        setExtrasProvider(VideoViewFactory::createViewViewNode);
+        setExtrasProvider(VideoViewFactory::createVideoViewNode);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class VideosDetailsBox extends DetailsBoxBase<Video> {
         playButton.managedProperty().bind(playButton.visibleProperty());
         playButton.setOnAction(evt -> setSelectedItem(video));
 
-        Button youTubeButton = new Button("Youtube");
+        Button youTubeButton = new Button("YouTube");
         youTubeButton.getStyleClass().add("youtube-button");
         LinkUtil.setExternalLink(youTubeButton, "https://youtu.be/" + video.getId(), "https://youtu.be/" + video.getId());
 

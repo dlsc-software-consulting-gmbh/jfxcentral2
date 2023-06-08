@@ -31,6 +31,15 @@ public class DetailsContentPane extends PaneBase {
 
         menuView.sizeProperty().bind(sizeProperty());
         menuView.orientationProperty().bind(Bindings.createObjectBinding(() -> getSize().equals(Size.LARGE) ? Orientation.VERTICAL : Orientation.HORIZONTAL, sizeProperty()));
+
+        /*
+         * We do not show the menu view in medium or small size if the menu only contains
+         * a single item. In large size we always show it, otherwise the layout would not
+         * be symmetrical.
+         */
+        menuView.visibleProperty().bind(sizeProperty().isEqualTo(Size.LARGE).or(menuView.itemsProperty().sizeProperty().greaterThan(1)));
+        menuView.managedProperty().bind(menuView.visibleProperty());
+
         HBox.setHgrow(menuView, Priority.NEVER);
 
         commentsView.sizeProperty().bind(sizeProperty());
@@ -38,7 +47,6 @@ public class DetailsContentPane extends PaneBase {
         detailBoxes.addListener((Observable it) -> updateMenuView());
         centerNodes.addListener((Observable it) -> updateMenuView());
 
-        // TODO: maybe pass in the list of center nodes and save additional layouting?
         centerNodesProperty().addListener((Observable it) -> layoutBySize());
 
         /*

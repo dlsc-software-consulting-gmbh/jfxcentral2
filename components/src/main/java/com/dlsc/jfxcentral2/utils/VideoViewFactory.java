@@ -11,7 +11,7 @@ import javafx.scene.web.WebView;
 
 public class VideoViewFactory {
 
-    public static Node createViewViewNode(Video video) {
+    public static Node createVideoViewNode(Video video) {
         if (WebAPI.isBrowser()) {
             HTMLView htmlView = new HTMLView();
             htmlView.setContent("<div width=\"100%\" \"height=100%\" background-color=\"powderblue\" class=\"yt\"><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + video.getId() + "\" allowfullscreen></iframe></div></body></html>\n");

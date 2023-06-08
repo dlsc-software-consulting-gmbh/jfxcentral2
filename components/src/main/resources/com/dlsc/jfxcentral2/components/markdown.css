@@ -156,15 +156,18 @@
 }
 
 .markdown-table-odd {
-    -fx-background-color: rgba(0, 0, 0, .05);
-}
-
-.markdown-table-cell-top {
     -fx-background-color: -light-blue;
 }
 
-.markdown-table-cell-top .text {
-    -fx-text-fill: white;
+.markdown-table-cell-top {
+    -fx-background-color: -bright-blue;
+}
+
+.markdown-table-cell-top .markdown-text {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Roboto Condensed";
+    -fx-fill: -white;
 }
 
 .markdown-table-cell-top .markdown-normal-flow {

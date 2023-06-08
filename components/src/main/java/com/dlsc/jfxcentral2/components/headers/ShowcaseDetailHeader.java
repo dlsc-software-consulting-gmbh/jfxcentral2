@@ -10,7 +10,6 @@ public class ShowcaseDetailHeader extends SimpleDetailHeader<RealWorldApp>  {
 
         getStyleClass().addAll("showcase-detail-header", "dark-header");
         setWebsite(getModel().getUrl());
-        setDescription(app.getSummary());
         backgroundImageProperty().bind(ImageManager.getInstance().realWorldAppBannerImageProperty(app));
 
         setShareUrl("showcases/" + app.getId());

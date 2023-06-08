@@ -50,7 +50,7 @@ public class VideosCategoryPage extends CategoryPageBase<Video> {
 
     @Override
     protected Callback<Video, Node> getDetailNodeProvider() {
-        return VideoViewFactory::createViewViewNode;
+        return VideoViewFactory::createVideoViewNode;
     }
 
     @Override

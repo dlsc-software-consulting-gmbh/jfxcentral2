@@ -41,7 +41,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         getStyleClass().add("simple-detail-header");
 
         setCenter(createCenterNode());
-        setDescription(model.getDescription());
+        setSummary(model.getSummary());
         sizeProperty().addListener(it-> setCenter(createCenterNode()));
     }
 
@@ -74,14 +74,14 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         nameLabel.textAlignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(TextAlignment.LEFT).otherwise(TextAlignment.CENTER));
         nameLabel.setMinHeight(Region.USE_PREF_SIZE);
 
-        Label descriptionLabel = new Label();
-        descriptionLabel.visibleProperty().bind(descriptionLabel.textProperty().isNotEmpty());
-        descriptionLabel.managedProperty().bind(descriptionLabel.textProperty().isNotEmpty());
-        descriptionLabel.textProperty().bind(descriptionProperty());
-        descriptionLabel.getStyleClass().add("description");
-        descriptionLabel.setWrapText(true);
-        descriptionLabel.textAlignmentProperty().bind(nameLabel.textAlignmentProperty());
-        descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
+        Label summaryLabel = new Label();
+        summaryLabel.visibleProperty().bind(summaryLabel.textProperty().isNotEmpty());
+        summaryLabel.managedProperty().bind(summaryLabel.textProperty().isNotEmpty());
+        summaryLabel.textProperty().bind(summaryProperty());
+        summaryLabel.getStyleClass().add("description");
+        summaryLabel.setWrapText(true);
+        summaryLabel.textAlignmentProperty().bind(nameLabel.textAlignmentProperty());
+        summaryLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
@@ -127,25 +127,25 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         buttonBox.getStyleClass().add("button-box");
         buttonBox.alignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(Pos.CENTER_LEFT).otherwise(Pos.CENTER));
 
-        contentBox.getChildren().addAll(nameLabel, descriptionLabel, buttonBox);
+        contentBox.getChildren().addAll(nameLabel, summaryLabel, buttonBox);
 
         Pane contentPane = isSmall() ? new VBox(logoImageView, contentBox) : new FlowPane(logoImageView, contentBox);
         contentPane.getStyleClass().add("flow-pane");
         return contentPane;
     }
 
-    private final StringProperty description = new SimpleStringProperty(this, "description");
+    private final StringProperty summary = new SimpleStringProperty(this, "summary");
 
-    public String getDescription() {
-        return description.get();
+    public String getSummary() {
+        return summary.get();
     }
 
-    public StringProperty descriptionProperty() {
-        return description;
+    public StringProperty summaryProperty() {
+        return summary;
     }
 
-    public void setDescription(String description) {
-        this.description.set(description);
+    public void setSummary(String summary) {
+        this.summary.set(summary);
     }
 
     private final StringProperty websiteButtonText = new SimpleStringProperty(this, "websiteButtonText", "WEBSITE");

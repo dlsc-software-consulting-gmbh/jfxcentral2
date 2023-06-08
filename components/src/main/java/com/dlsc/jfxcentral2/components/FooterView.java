@@ -115,7 +115,7 @@ public class FooterView extends PaneBase {
         LinkUtil.setLink(emailLink, "mailto:dlemmermann@gmail.com");
 
         Label contactLabel = new Label("Contact");
-        Label dlscLabel = new Label("DLSC Gmbh");
+        Label dlscLabel = new Label("DLSC GmbH");
         Label addressLabel = new Label("Asylweg 28,8134 Adliswil,");
         Label countryLabel = new Label("Switzerland");
         LineNumberPane contactPane;

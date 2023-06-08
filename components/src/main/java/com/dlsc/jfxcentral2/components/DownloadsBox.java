@@ -101,7 +101,7 @@ public class DownloadsBox extends PaneBase {
         }
 
         Header header = new Header();
-        header.setTitle("Download Links");
+        header.setTitle("DOWNLOADS");
         header.setIcon(IkonUtil.download);
 
         Label nameLabel = new Label(download.getName());
