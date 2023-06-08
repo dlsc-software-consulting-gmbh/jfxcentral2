@@ -17,6 +17,6 @@ public class CompanyTileView extends PreviewTileView<Company> {
 
     @Override
     protected int getSizeReduction() {
-        return 20;
+        return 40;
     }
 }
