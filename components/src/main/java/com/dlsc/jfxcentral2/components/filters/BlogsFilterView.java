@@ -9,7 +9,9 @@ public class BlogsFilterView extends SimpleSearchFilterView<Blog> {
         getStyleClass().add("blogs-filter-view");
         setSearchPromptText("Search for a blog");
 
-        setOnSearch(text -> blog -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(blog.getName(), text));
+        setOnSearch(text -> blog -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(blog.getName(), text)
+                || StringUtils.containsIgnoreCase(blog.getDescription(), text));
 
     }
 }

@@ -8,7 +8,9 @@ public class BooksFilterView extends SimpleSearchFilterView<Book> {
         getStyleClass().add("books-filter-view");
         setSearchPromptText("Search for a book");
 
-        setOnSearch(text -> book -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(book.getName(), text));
+        setOnSearch(text -> book -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(book.getName(), text)
+                || StringUtils.containsIgnoreCase(book.getDescription(), text));
 
     }
 }

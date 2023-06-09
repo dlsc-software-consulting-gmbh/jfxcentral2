@@ -25,6 +25,9 @@ public class ShowcaseFilterView extends SimpleSearchFilterView<RealWorldApp> {
                 ))
         );
 
-        setOnSearch(text -> app -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(app.getName(), text));
+        setOnSearch(text -> app -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(app.getName(), text)
+                || StringUtils.containsIgnoreCase(app.getDescription(), text));
+
     }
 }

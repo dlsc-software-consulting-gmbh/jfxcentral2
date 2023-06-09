@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Post;
 import com.dlsc.jfxcentral2.components.CustomImageView;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
@@ -71,9 +70,9 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
             ageLabel.setMinWidth(Region.USE_PREF_SIZE);
 
             if (size == Size.SMALL) {
-                HBox topBox = new HBox(imageView, new Spacer(), ageLabel);
-                topBox.getStyleClass().add("top-box");
-                postView.getChildren().setAll(topBox, titleLabel);
+                titleLabel.setGraphic(imageView);
+                HBox.setHgrow(titleLabel, Priority.ALWAYS);
+                postView.getChildren().setAll(titleLabel, ageLabel);
             }else {
                 postView.getChildren().setAll(imageView, titleLabel, ageLabel);
                 HBox.setHgrow(titleLabel, Priority.ALWAYS);

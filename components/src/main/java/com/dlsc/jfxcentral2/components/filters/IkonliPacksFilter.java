@@ -23,6 +23,8 @@ public class IkonliPacksFilter extends SimpleSearchFilterView<IkonliPack> {
                         new FilterItem<>("MIXING", item -> item.getIconStyle() == IconStyle.MIXING)
                 )));
 
-        setOnSearch(text -> pack -> StringUtils.containsIgnoreCase(pack.getName(), text));
+        setOnSearch(text -> pack -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(pack.getName(), text)
+                || StringUtils.containsIgnoreCase(pack.getDescription(), text));
     }
 }
