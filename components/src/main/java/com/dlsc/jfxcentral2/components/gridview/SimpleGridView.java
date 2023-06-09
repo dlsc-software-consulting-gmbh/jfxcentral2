@@ -55,6 +55,7 @@ public class SimpleGridView<T> extends PaneBase {
                     CellView<T> cellView = getCellViewProvider().call(model);
                     cellView.sizeProperty().bind(sizeProperty());
                     cellView.selectedProperty().addListener((ob, ov, nv) ->{
+                        this.requestFocus();
                         if (nv) {
                             if (lasetSelectedCellView != null) {
                                 lasetSelectedCellView.setSelected(false);
