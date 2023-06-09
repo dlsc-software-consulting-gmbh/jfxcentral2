@@ -78,6 +78,7 @@ public class TopMenuBar extends PaneBase {
         dukeView.getStyleClass().add("duke-image");
 
         searchField = new SearchField<>();
+        searchField.getEditor().setFocusTraversable(false);
         searchField.setPromptText("Search");
         searchField.setCellFactory(listView -> new SearchResultCell());
         searchField.setSuggestionProvider(request -> search(request.getUserText()));
@@ -277,7 +278,7 @@ public class TopMenuBar extends PaneBase {
 
     private Node getSearchTextField() {
         if (searchTextField == null) {
-            searchTextField = searchField.lookup(".text-field");
+            searchTextField = searchField.getEditor();
             searchTextField.focusedProperty().addListener((ob, ov, nv) -> {
                 if (!nv) {
                     searchField.setVisible(false);
@@ -300,6 +301,10 @@ public class TopMenuBar extends PaneBase {
             Region jfxcentralRegion = new Region();
             jfxcentralRegion.getStyleClass().add("jfxcentral-region");
             HBox logoBox = new HBox(dukeView, jfxcentralRegion);
+            // 1370px was determined by trial and error (resizing the window)
+            jfxcentralRegion.visibleProperty().bind(widthProperty().greaterThanOrEqualTo(1370));
+            jfxcentralRegion.managedProperty().bind(widthProperty().greaterThanOrEqualTo(1370));
+            logoBox.setMinWidth(Region.USE_PREF_SIZE);
             logoBox.getStyleClass().add("logo-box");
             LinkUtil.setLink(logoBox, "/", "Back to homepage");
             return logoBox;

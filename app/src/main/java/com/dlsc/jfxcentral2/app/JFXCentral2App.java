@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.app;
 
+import com.dlsc.gemsfx.util.StageManager;
 import com.dlsc.jfxcentral2.app.pages.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.app.pages.LoginPage;
@@ -33,23 +34,26 @@ import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
+import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import one.jpro.routing.Request;
 import one.jpro.routing.Response;
 import one.jpro.routing.Route;
-import one.jpro.routing.RouteApp;
+import one.jpro.routing.RouteNode;
 import one.jpro.routing.RouteUtils;
 import one.jpro.routing.dev.DevFilter;
+import one.jpro.routing.sessionmanager.SessionManager;
 import simplefx.experimental.parts.FXFuture;
 
 import java.util.function.Supplier;
 
-public class JFXCentral2App extends RouteApp {
+public class JFXCentral2App extends Application {
 
     static {
         LoadRepository.requestInitialUpdate();
@@ -59,24 +63,38 @@ public class JFXCentral2App extends RouteApp {
 
     @Override
     public void start(Stage stage) {
-        super.start(stage);
+        stage.initStyle(StageStyle.UNDECORATED);
 
-        // Can't use Platform.exit because something is leaking a non-daemon thread pool.
-        stage.setOnCloseRequest(t -> System.exit(0));
-    }
+        // route node
+        Route route = createRoute();
+        RouteNode routeNode = new RouteNode(stage, route);
 
-    @Override
-    public Route createRoute() {
-        Scene scene = getScene();
+        // session manager
+        SessionManager sessionManager = SessionManager.getDefault(routeNode, stage);
+        routeNode.start(sessionManager);
 
+        // customs stage for decorations / the chrome
+        CustomStage customStage = new CustomStage(stage, routeNode, sessionManager);
+        customStage.setCloseHandler(stage::close);
+
+        // scene
+        Scene scene = new Scene(customStage, 1400, 800);
         scene.setFill(Color.web("070B32"));
-        scene.widthProperty().addListener((it -> updateSize(scene)));
+        scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
         scene.widthProperty().addListener(it -> System.out.println("width: " + scene.getWidth()));
         scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
         scene.focusOwnerProperty().addListener(it -> System.out.println("new focus owner: " + scene.getFocusOwner()));
 
-        updateSize(scene);
+        updateSizeProperty(scene);
 
+        stage.setScene(scene);
+
+        StageManager.install(stage, "com/dlsc/jfxcentral2", 400, 800);
+
+        stage.show();
+    }
+
+    private Route createRoute() {
         Route route = Route.empty()
                 .and(RouteUtils.get("/", r -> new StartPage(size)))
                 .and(createCategoryOrDetailRoute("/blogs", () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
@@ -130,7 +148,7 @@ public class JFXCentral2App extends RouteApp {
         return categoryResponse.get();
     }
 
-    private void updateSize(Scene scene) {
+    private void updateSizeProperty(Scene scene) {
         double sceneWidth = scene.getWidth();
         if (sceneWidth < 768) {
             size.set(Size.SMALL);

@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.headers;
 
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 
 public class BlogDetailHeader extends SimpleDetailHeader<Blog>  {
@@ -9,6 +10,7 @@ public class BlogDetailHeader extends SimpleDetailHeader<Blog>  {
 
         getStyleClass().add("blog-detail-header");
 
+        imageProperty().bind(ImageManager.getInstance().blogIconImageProperty(blog));
         setWebsite(blog.getUrl());
         setShareUrl("blogs/" + blog.getId());
         setShareText("Found this blog on @JFXCentral: " + blog.getName());

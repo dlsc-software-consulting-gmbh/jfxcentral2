@@ -31,7 +31,7 @@
         <javafx.version>20</javafx.version>
         <ikonli.version>12.3.1</ikonli.version>
         <jpro.version>2023.2.0-SNAPSHOT</jpro.version>
-        <routing.version>0.15.0</routing.version>
+        <routing.version>0.16.0-SNAPSHOT</routing.version>
     </properties>
 
     <repositories>

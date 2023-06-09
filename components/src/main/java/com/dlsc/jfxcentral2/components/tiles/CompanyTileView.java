@@ -10,7 +10,7 @@ public class CompanyTileView extends PreviewTileView<Company> {
     public CompanyTileView(Company company) {
         super(company);
         getStyleClass().add("company-tile-view");
-        setButton1Text("HOMEPAGE");
+        setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));
         LinkUtil.setLink(getButton1(), "/companies/" + company.getId());
     }

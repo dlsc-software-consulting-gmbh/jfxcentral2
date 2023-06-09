@@ -9,12 +9,14 @@ import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -41,7 +43,7 @@ public class PersonDetailHeader extends DetailHeader<Person> {
 
         AvatarView avatarImage = new AvatarView();
         avatarImage.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
-
+        avatarImage.setEffect(new DropShadow(10, Color.web("#58a6ff")));
         FlowPane nameBadgePane = createNameBadgePane(person);
 
         Label descriptionLabel = new Label();

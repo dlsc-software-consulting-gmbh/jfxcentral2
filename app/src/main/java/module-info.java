@@ -9,6 +9,7 @@ open module com.dlsc.jfxcentral2.app {
     requires com.dlsc.jfxcentral2.components;
     requires one.jpro.routing.core;
     requires one.jpro.routing.dev;
+    requires com.dlsc.gemsfx;
 
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;
