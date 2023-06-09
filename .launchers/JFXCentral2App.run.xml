@@ -4,7 +4,7 @@
     <module name="app" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.dlsc.jfxcentral2.app.*" />
+        <option name="PATTERN" value="com.dlsc.jfxcentral2.app.stage.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

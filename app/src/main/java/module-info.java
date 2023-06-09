@@ -75,4 +75,5 @@ open module com.dlsc.jfxcentral2.app {
 
     exports com.dlsc.jfxcentral2.app;
     exports com.dlsc.jfxcentral2.app.pages;
+    exports com.dlsc.jfxcentral2.app.stage;
 }

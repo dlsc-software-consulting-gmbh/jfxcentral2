@@ -32,6 +32,7 @@ import com.dlsc.jfxcentral2.app.pages.details.TipDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.ToolDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
+import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.jpro.webapi.WebAPI;

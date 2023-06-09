@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.app;
+package com.dlsc.jfxcentral2.app.stage;
 
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
