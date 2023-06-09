@@ -172,8 +172,8 @@ public class TopMenuBar extends PaneBase {
             Button downloadsBtn = new Button("Downloads");
             downloadsBtn.setMinWidth(Region.USE_PREF_SIZE);
             downloadsBtn.getStyleClass().add("downloads-button");
-            downloadsBtn.setVisible(mobile);
-            downloadsBtn.setManaged(mobile);
+            downloadsBtn.setVisible(!mobile);
+            downloadsBtn.setManaged(!mobile);
             LinkUtil.setLink(downloadsBtn, "/downloads");
 
             Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));
