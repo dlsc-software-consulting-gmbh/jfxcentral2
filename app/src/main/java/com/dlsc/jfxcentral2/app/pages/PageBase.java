@@ -52,7 +52,7 @@ public abstract class PageBase extends View {
         sizeProperty().addListener(it -> updateStyleClassBasedOnSize(vbox));
 
         // menubar
-        TopMenuBar topMenuBar = new TopMenuBar();
+        TopMenuBar topMenuBar = new TopMenuBar(isMobile());
         topMenuBar.sizeProperty().bind(sizeProperty());
         topMenuBar.setMode(menuMode);
         topMenuBar.showHamburgerMenuProperty().bindBidirectional(showHamburgerMenuProperty());
@@ -70,7 +70,7 @@ public abstract class PageBase extends View {
         copyrightView.sizeProperty().bind(sizeProperty());
 
         // hamburger menu
-        HamburgerMenuView hamburgerMenuView = new HamburgerMenuView();
+        HamburgerMenuView hamburgerMenuView = new HamburgerMenuView(isMobile());
         hamburgerMenuView.sizeProperty().bind(sizeProperty());
         hamburgerMenuView.visibleProperty().bind(sizeProperty().isNotEqualTo(Size.LARGE).and(showHamburgerMenuProperty()));
         hamburgerMenuView.managedProperty().bind(sizeProperty().isNotEqualTo(Size.LARGE).and(showHamburgerMenuProperty()));

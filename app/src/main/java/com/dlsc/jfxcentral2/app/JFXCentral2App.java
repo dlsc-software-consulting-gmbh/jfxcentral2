@@ -34,6 +34,7 @@ import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -89,7 +90,10 @@ public class JFXCentral2App extends Application {
 
         stage.setScene(scene);
 
-        StageManager.install(stage, "com/dlsc/jfxcentral2", 400, 800);
+        // do not store stage width, height, location when we are running in a browser
+        if (!WebAPI.isBrowser()) {
+            StageManager.install(stage, "com/dlsc/jfxcentral2", 500, 800);
+        }
 
         stage.show();
     }

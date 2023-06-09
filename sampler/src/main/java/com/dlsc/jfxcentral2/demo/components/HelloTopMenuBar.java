@@ -17,7 +17,7 @@ public class HelloTopMenuBar extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        topMenuBar = new TopMenuBar();
+        topMenuBar = new TopMenuBar(false);
         topMenuBar.getStylesheets().add(HelloTopMenuBar.class.getResource("test.css").toExternalForm());
         return new ScrollPane(topMenuBar);
     }

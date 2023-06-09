@@ -16,7 +16,6 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.jpro.webapi.WebAPI;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -57,6 +56,7 @@ public class TopMenuBar extends PaneBase {
     private final CustomImageView dukeView;
     private final SearchField<ModelObject> searchField;
     private final HBox contentBox;
+    private final boolean mobile;
 
     private Node searchTextField;
 
@@ -65,7 +65,9 @@ public class TopMenuBar extends PaneBase {
         DARK
     }
 
-    public TopMenuBar() {
+    public TopMenuBar(boolean mobile) {
+        this.mobile = mobile;
+
         getStyleClass().add("top-menu-bar");
 
         activateModePseudoClass();
@@ -170,8 +172,8 @@ public class TopMenuBar extends PaneBase {
             Button downloadsBtn = new Button("Downloads");
             downloadsBtn.setMinWidth(Region.USE_PREF_SIZE);
             downloadsBtn.getStyleClass().add("downloads-button");
-            downloadsBtn.visibleProperty().bind(Bindings.createBooleanBinding(() -> !WebAPI.getWebAPI(getScene()).isMobile(), sceneProperty()));
-            downloadsBtn.managedProperty().bind(downloadsBtn.visibleProperty());
+            downloadsBtn.setVisible(mobile);
+            downloadsBtn.setManaged(mobile);
             LinkUtil.setLink(downloadsBtn, "/downloads");
 
             Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));

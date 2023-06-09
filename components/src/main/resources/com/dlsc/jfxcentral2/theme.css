@@ -3663,9 +3663,7 @@
 }
 
 .video-gallery-view:md {
-    -fx-min-width: -md-width;
     -fx-pref-width: -md-width;
-    -fx-max-width: -md-width;
     -fx-padding: 60px 30px 30px 30px;
     -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 60.4%, -bright-blue 0.0%, -bright-blue 99.6389%, -background 100.0%);
 }
@@ -3676,9 +3674,7 @@
 }
 
 .video-gallery-view:sm {
-    -fx-min-width: -sm-width;
     -fx-pref-width: -sm-width;
-    -fx-max-width: -sm-width;
     -fx-padding: 40px 30px 55px 30px;
     -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 61.5%, -bright-blue 0.0%, -bright-blue 99.6389%, -background 100.0%);
 }

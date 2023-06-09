@@ -14,7 +14,7 @@ public class HelloHamburgerMenuView extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        menuView = new HamburgerMenuView();
+        menuView = new HamburgerMenuView(false);
         return new ScrollPane(menuView);
     }
 

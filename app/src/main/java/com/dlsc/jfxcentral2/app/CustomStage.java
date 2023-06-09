@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.jpro.webapi.WebAPI;
-import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
@@ -13,10 +12,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -30,8 +26,6 @@ import javafx.stage.Window;
 import one.jpro.routing.sessionmanager.SessionManager;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
-
-import java.text.NumberFormat;
 
 public class CustomStage extends BorderPane {
 
@@ -385,36 +379,6 @@ public class CustomStage extends BorderPane {
             NavigationView navigationView = new NavigationView(sessionManager);
 
             getChildren().addAll(closeButton, label, navigationView, minButton, maxButton);
-
-            if (!WebAPI.isBrowser() && Boolean.getBoolean("show-cpu-and-memory")) {
-
-                Label memoryLabel = new Label();
-                memoryLabel.getStyleClass().add("memory-label");
-
-                MenuItem runGCItem = new MenuItem("Run Garbage Collection");
-                runGCItem.setOnAction(evt -> Platform.runLater(() -> {
-                    memoryLabel.setText("GC");
-                    Runtime.getRuntime().gc();
-                }));
-
-                ContextMenu menu = new ContextMenu();
-                menu.getItems().add(runGCItem);
-
-                setOnContextMenuRequested(evt -> menu.show(this, evt.getScreenX(), evt.getScreenY()));
-
-                Label cpuLabel = new Label();
-                cpuLabel.getStyleClass().add("cpu-label");
-
-                HBox box = new HBox(memoryLabel, cpuLabel);
-                box.getStyleClass().add("badges");
-
-                label.setGraphic(box);
-                label.setContentDisplay(ContentDisplay.RIGHT);
-                label.setGraphicTextGap(20);
-
-                NumberFormat percentInstance = NumberFormat.getPercentInstance();
-                percentInstance.setMaximumFractionDigits(0);
-            }
         }
 
         public Label getLabel() {
