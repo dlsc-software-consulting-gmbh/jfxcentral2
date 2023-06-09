@@ -3265,6 +3265,7 @@
     -fx-text-fill: -grey-60;
     -fx-cursor: hand;
     -fx-padding: 0 20px 5px 20px;
+    -fx-alignment: top-left;
 }
 
 .tile-view:lg > .content-box > .flip-view .front-box .description {
