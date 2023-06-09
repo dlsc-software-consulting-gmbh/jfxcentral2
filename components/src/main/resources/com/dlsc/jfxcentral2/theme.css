@@ -6842,7 +6842,7 @@
  * IkonDetailView
  */
 .ikon-detail-view {
-    -fx-padding: 10px;
+    -fx-padding: 0px;
     -fx-background-color: #e0e0e0;
     -fx-background-radius: 6px;
     -fx-background-insets: 0px, 1px 0px 1px 0px;
@@ -6853,34 +6853,25 @@
 }
 
 .ikon-detail-view .ikon-preview-wrapper {
-    -size: 120px;
-    -fx-min-width: -size;
-    -fx-pref-width: -size;
-    -fx-max-width: -size;
-    -fx-min-heigth: -size;
-    -fx-pref-height: -size;
-    -fx-max-height: -size;
-}
-
-.ikon-detail-view:md .ikon-preview-wrapper {
-    -size: 80px;
-}
-
-.ikon-detail-view:sm .ikon-preview-wrapper {
-    -size: 65px;
+    -fx-alignment: center-right;
+    -fx-max-width: 120px;
 }
 
 .ikon-detail-view .ikon-preview-wrapper .ikonli-font-icon {
-    -fx-icon-size: 108px;
+    -fx-icon-size: 65px;
     -fx-icon-color: -bright-blue;
 }
 
 .ikon-detail-view:md .ikon-preview-wrapper .ikonli-font-icon {
-    -fx-icon-size: 70px;
+    -fx-icon-size: 50px;
 }
 
 .ikon-detail-view:sm .ikon-preview-wrapper .ikonli-font-icon {
-    -fx-icon-size: 50px;
+    -fx-icon-size: 48px;
+}
+
+.ikon-detail-view.payment-font-detail-view:sm .ikon-preview-wrapper .ikonli-font-icon {
+    -fx-icon-size: 20px;
 }
 
 .ikon-detail-view .ikon-info-grid-pane {
@@ -6889,10 +6880,20 @@
     -fx-alignment: center;
 }
 
+.ikon-detail-view:md-lg .ikon-info-grid-pane {
+    -fx-max-width: 820px;
+}
+
 .ikon-detail-view:sm .ikon-info-grid-pane {
     -fx-hgap: 5px;
     -fx-vgap: 5px;
     -fx-alignment: center;
+    -fx-pref-width: 200px;
+}
+
+.ikon-detail-view .ikon-info-grid-pane .row-box {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
 }
 
 .ikon-detail-view .ikon-info-grid-pane .copy-button {
@@ -6904,14 +6905,14 @@
 
 .ikon-detail-view .ikon-info-grid-pane .text-field {
     -fx-background-color: white;
-    -fx-pref-width: 280px;
+    -fx-pref-width: 260px;
     -fx-text-fill: -grey-100;
     -fx-border-width: 0 0 1px 0;
     -fx-border-color: -grey-10;
 }
 
 .ikon-detail-view:md .ikon-info-grid-pane .text-field {
-    -fx-pref-width: 160px;
+    -fx-pref-width: 120px;
 }
 
 .ikon-detail-view:sm .ikon-info-grid-pane .text-field {
@@ -6920,19 +6921,14 @@
 
 .ikon-detail-view .ikon-info-grid-pane .title {
     -fx-font-family: "Roboto Condensed";
-}
-
-.ikon-detail-view .ikon-info-grid-pane .title-2 {
-    -fx-padding: 0 0 0 50px;
-}
-
-.ikon-detail-view:md .ikon-info-grid-pane .title-2 {
-    -fx-padding: 0 0 0 10px;
+    -fx-pref-width: 82px;
+    -fx-alignment: center-right;
 }
 
 .ikon-detail-view .detail-content {
     -fx-spacing: 50px;
     -fx-alignment: center;
+    -fx-padding: 8px 0;
 }
 
 .ikon-detail-view:md .detail-content {
@@ -6944,9 +6940,9 @@
     -fx-alignment: center;
 }
 
-.ikon-detail-view:sm .right {
-    visibility: hidden;
-}
+/*.ikon-detail-view:sm .right {*/
+/*    visibility: hidden;*/
+/*}*/
 
 /** ----------------------------------------------------------------------------
  * IkonGridView

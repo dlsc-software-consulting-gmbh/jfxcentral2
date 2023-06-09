@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.app;
 
+import com.dlsc.jfxcentral2.components.Spacer;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -18,7 +19,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -301,7 +302,7 @@ public class CustomStage extends BorderPane {
         this.content.set(content);
     }
 
-    class TitleBar extends HBox {
+    class TitleBar extends StackPane {
 
         private final Label label;
 
@@ -315,10 +316,6 @@ public class CustomStage extends BorderPane {
 
             label = new Label();
             label.getStyleClass().add("title");
-            label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-            label.setAlignment(Pos.CENTER);
-            label.setMouseTransparent(true);
-            HBox.setHgrow(label, Priority.ALWAYS);
 
             FontIcon maxIcon = new FontIcon(MaterialDesign.MDI_WINDOW_MAXIMIZE);
             FontIcon restoreIcon = new FontIcon(MaterialDesign.MDI_WINDOW_RESTORE);
@@ -378,7 +375,9 @@ public class CustomStage extends BorderPane {
 
             NavigationView navigationView = new NavigationView(sessionManager);
 
-            getChildren().addAll(closeButton, label, navigationView, minButton, maxButton);
+            HBox frontBox = new HBox(closeButton, new Spacer(), navigationView, minButton, maxButton);
+            frontBox.getStyleClass().add("front-box");
+            getChildren().addAll(label, frontBox);
         }
 
         public Label getLabel() {

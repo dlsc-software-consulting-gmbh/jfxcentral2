@@ -23,9 +23,11 @@
 }
 
 .custom-stage .title-bar {
-    -fx-padding: 5 10 5 10;
-    -fx-alignment: center-left;
     -fx-background-color: #070B32;
+}
+
+.custom-stage .title-bar > .front-box {
+    -fx-padding: 5 10 5 10;
     -fx-spacing: 10;
 }
 
