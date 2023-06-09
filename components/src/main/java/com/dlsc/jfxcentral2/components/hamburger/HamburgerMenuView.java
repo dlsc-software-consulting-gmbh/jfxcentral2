@@ -16,6 +16,7 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
@@ -97,11 +99,22 @@ public class HamburgerMenuView extends PaneBase {
 
         setMaxHeight(Region.USE_PREF_SIZE);
 
-        getMenus().addAll(resourcesMenu, communityMenu, showcases, downloads);
+        sceneProperty().addListener(it -> updateMenuItems(resourcesMenu, communityMenu, showcases, downloads));
 
         refreshMenus();
 
         getMenus().addListener((ListChangeListener<HamburgerMenu>) change -> refreshMenus());
+    }
+
+    private void updateMenuItems(HamburgerMenu resourcesMenu, HamburgerMenu communityMenu, HamburgerMenu showcases, HamburgerMenu downloads) {
+        Scene scene = getScene();
+        if (scene != null) {
+            if (WebAPI.getWebAPI(scene).isMobile()) {
+                getMenus().addAll(resourcesMenu, communityMenu, showcases);
+            } else {
+                getMenus().addAll(resourcesMenu, communityMenu, showcases, downloads);
+            }
+        }
     }
 
     private void refreshMenus() {

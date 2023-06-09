@@ -91,7 +91,11 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
         maybeAddBox(modelObject, Video.class, VideosDetailsBox::new, boxes);
         maybeAddBox(modelObject, Blog.class, BlogsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Tutorial.class, TutorialsDetailsBox::new, boxes);
-        maybeAddBox(modelObject, Download.class, DownloadsDetailsBox::new, boxes);
+
+        if (!isMobile()) {
+            maybeAddBox(modelObject, Download.class, DownloadsDetailsBox::new, boxes);
+        }
+
         maybeAddBox(modelObject, Tip.class, TipsAndTricksDetailsBox::new, boxes);
         maybeAddBox(modelObject, RealWorldApp.class, AppsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Person.class, PersonsDetailsBox::new, boxes);
