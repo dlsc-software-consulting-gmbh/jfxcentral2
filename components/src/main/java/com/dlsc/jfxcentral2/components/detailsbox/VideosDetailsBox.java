@@ -15,7 +15,7 @@ public class VideosDetailsBox extends DetailsBoxBase<Video> {
     public VideosDetailsBox() {
         getStyleClass().addAll("videos-details-box");
         setTitle("VIDEOS");
-        setIkon(IkonUtil.video);
+        setIkon(IkonUtil.getModelIkon(Video.class));
         setMaxItemsPerPage(3);
         setExtrasProvider(VideoViewFactory::createVideoViewNode);
     }

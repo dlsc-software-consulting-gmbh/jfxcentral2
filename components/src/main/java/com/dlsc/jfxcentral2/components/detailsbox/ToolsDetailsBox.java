@@ -11,7 +11,7 @@ public class ToolsDetailsBox extends DetailsBoxBase<Tool> {
     public ToolsDetailsBox() {
         getStyleClass().add("tools-details-box");
         setTitle("TOOLS");
-        setIkon(IkonUtil.tool);
+        setIkon(IkonUtil.getModelIkon(Tool.class));
         setMaxItemsPerPage(3);
         setHomepageUrlProvider(detailsObject -> {
             String url = detailsObject.getHomepage();

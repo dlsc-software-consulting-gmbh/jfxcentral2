@@ -16,8 +16,8 @@ public class LibrariesDetailsBox extends DetailsBoxBase<Library> {
     public LibrariesDetailsBox() {
         getStyleClass().add("libraries-details-box");
         setTitle("LIBRARIES");
-        setIkon(IkonUtil.library);
-        setMaxItemsPerPage(3);
+        setIkon(IkonUtil.getModelIkon(Library.class));
+        setMaxItemsPerPage(5);
         setHomepageUrlProvider(library -> {
             String url = library.getHomepage();
             if (StringUtils.isBlank(url)) {

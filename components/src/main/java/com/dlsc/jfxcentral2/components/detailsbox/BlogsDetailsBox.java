@@ -18,7 +18,7 @@ public class BlogsDetailsBox extends DetailsBoxBase<Blog> {
         getStyleClass().add("blogs-details-box");
 
         setTitle("BLOGS");
-        setIkon(IkonUtil.blog);
+        setIkon(IkonUtil.getModelIkon(Blog.class));
         setVisitUrlProvider(Blog::getUrl);
     }
 

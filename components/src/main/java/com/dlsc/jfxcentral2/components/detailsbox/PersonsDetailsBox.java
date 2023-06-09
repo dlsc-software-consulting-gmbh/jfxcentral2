@@ -15,7 +15,7 @@ public class PersonsDetailsBox extends DetailsBoxBase<Person> {
         getStyleClass().add("persons-details-box");
 
         setTitle("PEOPLE");
-        setIkon(IkonUtil.person);
+        setIkon(IkonUtil.getModelIkon(Person.class));
         setMaxItemsPerPage(Integer.MAX_VALUE);
         setOnHomepage(Person::getWebsite);
     }

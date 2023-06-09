@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Download;
-import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import javafx.scene.Node;
@@ -17,7 +16,7 @@ public class DownloadsDetailsBox extends DetailsBoxBase<Download> {
     public DownloadsDetailsBox() {
         getStyleClass().add("downloads-details-box");
         setTitle("DOWNLOADS");
-        setIkon(IkonUtil.download);
+        setIkon(IkonUtil.getModelIkon(Download.class));
         setMaxItemsPerPage(3);
     }
 

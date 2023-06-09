@@ -17,7 +17,7 @@ public class TutorialsDetailsBox extends DetailsBoxBase<Tutorial> {
     public TutorialsDetailsBox() {
         getStyleClass().add("tutorials-details-box");
         setTitle("TUTORIALS");
-        setIkon(IkonUtil.tutorial);
+        setIkon(IkonUtil.getModelIkon(Tutorial.class));
         setVisitUrlProvider(Tutorial::getUrl);
     }
 

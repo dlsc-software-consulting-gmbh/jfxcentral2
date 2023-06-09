@@ -11,7 +11,7 @@ public class AppsDetailsBox extends DetailsBoxBase<RealWorldApp> {
     public AppsDetailsBox() {
         getStyleClass().add("apps-details-box");
         setTitle("APPS");
-        setIkon(IkonUtil.app);
+        setIkon(IkonUtil.getModelIkon(RealWorldApp.class));
         setMaxItemsPerPage(5);
         setHomepageUrlProvider(RealWorldApp::getUrl);
     }
