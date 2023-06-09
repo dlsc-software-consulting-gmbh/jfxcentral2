@@ -31,7 +31,7 @@ public class IkonDetailView extends DetailView<Ikon> {
         HBox.setHgrow(flowPane, Priority.ALWAYS);
 
         addRow(flowPane, "Icon Literal:", item.getDescription());
-        addRow(flowPane, "Css Code:", "-fx-icon-code: " + item.getDescription());
+        addRow(flowPane, "CSS Code:", "-fx-icon-code: " + item.getDescription());
         addRow(flowPane, "Java Code:", item.getClass().getSimpleName() + "." + fontIcon.getIconCode());
         addRow(flowPane, "Unicode:", "\\u" + Integer.toHexString(item.getCode()));
         HBox detailContent = new HBox(previewPane, flowPane);
