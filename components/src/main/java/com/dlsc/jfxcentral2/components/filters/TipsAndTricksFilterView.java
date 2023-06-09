@@ -8,7 +8,10 @@ public class TipsAndTricksFilterView extends SimpleSearchFilterView<Tip> {
         getStyleClass().add("tips-filter-view");
         setSearchPromptText("Search for tips and tricks");
 
-        setOnSearch(text -> tip -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(tip.getName(), text));
+        setOnSearch(text -> tip -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(tip.getName(), text)
+                || StringUtils.containsIgnoreCase(tip.getDescription(), text)
+        );
 
     }
 }

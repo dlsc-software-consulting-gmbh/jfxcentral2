@@ -5696,6 +5696,7 @@
     -fx-border-color: -grey-10;
     -fx-border-width: 0 0 1px 0;
     -fx-padding: 0 0 6px 0;
+    -fx-alignment: center-right;
 }
 
 .blog-overview-box .posts-box .custom-image-view {
@@ -5710,6 +5711,7 @@
 
 .blog-overview-box .posts-box > .post-view > .title-label {
     -fx-font-size: 1.2em;
+    -fx-graphic-text-gap: 10px;
 }
 
 .blog-overview-box .posts-box > .post-view:hover > .title-label {

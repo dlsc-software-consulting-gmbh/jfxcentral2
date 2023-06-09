@@ -9,8 +9,9 @@ public class DownloadsFilterView extends SimpleSearchFilterView<Download> {
         getStyleClass().add("companies-filter-view");
         setSearchPromptText("Search for a download");
 
-        setOnSearch(text -> download -> StringUtils.containsIgnoreCase(download.getName(), text));
-
+        setOnSearch(text -> download -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(download.getName(), text)
+                || StringUtils.containsIgnoreCase(download.getDescription(), text));
 
     }
 }

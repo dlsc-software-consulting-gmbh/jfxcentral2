@@ -30,8 +30,9 @@ public class PeopleFilterView extends SimpleSearchFilterView<Person> {
 
         getExtraNodes().add(badgeBox);
 
-        setOnSearch(text -> person -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(person.getName(), text));
-
+        setOnSearch(text -> person -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(person.getName(), text)
+                || StringUtils.containsIgnoreCase(person.getDescription(), text));
 
 
     }

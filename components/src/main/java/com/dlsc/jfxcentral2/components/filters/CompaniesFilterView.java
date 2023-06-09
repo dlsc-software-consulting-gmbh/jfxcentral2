@@ -9,6 +9,8 @@ public class CompaniesFilterView extends SimpleSearchFilterView<Company> {
         getStyleClass().add("companies-filter-view");
         setSearchPromptText("Search for a company");
 
-        setOnSearch(text -> company -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(company.getName(), text));
+        setOnSearch(text -> company -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(company.getName(), text)
+                || StringUtils.containsIgnoreCase(company.getDescription(), text));
     }
 }

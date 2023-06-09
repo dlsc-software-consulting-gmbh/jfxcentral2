@@ -8,7 +8,10 @@ public class ToolsFilterView extends SimpleSearchFilterView<Tool> {
         getStyleClass().add("tools-filter-view");
         setSearchPromptText("Search for a tool");
 
-        setOnSearch(text -> tool -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(tool.getName(), text));
+        setOnSearch(text -> tool -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(tool.getName(), text)
+                || StringUtils.containsIgnoreCase(tool.getDescription(), text)
+        );
 
     }
 }
