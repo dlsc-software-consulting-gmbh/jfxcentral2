@@ -21,7 +21,6 @@ public class LibraryTileView extends SimpleTileView<Library> {
         saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(library));
 
         setTitle(library.getName());
-        setDescription(library.getDescription());
 
         imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
     }

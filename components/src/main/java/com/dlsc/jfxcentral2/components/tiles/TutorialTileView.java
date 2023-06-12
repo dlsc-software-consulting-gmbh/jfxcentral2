@@ -12,10 +12,8 @@ public class TutorialTileView extends PreviewTileView<Tutorial> {
         super(tutorial);
         getStyleClass().add("tutorial-tile-view");
         setButton1Text("DISCOVER");
-        setDescription(tutorial.getSummary());
         setButton1Graphic(new FontIcon(IkonUtil.link));
         imageProperty().bind(ImageManager.getInstance().tutorialImageLargeProperty(tutorial));
         LinkUtil.setLink(getButton1(), "/tutorials/" + tutorial.getId());
     }
-
 }
