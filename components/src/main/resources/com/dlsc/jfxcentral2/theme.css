@@ -890,11 +890,11 @@
 }
 
 .openjfx-project-view:sm .title {
-    -fx-font-size: 34px;
+    -fx-font-size: 24 px;
 }
 
 .openjfx-project-view .fx-logo {
-    -fx-image: url("images/fxlogo@3x.png");
+    -fx-image: url("images/fxlogo.png");
 }
 
 .openjfx-project-view:lg .fx-logo {
@@ -1034,8 +1034,10 @@
 
 .openjfx-project-view:lg > .top-pane > .image {
     -fx-pref-width: 635px;
-    -fx-pref-height: 396px;
-    -fx-translate-y: 198px;
+    -fx-min-height: 438px;
+    -fx-translate-y: 158px;
+    -fx-background-size: 635px 438px;
+    -fx-background-position: 0 26;
 }
 
 .openjfx-project-view:lg > .top-pane > .title-vbox {
@@ -1043,6 +1045,7 @@
     -fx-pref-height: 310px;
     -fx-padding: 70px 20px;
     -fx-translate-x: 221px;
+    -fx-spacing: 3px;
 }
 
 .openjfx-project-view:lg > .top-pane .details-vbox {
@@ -1065,14 +1068,17 @@
 .openjfx-project-view:md > .top-pane > .image {
     -fx-pref-width: 635px;
     -fx-pref-height: 551px;
-    -fx-translate-y: 155px;
+    -fx-translate-y: 156px;
+    -fx-background-size: 635px 551px;
+    -fx-background-position: -12px 0;
 }
 
 .openjfx-project-view:md > .top-pane > .title-vbox {
     -fx-pref-width: 283px;
     -fx-pref-height: 310px;
-    -fx-padding: 70px 20px;
+    -fx-padding: 70px 20px 60px 20px;
     -fx-translate-x: 30px;
+    -fx-spacing: 9px;
 }
 
 .openjfx-project-view:md > .top-pane .details-vbox {
@@ -1086,7 +1092,12 @@
 }
 
 .openjfx-project-view:sm > .top-pane {
-    -fx-padding: 70px 30px 80px 30px;
+    -fx-min-width: 317px;
+    -fx-pref-width: 317px;
+    -fx-max-width: 317px;
+    -fx-min-height: 1105px;
+    -fx-pref-height: 1105px;
+    -fx-max-height: 1105px;
 }
 
 .openjfx-project-view:sm  > .top-pane > .details-vbox {
@@ -1097,7 +1108,7 @@
     -fx-background-color: -bright-blue;
     -fx-min-height: 226px;
     -fx-padding: 50px 20px;
-    -fx-spacing: 2px;
+    -fx-spacing: 24px;
 }
 
 .openjfx-project-view:sm > .top-pane  > .details-vbox >  .description{
