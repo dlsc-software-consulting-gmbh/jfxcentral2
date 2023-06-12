@@ -290,7 +290,8 @@ public class SearchFilterView<T> extends PaneBase {
         filterGroup.filterItems.stream()
                 .filter(FilterItem::isApplied).findFirst()
                 .ifPresentOrElse(it -> comboBox.getSelectionModel().select(it), () -> comboBox.getSelectionModel().selectFirst());
-
+        comboBox.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(comboBox, Priority.ALWAYS);
         return comboBox;
     }
 

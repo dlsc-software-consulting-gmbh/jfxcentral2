@@ -31,8 +31,8 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 public class CustomStage extends BorderPane {
 
     private static final int OFFSET = 5;
-    public static final double MIN_STAGE_WIDTH = 850;
-    public static final double MIN_STAGE_HEIGHT = 600;
+    public static final double MIN_STAGE_WIDTH = 350;
+    public static final double MIN_STAGE_HEIGHT = 300;
 
     private double startX;
     private double startY;

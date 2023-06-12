@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.components;
 
-
 import com.dlsc.jfxcentral2.utils.JFXCentralUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -92,32 +91,34 @@ public class OpenJFXProjectView extends PaneBase {
     }
 
     protected void layoutBySize() {
-        VBox detailsVBox;
+        VBox detailsVBox = new VBox();
+        detailsVBox.getStyleClass().add("details-vbox");
+
         if (isLarge()) {
             HBox buttonsBox = new HBox(visitHomePageButton, reportAnIssueButton);
             buttonsBox.getStyleClass().add("buttons-box");
-            detailsVBox = new VBox(description, textFlow, buttonsBox);
-            detailsVBox.getStyleClass().add("details-vbox");
-            getChildren().setAll(backgroundVBox, imageRegion, titleVBox, detailsVBox);
-            setAlignment(detailsVBox, Pos.BOTTOM_LEFT);
-        }else{
+            detailsVBox.getChildren().setAll(description, textFlow, buttonsBox);
+            Pane pane = new Pane(imageRegion, titleVBox, detailsVBox);
+            pane.getStyleClass().add("top-pane");
+            getChildren().setAll(backgroundVBox, pane);
+        } else {
             VBox buttonsBox = new VBox(visitHomePageButton, reportAnIssueButton);
             buttonsBox.getStyleClass().add("buttons-box");
-            detailsVBox = new VBox(description, textFlow, buttonsBox);
-            detailsVBox.getStyleClass().add("details-vbox");
-            setAlignment(detailsVBox, Pos.BOTTOM_LEFT);
-            if(isMedium()){
-                getChildren().setAll(backgroundVBox, imageRegion, titleVBox, detailsVBox);
-            }else{
+            detailsVBox.getChildren().setAll(description, textFlow, buttonsBox);
+            if (isMedium()) {
+                Pane pane = new Pane(imageRegion, titleVBox, detailsVBox);
+                pane.getStyleClass().add("top-pane");
+                getChildren().setAll(backgroundVBox, pane);
+            } else {
                 //small:
-                VBox columnVBox = new VBox(titleVBox, detailsVBox);
-                columnVBox.getStyleClass().add("column-vbox");
-                setAlignment(columnVBox, Pos.TOP_CENTER);
-                getChildren().setAll(backgroundVBox, columnVBox);
+                detailsVBox.getChildren().add(0, titleVBox);
+                StackPane topPane = new StackPane(detailsVBox);
+                topPane.getStyleClass().add("top-pane");
+                StackPane.setAlignment(detailsVBox, Pos.TOP_CENTER);
+                topPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+                getChildren().setAll(backgroundVBox, topPane);
             }
         }
-        detailsVBox.getStyleClass().add("details-vbox");
-        setAlignment(detailsVBox, Pos.BOTTOM_LEFT);
     }
 
     private final ObjectProperty<Runnable> onVisitHomePage = new SimpleObjectProperty<>(this, "onVisitHomePage");

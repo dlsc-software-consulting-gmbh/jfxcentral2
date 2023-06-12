@@ -6,6 +6,7 @@ import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 
@@ -37,6 +38,16 @@ public class VideoViewFactory {
         webView.sceneProperty().addListener(it -> {
             if (webView.getScene() == null) {
                 webView.getEngine().loadContent("empty");
+            }
+        });
+
+        webView.setOnScroll(event -> {
+            if (event.getDeltaY() != 0) {
+                event.consume();
+                ScrollPane scrollPane = NodeUtil.findScrollPane(webView);
+                if (scrollPane != null) {
+                    scrollPane.setVvalue(scrollPane.getVvalue() - event.getDeltaY() / scrollPane.getHeight());
+                }
             }
         });
 
