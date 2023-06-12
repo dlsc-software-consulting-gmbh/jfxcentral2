@@ -7,7 +7,6 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Region;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -25,59 +24,49 @@ public class SocialLinksView extends FlowPane {
     public SocialLinksView() {
         getStyleClass().add("social-links-view");
 
-        setMaxWidth(Region.USE_PREF_SIZE);
-
-        twitterLinkBtn = new Button("Twitter", new FontIcon(IkonUtil.twitter));
+        twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
         twitterLinkBtn.getStyleClass().add("twitter-link-btn");
         twitterLinkBtn.visibleProperty().bind(twitterUrlProperty().isNotEmpty());
         twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
         twitterUrl.addListener(it -> updateLink(twitterLinkBtn, getTwitterUrl()));
 
-        redditLinkBtn = new Button("Reddit", new FontIcon(IkonUtil.reddit));
+        redditLinkBtn = new Button("REDDIT", new FontIcon(IkonUtil.reddit));
         redditLinkBtn.getStyleClass().add("reddit-link-btn");
         redditLinkBtn.visibleProperty().bind(redditUrlProperty().isNotEmpty());
         redditLinkBtn.managedProperty().bind(redditLinkBtn.visibleProperty());
         redditUrl.addListener(it -> updateLink(redditLinkBtn, getRedditUrl()));
 
-        linkedInLinkBtn = new Button("LinkedIn", new FontIcon(IkonUtil.linkedin));
+        linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(IkonUtil.linkedin));
         linkedInLinkBtn.getStyleClass().add("linkedin-link-btn");
         linkedInLinkBtn.visibleProperty().bind(linkedInUrlProperty().isNotEmpty());
         linkedInLinkBtn.managedProperty().bind(linkedInLinkBtn.visibleProperty());
         linkedInUrl.addListener(it -> updateLink(linkedInLinkBtn, getLinkedInUrl()));
 
-        websiteLinkBtn = new Button("Website", new FontIcon(IkonUtil.website));
+        websiteLinkBtn = new Button("WEBSITE", new FontIcon(IkonUtil.website));
         websiteLinkBtn.getStyleClass().add("website-link-btn");
         websiteLinkBtn.visibleProperty().bind(websiteUrlProperty().isNotEmpty());
         websiteLinkBtn.managedProperty().bind(websiteLinkBtn.visibleProperty());
         websiteUrl.addListener(it -> updateLink(websiteLinkBtn, getWebsiteUrl()));
 
-        githubLinkBtn = new Button("GitHub", new FontIcon(IkonUtil.github));
+        githubLinkBtn = new Button("GITHUB", new FontIcon(IkonUtil.github));
         githubLinkBtn.getStyleClass().add("github-link-btn");
         githubLinkBtn.visibleProperty().bind(githubUrlProperty().isNotEmpty());
         githubLinkBtn.managedProperty().bind(githubLinkBtn.visibleProperty());
         githubUrl.addListener(it -> updateLink(githubLinkBtn, getGithubUrl()));
 
-        facebookLinkBtn = new Button("Facebook", new FontIcon(IkonUtil.facebook));
+        facebookLinkBtn = new Button("FACEBOOK", new FontIcon(IkonUtil.facebook));
         facebookLinkBtn.getStyleClass().add("facebook-link-btn");
         facebookLinkBtn.visibleProperty().bind(facebookUrlProperty().isNotEmpty());
         facebookLinkBtn.managedProperty().bind(facebookLinkBtn.visibleProperty());
         facebookUrl.addListener(it -> updateLink(facebookLinkBtn, getFacebookUrl()));
 
-        mailLinkBtn = new Button("Mail", new FontIcon(IkonUtil.mail));
+        mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
         mailLinkBtn.getStyleClass().add("mail-link-btn");
         mailLinkBtn.visibleProperty().bind(mailUrlProperty().isNotEmpty());
         mailLinkBtn.managedProperty().bind(mailLinkBtn.visibleProperty());
         mailUrl.addListener(it -> updateLink(mailLinkBtn, getMailUrl()));
 
         InvalidationListener updateViewListener = it -> updateView();
-
-        twitterLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
-        linkedInLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
-        websiteLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
-        githubLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
-        mailLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
-        facebookLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
-        redditLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
 
         twitterUrl.addListener(updateViewListener);
         linkedInUrl.addListener(updateViewListener);

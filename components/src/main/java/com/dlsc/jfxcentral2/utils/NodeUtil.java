@@ -94,7 +94,7 @@ public class NodeUtil {
         }
     }
 
-    private static ScrollPane findScrollPane(Node node) {
+    public static ScrollPane findScrollPane(Node node) {
         Parent parent = node.getParent();
         do {
             if (parent instanceof ScrollPane) {
