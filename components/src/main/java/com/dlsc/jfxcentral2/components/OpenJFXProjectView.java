@@ -115,7 +115,7 @@ public class OpenJFXProjectView extends PaneBase {
                 StackPane topPane = new StackPane(detailsVBox);
                 topPane.getStyleClass().add("top-pane");
                 StackPane.setAlignment(detailsVBox, Pos.TOP_CENTER);
-                topPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+                StackPane.setAlignment(topPane, Pos.TOP_CENTER);
                 getChildren().setAll(backgroundVBox, topPane);
             }
         }
