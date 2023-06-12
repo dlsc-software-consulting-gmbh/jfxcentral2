@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral2.components.PaneBase;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -25,6 +26,8 @@ public class CategoryHeader extends PaneBase {
     private static Image defaultLargeBgImage;
     private static Image defaultMediumBgImg;
     private static Image defaultSmallBgImg;
+    private double xOffset;
+    private double yOffset;
 
     public CategoryHeader() {
         getStyleClass().add("category-header");
@@ -55,6 +58,19 @@ public class CategoryHeader extends PaneBase {
          */
         contentProperty().addListener((ob, ov, nv) -> getChildren().setAll(overlay, Objects.requireNonNullElse(getContent(), label)));
         sizeProperty().addListener((ob, ov, nv) -> getChildren().setAll(overlay, Objects.requireNonNullElse(getContent(), label)));
+
+
+        if (!WebAPI.isBrowser()) {
+            setOnMousePressed(event -> {
+                xOffset = getScene().getWindow().getX() - event.getScreenX();
+                yOffset = getScene().getWindow().getY() - event.getScreenY();
+            });
+
+            setOnMouseDragged(event -> {
+                getScene().getWindow().setX(event.getScreenX() + xOffset);
+                getScene().getWindow().setY(event.getScreenY() + yOffset);
+            });
+        }
     }
 
     private Background createImageBackground(Image image) {
