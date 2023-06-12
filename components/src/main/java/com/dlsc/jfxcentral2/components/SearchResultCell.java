@@ -16,7 +16,6 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
-import com.jpro.webapi.WebAPI;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -53,6 +52,13 @@ public class SearchResultCell extends ListCell<ModelObject> {
         setPrefWidth(0);
 
         hBox.visibleProperty().bind(itemProperty().isNotNull());
+        itemProperty().addListener(it -> {
+            ModelObject item = getItem();
+            if (item != null) {
+                LinkUtil.setLink(this, PageUtil.getLink(item));
+            }
+        });
+
         setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }
@@ -65,17 +71,6 @@ public class SearchResultCell extends ListCell<ModelObject> {
             titleLabel.setText(createTitle(item));
             subtitleLabel.setText(createSubTitle(item));
             fontIcon.setIconCode(IkonUtil.getModelIkon(item));
-
-            if (WebAPI.isBrowser()) {
-                LinkUtil.setLink(this, PageUtil.getLink(item));
-            } else {
-
-                // work around ... setLink() should work after a fix from Florian
-                setOnMouseClicked(evt -> {
-                    getScene().getWindow().hide();
-                    LinkUtil.getSessionManager(this).gotoURL(PageUtil.getLink(item));
-                });
-            }
         }
     }
 
