@@ -13,5 +13,6 @@ public enum View {
     BOOKS,
     VIDEOS,
     DOWNLOADS,
-    TIPS
+    TIPS,
+    ICONS;
 }

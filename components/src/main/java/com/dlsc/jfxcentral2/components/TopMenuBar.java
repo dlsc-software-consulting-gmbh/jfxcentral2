@@ -81,6 +81,7 @@ public class TopMenuBar extends PaneBase {
         dukeView.getStyleClass().add("duke-image");
 
         searchField = new SearchField<>();
+        searchField.getPopup().setPrefWidth(600);
         searchField.getEditor().setFocusTraversable(false);
         searchField.setPromptText("Search");
         searchField.setCellFactory(listView -> new SearchResultCell());
