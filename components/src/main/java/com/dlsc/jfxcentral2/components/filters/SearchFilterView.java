@@ -170,8 +170,10 @@ public class SearchFilterView<T> extends PaneBase {
             contentBox.visibleProperty().bind(collapsibleButton.selectedProperty());
             VBox contentBoxWrapper = new VBox(collapsibleButton, contentBox);
             contentBoxWrapper.getStyleClass().add("content-box-wrapper");
+            contentBoxWrapper.setMaxWidth(Double.MAX_VALUE);
             getChildren().setAll(contentBoxWrapper);
         } else {
+            contentBox.setMaxWidth(Double.MAX_VALUE);
             getChildren().setAll(contentBox);
         }
 

@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.News;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
@@ -91,7 +92,9 @@ public interface IkonUtil {
             return linkOfTheWeek;
         } else if (clazz == IkonliPack.class) {
             return icons;
-        } else {
+        } else if (clazz == News.class) {
+            return news;
+        }else {
             return null;
         }
     }
