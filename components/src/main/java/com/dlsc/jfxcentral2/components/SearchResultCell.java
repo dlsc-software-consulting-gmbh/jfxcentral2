@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.News;
@@ -105,6 +106,8 @@ public class SearchResultCell extends ListCell<ModelObject> {
             return "News";
         } else if (clazz.equals(Post.class)) {
             return "Post";
+        } else if (clazz.equals(IkonliPack.class)) {
+            return "Icon Pack";
         } else {
             return "Item";
         }
@@ -125,6 +128,8 @@ public class SearchResultCell extends ListCell<ModelObject> {
             return "";
         } else if (item instanceof Download) {
             return "Download";
+        } else if (item instanceof IkonliPack) {
+            return item.getDescription();
         } else {
             return item.getSummary();
         }
