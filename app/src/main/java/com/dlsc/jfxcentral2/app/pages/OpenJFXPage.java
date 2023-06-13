@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
+import simplefx.experimental.parts.FXFuture;
 
 public class OpenJFXPage extends PageBase {
 
@@ -49,15 +50,21 @@ public class OpenJFXPage extends PageBase {
         pullRequestsView.sizeProperty().bind(sizeProperty());
 
         // data
-        ObservableList<PullRequest> itemsList = FXCollections.observableArrayList(DataRepository2.getInstance().loadPullRequests());
+        FXFuture.runBackground(() -> {
+            ObservableList<PullRequest> itemsList = FXCollections.observableArrayList(DataRepository2.getInstance().loadPullRequests());
 
-        FilteredList<PullRequest> filteredList = new FilteredList<>(itemsList);
-        filteredList.predicateProperty().bind(pullRequestsFilterView.predicateProperty());
+            FilteredList<PullRequest> filteredList = new FilteredList<>(itemsList);
+            filteredList.predicateProperty().bind(pullRequestsFilterView.predicateProperty());
 
-        SortedList<PullRequest> sortedList = new SortedList<>(filteredList);
-        sortedList.comparatorProperty().bind(pullRequestsFilterView.comparatorProperty());
+            SortedList<PullRequest> sortedList = new SortedList<>(filteredList);
+            sortedList.comparatorProperty().bind(pullRequestsFilterView.comparatorProperty());
 
-        pullRequestsView.setPullRequests(sortedList);
+            return sortedList;
+        }).map(result -> {
+            pullRequestsView.setPullRequests(result);
+            return null;
+        });
+
 
         // features
         FeaturesContainer featuresContainer = new FeaturesContainer();

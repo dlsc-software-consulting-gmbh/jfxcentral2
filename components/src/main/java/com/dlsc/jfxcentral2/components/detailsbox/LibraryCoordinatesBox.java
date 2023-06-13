@@ -2,8 +2,8 @@ package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Coordinates;
-import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
+import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.NameProvider;
@@ -26,6 +26,7 @@ import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
+import simplefx.experimental.parts.FXFuture;
 
 public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
 
@@ -86,14 +87,15 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         String artifactId = coordinates.getArtifactId();
 
         if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
-            StringProperty versionProperty = DataRepository2.getInstance().getArtifactVersion(coordinates);
-            repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
-                if (getBuildTool().equals(BuildTool.MAVEN)) {
-                    return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + versionProperty.get() + "</version>\n</dependency>";
-                }
-                return "dependencies {\n    implementation '" + groupId + ":" + artifactId + ":" + versionProperty.get() + "'\n}";
-            }, versionProperty, buildTool));
-
+            FXFuture.runBackground(() -> DataRepository2.getInstance().getArtifactVersion(coordinates)).map(property -> {
+                repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
+                    if (getBuildTool().equals(BuildTool.MAVEN)) {
+                        return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + property.get() + "</version>\n</dependency>";
+                    }
+                    return "dependencies {\n    implementation '" + groupId + ":" + artifactId + ":" + property.get() + "'\n}";
+                }, property, buildTool));
+                return null;
+            });
         } else {
             repositoryCoordinatesLabel.textProperty().unbind();
         }
