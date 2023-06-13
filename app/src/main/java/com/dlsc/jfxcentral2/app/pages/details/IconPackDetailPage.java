@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
 import org.kordamp.ikonli.Ikon;
 
@@ -35,10 +36,14 @@ public class IconPackDetailPage extends DetailsPageBase<IkonliPack> {
         FilteredList<Ikon> filteredList = new FilteredList<>(IkonliPackUtil.getInstance().getIkonList(ikonliPack));
         filteredList.predicateProperty().bind(filter.predicateProperty());
 
+        //sort
+        SortedList<Ikon> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(filter.comparatorProperty());
+
         // grid view
         IkonGridView gridView = new IkonGridView();
         gridView.sizeProperty().bind(sizeProperty());
-        gridView.setItems(filteredList);
+        gridView.setItems(sortedList);
 
         // strip view
         StripView stripView = new StripView(gridView);

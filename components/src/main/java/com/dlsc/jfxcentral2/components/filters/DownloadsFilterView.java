@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 public class DownloadsFilterView extends SimpleSearchFilterView<Download> {
 
     public DownloadsFilterView() {
-        getStyleClass().add("companies-filter-view");
+        getStyleClass().add("downloads-filter-view");
         setSearchPromptText("Search for a download");
 
         setOnSearch(text -> download -> StringUtils.isBlank(text)

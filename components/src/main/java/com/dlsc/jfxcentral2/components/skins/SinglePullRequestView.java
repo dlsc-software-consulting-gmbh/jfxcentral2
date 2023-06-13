@@ -3,10 +3,7 @@ package com.dlsc.jfxcentral2.components.skins;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral2.components.AvatarView;
-import com.dlsc.jfxcentral2.model.Size;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.geometry.Pos;
+import com.dlsc.jfxcentral2.components.PaneBase;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -21,22 +18,24 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
-public class SinglePullRequestView extends HBox {
+public class SinglePullRequestView extends PaneBase {
 
     private final Label titleLabel = new Label();
     private final Label summaryLabel = new Label();
     private final Label statusLabel = new Label();
     private final HBox labelBox = new HBox();
+    private final HBox contentBox = new HBox();
     private final AvatarView photoView = new AvatarView();
     private final DateTimeFormatter dateTimeFormatter;
     private final VBox vBox = new VBox();
 
     public SinglePullRequestView(PullRequest pr) {
         getStyleClass().add("single-pull-request-view");
+        contentBox.getStyleClass().add("content-box");
+        getChildren().setAll(contentBox);
+        contentBox.setMinHeight(Region.USE_PREF_SIZE);
 
         dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault());
-
-        setPrefWidth(0);
 
         photoView.visibleProperty().bind(photoView.imageProperty().isNotNull());
         photoView.managedProperty().bind(photoView.imageProperty().isNotNull());
@@ -50,9 +49,6 @@ public class SinglePullRequestView extends HBox {
 
         vBox.getStyleClass().add("vbox");
         HBox.setHgrow(vBox, Priority.ALWAYS);
-
-        HBox hBox = new HBox();
-        hBox.getStyleClass().add("hbox");
 
         labelBox.getChildren().clear();
 
@@ -76,6 +72,7 @@ public class SinglePullRequestView extends HBox {
                 statusLabel.getStyleClass().add("closed");
             }
         }
+        statusLabel.setMinWidth(Region.USE_PREF_SIZE);
 
         pr.getLabels().forEach(githubLabel -> {
             Label label = new Label(githubLabel.getName());
@@ -83,41 +80,40 @@ public class SinglePullRequestView extends HBox {
             labelBox.getChildren().add(label);
         });
 
-        sizeProperty().addListener(it -> updateView());
-        updateView();
+        sizeProperty().addListener(it -> layoutBySize());
+        layoutBySize();
 
         LinkUtil.setExternalLink(this, pr.getHtmlUrl());
     }
 
-    private void updateView() {
-        if (getSize().equals(Size.SMALL)) {
+    @Override
+    protected void layoutBySize() {
+        if (isSmall()) {
             titleLabel.setWrapText(true);
             titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+            titleLabel.setGraphic(null);
             summaryLabel.setWrapText(true);
             summaryLabel.setMinHeight(Region.USE_PREF_SIZE);
-            vBox.getChildren().setAll(statusLabel, titleLabel, summaryLabel, labelBox);
-            getChildren().setAll(photoView, vBox);
-            setAlignment(Pos.TOP_LEFT);
+            HBox badgeBox = new HBox(statusLabel, labelBox);
+            badgeBox.getStyleClass().add("badge-box");
+            vBox.getChildren().setAll(titleLabel, badgeBox, summaryLabel);
+            contentBox.getChildren().setAll(photoView, vBox);
+        } else if (isMedium()) {
+            titleLabel.setGraphic(null);
+            titleLabel.setWrapText(true);
+            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+            vBox.getChildren().setAll(titleLabel, summaryLabel);
+            HBox badgeBox = new HBox(labelBox, statusLabel);
+            labelBox.setMinWidth(Region.USE_PREF_SIZE);
+            badgeBox.getStyleClass().add("badge-box");
+            contentBox.getChildren().setAll(photoView, vBox, badgeBox);
         } else {
             titleLabel.setGraphic(labelBox);
+            titleLabel.setWrapText(true);
+            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
             vBox.getChildren().setAll(titleLabel, summaryLabel);
-            getChildren().setAll(photoView, vBox, statusLabel);
-            setAlignment(Pos.CENTER_LEFT);
+            contentBox.getChildren().setAll(photoView, vBox, statusLabel);
         }
-    }
-
-    private final ObjectProperty<Size> size = new SimpleObjectProperty<>(this, "size", Size.LARGE);
-
-    public Size getSize() {
-        return size.get();
-    }
-
-    public ObjectProperty<Size> sizeProperty() {
-        return size;
-    }
-
-    public void setSize(Size size) {
-        this.size.set(size);
     }
 
     private String createTimeString(String timeString) {
