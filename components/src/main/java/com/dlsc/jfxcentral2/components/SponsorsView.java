@@ -53,6 +53,14 @@ public class SponsorsView extends ControlBase {
                 new SponsorsView.Sponsor(
                         "Hydraulic",
                         getClass().getResource("logos/hydraulic.png").toExternalForm(),
+                        "https://www.hydraulic.dev/"),
+                new SponsorsView.Sponsor(
+                        "Senapt",
+                        getClass().getResource("logos/senapt.png").toExternalForm(),
+                        "https://www.hydraulic.dev/"),
+                new SponsorsView.Sponsor(
+                        "Tomato Energy",
+                        getClass().getResource("logos/tomato_energy.png").toExternalForm(),
                         "https://www.hydraulic.dev/"));
     }
 
