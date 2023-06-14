@@ -18,7 +18,6 @@ import one.jpro.routing.LinkUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class SponsorsViewSkin extends ControlBaseSkin<SponsorsView> {
     private final GridPane gridPane;
@@ -40,7 +39,7 @@ public class SponsorsViewSkin extends ControlBaseSkin<SponsorsView> {
 
         // we have to initialize the showed sponsors list with all items at first or the
         // algorithm for picking the sponsors will not work properly the first time it runs
-        showedSponsor.addAll(control.getItems());
+        //showedSponsor.addAll(control.getItems());
         initLogoNodes();
 
         control.itemsProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
@@ -54,7 +53,7 @@ public class SponsorsViewSkin extends ControlBaseSkin<SponsorsView> {
     private void initLogoNodes() {
         ObservableList<SponsorsView.Sponsor> items = control.getItems();
         List<Node> nodes = new ArrayList<>();
-        int logoCount = switch (control.getSize()){
+        int logoCount = switch (control.getSize()) {
             case SMALL -> 2;
             case MEDIUM -> 3;
             case LARGE -> 4;
@@ -62,43 +61,13 @@ public class SponsorsViewSkin extends ControlBaseSkin<SponsorsView> {
         int itemSize = items.size();
         int realLogoCount = Math.min(itemSize, logoCount);
 
-        Random random = new Random();
-        //randomly generate a new list of sponsors
-        if (itemSize <= realLogoCount) {
-            showedSponsor.clear();
-            showedSponsor.addAll(items);
-            Collections.shuffle(showedSponsor);
-        } else if (itemSize < 2 * realLogoCount) {
-            List<SponsorsView.Sponsor> temp = new ArrayList<>(items);
-            temp.removeAll(showedSponsor);
-            int tempSize = temp.size();
-            for (int i = 0; i < realLogoCount - tempSize; i++) {
-                SponsorsView.Sponsor sponsor = showedSponsor.get(random.nextInt(showedSponsor.size()));
-                if (!temp.contains(sponsor)) {
-                    temp.add(sponsor);
-                } else {
-                    i--;
-                }
-            }
-            showedSponsor.clear();
-            showedSponsor.addAll(temp);
-            Collections.shuffle(showedSponsor);
-        } else {
-            List<SponsorsView.Sponsor> temp = new ArrayList<>(items);
-            temp.removeAll(showedSponsor);
-            showedSponsor.clear();
-            int tempSize = temp.size();
-            for (int i = 0; i < 2 - tempSize; i++) {
-                SponsorsView.Sponsor sponsor = items.get(random.nextInt(items.size()));
-                if (!temp.contains(sponsor)) {
-                    temp.add(sponsor);
-                } else {
-                    i--;
-                }
-            }
-            Collections.shuffle(temp);
-            showedSponsor.addAll(temp.subList(0, 2));
-        }
+        List<SponsorsView.Sponsor> temp = new ArrayList<>(items);
+        temp.removeAll(showedSponsor);
+        showedSponsor.clear();
+
+        Collections.shuffle(temp);
+        showedSponsor.addAll(temp.subList(0, realLogoCount));
+
         //add divider and logo
         for (int i = 0; i < showedSponsor.size(); i++) {
             if (i != 0 || isLarge()) {
@@ -116,10 +85,6 @@ public class SponsorsViewSkin extends ControlBaseSkin<SponsorsView> {
             logo.fitHeightProperty().bind(control.logoFitHeightProperty());
             logo.fitWidthProperty().bind(control.logoFitWidthProperty());
             logo.getStyleClass().addAll("logo", "logo-" + sponsor.name().toLowerCase(), "logo-" + i);
-            logo.setOnMousePressed(e -> {
-                System.out.println("Opening sponsor.url()");
-                e.consume();
-            });
             LinkUtil.setLink(logo, sponsor.url());
             nodes.add(logo);
         }
