@@ -22,7 +22,7 @@ import one.jpro.routing.LinkUtil;
 public class FooterView extends PaneBase {
 
     private final HBox contentBox;
-    private final ImageView dukeImageView;
+    private final ImageView logoImageView;
     private final LineNumberPane linksPane;
     private final LineNumberPane legalInfoPane;
 
@@ -34,15 +34,15 @@ public class FooterView extends PaneBase {
 
         getChildren().add(contentBox);
 
-        dukeImageView = new ImageView();
-        dukeImageView.setPreserveRatio(true);
-        dukeImageView.getStyleClass().add("duke-image");
-        contentBox.getChildren().add(dukeImageView);
+        logoImageView = new ImageView();
+        logoImageView.setPreserveRatio(true);
+        logoImageView.getStyleClass().addAll("jfx-central-logo", "small", "color");
+        contentBox.getChildren().add(logoImageView);
 
         linksPane = initLinksPane();
         legalInfoPane = initLegalInfoPane();
 
-        HBox.setHgrow(dukeImageView, Priority.ALWAYS);
+        HBox.setHgrow(logoImageView, Priority.ALWAYS);
         HBox.setHgrow(linksPane, Priority.ALWAYS);
         HBox.setHgrow(legalInfoPane, Priority.ALWAYS);
 
@@ -51,17 +51,17 @@ public class FooterView extends PaneBase {
     }
 
     public void layoutBySize() {
-        dukeImageView.setFitHeight(getSize().isLarge() ? 90 : 61);
+        logoImageView.setFitHeight(getSize().isLarge() ? 90 : 61);
         LineNumberPane contactPane = initContactPane();
         HBox.setHgrow(contactPane, Priority.ALWAYS);
 
         Size size = getSize();
         if (size.isLarge() || size.isMedium()) {
-            contentBox.getChildren().setAll(dukeImageView, new Spacer(), contactPane, linksPane, legalInfoPane);
+            contentBox.getChildren().setAll(logoImageView, new Spacer(), contactPane, linksPane, legalInfoPane);
         } else {
             VBox box = new VBox(contactPane, linksPane, legalInfoPane);
             box.getStyleClass().add("number-pane-box");
-            contentBox.getChildren().setAll(dukeImageView, box);
+            contentBox.getChildren().setAll(logoImageView, box);
         }
     }
 

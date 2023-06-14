@@ -15,6 +15,7 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -52,11 +53,14 @@ public class TopMenuBar extends PaneBase {
 
     private static final PseudoClass LIGHT_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("light");
     private static final PseudoClass DARK_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("dark");
+    private static final int LOGO_THRESHOLD_LARGE = 1370;
+    private static final int LOGO_THRESHOLD_SMALL = 480;
 
-    private final CustomImageView dukeView;
+    private final CustomImageView jfxCentralLogoView;
     private final SearchField<ModelObject> searchField;
     private final HBox contentBox;
     private final boolean mobile;
+    private final StackPane logoWrapper;
 
     private Node searchTextField;
 
@@ -77,8 +81,21 @@ public class TopMenuBar extends PaneBase {
         contentBox.getStyleClass().add("content");
         getChildren().add(contentBox);
 
-        dukeView = new CustomImageView();
-        dukeView.getStyleClass().add("duke-image");
+        jfxCentralLogoView = new CustomImageView();
+        jfxCentralLogoView.setPreserveRatio(true);
+        jfxCentralLogoView.getStyleClass().add("jfx-central-logo");
+
+        modeProperty().addListener(it -> {
+            if (getMode().equals(Mode.LIGHT)) {
+                jfxCentralLogoView.getStyleClass().add("black");
+            }
+        });
+
+        // wrap logo to make it completely clickable
+        logoWrapper = new StackPane(jfxCentralLogoView);
+        LinkUtil.setLink(logoWrapper, "/", "Back to homepage");
+
+        widthProperty().addListener((it, oldWidth, newWidth) -> updateLogoStyleClass(newWidth.doubleValue()));
 
         searchField = new SearchField<>();
         searchField.getPopup().setPrefWidth(600);
@@ -102,6 +119,40 @@ public class TopMenuBar extends PaneBase {
             }
         });
         layoutBySize();
+
+        updateLogoStyleClass(getWidth());
+
+        sceneProperty().addListener(it -> {
+            if (getScene() != null && getStyleClass().contains("start-page")) {
+                jfxCentralLogoView.getStyleClass().add("color");
+            }
+        });
+    }
+
+    private void updateLogoStyleClass(double newWidth) {
+        if (getSize().equals(Size.LARGE)) {
+            if (newWidth < LOGO_THRESHOLD_LARGE) {
+                if (!jfxCentralLogoView.getStyleClass().contains("small")) {
+                    System.out.println("    adding small");
+                    jfxCentralLogoView.getStyleClass().add("small");
+                }
+            } else {
+                System.out.println("     removing small");
+                jfxCentralLogoView.getStyleClass().remove("small");
+            }
+        } else if (getSize().equals(Size.SMALL)) {
+            if (newWidth < LOGO_THRESHOLD_SMALL) {
+                if (!jfxCentralLogoView.getStyleClass().contains("small")) {
+                    System.out.println("    adding small");
+                    jfxCentralLogoView.getStyleClass().add("small");
+                }
+            } else {
+                System.out.println("     removing small");
+                jfxCentralLogoView.getStyleClass().remove("small");
+            }
+        } else {
+            jfxCentralLogoView.getStyleClass().remove("small");
+        }
     }
 
     public List<ModelObject> search(String pattern) {
@@ -184,7 +235,7 @@ public class TopMenuBar extends PaneBase {
 
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
-            contentBox.getChildren().setAll(createLogo(), new Spacer(), resourcesBtn, communityBtn, showcasesBtn, downloadsBtn, new Spacer(), loginBtn, searchField);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, downloadsBtn, new Spacer(), loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");
@@ -224,7 +275,7 @@ public class TopMenuBar extends PaneBase {
                 }
             });
 
-            contentBox.getChildren().setAll(createLogo(), new Spacer(), logOutBtn, createSeparatorRegion(), stackPane, createSeparatorRegion(), menuBtn);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, createSeparatorRegion(), stackPane, createSeparatorRegion(), menuBtn);
         }
 
         usedProperty().bind(blocking);
@@ -298,23 +349,6 @@ public class TopMenuBar extends PaneBase {
         Region separator = new Region();
         separator.getStyleClass().add("separator-region");
         return separator;
-    }
-
-    private Node createLogo() {
-        if (isSmall()) {
-            return dukeView;
-        } else {
-            Region jfxcentralRegion = new Region();
-            jfxcentralRegion.getStyleClass().add("jfxcentral-region");
-            HBox logoBox = new HBox(dukeView, jfxcentralRegion);
-            // 1370px was determined by trial and error (resizing the window)
-            jfxcentralRegion.visibleProperty().bind(widthProperty().greaterThanOrEqualTo(1370));
-            jfxcentralRegion.managedProperty().bind(widthProperty().greaterThanOrEqualTo(1370));
-            logoBox.setMinWidth(Region.USE_PREF_SIZE);
-            logoBox.getStyleClass().add("logo-box");
-            LinkUtil.setLink(logoBox, "/", "Back to homepage");
-            return logoBox;
-        }
     }
 
     private final StyleableObjectProperty<Mode> mode = new StyleableObjectProperty<>(DEFAULT_MODE) {

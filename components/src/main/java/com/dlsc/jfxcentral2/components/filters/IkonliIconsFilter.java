@@ -17,7 +17,7 @@ public class IkonliIconsFilter extends SimpleSearchFilterView<Ikon> {
 
         setSortGroup(new SortGroup<>("ORDER", List.of(
                 new SortItem<>("From A to Z", Comparator.comparing((Ikon ikon) -> ikon.getDescription().toLowerCase())),
-                new SortItem<>("From A to Z", Comparator.comparing((Ikon ikon) -> ikon.getDescription().toLowerCase()).reversed()))
+                new SortItem<>("From Z to A", Comparator.comparing((Ikon ikon) -> ikon.getDescription().toLowerCase()).reversed()))
         ));
 
         setOnSearch(text -> icon -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(icon.getDescription(), text));

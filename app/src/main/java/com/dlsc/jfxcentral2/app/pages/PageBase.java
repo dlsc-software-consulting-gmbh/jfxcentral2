@@ -57,6 +57,10 @@ public abstract class PageBase extends View {
         topMenuBar.setMode(menuMode);
         topMenuBar.showHamburgerMenuProperty().bindBidirectional(showHamburgerMenuProperty());
 
+        if (getClass().equals(StartPage.class)) {
+            topMenuBar.getStyleClass().add("start-page");
+        }
+
         // footer
         FooterView footerView = new FooterView();
         footerView.sizeProperty().bind(sizeProperty());

@@ -20,7 +20,7 @@ public class WelcomeView extends PaneBase {
     private final Button jfxcentralDataButton;
     private final Button jfxCentralButton;
 
-    public WelcomeView() {
+    public WelcomeView(boolean mobile) {
         getStyleClass().add("welcome-view");
 
         labelBox = new VBox();
@@ -59,6 +59,8 @@ public class WelcomeView extends PaneBase {
         installLocallyButton = new Button("Install Locally", downloadRegion);
         installLocallyButton.getStyleClass().addAll("fill-button", "install-button");
         LinkUtil.setLink(installLocallyButton, "https://downloads.hydraulic.dev/jfxcentral2/download.html");
+        installLocallyButton.setVisible(!mobile);
+        installLocallyButton.setManaged(!mobile);
 
         Region openjfxRegion = new Region();
         openjfxRegion.getStyleClass().add("openjfx-region");

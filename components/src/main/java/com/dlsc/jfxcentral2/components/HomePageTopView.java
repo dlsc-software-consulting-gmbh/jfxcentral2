@@ -10,7 +10,7 @@ public class HomePageTopView extends PaneBase {
     public HomePageTopView() {
         getStyleClass().add("home-page-top-view");
 
-        WelcomeView welcomeView = new WelcomeView();
+        WelcomeView welcomeView = new WelcomeView(isMobile());
         welcomeView.sizeProperty().bind(sizeProperty());
         StackPane.setAlignment(welcomeView, Pos.TOP_CENTER);
 

@@ -29,7 +29,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -48,17 +47,14 @@ public class HamburgerMenuView extends PaneBase {
 
         //top header
         CustomImageView imageView = new CustomImageView();
-        imageView.setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/images/duke.png").toExternalForm()));
-
-        Region jfxCentralLogo = new Region();
-        jfxCentralLogo.getStyleClass().add("jfxcentral-region");
+        imageView.getStyleClass().addAll("jfx-central-logo", "black");
 
         Button closeButton = new Button();
         closeButton.setGraphic(new FontIcon(IkonUtil.close));
         closeButton.getStyleClass().add("close-button");
         closeButton.setOnAction(e -> getOnClose().run());
 
-        HBox topHeader = new HBox(imageView, jfxCentralLogo, new Spacer(), closeButton);
+        HBox topHeader = new HBox(imageView, new Spacer(), closeButton);
         topHeader.getStyleClass().add("top-header");
 
         menusBox = new VBox();
