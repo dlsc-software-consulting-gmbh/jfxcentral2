@@ -53,7 +53,31 @@ public class SponsorsView extends ControlBase {
                 new SponsorsView.Sponsor(
                         "Hydraulic",
                         getClass().getResource("logos/hydraulic.png").toExternalForm(),
-                        "https://www.hydraulic.dev/"));
+                        "https://www.hydraulic.dev/"),
+                new SponsorsView.Sponsor(
+                        "Senapt",
+                        getClass().getResource("logos/Senapt.png").toExternalForm(),
+                        "https://www.senapt.co.uk"),
+                new SponsorsView.Sponsor(
+                        "SenaptCRM",
+                        getClass().getResource("logos/SenaptCRM.png").toExternalForm(),
+                        "https://www.senapt.co.uk/senaptcrm"),
+                new SponsorsView.Sponsor(
+                        "Tomato Energy",
+                        getClass().getResource("logos/TomatoEnergy.png").toExternalForm(),
+                        "https://www.tomato.energy/"),
+                new SponsorsView.Sponsor(
+                        "Tomato Homes",
+                        getClass().getResource("logos/TomatoHomes.png").toExternalForm(),
+                        "https://www.tomato.homes/"),
+                new SponsorsView.Sponsor(
+                        "MyWatts",
+                        getClass().getResource("logos/MyWatts.png").toExternalForm(),
+                        "https://www.mywatts.co.uk/"),
+                new SponsorsView.Sponsor(
+                        "EvXcen",
+                        getClass().getResource("logos/EvXcen.png").toExternalForm(),
+                        "http://www.evxcen.com/"));//TODO: unable to access the website
     }
 
     public record Sponsor(String name, String logoUrl, String url) {
