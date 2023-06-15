@@ -21,7 +21,7 @@ public class HelloWelcomeView extends JFXCentralSampleBase {
 
     @Override
     public Region createControl() {
-        welcomeView = new WelcomeView();
+        welcomeView = new WelcomeView(false);
         return new ScrollPane(welcomeView);
     }
 
