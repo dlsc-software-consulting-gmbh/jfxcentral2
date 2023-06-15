@@ -1475,6 +1475,10 @@
     -fx-faint-focus-color: transparent;
 }
 
+.top-menu-bar > .content .search-field .auto-completion-label {
+    -fx-text-fill: rgb(0, 0, 0, .2);
+}
+
 .top-menu-bar > .content .search-field .graphic-wrapper {
     -fx-padding: 9px;
     -fx-background-color: transparent;
