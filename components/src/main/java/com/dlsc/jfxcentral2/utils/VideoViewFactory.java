@@ -20,6 +20,9 @@ import org.kordamp.ikonli.javafx.FontIcon;
 public class VideoViewFactory {
 
     public static Node createVideoViewNode(Video video) {
+        return createVideoViewNode(video, false);
+    }
+    public static Node createVideoViewNode(Video video, boolean closeable) {
         if (WebAPI.isBrowser()) {
             HTMLView htmlView = new HTMLView();
             htmlView.setContent("<div width=\"100%\" \"height=100%\" background-color=\"powderblue\" class=\"yt\"><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + video.getId() + "\" allowfullscreen></iframe></div></body></html>\n");
@@ -57,6 +60,10 @@ public class VideoViewFactory {
                 }
             }
         });
+
+        if (!closeable) {
+            return webView;
+        }
 
         StackPane webViewWrapper = new StackPane();
         webViewWrapper.getStyleClass().add("web-view-wrapper");
