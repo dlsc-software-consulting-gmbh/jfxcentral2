@@ -30,7 +30,8 @@ public class VideoFilterValues extends JFXCentralSampleBase {
                 .map(String::trim)
                 .sorted()
                 .distinct()
-                .map(item -> String.format("new FilterItem<>(\"%s\", item -> StringUtils.equalsIgnoreCase(item.getType(), \"%s\"))", item, item))
+                //.map(item -> String.format("new FilterItem<>(\"%s\", item -> StringUtils.equalsIgnoreCase(item.getType(), \"%s\"))", item, item))
+                .map(item -> String.format("new FilterItem<>(\"%s\", item -> StringUtils.containsIgnoreCase(item.getType(), \"%s\"))", item, item))
                 .collect(Collectors.joining(",\n"));
         output.append(types);
 
@@ -41,7 +42,8 @@ public class VideoFilterValues extends JFXCentralSampleBase {
                 .map(String::trim)
                 .sorted()
                 .distinct()
-                .map(item -> String.format("new FilterItem<>(\"%s\", item -> StringUtils.equalsIgnoreCase(item.getEvent(), \"%s\"))", item, item))
+                //.map(item -> String.format("new FilterItem<>(\"%s\", item -> StringUtils.equalsIgnoreCase(item.getEvent(), \"%s\"))", item, item))
+                .map(item -> String.format("new FilterItem<>(\"%s\", item -> StringUtils.containsIgnoreCase(item.getEvent(), \"%s\"))", item, item))
                 .collect(Collectors.joining(",\n"));
         output.append(events);
 
@@ -52,7 +54,8 @@ public class VideoFilterValues extends JFXCentralSampleBase {
                 .map(String::trim)
                 .sorted()
                 .distinct()
-                .map(item -> String.format("new FilterItem<>(\"%s\", item -> StringUtils.equalsIgnoreCase(item.getDomain(), \"%s\"))", item, item))
+                //.map(item -> String.format("new FilterItem<>(\"%s\", item -> StringUtils.equalsIgnoreCase(item.getDomain(), \"%s\"))", item, item))
+                .map(item -> String.format("new FilterItem<>(\"%s\", item -> StringUtils.containsIgnoreCase(item.getDomain(), \"%s\"))", item, item))
                 .collect(Collectors.joining(",\n"));
         output.append(domains).append("\n");
 

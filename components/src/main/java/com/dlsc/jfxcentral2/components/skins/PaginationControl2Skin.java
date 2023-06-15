@@ -15,6 +15,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
@@ -93,6 +94,15 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
         contentPane.setBottom(controlBox);
         BorderPane.setAlignment(controlBox, Pos.CENTER);
         contentPane.centerProperty().bind(Bindings.createObjectBinding(() -> {
+                    if (control.getCurrentPageIndex() <=0 && control.getPageCount() <= 0) {
+                        Node placeholder = control.getPlaceholder();
+                        if (placeholder == null) {
+                            return null;
+                        }
+                        StackPane placeholderWrapper = new StackPane(placeholder);
+                        placeholderWrapper.getStyleClass().add("placeholder-wrapper");
+                        return placeholderWrapper;
+                    }
                     return control.getPageFactory().call(control.getCurrentPageIndex());
                 },
                 control.currentPageIndexProperty(),
@@ -108,8 +118,6 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
         control.currentPageIndexProperty().addListener(it -> updateControlBox());
         control.maxPageIndicatorCountProperty().addListener(it -> updateControlBox());
     }
-
-
 
     private int computeToggleButtonNumber(int index, int pageCount, int currentPageIndex, int maxPageIndicatorCount) {
         int middle = maxPageIndicatorCount / 2;

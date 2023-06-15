@@ -17,7 +17,7 @@ public class VideosDetailsBox extends DetailsBoxBase<Video> {
         setTitle("VIDEOS");
         setIkon(IkonUtil.getModelIkon(Video.class));
         setMaxItemsPerPage(3);
-        setExtrasProvider(VideoViewFactory::createVideoViewNode);
+        setExtrasProvider(video -> VideoViewFactory.createVideoViewNode(video, true));
     }
 
     @Override

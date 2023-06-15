@@ -1976,7 +1976,21 @@
 .custom-pagination-control2 .control-box .right-arrow-button > .ikonli-font-icon {
     -fx-icon-color: -white;
     -fx-icon-size: 20px;
+}
 
+.custom-pagination-control2 .content-pane .placeholder-wrapper {
+    -fx-padding: 15px 0 15px 0;
+}
+
+.custom-pagination-control2 .content-pane .default-placeholder {
+    -fx-text-fill: -grey-60;
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Condensed";
+    -fx-graphic-text-gap: 12px;
+}
+
+.custom-pagination-control2 .content-pane .default-placeholder .ikonli-font-icon {
+    -fx-icon-color: -grey-60;
 }
 
 /** -------------------------------
@@ -3357,6 +3371,8 @@
     -fx-padding: 2px 10px;
     -fx-background-color: -white;
     -fx-background-radius: 30px;
+    -fx-border-color: -grey-20;
+    -fx-border-radius: 30px;
     -fx-text-fill: -grey-100;
     -fx-graphic-text-gap: 8px;
     -fx-font-size: 13px;
@@ -5015,6 +5031,10 @@
     -fx-max-width: 1310px;
 }
 
+.books-filter-view:md .content-box .filter-combo-box{
+    -fx-pref-width: 200px;
+}
+
 .books-filter-view:sm .content-box {
     -fx-max-width: 415px;
 }
@@ -5108,6 +5128,10 @@
 /** ------------------------------------
  * AppsFilterView
  */
+.showcases-filter-view .filter-box .filter-combo-box {
+    -fx-pref-width: 180px;
+}
+
 .showcases-filter-view:lg > .content-box {
     -fx-max-width: 1305px;
 }

@@ -82,7 +82,7 @@ public class VideoGalleryView extends PaneBase {
                     if (centerPlayBox.getChildren().size() > 1) {
                         centerPlayBox.getChildren().remove(1);
                     }
-                    centerPlayBox.getChildren().add(VideoViewFactory.createVideoViewNode(video));
+                    centerPlayBox.getChildren().add(VideoViewFactory.createVideoViewNode(video, true));
                 });
 
                 videosBox.getChildren().add(videoTileView);
