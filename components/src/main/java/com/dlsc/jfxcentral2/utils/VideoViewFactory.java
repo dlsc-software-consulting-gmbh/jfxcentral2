@@ -3,12 +3,19 @@ package com.dlsc.jfxcentral2.utils;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class VideoViewFactory {
 
@@ -51,7 +58,25 @@ public class VideoViewFactory {
             }
         });
 
-        return webView;
+        StackPane webViewWrapper = new StackPane();
+        webViewWrapper.getStyleClass().add("web-view-wrapper");
+
+        Button closeButton = new Button();
+        closeButton.getStyleClass().addAll("close-button","blue-button");
+        closeButton.setGraphic(new FontIcon(IkonUtil.close));
+        closeButton.setOnAction(event -> {
+            Pane parent = (Pane) webViewWrapper.getParent();
+            if (parent != null) {
+                parent.getChildren().remove(webViewWrapper);
+                Platform.runLater(parent::requestFocus);
+            }
+        });
+
+        StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
+        StackPane.setMargin(closeButton,new Insets(5,5,0,0));
+
+        webViewWrapper.getChildren().addAll(webView, closeButton);
+        return webViewWrapper;
     }
 
     private static void bindWidthAndHeight(HTMLView htmlView, Region region) {

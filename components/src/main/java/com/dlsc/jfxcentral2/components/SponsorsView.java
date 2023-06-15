@@ -59,11 +59,11 @@ public class SponsorsView extends ControlBase {
                         getClass().getResource("logos/Senapt.png").toExternalForm(),
                         "https://www.senapt.co.uk"),
                 new SponsorsView.Sponsor(
-                        "Tomato Energy",
+                        "TomatoEnergy",
                         getClass().getResource("logos/TomatoEnergy.png").toExternalForm(),
                         "https://www.tomato.energy/"),
                 new SponsorsView.Sponsor(
-                        "Tomato Homes",
+                        "TomatoHomes",
                         getClass().getResource("logos/TomatoHomes.png").toExternalForm(),
                         "https://www.tomato.homes/"),
                 new SponsorsView.Sponsor(

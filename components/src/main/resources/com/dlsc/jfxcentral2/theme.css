@@ -476,6 +476,12 @@
     -fx-cursor: hand;
 }
 
+.sponsors-view .logo-tomatoenergy,
+.sponsors-view .logo-tomatohomes {
+    -fx-scale-x: 1.25;
+    -fx-scale-y: 1.25;
+}
+
 /** -------------------------------
  * HomePageTopView
  */
@@ -579,6 +585,7 @@
 .footer-view:sm .content {
     -fx-spacing: 20px;
     -fx-padding: 30px 33px 30px 20px;
+    -fx-alignment: center;
 }
 
 .footer-view:sm .number-pane-box {
@@ -4715,10 +4722,6 @@
     -fx-alignment: center-left;
 }
 
-.search-filter-view:sm {
-    /*-fx-pref-width: -sm-width;*/
-}
-
 .search-filter-view > .content-pane > .content-box {
     -fx-alignment: center;
 }
@@ -4885,57 +4888,10 @@
 }
 
 /** ------------------------------------
- * VideosFilterView
- */
-.videos-filter-view:lg .content-box {
-    -fx-max-width: 1310px;
-}
-
-.videos-filter-view:sm .content-box-wrapper {
-    -fx-max-width: 413px;
-}
-
-.videos-filter-view .content-box > .spacer {
-    visibility: hidden;
-}
-
-.videos-filter-view:lg .filter-box-0 > .filter-combo-box {
-    -fx-pref-width: 267px;
-}
-
-.videos-filter-view:lg .filter-box-1 > .filter-combo-box {
-    -fx-pref-width: 286px;
-}
-
-.videos-filter-view:lg .filter-box-2 > .filter-combo-box {
-    -fx-pref-width: 285px;
-}
-
-.videos-filter-view:md .content-box {
-    -fx-alignment: bottom-center;
-}
-
-.videos-filter-view:md .filter-box > .filter-combo-box {
-    -fx-pref-width: 173px;
-}
-
-/** ------------------------------------
  * SimpleSearchFilterView
  */
 .simple-filter-view .content-box > .spacer {
     visibility: hidden;
-}
-
-.simple-filter-view:lg .content-box {
-    /*-fx-spacing: 60px;*/
-}
-
-.simple-filter-view:lg .search-field {
-    /*-fx-pref-width: 633px;*/
-}
-
-.simple-filter-view:lg .filter-box .filter-combo-box {
-    /*-fx-pref-width: 550px;*/
 }
 
 .simple-filter-view:md .content-box {
@@ -4973,6 +4929,53 @@
 
 .simple-filter-view:sm .filters-box > .filter-box > .filter-combo-box {
     -fx-pref-width: 260px;
+}
+
+/** ------------------------------------
+ * VideosFilterView
+ */
+.videos-filter-view:lg .content-box {
+    -fx-max-width: 1310px;
+}
+
+.videos-filter-view:md {
+    -fx-filter-box-orientation: vertical;
+}
+
+.videos-filter-view:md.with-search-field {
+    -fx-filter-box-orientation: vertical;
+}
+
+.videos-filter-view:md .search-text-field {
+    -fx-translate-y: 15px;
+}
+
+.videos-filter-view .content-box > .spacer {
+    visibility: hidden;
+}
+
+.videos-filter-view:lg .filter-box-0 > .filter-combo-box {
+    -fx-pref-width: 267px;
+}
+
+.videos-filter-view:lg .filter-box-1 > .filter-combo-box {
+    -fx-pref-width: 286px;
+}
+
+.videos-filter-view:lg .filter-box-2 > .filter-combo-box {
+    -fx-pref-width: 285px;
+}
+
+.videos-filter-view:md .content-box {
+    -fx-alignment: bottom-center;
+}
+
+.videos-filter-view:md .filter-box > .filter-combo-box {
+    -fx-pref-width: 173px;
+}
+
+.videos-filter-view:sm .filter-box > .spacer {
+    -fx-max-width: 20px;
 }
 
 /** ------------------------------------
@@ -5078,8 +5081,8 @@
     -fx-max-width: 698px;
 }
 
-.pull-requests-filter-view:sm .content-box-wrapper {
-    -fx-max-width: 340px;
+.pull-requests-filter-view:sm .filter-box > .spacer {
+    -fx-max-width: 10px;
 }
 
 .pull-requests-filter-view .content-box > .spacer {
@@ -5142,6 +5145,14 @@
 
 .ikonli-icons-filter:lg .combo-box-base {
     -fx-pref-width: 610px;
+}
+
+.ikonli-icons-filter:lg {
+    -fx-padding: 0 180px;
+}
+
+.ikonli-icons-filter:md {
+    -fx-padding: 0 165px;
 }
 
 .ikonli-icons-filter:md .combo-box-base {
@@ -5807,6 +5818,21 @@
     -fx-font-weight: bold;
     -fx-text-fill: -white;
     -fx-background-radius: 30px;
+}
+
+.web-view-wrapper .close-button {
+    -fx-background-radius: 30px;
+    -fx-padding: 5px 15px;
+    visibility: hidden;
+}
+
+.web-view-wrapper:hover .close-button {
+    visibility: visible;
+}
+
+.web-view-wrapper .close-button .ikonli-font-icon {
+    -fx-icon-color: -white;
+    -fx-icon-size: 16px;
 }
 
 /** ------------------------------------
@@ -7002,8 +7028,10 @@
  */
 .search-result-list-cell {
     -fx-background-color: white;
-    -fx-padding: 10px;
+    -fx-padding: 6px 5px !important;
     -fx-spacing: 5;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 0px 0px 1px 0px;
 }
 
 .search-result-list-cell .label {
@@ -7011,8 +7039,14 @@
     -fx-alignment: top-left;
 }
 
-.search-result-list-cell :focused {
-    -fx-background-color: -light-blue;
+.search-result-list-cell:selected,
+.search-result-list-cell:hover {
+    -fx-background-color: #e2e2e255  !important;
+}
+
+.search-result-list-cell:focused:selected ,
+.search-result-list-cell:selected {
+    -fx-background-color: #cfdbfa55  !important;
 }
 
 .search-result-list-cell :selected .label {
@@ -7031,31 +7065,75 @@
     -fx-max-height: 32px;
     -fx-min-width: 32px;
     -fx-min-height: 32px;
-    -fx-background-color: -fx-accent;
+    -fx-background-color: transparent;
     -fx-background-radius: 2px;
 }
 
 .search-result-list-cell .hbox .icon-wrapper .ikonli-font-icon {
-    -fx-icon-size: 24px;
-    -fx-icon-color: white;
+    -fx-icon-size: 30px;
+    -fx-icon-color: -grey-60;
 }
 
 .search-result-list-cell .hbox .title-label {
-    -fx-text-fill: black;
-    -fx-font-family: "Inter Bold";
+    -fx-text-fill: -grey-100;
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 1.1em;
 }
 
 .search-result-list-cell .hbox .subtitle-label {
-    -fx-opacity: .8;
-    -fx-text-fill: black;
-}
-
-.search-result-list-cell .hbox .date-label {
+    -fx-text-fill: -grey-60;
 }
 
 .search-result-list-cell .hbox .vbox {
+    -fx-spacing: 5px;
 }
 
+/** ------------------------------------
+ * search-field-list-view (SearchField popup)
+ */
+.search-field-list-view  {
+    -fx-pref-height: 350px !important;
+}
+
+.search-field-list-view .scroll-bar {
+    -fx-background-color: transparent;
+    -fx-padding: 2px;
+}
+
+.search-field-list-view .scroll-bar:vertical .track {
+    -fx-background-color: #e2e2e255;
+    -fx-border-color: -grey-10;
+}
+
+.search-field-list-view .scroll-bar:vertical:hover .track {
+    -fx-background-color: #e2e2e299;
+    -fx-border-color: -grey-10;
+}
+
+.search-field-list-view .scroll-bar:vertical .thumb,
+.search-field-list-view .scroll-bar:vertical .thumb:hover {
+    -fx-cursor: hand;
+    -fx-background-radius: 4px;
+    -fx-background-color: -grey-30;
+    -fx-background-insets: 2px, 0, 0;
+}
+
+.search-field-list-view .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: -grey-60;
+}
+
+.search-field-list-view .scroll-bar:vertical .increment-button,
+.search-field-list-view .scroll-bar:vertical .decrement-button {
+    -fx-padding: 0 6px;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+}
+
+.search-field-list-view .scroll-bar:vertical .increment-arrow,
+.search-field-list-view .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: null;
+    -fx-padding: 0 3px;
+}
 
 /** ----------------------------------------------------------------------------
  * IkonCellView

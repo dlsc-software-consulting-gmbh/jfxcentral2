@@ -263,7 +263,6 @@ public class SearchFilterView<T> extends PaneBase {
 
     private Node createFilterBox(int index, FilterGroup<T> filterGroup, ObjectProperty<Predicate<T>> childPredicateProperty) {
         Pane box = getFilterBoxOrientation() == Orientation.VERTICAL ? new VBox() : new HBox();
-        System.out.println(getFilterBoxOrientation());
         box.getStyleClass().addAll("filter-box", "filter-box-" + index);
 
         Label titleLabel = new Label(filterGroup.title());

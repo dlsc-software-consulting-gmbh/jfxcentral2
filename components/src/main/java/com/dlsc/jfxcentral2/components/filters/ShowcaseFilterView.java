@@ -9,6 +9,7 @@ public class ShowcaseFilterView extends SimpleSearchFilterView<RealWorldApp> {
 
     public ShowcaseFilterView() {
         getStyleClass().add("showcases-filter-view");
+        setSearchPromptText("Search for a JFX APP");
 
         getFilterGroups().setAll(
                 new FilterGroup<>("TYPE", List.of(

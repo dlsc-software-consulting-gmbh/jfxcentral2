@@ -57,7 +57,7 @@ public class TopMenuBar extends PaneBase {
     private static final int LOGO_THRESHOLD_SMALL = 480;
 
     private final CustomImageView jfxCentralLogoView;
-    private final SearchField<ModelObject> searchField;
+    private SearchField<ModelObject> searchField;
     private final HBox contentBox;
     private final boolean mobile;
     private final StackPane logoWrapper;
@@ -97,7 +97,20 @@ public class TopMenuBar extends PaneBase {
 
         widthProperty().addListener((it, oldWidth, newWidth) -> updateLogoStyleClass(newWidth.doubleValue()));
 
-        searchField = new SearchField<>();
+        createSearchField();
+        layoutBySize();
+
+        updateLogoStyleClass(getWidth());
+
+        sceneProperty().addListener(it -> {
+            if (getScene() != null && getStyleClass().contains("start-page")) {
+                jfxCentralLogoView.getStyleClass().add("color");
+            }
+        });
+    }
+
+    private SearchField<ModelObject> createSearchField() {
+        SearchField<ModelObject> searchField = new SearchField<>();
         searchField.getPopup().setPrefWidth(600);
         searchField.getEditor().setFocusTraversable(false);
         searchField.setPromptText("Search");
@@ -118,15 +131,7 @@ public class TopMenuBar extends PaneBase {
                 return null;
             }
         });
-        layoutBySize();
-
-        updateLogoStyleClass(getWidth());
-
-        sceneProperty().addListener(it -> {
-            if (getScene() != null && getStyleClass().contains("start-page")) {
-                jfxCentralLogoView.getStyleClass().add("color");
-            }
-        });
+        return searchField;
     }
 
     private void updateLogoStyleClass(double newWidth) {
@@ -206,6 +211,7 @@ public class TopMenuBar extends PaneBase {
     private BooleanBinding blocking;
 
     protected void layoutBySize() {
+        searchField = createSearchField();
         if (isLarge()) {
             MenuButton resourcesBtn = createMenuButton("Resources");
             resourcesBtn.getStyleClass().add("resources-button");
