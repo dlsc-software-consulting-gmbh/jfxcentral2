@@ -5820,6 +5820,21 @@
     -fx-background-radius: 30px;
 }
 
+.web-view-wrapper .close-button {
+    -fx-background-radius: 30px;
+    -fx-padding: 5px 15px;
+    visibility: hidden;
+}
+
+.web-view-wrapper:hover .close-button {
+    visibility: visible;
+}
+
+.web-view-wrapper .close-button .ikonli-font-icon {
+    -fx-icon-color: -white;
+    -fx-icon-size: 16px;
+}
+
 /** ------------------------------------
  * OverviewBox
  */
