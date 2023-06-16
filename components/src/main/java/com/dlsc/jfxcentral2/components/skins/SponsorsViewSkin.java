@@ -6,7 +6,6 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -44,10 +43,6 @@ public class SponsorsViewSkin extends ControlBaseSkin<SponsorsView> {
 
         control.itemsProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
         control.sizeProperty().addListener((observable, oldValue, newValue) -> initLogoNodes());
-        control.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-            initLogoNodes();
-            event.consume();
-        });
     }
 
     private void initLogoNodes() {
