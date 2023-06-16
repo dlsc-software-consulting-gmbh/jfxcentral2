@@ -37,7 +37,7 @@ public class DetailsContentPane extends PaneBase {
          * a single item. In large size we always show it, otherwise the layout would not
          * be symmetrical.
          */
-        menuView.visibleProperty().bind(sizeProperty().isNotEqualTo(Size.SMALL).and(menuView.itemsProperty().sizeProperty().greaterThan(1)));
+        menuView.visibleProperty().bind(sizeProperty().isEqualTo(Size.LARGE));
         menuView.managedProperty().bind(menuView.visibleProperty());
 
         HBox.setHgrow(menuView, Priority.NEVER);
