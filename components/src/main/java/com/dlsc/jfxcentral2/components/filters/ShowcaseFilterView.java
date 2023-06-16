@@ -1,8 +1,7 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
-import javafx.collections.ObservableList;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -15,19 +14,13 @@ public class ShowcaseFilterView extends SimpleSearchFilterView<RealWorldApp> {
 
     public ShowcaseFilterView() {
         getStyleClass().add("showcases-filter-view");
-        setSearchPromptText("Search for a JFX APP");
+        setSearchPromptText("Search for an application...");
 
         if (domainFilterItems == null) {
             domainFilterItems = getDomainFilterItems();
         }
 
         getFilterGroups().setAll(
-                //new FilterGroup<>("TYPE", List.of(
-                //        new FilterItem<>("ALL", item -> true, true),
-                //        new FilterItem<>("Tools", item -> true),
-                //        new FilterItem<>("Business", item -> true),
-                //        new FilterItem<>("Other", item -> true)
-                //)),
                 new FilterGroup<>("DOMAIN", domainFilterItems)
         );
 
@@ -38,8 +31,7 @@ public class ShowcaseFilterView extends SimpleSearchFilterView<RealWorldApp> {
     }
 
     private List<FilterItem<RealWorldApp>> getDomainFilterItems() {
-        DataRepository.getInstance().loadData();
-        ObservableList<RealWorldApp> appList = DataRepository.getInstance().getRealWorldApps();
+        List<RealWorldApp> appList = DataRepository2.getInstance().getRealWorldApps();
 
         ArrayList<FilterItem<RealWorldApp>> filterItems = new ArrayList<>(appList.stream()
                 .flatMap(app -> Optional.ofNullable(app.getDomain()).stream()

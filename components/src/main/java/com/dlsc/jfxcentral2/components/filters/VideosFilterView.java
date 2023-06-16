@@ -1,8 +1,7 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Video;
-import javafx.collections.ObservableList;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -24,8 +23,6 @@ public class VideosFilterView extends SimpleSearchFilterView<Video> {
         setSearchPromptText("Search for a video");
 
         if (typeFilterItems == null) {
-            //first load data
-            DataRepository.getInstance().loadData();
             typeFilterItems = getVideoFilterItems(Video::getType, createFilterPredicate(Video::getType));
         }
 
@@ -60,7 +57,7 @@ public class VideosFilterView extends SimpleSearchFilterView<Video> {
     private List<FilterItem<Video>> getVideoFilterItems(
             Function<Video, String> attrGetter,
             BiPredicate<Video, String> predicate) {
-        ObservableList<Video> appList = DataRepository.getInstance().getVideos();
+        List<Video> appList = DataRepository2.getInstance().getVideos();
 
         ArrayList<FilterItem<Video>> filterItems = new ArrayList<>(appList.stream()
                 .flatMap(app -> Optional.ofNullable(attrGetter.apply(app)).stream()
