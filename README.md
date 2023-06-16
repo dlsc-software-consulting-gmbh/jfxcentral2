@@ -11,3 +11,5 @@ Welcome to the next version of JFXCentral. This repository contains the codebase
 ## Technical vs. Content Issues
 
 If you do encounter any technical issues, then please [create a ticket in this repository](https://github.com/dlemmermann/jfxcentral2/issues). If the issue is related to content then please create the ticket in the issue tracker of the [jfxcentral-data](https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data/issues) repository.
+
+![Screenshot](jfxcentral.jpg)
