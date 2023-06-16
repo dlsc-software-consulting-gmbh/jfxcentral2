@@ -157,7 +157,7 @@ public class JFXCentral2App extends Application {
         double sceneWidth = scene.getWidth();
         if (sceneWidth < 768) {
             size.set(Size.SMALL);
-        } else if (sceneWidth <= 1210) {
+        } else if (sceneWidth <= 1320) {
             size.set(Size.MEDIUM);
         } else {
             size.set(Size.LARGE);
