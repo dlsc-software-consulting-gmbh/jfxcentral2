@@ -77,7 +77,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         contentBox.setClip(clip);
 
         //[Top] FlipView
-        flipView.setFrontNode(createFront());
+        flipView.frontNodeProperty().bind(Bindings.createObjectBinding(this::createFront, sizeProperty()));
         flipView.setBackNode(createBack());
         VBox.setVgrow(flipView, Priority.ALWAYS);
 
