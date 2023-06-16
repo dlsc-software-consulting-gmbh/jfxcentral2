@@ -84,6 +84,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         summaryLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
+        saveAndLikeButton.setMinWidth(Region.USE_PREF_SIZE);
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
         saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(model));
         saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, nv) -> {
@@ -94,6 +95,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         });
 
         websiteButton = new Button();
+        websiteButton.setMinWidth(Region.USE_PREF_SIZE);
         websiteButton.visibleProperty().bind(websiteProperty().isNotEmpty());
         websiteButton.managedProperty().bind(websiteProperty().isNotEmpty());
         websiteButton.getStyleClass().addAll("website-button", "link-button");

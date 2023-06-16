@@ -150,22 +150,14 @@ public class TopMenuBar extends PaneBase {
         if (getSize().equals(Size.LARGE)) {
             if (newWidth < LOGO_THRESHOLD_LARGE) {
                 if (!jfxCentralLogoView.getStyleClass().contains("small")) {
-                    System.out.println("    adding small");
                     jfxCentralLogoView.getStyleClass().add("small");
                 }
             } else {
-                System.out.println("     removing small");
                 jfxCentralLogoView.getStyleClass().remove("small");
             }
         } else if (getSize().equals(Size.SMALL)) {
-            if (newWidth < LOGO_THRESHOLD_SMALL) {
-                if (!jfxCentralLogoView.getStyleClass().contains("small")) {
-                    System.out.println("    adding small");
-                    jfxCentralLogoView.getStyleClass().add("small");
-                }
-            } else {
-                System.out.println("     removing small");
-                jfxCentralLogoView.getStyleClass().remove("small");
+            if (!jfxCentralLogoView.getStyleClass().contains("small")) {
+                jfxCentralLogoView.getStyleClass().add("small");
             }
         } else {
             jfxCentralLogoView.getStyleClass().remove("small");
