@@ -7,7 +7,7 @@ public class LibrariesFilterView extends SimpleSearchFilterView<Library> {
 
     public LibrariesFilterView() {
         getStyleClass().add("libraries-filter-view");
-        setSearchPromptText("Search for libraries");
+        setSearchPromptText("Search for a library");
 
         setOnSearch(text -> library -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(library.getName(), text)
