@@ -4,6 +4,11 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -37,5 +42,31 @@ public class VideoTileView extends TileView<Video> {
                 }
             });
         }
+    }
+
+    protected Node createFrontTop() {
+        ImageView imageView = new ImageView();
+        imageView.imageProperty().bind(imageProperty());
+        imageView.setPreserveRatio(true);
+
+        Label remarkLabel = new Label();
+        remarkLabel.getStyleClass().add("remark");
+        remarkLabel.setGraphic(new FontIcon());
+        remarkLabel.textProperty().bind(remarkProperty());
+        remarkLabel.managedProperty().bind(remarkLabel.visibleProperty());
+        remarkLabel.visibleProperty().bind(remarkProperty().isNotEmpty());
+        StackPane.setAlignment(remarkLabel, Pos.TOP_RIGHT);
+
+        StackPane imageContainer = new StackPane();
+        imageContainer.getStyleClass().add("image-container");
+        imageContainer.getChildren().setAll(imageView, remarkLabel);
+        if (isSmall()) {
+            imageView.setFitWidth(140);
+            StackPane.setAlignment(imageView, Pos.BOTTOM_LEFT);
+        }else {
+            imageView.fitWidthProperty().bind(imageContainer.widthProperty());
+        }
+
+        return imageContainer;
     }
 }

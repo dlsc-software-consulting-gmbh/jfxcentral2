@@ -52,6 +52,8 @@ public class CustomStage extends BorderPane {
 
     public CustomStage(Stage stage, Node node, SessionManager sessionManager) {
         setContent(node);
+        node.getStyleClass().add("stage-content");
+
         getStylesheets().add(CustomStage.class.getResource("stage.css").toExternalForm());
         getStyleClass().add("custom-stage");
 
