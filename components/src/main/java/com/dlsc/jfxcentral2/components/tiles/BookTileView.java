@@ -21,9 +21,9 @@ public class BookTileView extends PreviewTileView<Book> {
         setButton2Text("amazon");
         Image AMAZON_IMAGE = new Image(BookTileView.class.getResource("/com/dlsc/jfxcentral2/images/amazon.png").toExternalForm());
         setButton2Graphic(new ImageView(AMAZON_IMAGE));
+        LinkUtil.setLink(getButton1(), "/books/" + getData().getId());
 
         if (StringUtils.isNotEmpty(book.getAmazonASIN())) {
-            LinkUtil.setLink(getButton1(), "/books/" + getData().getId());
             setButton2Visible(true);
             LinkUtil.setExternalLink(getButton2(), "http://www.amazon.com/dp/" + book.getAmazonASIN(), book.getName());
         } else {
