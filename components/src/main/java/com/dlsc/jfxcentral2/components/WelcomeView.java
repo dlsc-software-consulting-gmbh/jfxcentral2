@@ -1,6 +1,10 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+
+
+
+import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -19,6 +23,8 @@ public class WelcomeView extends PaneBase {
     private final Button installLocallyButton;
     private final Button jfxcentralDataButton;
     private final Button jfxCentralButton;
+    private double xOffset;
+    private double yOffset;
 
     public WelcomeView(boolean mobile) {
         getStyleClass().add("welcome-view");
@@ -68,6 +74,18 @@ public class WelcomeView extends PaneBase {
         openJFXProjectButton.getStyleClass().addAll("fill-button", "openjfx-button");
         LinkUtil.setLink(openJFXProjectButton, "/openjfx");
         setMinHeight(Region.USE_PREF_SIZE);
+
+        if (!WebAPI.isBrowser()) {
+            setOnMousePressed(event -> {
+                xOffset = getScene().getWindow().getX() - event.getScreenX();
+                yOffset = getScene().getWindow().getY() - event.getScreenY();
+            });
+
+            setOnMouseDragged(event -> {
+                getScene().getWindow().setX(event.getScreenX() + xOffset);
+                getScene().getWindow().setY(event.getScreenY() + yOffset);
+            });
+        }
 
         layoutBySize();
     }
