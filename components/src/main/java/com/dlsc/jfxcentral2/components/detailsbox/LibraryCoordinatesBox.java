@@ -89,6 +89,10 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
             FXFuture.runBackground(() -> DataRepository2.getInstance().getArtifactVersion(coordinates)).map(property -> {
                 repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
+                    String s = property.get();
+                    if (s == null || StringUtils.isBlank(s)) {
+                        return "Loading ...";
+                    }
                     if (getBuildTool().equals(BuildTool.MAVEN)) {
                         return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + property.get() + "</version>\n</dependency>";
                     }

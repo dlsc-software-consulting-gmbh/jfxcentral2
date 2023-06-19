@@ -9,4 +9,9 @@ public class VideoGalleryTileView extends VideoTileView {
         super(video);
         getStyleClass().add("video-gallery-tile");
     }
+
+    @Override
+    protected boolean ignoreSmallLayouts() {
+        return true;
+    }
 }

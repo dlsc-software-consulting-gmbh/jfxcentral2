@@ -94,7 +94,7 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
         contentPane.setBottom(controlBox);
         BorderPane.setAlignment(controlBox, Pos.CENTER);
         contentPane.centerProperty().bind(Bindings.createObjectBinding(() -> {
-                    if (control.getCurrentPageIndex() <=0 && control.getPageCount() <= 0) {
+                    if (control.getCurrentPageIndex() <= 0 && control.getPageCount() <= 0) {
                         Node placeholder = control.getPlaceholder();
                         if (placeholder == null) {
                             return null;
@@ -102,6 +102,9 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
                         StackPane placeholderWrapper = new StackPane(placeholder);
                         placeholderWrapper.getStyleClass().add("placeholder-wrapper");
                         return placeholderWrapper;
+                    }
+                    if (control.getPageFactory() == null) {
+                        return null;
                     }
                     return control.getPageFactory().call(control.getCurrentPageIndex());
                 },
@@ -169,7 +172,7 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
             controlBox.getChildren().addAll(ellipsisRightLabel, toLastButton);
         }
 
-        rightArrowButton.setDisable(control.getCurrentPageIndex() == control.getPageCount() - 1);
+        rightArrowButton.setDisable(control.getPageCount() == 0 || control.getCurrentPageIndex() == control.getPageCount() - 1);
         controlBox.getChildren().add(rightArrowButton);
     }
 

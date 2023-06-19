@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.app.pages;
 
-import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
+import com.dlsc.jfxcentral2.app.service.LoadPullRequestsService;
 import com.dlsc.jfxcentral2.components.FeaturesContainer;
 import com.dlsc.jfxcentral2.components.OpenJFXProjectView;
 import com.dlsc.jfxcentral2.components.PullRequestsView;
@@ -9,19 +9,36 @@ import com.dlsc.jfxcentral2.components.StripView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.filters.PullRequestsFilterView;
 import com.dlsc.jfxcentral2.model.Size;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
-import simplefx.experimental.parts.FXFuture;
+
+import java.util.ArrayList;
 
 public class OpenJFXPage extends PageBase {
-
+    private final ObservableList<PullRequest> pullRequests;
+    private final LoadPullRequestsService service;
+    private final FilteredList<PullRequest> filteredList;
 
     public OpenJFXPage(ObjectProperty<Size> size) {
         super(size, TopMenuBar.Mode.LIGHT);
+
+        // data
+        pullRequests = FXCollections.observableArrayList();
+        filteredList = new FilteredList<>(pullRequests);
+
+        // load pull requests service
+        service = new LoadPullRequestsService();
+        service.valueProperty().addListener((ob, ov, nv) -> {
+            if (nv == null || nv.isEmpty()) {
+                return;
+            }
+            pullRequests.setAll(nv);
+        });
+        service.start();
     }
 
     @Override
@@ -43,28 +60,26 @@ public class OpenJFXPage extends PageBase {
         // filter view
         PullRequestsFilterView pullRequestsFilterView = new PullRequestsFilterView();
         pullRequestsFilterView.sizeProperty().bind(sizeProperty());
-        blockingProperty().bind(pullRequestsFilterView.blockingProperty());
+        pullRequestsFilterView.setDisable(pullRequests.isEmpty());
+        //blockingProperty().bind(pullRequestsFilterView.blockingProperty());
 
         // pull requests
         PullRequestsView pullRequestsView = new PullRequestsView();
         pullRequestsView.sizeProperty().bind(sizeProperty());
 
-        // data
-        FXFuture.runBackground(() -> {
-            ObservableList<PullRequest> itemsList = FXCollections.observableArrayList(DataRepository2.getInstance().loadPullRequests());
-
-            FilteredList<PullRequest> filteredList = new FilteredList<>(itemsList);
-            filteredList.predicateProperty().bind(pullRequestsFilterView.predicateProperty());
-
-            SortedList<PullRequest> sortedList = new SortedList<>(filteredList);
-            sortedList.comparatorProperty().bind(pullRequestsFilterView.comparatorProperty());
-
-            return sortedList;
-        }).map(result -> {
-            pullRequestsView.setPullRequests(result);
-            return null;
+        pullRequestsFilterView.predicateProperty().addListener((ob, ov, nv) -> {
+            filteredList.setPredicate(nv);
+            pullRequestsView.setPullRequests(pullRequests.isEmpty() ? null : new ArrayList<>(filteredList));
         });
 
+
+        pullRequests.addListener((InvalidationListener) it -> {
+            filteredList.setPredicate(pullRequestsFilterView.getPredicate());
+            if (!pullRequests.isEmpty()) {
+                pullRequestsFilterView.setDisable(false);
+            }
+            pullRequestsView.setPullRequests(pullRequests.isEmpty() ? null : new ArrayList<>(filteredList));
+        });
 
         // features
         FeaturesContainer featuresContainer = new FeaturesContainer();

@@ -3592,16 +3592,13 @@
 }
 
 .video-tile-view.video-gallery-tile:md {
-    -tile-h: 354px;
-    -fx-min-width: 287px;
-    -fx-pref-width: 287px;
-    -fx-max-width: 287px;
+    -fx-min-height: 368px;
 }
 
 .video-tile-view.video-gallery-tile:sm {
     -tile-h: 375px;
-    -fx-min-width: 317px;
-    -fx-pref-width: 317px;
+    /*-fx-min-width: 317px;*/
+    /*-fx-pref-width: 317px;*/
     -fx-max-width: 317px;
 }
 
@@ -3609,7 +3606,6 @@
     -fx-font-size: 20px;
     -fx-padding: 8px 20px 5px 20px;
 }
-
 
 .tile-view:md-lg > .content-box > .flip-view .front-box .description {
     -fx-padding: 0 20px 5px 20px;
@@ -3619,47 +3615,12 @@
     -fx-padding: 0px;
 }
 
-.video-tile-view.video-gallery-tile:lg > .content-box > .flip-view .front-box .main-image-region {
-    -region-h: 228px;
-    -fx-min-width: 304px;
-    -fx-pref-width: 304px;
-    -fx-max-width: 304px;
-}
-
-.video-tile-view.video-gallery-tile:lg > .content-box > .flip-view .front-box .image-container {
-    -fx-min-width: 304px;
-    -fx-min-height: 228px;
-    -fx-max-width: 304px;
-    -fx-max-height: 228px;
-}
-
-.video-tile-view.video-gallery-tile:md > .content-box > .flip-view .front-box .main-image-region {
-    -region-h: 216px;
-    -fx-min-width: 288px;
-    -fx-pref-width: 288px;
-    -fx-max-width: 288px;
-}
-
-.video-tile-view.video-gallery-tile:md > .content-box > .flip-view .front-box .image-container {
-    -fx-min-width: 288px;
-    -fx-min-height: 216px;
-    -fx-max-width: 288px;
-    -fx-max-height: 216px;
-}
-
-.video-tile-view.video-gallery-tile:sm > .content-box > .flip-view .front-box .main-image-region {
-    -region-h: 237px;
-    -fx-min-width: 317px;
-    -fx-pref-width: 317px;
-    -fx-max-width: 317px;
-}
-
 .video-tile-view.video-gallery-tile:sm > .content-box > .flip-view .front-box .image-container {
-    -fx-padding: 0;
-    -fx-min-width: 317px;
-    -fx-min-height: 237px;
-    -fx-max-width: 317px;
-    -fx-max-height: 231px;
+    -fx-padding: 0px;
+}
+
+.video-tile-view.video-gallery-tile:sm > .content-box > .flip-view .front-box .center-box {
+    -fx-padding: 0px;
 }
 
 .video-tile-view.video-gallery-tile {
@@ -4584,6 +4545,18 @@
     -fx-min-width: 317px;
     -fx-pref-width: 317px;
     -fx-max-width: 317px;
+}
+
+.pull-requests-view .tips-label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto Condensed";
+    -fx-text-fill: -grey-60;
+    -fx-graphic-text-gap: 10px;
+}
+
+.pull-requests-view .tips-label .ikonli-font-icon {
+    -fx-icon-color: -grey-60;
+    -fx-icon-size: 20px;
 }
 
 .pull-requests-view .pull-requests-page {

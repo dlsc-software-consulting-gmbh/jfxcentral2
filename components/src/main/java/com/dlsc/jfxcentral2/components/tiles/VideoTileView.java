@@ -60,7 +60,7 @@ public class VideoTileView extends TileView<Video> {
         StackPane imageContainer = new StackPane();
         imageContainer.getStyleClass().add("image-container");
         imageContainer.getChildren().setAll(imageView, remarkLabel);
-        if (isSmall()) {
+        if (isSmall() && !ignoreSmallLayouts()) {
             imageView.setFitWidth(140);
             StackPane.setAlignment(imageView, Pos.BOTTOM_LEFT);
         }else {
@@ -68,5 +68,9 @@ public class VideoTileView extends TileView<Video> {
         }
 
         return imageContainer;
+    }
+
+    protected boolean ignoreSmallLayouts() {
+        return false;
     }
 }
