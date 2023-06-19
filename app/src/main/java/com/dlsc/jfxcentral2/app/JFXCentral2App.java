@@ -1,12 +1,27 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.gemsfx.util.StageManager;
+import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.app.pages.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.app.pages.LoginPage;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
-import com.dlsc.jfxcentral2.app.pages.StartPage;
+import com.dlsc.jfxcentral2.app.pages.ErrorPage;
 import com.dlsc.jfxcentral2.app.pages.RefreshPage;
+import com.dlsc.jfxcentral2.app.pages.StartPage;
 import com.dlsc.jfxcentral2.app.pages.UserProfilePage;
 import com.dlsc.jfxcentral2.app.pages.category.BlogsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.BooksCategoryPage;
@@ -103,19 +118,19 @@ public class JFXCentral2App extends Application {
                     }
                     return new RefreshPage(size);
                 }))
-                .and(createCategoryOrDetailRoute("/blogs", () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/books", () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/companies", () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/downloads", () -> new DownloadsCategoryPage(size), id -> new DownloadDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/libraries", () -> new LibrariesCategoryPage(size), id -> new LibraryDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/people", () -> new PeopleCategoryPage(size), id -> new PersonDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/real_world", () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // legacy routing for real world apps / showcases
-                .and(createCategoryOrDetailRoute("/showcases", () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/tips", () -> new TipCategoryPage(size), id -> new TipDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/tools", () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/tutorials", () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/videos", () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/icons", () -> new IconsCategoryPage(size), id -> new IconPackDetailPage(size, id)))
+                .and(createCategoryOrDetailRoute("/blogs", Blog.class, () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/books", Book.class, () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute("/companies", Company.class, () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/downloads", Download.class, () -> new DownloadsCategoryPage(size), id -> new DownloadDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/libraries", Library.class, () -> new LibrariesCategoryPage(size), id -> new LibraryDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute("/people", Person.class, () -> new PeopleCategoryPage(size), id -> new PersonDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute("/real_world", RealWorldApp.class, () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // legacy routing for real world apps / showcases
+                .and(createCategoryOrDetailRoute("/showcases", RealWorldApp.class, () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/tips", Tip.class, () -> new TipCategoryPage(size), id -> new TipDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/tools", Tool.class, () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/tutorials", Tutorial.class, () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute("/videos", Video.class, () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute("/icons", IkonliPack.class, () -> new IconsCategoryPage(size), id -> new IconPackDetailPage(size, id)))
                 .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/cookies", r -> new LegalPage(size, LegalPage.Section.COOKIES)))
@@ -128,7 +143,8 @@ public class JFXCentral2App extends Application {
                 .and(RouteUtils.get("/refresh", r -> {
                     RepositoryManager.prepareForRefresh();
                     return new RefreshPage(size);
-                }));
+                }))
+                .and(r -> FXFuture.unit(new ErrorPage(size, r)));
 
         if (Boolean.getBoolean("develop")) {
             route = route.filter(DevFilter.create());
@@ -137,20 +153,24 @@ public class JFXCentral2App extends Application {
         return route;
     }
 
-    private Route createCategoryOrDetailRoute(String path, Supplier<Response> masterResponse, Callback<String, Response> detailedResponse) {
+    private Route createCategoryOrDetailRoute(String path, Class<? extends ModelObject> clazz, Supplier<Response> masterResponse, Callback<String, Response> detailedResponse) {
         return r -> {
             if (r.path().startsWith(path)) {
-                return FXFuture.apply(() -> createResponse(r, masterResponse, detailedResponse));
+                return FXFuture.apply(() -> createResponse(r, clazz, masterResponse, detailedResponse));
             }
 
             return null;
         };
     }
 
-    private Response createResponse(Request request, Supplier<Response> categoryResponse, Callback<String, Response> detailedResponse) {
+    private Response createResponse(Request request,  Class<? extends ModelObject> clazz, Supplier<Response> categoryResponse, Callback<String, Response> detailedResponse) {
         int index = request.path().lastIndexOf("/");
         if (index > 0) {
             String id = request.path().substring(index + 1).trim();
+            if (!DataRepository2.getInstance().isValidId(clazz, id)) {
+                return new ErrorPage(size, request);
+            }
+
             return detailedResponse.call(id);
         }
 
