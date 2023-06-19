@@ -1,11 +1,14 @@
 package com.dlsc.jfxcentral2.components;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
@@ -23,7 +26,19 @@ public class Header extends HBox {
         icon.getStyleClass().add("header-icon");
         icon.iconCodeProperty().bind(iconProperty());
 
-        getChildren().setAll(title, new Spacer(), icon);
+        StackPane wrapper = new StackPane(icon);
+        wrapper.getStyleClass().add("header-icon-wrapper");
+        wrapper.cursorProperty().bind(Bindings.createObjectBinding(()-> getOnIconClickAction() == null ? Cursor.DEFAULT : Cursor.HAND, onIconClickActionProperty()));
+        wrapper.setOnMousePressed(evt -> {
+            Runnable action = getOnIconClickAction();
+            if (action != null) {
+                action.run();
+            }
+            evt.consume();
+        });
+
+
+        getChildren().setAll(title, new Spacer(), wrapper);
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title", "Overview");
@@ -54,4 +69,17 @@ public class Header extends HBox {
         this.icon.set(icon);
     }
 
+    private final ObjectProperty<Runnable> onIconClickAction = new SimpleObjectProperty<>(this, "onIconClickAction");
+
+    public Runnable getOnIconClickAction() {
+        return onIconClickAction.get();
+    }
+
+    public ObjectProperty<Runnable> onIconClickActionProperty() {
+        return onIconClickAction;
+    }
+
+    public void setOnIconClickAction(Runnable onIconClickAction) {
+        this.onIconClickAction.set(onIconClickAction);
+    }
 }
