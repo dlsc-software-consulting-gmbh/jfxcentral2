@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -21,14 +22,18 @@ import java.util.EnumSet;
 
 public class IconPreviewPane extends PaneBase {
     private int columnCount = 4;
+    private Size cachedSize;
+
     public IconPreviewPane() {
         getStyleClass().addAll("icon-preview-pane", "icon-grid-wrapper");
         modelProperty().addListener(it -> requestLayout());
         widthProperty().addListener((ob, ov, nv) -> {
+            Size size = getSize();
             int tempColumnCount = (int) (isSmall() ? nv.doubleValue() / 60 : isMedium() ? nv.doubleValue() / 55 : nv.doubleValue() / 76);
-            if (tempColumnCount == columnCount || tempColumnCount < 1) {
+            if ((tempColumnCount == columnCount || tempColumnCount < 1) && cachedSize == size) {
                 return;
             }
+            cachedSize = size;
             columnCount = tempColumnCount;
             layoutBySize();
         });
