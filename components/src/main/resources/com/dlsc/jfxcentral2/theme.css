@@ -95,13 +95,13 @@
     -youtube-red: #ee282e;
     -background: #f1f2f2;
     -blue-shadow: dropshadow(gaussian, rgba(14, 74, 228, 0.25), 30, 0.2, 0, 0); /* 20% alpha */
-    -box-shadow: null; /* dropshadow(gaussian, -grey-10, 10, 0.5, 0, 0); */
+    -box-shadow: dropshadow(gaussian, -grey-10, 10, 0.5, 0, 0);
 
     /** -------------------------------
      * MarkdownView
      */
     -mdfx-font-color: -grey-60;
-    -mdfx-link-color: blue;
+    -mdfx-link-color: -bright-blue;
     -mdfx-border-color-1: #888;
 
     -mdfx-bg-color-1: #ccc;
@@ -115,6 +115,67 @@
 .root {
     -fx-font-family: "Spline Sans";
     -fx-font-size: 16px;
+}
+
+.setup-view {
+    -fx-background-color: #070B32;
+    -fx-padding: 50px;
+}
+
+.setup-view .inner-box {
+    -fx-spacing: 30px;
+    -fx-alignment: center-left;
+    -fx-max-width: 800px;
+}
+
+.setup-view .inner-box .custom-image-view {
+    -fx-fit-height: 100px;
+}
+
+.setup-view .inner-box .label {
+    -fx-background-color: #070B32;
+    -fx-font-size: 1.5em;
+    -fx-text-fill: -white !important;
+}
+
+.setup-view .inner-box .button-box {
+    -fx-spacing: 15px;
+}
+
+.setup-view .inner-box .button-box .button {
+    -fx-background-color: -white, #070B32;
+    -fx-background-insets: 0px, 2px;
+    -fx-background-radius: 0px;
+    -fx-padding: 10px 20px;
+    -fx-font-family: "Spline Sans Medium";
+    -fx-font-size: 1.5em;
+    -fx-text-fill: -white;
+}
+
+.setup-view .inner-box .button-box .button:hover {
+    -fx-background-color: -white, -green;
+}
+
+.update-view {
+    -fx-background-color: #070B32;
+    -fx-padding: 50px;
+}
+
+.update-view .inner-box {
+    -fx-spacing: 30px;
+    -fx-alignment: center;
+    -fx-max-width: 800px;
+}
+
+.update-view .inner-box .custom-image-view {
+    -fx-fit-height: 100px;
+}
+
+.update-view .inner-box .label {
+    -fx-background-color: #070B32;
+    -fx-font-size: 1.5em;
+    -fx-text-fill: -white;
+    -fx-alignment: center;
 }
 
 /** -------------------------------

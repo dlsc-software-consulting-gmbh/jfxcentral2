@@ -52,7 +52,7 @@ public abstract class PageBase extends View {
         sizeProperty().addListener(it -> updateStyleClassBasedOnSize(vbox));
 
         // menubar
-        TopMenuBar topMenuBar = new TopMenuBar(isMobile());
+        TopMenuBar topMenuBar = new TopMenuBar(this);
         topMenuBar.sizeProperty().bind(sizeProperty());
         topMenuBar.setMode(menuMode);
         topMenuBar.showHamburgerMenuProperty().bindBidirectional(showHamburgerMenuProperty());

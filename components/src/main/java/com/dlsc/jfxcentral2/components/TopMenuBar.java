@@ -40,6 +40,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
 import one.jpro.routing.LinkUtil;
+import one.jpro.routing.View;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -58,9 +59,9 @@ public class TopMenuBar extends PaneBase {
     private static final int LOGO_THRESHOLD_SMALL = 480;
 
     private final CustomImageView jfxCentralLogoView;
+    private final View view;
     private SearchField<ModelObject> searchField;
     private final HBox contentBox;
-    private final boolean mobile;
     private final StackPane logoWrapper;
 
     private Node searchTextField;
@@ -70,8 +71,8 @@ public class TopMenuBar extends PaneBase {
         DARK
     }
 
-    public TopMenuBar(boolean mobile) {
-        this.mobile = mobile;
+    public TopMenuBar(View view) {
+        this.view = view;
 
         getStyleClass().add("top-menu-bar");
 
@@ -118,7 +119,7 @@ public class TopMenuBar extends PaneBase {
 
                 ModelObject selectedItem = getSelectedItem();
                 if (selectedItem != null) {
-                    LinkUtil.getSessionManager(TopMenuBar.this).gotoURL(PageUtil.getLink(selectedItem));
+                    view.sessionManager().gotoURL(PageUtil.getLink(selectedItem));
                 }
             }
         };
@@ -234,8 +235,8 @@ public class TopMenuBar extends PaneBase {
             Button downloadsBtn = new Button("Downloads");
             downloadsBtn.setMinWidth(Region.USE_PREF_SIZE);
             downloadsBtn.getStyleClass().add("downloads-button");
-            downloadsBtn.setVisible(!mobile);
-            downloadsBtn.setManaged(!mobile);
+            downloadsBtn.setVisible(!view.isMobile());
+            downloadsBtn.setManaged(!view.isMobile());
             LinkUtil.setLink(downloadsBtn, "/downloads");
 
             Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));

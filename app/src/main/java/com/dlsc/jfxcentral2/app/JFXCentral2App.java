@@ -5,8 +5,8 @@ import com.dlsc.jfxcentral2.app.pages.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.app.pages.LoginPage;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
-import com.dlsc.jfxcentral2.app.pages.RefreshPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
+import com.dlsc.jfxcentral2.app.pages.RefreshPage;
 import com.dlsc.jfxcentral2.app.pages.UserProfilePage;
 import com.dlsc.jfxcentral2.app.pages.category.BlogsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.BooksCategoryPage;
@@ -57,10 +57,6 @@ import java.util.function.Supplier;
 
 public class JFXCentral2App extends Application {
 
-    static {
-        LoadRepository.requestInitialUpdate();
-    }
-
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
     @Override
@@ -101,7 +97,12 @@ public class JFXCentral2App extends Application {
 
     private Route createRoute() {
         Route route = Route.empty()
-                .and(RouteUtils.get("/", r -> new StartPage(size)))
+                .and(RouteUtils.get("/", r -> {
+                    if (RepositoryManager.isRepositoryUpdated()) {
+                        return new StartPage(size);
+                    }
+                    return new RefreshPage(size);
+                }))
                 .and(createCategoryOrDetailRoute("/blogs", () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/books", () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/companies", () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
@@ -124,7 +125,10 @@ public class JFXCentral2App extends Application {
                 .and(RouteUtils.get("/login", r -> new LoginPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
                 .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)))
-                .and(RouteUtils.get("/refresh", r -> new RefreshPage(size)));
+                .and(RouteUtils.get("/refresh", r -> {
+                    RepositoryManager.prepareForRefresh();
+                    return new RefreshPage(size);
+                }));
 
         if (Boolean.getBoolean("develop")) {
             route = route.filter(DevFilter.create());
