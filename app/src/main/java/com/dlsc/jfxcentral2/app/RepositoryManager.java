@@ -1,10 +1,10 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.MergeCommand;
 import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.merge.ContentMergeStrategy;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
@@ -72,7 +72,7 @@ public class RepositoryManager {
         if (!isRepositoryUpdated()) {
             try {
                 initialLoad(monitor);
-                repositoryUpdated.set(true);
+                Platform.runLater(() -> repositoryUpdated.set(true));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -84,24 +84,21 @@ public class RepositoryManager {
     }
 
     private static void initialLoad(ProgressMonitor monitor) throws Exception {
-        if (System.getProperty("jfxcentral.repo") == null) {
-            File repoDirectory = DataRepository2.getRepositoryDirectory();
-            if (!repoDirectory.exists()) {
-                Git.cloneRepository()
-                        .setProgressMonitor(monitor)
-                        .setURI("https://github.com/dlemmermann/jfxcentral-data.git") //
-                        .setBranch("live")
-                        .setDirectory(repoDirectory)
-                        .call();
-            } else {
-                repoDirectory = new File(DataRepository2.getRepositoryDirectory(), "/.git");
-                new Git(FileRepositoryBuilder.create(repoDirectory))
-                        .pull()
-                        .setProgressMonitor(monitor)
-                        .setFastForward(MergeCommand.FastForwardMode.FF)
-                        .setContentMergeStrategy(ContentMergeStrategy.THEIRS)
-                        .call();
-            }
+        File repoDirectory = DataRepository2.getRepositoryDirectory();
+        if (!repoDirectory.exists()) {
+            Git.cloneRepository()
+                    .setProgressMonitor(monitor)
+                    .setURI("https://github.com/dlemmermann/jfxcentral-data.git") //
+                    .setBranch("live")
+                    .setDirectory(repoDirectory)
+                    .call();
+        } else {
+            repoDirectory = new File(DataRepository2.getRepositoryDirectory(), "/.git");
+            new Git(FileRepositoryBuilder.create(repoDirectory))
+                    .pull()
+                    .setProgressMonitor(monitor)
+                    .setContentMergeStrategy(ContentMergeStrategy.THEIRS)
+                    .call();
         }
     }
 
