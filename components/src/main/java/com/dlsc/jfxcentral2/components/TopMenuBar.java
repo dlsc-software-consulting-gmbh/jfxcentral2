@@ -15,7 +15,6 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
-import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import javafx.application.Platform;
@@ -55,8 +54,6 @@ public class TopMenuBar extends PaneBase {
 
     private static final PseudoClass LIGHT_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("light");
     private static final PseudoClass DARK_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("dark");
-    private static final int LOGO_THRESHOLD_LARGE = 1370;
-    private static final int LOGO_THRESHOLD_SMALL = 480;
 
     private final CustomImageView jfxCentralLogoView;
     private final View view;
@@ -85,7 +82,7 @@ public class TopMenuBar extends PaneBase {
 
         jfxCentralLogoView = new CustomImageView();
         jfxCentralLogoView.setPreserveRatio(true);
-        jfxCentralLogoView.getStyleClass().add("jfx-central-logo");
+        jfxCentralLogoView.getStyleClass().addAll("jfx-central-logo", "small");
 
         modeProperty().addListener(it -> {
             if (getMode().equals(Mode.LIGHT)) {
@@ -97,12 +94,8 @@ public class TopMenuBar extends PaneBase {
         logoWrapper = new StackPane(jfxCentralLogoView);
         LinkUtil.setLink(logoWrapper, "/", "Back to homepage");
 
-        widthProperty().addListener((it, oldWidth, newWidth) -> updateLogoStyleClass(newWidth.doubleValue()));
-
         createSearchField();
         layoutBySize();
-
-        updateLogoStyleClass(getWidth());
 
         sceneProperty().addListener(it -> {
             if (getScene() != null && getStyleClass().contains("start-page")) {
@@ -145,24 +138,6 @@ public class TopMenuBar extends PaneBase {
             }
         });
         return searchField;
-    }
-
-    private void updateLogoStyleClass(double newWidth) {
-        if (getSize().equals(Size.LARGE)) {
-            if (newWidth < LOGO_THRESHOLD_LARGE) {
-                if (!jfxCentralLogoView.getStyleClass().contains("small")) {
-                    jfxCentralLogoView.getStyleClass().add("small");
-                }
-            } else {
-                jfxCentralLogoView.getStyleClass().remove("small");
-            }
-        } else if (getSize().equals(Size.SMALL)) {
-            if (!jfxCentralLogoView.getStyleClass().contains("small")) {
-                jfxCentralLogoView.getStyleClass().add("small");
-            }
-        } else {
-            jfxCentralLogoView.getStyleClass().remove("small");
-        }
     }
 
     public List<ModelObject> search(String pattern) {

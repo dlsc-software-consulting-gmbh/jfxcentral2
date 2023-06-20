@@ -1494,6 +1494,13 @@
     -fx-foreground-color: -white;
 }
 
+.top-menu-bar:lg .jfx-central-logo {
+    -fx-scale-x: 1.5;
+    -fx-scale-y: 1.5;
+    -fx-translate-x: 20px;
+    -fx-translate-y: 20px;
+}
+
 .top-menu-bar .context-menu {
     -fx-translate-y: 10px;
     -fx-effect: null;
