@@ -6225,28 +6225,22 @@
 }
 
 /** ------------------------------------
- * links-of-the-week-view
+ * LinksOfTheWeekView
  */
 .links-of-the-week-view {
     -fx-background-color: -background;
 }
 
 .links-of-the-week-view:lg {
-    -fx-min-width: 858px;
     -fx-pref-width: 858px;
-    -fx-max-width: 858px;
 }
 
 .links-of-the-week-view:md {
-    -fx-min-width: 713px;
     -fx-pref-width: 713px;
-    -fx-max-width: 713px;
 }
 
 .links-of-the-week-view:sm {
-    -fx-min-width: 317px;
     -fx-pref-width: 317px;
-    -fx-max-width: 317px;
 }
 
 .links-of-the-week-view .links-box {

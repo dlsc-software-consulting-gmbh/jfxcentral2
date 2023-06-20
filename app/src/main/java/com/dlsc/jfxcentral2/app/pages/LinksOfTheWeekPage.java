@@ -91,9 +91,9 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
     protected List<MenuView.Item> createMenuItems() {
         return DataRepository2.getInstance().getLinksOfTheWeek()
                 .stream()
-                .limit(5)
                 .sorted(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed())
                 .map(links -> new MenuView.Item(DATE_FORMATTER.format(links.getCreatedOn()), null, null))
+                .limit(5)
                 .toList();
     }
 }

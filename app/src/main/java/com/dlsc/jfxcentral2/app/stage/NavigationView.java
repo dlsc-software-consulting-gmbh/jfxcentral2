@@ -34,8 +34,8 @@ public class NavigationView extends HBox {
         refreshButton.setGraphic(new FontIcon(MaterialDesign.MDI_REFRESH));
         refreshButton.setTooltip(new Tooltip("Refresh data"));
         refreshButton.getStyleClass().add("refresh-button");
-        refreshButton.setVisible(!WebAPI.isBrowser());
-        refreshButton.setManaged(!WebAPI.isBrowser());
+        refreshButton.setVisible(!WebAPI.isBrowser() && Boolean.getBoolean("develop"));
+        refreshButton.setManaged(!WebAPI.isBrowser() && Boolean.getBoolean("develop"));
         refreshButton.setOnAction(evt -> sessionManager.gotoURL("/refresh"));
 
         Button back = new Button();
