@@ -7,17 +7,7 @@
     -fx-padding: 2 4 4 4;
 }
 
-.custom-stage:stage-focused {
-    -fx-background-color: gray, #070B32;
-    -fx-background-insets: 0, 1;
-}
-
 .custom-stage:web {
-    -fx-padding: 0 0 0 0;
-    -fx-background-insets: 0;
-}
-
-.custom-stage:web:stage-focused {
     -fx-padding: 0 0 0 0;
     -fx-background-insets: 0;
 }
@@ -29,10 +19,6 @@
 .custom-stage .title-bar > .front-box {
     -fx-padding: 5 10 5 10;
     -fx-spacing: 10;
-}
-
-.custom-stage:stage-focused .title-bar {
-    -fx-background-color: #070B32;
 }
 
 .custom-stage .title-bar > .title {
@@ -72,6 +58,4 @@
     -fx-background-color: rgba(255, 255, 255, .5);
     -fx-background-insets: 0 0 0 4;
     -fx-background-radius: 1000px;
-    /*-fx-border-width: 0;*/
-    /*-fx-border-insets: 0;*/
 }
