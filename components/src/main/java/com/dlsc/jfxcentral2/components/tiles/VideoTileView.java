@@ -8,7 +8,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -60,17 +62,47 @@ public class VideoTileView extends TileView<Video> {
         StackPane imageContainer = new StackPane();
         imageContainer.getStyleClass().add("image-container");
         imageContainer.getChildren().setAll(imageView, remarkLabel);
-        if (isSmall() && !ignoreSmallLayouts()) {
-            imageView.setFitWidth(140);
-            StackPane.setAlignment(imageView, Pos.BOTTOM_LEFT);
-        }else {
-            imageView.fitWidthProperty().bind(imageContainer.widthProperty());
+
+        if (isMedium() && !isVideoGalleryChild()) {
+            Rectangle rectClip = new Rectangle();
+            rectClip.widthProperty().bind(imageContainer.widthProperty());
+            rectClip.heightProperty().bind(imageContainer.heightProperty());
+            imageContainer.setClip(rectClip);
         }
+
+        parentProperty().addListener((ob, ov, node) -> {
+            Pane parent = (Pane) node;
+            if (node != null) {
+                parent.widthProperty().addListener((ob1, ov1, newWidth) -> {
+                    if (isLarge()) {
+                        imageView.fitWidthProperty().bind(imageContainer.widthProperty());
+                    } else {
+                        if (isVideoGalleryChild()) {
+                            imageView.fitWidthProperty().bind(imageContainer.widthProperty());
+                        } else {
+                            if (isSmall()) {
+                                if (imageView.fitWidthProperty().isBound()) {
+                                    imageView.fitWidthProperty().unbind();
+                                }
+                                imageView.setFitWidth(140);
+                                StackPane.setAlignment(imageView, Pos.BOTTOM_LEFT);
+                            } else {
+                                imageView.fitWidthProperty().bind(
+                                        parent.widthProperty()
+                                                .subtract(30 * 2)//padding
+                                                .subtract(20 * 2)//hgaps
+                                                .divide(3.3));
+                            }
+                        }
+                    }
+                });
+            }
+        });
 
         return imageContainer;
     }
 
-    protected boolean ignoreSmallLayouts() {
+    protected boolean isVideoGalleryChild() {
         return false;
     }
 }
