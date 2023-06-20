@@ -11,7 +11,7 @@ public class VideoGalleryTileView extends VideoTileView {
     }
 
     @Override
-    protected boolean ignoreSmallLayouts() {
+    protected boolean isVideoGalleryChild() {
         return true;
     }
 }
