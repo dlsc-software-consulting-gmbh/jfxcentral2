@@ -44,7 +44,6 @@ public class PersonDetailHeader extends DetailHeader<Person> {
         AvatarView avatarImage = new AvatarView();
         avatarImage.setMouseTransparent(true);
         avatarImage.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
-        avatarImage.setEffect(new DropShadow(10, Color.web("#58a6ff")));
         FlowPane nameBadgePane = createNameBadgePane(person);
 
         Label descriptionLabel = new Label();

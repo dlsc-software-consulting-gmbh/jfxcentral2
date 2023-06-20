@@ -5991,7 +5991,7 @@
     -fx-text-fill: -white;
 }
 
-.overview-box .header > .header-icon {
+.overview-box .header > .header-icon-wrapper > .header-icon {
     -fx-icon-size: 25px;
     -fx-icon-color: -white;
 }
