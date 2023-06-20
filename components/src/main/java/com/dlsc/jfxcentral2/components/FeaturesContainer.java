@@ -98,6 +98,8 @@ public class FeaturesContainer extends PaneBase {
             return "Tools";
         } else if (mo instanceof Book) {
             return "Books";
+        } else if (mo instanceof Tip) {
+            return "Tips & Tricks";
         }
 
         return null;
