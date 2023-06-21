@@ -13,51 +13,6 @@ import java.io.File;
 
 public class RepositoryManager {
 
-    private static double total;
-    private static double acc;
-    private static int lastPercentage;
-    private static String taskName;
-
-    /* This main is called by JPro during startup! */
-    public static void main(String[] args) {
-        updateRepository(new ProgressMonitor() {
-
-            @Override
-            public void start(int i) {
-            }
-
-            @Override
-            public void beginTask(String task, int work) {
-                taskName = task;
-                total = work;
-                acc = 0;
-                lastPercentage = 0;
-            }
-
-            @Override
-            public void update(int i) {
-                if (total != ProgressMonitor.UNKNOWN) {
-                    acc += i;
-                    int percentage = (int) ((acc / total) * 100);
-                    if (percentage > lastPercentage) {
-                        lastPercentage = percentage;
-                        System.out.println(taskName + " " + percentage + "%");
-                    }
-                }
-            }
-
-            @Override
-            public void endTask() {
-                System.out.println(taskName + " complete");
-            }
-
-            @Override
-            public boolean isCancelled() {
-                return false;
-            }
-        });
-    }
-
     private static final BooleanProperty repositoryUpdated = new SimpleBooleanProperty();
 
     public static boolean isRepositoryUpdated() {
@@ -100,6 +55,9 @@ public class RepositoryManager {
                     .setContentMergeStrategy(ContentMergeStrategy.THEIRS)
                     .call();
         }
+
+        // perform the actual data loading
+        DataRepository2.getInstance();
     }
 
     public static void prepareForRefresh() {

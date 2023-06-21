@@ -1495,10 +1495,10 @@
 }
 
 .top-menu-bar:lg .jfx-central-logo {
-    -fx-scale-x: 1.5;
-    -fx-scale-y: 1.5;
-    -fx-translate-x: 20px;
-    -fx-translate-y: 20px;
+    -fx-scale-x: 1.3;
+    -fx-scale-y: 1.3;
+    -fx-translate-x: 10px;
+    -fx-translate-y: 10px;
 }
 
 .top-menu-bar .context-menu {

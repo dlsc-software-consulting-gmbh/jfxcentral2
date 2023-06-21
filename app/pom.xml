@@ -1,368 +1,433 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<packaging>jar</packaging>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
 
-	<artifactId>app</artifactId>
-	<name>app</name>
-	<version>1.0-SNAPSHOT</version>
+    <artifactId>app</artifactId>
+    <name>app</name>
+    <version>1.0-SNAPSHOT</version>
 
-	<parent>
-		<groupId>com.dlsc.jfxcentral2</groupId>
-		<artifactId>jfxcentral2</artifactId>
-		<version>1.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
+    <parent>
+        <groupId>com.dlsc.jfxcentral2</groupId>
+        <artifactId>jfxcentral2</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 
-	<properties>
-		<maven.javadoc.skip>true</maven.javadoc.skip>
-	</properties>
+    <properties>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.dlsc.jfxcentral2</groupId>
-			<artifactId>iconfont</artifactId>
-		</dependency>
+    <dependencies>
 
-		<dependency>
-			<groupId>org.eclipse.jgit</groupId>
-			<artifactId>org.eclipse.jgit</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>one.jpro</groupId>
-			<artifactId>jpro-routing-core</artifactId>
-			<version>${routing.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>com.dustinredmond.fxtrayicon</groupId>
+            <artifactId>FXTrayIcon</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>one.jpro</groupId>
-			<artifactId>jpro-routing-dev</artifactId>
-			<version>${routing.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>com.dlsc.jfxcentral2</groupId>
+            <artifactId>iconfont</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>com.dlsc.jfxcentral2</groupId>
-			<artifactId>components</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-core</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>one.jpro</groupId>
+            <artifactId>jpro-routing-core</artifactId>
+            <version>${routing.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-javafx</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>one.jpro</groupId>
+            <artifactId>jpro-routing-dev</artifactId>
+            <version>${routing.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.controlsfx</groupId>
-			<artifactId>controlsfx</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>com.dlsc.jfxcentral2</groupId>
+            <artifactId>components</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
-		<dependency>
-			<groupId>com.dlsc.gemsfx</groupId>
-			<artifactId>gemsfx</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-core</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>fr.brouillard.oss</groupId>
-			<artifactId>cssfx</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>com.sandec.jpro</groupId>
-			<artifactId>jpro-webapi</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+        </dependency>
 
-		<!--    ** Icon pack dependencies START **  -->
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-antdesignicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-bootstrapicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-boxicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-bpmn-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-captainicon-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-carbonicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-codicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-coreui-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-dashicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-devicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-elusive-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-entypo-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-evaicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-feather-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-fileicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-fluentui-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-fontawesome-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-fontawesome5-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-fontelico-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-foundation-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-hawcons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-icomoon-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-ionicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-ionicons4-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-jamicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-ligaturesymbols-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-lineawesome-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-linecons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-maki-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-maki2-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-mapicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-material-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-material2-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-materialdesign-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-materialdesign2-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-medicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-metrizeicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-microns-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-ociicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-octicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-openiconic-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-paymentfont-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-prestashopicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-remixicon-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-runestroicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-simpleicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-simplelineicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-subway-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-swing</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-themify-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-typicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-unicons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-weathericons-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-websymbols-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-whhg-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-win10-pack</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kordamp.ikonli</groupId>
-			<artifactId>ikonli-zondicons-pack</artifactId>
-		</dependency>
-		<!--    ** Icon pack dependencies END **  -->
+        <dependency>
+            <groupId>com.dlsc.gemsfx</groupId>
+            <artifactId>gemsfx</artifactId>
+        </dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>fr.brouillard.oss</groupId>
+            <artifactId>cssfx</artifactId>
+        </dependency>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>jpro - sandec repository</id>
-			<url>https://sandec.jfrog.io/artifactory/repo/</url>
-		</pluginRepository>
-	</pluginRepositories>
+        <dependency>
+            <groupId>com.sandec.jpro</groupId>
+            <artifactId>jpro-webapi</artifactId>
+        </dependency>
 
-	<repositories>
-		<repository>
-			<id>jpro - sandec repository</id>
-			<url>https://sandec.jfrog.io/artifactory/repo/</url>
-		</repository>
-	</repositories>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-antdesignicons-pack</artifactId>
+        </dependency>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.openjfx</groupId>
-				<artifactId>javafx-maven-plugin</artifactId>
-				<version>0.0.8</version>
-				<configuration>
-					<mainClass>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClass>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>one.jpro</groupId>
-				<artifactId>jpro-maven-plugin</artifactId>
-				<version>${jpro.version}</version>
-				<configuration>
-					<mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
-				</configuration>
-			</plugin>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-bootstrapicons-pack</artifactId>
+        </dependency>
 
-			<!-- For Conveyor: Copy all dependencies excluding JavaFX which will be jlinked in for each platform. -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>target/classpath-jars</outputDirectory>
-							<includeScope>runtime</includeScope>
-							<excludeGroupIds>org.openjfx</excludeGroupIds>
-							<overWriteReleases>true</overWriteReleases>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-boxicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-bpmn-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-captainicon-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-carbonicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-codicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-coreui-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-dashicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-devicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-elusive-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-entypo-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-evaicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-feather-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fileicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fluentui-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fontawesome-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fontawesome5-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fontelico-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-foundation-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-hawcons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-icomoon-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-ionicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-ionicons4-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-jamicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-ligaturesymbols-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-lineawesome-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-linecons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-maki-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-maki2-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-mapicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-material-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-material2-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-materialdesign-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-materialdesign2-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-medicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-metrizeicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-microns-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-ociicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-octicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-openiconic-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-paymentfont-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-prestashopicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-remixicon-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-runestroicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-simpleicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-simplelineicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-subway-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-swing</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-themify-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-typicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-unicons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-weathericons-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-websymbols-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-whhg-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-win10-pack</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-zondicons-pack</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jpro - sandec repository</id>
+            <url>https://sandec.jfrog.io/artifactory/repo/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <repositories>
+        <repository>
+            <id>jpro - sandec repository</id>
+            <url>https://sandec.jfrog.io/artifactory/repo/</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>one.jpro</groupId>
+                <artifactId>jpro-maven-plugin</artifactId>
+                <version>${jpro.version}</version>
+                <configuration>
+                    <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
+                </configuration>
+            </plugin>
+
+            <!-- For Conveyor: Copy all dependencies excluding JavaFX which will be jlinked in for each platform. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/classpath-jars</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                            <excludeGroupIds>org.openjfx</excludeGroupIds>
+                            <overWriteReleases>true</overWriteReleases>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

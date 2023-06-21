@@ -102,6 +102,12 @@ public abstract class PageBase extends View {
         glassPane.setMouseTransparent(true);
         glassPane.visibleProperty().bind(topMenuBar.usedProperty().or(blockingProperty()));
 
+        if (menuMode.equals(TopMenuBar.Mode.LIGHT)) {
+            // make sure the JFX logo can be fully seen (without this call it gets clipped)
+            // the JFX logo uses scale-x / -y, hence it is bigger than its parent container
+            topMenuBar.setViewOrder(Double.MIN_VALUE);
+        }
+
         StackPane root = new StackPane(vbox, glassPane, hamburgerMenuView);
         root.getStyleClass().add("background");
 

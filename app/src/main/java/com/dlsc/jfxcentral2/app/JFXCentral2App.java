@@ -108,6 +108,10 @@ public class JFXCentral2App extends Application {
         }
 
         stage.show();
+
+        if (!WebAPI.isBrowser()) {
+            new TrayIconManager(stage, sessionManager);
+        }
     }
 
     private Route createRoute() {

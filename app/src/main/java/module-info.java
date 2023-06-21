@@ -2,6 +2,7 @@ open module com.dlsc.jfxcentral2.app {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.swing;
 
     requires jfxcentral.data;
     requires org.eclipse.jgit;
@@ -71,6 +72,7 @@ open module com.dlsc.jfxcentral2.app {
     requires org.kordamp.ikonli.whhg;
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
+    requires FXTrayIcon;
     // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.app;
