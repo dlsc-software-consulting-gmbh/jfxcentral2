@@ -47,6 +47,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -65,6 +66,7 @@ public class SearchFilterView<T> extends PaneBase {
      */
     private final StringProperty searchText = new SimpleStringProperty(this, "searchText", "");
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    private ScheduledFuture<?> future;
     private final SearchTextField searchField = new SearchTextField(true);
     private final StringConverter<FilterItem<T>> predicateItemStringConverter = new StringConverter<>() {
         @Override
@@ -103,7 +105,10 @@ public class SearchFilterView<T> extends PaneBase {
         searchField.managedProperty().bind(searchField.visibleProperty());
         searchField.visibleProperty().bind(onSearchProperty().isNotNull());
         searchField.textProperty().addListener((ob, ov, str) -> {
-            executorService.schedule(() -> {
+            if (future != null) {
+                future.cancel(false);
+            }
+            future = executorService.schedule(() -> {
                 if (StringUtils.equalsIgnoreCase(str, searchField.getText())) {
                     Platform.runLater(() -> searchText.set(str));
                 }
