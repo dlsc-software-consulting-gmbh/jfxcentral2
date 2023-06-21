@@ -39,6 +39,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -103,7 +104,7 @@ public class SearchFilterView<T> extends PaneBase {
         searchField.visibleProperty().bind(onSearchProperty().isNotNull());
         searchField.textProperty().addListener((ob, ov, str) -> {
             executorService.schedule(() -> {
-                if (str.equals(searchField.getText())) {
+                if (StringUtils.equalsIgnoreCase(str, searchField.getText())) {
                     Platform.runLater(() -> searchText.set(str));
                 }
             }, SEARCH_DELAY, TimeUnit.MILLISECONDS);
