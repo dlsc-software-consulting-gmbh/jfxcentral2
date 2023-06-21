@@ -15,11 +15,11 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.app.pages.ErrorPage;
 import com.dlsc.jfxcentral2.app.pages.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.app.pages.LoginPage;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
-import com.dlsc.jfxcentral2.app.pages.ErrorPage;
 import com.dlsc.jfxcentral2.app.pages.RefreshPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
 import com.dlsc.jfxcentral2.app.pages.UserProfilePage;
@@ -86,6 +86,13 @@ public class JFXCentral2App extends Application {
         SessionManager sessionManager = SessionManager.getDefault(routeNode, stage);
         routeNode.start(sessionManager);
 
+        // tray icon
+        RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
+            if (!WebAPI.isBrowser()) {
+                new TrayIconManager(stage, sessionManager);
+            }
+        });
+
         // customs stage for decorations / the chrome
         CustomStage customStage = new CustomStage(stage, routeNode, sessionManager);
         customStage.setCloseHandler(stage::close);
@@ -108,10 +115,6 @@ public class JFXCentral2App extends Application {
         }
 
         stage.show();
-
-        if (!WebAPI.isBrowser()) {
-            new TrayIconManager(stage, sessionManager);
-        }
     }
 
     private Route createRoute() {

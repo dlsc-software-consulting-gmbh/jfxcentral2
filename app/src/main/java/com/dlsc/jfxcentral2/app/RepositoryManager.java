@@ -55,9 +55,6 @@ public class RepositoryManager {
                     .setContentMergeStrategy(ContentMergeStrategy.THEIRS)
                     .call();
         }
-
-        // perform the actual data loading
-        DataRepository2.getInstance();
     }
 
     public static void prepareForRefresh() {

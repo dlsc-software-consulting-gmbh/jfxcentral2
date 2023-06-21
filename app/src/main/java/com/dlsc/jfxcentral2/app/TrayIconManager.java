@@ -13,6 +13,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class TrayIconManager {
@@ -24,7 +25,7 @@ public class TrayIconManager {
         this.stage = stage;
         this.sessionManager = sessionManager;
 
-        FXTrayIcon icon = new FXTrayIcon(stage, JFXCentral2App.class.getResource("tray-icon2.png"), 350, 210);
+        FXTrayIcon icon = new FXTrayIcon(stage, Objects.requireNonNull(JFXCentral2App.class.getResource("tray-icon2.png")), 350, 210);
 
         Menu libraries = new Menu("Libraries");
         Menu people = new Menu("People");
