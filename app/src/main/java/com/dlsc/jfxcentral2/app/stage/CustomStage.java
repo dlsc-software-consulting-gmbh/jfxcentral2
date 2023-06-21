@@ -335,9 +335,29 @@ public class CustomStage extends BorderPane {
                 Stage stage = (Stage) getScene().getWindow();
 
                 if (maxButton.isSelected()) {
+
+                    lastX = stage.getX();
+                    lastY = stage.getY();
+                    lastWidth = stage.getWidth();
+                    lastHeight = stage.getHeight();
+
                     stage.setFullScreenExitHint("");
                     stage.setFullScreen(true);
+
+                    // Get current screen of the stage
+                    ObservableList<Screen> screens = Screen.getScreensForRectangle(new Rectangle2D(stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight()));
+
+                    // Change stage properties
+                    Rectangle2D bounds = screens.get(0).getVisualBounds();
+                    stage.setX(bounds.getMinX());
+                    stage.setY(bounds.getMinY());
+                    stage.setWidth(bounds.getWidth());
+                    stage.setHeight(bounds.getHeight());
                 } else {
+                    stage.setX(lastX);
+                    stage.setY(lastY);
+                    stage.setWidth(lastWidth);
+                    stage.setHeight(lastHeight);
                     stage.setFullScreen(false);
                 }
             });
