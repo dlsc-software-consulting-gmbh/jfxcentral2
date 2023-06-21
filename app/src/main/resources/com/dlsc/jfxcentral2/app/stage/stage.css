@@ -19,13 +19,15 @@
 .custom-stage .title-bar > .front-box {
     -fx-padding: 5 10 5 10;
     -fx-spacing: 10;
+    -fx-alignment: center-left;
 }
 
-.custom-stage .title-bar > .title {
+.custom-stage .title-bar .title {
     -fx-font-family: "Roboto Condensed";
     -fx-font-size: 20px;
     -fx-text-fill: -white;
     -fx-padding: 5;
+    /*-fx-graphic: url("jfx.png");*/
 }
 
 .custom-stage .title-bar .button,
@@ -48,6 +50,57 @@
 .custom-stage .title-bar .button:pressed .ikonli-font-icon,
 .custom-stage .title-bar .toggle-button:pressed .ikonli-font-icon {
     -fx-icon-color: -red;
+}
+
+.custom-stage .title-bar .close-button:hover .ikonli-font-icon{
+    -fx-icon-color: -red;
+}
+
+.custom-stage .title-bar.mac .control-box {
+    -fx-alignment: center-left;
+    -fx-padding: 0 10px 0 0;
+    -fx-spacing: 3px;
+}
+
+.custom-stage .title-bar.mac .control-box:hover .control-button  .ikonli-font-icon{
+    visibility: visible;
+}
+
+.custom-stage .title-bar.mac .control-button {
+    -fx-background-radius: 1000px;
+    -fx-padding: 0px 4.5px 0px 4.5px;
+    -fx-background-insets: 2px;
+    -fx-cursor: hand;
+}
+
+.custom-stage .title-bar.mac > .front-box .control-button .ikonli-font-icon {
+    visibility: hidden;
+    -fx-icon-size: 10px;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+    -fx-icon-color: rgba(0, 0, 0, 0.7);
+}
+
+.custom-stage .title-bar.mac > .front-box .close-button {
+    -fx-background-color: #fc5350;
+}
+
+.custom-stage .title-bar.mac > .front-box .min-button {
+    -fx-background-color: #f8b63a;
+}
+
+.custom-stage .title-bar.mac > .front-box .max-button {
+    -fx-background-color: #35c046;
+}
+
+.custom-stage .title-bar.mac > .front-box .max-button .ikonli-font-icon {
+    -fx-icon-code: "oi-fullscreen-enter";
+    -fx-icon-size: 9px;
+}
+
+.custom-stage .title-bar.mac > .front-box .max-button:selected .ikonli-font-icon {
+    -fx-icon-code: "oi-fullscreen-exit";
+    -fx-icon-size: 9px;
 }
 
 .custom-stage .stage-content > .scroll-pane > .scroll-bar .track {

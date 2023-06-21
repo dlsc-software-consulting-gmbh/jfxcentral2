@@ -1,6 +1,8 @@
 package com.dlsc.jfxcentral2.app.stage;
 
+import com.dlsc.jfxcentral2.app.utils.OSUtil;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -322,9 +324,10 @@ public class CustomStage extends BorderPane {
             FontIcon maxIcon = new FontIcon(MaterialDesign.MDI_WINDOW_MAXIMIZE);
             FontIcon restoreIcon = new FontIcon(MaterialDesign.MDI_WINDOW_RESTORE);
             FontIcon minIcon = new FontIcon(MaterialDesign.MDI_WINDOW_MINIMIZE);
-            FontIcon closeIcon = new FontIcon(MaterialDesign.MDI_CLOSE);
+            FontIcon closeIcon = new FontIcon(IkonUtil.close);
 
             ToggleButton maxButton = new ToggleButton();
+            maxButton.getStyleClass().addAll("control-button", "max-button");
             maxButton.setGraphic(maxIcon);
             maxButton.setFocusTraversable(false);
             maxButton.selectedProperty().addListener(it -> maxButton.setGraphic(maxButton.isSelected() ? restoreIcon : maxIcon));
@@ -362,6 +365,7 @@ public class CustomStage extends BorderPane {
             });
 
             Button minButton = new Button();
+            minButton.getStyleClass().addAll("control-button", "min-button");
             minButton.setFocusTraversable(false);
             minButton.setGraphic(minIcon);
             minButton.setOnAction(evt -> {
@@ -370,6 +374,7 @@ public class CustomStage extends BorderPane {
             });
 
             Button closeButton = new Button();
+            closeButton.getStyleClass().addAll("control-button", "close-button");
             closeButton.disableProperty().bind(closeHandlerProperty().isNull());
             closeButton.setFocusTraversable(false);
             closeButton.setGraphic(closeIcon);
@@ -377,9 +382,20 @@ public class CustomStage extends BorderPane {
 
             NavigationView navigationView = new NavigationView(sessionManager);
 
-            HBox frontBox = new HBox(closeButton, new Spacer(), navigationView, minButton, maxButton);
-            frontBox.getStyleClass().add("front-box");
-            getChildren().addAll(label, frontBox);
+            if (OSUtil.isMac()) {
+                getStyleClass().add("mac");
+                HBox controlBox = new HBox(closeButton, minButton, maxButton);
+                controlBox.getStyleClass().add("control-box");
+
+                HBox frontBox = new HBox(controlBox, new Spacer(), navigationView);
+                frontBox.getStyleClass().add("front-box");
+                getChildren().addAll(label, frontBox);
+            } else {
+                HBox frontBox = new HBox(label, new Spacer(), navigationView, minButton, maxButton, closeButton);
+                frontBox.getStyleClass().add("front-box");
+                getChildren().add(frontBox);
+            }
+
         }
 
         public Label getLabel() {

@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -43,15 +44,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class SearchFilterView<T> extends PaneBase {
-
     private static final String DEFAULT_STYLE_CLASS = "search-filter-view";
     private static final Orientation FILTER_BOX_DEFAULT_ORIENTATION = Orientation.HORIZONTAL;
     private static final String WITH_SEARCH_FIELD = "with-search-field";
+    /**
+     * delayed search interval 200 ms
+     */
+    private static final int SEARCH_DELAY = 200;
+    /**
+     * delayed search text
+     */
+    private final StringProperty searchText = new SimpleStringProperty(this, "searchText", "");
+    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     private final SearchTextField searchField = new SearchTextField(true);
     private final StringConverter<FilterItem<T>> predicateItemStringConverter = new StringConverter<>() {
         @Override
@@ -89,6 +101,13 @@ public class SearchFilterView<T> extends PaneBase {
         searchField.promptTextProperty().bind(searchPromptTextProperty());
         searchField.managedProperty().bind(searchField.visibleProperty());
         searchField.visibleProperty().bind(onSearchProperty().isNotNull());
+        searchField.textProperty().addListener((ob, ov, str) -> {
+            executorService.schedule(() -> {
+                if (str.equals(searchField.getText())) {
+                    Platform.runLater(() -> searchText.set(str));
+                }
+            }, SEARCH_DELAY, TimeUnit.MILLISECONDS);
+        });
 
         filterBoxOrientationProperty().addListener(it -> layoutBySize());
         filterGroupsProperty().addListener((InvalidationListener) it -> layoutBySize());
@@ -203,13 +222,13 @@ public class SearchFilterView<T> extends PaneBase {
 
         Stream.Builder<Observable> builder = Stream.builder();
         builder.add(onSearchProperty());
-        builder.add(searchField.textProperty());
+        builder.add(searchText);
         childPredicateProperties.forEach(builder::add);
 
         predicate.bind(Bindings.createObjectBinding(() -> {
             Predicate<T> predicate = item -> true;
             if (getOnSearch() != null) {
-                predicate = predicate.and(getOnSearch().apply(searchField.getText()));
+                predicate = predicate.and(getOnSearch().apply(searchText.get()));
             }
             for (ObjectProperty<Predicate<T>> childPredicateProperty : childPredicateProperties) {
                 predicate = predicate.and(childPredicateProperty.get());
