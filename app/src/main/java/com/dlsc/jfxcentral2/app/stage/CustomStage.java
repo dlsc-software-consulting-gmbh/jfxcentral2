@@ -348,7 +348,7 @@ public class CustomStage extends BorderPane {
                     ObservableList<Screen> screens = Screen.getScreensForRectangle(new Rectangle2D(stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight()));
 
                     // Change stage properties
-                    Rectangle2D bounds = screens.get(0).getVisualBounds();
+                    Rectangle2D bounds = screens.get(0).getBounds();
                     stage.setX(bounds.getMinX());
                     stage.setY(bounds.getMinY());
                     stage.setWidth(bounds.getWidth());
