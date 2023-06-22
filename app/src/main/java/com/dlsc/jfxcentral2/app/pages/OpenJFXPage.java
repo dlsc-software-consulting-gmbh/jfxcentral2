@@ -3,10 +3,10 @@ package com.dlsc.jfxcentral2.app.pages;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral2.app.service.LoadPullRequestsService;
 import com.dlsc.jfxcentral2.components.FeaturesContainer;
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.OpenJFXProjectView;
 import com.dlsc.jfxcentral2.components.PullRequestsView;
 import com.dlsc.jfxcentral2.components.StripView;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.filters.PullRequestsFilterView;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.InvalidationListener;
@@ -24,7 +24,7 @@ public class OpenJFXPage extends PageBase {
     private final FilteredList<PullRequest> filteredList;
 
     public OpenJFXPage(ObjectProperty<Size> size) {
-        super(size, TopMenuBar.Mode.LIGHT);
+        super(size, Mode.LIGHT);
 
         // data
         pullRequests = FXCollections.observableArrayList();

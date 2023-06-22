@@ -2647,6 +2647,14 @@
     -fx-icon-color: -white;
 }
 
+.category-header:light .header-title {
+    -fx-text-fill: -grey-100;
+}
+
+.category-header:light .header-title > .ikonli-font-icon {
+    -fx-icon-color: -grey-100;
+}
+
 .category-header .header-title > .ikonli-font-icon {
     -fx-icon-size: 58px;
 }
@@ -7828,3 +7836,126 @@
 .error-view .dialog-pane > .center-box .buttons-box .action-btn-red {
     -bg: -red;
 }
+
+/** ----------------------------------------------------------------------------
+ * TeamView
+ */
+.team-page-wrapper {
+    -fx-padding: 25px;
+}
+
+.team-page-wrapper:lg {
+    -fx-padding: 60px 0 50px 0;
+}
+
+.team-page-wrapper .category-header {
+    -fx-min-height: 70px;
+    -fx-pref-height: 70px;
+    -fx-max-height: 70px;
+    -fx-padding: 0;
+}
+
+.team-page-wrapper .category-header .header-title {
+    -fx-padding: 0px;
+}
+
+.team-view:lg {
+    -fx-max-width: 1080px;
+    -fx-padding: 0px 30px;
+}
+
+.team-view {
+    -fx-background-color: -white;
+    -fx-padding: 0 30px;
+    -fx-spacing: 0px;
+}
+
+.member-cell-view:md-lg {
+    -fx-alignment: center;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.member-cell-view.last {
+    -fx-border-color: transparent;
+}
+
+.member-cell-view:md-lg .content-box {
+    -fx-alignment: top-center;
+    -fx-spacing: 35px;
+}
+
+.member-cell-view .name-box {
+    -fx-alignment: center-left;
+    -fx-spacing: 5px;
+}
+
+.member-cell-view:md-lg .center-box {
+    -fx-padding: 30px 0;
+}
+
+.member-cell-view .avatar-view {
+    -fx-avatar-size: 100px;
+}
+
+.member-cell-view:md-lg .avatar-view {
+    -fx-padding: 30px 0 0 0;
+}
+
+.member-cell-view .name-label {
+    -fx-font-size: 20px;
+}
+
+.member-cell-view .job-title-label {
+    -fx-font-size: 13px;
+    -fx-padding: 5px 0 10px 0;
+}
+
+.member-cell-view:sm .job-title-label {
+    -fx-padding:0;
+}
+
+.member-cell-view .social-links-view {
+    -fx-background-color: -white;
+    -fx-effect: null;
+    -fx-alignment: center-left;
+    -fx-padding: 10px 0 0 0;
+}
+
+.member-cell-view:sm .social-links-view {
+    -fx-alignment: center;
+}
+
+.member-cell-view .social-links-view .button {
+    -fx-background-color: -bright-blue;
+    -fx-text-fill: -white;
+}
+
+.member-cell-view .social-links-view .button:hover {
+    -fx-background-color: derive(-bright-blue, -10%);
+}
+
+.member-cell-view .social-links-view .button:pressed {
+    -fx-background-color: derive(-bright-blue, -20%);
+}
+
+.member-cell-view .social-links-view .button .ikonli-font-icon {
+    -fx-icon-color: -white;
+}
+
+.team-view:sm {
+    -fx-spacing: 30px;
+    -fx-padding: 30px 30px 0 30px;
+}
+
+.member-cell-view:sm {
+    -fx-padding: 0 0 30px 0;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.member-cell-view:sm .content-box {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+

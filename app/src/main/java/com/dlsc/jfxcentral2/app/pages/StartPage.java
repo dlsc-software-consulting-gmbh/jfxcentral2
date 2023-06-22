@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.app.pages;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.HomePageTopView;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.VideoGalleryView;
 import com.dlsc.jfxcentral2.components.WebsiteChangesView;
 import com.dlsc.jfxcentral2.components.WeekLinksLiteView;
@@ -18,7 +18,7 @@ import java.util.List;
 public class StartPage extends PageBase {
 
     public StartPage(ObjectProperty<Size> size) {
-        super(size, TopMenuBar.Mode.DARK);
+        super(size, Mode.DARK);
     }
 
     @Override

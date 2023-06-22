@@ -63,11 +63,6 @@ public class TopMenuBar extends PaneBase {
 
     private Node searchTextField;
 
-    public enum Mode {
-        LIGHT,
-        DARK
-    }
-
     public TopMenuBar(View view) {
         this.view = view;
 

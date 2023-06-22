@@ -7,8 +7,8 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.StripView;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.userprofile.UserProfileView;
 import com.dlsc.jfxcentral2.model.Comment;
 import com.dlsc.jfxcentral2.model.RegisteredUser;
@@ -28,7 +28,7 @@ import java.util.Random;
 public class UserProfilePage extends PageBase {
 
     public UserProfilePage(ObjectProperty<Size> size) {
-        super(size, TopMenuBar.Mode.LIGHT);
+        super(size, Mode.LIGHT);
     }
 
     @Override

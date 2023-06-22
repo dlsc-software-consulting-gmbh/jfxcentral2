@@ -33,7 +33,7 @@ public class TopPane extends PaneBase {
     }
 
     private void updateView() {
-        if (topMenuBar.getMode().equals(TopMenuBar.Mode.DARK)) {
+        if (topMenuBar.getMode().equals(Mode.DARK)) {
             getChildren().setAll(content, topMenuBar);
         } else {
             VBox box = new VBox(topMenuBar, content);

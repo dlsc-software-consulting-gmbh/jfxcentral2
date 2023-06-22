@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral2.components.CopyrightView;
 import com.dlsc.jfxcentral2.components.FooterView;
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.SponsorsView;
 import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.TopPane;
@@ -26,7 +27,7 @@ import java.util.Objects;
 
 public abstract class PageBase extends View {
 
-    private final TopMenuBar.Mode menuMode;
+    private final Mode menuMode;
 
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
@@ -38,7 +39,7 @@ public abstract class PageBase extends View {
         return sizeProperty().get();
     }
 
-    public PageBase(ObjectProperty<Size> size, TopMenuBar.Mode menuMode) {
+    public PageBase(ObjectProperty<Size> size, Mode menuMode) {
         this.size.bind(size);
         this.menuMode = Objects.requireNonNull(menuMode);
     }
@@ -102,7 +103,7 @@ public abstract class PageBase extends View {
         glassPane.setMouseTransparent(true);
         glassPane.visibleProperty().bind(topMenuBar.usedProperty().or(blockingProperty()));
 
-        if (menuMode.equals(TopMenuBar.Mode.LIGHT)) {
+        if (menuMode.equals(Mode.LIGHT)) {
             // make sure the JFX logo can be fully seen (without this call it gets clipped)
             // the JFX logo uses scale-x / -y, hence it is bigger than its parent container
             topMenuBar.setViewOrder(Double.MIN_VALUE);
