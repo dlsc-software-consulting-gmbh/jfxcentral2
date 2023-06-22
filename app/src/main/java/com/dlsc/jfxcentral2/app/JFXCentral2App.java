@@ -74,8 +74,12 @@ public class JFXCentral2App extends Application {
 
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
+    private TrayIconManager trayIconManager;
+
     @Override
     public void start(Stage stage) {
+        System.setProperty("prism.lcdtext", "false");
+
         stage.initStyle(StageStyle.UNDECORATED);
 
         // route node
@@ -89,7 +93,11 @@ public class JFXCentral2App extends Application {
         // tray icon
         RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
             if (!WebAPI.isBrowser()) {
-                new TrayIconManager(stage, sessionManager);
+                if (trayIconManager == null) {
+                    trayIconManager = new TrayIconManager(stage, sessionManager);
+                } else {
+                    trayIconManager.refresh();
+                }
             }
         });
 
