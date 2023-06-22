@@ -2221,6 +2221,95 @@
     -fx-cursor: default;
 }
 
+.quick-link-view.senapt-link-view {
+    -fx-padding: 0;
+}
+
+.quick-link-view.senapt-link-view:sm {
+    -fx-background-size: cover;
+}
+
+.quick-link-view.senapt-link-view .label {
+    -fx-text-fill: -white;
+}
+
+.quick-link-view.senapt-link-view:md .content-box .custom-image-view {
+    -fx-fit-width: 135px;
+}
+
+.quick-link-view.senapt-link-view:sm .content-box .custom-image-view {
+    -fx-fit-width: 150px;
+}
+
+.quick-link-view.senapt-link-view-0 {
+    -fx-background-image: url("utils/senapt-bg0.png");
+}
+
+.quick-link-view.senapt-link-view-0 .content-box {
+    -fx-spacing: 45px;
+    -fx-alignment: center;
+}
+
+.quick-link-view.senapt-link-view-0:sm .content-box {
+    -fx-spacing: 66px;
+}
+
+.quick-link-view.senapt-link-view-0 .label {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.quick-link-view.senapt-link-view-0:sm .label {
+    -fx-font-size: 11px;
+}
+
+.quick-link-view.senapt-link-view-0 .top-label {
+    -fx-scale-y: -1;
+    -fx-scale-x: -1;
+}
+
+.quick-link-view.senapt-link-view-1 {
+    -fx-background-image: url("utils/senapt-bg1.png");
+}
+
+.quick-link-view.senapt-link-view-1 .content-box,
+.quick-link-view.senapt-link-view-2 .content-box {
+    -fx-spacing:20px;
+    -fx-alignment: center;
+}
+
+.quick-link-view.senapt-link-view-1 .content-box .top-label,
+.quick-link-view.senapt-link-view-2 .content-box .top-label {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-weight: bold;
+}
+
+.quick-link-view.senapt-link-view-2:md .content-box .top-label {
+    -fx-font-size: 14px;
+}
+
+.quick-link-view.senapt-link-view-2:sm .content-box .top-label {
+    -fx-font-size: 9px;
+}
+
+.quick-link-view.senapt-link-view-1 .content-box .bottom-label,
+.quick-link-view.senapt-link-view-2 .content-box .bottom-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.quick-link-view.senapt-link-view-2 .content-box .bottom-label {
+    -fx-border-width: 2px;
+    -fx-border-color: -white;
+    -fx-border-radius: 20px;
+    -fx-padding: 3px 15px;
+}
+
+.quick-link-view.senapt-link-view-2 {
+    -fx-background-image: url("utils/senapt-bg2.png");
+}
+
 /** -------------------------------
  * TitleAndDescriptionBox
  */
