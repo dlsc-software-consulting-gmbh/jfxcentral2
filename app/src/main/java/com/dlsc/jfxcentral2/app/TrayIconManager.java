@@ -20,12 +20,19 @@ public class TrayIconManager {
 
     private final SessionManager sessionManager;
     private final Stage stage;
+    private final FXTrayIcon trayIcon;
 
     public TrayIconManager(Stage stage, SessionManager sessionManager) {
         this.stage = stage;
         this.sessionManager = sessionManager;
 
-        FXTrayIcon icon = new FXTrayIcon(stage, Objects.requireNonNull(JFXCentral2App.class.getResource("tray-icon2.png")), 350, 210);
+        trayIcon = new FXTrayIcon(stage, Objects.requireNonNull(JFXCentral2App.class.getResource("tray-icon2.png")), 350, 210);
+        refresh();
+        trayIcon.show();
+    }
+
+    public void refresh() {
+        trayIcon.clear();
 
         Menu libraries = new Menu("Libraries");
         Menu people = new Menu("People");
@@ -67,46 +74,44 @@ public class TrayIconManager {
             stage.setIconified(false);
             stage.toFront();
         });
-        icon.addMenuItem(showApp);
+        trayIcon.addMenuItem(showApp);
 
         MenuItem openjfx = new MenuItem("Visit openjfx.io");
         openjfx.setOnAction(evt -> showURL("https://openjfx.io"));
-        icon.addMenuItem(openjfx);
+        trayIcon.addMenuItem(openjfx);
 
-        icon.addSeparator();
+        trayIcon.addSeparator();
 
         MenuItem cssDocs = new MenuItem("CSS Documentation");
         cssDocs.setOnAction(evt -> showURL("https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/doc-files/cssref.html"));
-        icon.addMenuItem(cssDocs);
+        trayIcon.addMenuItem(cssDocs);
 
-        icon.addSeparator();
+        trayIcon.addSeparator();
 
         MenuItem addInfoToJfxCentral = new MenuItem("Add Info to JFX-Central");
         addInfoToJfxCentral.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral-data"));
-        icon.addMenuItem(addInfoToJfxCentral);
+        trayIcon.addMenuItem(addInfoToJfxCentral);
 
         MenuItem reportIssue = new MenuItem("Report an Issue");
         reportIssue.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral2/issues"));
-        icon.addMenuItem(reportIssue);
+        trayIcon.addMenuItem(reportIssue);
 
-        icon.addSeparator();
+        trayIcon.addSeparator();
 
-        icon.addMenuItem(libraries);
-        icon.addMenuItem(tools);
-        icon.addMenuItem(books);
-        icon.addMenuItem(people);
-        icon.addMenuItem(blogs);
-        icon.addMenuItem(videos);
-        icon.addMenuItem(tutorials);
-        icon.addMenuItem(companies);
-        icon.addMenuItem(downloads);
-        icon.addMenuItem(realWorld);
-        icon.addMenuItem(tips);
-        icon.addMenuItem(icons);
+        trayIcon.addMenuItem(libraries);
+        trayIcon.addMenuItem(tools);
+        trayIcon.addMenuItem(books);
+        trayIcon.addMenuItem(people);
+        trayIcon.addMenuItem(blogs);
+        trayIcon.addMenuItem(videos);
+        trayIcon.addMenuItem(tutorials);
+        trayIcon.addMenuItem(companies);
+        trayIcon.addMenuItem(downloads);
+        trayIcon.addMenuItem(realWorld);
+        trayIcon.addMenuItem(tips);
+        trayIcon.addMenuItem(icons);
 
-        icon.addExitItem(true);
-
-        icon.show();
+        trayIcon.addExitItem(true);
     }
 
     private void showURL(String url) {
