@@ -97,7 +97,6 @@
     -background: #0D1117; /*=*/
     -background-two: #3C3F41;
     -blue-shadow: dropshadow(gaussian, rgba(143, 127, 250, 0.55), 30, 0.3, 0, 0);
-    -box-shadow: dropshadow(gaussian, rgba(207, 219, 250, 0.55), 20, 0.13, 0, 0);
 
     /** -------------------------------
      * MarkdownView
@@ -3153,7 +3152,6 @@
  * TileViewBase
  */
 .tile-view-base {
-    /*-fx-effect: -box-shadow;*/
     -fx-background-color: #0F0F0F;
     -fx-border-width: 1px;
     -fx-border-color: #595B5D;
@@ -4356,7 +4354,6 @@
  * CommentsView
  */
 .comments-view:md-lg {
-    -fx-effect: -box-shadow;
 }
 
 .comments-view:lg {
@@ -5528,7 +5525,6 @@
 }
 
 .details-box:md-lg {
-    -fx-effect: -box-shadow;
 }
 
 .details-box:lg {
@@ -5970,7 +5966,6 @@
  */
 .overview-box {
     -fx-background-color: -white;
-    -fx-effect: -box-shadow;
 }
 
 .overview-box:lg {

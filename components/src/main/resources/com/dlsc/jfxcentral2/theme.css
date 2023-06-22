@@ -95,7 +95,6 @@
     -youtube-red: #ee282e;
     -background: #f1f2f2;
     -blue-shadow: dropshadow(gaussian, rgba(14, 74, 228, 0.25), 30, 0.2, 0, 0); /* 20% alpha */
-    -box-shadow: dropshadow(gaussian, -grey-10, 10, 0.5, 0, 0);
 
     /** -------------------------------
      * MarkdownView
@@ -115,6 +114,10 @@
 .root {
     -fx-font-family: "Spline Sans";
     -fx-font-size: 16px;
+}
+
+.text {
+    -fx-font-smoothing-type: gray;
 }
 
 .setup-view {
@@ -3226,7 +3229,6 @@
  * TileViewBase
  */
 .tile-view-base {
-    -fx-effect: -box-shadow;
     -fx-background-color: -white;
     -fx-border-width: 1px;
     -fx-border-color: -grey-10;
@@ -4427,7 +4429,6 @@
  * CommentsView
  */
 .comments-view:md-lg {
-    -fx-effect: -box-shadow;
 }
 
 .comments-view:lg {
@@ -5599,7 +5600,6 @@
 }
 
 .details-box:md-lg {
-    -fx-effect: -box-shadow;
 }
 
 .details-box:lg {
@@ -6041,7 +6041,6 @@
  */
 .overview-box {
     -fx-background-color: -white;
-    -fx-effect: -box-shadow;
 }
 
 .overview-box:lg {
