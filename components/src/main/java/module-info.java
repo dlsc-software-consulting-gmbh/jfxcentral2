@@ -17,7 +17,6 @@ open module com.dlsc.jfxcentral2.components {
     requires jpro.webapi;
     requires one.jpro.routing.core;
     requires java.desktop;
-    requires com.rometools.rome;
     requires commons.validator;
     requires com.dlsc.jfxcentral2.iconfont;
     requires com.google.gson;

@@ -69,12 +69,14 @@ public class FooterView extends PaneBase {
         Hyperlink tcLink = new Hyperlink("T&C");
         Hyperlink cookiesLink = new Hyperlink("Cookies");
         Hyperlink privacyPolicyLink = new Hyperlink("Privacy policy");
+        Hyperlink teamLink = new Hyperlink("Team");
 
         LinkUtil.setLink(tcLink, "/legal/terms");
         LinkUtil.setLink(cookiesLink, "/legal/cookies");
         LinkUtil.setLink(privacyPolicyLink, "/legal/privacy");
+        LinkUtil.setLink(teamLink, "/team");
 
-        return new LineNumberPane(new Label("Legal info"), null, tcLink, cookiesLink, privacyPolicyLink);
+        return new LineNumberPane(new Label("Legal info"), null, tcLink, cookiesLink, privacyPolicyLink, teamLink);
     }
 
     private LineNumberPane initLinksPane() {

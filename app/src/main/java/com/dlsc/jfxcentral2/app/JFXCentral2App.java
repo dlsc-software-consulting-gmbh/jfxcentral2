@@ -18,6 +18,7 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.app.pages.ErrorPage;
 import com.dlsc.jfxcentral2.app.pages.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
+import com.dlsc.jfxcentral2.app.pages.LoginPage;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
 import com.dlsc.jfxcentral2.app.pages.RefreshPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
@@ -152,7 +153,8 @@ public class JFXCentral2App extends Application {
                 .and(RouteUtils.get("/legal/privacy", r -> new LegalPage(size, LegalPage.Section.PRIVACY)))
                 .and(RouteUtils.get("/links", r -> new LinksOfTheWeekPage(size)))
                 .and(RouteUtils.get("/links/rss", r -> new LinksOfTheWeekPage(size))) // TODO: how to return raw data?
-                .and(RouteUtils.get("/login", r -> new TeamPage(size)))
+                .and(RouteUtils.get("/login", r -> new LoginPage(size)))
+                .and(RouteUtils.get("/team", r -> new TeamPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
                 .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)))
                 .and(RouteUtils.get("/refresh", r -> {
