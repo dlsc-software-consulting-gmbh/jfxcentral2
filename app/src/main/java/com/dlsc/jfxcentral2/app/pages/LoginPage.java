@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral2.components.LoginView;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 public class LoginPage extends PageBase {
 
     public LoginPage(ObjectProperty<Size> size) {
-        super(size, TopMenuBar.Mode.DARK);
+        super(size, Mode.DARK);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral2.app.RepositoryManager;
 import com.dlsc.jfxcentral2.components.CustomImageView;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -43,7 +43,7 @@ public class RefreshPage extends PageBase {
     private Node setupView;
 
     public RefreshPage(ObjectProperty<Size> size) {
-        super(size, TopMenuBar.Mode.DARK);
+        super(size, Mode.DARK);
         RepositoryManager.repositoryUpdatedProperty().addListener(weakInvalidationListener);
     }
 

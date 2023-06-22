@@ -2,8 +2,8 @@ package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.CategoryContentPane;
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.StripView;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
@@ -20,7 +20,7 @@ import org.kordamp.ikonli.Ikon;
 public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
 
     public CategoryPageBase(ObjectProperty<Size> size) {
-        super(size, TopMenuBar.Mode.DARK);
+        super(size, Mode.DARK);
     }
 
     @Override

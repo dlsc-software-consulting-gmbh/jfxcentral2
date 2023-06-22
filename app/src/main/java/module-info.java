@@ -73,6 +73,7 @@ open module com.dlsc.jfxcentral2.app {
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
     requires FXTrayIcon;
+    requires com.dlsc.jfxcentral2.iconfont;
     // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.app;

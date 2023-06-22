@@ -14,7 +14,7 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.detailsbox.AppsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.BlogsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.BooksDetailsBox;
@@ -41,7 +41,7 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
     private T item;
 
     public DetailsPageBase(ObjectProperty<Size> size, Class<? extends T> clazz, String itemId) {
-        super(size, TopMenuBar.Mode.DARK);
+        super(size, Mode.DARK);
         setItem((T) DataRepository2.getInstance().getByID(clazz, itemId));
     }
 

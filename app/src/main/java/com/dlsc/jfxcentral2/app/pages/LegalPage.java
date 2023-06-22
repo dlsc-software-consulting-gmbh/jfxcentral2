@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral2.components.CustomMarkdownTabPane;
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.StripView;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.model.MarkdownTab;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
@@ -27,7 +27,7 @@ public class LegalPage extends PageBase {
     }
 
     public LegalPage(ObjectProperty<Size> size, Section section) {
-        super(size, TopMenuBar.Mode.LIGHT);
+        super(size, Mode.LIGHT);
         this.section = section;
     }
 

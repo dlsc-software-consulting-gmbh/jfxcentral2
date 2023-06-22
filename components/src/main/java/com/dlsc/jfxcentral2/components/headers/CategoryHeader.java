@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.headers;
 
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
@@ -7,6 +8,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -22,7 +24,8 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.util.Objects;
 
 public class CategoryHeader extends PaneBase {
-
+    private static final PseudoClass LIGHT_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("light");
+    private static final PseudoClass DARK_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("dark");
     private static Image defaultLargeBgImage;
     private static Image defaultMediumBgImg;
     private static Image defaultSmallBgImg;
@@ -34,7 +37,7 @@ public class CategoryHeader extends PaneBase {
 
         backgroundProperty().bind(
                 Bindings.createObjectBinding(() ->
-                        createImageBackground(getBackgroundImage()), backgroundImageProperty(), sizeProperty())
+                        createImageBackground(getBackgroundImage()), backgroundImageProperty(), sizeProperty(), modeProperty())
         );
 
         FontIcon fontIcon = new FontIcon();
@@ -52,6 +55,8 @@ public class CategoryHeader extends PaneBase {
 
         getChildren().setAll(overlay, label);
 
+        activateModePseudoClass();
+        modeProperty().addListener(it -> activateModePseudoClass());
         /*
          * Only one label and content can be displayed. If the content is not empty, the content will be displayed,
          * otherwise the label will be displayed
@@ -73,7 +78,16 @@ public class CategoryHeader extends PaneBase {
         }
     }
 
+    private void activateModePseudoClass() {
+        Mode mode = getMode();
+        pseudoClassStateChanged(LIGHT_PSEUDOCLASS_STATE, mode == Mode.LIGHT);
+        pseudoClassStateChanged(DARK_PSEUDOCLASS_STATE, mode == Mode.DARK);
+    }
+
     private Background createImageBackground(Image image) {
+        if (getMode() == Mode.LIGHT) {
+            return null;
+        }
         if (image == null) {
             switch (getSize()) {
                 case LARGE -> {
@@ -158,5 +172,19 @@ public class CategoryHeader extends PaneBase {
 
     public void setBackgroundImage(Image backgroundImage) {
         this.backgroundImage.set(backgroundImage);
+    }
+
+    private final ObjectProperty<Mode> mode = new SimpleObjectProperty<>(this, "mode", Mode.DARK);
+
+    public Mode getMode() {
+        return mode.get();
+    }
+
+    public ObjectProperty<Mode> modeProperty() {
+        return mode;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode.set(mode);
     }
 }

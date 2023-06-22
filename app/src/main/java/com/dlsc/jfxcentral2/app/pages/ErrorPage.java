@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral2.components.ErrorView;
+import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.StripView;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
@@ -13,7 +13,7 @@ public class ErrorPage extends PageBase {
     private final Request request;
 
     public ErrorPage(ObjectProperty<Size> size, Request request) {
-        super(size, TopMenuBar.Mode.LIGHT);
+        super(size, Mode.LIGHT);
 
         this.request = request;
     }
