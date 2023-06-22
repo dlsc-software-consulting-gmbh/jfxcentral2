@@ -12,6 +12,7 @@ import com.dlsc.jfxcentral2.model.DateQuickLink;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
+import com.dlsc.jfxcentral2.model.SenaptQuickLink;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 
@@ -47,15 +48,19 @@ public class QuickLinksGenerator {
     }
 
     private static List<QuickLink> getSmallQuickLinks() {
-        List<QuickLink> list = createQuickLinks(4);
+        List<QuickLink> list = createQuickLinks(3);
+        list.add(new SenaptQuickLink());
         Collections.shuffle(list);
         return list;
     }
 
     private static List<QuickLink> getLargeOrMediumQuickLinks(Size size) {
-        // Randomly generate 4 to 6 QuickLinks
-        int count = new Random().nextInt(3) + 4;
+        // Randomly generate 4 to 5 QuickLinks
+        int count = new Random().nextInt(2) + 4;
         List<QuickLink> list = createQuickLinks(count);
+
+        //add main sponsor
+        list.add(new SenaptQuickLink());
 
         //Randomly generate 1~3 QuickLinks for image placeholders
         int count2 = new Random().nextInt(3) + 1;
@@ -69,8 +74,8 @@ public class QuickLinksGenerator {
         Collections.shuffle(imageName);
         imageName.subList(0, count2).forEach(url -> list.add(new ImageQuickLink(QuickLinksGenerator.class.getResource(url).toExternalForm())));
 
-        //If the above QuickLinks are less than 9, fill null
-        for (int i = 0; i < 9 - count - count2; i++) {
+        //If the above QuickLinks are less than 9 (must add main sponsor), fill null
+        for (int i = 0; i < 9 - count - count2- 1 ; i++) {
             list.add(null);
         }
         // shuffle the links
@@ -106,7 +111,6 @@ public class QuickLinksGenerator {
     public static boolean checkArrayList(List<QuickLink> list) {
         int rows = 3;
         int cols = 3;
-
         // Cannot have 3 null values or 3 QuickLinks without images in the same row
         for (int i = 0; i < rows; i++) {
             int normalView = 0;
