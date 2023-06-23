@@ -12,6 +12,7 @@ public class AppTileView extends TileView<RealWorldApp> {
         getStyleClass().add("app-tile-view");
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));
+        setButton2Visible(false);
         LinkUtil.setLink(getButton1(), "/showcases/" + app.getId());
     }
 }

@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral2.components.detailsbox.DetailsBoxBase;
 import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.model.Size;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
@@ -43,6 +44,8 @@ public class DetailsContentPane extends PaneBase {
         HBox.setHgrow(menuView, Priority.NEVER);
 
         commentsView.sizeProperty().bind(sizeProperty());
+        commentsView.setVisible(WebAPI.isBrowser());
+        commentsView.setManaged(WebAPI.isBrowser());
 
         detailBoxes.addListener((Observable it) -> updateMenuView());
         centerNodes.addListener((Observable it) -> updateMenuView());

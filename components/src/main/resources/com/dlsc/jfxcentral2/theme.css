@@ -1519,13 +1519,13 @@
     -fx-foreground-color: -grey-100;
 }
 
-.top-menu-bar > .separator-region {
+.top-menu-bar .separator-region {
     -fx-border-color: transparent -white-a20 transparent transparent;
     -fx-border-width: 0 1px 0 0;
     -fx-max-height: 30;
 }
 
-.top-menu-bar:light > .separator-region {
+.top-menu-bar:light .separator-region {
     -fx-border-color: transparent -grey-20 transparent transparent;
 }
 
@@ -1562,8 +1562,17 @@
 
 .top-menu-bar > .content > .menu-button,
 .top-menu-bar > .content > .button {
+    -fx-padding: 0px;
     -fx-background-color: transparent;
     -fx-font-family: "Roboto Condensed";
+}
+
+.top-menu-bar > .content > .menu-button > .label {
+    -fx-padding: 0px 10px 0px 0px;
+}
+
+.top-menu-bar > .content > .menu-button > .arrow-button {
+    -fx-padding: 0px;
 }
 
 .top-menu-bar > .content > .menu-button > .arrow-button > .arrow {
@@ -1642,7 +1651,7 @@
 }
 
 .top-menu-bar:sm .content {
-    -fx-spacing: 5px;
+    -fx-spacing: 10px;
 }
 
 .top-menu-bar:sm .text-field {
