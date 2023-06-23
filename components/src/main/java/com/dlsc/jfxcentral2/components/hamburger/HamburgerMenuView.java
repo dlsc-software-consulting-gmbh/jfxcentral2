@@ -188,7 +188,7 @@ public class HamburgerMenuView extends PaneBase {
 
     }
 
-    private ObservableList<HamburgerMenu> menus = FXCollections.<HamburgerMenu>observableArrayList();
+    private ObservableList<HamburgerMenu> menus = FXCollections.observableArrayList();
 
     public ObservableList<HamburgerMenu> getMenus() {
         return menus;

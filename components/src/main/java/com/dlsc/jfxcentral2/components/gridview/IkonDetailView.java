@@ -56,8 +56,8 @@ public class IkonDetailView extends DetailView<Ikon> {
         button.managedProperty().bind(button.visibleProperty());
 
         button.setOnAction(event -> {
-            final Clipboard clipboard = Clipboard.getSystemClipboard();
-            final ClipboardContent content = new ClipboardContent();
+            Clipboard clipboard = Clipboard.getSystemClipboard();
+            ClipboardContent content = new ClipboardContent();
             content.putString(contentText);
             clipboard.setContent(content);
         });
