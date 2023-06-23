@@ -8017,6 +8017,13 @@
     -fx-fit-height: 50px;
 }
 
+.top-content-view .preview-wrapper {
+    -fx-min-width: 50px;
+    -fx-max-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-height: 50px;
+}
+
 .top-content-view .cell-box {
     -fx-alignment: center-left;
     -fx-padding: 10px 0;
