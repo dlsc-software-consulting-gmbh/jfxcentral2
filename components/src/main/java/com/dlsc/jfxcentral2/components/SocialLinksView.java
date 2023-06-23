@@ -14,6 +14,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 public class SocialLinksView extends FlowPane {
 
     private final Button twitterLinkBtn;
+    private final Button mastodonLinkBtn;
     private final Button linkedInLinkBtn;
     private final Button websiteLinkBtn;
     private final Button mailLinkBtn;
@@ -29,6 +30,12 @@ public class SocialLinksView extends FlowPane {
         twitterLinkBtn.visibleProperty().bind(twitterUrlProperty().isNotEmpty());
         twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
         twitterUrl.addListener(it -> updateLink(twitterLinkBtn, getTwitterUrl()));
+
+        mastodonLinkBtn = new Button("MASTODON", new FontIcon(IkonUtil.twitter));
+        mastodonLinkBtn.getStyleClass().add("mastodon-link-btn");
+        mastodonLinkBtn.visibleProperty().bind(mastodonUrlProperty().isNotEmpty());
+        mastodonLinkBtn.managedProperty().bind(mastodonLinkBtn.visibleProperty());
+        mastodonUrl.addListener(it -> updateLink(mastodonLinkBtn, getMastodonUrl()));
 
         redditLinkBtn = new Button("REDDIT", new FontIcon(IkonUtil.reddit));
         redditLinkBtn.getStyleClass().add("reddit-link-btn");
@@ -69,6 +76,7 @@ public class SocialLinksView extends FlowPane {
         InvalidationListener updateViewListener = it -> updateView();
 
         twitterUrl.addListener(updateViewListener);
+        mastodonUrl.addListener(updateViewListener);
         linkedInUrl.addListener(updateViewListener);
         websiteUrl.addListener(updateViewListener);
         githubUrl.addListener(updateViewListener);
@@ -82,25 +90,28 @@ public class SocialLinksView extends FlowPane {
     private void updateView() {
         getChildren().clear();
 
-        if (getTwitterUrl() != null) {
+        if (getTwitterUrl() != null && !getTwitterUrl().isEmpty()) {
             getChildren().add(twitterLinkBtn);
         }
-        if (getLinkedInUrl() != null) {
+        if (getMastodonUrl() != null && !getMastodonUrl().isEmpty()) {
+            getChildren().add(mastodonLinkBtn);
+        }
+        if (getLinkedInUrl() != null && !getLinkedInUrl().isEmpty()) {
             getChildren().add(linkedInLinkBtn);
         }
-        if (getWebsiteUrl() != null) {
+        if (getWebsiteUrl() != null && !getWebsiteUrl().isEmpty()) {
             getChildren().add(websiteLinkBtn);
         }
-        if (getGithubUrl() != null) {
+        if (getGithubUrl() != null && !getGithubUrl().isEmpty()) {
             getChildren().add(githubLinkBtn);
         }
-        if (getMailUrl() != null) {
+        if (getMailUrl() != null && !getMailUrl().isEmpty()) {
             getChildren().add(facebookLinkBtn);
         }
-        if (getRedditUrl() != null) {
+        if (getRedditUrl() != null && !getRedditUrl().isEmpty()) {
             getChildren().add(redditLinkBtn);
         }
-        if (getMailUrl() != null) {
+        if (getMailUrl() != null && !getMailUrl().isEmpty()) {
             getChildren().add(mailLinkBtn);
         }
     }
@@ -123,6 +134,18 @@ public class SocialLinksView extends FlowPane {
 
     public void setTwitterUrl(String twitterUrl) {
         this.twitterUrl.set(twitterUrl);
+    }
+    private final StringProperty mastodonUrl = new SimpleStringProperty(this, "mastodonUrl");
+    public String getMastodonUrl() {
+        return mastodonUrl.get();
+    }
+
+    public StringProperty mastodonUrlProperty() {
+        return mastodonUrl;
+    }
+
+    public void setMastodonUrl(String mastodonUrl) {
+        this.mastodonUrl.set(mastodonUrl);
     }
 
     private final StringProperty facebookUrl = new SimpleStringProperty(this, "facebookUrl");
