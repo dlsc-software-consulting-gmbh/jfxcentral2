@@ -4,17 +4,12 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Member;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import org.apache.commons.lang3.StringUtils;
 
 public class MemberCellView extends PaneBase {
-
-    private static final DropShadow DEFAULT_EFFECT = new DropShadow(BlurType.GAUSSIAN, Color.rgb(5, 0, 0, 0.35), 10, 0.3, 0, 0);
 
     private final AvatarView avatar;
     private final SocialLinksView socialLinksView;
@@ -57,7 +52,6 @@ public class MemberCellView extends PaneBase {
         }
 
         avatar = new AvatarView();
-        avatar.setEffect(DEFAULT_EFFECT);
         avatar.imageProperty().bind(ImageManager.getInstance().memberImageProperty(member));
     }
 

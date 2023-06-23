@@ -181,29 +181,29 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         int column = 0;
         if (button1.isVisible() && isButton1Visible()) {
             bottomPane.add(button1, column++, 0);
-            bottomPane.getColumnConstraints().addAll(getColumnConstraints());
-            if (isButton2Visible()) {
+            bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.ALWAYS));
+            if (isButton2Visible() || WebAPI.isBrowser()) {
                 bottomPane.add(separator1, column++, 0);
-                bottomPane.getColumnConstraints().addAll(getColumnConstraints());
+                bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.NEVER));
             }
         }
         if (button2.isVisible() && isButton2Visible()) {
             bottomPane.add(button2, column++, 0);
-            bottomPane.getColumnConstraints().addAll(getColumnConstraints());
+            bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.ALWAYS));
             if (WebAPI.isBrowser()) {
                 bottomPane.add(separator2, column++, 0);
-                bottomPane.getColumnConstraints().addAll(getColumnConstraints());
+                bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.NEVER));
             }
         }
         if (WebAPI.isBrowser()) {
             bottomPane.add(saveAndLikeButton, column, 0);
-            bottomPane.getColumnConstraints().addAll(getColumnConstraints());
+            bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.ALWAYS));
         }
     }
 
-    private ColumnConstraints getColumnConstraints() {
+    private ColumnConstraints getColumnConstraints(Priority priority) {
         ColumnConstraints columnConstraints = new ColumnConstraints();
-        columnConstraints.setHgrow(Priority.ALWAYS);
+        columnConstraints.setHgrow(priority);
         columnConstraints.setHalignment(HPos.CENTER);
         return columnConstraints;
     }

@@ -7902,7 +7902,8 @@
     -fx-spacing: 5px;
 }
 
-.team-view .member-cell-view:md-lg .center-box {
+.team-view .member-cell-view:md-lg .content-box .center-box {
+    -fx-spacing: 10px;
     -fx-padding: 30px 0;
 }
 
@@ -7919,8 +7920,10 @@
 }
 
 .team-view .member-cell-view .job-title-label {
-    -fx-font-size: 13px;
-    -fx-padding: 5px 0 10px 0;
+    -fx-font-size: 15px;
+    -fx-padding: 0px 0px 10px 0px;
+    -fx-font-family: "Spline Sans Medium";
+    -fx-opacity: .66;
 }
 
 .team-view .member-cell-view:sm .job-title-label {
@@ -7931,7 +7934,7 @@
     -fx-background-color: -white;
     -fx-effect: null;
     -fx-alignment: center-left;
-    -fx-padding: 10px 0 0 0;
+    -fx-padding: 15px 0 0 0;
 }
 
 .team-view .member-cell-view:sm .social-links-view {
@@ -7958,6 +7961,10 @@
 .team-view:sm {
     -fx-spacing: 30px;
     -fx-padding: 30px 30px 0 30px;
+}
+
+.team-view:sm .member-cell-view .social-links-view {
+    -fx-padding: 0px 0px 20px 0px;
 }
 
 .team-view .member-cell-view:sm {
