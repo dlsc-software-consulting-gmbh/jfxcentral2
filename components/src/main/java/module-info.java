@@ -81,6 +81,7 @@ open module com.dlsc.jfxcentral2.components {
     requires org.kordamp.ikonli.whhg;
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
+    requires com.rometools.rome;
     // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.components;
@@ -95,6 +96,7 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.components.overviewbox;
     exports com.dlsc.jfxcentral2.components.userprofile;
     exports com.dlsc.jfxcentral2.components.hamburger;
+    exports com.dlsc.jfxcentral2.components.topcontent;
 
     uses IkonProvider;
 }
