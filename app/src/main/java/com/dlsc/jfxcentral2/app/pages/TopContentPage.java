@@ -35,7 +35,7 @@ public class TopContentPage extends PageBase {
         header.setTitle("Top Content");
         header.setIkon(JFXCentralIcon.TOP_CONTENT);
 
-        // team view
+        // TopContent Container
         TopContentContainerView topContentContainerView = new TopContentContainerView();
         topContentContainerView.sizeProperty().bind(sizeProperty());
 
