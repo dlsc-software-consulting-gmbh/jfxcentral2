@@ -47,7 +47,7 @@ public class TeamPage extends PageBase {
 
         StripView stripView = new StripView(header, teamView,featuresContainer);
         stripView.sizeProperty().bind(sizeProperty());
-        stripView.getStyleClass().add("team-page-wrapper");
+        stripView.getStyleClass().add("simple-page-wrapper");
 
         return wrapContent(stripView);
     }

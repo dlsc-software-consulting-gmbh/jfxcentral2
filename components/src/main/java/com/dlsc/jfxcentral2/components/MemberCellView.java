@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import org.apache.commons.lang3.StringUtils;
 
 public class MemberCellView extends PaneBase {
 
@@ -36,11 +37,24 @@ public class MemberCellView extends PaneBase {
         descriptionMd.setMdString(DataRepository2.getInstance().getMemberReadMe(member));
 
         socialLinksView = new SocialLinksView();
-        socialLinksView.setTwitterUrl(member.getTwitter());
-        socialLinksView.setLinkedInUrl(member.getLinkedIn());
+
+        if (StringUtils.isNotBlank(member.getTwitter())) {
+            socialLinksView.setTwitterUrl("https://www.twitter.com/" + member.getTwitter());
+        }
+
         socialLinksView.setWebsiteUrl(member.getWebsite());
-        socialLinksView.setMailUrl(member.getEmail());
-        socialLinksView.setGithubUrl(member.getGitHub());
+
+        if (StringUtils.isNotBlank(member.getLinkedIn())) {
+            socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + member.getLinkedIn());
+        }
+
+        if (StringUtils.isNotBlank(member.getEmail())) {
+            socialLinksView.setMailUrl("mailto:" + member.getEmail());
+        }
+
+        if (StringUtils.isNotBlank(member.getGitHub())) {
+            socialLinksView.setGithubUrl("https://www.github.com/" + member.getGitHub());
+        }
 
         avatar = new AvatarView();
         avatar.setEffect(DEFAULT_EFFECT);

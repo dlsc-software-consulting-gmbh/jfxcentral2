@@ -18,12 +18,12 @@ public class TopContentPage extends PageBase {
 
     @Override
     public String title() {
-        return "JFXCentral - Team";
+        return "JFXCentral - Top Content";
     }
 
     @Override
     public String description() {
-        return "JFXCentral2 main developers";
+        return "Content on JFXCentral that visitors liked the most.";
     }
 
     @Override
@@ -45,7 +45,7 @@ public class TopContentPage extends PageBase {
 
         StripView stripView = new StripView(header, topContentContainerView ,featuresContainer);
         stripView.sizeProperty().bind(sizeProperty());
-        stripView.getStyleClass().add("team-page-wrapper");
+        stripView.getStyleClass().add("simple-page-wrapper");
 
         return wrapContent(stripView);
     }
