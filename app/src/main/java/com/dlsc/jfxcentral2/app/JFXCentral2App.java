@@ -105,7 +105,10 @@ public class JFXCentral2App extends Application {
 
         // customs stage for decorations / the chrome
         CustomStage customStage = new CustomStage(stage, routeNode, sessionManager);
-        customStage.setCloseHandler(stage::close);
+        customStage.setCloseHandler(() -> {
+            trayIconManager.hide();
+            stage.close();
+        });
 
         // scene
         Scene scene = new Scene(customStage, 1400, 800);
