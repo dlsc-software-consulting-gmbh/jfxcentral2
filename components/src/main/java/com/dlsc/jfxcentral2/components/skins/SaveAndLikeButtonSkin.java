@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components.skins;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -16,7 +17,10 @@ public class SaveAndLikeButtonSkin extends ControlBaseSkin<SaveAndLikeButton> {
 
         ToggleButton saveButton = new ToggleButton();
         saveButton.setGraphic(new FontIcon(IkonUtil.floppy));
-        saveButton.textProperty().bind(control.saveButtonTextProperty());
+        saveButton.textProperty().bind(control.saveButtonTextProperty()
+                .concat(Bindings.when(control.showCountProperty())
+                        .then(Bindings.concat(" (", control.saveCountProperty(), ")"))
+                        .otherwise("")));
         saveButton.visibleProperty().bind(control.saveButtonVisibleProperty());
         saveButton.managedProperty().bind(control.saveButtonVisibleProperty());
         saveButton.getStyleClass().add("save-button");
@@ -25,7 +29,10 @@ public class SaveAndLikeButtonSkin extends ControlBaseSkin<SaveAndLikeButton> {
 
         ToggleButton likeButton = new ToggleButton();
         likeButton.setGraphic(new FontIcon(JFXCentralIcon.HEART));
-        likeButton.textProperty().bind(control.likeButtonTextProperty());
+        likeButton.textProperty().bind(control.likeButtonTextProperty()
+                .concat(Bindings.when(control.showCountProperty())
+                        .then(Bindings.concat(" (", control.likeCountProperty(), ")"))
+                        .otherwise("")));
         likeButton.visibleProperty().bind(control.likeButtonVisibleProperty());
         likeButton.managedProperty().bind(control.likeButtonVisibleProperty());
         likeButton.getStyleClass().add("like-button");

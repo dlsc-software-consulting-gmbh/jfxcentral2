@@ -19,6 +19,8 @@ public class HelloSaveAndLikeButton extends JFXCentralSampleBase {
     @Override
     protected Region createControl() {
         saveAndLikeButton = new SaveAndLikeButton();
+        saveAndLikeButton.setSaveCount(56);
+        saveAndLikeButton.setLikeCount(123);
         StackPane stackPane = new StackPane();
         stackPane.getStyleClass().add("hello-save-and-like-button");
         stackPane.getChildren().add(saveAndLikeButton);
@@ -44,6 +46,9 @@ public class HelloSaveAndLikeButton extends JFXCentralSampleBase {
         SizeComboBox sizeComboBox = new SizeComboBox();
         saveAndLikeButton.sizeProperty().bind(sizeComboBox.valueProperty());
 
+        CheckBox showCountButton = new CheckBox("Show Count");
+        saveAndLikeButton.showCountProperty().bind(showCountButton.selectedProperty());
+
         VBox vBox = new VBox(10,
                 saveButtonVisibleCheckBox,
                 likeButtonVisibleCheckBox,
@@ -54,6 +59,8 @@ public class HelloSaveAndLikeButton extends JFXCentralSampleBase {
                 new Label("Like Text"),
                 likeTextField,
                 new Label("Change Size"),
+                new Label("Show Count"),
+                showCountButton,
                 sizeComboBox
         );
 
