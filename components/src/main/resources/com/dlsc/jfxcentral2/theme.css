@@ -8053,9 +8053,6 @@
 
 .top-content-view .center-box .link-button {
     -fx-padding: 10px;
-}
-
-.top-content-view .center-box .link-button {
     -fx-background-color: transparent;
 }
 
@@ -8063,7 +8060,7 @@
     -fx-pref-width: 98px;
 }
 
-.top-content-view .center-box .link-button .ikonli-font-icon{
+.top-content-view .center-box .link-button .ikonli-font-icon {
     -fx-icon-size: 20px;
     -fx-icon-color: -bright-blue;
 }
@@ -8100,4 +8097,145 @@
 
 .top-content-view:sm .cell-box .right-box {
     -fx-spacing: 5px;
+}
+
+/** ----------------------------------------------------------------------------
+ * CreditsView
+ */
+.credits-view {
+    -fx-background-color: -white;
+    -fx-padding: 30px;
+}
+
+.credits-view:lg {
+    -fx-max-width: 1080px;
+}
+
+.credits-view:sm {
+    -fx-padding: 10px;
+}
+
+.credits-view .container {
+    -fx-spacing: 20px;
+}
+
+.credits-view .container .dividing-line {
+    -fx-background-color: -grey-10;
+    -fx-pref-height: 1px;
+}
+
+/** ----------------------------------------------------------------------------
+ * CreditItemView
+ */
+.credit-item-view {
+    -fx-background-color: -background;
+    -fx-padding: 10px;
+    -fx-background-radius: 10px;
+}
+
+.credits-view:sm .credit-item-view {
+    -fx-spacing: 10px;
+}
+
+.credit-item-view .link-button {
+    -fx-background-color: transparent;
+}
+
+.credit-item-view .link-button .ikonli-font-icon {
+    -fx-icon-color: -bright-blue;
+    -fx-icon-size: 20px;
+}
+
+.credit-item-view .logo-image {
+    -fx-fit-width: 90px;
+    -fx-fit-height: 45px;
+}
+
+.credit-item-view .logo-wrapper {
+    -wrapper-width: 120px;
+    -wrapper-height: 70px;
+    -fx-min-width: -wrapper-width;
+    -fx-pref-width: -wrapper-width;
+    -fx-max-width: -wrapper-width;
+    -fx-min-height: -wrapper-height;
+    -fx-pref-height: -wrapper-height;
+    -fx-max-height: -wrapper-height;
+    -fx-background-color: -white;
+    -fx-background-radius: 5px;
+}
+
+.credits-view:sm .credit-item-view .logo-image {
+    -fx-fit-width: 50px;
+    -fx-fit-height: 50px;
+}
+
+.credits-view:sm .credit-item-view .logo-wrapper {
+    -wrapper-width: 55px;
+    -wrapper-height: 55px;
+}
+
+.credit-item-view .top-box {
+    -fx-spacing: 15px;
+    -fx-alignment: top-center;
+}
+
+.credits-view:sm .credit-item-view .top-box {
+    -fx-spacing: 5px;
+}
+
+.credit-item-view .top-box .name-box {
+    -fx-spacing: 10px;
+    -fx-alignment: top-left;
+}
+
+.credit-item-view .top-box .name-label {
+    -fx-font-size: 20px;
+}
+
+.credits-view:sm .credit-item-view .top-box .name-label {
+    -fx-font-size: 16px;
+}
+
+.credit-item-view .top-box .licence-box {
+    -fx-font-size: 13px;
+    -fx-alignment: center-left;
+    /*-fx-cursor: hand;*/
+}
+
+.credit-item-view .top-box .licence-box .label {
+    -fx-padding: 1px 4px;
+}
+
+.credit-item-view .top-box .version-label {
+    -fx-background-color: -blue;
+    -fx-text-fill: -white;
+    -fx-background-radius: 5px;
+    -fx-min-width: 50px;
+    -fx-alignment: center;
+}
+
+.credit-item-view .top-box .licence-type-label {
+    -fx-background-color: -grey-60;
+    -fx-text-fill: -white;
+    -fx-background-radius: 5px 0 0 5px;
+    -fx-min-width: 50px;
+    -fx-alignment: center;
+}
+
+.credit-item-view .top-box .licence-version-label {
+    -fx-background-color: -orange;
+    -fx-text-fill: -white;
+    -fx-background-radius: 0 5px 5px 0;
+    -fx-min-width: 35px;
+    -fx-alignment: center;
+}
+
+.credit-item-view .description-label {
+    -fx-padding: 0 0 15px 135px;
+    -fx-text-fill: -grey-60;
+    -fx-font-size: 13px;
+}
+
+.credits-view:sm .credit-item-view .description-label {
+    -fx-padding: 0 0 15px 0px;
 }
