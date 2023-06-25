@@ -1,0 +1,239 @@
+[
+  {
+    "name": "FXTrayIcon",
+    "id": "fxtrayicon",
+    "version": "3.1.2",
+    "url": "https://github.com/dustinkredmond/FXTrayIcon",
+    "description": "Library for use in JavaFX applications that makes adding a System Tray icon easier. The FXTrayIcon class handles all the messy AWT and Swing parts of constructing an icon, displaying notifications, creating a context menu, etc. This means that users of FXTrayIcon can work solely with its public API and JavaFX classes that they are already familiar with.",
+    "license": {
+      "type": "License",
+      "version": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  },
+  {
+    "name": "OpenJFX",
+    "id": "openjfx",
+    "version": "20",
+    "url": "https://github.com/openjdk/jfx",
+    "description": "OpenJFX is an open source, next generation client application platform for desktop, mobile and embedded systems based on JavaSE. It is a collaborative effort by many individuals and companies with the goal of producing a modern, efficient, and fully featured toolkit for developing rich client applications. This is the open source project where we develop JavaFX.",
+    "license": {
+      "type": "GPL",
+      "version": "v2+CE",
+      "url": "https://openjdk.java.net/legal/gplv2+ce.html"
+    }
+  },
+  {
+    "name": "ControlsFX",
+    "id": "controlsfx",
+    "version": "11.1.2",
+    "url": "https://github.com/controlsfx/controlsfx",
+    "description": "ControlsFX is an open source project for JavaFX that aims to provide really high quality UI controls and other tools to complement the core JavaFX distribution. It has been developed for JavaFX 8.0 and beyond, and has a guiding principle of only accepting new controls / features when all existing code is at an acceptably high level, including thankless jobs like having high quality javadoc documentation. This ensures a high quality release is available at all times, with all experimental work being done in branches of the main code base.",
+    "license": {
+      "type": "BSD",
+      "version": "3-Clause",
+      "url": "https://opensource.org/license/bsd-3-clause/"
+    }
+  },
+  {
+    "name": "ValidatorFX",
+    "id": "validatorfx",
+    "version": "11.1.2",
+    "url": "https://github.com/effad/ValidatorFX",
+    "description": "A form validation library for JavaFX.\nForm validation made easy.",
+    "license": {
+      "type": "BSD",
+      "version": "3-Clause",
+      "url": "https://opensource.org/license/bsd-3-clause/"
+    }
+  },
+  {
+    "name": "JPRO",
+    "id": "jpro",
+    "version": "2023.2.0-SNAPSHOT",
+    "url": "https://www.jpro.one/",
+    "description": "Write your App with Java!TRUE \"WORA“ APPLICATIONS! CROSS PLATFORM DEVELOPMENT WITH JAVA! Basically you can run it wherever a JVM is running (i.e. on a Raspberry Pi)"
+  },
+  {
+    "name": "simplefx_2.12",
+    "id": "simplefx_2.12",
+    "version": "3.2.23",
+    "url": "https://www.jpro.one/",
+    "description": "simplefx"
+  },
+  {
+    "name": "GemsFX",
+    "id": "gemsfx",
+    "version": "1.74.0",
+    "url": "https://github.com/dlsc-software-consulting-gmbh/GemsFX",
+    "description": "A collection of JavaFX controls and utilities.Such as: CalendarView,CalendarPicker,YearMonthPicker,StripView,InfoCenterPane,ScreensView,Search Text Field,Tags Field,Dialog Pane,Resizable Text Area,Expanding Text Area,Time Picker,Duration Picker,Photo View,Payment Option Controls,DrawerStackPane,FilterView ...",
+    "license": {
+      "type": "Apache",
+      "version": "2.0",
+      "url": "https://opensource.org/license/apache-2-0/"
+    }
+  },
+  {
+    "name": "Scala",
+    "id": "scala",
+    "version": "2.12.12",
+    "url": "https://github.com/scala/scala",
+    "description": "Standard library for the Scala Programming Language",
+    "license": {
+      "type": "Apache",
+      "version": "2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  {
+    "name": "mdfx",
+    "id": "mdfx",
+    "version": "0.2.9",
+    "url": "https://www.jpro.one/",
+    "description": "A Java FX control to display Markdown information."
+  },
+  {
+    "name": "CSSFX",
+    "id": "cssfx",
+    "version": "11.5.1",
+    "url": "https://github.com/mcfoggy/cssfx",
+    "description": "Allow runtime modification of JavaFX CSS.CSSFX enhances developer productivity by providing CSS reloading functionality in your running application.",
+    "license": {
+      "type": "Apache",
+      "version": "2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+    }
+  },
+  {
+    "name": "Commons Logging",
+    "id": "commons-logging",
+    "version": "1.2",
+    "url": "https://github.com/apache/commons-logging",
+    "description": "Apache Commons Logging is a thin adapter allowing configurable bridging to other, well known logging systems.",
+    "license": {
+      "type": "Apache",
+      "version": "2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  {
+    "name": "Log4j",
+    "id": "log4j",
+    "version": "2.20.0",
+    "url": "https://github.com/apache/logging-log4j2",
+    "description": "Apache Log4j 2 is an upgrade to Log4j that provides significant improvements over its predecessor, Log4j 1.x, and provides many of the improvements available in Logback while fixing some inherent problems in Logback's architecture.",
+    "license": {
+      "type": "Apache",
+      "version": "2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  {
+    "name": "Unit API",
+    "id": "unit-api",
+    "version": "2.1.2",
+    "url": "https://github.com/unitsofmeasurement/unit-api",
+    "description": "The Unit of Measurement API provides a set of Java language programming interfaces for handling units and quantities. The interfaces provide a layer which separates client code, that would call the API, from library code, which implements the API.",
+    "license": {
+      "type": "License",
+      "version": "",
+      "url": "https://github.com/unitsofmeasurement/unit-api/blob/master/LICENSE"
+    }
+  },
+  {
+    "name": "JFXCentral Data",
+    "id": "jfxcentral-data",
+    "version": "1.15.0",
+    "url": "https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data",
+    "description": "The data repository for the JFXCentral website.",
+    "license": {
+      "type": "Apache",
+      "version": "2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  {
+    "name": "Commons Lang",
+    "id": "commons-lang",
+    "version": "3.12.0",
+    "url": "https://github.com/apache/commons-lang",
+    "description": "Apache Commons Lang, a package of Java utility classes for the. classes that are in java.lang's hierarchy, or are considered to be so. standard as to justify existence in java.lang.",
+    "license": {
+      "type": "Apache",
+      "version": "2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  {
+    "name": "Gson",
+    "id": "gson",
+    "version": "2.9.0",
+    "url": "https://github.com/google/gson",
+    "description": "Gson is a Java library that can be used to convert Java Objects into their JSON representation. It can also be used to convert a JSON string to an equivalent Java object. Gson can work with arbitrary Java objects including pre-existing objects that you do not have source-code of.",
+    "license": {
+      "type": "Apache",
+      "version": "2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+    }
+  },
+  {
+    "name": "JGit",
+    "id": "jgit",
+    "version": "6.0.0.202111291000-r",
+    "url": "https://www.eclipse.org/jgit/",
+    "description": "JGit is an EDL (new-style BSD) licensed, lightweight, pure Java library implementing the Git version control system.",
+    "license": {
+      "type": "BSD",
+      "version": "EDL",
+      "url": "https://www.eclipse.org/org/documents/edl-v10.php"
+    }
+  },
+  {
+    "name": "SLF4J",
+    "id": "slf4j",
+    "version": "2.0.6",
+    "url": "https://github.com/qos-ch/slf4j",
+    "description": "The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, reload4j, log4j 2.x) allowing the end user to plug in the desired logging framework at deployment time.",
+    "license": {
+      "type": "License",
+      "version": "MIT",
+      "url": "https://github.com/qos-ch/slf4j/blob/master/LICENSE.txt"
+    }
+  },
+  {
+    "name": "Ikonli",
+    "id": "ikonli",
+    "version": "12.3.1",
+    "url": "https://github.com/kordamp/ikonli",
+    "description": "Ikonli provides icon packs that can be used in Java applications. Currently Swing and JavaFX UI toolkits are supported.",
+    "license": {
+      "type": "Apache",
+      "version": "2.0",
+      "url": "https://spdx.org/licenses/Apache-2.0.html"
+    }
+  },
+  {
+    "name": "JUnit",
+    "id": "junit",
+    "version": "5.9.1",
+    "url": "https://github.com/junit-team/junit5",
+    "description": "The 5th major version of the programmer-friendly testing framework for Java and the JVM",
+    "license": {
+      "type": "Eclipse Public License",
+      "version": "2.0",
+      "url": "https://github.com/junit-team/junit5/blob/main/LICENSE.md"
+    }
+  },
+  {
+    "name": "Maven Compiler Plugin",
+    "id": "maven-compiler-plugin",
+    "version": "3.10.1",
+    "url": "https://github.com/apache/maven-compiler-plugin",
+    "description": "The 5th major version of the programmer-friendly testing framework for Java and the JVM",
+    "license": {
+      "type": "Apache",
+      "version": "2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  }
+]
