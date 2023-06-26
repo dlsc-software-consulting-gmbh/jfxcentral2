@@ -31,7 +31,7 @@ public class SocialLinksView extends FlowPane {
         twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
         twitterUrl.addListener(it -> updateLink(twitterLinkBtn, getTwitterUrl()));
 
-        mastodonLinkBtn = new Button("MASTODON", new FontIcon(IkonUtil.twitter));
+        mastodonLinkBtn = new Button("MASTODON", new FontIcon(IkonUtil.mastodon));
         mastodonLinkBtn.getStyleClass().add("mastodon-link-btn");
         mastodonLinkBtn.visibleProperty().bind(mastodonUrlProperty().isNotEmpty());
         mastodonLinkBtn.managedProperty().bind(mastodonLinkBtn.visibleProperty());
