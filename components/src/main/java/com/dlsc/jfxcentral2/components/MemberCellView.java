@@ -32,7 +32,11 @@ public class MemberCellView extends PaneBase {
         descriptionMd.setMdString(DataRepository2.getInstance().getMemberReadMe(member));
 
         socialLinksView = new SocialLinksView();
-        socialLinksView.setTwitterUrl(member.getTwitter());
+
+        if (StringUtils.isNotBlank(member.getTwitter())) {
+            socialLinksView.setTwitterUrl("https://www.twitter.com/" + member.getTwitter());
+        }
+
         socialLinksView.setMastodonUrl(member.getMastodon());
         socialLinksView.setWebsiteUrl(member.getWebsite());
 
