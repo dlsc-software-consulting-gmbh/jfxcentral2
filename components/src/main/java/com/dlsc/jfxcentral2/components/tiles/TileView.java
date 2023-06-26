@@ -12,6 +12,7 @@ import com.dlsc.jfxcentral2.components.FlipView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -178,23 +179,31 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         bottomPane.getChildren().clear();
         bottomPane.getColumnConstraints().clear();
         int column = 0;
-        if (button1.isVisible() && getButton1Visible()) {
+        if (button1.isVisible() && isButton1Visible()) {
             bottomPane.add(button1, column++, 0);
-            bottomPane.add(separator1, column++, 0);
-            bottomPane.getColumnConstraints().addAll(getColumnConstraints(), getColumnConstraints());
+            bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.ALWAYS));
+            if (isButton2Visible() || WebAPI.isBrowser()) {
+                bottomPane.add(separator1, column++, 0);
+                bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.NEVER));
+            }
         }
-        if (button2.isVisible() && getButton2Visible()) {
+        if (button2.isVisible() && isButton2Visible()) {
             bottomPane.add(button2, column++, 0);
-            bottomPane.add(separator2, column++, 0);
-            bottomPane.getColumnConstraints().addAll(getColumnConstraints(), getColumnConstraints());
+            bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.ALWAYS));
+            if (WebAPI.isBrowser()) {
+                bottomPane.add(separator2, column++, 0);
+                bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.NEVER));
+            }
         }
-        bottomPane.add(saveAndLikeButton, column, 0);
-        bottomPane.getColumnConstraints().addAll(getColumnConstraints());
+        if (WebAPI.isBrowser()) {
+            bottomPane.add(saveAndLikeButton, column, 0);
+            bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.ALWAYS));
+        }
     }
 
-    private ColumnConstraints getColumnConstraints() {
+    private ColumnConstraints getColumnConstraints(Priority priority) {
         ColumnConstraints columnConstraints = new ColumnConstraints();
-        columnConstraints.setHgrow(Priority.ALWAYS);
+        columnConstraints.setHgrow(priority);
         columnConstraints.setHalignment(HPos.CENTER);
         return columnConstraints;
     }
@@ -325,7 +334,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
 
     private final StyleableBooleanProperty button1Visible = new SimpleStyleableBooleanProperty(StyleableProperties.BUTTON_1_VISIBLE, TileView.this, "button1Visible", true);
 
-    public boolean getButton1Visible() {
+    public boolean isButton1Visible() {
         return button1Visible.get();
     }
 
@@ -365,10 +374,9 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         this.button2Graphic.set(button2Graphic);
     }
 
-    private final StyleableBooleanProperty button2Visible = new SimpleStyleableBooleanProperty(StyleableProperties.BUTTON_2_VISIBLE, TileView.this,
-            "button2Visible", true);
+    private final StyleableBooleanProperty button2Visible = new SimpleStyleableBooleanProperty(StyleableProperties.BUTTON_2_VISIBLE, TileView.this, "button2Visible", true);
 
-    public boolean getButton2Visible() {
+    public boolean isButton2Visible() {
         return button2Visible.get();
     }
 

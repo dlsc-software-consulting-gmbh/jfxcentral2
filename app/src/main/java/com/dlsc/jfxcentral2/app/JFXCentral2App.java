@@ -15,6 +15,7 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.app.pages.CreditsPage;
 import com.dlsc.jfxcentral2.app.pages.ErrorPage;
 import com.dlsc.jfxcentral2.app.pages.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
@@ -23,6 +24,7 @@ import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
 import com.dlsc.jfxcentral2.app.pages.RefreshPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
 import com.dlsc.jfxcentral2.app.pages.TeamPage;
+import com.dlsc.jfxcentral2.app.pages.TopContentPage;
 import com.dlsc.jfxcentral2.app.pages.UserProfilePage;
 import com.dlsc.jfxcentral2.app.pages.category.BlogsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.BooksCategoryPage;
@@ -104,7 +106,10 @@ public class JFXCentral2App extends Application {
 
         // customs stage for decorations / the chrome
         CustomStage customStage = new CustomStage(stage, routeNode, sessionManager);
-        customStage.setCloseHandler(stage::close);
+        customStage.setCloseHandler(() -> {
+            trayIconManager.hide();
+            stage.close();
+        });
 
         // scene
         Scene scene = new Scene(customStage, 1400, 800);
@@ -147,6 +152,7 @@ public class JFXCentral2App extends Application {
                 .and(createCategoryOrDetailRoute("/tutorials", Tutorial.class, () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/videos", Video.class, () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/icons", IkonliPack.class, () -> new IconsCategoryPage(size), id -> new IconPackDetailPage(size, id)))
+                .and(RouteUtils.get("/credits", r -> new CreditsPage(size)))
                 .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/cookies", r -> new LegalPage(size, LegalPage.Section.COOKIES)))
@@ -155,6 +161,7 @@ public class JFXCentral2App extends Application {
                 .and(RouteUtils.get("/links/rss", r -> new LinksOfTheWeekPage(size))) // TODO: how to return raw data?
                 .and(RouteUtils.get("/login", r -> new LoginPage(size)))
                 .and(RouteUtils.get("/team", r -> new TeamPage(size)))
+                .and(RouteUtils.get("/top", r -> new TopContentPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
                 .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)))
                 .and(RouteUtils.get("/refresh", r -> {

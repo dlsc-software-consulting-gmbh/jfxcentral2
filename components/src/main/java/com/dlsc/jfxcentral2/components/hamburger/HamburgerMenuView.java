@@ -16,6 +16,7 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -82,8 +83,13 @@ public class HamburgerMenuView extends PaneBase {
                 new HamburgerMenuItem("People", IkonUtil.getModelIkon(Person.class), "/people"),
                 new HamburgerMenuItem("Companies", IkonUtil.getModelIkon(Company.class), "/companies"),
                 new HamburgerMenuItem("OpenJFX", MaterialDesign.MDI_GITHUB_BOX, "/openjfx"),
-                new HamburgerMenuItem("Links of the Week", IkonUtil.getModelIkon(LinksOfTheWeek.class), "/links")
+                new HamburgerMenuItem("Links of the Week", IkonUtil.getModelIkon(LinksOfTheWeek.class), "/links"),
+                new HamburgerMenuItem("Meet the Team", JFXCentralIcon.TEAM, "/team")
         );
+
+        if (WebAPI.isBrowser()) {
+            communityMenu.getItems().add(new HamburgerMenuItem("JFX Central Top Content", JFXCentralIcon.TOP_CONTENT, "/top"));
+        }
 
         HamburgerMenu showcases = new HamburgerMenu("Showcases", "/showcases");
         showcases.setOnAction(e -> System.out.println("onAction Showcases ..."));
@@ -112,7 +118,7 @@ public class HamburgerMenuView extends PaneBase {
         }
     }
 
-    private Node createMenuButton(HamburgerMenu menu,ToggleGroup group) {
+    private Node createMenuButton(HamburgerMenu menu, ToggleGroup group) {
         if (menu.getItems().isEmpty()) {
             Button button = new Button();
             button.getStyleClass().add("hamburger-menu-button");
@@ -145,7 +151,7 @@ public class HamburgerMenuView extends PaneBase {
 
             for (HamburgerMenuItem item : menu.getItems()) {
                 if (item instanceof HamburgerMenu) {
-                    submenuBox.getChildren().add(createMenuButton((HamburgerMenu) item,null));
+                    submenuBox.getChildren().add(createMenuButton((HamburgerMenu) item, null));
                 } else {
                     Button itemButton = new Button();
                     itemButton.getStyleClass().add("hamburger-item-button");
@@ -188,7 +194,7 @@ public class HamburgerMenuView extends PaneBase {
 
     }
 
-    private ObservableList<HamburgerMenu> menus = FXCollections.<HamburgerMenu>observableArrayList();
+    private ObservableList<HamburgerMenu> menus = FXCollections.observableArrayList();
 
     public ObservableList<HamburgerMenu> getMenus() {
         return menus;

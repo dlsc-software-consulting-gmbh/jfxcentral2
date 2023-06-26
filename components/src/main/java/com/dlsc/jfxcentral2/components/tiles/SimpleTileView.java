@@ -13,6 +13,7 @@ import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
@@ -25,6 +26,7 @@ import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -36,7 +38,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
 
     protected HBox badgeBox = new HBox();
-    protected SaveAndLikeButton saveAndLikeButton;
+    protected SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
 
     private final HBox linkedObjectBox;
 
@@ -94,7 +96,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
 
         HBox contentBox = new HBox(leftBox);
         if (!(item instanceof Library)) {
-            contentBox.getChildren().add(0,avatarView);
+            contentBox.getChildren().add(0, avatarView);
         }
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
@@ -115,24 +117,26 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
     }
 
     protected List<Node> createExtraNodes() {
-        saveAndLikeButton = new SaveAndLikeButton();
-        saveSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setSaveButtonSelected(nv));
-        likeSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setLikeButtonSelected(nv));
-        saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, saved) -> {
-            setSaveSelected(saved);
-            if (getData() != null) {
-                System.out.println((saved ? "SELECTED: " : "UNSELECTED: ") + getData().getName());
-            }
-        });
+        if (WebAPI.isBrowser()) {
+            saveSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setSaveButtonSelected(nv));
+            likeSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setLikeButtonSelected(nv));
+            saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, saved) -> {
+                setSaveSelected(saved);
+                if (getData() != null) {
+                    System.out.println((saved ? "SELECTED: " : "UNSELECTED: ") + getData().getName());
+                }
+            });
 
-        saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, liked) -> {
-            setLikeSelected(liked);
-            if (getData() != null) {
-                System.out.println((liked ? "LIKED: " : "UNLIKED: ") + getData().getName());
-            }
-        });
+            saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, liked) -> {
+                setLikeSelected(liked);
+                if (getData() != null) {
+                    System.out.println((liked ? "LIKED: " : "UNLIKED: ") + getData().getName());
+                }
+            });
 
-        return List.of(saveAndLikeButton);
+            return List.of(saveAndLikeButton);
+        }
+        return Collections.emptyList();
     }
 
     protected void updateLinkedObjectBadges() {

@@ -14,5 +14,5 @@ public enum View {
     VIDEOS,
     DOWNLOADS,
     TIPS,
-    ICONS;
+    ICONS
 }

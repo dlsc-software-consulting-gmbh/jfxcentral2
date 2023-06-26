@@ -17,6 +17,7 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -210,19 +211,27 @@ public class TopMenuBar extends PaneBase {
             LinkUtil.setLink(downloadsBtn, "/downloads");
 
             Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));
+            loginBtn.setVisible(WebAPI.isBrowser());
+            loginBtn.setManaged(WebAPI.isBrowser());
             loginBtn.setMinWidth(Region.USE_PREF_SIZE);
             loginBtn.getStyleClass().add("login-button");
             LinkUtil.setLink(loginBtn, "/login");
 
+            Region separatorRegion = createSeparatorRegion();
+            separatorRegion.setVisible(WebAPI.isBrowser());
+            separatorRegion.setManaged(WebAPI.isBrowser());
+
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, downloadsBtn, new Spacer(), loginBtn, searchField);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");
 
             Button logOutBtn = new Button(null, logoutRegion);
             logOutBtn.getStyleClass().add("logout-button");
+            logOutBtn.setVisible(WebAPI.isBrowser());
+            logOutBtn.setManaged(WebAPI.isBrowser());
 
             Region searchRegion = new Region();
             searchRegion.getStyleClass().add("search-region");
@@ -256,7 +265,11 @@ public class TopMenuBar extends PaneBase {
                 }
             });
 
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, createSeparatorRegion(), stackPane, createSeparatorRegion(), menuBtn);
+            Region separatorRegion = createSeparatorRegion();
+            separatorRegion.setVisible(WebAPI.isBrowser());
+            separatorRegion.setManaged(WebAPI.isBrowser());
+
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, separatorRegion, stackPane, createSeparatorRegion(), menuBtn);
         }
 
         usedProperty().bind(blocking);
@@ -276,8 +289,12 @@ public class TopMenuBar extends PaneBase {
     private void fillCommunityMenu(MenuButton button) {
         button.getItems().add(createMenuItem("People", "/people", IkonUtil.getModelIkon(Person.class)));
         button.getItems().add(createMenuItem("Companies", "/companies", IkonUtil.getModelIkon(Company.class)));
-        button.getItems().add(createMenuItem("OpenJFX", "/openjfx", MaterialDesign.MDI_GITHUB_BOX));
+        button.getItems().add(createMenuItem("OpenJFX Project", "/openjfx", MaterialDesign.MDI_GITHUB_BOX));
         button.getItems().add(createMenuItem("Links of the Week", "/links", IkonUtil.getModelIkon(LinksOfTheWeek.class)));
+        button.getItems().add(createMenuItem("Meet the Team", "/team", JFXCentralIcon.TEAM));
+        if (WebAPI.isBrowser()) {
+            button.getItems().add(createMenuItem("JFX Central Top Content", "/top", JFXCentralIcon.TOP_CONTENT));
+        }
     }
 
     private MenuItem createMenuItem(String text, String url, Ikon ikon) {
@@ -329,6 +346,7 @@ public class TopMenuBar extends PaneBase {
     private Region createSeparatorRegion() {
         Region separator = new Region();
         separator.getStyleClass().add("separator-region");
+        separator.setMinWidth(Region.USE_PREF_SIZE);
         return separator;
     }
 

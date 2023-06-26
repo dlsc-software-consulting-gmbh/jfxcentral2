@@ -1,6 +1,8 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.components.skins.SaveAndLikeButtonSkin;
+import com.jpro.webapi.WebAPI;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -27,8 +29,11 @@ public class SaveAndLikeButton extends ControlBase {
 
         setFocusTraversable(false);
 
-        visibleProperty().bind(saveButtonVisibleProperty().or(likeButtonVisibleProperty()));
-        managedProperty().bind(saveButtonVisibleProperty().or(likeButtonVisibleProperty()));
+        /*
+         * We currently only support liking and saving in the web application.
+         */
+        visibleProperty().bind(Bindings.createBooleanBinding(() -> (isSaveButtonVisible() || isLikeButtonVisible()) && WebAPI.isBrowser(), saveButtonVisibleProperty(), likeButtonVisibleProperty()));
+        managedProperty().bind(Bindings.createBooleanBinding(() -> (isSaveButtonVisible() || isLikeButtonVisible()) && WebAPI.isBrowser(), saveButtonVisibleProperty(), likeButtonVisibleProperty()));
     }
 
     @Override

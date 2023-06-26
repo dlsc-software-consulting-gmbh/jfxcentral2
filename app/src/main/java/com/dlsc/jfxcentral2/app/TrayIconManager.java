@@ -31,6 +31,10 @@ public class TrayIconManager {
         trayIcon.show();
     }
 
+    public void hide() {
+        trayIcon.hide();
+    }
+
     public void refresh() {
         trayIcon.clear();
 

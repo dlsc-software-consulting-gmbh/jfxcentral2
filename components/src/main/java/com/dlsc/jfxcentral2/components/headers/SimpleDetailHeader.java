@@ -120,7 +120,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         Region separator = new Region();
         separator.getStyleClass().add("region-separator");
         separator.managedProperty().bind(separator.visibleProperty());
-        separator.visibleProperty().bind(websiteButton.visibleProperty());
+        separator.visibleProperty().bind(websiteButton.visibleProperty().and(saveAndLikeButton.visibleProperty()));
 
         HBox buttonBox = new HBox(saveAndLikeButton, separator, websiteButton);
         buttonBox.getStyleClass().add("button-box");

@@ -25,7 +25,7 @@ public class BookTileView extends PreviewTileView<Book> {
 
         if (StringUtils.isNotEmpty(book.getAmazonASIN())) {
             setButton2Visible(true);
-            LinkUtil.setExternalLink(getButton2(), "http://www.amazon.com/dp/" + book.getAmazonASIN(), book.getName());
+            LinkUtil.setExternalLink(getButton2(), "https://www.amazon.com/dp/" + book.getAmazonASIN(), book.getName());
         } else {
             setButton2Visible(false);
         }

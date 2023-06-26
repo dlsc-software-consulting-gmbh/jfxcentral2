@@ -105,6 +105,6 @@ public class IconPreviewPane extends PaneBase {
     }
 
     public void setModel(IkonliPack ikonPackModel) {
-        this.model.set(ikonPackModel);
+        model.set(ikonPackModel);
     }
 }
