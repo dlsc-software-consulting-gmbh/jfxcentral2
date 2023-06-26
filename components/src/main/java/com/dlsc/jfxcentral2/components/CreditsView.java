@@ -32,6 +32,12 @@ public class CreditsView extends PaneBase {
         container.getStyleClass().add("container");
         getChildren().add(container);
 
+        // message
+        Label message = new Label("Building this application was only possible because of all the fine work in many other open source projects. The projects listed below are our direct dependencies and we want to say \"Thank You!\" to them for their valuable contributions.");
+        message.setWrapText(true);
+        message.getStyleClass().add("message-label");
+        container.getChildren().add(message);
+
         List<CreditModel> credits = loadCredits();
         credits.sort((o1, o2) -> o1.getId().compareToIgnoreCase(o2.getId()));
         int itemSize = credits.size();
