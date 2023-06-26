@@ -93,7 +93,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
                 .stream()
                 .sorted(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed())
                 .map(links -> new MenuView.Item(DATE_FORMATTER.format(links.getCreatedOn()), null, null))
-                .limit(5)
+                .limit(20)
                 .toList();
     }
 }
