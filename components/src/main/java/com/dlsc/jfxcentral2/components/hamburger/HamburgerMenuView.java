@@ -88,7 +88,7 @@ public class HamburgerMenuView extends PaneBase {
         );
 
         if (WebAPI.isBrowser()) {
-            communityMenu.getItems().add(new HamburgerMenuItem("JFX Central Top Content", JFXCentralIcon.TOP_CONTENT, "/top"));
+            communityMenu.getItems().add(new HamburgerMenuItem("Top Content", JFXCentralIcon.TOP_CONTENT, "/top"));
         }
 
         HamburgerMenu showcases = new HamburgerMenu("Showcases", "/showcases");

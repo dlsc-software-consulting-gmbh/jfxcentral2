@@ -293,7 +293,7 @@ public class TopMenuBar extends PaneBase {
         button.getItems().add(createMenuItem("Links of the Week", "/links", IkonUtil.getModelIkon(LinksOfTheWeek.class)));
         button.getItems().add(createMenuItem("Meet the Team", "/team", JFXCentralIcon.TEAM));
         if (WebAPI.isBrowser()) {
-            button.getItems().add(createMenuItem("JFX Central Top Content", "/top", JFXCentralIcon.TOP_CONTENT));
+            button.getItems().add(createMenuItem("Top Content", "/top", JFXCentralIcon.TOP_CONTENT));
         }
     }
 
