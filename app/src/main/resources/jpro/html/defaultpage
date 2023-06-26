@@ -78,6 +78,7 @@
           color: white;
           cursor: pointer;
           padding: 15px;
+          border: 1px solid white;
           border-radius: 3px;
           background-radius: 1000px;
         }

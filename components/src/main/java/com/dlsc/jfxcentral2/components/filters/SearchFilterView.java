@@ -101,6 +101,7 @@ public class SearchFilterView<T> extends PaneBase {
     public SearchFilterView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
+        searchField.setFocusTraversable(false);
         searchField.promptTextProperty().bind(searchPromptTextProperty());
         searchField.managedProperty().bind(searchField.visibleProperty());
         searchField.visibleProperty().bind(onSearchProperty().isNotNull());

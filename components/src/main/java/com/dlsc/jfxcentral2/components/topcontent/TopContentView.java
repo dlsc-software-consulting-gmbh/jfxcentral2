@@ -99,7 +99,7 @@ public class TopContentView<T extends ModelObject> extends PaneBase {
         //description
         Label description = new Label();
         description.getStyleClass().add("description-label");
-        description.setText(item.getDescription());
+        description.setWrapText(true);
         if (item instanceof Blog blog) {
             description.setText(blog.getSummary());
         }else {

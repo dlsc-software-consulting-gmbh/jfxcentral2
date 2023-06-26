@@ -1,13 +1,14 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
@@ -47,7 +48,7 @@ public class VideoTileView extends TileView<Video> {
     }
 
     protected Node createFrontTop() {
-        ImageView imageView = new ImageView();
+        CustomImageView imageView = new CustomImageView();
         imageView.imageProperty().bind(imageProperty());
         imageView.setPreserveRatio(true);
 
@@ -62,8 +63,12 @@ public class VideoTileView extends TileView<Video> {
         StackPane imageContainer = new StackPane();
         imageContainer.getStyleClass().add("image-container");
         imageContainer.getChildren().setAll(imageView, remarkLabel);
+        if (isSmall()) {
+            StackPane.setAlignment(imageView, Pos.BOTTOM_LEFT);
+            imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> 140d));
+        }
 
-        if (isMedium() && !isVideoGalleryChild()) {
+        if (isMedium()) {
             Rectangle rectClip = new Rectangle();
             rectClip.widthProperty().bind(imageContainer.widthProperty());
             rectClip.heightProperty().bind(imageContainer.heightProperty());
@@ -74,26 +79,19 @@ public class VideoTileView extends TileView<Video> {
             Pane parent = (Pane) node;
             if (node != null) {
                 parent.widthProperty().addListener((ob1, ov1, newWidth) -> {
-                    if (isLarge()) {
-                        imageView.fitWidthProperty().bind(imageContainer.widthProperty());
-                    } else {
-                        if (isVideoGalleryChild()) {
-                            imageView.fitWidthProperty().bind(imageContainer.widthProperty());
-                        } else {
-                            if (isSmall()) {
-                                if (imageView.fitWidthProperty().isBound()) {
-                                    imageView.fitWidthProperty().unbind();
-                                }
-                                imageView.setFitWidth(140);
-                                StackPane.setAlignment(imageView, Pos.BOTTOM_LEFT);
-                            } else {
-                                imageView.fitWidthProperty().bind(
-                                        parent.widthProperty()
-                                                .subtract(30 * 2)//padding
-                                                .subtract(20 * 2)//hgaps
-                                                .divide(3.3));
-                            }
+                    switch (getSize()) {
+                        case SMALL -> {
+                            imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> 140d));
+                            StackPane.setAlignment(imageView, Pos.BOTTOM_LEFT);
                         }
+                        case MEDIUM -> imageView.fitWidthProperty().bind(
+                                parent.widthProperty()
+                                        .subtract(30 * 2)//padding
+                                        .subtract(20 * 2)//hgaps
+                                        .divide(3.3));
+
+                        case LARGE -> imageView.fitWidthProperty().bind(imageContainer.widthProperty());
+
                     }
                 });
             }
@@ -102,7 +100,4 @@ public class VideoTileView extends TileView<Video> {
         return imageContainer;
     }
 
-    protected boolean isVideoGalleryChild() {
-        return false;
-    }
 }

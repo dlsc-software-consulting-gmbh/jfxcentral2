@@ -2,7 +2,6 @@ package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.EditTextField;
 import com.dlsc.jfxcentral2.components.Spacer;
-import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -50,6 +49,7 @@ public class EditTextFieldSkin extends ControlBaseSkin<EditTextField> {
         topBox.getStyleClass().add("top-box");
 
         TextField textField = new TextField();
+        textField.setFocusTraversable(false);
         textField.textProperty().bindBidirectional(control.textProperty());
         textField.promptTextProperty().bind(control.promptTextProperty());
         textField.managedProperty().bind(textField.visibleProperty());

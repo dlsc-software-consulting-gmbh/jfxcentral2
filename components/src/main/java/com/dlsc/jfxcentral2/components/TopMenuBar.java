@@ -188,6 +188,7 @@ public class TopMenuBar extends PaneBase {
 
     protected void layoutBySize() {
         searchField = createSearchField();
+        searchField.setFocusTraversable(false);
         if (isLarge()) {
             MenuButton resourcesBtn = createMenuButton("Resources");
             resourcesBtn.getStyleClass().add("resources-button");
