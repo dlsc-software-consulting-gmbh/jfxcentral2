@@ -74,6 +74,5 @@ public class MemberCellView extends PaneBase {
             contentBox.getChildren().setAll(avatar, nameLabel, jobTitleLabel, socialLinksView, descriptionMd);
             getChildren().setAll(contentBox);
         }
-
     }
 }

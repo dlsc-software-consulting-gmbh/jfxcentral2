@@ -137,6 +137,7 @@ public class SocialLinksView extends FlowPane {
         this.twitterUrl.set(twitterUrl);
     }
     private final StringProperty mastodonUrl = new SimpleStringProperty(this, "mastodonUrl");
+
     public String getMastodonUrl() {
         return mastodonUrl.get();
     }
