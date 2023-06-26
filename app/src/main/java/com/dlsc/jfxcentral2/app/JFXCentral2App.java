@@ -15,6 +15,7 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.app.pages.CreditsPage;
 import com.dlsc.jfxcentral2.app.pages.ErrorPage;
 import com.dlsc.jfxcentral2.app.pages.LegalPage;
 import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
@@ -151,6 +152,7 @@ public class JFXCentral2App extends Application {
                 .and(createCategoryOrDetailRoute("/tutorials", Tutorial.class, () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/videos", Video.class, () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/icons", IkonliPack.class, () -> new IconsCategoryPage(size), id -> new IconPackDetailPage(size, id)))
+                .and(RouteUtils.get("/credits", r -> new CreditsPage(size)))
                 .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/cookies", r -> new LegalPage(size, LegalPage.Section.COOKIES)))
