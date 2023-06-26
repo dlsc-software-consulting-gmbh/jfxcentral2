@@ -41,6 +41,7 @@ public interface IkonUtil {
     Ikon play = JFXCentralIcon.PLAY;
     Ikon github = JFXCentralIcon.GITHUB;
     Ikon twitter = JFXCentralIcon.TWITTER;
+    Ikon mastodon = JFXCentralIcon.MASTODON;
     Ikon reddit = MaterialDesign.MDI_REDDIT;
     Ikon facebook = JFXCentralIcon.FACEBOOK;
     Ikon linkedin = JFXCentralIcon.LINKEDIN;

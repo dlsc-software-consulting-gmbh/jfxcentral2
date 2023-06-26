@@ -38,6 +38,7 @@ public enum JFXCentralIcon implements Ikon {
     LINKS("jfx-icon-links", '\ue91f'),
     LOG_IN("jfx-icon-log-in", '\ue920'),
     LOG_OUT("jfx-icon-log-out", '\ue921'),
+    MASTODON("jfx-icon-mastodon", '\ue931'),
     MENU("jfx-icon-menu", '\ue922'),
     OPEN_LINK("jfx-icon-open-link", '\ue923'),
     OVERVIEW("jfx-icon-overview", '\ue924'),
