@@ -17,6 +17,7 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import org.kordamp.ikonli.Ikon;
+import org.kordamp.ikonli.coreui.CoreUiBrands;
 import org.kordamp.ikonli.hawcons.HawconsStroke;
 import org.kordamp.ikonli.lineawesome.LineAwesomeSolid;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -41,7 +42,7 @@ public interface IkonUtil {
     Ikon play = JFXCentralIcon.PLAY;
     Ikon github = JFXCentralIcon.GITHUB;
     Ikon twitter = JFXCentralIcon.TWITTER;
-    Ikon mastodon = JFXCentralIcon.MASTODON;
+    Ikon mastodon = CoreUiBrands.MASTODON;
     Ikon reddit = MaterialDesign.MDI_REDDIT;
     Ikon facebook = JFXCentralIcon.FACEBOOK;
     Ikon linkedin = JFXCentralIcon.LINKEDIN;

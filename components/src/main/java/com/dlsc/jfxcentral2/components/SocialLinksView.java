@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.kordamp.ikonli.coreui.CoreUiBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class SocialLinksView extends FlowPane {
@@ -31,7 +32,7 @@ public class SocialLinksView extends FlowPane {
         twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
         twitterUrl.addListener(it -> updateLink(twitterLinkBtn, getTwitterUrl()));
 
-        mastodonLinkBtn = new Button("MASTODON", new FontIcon(IkonUtil.mastodon));
+        mastodonLinkBtn = new Button("MASTODON", new FontIcon(CoreUiBrands.MASTODON));
         mastodonLinkBtn.getStyleClass().add("mastodon-link-btn");
         mastodonLinkBtn.visibleProperty().bind(mastodonUrlProperty().isNotEmpty());
         mastodonLinkBtn.managedProperty().bind(mastodonLinkBtn.visibleProperty());

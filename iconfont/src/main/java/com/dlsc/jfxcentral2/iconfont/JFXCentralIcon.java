@@ -59,10 +59,7 @@ public enum JFXCentralIcon implements Ikon {
     YOUTUBE("jfx-icon-youtube", '\ue934'),
     TOP_CONTENT("jfx-icon-top-content", '\ue935'),
     HANDSHAKE("jfx-icon-handshake", '\ue936'),
-    TEAM("jfx-icon-team", '\ue937'),
-    // TODO Replace Mastodon with correct icon code, current identical to Twitter
-    // See https://github.com/dlemmermann/jfxcentral2/issues/310
-    MASTODON("jfx-icon-mastodon", '\ue931') ;
+    TEAM("jfx-icon-team", '\ue937');
 
     private final String description;
     private final int icon;
