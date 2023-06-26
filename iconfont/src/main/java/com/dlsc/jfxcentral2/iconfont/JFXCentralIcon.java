@@ -38,7 +38,6 @@ public enum JFXCentralIcon implements Ikon {
     LINKS("jfx-icon-links", '\ue91f'),
     LOG_IN("jfx-icon-log-in", '\ue920'),
     LOG_OUT("jfx-icon-log-out", '\ue921'),
-    MASTODON("jfx-icon-mastodon", '\ue931'),
     MENU("jfx-icon-menu", '\ue922'),
     OPEN_LINK("jfx-icon-open-link", '\ue923'),
     OVERVIEW("jfx-icon-overview", '\ue924'),
@@ -60,7 +59,10 @@ public enum JFXCentralIcon implements Ikon {
     YOUTUBE("jfx-icon-youtube", '\ue934'),
     TOP_CONTENT("jfx-icon-top-content", '\ue935'),
     HANDSHAKE("jfx-icon-handshake", '\ue936'),
-    TEAM("jfx-icon-team", '\ue937');
+    TEAM("jfx-icon-team", '\ue937'),
+    // TODO Replace Mastodon with correct icon code, current identical to Twitter
+    // See https://github.com/dlemmermann/jfxcentral2/issues/310
+    MASTODON("jfx-icon-mastodon", '\ue931') ;
 
     private final String description;
     private final int icon;

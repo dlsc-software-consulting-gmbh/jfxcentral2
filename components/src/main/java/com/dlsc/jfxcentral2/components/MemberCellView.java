@@ -34,7 +34,6 @@ public class MemberCellView extends PaneBase {
         socialLinksView = new SocialLinksView();
         socialLinksView.setTwitterUrl(member.getTwitter());
         socialLinksView.setMastodonUrl(member.getMastodon());
-        socialLinksView.setLinkedInUrl(member.getLinkedIn());
         socialLinksView.setWebsiteUrl(member.getWebsite());
 
         if (StringUtils.isNotBlank(member.getLinkedIn())) {

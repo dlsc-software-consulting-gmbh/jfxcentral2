@@ -90,28 +90,28 @@ public class SocialLinksView extends FlowPane {
     private void updateView() {
         getChildren().clear();
 
-        if (getTwitterUrl() != null && !getTwitterUrl().isEmpty()) {
+        if (StringUtils.isNotBlank(getTwitterUrl())) {
             getChildren().add(twitterLinkBtn);
         }
-        if (getMastodonUrl() != null && !getMastodonUrl().isEmpty()) {
+        if (StringUtils.isNotBlank(getMastodonUrl())) {
             getChildren().add(mastodonLinkBtn);
         }
-        if (getLinkedInUrl() != null && !getLinkedInUrl().isEmpty()) {
+        if (StringUtils.isNotBlank(getLinkedInUrl())) {
             getChildren().add(linkedInLinkBtn);
         }
-        if (getWebsiteUrl() != null && !getWebsiteUrl().isEmpty()) {
+        if (StringUtils.isNotBlank(getWebsiteUrl())) {
             getChildren().add(websiteLinkBtn);
         }
-        if (getGithubUrl() != null && !getGithubUrl().isEmpty()) {
+        if (StringUtils.isNotBlank(getGithubUrl())) {
             getChildren().add(githubLinkBtn);
         }
-        if (getMailUrl() != null && !getMailUrl().isEmpty()) {
+        if (StringUtils.isNotBlank(getMailUrl())) {
             getChildren().add(facebookLinkBtn);
         }
-        if (getRedditUrl() != null && !getRedditUrl().isEmpty()) {
+        if (StringUtils.isNotBlank(getRedditUrl())) {
             getChildren().add(redditLinkBtn);
         }
-        if (getMailUrl() != null && !getMailUrl().isEmpty()) {
+        if (StringUtils.isNotBlank(getMailUrl())) {
             getChildren().add(mailLinkBtn);
         }
     }
