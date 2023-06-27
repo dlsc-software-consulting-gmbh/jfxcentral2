@@ -17,8 +17,9 @@ import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.List;
@@ -56,10 +57,13 @@ public class CreditsView extends PaneBase {
     }
 
     private List<CreditModel> loadCredits() {
-        String filePath = Objects.requireNonNull(getClass().getResource("/com/dlsc/jfxcentral2/credits/credits.json")).getFile();
-        Type listType = new TypeToken<List<CreditModel>>() {}.getType();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            return new Gson().fromJson(reader, listType);
+        String filePath = "/com/dlsc/jfxcentral2/credits/credits.json";
+        Type listType = new TypeToken<List<CreditModel>>() {
+        }.getType();
+        try (InputStream inputStream = getClass().getResourceAsStream(filePath);
+             InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(inputStream));
+             BufferedReader bufferedReader = new BufferedReader(reader)) {
+            return new Gson().fromJson(bufferedReader, listType);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -100,7 +104,7 @@ public class CreditsView extends PaneBase {
                 licenceVersionLabel.setText(license.getVersion());
 
                 licenceBox.getChildren().addAll(licenceTypeLabel, licenceVersionLabel);
-            }else {
+            } else {
                 Label version = new Label("V " + creditModel.getVersion());
                 version.getStyleClass().add("version-label");
                 licenceBox.getChildren().add(version);

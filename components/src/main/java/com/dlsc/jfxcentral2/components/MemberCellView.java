@@ -6,16 +6,17 @@ import com.dlsc.jfxcentral.data.model.Member;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import org.apache.commons.lang3.StringUtils;
 
 public class MemberCellView extends PaneBase {
-
-    private final AvatarView avatar;
     private final SocialLinksView socialLinksView;
     private final CustomMarkdownView descriptionMd;
     private final Label nameLabel;
     private final Label jobTitleLabel;
+    private final StackPane avatarWrapper;
 
     public MemberCellView(Member member) {
         getStyleClass().add("member-cell-view");
@@ -52,8 +53,18 @@ public class MemberCellView extends PaneBase {
             socialLinksView.setGithubUrl("https://www.github.com/" + member.getGitHub());
         }
 
-        avatar = new AvatarView();
+        AvatarView avatar = new AvatarView();
         avatar.imageProperty().bind(ImageManager.getInstance().memberImageProperty(member));
+
+        Circle effectCircle = new Circle();
+        effectCircle.getStyleClass().add("effect-circle");
+        effectCircle.radiusProperty().bind(avatar.avatarSizeProperty().divide(2));
+
+        avatarWrapper = new StackPane(effectCircle, avatar);
+        avatarWrapper.getStyleClass().add("avatar-wrapper");
+        avatarWrapper.maxWidthProperty().bind(avatar.avatarSizeProperty());
+        avatarWrapper.maxHeightProperty().bind(avatar.avatarSizeProperty());
+
     }
 
     @Override
@@ -65,13 +76,13 @@ public class MemberCellView extends PaneBase {
             VBox centerBox = new VBox(nameLabel, jobTitleLabel, descriptionMd, socialLinksView);
             centerBox.getStyleClass().add("center-box");
             HBox.setHgrow(centerBox, Priority.ALWAYS);
-            contentBox.getChildren().setAll(avatar, centerBox);
+            contentBox.getChildren().setAll(avatarWrapper, centerBox);
             getChildren().setAll(contentBox);
         } else {
             VBox contentBox = new VBox();
             contentBox.getStyleClass().add("content-box");
 
-            contentBox.getChildren().setAll(avatar, nameLabel, jobTitleLabel, socialLinksView, descriptionMd);
+            contentBox.getChildren().setAll(avatarWrapper, nameLabel, jobTitleLabel, socialLinksView, descriptionMd);
             getChildren().setAll(contentBox);
         }
     }

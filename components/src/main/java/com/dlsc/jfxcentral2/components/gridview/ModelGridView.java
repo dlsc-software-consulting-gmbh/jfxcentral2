@@ -30,6 +30,8 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
 
     private Node currentDetailView;
 
+    private int currentIndex = -1;
+
     public ModelGridView() {
         getStyleClass().add("model-grid-view");
 
@@ -56,23 +58,24 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
                 TileViewBase<T> tileView = createTileView(contentBox, i);
                 contentBox.getChildren().add(tileView);
             }
+            currentIndex = Math.min(initItemCount, items.size()) - 1;
 
             Button loadMoreButton = new Button("Load More");
             loadMoreButton.getStyleClass().addAll("blue-button", "load-more-button");
             VBox.setMargin(loadMoreButton, new Insets(20, 0, 0, 0));
             contentBox.getChildren().add(loadMoreButton);
             loadMoreButton.setOnAction(event -> {
-                int currentIndex = contentBox.getChildren().size() - 1;
-                if (currentDetailView != null && contentBox.getChildren().contains(currentDetailView)) {
-                    currentIndex--;
+                for (int i = 0; i < contentBox.getChildren().size(); i++) {
+                    System.out.println(contentBox.getChildren().get(i));
                 }
                 int endIndex = Math.min(currentIndex + getRows(), items.size());
-                for (int i = currentIndex; i < endIndex; i++) {
+                for (int i = currentIndex + 1 ; i < endIndex; i++) {
                     TileViewBase<T> tileView = createTileView(contentBox, i);
-                    contentBox.getChildren().add(contentBox.getChildren().size() - 1, tileView);
+                    int index = contentBox.getChildren().indexOf(loadMoreButton);
+                    contentBox.getChildren().add(index, tileView);
                 }
-                currentIndex = endIndex;
-                if (currentIndex == items.size()) {
+                currentIndex = endIndex - 1;
+                if (currentIndex == items.size() - 1) {
                     loadMoreButton.setDisable(true);
                 }
             });
