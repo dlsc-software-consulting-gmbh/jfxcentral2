@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import one.jpro.routing.LinkUtil;
@@ -11,6 +12,8 @@ public class DownloadTileView extends TileView<Download> {
         super(download);
 
         getStyleClass().add("download-tile-view");
+
+        imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
 
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));

@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.image.Image;
@@ -17,6 +18,8 @@ public class BookTileView extends PreviewTileView<Book> {
 
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));
+
+        imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
 
         setButton2Text("amazon");
         Image AMAZON_IMAGE = new Image(BookTileView.class.getResource("/com/dlsc/jfxcentral2/images/amazon.png").toExternalForm());

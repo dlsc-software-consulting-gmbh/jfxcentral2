@@ -1,12 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
-import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral.data.model.Company;
-import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral.data.model.RealWorldApp;
-import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.FlipView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
@@ -77,12 +71,12 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         clip.heightProperty().bind(heightProperty());
         contentBox.setClip(clip);
 
-        //[Top] FlipView
+        // [Top] FlipView
         flipView.frontNodeProperty().bind(Bindings.createObjectBinding(this::createFront, sizeProperty()));
         flipView.setBackNode(createBack());
         VBox.setVgrow(flipView, Priority.ALWAYS);
 
-        //[Bottom] nodes,save button,like button
+        // [Bottom] nodes,save button,like button
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
         saveAndLikeButton.sizeProperty().bind(sizeProperty());
         saveSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setSaveButtonSelected(nv));
@@ -134,11 +128,9 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         bottomPane.add(saveAndLikeButton, 0, 0);
 
         button1.visibleProperty().addListener((ob, ov, nv) -> bottomPaneLayout(saveAndLikeButton, button1, separator1, button2, separator2, bottomPane));
-
-        button2.visibleProperty().addListener((ob, ov, nv) -> bottomPaneLayout(saveAndLikeButton, button1, separator1, button2, separator2, bottomPane));
-
         button1VisibleProperty().addListener((ob, ov, nv) -> bottomPaneLayout(saveAndLikeButton, button1, separator1, button2, separator2, bottomPane));
 
+        button2.visibleProperty().addListener((ob, ov, nv) -> bottomPaneLayout(saveAndLikeButton, button1, separator1, button2, separator2, bottomPane));
         button2VisibleProperty().addListener((ob, ov, nv) -> bottomPaneLayout(saveAndLikeButton, button1, separator1, button2, separator2, bottomPane));
 
         contentBox.getChildren().setAll(flipView, bottomPane);
@@ -148,23 +140,10 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
             boolean isVideo = item instanceof Video;
             StackPane.setAlignment(mainImageRegion, isVideo ? Pos.TOP_LEFT : Pos.CENTER);
         }
+
         setTitle(item.getName());
         setSaveSelected(SaveAndLikeUtil.isSaved(item));
         setLikeSelected(SaveAndLikeUtil.isLiked(item));
-
-        if (item instanceof RealWorldApp app) {
-            imageProperty().bind(ImageManager.getInstance().realWorldAppBannerImageProperty(app));
-        } else if (item instanceof Video video) {
-            imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
-        } else if (item instanceof Book book) {
-            imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
-        } else if (item instanceof Download download) {
-            imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
-        } else if (item instanceof Company company) {
-            imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
-        } else if (item instanceof Tip) {
-            imageProperty().bind(Bindings.createObjectBinding(() -> new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/default-tips-tricks-bg.png").toExternalForm())));
-        }
     }
 
     public Button getButton1() {

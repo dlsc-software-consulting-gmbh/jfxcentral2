@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
@@ -21,6 +22,8 @@ public class VideoTileView extends TileView<Video> {
         super(video);
 
         getStyleClass().add("video-tile-view");
+
+        imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
 
         setButton1Text("PLAY");
         setButton1Graphic(new FontIcon(IkonUtil.play));
