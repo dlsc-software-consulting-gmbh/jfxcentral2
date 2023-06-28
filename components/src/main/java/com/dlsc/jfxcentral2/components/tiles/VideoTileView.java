@@ -89,7 +89,7 @@ public class VideoTileView extends TileView<Video> {
                             ));
                         }
 
-                        case LARGE -> imageView.fitWidthProperty().bind(imageContainer.widthProperty());
+                        case LARGE -> imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(()->400d));
 
                     }
                 });

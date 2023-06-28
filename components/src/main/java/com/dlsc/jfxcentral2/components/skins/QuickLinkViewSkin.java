@@ -122,7 +122,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
                 topLabel.setText("MAIN SPONSOR");
                 bottomLabel.setText("senapt.co.uk");
             } else if (randomStyle == 2) {
-                topLabel.setText("PLATINUM SPONSOR OF JFXCENTRAL");
+                topLabel.setText(isSmall() ? "MAIN SPONSOR" : "PLATINUM SPONSOR OF JFXCENTRAL");
                 bottomLabel.setText("senapt.co.uk");
             }
 
