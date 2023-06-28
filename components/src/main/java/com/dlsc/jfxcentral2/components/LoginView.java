@@ -11,12 +11,16 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class LoginView extends PaneBase{
+public class LoginView extends PaneBase {
 
     private final StackPane background;
     private final StackPane descriptionStackPane;
@@ -25,7 +29,7 @@ public class LoginView extends PaneBase{
     public LoginView() {
         getStyleClass().add("login-view");
 
-        /*background*/
+        /* background */
         Region bgImage = new Region();
         bgImage.getStyleClass().add("bg-image");
 
@@ -35,7 +39,7 @@ public class LoginView extends PaneBase{
         background = new StackPane(bgImage, bgOverlay);
         background.getStyleClass().add("background");
 
-        /*description stack-pane*/
+        /* description stack-pane */
         descriptionStackPane = new StackPane();
         descriptionStackPane.getStyleClass().add("description-stack-pane");
 
@@ -69,8 +73,7 @@ public class LoginView extends PaneBase{
         StackPane.setAlignment(textFlow, Pos.BOTTOM_LEFT);
         descriptionStackPane.getChildren().addAll(title, textFlow);
 
-
-        /*login form v-box*/
+        /* login form v-box */
         ImageView googleLogo = new ImageView();
         googleLogo.getStyleClass().add("google-logo");
         Button googleLoginButton = new Button("LOG IN WITH GOOGLE", googleLogo);
@@ -94,7 +97,7 @@ public class LoginView extends PaneBase{
         microsoftLoginButton.getStyleClass().add("button");
         microsoftLoginButton.setOnAction(event -> JFXCentralUtil.run(onMicrosoftLogin));
 
-        Text registerLabel = new Text("Don't you have an account? " );
+        Text registerLabel = new Text("Don't you have an account? ");
         Hyperlink registerLink = new Hyperlink("Sign up now");
         registerLink.getStyleClass().add("link");
         registerLink.setOnAction(event -> JFXCentralUtil.run(onRegister));
@@ -107,13 +110,13 @@ public class LoginView extends PaneBase{
     @Override
     protected void layoutBySize() {
         super.layoutBySize();
-        if(isLarge()){
+        if (isLarge()) {
             HBox hBox = new HBox(descriptionStackPane, formVBox);
             hBox.getStyleClass().add("h-box");
             setAlignment(hBox, Pos.CENTER);
             getChildren().setAll(hBox, background);
             hBox.toFront();
-        }else{
+        } else {
             VBox vBox = new VBox(descriptionStackPane, formVBox);
             vBox.getStyleClass().add("v-box");
             setAlignment(vBox, Pos.CENTER);
@@ -123,18 +126,45 @@ public class LoginView extends PaneBase{
     }
 
     private final ObjectProperty<Runnable> onGoogleLogin = new SimpleObjectProperty<>(this, "onGoogleLogin");
-    public Runnable getOnGoogleLogin(){return onGoogleLogin.get();}
-    public ObjectProperty<Runnable> onGoogleLoginProperty(){return onGoogleLogin;}
-    public void setOnGoogleLogin(Runnable onGoogleLogin) {this.onGoogleLogin.set(onGoogleLogin);}
+
+    public Runnable getOnGoogleLogin() {
+        return onGoogleLogin.get();
+    }
+
+    public ObjectProperty<Runnable> onGoogleLoginProperty() {
+        return onGoogleLogin;
+    }
+
+    public void setOnGoogleLogin(Runnable onGoogleLogin) {
+        this.onGoogleLogin.set(onGoogleLogin);
+    }
 
     private final ObjectProperty<Runnable> onMicrosoftLogin = new SimpleObjectProperty<>(this, "onMicrosoftLogin");
-    public Runnable getOnMicrosoftLogin(){return onMicrosoftLogin.get();}
-    public ObjectProperty<Runnable> onMicrosoftLoginProperty(){return onMicrosoftLogin;}
-    public void setOnMicrosoftLogin(Runnable onMicrosoftLogin) {this.onMicrosoftLogin.set(onMicrosoftLogin);}
+
+    public Runnable getOnMicrosoftLogin() {
+        return onMicrosoftLogin.get();
+    }
+
+    public ObjectProperty<Runnable> onMicrosoftLoginProperty() {
+        return onMicrosoftLogin;
+    }
+
+    public void setOnMicrosoftLogin(Runnable onMicrosoftLogin) {
+        this.onMicrosoftLogin.set(onMicrosoftLogin);
+    }
 
     private final ObjectProperty<Runnable> onRegister = new SimpleObjectProperty<>(this, "onRegister");
-    public Runnable getOnRegister(){return onRegister.get();}
-    public ObjectProperty<Runnable> onRegisterProperty(){return onRegister;}
-    public void setOnRegister(Runnable onRegister) {this.onRegister.set(onRegister);}
+
+    public Runnable getOnRegister() {
+        return onRegister.get();
+    }
+
+    public ObjectProperty<Runnable> onRegisterProperty() {
+        return onRegister;
+    }
+
+    public void setOnRegister(Runnable onRegister) {
+        this.onRegister.set(onRegister);
+    }
 
 }
