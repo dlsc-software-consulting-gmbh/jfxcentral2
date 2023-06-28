@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.components.tiles.VideoGalleryTileView;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
