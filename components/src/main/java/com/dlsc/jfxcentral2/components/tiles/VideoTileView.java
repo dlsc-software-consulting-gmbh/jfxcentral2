@@ -9,6 +9,7 @@ import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
@@ -84,11 +85,21 @@ public class VideoTileView extends TileView<Video> {
                             imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> 140d));
                             StackPane.setAlignment(imageView, Pos.BOTTOM_LEFT);
                         }
-                        case MEDIUM -> imageView.fitWidthProperty().bind(
-                                parent.widthProperty()
-                                        .subtract(30 * 2)//padding
-                                        .subtract(20 * 2)//hgaps
-                                        .divide(3.3));
+                        case MEDIUM -> {
+                            GridPane gridPane = (GridPane) parent;
+                            Pane gridPaneParent = (Pane) gridPane.getParent().getParent().getParent();
+
+                            imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> {
+                                        double width = parent.getWidth();
+                                        double padding = gridPaneParent.getPadding().getLeft() + gridPaneParent.getPadding().getRight();
+                                        double hgap = gridPane.getHgap() * 2;
+                                        return (width - padding - hgap) / 3.3;
+                                    },
+                                    gridPane.hgapProperty(),
+                                    gridPaneParent.paddingProperty(),
+                                    parent.widthProperty()
+                            ));
+                        }
 
                         case LARGE -> imageView.fitWidthProperty().bind(imageContainer.widthProperty());
 
