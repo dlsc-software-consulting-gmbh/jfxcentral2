@@ -91,12 +91,12 @@ public class VideoTileView extends TileView<Video> {
 
                             imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> {
                                         double width = parent.getWidth();
-                                        double padding = gridPaneParent.getPadding().getLeft() + gridPaneParent.getPadding().getRight();
+                                        double horInsets = gridPaneParent.getInsets().getLeft() + gridPaneParent.getInsets().getRight();
                                         double hgap = gridPane.getHgap() * 2;
-                                        return (width - padding - hgap) / 3.3;
+                                        return (width - horInsets - hgap) / 3.3;
                                     },
                                     gridPane.hgapProperty(),
-                                    gridPaneParent.paddingProperty(),
+                                    gridPaneParent.insetsProperty(),
                                     parent.widthProperty()
                             ));
                         }
