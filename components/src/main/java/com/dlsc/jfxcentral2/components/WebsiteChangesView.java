@@ -24,13 +24,11 @@ public class WebsiteChangesView extends LinksContainerBase {
         if (titleProperty() == null || quickLinks == null || quickLinks.isEmpty()) {
             return;
         }
-        System.out.println(quickLinks.size());
         TitleAndDescriptionBox header = new TitleAndDescriptionBox();
         header.getStyleClass().add("header");
         header.sizeProperty().bind(sizeProperty());
         header.titleProperty().bind(titleProperty());
         header.descriptionProperty().bind(descriptionProperty());
-        System.out.println();
         if (isSmall()) {
             gridPane.add(header, 0, 0);
             for (int i = 0; i < 3; i++) {

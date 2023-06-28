@@ -27,6 +27,13 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
     public QuickLinkViewSkin(QuickLinkView control) {
         super(control);
         control.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> control.toFront());
+        control.hoverProperty().addListener((observable, oldValue, isHover) -> {
+            if (isHover) {
+                control.toFront();
+            }else {
+                control.toBack();
+            }
+        });
         layoutBySize();
     }
 

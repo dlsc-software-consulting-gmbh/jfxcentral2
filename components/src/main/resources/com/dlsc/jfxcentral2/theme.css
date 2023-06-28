@@ -2230,6 +2230,7 @@
 .quick-link-view.empty-link-view {
     -fx-border-color: transparent;
     -fx-background-color: transparent;
+    -fx-effect: null;
     -fx-cursor: default;
 }
 
@@ -6004,8 +6005,12 @@
     -fx-spacing: 10px;
 }
 
-.category-content-pane:sm-md > .content-box {
-    -fx-padding: 0px 0px;
+.category-content-pane:sm > .content-box {
+    -fx-padding: 60px 0px;
+}
+
+.category-content-pane:md > .content-box {
+    -fx-padding: 70px 0px;
 }
 
 
@@ -7882,6 +7887,16 @@
     -fx-spacing: 0px;
 }
 
+.team-view .member-cell-view .avatar-wrapper {
+    -fx-padding: 35px 0 0 0;
+}
+
+.team-view .member-cell-view .effect-circle {
+    -fx-stroke: transparent;
+    -fx-fill: #808080;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0.15, 0, 0);
+}
+
 .team-view .member-cell-view:md-lg {
     -fx-alignment: center;
     -fx-border-color: -grey-10;
@@ -7909,10 +7924,6 @@
 
 .team-view .member-cell-view .avatar-view {
     -fx-avatar-size: 100px;
-}
-
-.team-view .member-cell-view:md-lg .avatar-view {
-    -fx-padding: 30px 0 0 0;
 }
 
 .team-view .member-cell-view .name-label {
