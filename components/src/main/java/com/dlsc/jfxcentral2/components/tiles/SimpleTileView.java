@@ -16,6 +16,8 @@ import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -23,6 +25,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.LinkUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -52,7 +56,6 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         avatarView.typeProperty().bind(avatarTypeProperty());
         avatarView.visibleProperty().bind(avatarView.imageProperty().isNotNull());
         avatarView.managedProperty().bind(avatarView.imageProperty().isNotNull());
-        avatarView.setMouseTransparent(true);
 
         Label nameLabel = new Label();
         nameLabel.getStyleClass().add("title");
@@ -64,7 +67,6 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         Button detailButton = new Button();
         detailButton.getStyleClass().add("detail-button");
         detailButton.setGraphic(new FontIcon(IkonUtil.link));
-        detailButton.setMouseTransparent(true);
 
         badgeBox.getStyleClass().add("badge-box");
 
@@ -100,6 +102,22 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         }
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
+
+        linkUrlProperty().addListener((ob, ov, newUrl) -> {
+            if (StringUtils.isBlank(newUrl)) {
+                return;
+            }
+            if (WebAPI.isBrowser()) {
+                LinkUtil.setLink(avatarView, newUrl);
+                LinkUtil.setLink(topBox, newUrl);
+                LinkUtil.setLink(descriptionLabel, newUrl);
+                LinkUtil.setLink(linkedObjectBox, newUrl);
+            } else {
+                avatarView.setMouseTransparent(true);
+                detailButton.setMouseTransparent(true);
+                LinkUtil.setLink(this, newUrl);
+            }
+        });
     }
 
     private final ObjectProperty<AvatarView.Type> avatarType = new SimpleObjectProperty<>(this, "avatarType", AvatarView.Type.CIRCLE);
@@ -176,4 +194,17 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
     public record LinkedObjectBadge(String name, Ikon ikon, int count) {
     }
 
+    private final StringProperty linkUrl = new SimpleStringProperty(this, "linkUrl");
+
+    public String getLinkUrl() {
+        return linkUrl.get();
+    }
+
+    public StringProperty linkUrlProperty() {
+        return linkUrl;
+    }
+
+    public void setLinkUrl(String linkUrl) {
+        this.linkUrl.set(linkUrl);
+    }
 }

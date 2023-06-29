@@ -1,7 +1,9 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.scene.image.Image;
+import org.apache.commons.lang3.StringUtils;
 
 public class BookDetailHeader extends SimpleDetailHeader<Book> {
 
@@ -10,8 +12,14 @@ public class BookDetailHeader extends SimpleDetailHeader<Book> {
 
         getStyleClass().addAll("book-detail-header", "dark-header");
 
-        setWebsiteButtonText("amazon");
-        setWebsite("https://www.amazon.com/dp/" + getModel().getAmazonASIN());
+        if (StringUtils.isNotBlank(book.getAmazonASIN())) {
+            setWebsiteButtonText("amazon");
+            setWebsite("https://www.amazon.com/dp/" + getModel().getAmazonASIN());
+        } else if (StringUtils.isNotBlank(book.getUrl())) {
+            setWebsiteButtonText(StringUtil.getDomainName(book.getUrl()));
+            setWebsite(book.getUrl());
+        }
+
         setBackgroundImage(new Image(BookDetailHeader.class.getResource("books-banner.jpg").toExternalForm()));
         setShareUrl("books/" + book.getId());
         setShareText("Found this book on @JFXCentral: " + book.getName() + " - " + book.getSubtitle());

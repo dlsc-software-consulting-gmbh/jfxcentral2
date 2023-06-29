@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral2.components.skins.SinglePullRequestView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -25,10 +26,10 @@ public class PullRequestsView extends StripView {
     public PullRequestsView() {
         getStyleClass().add("pull-requests-view");
 
-        Label tipsLabel = new Label("Loading ...");
+        Label tipsLabel = new Label(StringUtil.LOADING_TIPS);
         tipsLabel.managedProperty().bind(tipsLabel.visibleProperty());
         tipsLabel.setGraphic(new FontIcon(AntDesignIconsOutlined.CLOUD_DOWNLOAD));
-        tipsLabel.getStyleClass().add("tips-label");
+        tipsLabel.getStyleClass().add("loading-label");
 
         PaginationControl2 paginationControl = new PaginationControl2();
         paginationControl.setPlaceholder(null);
@@ -47,7 +48,7 @@ public class PullRequestsView extends StripView {
 
         pullRequestsProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
-                tipsLabel.setText("Loading ...");
+                tipsLabel.setText(StringUtil.LOADING_TIPS);
                 tipsLabel.setGraphic(new FontIcon(AntDesignIconsOutlined.CLOUD_DOWNLOAD));
                 tipsLabel.setVisible(true);
                 contentPane.setCenter(null);

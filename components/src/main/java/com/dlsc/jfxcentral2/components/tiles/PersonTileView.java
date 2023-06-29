@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.Region;
-import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -30,7 +29,7 @@ public class PersonTileView extends SimpleTileView<Person> {
 
         getStyleClass().add("person-tile-view");
 
-        LinkUtil.setLink(this, "/people/" + getData().getId());
+        setLinkUrl("/people/" + getData().getId());
 
         //add image for testing
         imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
