@@ -2,15 +2,16 @@ package com.dlsc.jfxcentral2.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.LibraryPreviewBox;
-import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.model.NameProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
@@ -30,8 +31,9 @@ public class LibraryOverviewBox extends PaneBase implements NameProvider {
 
         LibraryPreviewBox libraryPreviewBox = new LibraryPreviewBox(library);
         libraryPreviewBox.sizeProperty().bind(sizeProperty());
+        VBox.setMargin(libraryPreviewBox, new Insets(20, 0, 0, 0));
 
-        VBox bodyBox = new VBox(libraryPreviewBox, markdownView);
+        VBox bodyBox = new VBox(markdownView, libraryPreviewBox);
         bodyBox.getStyleClass().add("body-box");
 
         VBox contentBox = new VBox();
