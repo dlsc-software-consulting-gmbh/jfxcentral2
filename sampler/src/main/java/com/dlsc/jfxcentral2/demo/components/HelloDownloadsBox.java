@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.demo.components;
 
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral2.components.DownloadsBox;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
@@ -8,28 +9,15 @@ import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
-import java.util.List;
-
 public class HelloDownloadsBox extends JFXCentralSampleBase {
 
     private DownloadsBox downloadsBox;
 
     @Override
     protected Region createControl() {
-        Download download = createDownload();
+        Download download = DataRepository2.getInstance().getDownloads().get(0);
         downloadsBox = new DownloadsBox(download);
         return new StackPane(downloadsBox);
-    }
-
-    private Download createDownload() {
-        Download download = new Download();
-        download.setName("CalendarFX");
-        download.setFiles(List.of(
-                createDownloadFile(Download.FileType.EXE),
-                createDownloadFile(Download.FileType.DMG),
-                createDownloadFile(Download.FileType.JAR)
-        ));
-        return download;
     }
 
     private Download.DownloadFile createDownloadFile(Download.FileType fileType) {

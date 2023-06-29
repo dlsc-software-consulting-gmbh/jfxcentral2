@@ -117,6 +117,9 @@ public class DownloadsBox extends PaneBase {
                 tagsBox.getChildren().add(tagLabel);
             });
         }
+        tagsBox.managedProperty().bind(tagsBox.visibleProperty());
+        tagsBox.visibleProperty().bind(sizeProperty().map(size-> !isSmall()));
+
         Region dividingLine = new Region();
         dividingLine.getStyleClass().add("dividing-line");
 
