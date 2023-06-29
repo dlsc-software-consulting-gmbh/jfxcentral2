@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.StringUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -39,7 +40,7 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
 
         getStyleClass().addAll("overview-box", "library-coordinates-box");
 
-        repositoryCoordinatesLabel = new Label();
+        repositoryCoordinatesLabel = new Label(StringUtil.LOADING_TIPS);
         repositoryCoordinatesLabel.getStyleClass().add("coordinates-label");
         repositoryCoordinatesLabel.setWrapText(true);
         repositoryCoordinatesLabel.setMinHeight(Region.USE_PREF_SIZE);
@@ -90,8 +91,8 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
             FXFuture.runBackground(() -> DataRepository2.getInstance().getArtifactVersion(coordinates)).map(property -> {
                 repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
                     String s = property.get();
-                    if (s == null || StringUtils.isBlank(s)) {
-                        return "Loading ...";
+                    if (StringUtils.equalsIgnoreCase("unknown", s)) {
+                        return "WAIT TIMEOUT...";
                     }
                     if (getBuildTool().equals(BuildTool.MAVEN)) {
                         return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + property.get() + "</version>\n</dependency>";

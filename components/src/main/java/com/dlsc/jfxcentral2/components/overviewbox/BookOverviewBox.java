@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.format.DateTimeFormatter;
 
@@ -50,6 +51,7 @@ public class BookOverviewBox extends OverviewBox<Book> {
         isbnLabel.getStyleClass().add("last");
         isbnLabel.getStyleClass().add("field-value");
         isbnLabel.setText(book.getIsbn());
+        isbnLabel.setVisible(StringUtils.isNotBlank(book.getIsbn()));
 
         Label writtenBy = new Label("WRITTEN BY");
         writtenBy.getStyleClass().add("field-title");
@@ -62,6 +64,7 @@ public class BookOverviewBox extends OverviewBox<Book> {
 
         Label isbn = new Label("ISBN");
         isbn.getStyleClass().add("field-title");
+        isbn.setVisible(StringUtils.isNotBlank(book.getIsbn()));
 
         VBox topBox = new VBox(
                 writtenBy,

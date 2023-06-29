@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components.tiles;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import one.jpro.routing.LinkUtil;
@@ -26,9 +27,13 @@ public class BookTileView extends PreviewTileView<Book> {
         setButton2Graphic(new ImageView(AMAZON_IMAGE));
         LinkUtil.setLink(getButton1(), "/books/" + getData().getId());
 
-        if (StringUtils.isNotEmpty(book.getAmazonASIN())) {
+        if (StringUtils.isNotBlank(book.getAmazonASIN())) {
             setButton2Visible(true);
             LinkUtil.setExternalLink(getButton2(), "https://www.amazon.com/dp/" + book.getAmazonASIN(), book.getName());
+        } else if (StringUtils.isNotBlank(book.getUrl())) {
+            setButton2Visible(true);
+            setButton2Text(StringUtil.getDomainName(book.getUrl()));
+            LinkUtil.setExternalLink(getButton2(), book.getUrl(), book.getName());
         } else {
             setButton2Visible(false);
         }

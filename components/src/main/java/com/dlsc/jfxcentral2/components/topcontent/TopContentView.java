@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
+import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
@@ -30,11 +31,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.Ikon;
+import org.kordamp.ikonli.antdesignicons.AntDesignIconsOutlined;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class TopContentView<T extends ModelObject> extends PaneBase {
 
     private final VBox centerBox;
+    private Label tipsLabel;
 
     public TopContentView() {
         getStyleClass().add("top-content-view");
@@ -42,6 +45,10 @@ public class TopContentView<T extends ModelObject> extends PaneBase {
         Header header = new Header();
         header.titleProperty().bind(titleProperty());
         header.iconProperty().bind(iconProperty());
+
+        tipsLabel = new Label(StringUtil.LOADING_TIPS);
+        tipsLabel.getStyleClass().add("loading-label");
+        tipsLabel.setGraphic(new FontIcon(AntDesignIconsOutlined.CLOUD_DOWNLOAD));
 
         centerBox = new VBox();
         centerBox.getStyleClass().add("center-box");
@@ -72,7 +79,11 @@ public class TopContentView<T extends ModelObject> extends PaneBase {
     @Override
     protected void layoutBySize() {
         centerBox.getChildren().clear();
+        if (getItems().isEmpty()) {
 
+            centerBox.getChildren().setAll(tipsLabel);
+            return;
+        }
         //TODO: Sort the items by saveCount + likeCount
         //getItems().sort((o1, o2) ->));
 

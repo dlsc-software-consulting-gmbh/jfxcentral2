@@ -4,7 +4,6 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
-import one.jpro.routing.LinkUtil;
 
 public class ToolTileView extends SimpleTileView<Tool> {
 
@@ -13,7 +12,7 @@ public class ToolTileView extends SimpleTileView<Tool> {
 
         getStyleClass().add("tool-tile-view");
 
-        LinkUtil.setLink(this, "/tools/" + getData().getId());
+        setLinkUrl("/tools/" + getData().getId());
 
         setAvatarType(AvatarView.Type.PLAIN);
 
