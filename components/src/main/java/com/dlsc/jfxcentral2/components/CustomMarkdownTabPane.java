@@ -40,7 +40,7 @@ public class CustomMarkdownTabPane extends PaneBase {
         getChildren().setAll(contentBox);
         setMaxHeight(Region.USE_PREF_SIZE);
 
-        tabsProperty().addListener((observable, oldValue, newValue) -> layoutBySize());
+        tabsProperty().addListener((observable, oldValue, newValue) -> updateUI());
 
         selectedIndexProperty().addListener((obs, oldIndex, newIndex) -> {
             int index = newIndex.intValue();
@@ -74,6 +74,12 @@ public class CustomMarkdownTabPane extends PaneBase {
 
     @Override
     protected void layoutBySize() {
+        if (!isLgToMdOrMdToLg()) {
+            updateUI();
+        }
+    }
+
+    private void updateUI() {
         contentBox.getChildren().clear();
         group.getToggles().clear();
         if (isLarge() || isMedium()) {
@@ -99,7 +105,7 @@ public class CustomMarkdownTabPane extends PaneBase {
                 columnConstraints.setHgrow(Priority.ALWAYS);
                 columnConstraints.setHalignment(HPos.CENTER);
                 gridPane.getColumnConstraints().add(columnConstraints);
-                if (i == getSelectedIndex()) {
+                if (i == getSelectedIndex() || (getSelectedIndex() == -1 && i == 0)) {
                     toggleButton.setSelected(true);
                 }
             }
@@ -120,7 +126,7 @@ public class CustomMarkdownTabPane extends PaneBase {
                 toggleButton.setGraphic(tabGraphicBox);
                 toggleButton.setToggleGroup(group);
                 contentBox.getChildren().add(toggleButton);
-                if (i == getSelectedIndex()) {
+                if (i == getSelectedIndex() || (getSelectedIndex() == -1 && i == 0)) {
                     contentBox.getChildren().add(markdownView);
                     toggleButton.setSelected(true);
                 }

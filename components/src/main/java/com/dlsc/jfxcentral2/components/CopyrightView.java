@@ -35,10 +35,16 @@ public class CopyrightView extends PaneBase {
         poweredByBox.getStyleClass().add("powered-by-box");
         LinkUtil.setExternalLink(poweredByBox, "https://www.jpro.one");
 
-        layoutBySize();
+        updateUI();
     }
 
     protected void layoutBySize() {
+        if (!isLgToMdOrMdToLg()) {
+            updateUI();
+        }
+    }
+
+    private void updateUI() {
         if (isSmall()) {
             VBox box = new VBox(copyrightLabel, poweredByBox);
             box.getStyleClass().add("content");

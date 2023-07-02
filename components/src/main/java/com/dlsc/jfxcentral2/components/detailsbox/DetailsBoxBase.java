@@ -337,7 +337,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             StackPane mainPreviewPane = new StackPane(imageView);
             mainPreviewPane.getStyleClass().addAll("image-wrapper", "main-preview-wrapper");
             mainPreviewPane.managedProperty().bind(mainPreviewPane.visibleProperty());
-            mainPreviewPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+            //mainPreviewPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
             if (mins != null) {
                 Label mainPreviewDesc = new Label(mins, new FontIcon());

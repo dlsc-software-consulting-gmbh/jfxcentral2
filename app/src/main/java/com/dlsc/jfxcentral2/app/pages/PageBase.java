@@ -159,10 +159,10 @@ public abstract class PageBase extends View {
     /**
      * Useful utility method to create a random sublist of a given list.
      *
-     * @param list the original list
+     * @param list    the original list
      * @param newSize the requested size for the random sublist
+     * @param <T>     the type of the items in the list
      * @return a new list containing a fixed number of
-     * @param <T> the type of the items in the list
      */
     public <T> List<T> randomSubList(List<T> list, int newSize) {
         list = new ArrayList<>(list);
