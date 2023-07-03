@@ -65,10 +65,17 @@ public class MemberCellView extends PaneBase {
         avatarWrapper.maxWidthProperty().bind(avatar.avatarSizeProperty());
         avatarWrapper.maxHeightProperty().bind(avatar.avatarSizeProperty());
 
+        updarteUI();
     }
 
     @Override
     protected void layoutBySize() {
+        if (!isLgToMdOrMdToLg()) {
+            updarteUI();
+        }
+    }
+
+    private void updarteUI() {
         if (isLarge() || isMedium()) {
             HBox contentBox = new HBox();
             contentBox.getStyleClass().add("content-box");

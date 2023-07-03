@@ -50,7 +50,7 @@ public class TopContentView<T extends ModelObject> extends PaneBase {
         tipsLabel.getStyleClass().add("loading-label");
         tipsLabel.setGraphic(new FontIcon(AntDesignIconsOutlined.CLOUD_DOWNLOAD));
 
-        centerBox = new VBox();
+        centerBox = new VBox(tipsLabel);
         centerBox.getStyleClass().add("center-box");
 
         Button loadMoreButton = new Button("LOAD MORE");
@@ -73,24 +73,29 @@ public class TopContentView<T extends ModelObject> extends PaneBase {
         loadMoreButton.disableProperty().bind(Bindings.createBooleanBinding(
                 () -> getItems().size() <= centerBox.getChildren().size(), itemsProperty(), centerBox.getChildren()));
 
-        itemsProperty().addListener((InvalidationListener) it -> layoutBySize());
+        itemsProperty().addListener((InvalidationListener) it -> updateUI());
     }
 
     @Override
     protected void layoutBySize() {
-        centerBox.getChildren().clear();
-        if (getItems().isEmpty()) {
+        if (!isLgToMdOrMdToLg()) {
+            updateUI();
+        }
+    }
 
+    private void updateUI() {
+        if (getItems().isEmpty()) {
             centerBox.getChildren().setAll(tipsLabel);
             return;
         }
+        centerBox.getChildren().clear();
+
         //TODO: Sort the items by saveCount + likeCount
         //getItems().sort((o1, o2) ->));
 
         getItems().stream().limit(getInitCount()).forEach(item -> {
             centerBox.getChildren().add(createItemCell(item));
         });
-
     }
 
     protected Node createItemCell(T item) {

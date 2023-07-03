@@ -25,7 +25,8 @@ public class PaneBase extends StackPane {
     private static final PseudoClass DESKTOP_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("desktop");
     private static final PseudoClass BROWSER_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("browser");
     private static final PseudoClass MOBILE_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("mobile");
-
+    private Size oldSize;
+    private Size newSize;
     public PaneBase() {
         // target styling
         activateTargetPseudoClass();
@@ -33,10 +34,28 @@ public class PaneBase extends StackPane {
 
         // size styling
         activateSizePseudoClass();
+        newSize = getSize();
         sizeProperty().addListener(it -> {
+            oldSize = newSize;
+            newSize = getSize();
             activateSizePseudoClass();
             layoutBySize();
         });
+    }
+
+    public Size getOldSize() {
+        return oldSize;
+    }
+
+    public Size getNewSize() {
+        return newSize;
+    }
+
+    public boolean isLgToMdOrMdToLg() {
+        if (oldSize == null || newSize == null) {
+            return false;
+        }
+        return (oldSize.isLarge() && newSize.isMedium()) || (oldSize.isMedium() && newSize.isLarge());
     }
 
     private void activateTargetPseudoClass() {
