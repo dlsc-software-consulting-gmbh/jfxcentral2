@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.gridview;
 
+import com.dlsc.jfxcentral2.components.PaginationControl;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import javafx.beans.InvalidationListener;
@@ -11,6 +12,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
@@ -21,17 +23,23 @@ public class SimpleGridView<T> extends PaneBase {
 
     private DetailView<T> currentDetailView;
     private CellView<T> lasetSelectedCellView;
+
+    public enum PaginationMode {
+        ADVANCED,
+        SIMPLE
+    }
+
     public SimpleGridView() {
         getStyleClass().add("simple-grid-view");
 
         InvalidationListener layoutListener = it -> layoutBySize();
-
 
         cellViewProviderProperty().addListener(layoutListener);
         detailNodeProviderProperty().addListener(layoutListener);
         rowsProperty().addListener(layoutListener);
         itemsProperty().addListener(layoutListener);
         columnsProperty().addListener(layoutListener);
+        paginationModeProperty().addListener(layoutListener);
     }
 
     @Override
@@ -40,9 +48,8 @@ public class SimpleGridView<T> extends PaneBase {
         int columns = getColumns();
         int rows = getRows();
         List<T> items = getItems();
-        PaginationControl2 paginationControl = new PaginationControl2();
-        paginationControl.setPageCount((int) Math.ceil((double) items.size() / (double) (columns * rows)));
-        paginationControl.setPageFactory(pageIndex -> {
+
+        Callback<Integer, Node> pageFactory = pageIndex -> {
             GridPane gridPane = new GridPane();
             gridPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
             gridPane.getStyleClass().add("grid-pane");
@@ -52,40 +59,52 @@ public class SimpleGridView<T> extends PaneBase {
                 int row = (i - startIndex) / columns;
                 int column = (i - startIndex) % columns;
                 T model = items.get(i);
-                    CellView<T> cellView = getCellViewProvider().call(model);
-                    cellView.sizeProperty().bind(sizeProperty());
-                    cellView.selectedProperty().addListener((ob, ov, nv) ->{
-                        requestFocus();
-                        if (nv) {
-                            if (lasetSelectedCellView != null) {
-                                lasetSelectedCellView.setSelected(false);
-                            }
-                            lasetSelectedCellView = cellView;
-                            if (currentDetailView != null) {
-                                gridPane.getChildren().remove(currentDetailView);
-                                currentDetailView = null;
-                            }
-                            if (getDetailNodeProvider() != null) {
-                                currentDetailView = getDetailNodeProvider().call(model);
-                                currentDetailView.sizeProperty().bind(sizeProperty());
-                                currentDetailView.getStyleClass().add("detail-node");
-                                gridPane.add(currentDetailView, 0, row * 2 + 1, columns, 1);
-                            }
-                        } else {
-                            lasetSelectedCellView = null;
-                            if (currentDetailView != null) {
-                                gridPane.getChildren().remove(currentDetailView);
-                                currentDetailView = null;
-                            }
+                CellView<T> cellView = getCellViewProvider().call(model);
+                cellView.sizeProperty().bind(sizeProperty());
+                cellView.selectedProperty().addListener((ob, ov, nv) -> {
+                    requestFocus();
+                    if (nv) {
+                        if (lasetSelectedCellView != null) {
+                            lasetSelectedCellView.setSelected(false);
                         }
+                        lasetSelectedCellView = cellView;
+                        if (currentDetailView != null) {
+                            gridPane.getChildren().remove(currentDetailView);
+                            currentDetailView = null;
+                        }
+                        if (getDetailNodeProvider() != null) {
+                            currentDetailView = getDetailNodeProvider().call(model);
+                            currentDetailView.sizeProperty().bind(sizeProperty());
+                            currentDetailView.getStyleClass().add("detail-node");
+                            gridPane.add(currentDetailView, 0, row * 2 + 1, columns, 1);
+                        }
+                    } else {
+                        lasetSelectedCellView = null;
+                        if (currentDetailView != null) {
+                            gridPane.getChildren().remove(currentDetailView);
+                            currentDetailView = null;
+                        }
+                    }
 
-                    });
-                    gridPane.add(cellView, column, row * 2);
+                });
+                gridPane.add(cellView, column, row * 2);
 
             }
             return gridPane;
-        });
-        getChildren().setAll(paginationControl);
+        };
+
+        if (getPaginationMode() == PaginationMode.ADVANCED) {
+            PaginationControl2 paginationControl = new PaginationControl2();
+            paginationControl.setPageCount((int) Math.ceil((double) items.size() / (double) (columns * rows)));
+            paginationControl.setPageFactory(pageFactory);
+            getChildren().setAll(paginationControl);
+        } else {
+            PaginationControl paginationControl = new PaginationControl();
+            paginationControl.setPageCount((int) Math.ceil((double) items.size() / (double) (columns * rows)));
+            paginationControl.setPageFactory(pageFactory);
+            getChildren().setAll(paginationControl);
+        }
+
     }
 
 
@@ -160,5 +179,19 @@ public class SimpleGridView<T> extends PaneBase {
 
     public void setCellViewProvider(Callback<T, CellView<T>> cellViewProvider) {
         this.cellViewProvider.set(cellViewProvider);
+    }
+
+    private final ObjectProperty<PaginationMode> paginationMode = new SimpleObjectProperty<>(this, "paginationMode", PaginationMode.ADVANCED);
+
+    public PaginationMode getPaginationMode() {
+        return paginationMode.get();
+    }
+
+    public ObjectProperty<PaginationMode> paginationModeProperty() {
+        return paginationMode;
+    }
+
+    public void setPaginationMode(PaginationMode paginationMode) {
+        this.paginationMode.set(paginationMode);
     }
 }
