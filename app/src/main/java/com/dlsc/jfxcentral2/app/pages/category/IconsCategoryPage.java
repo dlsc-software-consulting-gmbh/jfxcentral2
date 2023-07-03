@@ -1,22 +1,22 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
-import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.components.filters.IkonliPacksFilter;
+import com.dlsc.jfxcentral2.components.FeaturesContainer;
+import com.dlsc.jfxcentral2.components.PacksIconsView;
+import com.dlsc.jfxcentral2.components.StripView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.tiles.IkonliPackTileView;
+import com.dlsc.jfxcentral2.components.headers.PacksIconsHeader;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
 public class IconsCategoryPage extends CategoryPageBase<IkonliPack> {
-
 
     public IconsCategoryPage(ObjectProperty<Size> size) {
         super(size);
@@ -44,16 +44,34 @@ public class IconsCategoryPage extends CategoryPageBase<IkonliPack> {
 
     @Override
     protected ObservableList<IkonliPack> getCategoryItems() {
-        return FXCollections.observableArrayList(DataRepository2.getInstance().getIkonliPacks());
+        return null;
     }
 
     @Override
     protected Callback<IkonliPack, TileViewBase<IkonliPack>> getTileViewProvider() {
-        return IkonliPackTileView::new;
+        return null;
     }
 
     @Override
     protected SearchFilterView createSearchFilterView() {
-        return new IkonliPacksFilter();
+        return null;
+    }
+
+    @Override
+    public Node content() {
+        // header
+        PacksIconsHeader header = new PacksIconsHeader();
+        header.sizeProperty().bind(sizeProperty());
+
+        PacksIconsView packsIconsView = new PacksIconsView();
+        packsIconsView.sizeProperty().bind(sizeProperty());
+
+        FeaturesContainer featuresContainer = new FeaturesContainer();
+        featuresContainer.sizeProperty().bind(sizeProperty());
+
+        StripView wrapperBox = new StripView(packsIconsView, featuresContainer);
+        wrapperBox.getStyleClass().add("packs-icons-wrapper-box");
+
+        return wrapContent(header, wrapperBox);
     }
 }

@@ -209,6 +209,51 @@
     -fx-rotate: 180;
 }
 
+/** -------------------------------
+ * ComboBox
+ */
+.combo-box-base {
+    -fx-font-size: 16px;
+    -fx-background-color: -white;
+    -fx-padding: 6px 10px;
+    -fx-background-radius: 26px;
+}
+
+.combo-box .combo-box-popup .list-view,
+.combo-box .combo-box-popup .list-cell {
+    -fx-background-color: -white;
+    -fx-text-fill: -grey-100;
+}
+
+.combo-box .combo-box-popup .list-view {
+    -fx-background-color: -white;
+    -fx-background-radius: 10px;
+    -fx-effect: -blue-shadow;
+    -fx-font-size: 16px;
+    -fx-padding: 20px 5px;
+    -fx-translate-y: 8px;
+}
+
+.combo-box .combo-box-popup .list-view .list-cell {
+    -fx-cursor: hand;
+    -fx-text-fill: -grey-100;
+    -fx-padding: 3px 10px 3px 12px;
+    -fx-background-color: transparent;
+    -fx-cell-size: 45px;
+}
+
+.combo-box .combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: derive(-grey-10, 50%);
+}
+
+.combo-box .combo-box-popup .list-view .check-box {
+    -fx-border-color: -grey-20;
+}
+
+.combo-box .combo-box-popup .list-view .check-box .box {
+    -fx-background-color: transparent;
+}
+
 /** ------------------------------------
  * ScrollBar
  **/
@@ -7573,12 +7618,14 @@
 /** ----------------------------------------------------------------------------
  * IkonGridView
  */
+.ikon-grid-view .pagination-control .grid-pane,
 .ikon-grid-view .custom-pagination-control2 .grid-pane {
     -fx-hgap: 10px;
     -fx-vgap: 10px;
     -fx-padding: 15px 0;
 }
 
+.ikon-grid-view:md .pagination-control .grid-pane,
 .ikon-grid-view:md .custom-pagination-control2 .grid-pane {
     -fx-hgap: 8px;
     -fx-vgap: 8px;
@@ -8312,4 +8359,97 @@
 
 .credits-view:sm .credit-item-view .description-label {
     -fx-padding: 0 0 15px 0px;
+}
+
+/** ----------------------------------------------------------------------------
+ * IconsCategoryPage
+ */
+.packs-icons-wrapper-box:lg {
+    -fx-padding: 0 0 100px 0;
+}
+
+.packs-icons-wrapper-box:md {
+    -fx-padding: 0 0 70px 0;
+}
+
+.packs-icons-wrapper-box:sm {
+    -fx-padding: 0 0 60px 0;
+}
+
+/** ----------------------------------------------------------------------------
+ * AllIconsView
+ */
+.packs-icons-view.packs {
+    -fx-background-color: -background;
+}
+
+.packs-icons-view.icons {
+    -fx-background-color: -white;
+}
+
+.packs-icons-view .top-box {
+    -fx-alignment: center;
+}
+
+.packs-icons-view .top-box .search-text-field{
+    -fx-background-radius: 26px;
+    -fx-focus-color: -grey-10;
+    -fx-faint-focus-color: transparent;
+    -fx-padding: 12px 10px 12px 20px;
+    -fx-pref-width: 100px;
+}
+
+.packs-icons-view .content-box {
+    -fx-alignment: top-center;
+}
+
+.packs-icons-view.icons .content-box .grid-wrapper {
+    -fx-padding: 0 0 40px 0;
+}
+
+.packs-icons-view .view-spacer {
+    -fx-min-height: 60px;
+}
+
+.packs-icons-view .top-wrapper {
+    -fx-background-color: -grey-10;
+    -fx-padding: 20px 30px;
+}
+
+.packs-icons-view .top-box {
+    -fx-spacing: 20px;
+    -fx-alignment: center;
+}
+
+.packs-icons-view.packs:lg .top-box {
+    -fx-max-width: 1350px;
+}
+
+.packs-icons-view.icons:lg .top-box {
+    -fx-max-width: 2190px;
+}
+
+.packs-icons-view.icons:md .top-box {
+    -fx-max-width: 860px;
+}
+
+.packs-icons-view .top-box .combo-box {
+    -fx-pref-width: 100px;
+}
+
+.packs-icons-view .top-box .combo-box-wrapper {
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+}
+
+.packs-icons-view:sm .top-box .combo-box-wrapper .label {
+    -fx-min-width: 60px;
+    -fx-pref-width: 60px;
+    -fx-max-width: 60px;
+}
+
+.packs-icons-view .top-box .combo-box-wrapper .label {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
 }
