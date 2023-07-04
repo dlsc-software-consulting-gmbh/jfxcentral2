@@ -7,7 +7,6 @@ import com.dlsc.jfxcentral.data.model.Post;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.jpro.webapi.WebAPI;
 import com.rometools.rome.feed.synd.SyndEntry;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -18,9 +17,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -43,7 +39,7 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
     protected Node createTopNode() {
         VBox box = new VBox();
         box.getStyleClass().add("posts-box");
-        DataRepository2.getInstance().loadPosts(getModel()).forEach(post -> box.getChildren().add(new PostViewBuilder(post,getSize()).build()));
+        DataRepository2.getInstance().loadPosts(getModel()).forEach(post -> box.getChildren().add(new PostViewBuilder(post, getSize()).build()));
         return box;
     }
 
@@ -52,7 +48,7 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
         private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 
         public PostViewBuilder(Post post, Size size) {
-            postView = size==Size.SMALL? new VBox() : new HBox();
+            postView = size == Size.SMALL ? new VBox() : new HBox();
             postView.getStyleClass().add("post-view");
             postView.setPrefWidth(0);
 
@@ -73,22 +69,12 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
                 titleLabel.setGraphic(imageView);
                 HBox.setHgrow(titleLabel, Priority.ALWAYS);
                 postView.getChildren().setAll(titleLabel, ageLabel);
-            }else {
+            } else {
                 postView.getChildren().setAll(imageView, titleLabel, ageLabel);
                 HBox.setHgrow(titleLabel, Priority.ALWAYS);
             }
 
-            if (WebAPI.isBrowser()) {
-                LinkUtil.setExternalLink(postView, post.getSyndEntry().getLink());
-            } else {
-                postView.setOnMouseClicked(evt -> {
-                    try {
-                        Desktop.getDesktop().browse(URI.create(post.getSyndEntry().getLink()));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-            }
+            LinkUtil.setExternalLink(postView, post.getSyndEntry().getLink());
         }
 
         private Node build() {

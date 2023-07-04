@@ -16,7 +16,7 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.jpro.webapi.WebAPI;
+import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -87,7 +87,7 @@ public class HamburgerMenuView extends PaneBase {
                 new HamburgerMenuItem("Meet the Team", JFXCentralIcon.TEAM, "/team")
         );
 
-        if (WebAPI.isBrowser()) {
+        if (SocialUtil.isSocialFeaturesEnabled()) {
             communityMenu.getItems().add(new HamburgerMenuItem("Top Content", JFXCentralIcon.TOP_CONTENT, "/top"));
         }
 

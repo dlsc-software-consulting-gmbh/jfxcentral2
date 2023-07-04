@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.components.FlipView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
+import com.dlsc.jfxcentral2.utils.SocialUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -174,7 +175,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
                 bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.NEVER));
             }
         }
-        if (WebAPI.isBrowser()) {
+        if (SocialUtil.isSocialFeaturesEnabled()) {
             bottomPane.add(saveAndLikeButton, column, 0);
             bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.ALWAYS));
         }

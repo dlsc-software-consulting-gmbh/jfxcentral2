@@ -13,6 +13,7 @@ import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.SocialUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -135,7 +136,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
     }
 
     protected List<Node> createExtraNodes() {
-        if (WebAPI.isBrowser()) {
+        if (SocialUtil.isSocialFeaturesEnabled()) {
             saveSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setSaveButtonSelected(nv));
             likeSelectedProperty().addListener((ob, ov, nv) -> saveAndLikeButton.setLikeButtonSelected(nv));
             saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, saved) -> {

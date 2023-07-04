@@ -53,6 +53,7 @@ import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
+import com.dlsc.jfxcentral2.utils.SocialUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
@@ -159,11 +160,8 @@ public class JFXCentral2App extends Application {
                 .and(RouteUtils.get("/legal/privacy", r -> new LegalPage(size, LegalPage.Section.PRIVACY)))
                 .and(RouteUtils.get("/links", r -> new LinksOfTheWeekPage(size)))
                 .and(RouteUtils.get("/links/rss", r -> new LinksOfTheWeekPage(size))) // TODO: how to return raw data?
-                .and(RouteUtils.get("/login", r -> new LoginPage(size)))
                 .and(RouteUtils.get("/team", r -> new TeamPage(size)))
-                .and(RouteUtils.get("/top", r -> new TopContentPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
-                .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)))
                 .and(RouteUtils.get("/refresh", r -> {
                     RepositoryManager.prepareForRefresh();
                     return new RefreshPage(size);
@@ -172,6 +170,14 @@ public class JFXCentral2App extends Application {
 
         if (Boolean.getBoolean("develop")) {
             route = route.filter(DevFilter.create());
+        }
+
+        // the following routes are only needed when we support user login
+
+        if (SocialUtil.isSocialFeaturesEnabled()) {
+            route = route.and(RouteUtils.get("/login", r -> new LoginPage(size)))
+                    .and(RouteUtils.get("/top", r -> new TopContentPage(size)))
+                    .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)));
         }
 
         return route;
@@ -187,7 +193,7 @@ public class JFXCentral2App extends Application {
         };
     }
 
-    private Response createResponse(Request request,  Class<? extends ModelObject> clazz, Supplier<Response> categoryResponse, Callback<String, Response> detailedResponse) {
+    private Response createResponse(Request request, Class<? extends ModelObject> clazz, Supplier<Response> categoryResponse, Callback<String, Response> detailedResponse) {
         int index = request.path().lastIndexOf("/");
         if (index > 0) {
             String id = request.path().substring(index + 1).trim();

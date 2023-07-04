@@ -22,6 +22,7 @@ public class VideoViewFactory {
     public static Node createVideoViewNode(Video video) {
         return createVideoViewNode(video, false);
     }
+
     public static Node createVideoViewNode(Video video, boolean closeable) {
         if (WebAPI.isBrowser()) {
             HTMLView htmlView = new HTMLView();
