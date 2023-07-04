@@ -15,7 +15,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailsContentPane extends PaneBase {
 
@@ -111,20 +115,32 @@ public class DetailsContentPane extends PaneBase {
     @Override
     protected void layoutBySize() {
         Size size = getSize();
+        List<Node> nodes = new ArrayList<>();
+        ObservableList<Node> tempNodes = getCenterNodes();
+        for (Node tempNode : tempNodes) {
+            nodes.add(tempNode);
+            nodes.add(createSpacer());
+        }
 
         if (size.equals(Size.SMALL) || size.equals(Size.MEDIUM)) {
-            centerBox.getChildren().setAll(getCenterNodes());
-            centerBox.getChildren().addAll(detailBoxesContainer, commentsView);
+            centerBox.getChildren().setAll(nodes);
+            centerBox.getChildren().addAll(detailBoxesContainer, createSpacer(), commentsView);
             VBox intermediateBox = new VBox(menuView, centerBox, featuresContainer);
             intermediateBox.getStyleClass().add("intermediate-box");
             intermediateBox.setAlignment(Pos.TOP_CENTER);
             HBox.setHgrow(intermediateBox, Priority.ALWAYS);
             contentBox.getChildren().setAll(intermediateBox);
         } else {
-            centerBox.getChildren().setAll(getCenterNodes());
-            centerBox.getChildren().addAll(detailBoxesContainer, commentsView);
+            centerBox.getChildren().setAll(nodes);
+            centerBox.getChildren().addAll(detailBoxesContainer, createSpacer(), commentsView);
             contentBox.getChildren().setAll(menuView, centerBox, featuresContainer);
         }
+    }
+
+    private Region createSpacer() {
+        Region spacer = new Region();
+        spacer.getStyleClass().add("box-spacer");
+        return spacer;
     }
 
     private final ListProperty<Node> centerNodes = new SimpleListProperty<>(this, "centerNodes", FXCollections.observableArrayList());
