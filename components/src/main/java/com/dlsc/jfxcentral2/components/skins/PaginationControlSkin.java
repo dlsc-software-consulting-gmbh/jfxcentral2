@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.PaginationControl;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -28,7 +30,7 @@ public class PaginationControlSkin extends ControlBaseSkin<PaginationControl> {
         pageInformationLabel.getStyleClass().add("page-information-label");
 
         pageInformationLabel.textProperty().bind(
-                control.currentPageIndexProperty().add(1)
+                control.currentPageIndexProperty().add(Bindings.when(control.pageCountProperty().greaterThan(0)).then(1).otherwise(0))
                         .asString()
                         .concat(control.separatorTextProperty())
                         .concat(control.pageCountProperty())
@@ -97,7 +99,25 @@ public class PaginationControlSkin extends ControlBaseSkin<PaginationControl> {
 
         VBox.setVgrow(pagination, Priority.ALWAYS);
 
-        VBox contentPane = new VBox(pagination, controlBox);
+        BorderPane centerPane = new BorderPane();
+        centerPane.getStyleClass().add("center-pane");
+
+        centerPane.centerProperty().bind(Bindings.createObjectBinding(() -> {
+                    if ((control.getCurrentPageIndex() <= 0 && control.getPageCount() <= 0) || control.pageFactoryProperty() == null) {
+                        Node placeholder = control.getPlaceholder();
+                        if (placeholder == null) {
+                            return null;
+                        }
+                        StackPane placeholderWrapper = new StackPane(placeholder);
+                        placeholderWrapper.getStyleClass().add("placeholder-wrapper");
+                        return placeholderWrapper;
+                    }
+                    return pagination;
+                },
+                control.currentPageIndexProperty(),
+                control.pageFactoryProperty()));
+
+        VBox contentPane = new VBox(centerPane, controlBox);
         contentPane.setAlignment(Pos.TOP_CENTER);
         contentPane.getStyleClass().add("content-pane");
 
