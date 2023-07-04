@@ -1,11 +1,12 @@
 package com.dlsc.jfxcentral2.model;
 
+import com.dlsc.jfxcentral.data.model.IkonliPack;
 import org.kordamp.ikonli.IkonProvider;
 
 public class IkonData implements Comparable<IkonData> {
 
     private String name;
-
+    private IkonliPack ikonliPack;
     private IkonProvider ikonProvider;
 
     public IkonData() {
@@ -19,6 +20,14 @@ public class IkonData implements Comparable<IkonData> {
     @Override
     public int compareTo(IkonData o) {
         return name.compareTo(o.name);
+    }
+
+    public IkonliPack getIkonliPack() {
+        return ikonliPack;
+    }
+
+    public void setIkonliPack(IkonliPack ikonliPack) {
+        this.ikonliPack = ikonliPack;
     }
 
     public IkonProvider getIkonProvider() {

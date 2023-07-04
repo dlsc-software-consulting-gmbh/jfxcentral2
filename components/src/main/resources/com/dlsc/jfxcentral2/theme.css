@@ -8437,11 +8437,11 @@
 }
 
 .packs-icons-view.packs:lg .top-box {
-    -fx-max-width: 1350px;
+    -fx-max-width: 1306px;
 }
 
 .packs-icons-view.icons:lg .top-box {
-    -fx-max-width: 2190px;
+    -fx-padding: 0 100px;
 }
 
 .packs-icons-view.icons:md .top-box {

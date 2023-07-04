@@ -1,5 +1,7 @@
 package com.dlsc.jfxcentral2.utils;
 
+import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.model.Dependency;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.model.IkonData;
 import javafx.collections.FXCollections;
@@ -9,6 +11,7 @@ import org.kordamp.ikonli.IkonProvider;
 
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -31,8 +34,15 @@ public class IkonliPackUtil {
                 ikonDataSet.add(IkonData.of(provider));
             }
         }
+        List<IkonliPack> ikonliPacks = DataRepository2.getInstance().getIkonliPacks();
 
         ikonDataSet.forEach(data -> {
+            for (IkonliPack pack : ikonliPacks) {
+                if (pack.getName().equals(data.getName())) {
+                    data.setIkonliPack(pack);
+                    break;
+                }
+            }
             IkonProvider ikonProvider = data.getIkonProvider();
             Class ikonProviderClass = ikonProvider.getIkon();
             nameMap.put(ikonProviderClass.getSimpleName(), data);
@@ -65,6 +75,27 @@ public class IkonliPackUtil {
         IkonData ikonData = getIkonData(iconPack.getName());
         IkonProvider ikonProvider = ikonData.getIkonProvider();
         EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
-        return FXCollections.observableArrayList(enumSet);
+        ObservableList<Ikon> list = FXCollections.observableArrayList(enumSet);
+        for (Ikon ikon : list) {
+            IkonData tempData = getIkonData(ikon);
+            if (tempData!=null && tempData.getIkonliPack() == null ) {
+                tempData.setIkonliPack(iconPack);
+            }
+        }
+        return list;
+    }
+
+    public String getMavenDependency(Ikon ikon) {
+        IkonliPack ikonliPack = getIkonData(ikon).getIkonliPack();
+        Dependency dependency = ikonliPack.getInstalling().getMaven().getDependency();
+        return "<dependency>\n" +
+                "    <groupId>" + dependency.getGroupId() + "</groupId>\n" +
+                "    <artifactId>" + dependency.getArtifactId() + "</artifactId>\n" +
+                "    <version>" + dependency.getVersion() + "</version>\n" +
+                "</dependency>";
+    }
+
+    public String getGradleDependency(Ikon ikon) {
+        return  getIkonData(ikon).getIkonliPack().getInstalling().getGradle();
     }
 }

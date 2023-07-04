@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral2.components.tiles.IkonliPackTileView;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -17,6 +18,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -42,6 +44,8 @@ public class PacksIconsView extends PaneBase {
     private final HBox scopeComboBoxWrapper;
     private final StringProperty searchText = new SimpleStringProperty(this, "searchText", "");
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    private final IkonGridView ikonGridView;
+    private final ComboBox<Scope> scopeComboBox;
     private ScheduledFuture<?> future;
 
     private enum Scope {
@@ -70,7 +74,7 @@ public class PacksIconsView extends PaneBase {
 
         HBox.setHgrow(searchField, Priority.ALWAYS);
 
-        ComboBox<Scope> scopeComboBox = initScopeComboBox();
+        scopeComboBox = initScopeComboBox();
         scopeComboBox.getStyleClass().addAll("scope-combo-box");
         scopeComboBox.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(scopeComboBox, Priority.ALWAYS);
@@ -98,32 +102,38 @@ public class PacksIconsView extends PaneBase {
         topWrapper.getStyleClass().add("top-wrapper");
 
         // center
-        IkonGridView ikonGridView = createIkonGridView(searchField, scopeComboBox, sortComboBox);
+        ikonGridView = createIkonGridView(scopeComboBox, sortComboBox);
 
-        ModelGridView<IkonliPack> packGridView = createModelGridView(searchField, scopeComboBox, sortComboBox);
-        StackPane gridWrapper = new StackPane(scopeComboBox.getSelectionModel().getSelectedItem() == Scope.PACKS ? packGridView : ikonGridView);
-        if (scopeComboBox.getSelectionModel().getSelectedItem() == Scope.PACKS) {
-            getStyleClass().add("packs");
-        } else {
-            getStyleClass().add("icons");
-        }
+        ModelGridView<IkonliPack> packGridView = createModelGridView(sortComboBox);
 
-        scopeComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == Scope.PACKS) {
-                gridWrapper.getChildren().setAll(packGridView);
+        scopeComboBox.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> {
+            searchField.setText("");
+            sortComboBox.getSelectionModel().select(0);
+        });
+
+        ObjectBinding<? extends PaneBase> gridViewNodeBinding = Bindings.createObjectBinding(() -> {
+            if (StringUtils.isBlank(searchField.getText().trim()) || (scopeComboBox.getSelectionModel().getSelectedItem() == Scope.PACKS)) {
                 getStyleClass().remove("icons");
                 if (!getStyleClass().contains("packs")) {
                     getStyleClass().add("packs");
                 }
+                ikonGridView.setVisible(false);
+                packGridView.setVisible(true);
+                return packGridView;
             } else {
-                gridWrapper.getChildren().setAll(ikonGridView);
                 getStyleClass().remove("packs");
                 if (!getStyleClass().contains("icons")) {
                     getStyleClass().add("icons");
                 }
+                packGridView.setVisible(false);
+                ikonGridView.setVisible(true);
+                return ikonGridView;
             }
-        });
+        }, scopeComboBox.getSelectionModel().selectedItemProperty(), searchField.textProperty());
 
+
+        BorderPane gridWrapper = new BorderPane();
+        gridWrapper.centerProperty().bind(gridViewNodeBinding);
         gridWrapper.getStyleClass().add("grid-wrapper");
 
         Region spacer = new Region();
@@ -142,14 +152,13 @@ public class PacksIconsView extends PaneBase {
         topWrapper.getChildren().setAll(topBox);
     }
 
-    private ModelGridView<IkonliPack> createModelGridView(SearchTextField searchField, ComboBox<Scope> scopeComboBox, ComboBox<Sort> sortComboBox) {
+    private ModelGridView<IkonliPack> createModelGridView(ComboBox<Sort> sortComboBox) {
         ModelGridView<IkonliPack> packGridView = new ModelGridView<>();
         packGridView.sizeProperty().bind(sizeProperty());
         packGridView.setTileViewProvider(IkonliPackTileView::new);
         packGridView.setColumns(3);
         packGridView.setRows(3);
         packGridView.managedProperty().bind(visibleProperty());
-        packGridView.visibleProperty().bind(scopeComboBox.valueProperty().map(scope -> scope == Scope.PACKS));
 
         // packs data
         ObservableList<IkonliPack> packs = FXCollections.observableArrayList(DataRepository2.getInstance().getIkonliPacks());
@@ -177,11 +186,10 @@ public class PacksIconsView extends PaneBase {
         return packGridView;
     }
 
-    private IkonGridView createIkonGridView(SearchTextField searchField, ComboBox<Scope> scopeComboBox, ComboBox<Sort> sortComboBox) {
+    private IkonGridView createIkonGridView(ComboBox<Scope> scopeComboBox, ComboBox<Sort> sortComboBox) {
         IkonGridView ikonGridView = new IkonGridView();
         ikonGridView.sizeProperty().bind(sizeProperty());
         ikonGridView.managedProperty().bind(visibleProperty());
-        ikonGridView.visibleProperty().bind(scopeComboBox.valueProperty().map(scope -> scope == Scope.ICONS));
         ikonGridView.paginationModeProperty().bind(Bindings.createObjectBinding(() -> {
             Scope scope = scopeComboBox.getSelectionModel().getSelectedItem();
             if (scope == Scope.PACKS) {
@@ -200,11 +208,21 @@ public class PacksIconsView extends PaneBase {
 
         FilteredList<Ikon> filteredIconsList = new FilteredList<>(icons);
         filteredIconsList.predicateProperty().bind(Bindings.createObjectBinding(() -> {
-            String text = searchText.get().trim();
+            String text = searchText.get().toLowerCase().trim();
             if (StringUtils.isBlank(text)) {
                 return item -> true;
             } else {
-                return item -> StringUtils.containsIgnoreCase(item.getDescription(), text);
+                return item -> {
+                    String str = item.getDescription().toLowerCase();
+                    String[] keys = text.split("\\s+");
+                    for (String key : keys) {
+                        if (!StringUtils.containsAnyIgnoreCase(str, key)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                    //return StringUtils.containsAnyIgnoreCase(str, keys);
+                };
             }
         }, searchText));
 
@@ -254,7 +272,7 @@ public class PacksIconsView extends PaneBase {
             }
         });
         scopeBox.getItems().addAll(Scope.values());
-        scopeBox.getSelectionModel().select(Scope.PACKS);
+        scopeBox.getSelectionModel().select(Scope.ICONS);
         return scopeBox;
     }
 
