@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.gridview;
 
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -31,9 +32,11 @@ public class IkonDetailView extends DetailView<Ikon> {
         HBox.setHgrow(flowPane, Priority.ALWAYS);
 
         addRow(flowPane, "Icon Literal:", item.getDescription());
-        addRow(flowPane, "CSS Code:", "-fx-icon-code: " + item.getDescription());
+        addRow(flowPane, "CSS Code:", "-fx-icon-code: \"" + item.getDescription()+"\"");
         addRow(flowPane, "Java Code:", item.getClass().getSimpleName() + "." + fontIcon.getIconCode());
         addRow(flowPane, "Unicode:", "\\u" + Integer.toHexString(item.getCode()));
+        addRow(flowPane, "Maven:", IkonliPackUtil.getInstance().getMavenDependency(item));
+        addRow(flowPane, "Gradle :", IkonliPackUtil.getInstance().getGradleDependency(item));
         HBox detailContent = new HBox(previewPane, flowPane);
         detailContent.getStyleClass().add("detail-content");
         getChildren().setAll(detailContent);
