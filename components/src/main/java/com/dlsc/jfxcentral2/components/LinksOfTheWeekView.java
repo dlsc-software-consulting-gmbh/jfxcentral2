@@ -4,6 +4,8 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -37,7 +39,7 @@ public class LinksOfTheWeekView extends PaneBase {
 
         createFactory();
         pagination.setPrefHeight(Region.USE_PREF_SIZE);
-
+        selectedIndex.bind(pagination.currentPageIndexProperty());
         linksOfTheWeeksProperty().addListener((ob, ov, nv) -> createFactory());
         weekCountProperty().addListener((ob, ov, nv) -> createFactory());
         sizeProperty().addListener((ob, ov, nv) -> createFactory());
@@ -105,4 +107,21 @@ public class LinksOfTheWeekView extends PaneBase {
         this.linksOfTheWeeks.set(linksOfTheWeeks);
     }
 
+    public void goToPage(int pageIndex) {
+        pagination.setCurrentPageIndex(pageIndex);
+    }
+
+    private final ReadOnlyIntegerWrapper selectedIndex = new ReadOnlyIntegerWrapper(this, "selectedIndex", 0);
+
+    public int getSelectedIndex() {
+        return selectedIndex.get();
+    }
+
+    public ReadOnlyIntegerProperty selectedIndexProperty() {
+        return selectedIndex.getReadOnlyProperty();
+    }
+
+    private void setSelectedIndex(int selectedIndex) {
+        this.selectedIndex.set(selectedIndex);
+    }
 }

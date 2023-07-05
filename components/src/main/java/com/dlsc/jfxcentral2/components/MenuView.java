@@ -1,8 +1,10 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.components.skins.MenuViewSkin;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,7 +30,10 @@ public class MenuView extends ControlBase {
 
     private static final Orientation DEFAULT_ORIENTATION = Orientation.HORIZONTAL;
 
-    public record Item(String name, Ikon ikon, String url) {
+    public record Item(String name, Ikon ikon, String url, Runnable action) {
+        public Item(String name, Ikon ikon, String url) {
+            this(name, ikon, url, null);
+        }
     }
 
     public MenuView() {
@@ -140,4 +145,17 @@ public class MenuView extends ControlBase {
         return getClassCssMetaData();
     }
 
+    private final IntegerProperty selectedIndex = new SimpleIntegerProperty(this, "selectedIndex", 0);
+
+    public int getSelectedIndex() {
+        return selectedIndex.get();
+    }
+
+    public IntegerProperty selectedIndexProperty() {
+        return selectedIndex;
+    }
+
+    public void setSelectedIndex(int selectedIndex) {
+        this.selectedIndex.set(selectedIndex);
+    }
 }
