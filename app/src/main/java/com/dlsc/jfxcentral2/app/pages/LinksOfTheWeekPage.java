@@ -53,6 +53,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
     @Override
     public Node content() {
 
+
         // header
         LinksOfTheWeekHeader header = new LinksOfTheWeekHeader();
         header.sizeProperty().bind(sizeProperty());
@@ -68,7 +69,16 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
         detailsContentPane.getCenterNodes().add(linksOfTheWeekView);
 
         // this must be the last change to the details content pane, otherwise the menu shows wrong items
-        detailsContentPane.getMenuView().getItems().setAll(createMenuItems());
+        detailsContentPane.getMenuView().getItems().setAll(createMenuItems(linksOfTheWeekView));
+
+        linksOfTheWeekView.selectedIndexProperty().addListener((ob, ov, nv) ->{
+            int size = detailsContentPane.getMenuView().getItems().size();
+            if(nv.intValue() >= 0 && nv.intValue() < size) {
+                detailsContentPane.getMenuView().setSelectedIndex(nv.intValue());
+            }else {
+                detailsContentPane.getMenuView().setSelectedIndex(-1);
+            }
+        });
 
         return wrapContent(header, detailsContentPane);
     }
@@ -88,11 +98,14 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
         return null;
     }
 
-    protected List<MenuView.Item> createMenuItems() {
-        return DataRepository2.getInstance().getLinksOfTheWeek()
+    protected List<MenuView.Item> createMenuItems(LinksOfTheWeekView linksOfTheWeekView) {
+        List<LinksOfTheWeek> linksOfTheWeek = DataRepository2.getInstance().getLinksOfTheWeek();
+        linksOfTheWeek.sort(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed());
+
+        return linksOfTheWeek
                 .stream()
-                .sorted(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed())
-                .map(links -> new MenuView.Item(DATE_FORMATTER.format(links.getCreatedOn()), null, null))
+                .map(links -> new MenuView.Item(DATE_FORMATTER.format(links.getCreatedOn()), null, null,
+                        () -> linksOfTheWeekView.goToPage(linksOfTheWeek.indexOf(links))))
                 .limit(20)
                 .toList();
     }

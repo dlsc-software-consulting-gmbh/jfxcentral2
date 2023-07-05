@@ -8,12 +8,14 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class MenuViewSkin extends ControlBaseSkin<MenuView> {
 
     private Pane box;
     private final MenuView control;
+    private ToggleGroup group;
 
     public MenuViewSkin(MenuView control) {
         super(control);
@@ -22,6 +24,15 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
 
         control.orientationProperty().addListener((ob, ov, nv) -> layoutByOrientation());
         control.itemsProperty().addListener((ob, ov, nv) -> layoutByOrientation());
+        control.selectedIndexProperty().addListener((ob, ov, nv) -> {
+            if (nv.intValue() >= 0) {
+                CustomToggleButton button = (CustomToggleButton) box.getChildren().get(nv.intValue());
+                button.setSelected(true);
+                button.fire();
+            }else {
+                group.selectToggle(null);
+            }
+        });
     }
 
     private void layoutByOrientation() {
@@ -33,7 +44,7 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
         box = isVertical ? new VBox() : new HBox();
         box.getStyleClass().add("content");
         if (items != null) {
-            ToggleGroup group = new ToggleGroup();
+            group = new ToggleGroup();
             for (int i = 0; i < items.size(); i++) {
                 MenuView.Item item = items.get(i);
                 CustomToggleButton button = new CustomToggleButton(item.name());
@@ -48,22 +59,18 @@ public class MenuViewSkin extends ControlBaseSkin<MenuView> {
                     button.setGraphic(new FontIcon(item.ikon()));
                 }
                 box.getChildren().add(button);
-                if (i == 0) {
+                if (i == control.getSelectedIndex()) {
                     button.setSelected(true);
-                    System.out.println("item url = " + item.url());
+                }
+                if (item.url() != null) {
+                    LinkUtil.setLink(button, item.url());
+                }else if (item.action() != null){
+                    button.setOnAction(event -> item.action().run());
                 }
             }
         } else {
             Pane node = (Pane) getChildren().get(0);
             node.getChildren().clear();
-        }
-        for (int i = 0; i < box.getChildren().size(); i++) {
-            int tempIndex = i;
-            CustomToggleButton button = (CustomToggleButton) box.getChildren().get(i);
-            button.setOnAction(event -> {
-                MenuView.Item item = control.getItems().get(tempIndex);
-                System.out.println("item url = " + item.url());
-            });
         }
         getChildren().setAll(box);
 

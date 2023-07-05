@@ -16,14 +16,14 @@ public class HelloMenuView extends JFXCentralSampleBase {
     @Override
     protected Region createControl() {
         menuView = new MenuView(FXCollections.observableArrayList(
-                new MenuView.Item("TOOLS", null, "Tools url"),
-                new MenuView.Item("BLOGS", null, "Blogs url"),
-                new MenuView.Item("DOWNLOADS", null, "Downloads url"),
-                new MenuView.Item("LIBRARIES", null, "Libraries url"),
-                new MenuView.Item("VIDEOS", null, "Videos url"),
-                new MenuView.Item("APP", null, "app url"),
-                new MenuView.Item("BOOK", null, "book url"),
-                new MenuView.Item("TIPS & TRICKS", null, "Tips & Tricks url")
+                new MenuView.Item("TOOLS", null, null),
+                new MenuView.Item("BLOGS", null, null),
+                new MenuView.Item("DOWNLOADS", null, null),
+                new MenuView.Item("LIBRARIES", null, null),
+                new MenuView.Item("VIDEOS", null, null),
+                new MenuView.Item("APP", null, null),
+                new MenuView.Item("BOOK", null, null),
+                new MenuView.Item("TIPS & TRICKS", null, null)
         ));
         return new ScrollPane(menuView);
     }

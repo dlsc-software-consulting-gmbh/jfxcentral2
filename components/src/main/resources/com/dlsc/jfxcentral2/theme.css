@@ -2189,12 +2189,11 @@
 
 .menu-view:vertical .item {
     -fx-padding: 6px 75px 6px 16px;
-    -fx-border-width: 0 0 0 4px;
-    -fx-border-color: transparent;
 }
 
 .menu-view:vertical .item:selected {
-    -fx-border-color: linear-gradient(from 100.0% 100.0% to 100.0% 0.0%, transparent 0.0%, transparent 18%, -bright-blue 18.01%, -bright-blue 82%, transparent 82.01%, transparent 100.0%);
+    -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, -bright-blue 0.0%, -bright-blue 3.2%, #ffffff00 3.201%, #ffffff00 100.0%);
+    -fx-background-insets: 6px 0 6px 4px;
 }
 
 .menu-view:horizontal {
