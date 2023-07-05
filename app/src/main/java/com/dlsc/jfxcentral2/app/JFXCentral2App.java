@@ -165,12 +165,7 @@ public class JFXCentral2App extends Application {
                 .and(RouteUtils.get("/refresh", r -> {
                     RepositoryManager.prepareForRefresh();
                     return new RefreshPage(size);
-                }))
-                .and(r -> FXFuture.unit(new ErrorPage(size, r)));
-
-        if (Boolean.getBoolean("develop")) {
-            route = route.filter(DevFilter.create());
-        }
+                }));
 
         // the following routes are only needed when we support user login
 
@@ -178,6 +173,12 @@ public class JFXCentral2App extends Application {
             route = route.and(RouteUtils.get("/login", r -> new LoginPage(size)))
                     .and(RouteUtils.get("/top", r -> new TopContentPage(size)))
                     .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)));
+        }
+
+        route = route.and(r -> FXFuture.unit(new ErrorPage(size, r)));
+
+        if (Boolean.getBoolean("develop")) {
+            route = route.filter(DevFilter.create());
         }
 
         return route;
