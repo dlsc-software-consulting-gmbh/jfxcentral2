@@ -7,7 +7,6 @@ import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
-import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -162,7 +161,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         if (button1.isVisible() && isButton1Visible()) {
             bottomPane.add(button1, column++, 0);
             bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.ALWAYS));
-            if (isButton2Visible() || WebAPI.isBrowser()) {
+            if (isButton2Visible() || SocialUtil.isSocialFeaturesEnabled()) {
                 bottomPane.add(separator1, column++, 0);
                 bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.NEVER));
             }
@@ -170,7 +169,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         if (button2.isVisible() && isButton2Visible()) {
             bottomPane.add(button2, column++, 0);
             bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.ALWAYS));
-            if (WebAPI.isBrowser()) {
+            if (SocialUtil.isSocialFeaturesEnabled()) {
                 bottomPane.add(separator2, column++, 0);
                 bottomPane.getColumnConstraints().addAll(getColumnConstraints(Priority.NEVER));
             }
