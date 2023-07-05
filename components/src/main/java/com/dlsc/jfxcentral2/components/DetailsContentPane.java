@@ -30,6 +30,10 @@ public class DetailsContentPane extends PaneBase {
     public DetailsContentPane() {
         getStyleClass().add("details-content-pane");
 
+        // Check the container, if empty, don't show it
+        detailBoxesContainer.managedProperty().bind(detailBoxesContainer.visibleProperty());
+        detailBoxesContainer.visibleProperty().bind(Bindings.createBooleanBinding(() -> !detailBoxesContainer.getChildren().isEmpty(), detailBoxesContainer.getChildren()));
+
         menuView.sizeProperty().bind(sizeProperty());
         menuView.orientationProperty().bind(Bindings.createObjectBinding(() -> getSize().equals(Size.LARGE) ? Orientation.VERTICAL : Orientation.HORIZONTAL, sizeProperty()));
 
@@ -113,9 +117,6 @@ public class DetailsContentPane extends PaneBase {
         Size size = getSize();
 
         centerBox.getChildren().setAll(getCenterNodes());
-        // Check the container, if empty, don't show it
-        detailBoxesContainer.managedProperty().bind(detailBoxesContainer.visibleProperty());
-        detailBoxesContainer.visibleProperty().bind(Bindings.createBooleanBinding(() -> !detailBoxesContainer.getChildren().isEmpty(), detailBoxesContainer.getChildren()));
         centerBox.getChildren().addAll(detailBoxesContainer, commentsView);
 
         if (size.equals(Size.SMALL) || size.equals(Size.MEDIUM)) {
