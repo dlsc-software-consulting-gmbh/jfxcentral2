@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral2.components.detailsbox.DetailsBoxBase;
 import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
@@ -18,9 +17,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DetailsContentPane extends PaneBase {
 
     private final MenuView menuView = new MenuView();
@@ -33,6 +29,10 @@ public class DetailsContentPane extends PaneBase {
 
     public DetailsContentPane() {
         getStyleClass().add("details-content-pane");
+
+        // Check the container, if empty, don't show it
+        detailBoxesContainer.managedProperty().bind(detailBoxesContainer.visibleProperty());
+        detailBoxesContainer.visibleProperty().bind(Bindings.createBooleanBinding(() -> !detailBoxesContainer.getChildren().isEmpty(), detailBoxesContainer.getChildren()));
 
         menuView.sizeProperty().bind(sizeProperty());
         menuView.orientationProperty().bind(Bindings.createObjectBinding(() -> getSize().equals(Size.LARGE) ? Orientation.VERTICAL : Orientation.HORIZONTAL, sizeProperty()));
@@ -48,8 +48,8 @@ public class DetailsContentPane extends PaneBase {
         HBox.setHgrow(menuView, Priority.NEVER);
 
         commentsView.sizeProperty().bind(sizeProperty());
-        commentsView.setVisible(SocialUtil.isSocialFeaturesEnabled());
-        commentsView.setManaged(SocialUtil.isSocialFeaturesEnabled());
+        //commentsView.setVisible(SocialUtil.isSocialFeaturesEnabled());
+        //commentsView.setManaged(SocialUtil.isSocialFeaturesEnabled());
 
         detailBoxes.addListener((Observable it) -> updateMenuView());
         centerNodes.addListener((Observable it) -> updateMenuView());
@@ -115,24 +115,17 @@ public class DetailsContentPane extends PaneBase {
     @Override
     protected void layoutBySize() {
         Size size = getSize();
-        List<Node> nodes = new ArrayList<>();
-        ObservableList<Node> tempNodes = getCenterNodes();
-        for (Node tempNode : tempNodes) {
-            nodes.add(tempNode);
-            nodes.add(createSpacer());
-        }
+
+        centerBox.getChildren().setAll(getCenterNodes());
+        centerBox.getChildren().addAll(detailBoxesContainer, commentsView);
 
         if (size.equals(Size.SMALL) || size.equals(Size.MEDIUM)) {
-            centerBox.getChildren().setAll(nodes);
-            centerBox.getChildren().addAll(detailBoxesContainer, createSpacer(), commentsView);
             VBox intermediateBox = new VBox(menuView, centerBox, featuresContainer);
             intermediateBox.getStyleClass().add("intermediate-box");
             intermediateBox.setAlignment(Pos.TOP_CENTER);
             HBox.setHgrow(intermediateBox, Priority.ALWAYS);
             contentBox.getChildren().setAll(intermediateBox);
         } else {
-            centerBox.getChildren().setAll(nodes);
-            centerBox.getChildren().addAll(detailBoxesContainer, createSpacer(), commentsView);
             contentBox.getChildren().setAll(menuView, centerBox, featuresContainer);
         }
     }
