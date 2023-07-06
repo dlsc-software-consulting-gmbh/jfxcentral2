@@ -14,10 +14,14 @@ public class WebAPIUtil {
     public static void navigateToPage(Node node, String url) {
         System.out.println(url);
         if (url.startsWith("htttp")) {
-            WebAPI.getWebAPI(node.getScene()).executeScript("window.open('" + url + "', '_blank')");
+            executeScript(node, "window.open('" + url + "', '_blank')");
         } else {
-            WebAPI.getWebAPI(node.getScene()).executeScript("window.location.assign('" + url + "')");
+            executeScript(node, "window.location.assign('" + url + "')");
         }
+    }
+
+    public static void executeScript(Node node, String script) {
+        WebAPI.getWebAPI(node.getScene()).executeScript(script);
     }
 
 }
