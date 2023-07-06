@@ -39,8 +39,10 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
 
         if (WebAPI.isBrowser()) {
             control.setOnMousePressed(event -> {
-                if (control.getQuickLink() != null && StringUtils.isNotBlank(control.getQuickLink().getLinkUrl())) {
-                    WebAPIUtil.navigateToPage(control, control.getQuickLink().getLinkUrl());
+                if (event.isPrimaryButtonDown()) {
+                    if (control.getQuickLink() != null && StringUtils.isNotBlank(control.getQuickLink().getLinkUrl())) {
+                        WebAPIUtil.navigateToPage(control, control.getQuickLink().getLinkUrl());
+                    }
                 }
                 event.consume();
             });

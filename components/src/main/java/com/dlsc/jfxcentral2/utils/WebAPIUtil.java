@@ -13,7 +13,7 @@ public class WebAPIUtil {
      */
     public static void navigateToPage(Node node, String url) {
         System.out.println(url);
-        if (url.startsWith("htttp")) {
+        if (url.startsWith("http")) {
             executeScript(node, "window.open('" + url + "', '_blank')");
         } else {
             executeScript(node, "window.location.assign('" + url + "')");
