@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral2.components.detailsbox.DetailsBoxBase;
 import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
@@ -14,7 +15,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class DetailsContentPane extends PaneBase {
@@ -48,8 +48,8 @@ public class DetailsContentPane extends PaneBase {
         HBox.setHgrow(menuView, Priority.NEVER);
 
         commentsView.sizeProperty().bind(sizeProperty());
-        //commentsView.setVisible(SocialUtil.isSocialFeaturesEnabled());
-        //commentsView.setManaged(SocialUtil.isSocialFeaturesEnabled());
+        commentsView.setVisible(SocialUtil.isSocialFeaturesEnabled());
+        commentsView.setManaged(SocialUtil.isSocialFeaturesEnabled());
 
         detailBoxes.addListener((Observable it) -> updateMenuView());
         centerNodes.addListener((Observable it) -> updateMenuView());
@@ -128,12 +128,6 @@ public class DetailsContentPane extends PaneBase {
         } else {
             contentBox.getChildren().setAll(menuView, centerBox, featuresContainer);
         }
-    }
-
-    private Region createSpacer() {
-        Region spacer = new Region();
-        spacer.getStyleClass().add("box-spacer");
-        return spacer;
     }
 
     private final ListProperty<Node> centerNodes = new SimpleListProperty<>(this, "centerNodes", FXCollections.observableArrayList());
