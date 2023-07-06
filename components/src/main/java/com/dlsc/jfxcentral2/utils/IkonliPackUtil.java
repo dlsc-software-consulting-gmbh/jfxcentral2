@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.utils;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
-import com.dlsc.jfxcentral.data.model.Dependency;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.model.IkonData;
 import javafx.collections.FXCollections;
@@ -87,12 +86,7 @@ public class IkonliPackUtil {
 
     public String getMavenDependency(Ikon ikon) {
         IkonliPack ikonliPack = getIkonData(ikon).getIkonliPack();
-        Dependency dependency = ikonliPack.getInstalling().getMaven().getDependency();
-        return "<dependency>\n" +
-                "    <groupId>" + dependency.getGroupId() + "</groupId>\n" +
-                "    <artifactId>" + dependency.getArtifactId() + "</artifactId>\n" +
-                "    <version>" + dependency.getVersion() + "</version>\n" +
-                "</dependency>";
+        return ikonliPack.getInstalling().getMaven().toString();
     }
 
     public String getGradleDependency(Ikon ikon) {

@@ -51,6 +51,7 @@ public class WebAPIUtil {
     /**
      * Scrolls to the top of the page.
      * If smooth is true, it will scroll smoothly.
+     *
      * @param node node is used to get the webAPI;
      */
     public static void scrollToTop(Node node, boolean smooth, int offset) {
@@ -64,6 +65,7 @@ public class WebAPIUtil {
     /**
      * Scrolls to the top of the page.
      * If smooth is true, it will scroll smoothly.
+     *
      * @param node node is used to get the webAPI;
      */
     public static void scrollToTop(Node node, boolean smooth) {
@@ -79,6 +81,7 @@ public class WebAPIUtil {
 
     /**
      * Scrolls to the position of the page;
+     *
      * @param node node is used to get the webAPI;
      */
     public static void scrollToPosition(Node node, int x, int y) {
@@ -87,5 +90,12 @@ public class WebAPIUtil {
 
     public static WebAPI getWebAPI(Node node) {
         return WebAPI.getWebAPI(node.getScene());
+    }
+
+    /**
+     * Copy the given text to the clipboard.
+     */
+    public static void copyToClipboard(Node node, String text) {
+        executeScript(node, "navigator.clipboard.writeText(`" + text + "`)");
     }
 }

@@ -7,8 +7,10 @@ import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.NameProvider;
+import com.dlsc.jfxcentral2.utils.FXUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
+import com.dlsc.jfxcentral2.utils.WebAPIUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -19,8 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -58,17 +58,18 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         copyButton.getStyleClass().addAll("blue-button", "copy-button");
         copyButton.setGraphic(new FontIcon(IkonUtil.copy));
         copyButton.setOnAction(evt -> {
-            Clipboard clipboard = Clipboard.getSystemClipboard();
-            ClipboardContent content = new ClipboardContent();
-            content.putString(repositoryCoordinatesLabel.getText());
-            clipboard.setContent(content);
+            evt.consume();
+            String content = repositoryCoordinatesLabel.getText();
+            if (WebAPI.isBrowser()) {
+                WebAPIUtil.copyToClipboard(copyButton, content);
+            }else {
+                FXUtil.copyToClipboard(content);
+            }
         });
 
         HBox buttonsBox = new HBox(mavenButton, gradleButton, new Spacer());
         buttonsBox.getStyleClass().add("buttons-box");
-        if (!WebAPI.isBrowser()) {
-            buttonsBox.getChildren().add(copyButton);
-        }
+        buttonsBox.getChildren().add(copyButton);
 
         CustomMarkdownView descriptionLabel = new CustomMarkdownView();
         descriptionLabel.getStyleClass().add("description");

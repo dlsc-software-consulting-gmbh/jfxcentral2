@@ -1,12 +1,13 @@
 package com.dlsc.jfxcentral2.components.gridview;
 
+import com.dlsc.jfxcentral2.utils.FXUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
+import com.dlsc.jfxcentral2.utils.WebAPIUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -32,7 +33,7 @@ public class IkonDetailView extends DetailView<Ikon> {
         HBox.setHgrow(flowPane, Priority.ALWAYS);
 
         addRow(flowPane, "Icon Literal:", item.getDescription());
-        addRow(flowPane, "CSS Code:", "-fx-icon-code: \"" + item.getDescription()+"\"");
+        addRow(flowPane, "CSS Code:", "-fx-icon-code: \"" + item.getDescription() + "\"");
         addRow(flowPane, "Java Code:", item.getClass().getSimpleName() + "." + fontIcon.getIconCode());
         addRow(flowPane, "Unicode:", "\\u" + Integer.toHexString(item.getCode()));
         addRow(flowPane, "Maven:", IkonliPackUtil.getInstance().getMavenDependency(item));
@@ -59,10 +60,11 @@ public class IkonDetailView extends DetailView<Ikon> {
         button.managedProperty().bind(button.visibleProperty());
 
         button.setOnAction(event -> {
-            Clipboard clipboard = Clipboard.getSystemClipboard();
-            ClipboardContent content = new ClipboardContent();
-            content.putString(contentText);
-            clipboard.setContent(content);
+            if (WebAPI.isBrowser()) {
+                WebAPIUtil.copyToClipboard(button, contentText);
+            } else {
+                FXUtil.copyToClipboard(contentText);
+            }
         });
         HBox box = new HBox(titleLabel, textField, button);
         box.getStyleClass().add("row-box");
