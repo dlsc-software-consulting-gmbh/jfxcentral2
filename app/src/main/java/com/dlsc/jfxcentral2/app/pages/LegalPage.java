@@ -14,9 +14,9 @@ import java.nio.file.Path;
 
 public class LegalPage extends PageBase {
 
-    private static final String termsText = readText("TermsAndConditions.txt");
-    private static final String privacyText = readText("PrivacyPolicy.txt");
-    private static final String cookieText = readText("CookiePolicy.txt");
+    private static final String termsText = readText("terms-and-conditions.md");
+    private static final String privacyText = readText("privacy-policy.md");
+    private static final String cookieText = readText("cookie-policy.md");
 
     private final Section section;
 
