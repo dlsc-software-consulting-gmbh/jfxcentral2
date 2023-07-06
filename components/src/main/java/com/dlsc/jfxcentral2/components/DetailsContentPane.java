@@ -3,6 +3,10 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral2.components.detailsbox.DetailsBoxBase;
 import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.NodeUtil;
+import com.dlsc.jfxcentral2.utils.SocialUtil;
+import com.dlsc.jfxcentral2.utils.WebAPIUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
@@ -14,7 +18,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class DetailsContentPane extends PaneBase {
@@ -48,8 +51,8 @@ public class DetailsContentPane extends PaneBase {
         HBox.setHgrow(menuView, Priority.NEVER);
 
         commentsView.sizeProperty().bind(sizeProperty());
-        //commentsView.setVisible(SocialUtil.isSocialFeaturesEnabled());
-        //commentsView.setManaged(SocialUtil.isSocialFeaturesEnabled());
+        commentsView.setVisible(SocialUtil.isSocialFeaturesEnabled());
+        commentsView.setManaged(SocialUtil.isSocialFeaturesEnabled());
 
         detailBoxes.addListener((Observable it) -> updateMenuView());
         centerNodes.addListener((Observable it) -> updateMenuView());
@@ -87,17 +90,28 @@ public class DetailsContentPane extends PaneBase {
         menuView.getItems().clear();
 
         centerNodes.forEach(item -> {
+
             if (item instanceof NameProvider nameProvider) {
-                MenuView.Item overviewItem = new MenuView.Item(nameProvider.getName().toUpperCase(), null, null);
+                MenuView.Item overviewItem = new MenuView.Item(nameProvider.getName().toUpperCase(), null, null, scrollToNodeAction(item));
                 menuView.getItems().add(overviewItem);
             }
         });
 
         detailBoxes.forEach(box -> {
             String title = box.getTitle();
-            MenuView.Item boxItem = new MenuView.Item(title.toUpperCase(), null, null);
+            MenuView.Item boxItem = new MenuView.Item(title.toUpperCase(), null, null, scrollToNodeAction(box));
             menuView.getItems().add(boxItem);
         });
+    }
+
+    private Runnable scrollToNodeAction(Node item) {
+        return () -> {
+            if (WebAPI.isBrowser()) {
+                WebAPIUtil.scrollToNode(item);
+            } else {
+                NodeUtil.scrollToNode(item);
+            }
+        };
     }
 
     public MenuView getMenuView() {
@@ -128,12 +142,6 @@ public class DetailsContentPane extends PaneBase {
         } else {
             contentBox.getChildren().setAll(menuView, centerBox, featuresContainer);
         }
-    }
-
-    private Region createSpacer() {
-        Region spacer = new Region();
-        spacer.getStyleClass().add("box-spacer");
-        return spacer;
     }
 
     private final ListProperty<Node> centerNodes = new SimpleListProperty<>(this, "centerNodes", FXCollections.observableArrayList());

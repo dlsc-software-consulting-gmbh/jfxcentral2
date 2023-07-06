@@ -2296,16 +2296,6 @@
     -fx-font-size: 20px;
 }
 
-.quick-link-view.browser:sm:hover {
-    -fx-scale-x: 0.995;
-    -fx-scale-y: 0.995;
-}
-
-.quick-link-view.browser:md-lg:hover {
-    -fx-scale-x: 0.99;
-    -fx-scale-y: 0.99;
-}
-
 .quick-link-view:hover {
     -fx-effect: -blue-shadow;
 }
