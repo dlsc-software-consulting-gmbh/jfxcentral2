@@ -3,7 +3,10 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral2.components.detailsbox.DetailsBoxBase;
 import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
+import com.dlsc.jfxcentral2.utils.WebAPIUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
@@ -87,17 +90,28 @@ public class DetailsContentPane extends PaneBase {
         menuView.getItems().clear();
 
         centerNodes.forEach(item -> {
+
             if (item instanceof NameProvider nameProvider) {
-                MenuView.Item overviewItem = new MenuView.Item(nameProvider.getName().toUpperCase(), null, null);
+                MenuView.Item overviewItem = new MenuView.Item(nameProvider.getName().toUpperCase(), null, null, scrollToNodeAction(item));
                 menuView.getItems().add(overviewItem);
             }
         });
 
         detailBoxes.forEach(box -> {
             String title = box.getTitle();
-            MenuView.Item boxItem = new MenuView.Item(title.toUpperCase(), null, null);
+            MenuView.Item boxItem = new MenuView.Item(title.toUpperCase(), null, null, scrollToNodeAction(box));
             menuView.getItems().add(boxItem);
         });
+    }
+
+    private Runnable scrollToNodeAction(Node item) {
+        return () -> {
+            if (WebAPI.isBrowser()) {
+                WebAPIUtil.scrollToNode(item);
+            } else {
+                NodeUtil.scrollToNode(item);
+            }
+        };
     }
 
     public MenuView getMenuView() {

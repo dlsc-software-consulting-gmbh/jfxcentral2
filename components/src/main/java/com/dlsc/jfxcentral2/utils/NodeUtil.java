@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.utils;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -77,13 +78,16 @@ public class NodeUtil {
 
     public static void scrollToNode(Node node) {
         ScrollPane pane = findScrollPane(node);
-
         if (pane != null) {
-            double width = pane.getContent().getBoundsInLocal().getWidth();
-            double height = pane.getContent().getBoundsInLocal().getHeight();
+            Node content = pane.getContent();
+            double width = content.getBoundsInLocal().getWidth();
+            double height = content.getBoundsInLocal().getHeight();
 
-            double x = node.getBoundsInParent().getMaxX();
-            double y = node.getBoundsInParent().getMaxY();
+            Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+            Bounds bounds = content.sceneToLocal(boundsInScene);
+
+            double x = bounds.getMinX();
+            double y = bounds.getMinY();
 
             // scrolling values range from 0 to 1
             pane.setVvalue(y/height);
