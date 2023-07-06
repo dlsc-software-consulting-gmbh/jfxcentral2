@@ -74,7 +74,6 @@ public class DetailsContentPane extends PaneBase {
         HBox.setHgrow(featuresContainer, Priority.NEVER);
 
         detailBoxesContainer.getStyleClass().add("boxes-container");
-
         Bindings.bindContent(detailBoxesContainer.getChildren(), detailBoxes);
 
         centerBox = new VBox();

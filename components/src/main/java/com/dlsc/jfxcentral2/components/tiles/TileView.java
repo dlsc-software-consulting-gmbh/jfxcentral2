@@ -253,7 +253,10 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         Button closeButton = new Button("CLOSE", new FontIcon(IkonUtil.close));
         closeButton.getStyleClass().addAll("close-button", "blue-button");
         closeButton.setContentDisplay(ContentDisplay.RIGHT);
-        closeButton.setOnAction(event -> flipView.flipToFront());
+        closeButton.setOnMousePressed(event -> {
+            event.consume();
+            flipView.flipToFront();
+        });
         closeButton.setFocusTraversable(false);
 
         TextArea descriptionArea = new TextArea();

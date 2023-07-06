@@ -2071,6 +2071,16 @@
     -fx-translate-x: -6px;
 }
 
+.pagination-control .control-box .prev-button:pressed {
+    -fx-scale-x: .95;
+    -fx-scale-y: .95;
+}
+
+.pagination-control .control-box .next-button:pressed {
+    -fx-scale-x: .95;
+    -fx-scale-y: .95;
+}
+
 .pagination-control .control-box .prev-button,
 .pagination-control .control-box .next-button {
     -fx-padding: 10px 11px 10px 11px;
@@ -2131,6 +2141,13 @@
     -fx-border-radius: 28px;
     -fx-background-color: -bright-blue;
 }
+
+.custom-pagination-control2 .control-box > .left-arrow-button:pressed,
+.custom-pagination-control2 .control-box > .right-arrow-button:pressed {
+    -fx-scale-x: .95;
+    -fx-scale-y: .95;
+}
+
 
 .custom-pagination-control2 .control-box .left-arrow-button > .ikonli-font-icon,
 .custom-pagination-control2 .control-box .right-arrow-button > .ikonli-font-icon {
@@ -3341,6 +3358,12 @@
 
 .tile-view-base:hover {
     -fx-effect: -blue-shadow;
+}
+
+.tile-view-base:hover:pressed {
+    -fx-effect: null;
+    -fx-scale-x: .95;
+    -fx-scale-y: .95;
 }
 
 /** ------------------------------------
