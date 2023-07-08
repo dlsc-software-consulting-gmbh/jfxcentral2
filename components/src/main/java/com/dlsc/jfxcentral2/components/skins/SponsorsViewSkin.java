@@ -80,7 +80,7 @@ public class SponsorsViewSkin extends ControlBaseSkin<SponsorsView> {
             logo.fitHeightProperty().bind(control.logoFitHeightProperty());
             logo.fitWidthProperty().bind(control.logoFitWidthProperty());
             logo.getStyleClass().addAll("logo", "logo-" + sponsor.name().toLowerCase(), "logo-" + i);
-            LinkUtil.setLink(logo, sponsor.url());
+            LinkUtil.setExternalLink(logo, sponsor.url());
             nodes.add(logo);
         }
         gridPane.getChildren().clear();

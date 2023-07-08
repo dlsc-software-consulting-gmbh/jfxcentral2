@@ -14,6 +14,7 @@ public class WebAPIUtil {
     /**
      * Navigates to the given url.
      * If it is an external link, it will open in a new window;
+     * Note: Due to Safari's privacy and security policy, the following js code is invalid for Safari browser
      */
     public static void navigateToPage(Node node, String url) {
         System.out.println(url);
@@ -94,6 +95,7 @@ public class WebAPIUtil {
 
     /**
      * Copy the given text to the clipboard.
+     * Note: Due to Safari's privacy and security policy, the following js code is invalid for Safari browser
      */
     public static void copyToClipboard(Node node, String text) {
         executeScript(node, "navigator.clipboard.writeText(`" + text + "`)");

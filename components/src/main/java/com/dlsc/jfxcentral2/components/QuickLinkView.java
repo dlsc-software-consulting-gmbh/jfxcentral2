@@ -15,7 +15,12 @@ public class QuickLinkView extends ControlBase {
         getStyleClass().add("quick-link-view");
         setQuickLink(quickLink);
         if (quickLink != null && StringUtils.isNotBlank(quickLink.getLinkUrl())) {
-            LinkUtil.setLink(this, quickLink.getLinkUrl());
+            String linkUrl = quickLink.getLinkUrl();
+            if (linkUrl.startsWith("http://") || linkUrl.startsWith("https://")) {
+                LinkUtil.setExternalLink(this, linkUrl);
+            } else {
+                LinkUtil.setLink(this, linkUrl);
+            }
         }
     }
 

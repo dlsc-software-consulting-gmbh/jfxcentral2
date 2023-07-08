@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.utils;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.model.Dependency;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.model.IkonData;
 import javafx.collections.FXCollections;
@@ -77,19 +78,24 @@ public class IkonliPackUtil {
         ObservableList<Ikon> list = FXCollections.observableArrayList(enumSet);
         for (Ikon ikon : list) {
             IkonData tempData = getIkonData(ikon);
-            if (tempData!=null && tempData.getIkonliPack() == null ) {
+            if (tempData != null && tempData.getIkonliPack() == null) {
                 tempData.setIkonliPack(iconPack);
             }
         }
         return list;
     }
-
     public String getMavenDependency(Ikon ikon) {
         IkonliPack ikonliPack = getIkonData(ikon).getIkonliPack();
-        return ikonliPack.getInstalling().getMaven().toString();
+        Dependency dependency = ikonliPack.getInstalling().getMaven().getDependency();
+        String line = System.lineSeparator();
+        return "<dependency>" + line +
+                "    <groupId>" + dependency.getGroupId() + "</groupId>" + line +
+                "    <artifactId>" + dependency.getArtifactId() + "</artifactId>" + line +
+                "    <version>" + dependency.getVersion() + "</version>" + line +
+                "</dependency>";
     }
 
     public String getGradleDependency(Ikon ikon) {
-        return  getIkonData(ikon).getIkonliPack().getInstalling().getGradle();
+        return getIkonData(ikon).getIkonliPack().getInstalling().getGradle();
     }
 }
