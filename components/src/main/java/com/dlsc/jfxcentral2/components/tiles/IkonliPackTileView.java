@@ -18,7 +18,7 @@ public class IkonliPackTileView extends TileView<IkonliPack> {
         setButton1Graphic(new FontIcon(IkonUtil.link));
         //LinkUtil.setLink(getButton1(), "icons/" + pack.getId());
         getButton1().setOnAction(e -> {
-            LinkUtil.gotoPage(this, "/books/" + pack.getId());
+            LinkUtil.gotoPage(this, "/icons/" + pack.getId());
             e.consume();
         });
 
