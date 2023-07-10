@@ -12,8 +12,6 @@ public class BlogTileView extends SimpleTileView<Blog> {
 
         getStyleClass().add("blog-tile-view");
 
-        setLinkUrl("/blogs/" + getData().getId());
-
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(blog));
         saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(blog));
 

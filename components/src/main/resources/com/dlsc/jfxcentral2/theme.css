@@ -3368,12 +3368,6 @@
     -fx-effect: -blue-shadow;
 }
 
-.tile-view-base:hover:pressed {
-    -fx-effect: null;
-    -fx-scale-x: .95;
-    -fx-scale-y: .95;
-}
-
 /** ------------------------------------
  * simple-tile-view
  */
@@ -3419,11 +3413,19 @@
     -fx-background-color: transparent;
 }
 
+.simple-tile-view .detail-button:hover {
+    -fx-background-color: -bright-blue;
+}
+
 .simple-tile-view .detail-button .ikonli-font-icon {
     -fx-icon-color: -bright-blue;
     -fx-icon-size: 16px;
     -fx-scale-x: 1.5;
     -fx-scale-y: 1.5;
+}
+
+.simple-tile-view .detail-button:hover .ikonli-font-icon {
+    -fx-icon-color: -white;
 }
 
 .simple-tile-view > .content-box .social-button {

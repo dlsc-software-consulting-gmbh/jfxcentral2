@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -38,6 +39,7 @@ public class VideoTileView extends TileView<Video> {
 
     protected Node createFrontTop() {
         CustomImageView imageView = new CustomImageView();
+        imageView.setCursor(Cursor.HAND);
         imageView.imageProperty().bind(imageProperty());
         imageView.setPreserveRatio(true);
 

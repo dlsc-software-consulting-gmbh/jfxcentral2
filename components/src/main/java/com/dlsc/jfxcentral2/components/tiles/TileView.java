@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.FlipView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.binding.Bindings;
@@ -43,6 +44,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
@@ -154,6 +156,10 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         return button2;
     }
 
+    public Region getImageRegion() {
+        return mainImageRegion;
+    }
+
     private void bottomPaneLayout(SaveAndLikeButton saveAndLikeButton, Button button1, Separator separator1, Button button2, Separator separator2, GridPane bottomPane) {
         bottomPane.getChildren().clear();
         bottomPane.getColumnConstraints().clear();
@@ -188,20 +194,20 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
     }
 
     private Node createFront() {
-        //Center title and description
+        // center title and description
         Label titleLabel = new Label();
         titleLabel.getStyleClass().add("title");
         titleLabel.textProperty().bind(titleProperty());
         titleLabel.managedProperty().bind(titleProperty().isNotEmpty());
         titleLabel.visibleProperty().bind(titleProperty().isNotEmpty());
         titleLabel.setWrapText(true);
+        titleLabel.setOnMousePressed(event -> flipView.flipToBack());
         titleLabel.minHeightProperty().bind(Bindings.createDoubleBinding(() -> {
             boolean isVideoGallery = getStyleClass().contains("video-gallery-tile");
             double height = titleLabel.getFont().getSize() * 1.5 * (isVideoGallery ? 2 : isSmall() ? 2 : 2.2);
             double prefH = titleLabel.prefHeight(titleLabel.getWidth());
             return Math.min(prefH, height);
         }, sizeProperty(), titleLabel.fontProperty(), titleLabel.widthProperty(), getStyleClass()));
-        titleLabel.setOnMousePressed(event -> flipView.flipToBack());
 
         Label descriptionLabel = new Label();
         descriptionLabel.getStyleClass().add("description");
@@ -215,9 +221,13 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         centerBox.getStyleClass().add("center-box");
         VBox.setVgrow(centerBox, Priority.ALWAYS);
 
-        VBox frontBox = new VBox(createFrontTop(), centerBox);
+        Node frontTop = createFrontTop();
+        LinkUtil.setLink(frontTop, PageUtil.getLink(getData()));
+
+        VBox frontBox = new VBox(frontTop, centerBox);
         frontBox.getStyleClass().add("front-box");
         frontBox.setAlignment(Pos.TOP_LEFT);
+
         return frontBox;
     }
 

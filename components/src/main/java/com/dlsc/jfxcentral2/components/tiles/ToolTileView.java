@@ -12,17 +12,13 @@ public class ToolTileView extends SimpleTileView<Tool> {
 
         getStyleClass().add("tool-tile-view");
 
-        setLinkUrl("/tools/" + getData().getId());
-
         setAvatarType(AvatarView.Type.PLAIN);
 
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(tool));
         saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(tool));
 
-        //add image for testing
         imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
 
-        //imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
         titleProperty().set(tool.getName());
         setDescription(tool.getDescription());
     }

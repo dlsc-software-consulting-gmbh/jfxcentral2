@@ -13,12 +13,10 @@ import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
-import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -27,7 +25,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -42,6 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
 
+    private final Button detailButton;
     protected HBox badgeBox = new HBox();
     protected SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
 
@@ -51,6 +49,8 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         super(item);
 
         getStyleClass().addAll("simple-tile-view");
+
+        LinkUtil.setLink(this, PageUtil.getLink(item));
 
         AvatarView avatarView = new AvatarView();
         avatarView.imageProperty().bind(imageProperty());
@@ -65,7 +65,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
             nameLabel.setGraphic(avatarView);
         }
 
-        Button detailButton = new Button();
+        detailButton = new Button();
         detailButton.getStyleClass().add("detail-button");
         detailButton.setGraphic(new FontIcon(IkonUtil.link));
 
@@ -103,23 +103,10 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         }
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
+    }
 
-        linkUrlProperty().addListener((ob, ov, newUrl) -> {
-            if (StringUtils.isBlank(newUrl)) {
-                return;
-            }
-            if (WebAPI.isBrowser()) {
-                this.setOnMousePressed(e -> {
-                    e.consume();
-                    LinkUtil.gotoPage(SimpleTileView.this, newUrl);
-                });
-
-            } else {
-                avatarView.setMouseTransparent(true);
-                detailButton.setMouseTransparent(true);
-                LinkUtil.setLink(SimpleTileView.this, newUrl);
-            }
-        });
+    public Button getDetailButton() {
+        return detailButton;
     }
 
     private final ObjectProperty<AvatarView.Type> avatarType = new SimpleObjectProperty<>(this, "avatarType", AvatarView.Type.CIRCLE);
@@ -194,19 +181,5 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
     }
 
     public record LinkedObjectBadge(String name, Ikon ikon, int count) {
-    }
-
-    private final StringProperty linkUrl = new SimpleStringProperty(this, "linkUrl");
-
-    public String getLinkUrl() {
-        return linkUrl.get();
-    }
-
-    public StringProperty linkUrlProperty() {
-        return linkUrl;
-    }
-
-    public void setLinkUrl(String linkUrl) {
-        this.linkUrl.set(linkUrl);
     }
 }

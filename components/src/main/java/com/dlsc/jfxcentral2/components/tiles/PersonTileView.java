@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.components.SocialLinksView;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
@@ -16,6 +17,7 @@ import javafx.scene.layout.Region;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PersonTileView extends SimpleTileView<Person> {
@@ -28,8 +30,6 @@ public class PersonTileView extends SimpleTileView<Person> {
         super(person);
 
         getStyleClass().add("person-tile-view");
-
-        setLinkUrl("/people/" + getData().getId());
 
         //add image for testing
         imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
@@ -53,15 +53,6 @@ public class PersonTileView extends SimpleTileView<Person> {
             badgeBox.getChildren().add(rockStartBadge);
         }
 
-        socialLinksView.setTwitterUrl(person.getTwitter());
-        socialLinksView.setMastodonUrl(person.getMastodon());
-        socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + person.getLinkedIn());
-        socialLinksView.setWebsiteUrl(person.getWebsite());
-        if (StringUtils.isNotBlank(person.getEmail().trim())) {
-            socialLinksView.setMailUrl("mailto:" + person.getEmail());
-        }
-        socialLinksView.setGithubUrl(person.getGitHub());
-
         sizeUpdated();
 
         sizeProperty().addListener(it -> sizeUpdated());
@@ -69,15 +60,36 @@ public class PersonTileView extends SimpleTileView<Person> {
 
     @Override
     protected List<Node> createExtraNodes() {
-        socialButton = new MenuButton();
-        socialButton.getStyleClass().add("social-button");
+        // We can not show the social button when running inside the browser, as the
+        // click will go "through" the button and trigger the link on the tile, taking
+        // the user to the details page of the person.
+        if (WebAPI.isBrowser()) {
+            return Collections.emptyList();
+        }
+
         FontIcon graphic = new FontIcon(JFXCentralIcon.LINKS);
         graphic.getStyleClass().add("more-graphic");
+
+        socialButton = new MenuButton();
+        socialButton.getStyleClass().add("social-button");
         socialButton.setGraphic(graphic);
+
+        int socialViewWidth = 302;
+
+        Person person = getData();
+
         socialLinksView = new SocialLinksView();
         socialLinksView.getStyleClass().add("person-social-links-view");
-        int socialViewWidth = 302;
         socialLinksView.setPrefWidth(socialViewWidth);
+        socialLinksView.setTwitterUrl(person.getTwitter());
+        socialLinksView.setMastodonUrl(person.getMastodon());
+        socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + person.getLinkedIn());
+        socialLinksView.setWebsiteUrl(person.getWebsite());
+        socialLinksView.setGithubUrl(person.getGitHub());
+        if (StringUtils.isNotBlank(person.getEmail().trim())) {
+            socialLinksView.setMailUrl("mailto:" + person.getEmail());
+        }
+
         contextMenu = new ContextMenu(new SeparatorMenuItem());
         contextMenu.getScene().setRoot(socialLinksView);
         contextMenu.showingProperty().addListener(it -> {
@@ -102,9 +114,10 @@ public class PersonTileView extends SimpleTileView<Person> {
     }
 
     private void sizeUpdated() {
-        socialButton.getStyleClass().remove("active");
-        contextMenu.hide();
+        if (socialButton != null) {
+            socialButton.getStyleClass().remove("active");
+            contextMenu.hide();
+        }
         updateLinkedObjectBadges();
     }
-
 }
