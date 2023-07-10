@@ -19,8 +19,8 @@ import javafx.scene.Node;
 import java.util.ArrayList;
 
 public class OpenJFXPage extends PageBase {
+
     private final ObservableList<PullRequest> pullRequests;
-    private final LoadPullRequestsService service;
     private final FilteredList<PullRequest> filteredList;
 
     public OpenJFXPage(ObjectProperty<Size> size) {
@@ -31,7 +31,7 @@ public class OpenJFXPage extends PageBase {
         filteredList = new FilteredList<>(pullRequests);
 
         // load pull requests service
-        service = new LoadPullRequestsService();
+        LoadPullRequestsService service = new LoadPullRequestsService();
         service.valueProperty().addListener((ob, ov, nv) -> {
             if (nv == null || nv.isEmpty()) {
                 return;
@@ -61,7 +61,7 @@ public class OpenJFXPage extends PageBase {
         PullRequestsFilterView pullRequestsFilterView = new PullRequestsFilterView();
         pullRequestsFilterView.sizeProperty().bind(sizeProperty());
         pullRequestsFilterView.setDisable(pullRequests.isEmpty());
-        //blockingProperty().bind(pullRequestsFilterView.blockingProperty());
+        blockingProperty().bind(pullRequestsFilterView.blockingProperty());
 
         // pull requests
         PullRequestsView pullRequestsView = new PullRequestsView();

@@ -54,13 +54,16 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class SearchFilterView<T> extends PaneBase {
+
     private static final String DEFAULT_STYLE_CLASS = "search-filter-view";
     private static final Orientation FILTER_BOX_DEFAULT_ORIENTATION = Orientation.HORIZONTAL;
     private static final String WITH_SEARCH_FIELD = "with-search-field";
+
     /**
      * delayed search interval 200 ms
      */
     private static final int SEARCH_DELAY = 200;
+
     /**
      * delayed search text
      */
