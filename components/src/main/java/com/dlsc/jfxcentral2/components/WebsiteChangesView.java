@@ -31,11 +31,16 @@ public class WebsiteChangesView extends LinksContainerBase {
         header.descriptionProperty().bind(descriptionProperty());
         if (isSmall()) {
             gridPane.add(header, 0, 0);
-            for (int i = 0; i < 3; i++) {
+            int len = 0;
+            for (int i = 0; i < quickLinks.size() && len < 3; i++) {
                 QuickLink quickLink = quickLinks.get(i);
+                if (quickLink == null) {
+                    continue;
+                }
                 QuickLinkView linkView = new QuickLinkView(quickLink);
                 linkView.sizeProperty().bind(sizeProperty());
                 gridPane.add(linkView, 0, i + 1);
+                len++;
             }
         } else {
             gridPane.add(header, 0, 0, 1, 2);
