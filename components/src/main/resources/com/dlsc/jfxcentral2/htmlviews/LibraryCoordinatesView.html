@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Copy Maven or Gradle</title>
+        <style>
+            #top-area {
+                display: flex;
+                justify-content: space-between;
+                padding: 15px 20px;
+            }
+
+            .radio {
+                appearance: none;
+                -webkit-appearance: none;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                outline: none;
+                border: none;
+                margin-right: 5px;
+                position: relative;
+                top: 4px;
+                background: #CFDBFA;
+            }
+
+            .radio:before {
+                content: '';
+                display: block;
+                width: 50%;
+                height: 50%;
+                margin: 25% auto;
+                border-radius: 50%;
+            }
+
+            .radio:checked:before {
+                background: #0E4AE4;
+            }
+
+            .radio:checked {
+                background: #CFDBFA;
+                border-color: #0E4AE4;
+            }
+
+            #main-area {
+                margin: 0 20px;
+            }
+
+            textarea {
+                width: calc(100% - 30px);
+                height: 85px;
+                padding: 10px;
+                background-color: #e2e2e2;
+                font-size: 13px;
+                border-radius: 10px;
+                border-color: #ffff;
+                resize: none;
+            }
+
+            textarea:focus {
+                outline: none;
+            }
+
+            .copy-button {
+                font-size: 12px;
+                flex: 0 0 auto;
+                width: 30px;
+                margin-left: 6px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 2px 6px;
+                color: white;
+                cursor: pointer;
+                background-color: #0e4ae4;
+            }
+
+            .copy-button:hover {
+                background-color: #2d62ea;
+            }
+
+            .copy-button:active {
+                background-color: #0e4ae4;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="top-area">
+            <div>
+                <input class="radio" type="radio" id="maven" name="choice" value="maven" checked>
+                <label for="maven">Maven</label>
+                <input class="radio" type="radio" id="gradle" name="choice" value="gradle">
+                <label for="gradle">Gradle</label>
+            </div>
+            <button onclick="copyText()" class="copy-button">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                     viewBox="0 0 24 24" xml:space="preserve">
+                        <g>
+                            <path fill="#ffffff" d="M15.2,7.7v12.7H5.9V7.7H15.2 M16.8,6.1H4.3V22h12.5V6.1L16.8,6.1z"/>
+                        </g>
+                    <g>
+                            <line stroke="#ffffff" stroke-width="1.6" x1="8" y1="3" x2="21" y2="3"/>
+                        </g>
+                    <line stroke="#ffffff" stroke-width="1.6" x1="20.2" y1="3" x2="20.2" y2="19.6"/>
+                </svg>
+            </button>
+        </div>
+        <div id="main-area">
+            <textarea id="info" readonly></textarea>
+        </div>
+        <script>
+            var mavenInfo = `${mavenInfo}`;
+            var gradleInfo = `${gradleInfo}`;
+
+            function updateInfo() {
+                var choice = document.querySelector('input[name="choice"]:checked').value;
+                var info = document.getElementById("info");
+                info.value = (choice == "maven" ? mavenInfo : gradleInfo);
+            }
+
+            function copyText() {
+                var info = document.getElementById("info");
+                info.select();
+                document.execCommand("copy");
+            }
+
+            var radios = document.querySelectorAll('input[type=radio][name="choice"]');
+            radios.forEach(radio => radio.addEventListener('change', updateInfo));
+            updateInfo();
+        </script>
+    </body>
+</html>

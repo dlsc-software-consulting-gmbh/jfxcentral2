@@ -18,6 +18,7 @@ public class WebAPIUtil {
     public static void navigateToPage(Node node, String url) {
         System.out.println(url);
         if (url.startsWith("http")) {
+            //Note: Due to Safari's privacy and security policy, the following js code is invalid for Safari browser
             executeScript(node, "window.open('" + url + "', '_blank')");
         } else {
             executeScript(node, "window.location.assign('" + url + "')");
@@ -94,6 +95,7 @@ public class WebAPIUtil {
 
     /**
      * Copy the given text to the clipboard.
+     * Note: Due to Safari's privacy and security policy, the following js code is invalid for Safari browser
      */
     public static void copyToClipboard(Node node, String text) {
         executeScript(node, "navigator.clipboard.writeText(`" + text + "`)");

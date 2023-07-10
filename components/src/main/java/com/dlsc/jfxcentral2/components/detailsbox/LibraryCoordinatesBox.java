@@ -8,15 +8,18 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.utils.FXUtil;
+import com.dlsc.jfxcentral2.utils.FilesUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import com.dlsc.jfxcentral2.utils.WebAPIUtil;
+import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -30,21 +33,61 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import simplefx.experimental.parts.FXFuture;
 
 public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
-
-    private final Label repositoryCoordinatesLabel;
+    private static final String LINED_SEPARATOR = System.lineSeparator();
+    private final VBox contentBox;
+    private final String groupId;
+    private final String artifactId;
+    private final boolean isAvailable;
 
     public LibraryCoordinatesBox(Coordinates coordinates) {
+        getStyleClass().addAll("overview-box", "library-coordinates-box");
+        contentBox = new VBox();
+        groupId = coordinates.getGroupId();
+        artifactId = coordinates.getArtifactId();
+        isAvailable = StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId);
+        setVisible(isAvailable);
+        setManaged(isAvailable);
+        StringProperty versionProperty = new SimpleStringProperty(this, "version");
+
+        if (isAvailable) {
+            FXFuture.runBackground(() -> DataRepository2.getInstance().getArtifactVersion(coordinates)).map(property -> {
+                versionProperty.bind(property);
+                return null;
+            });
+        } else {
+            versionProperty.unbind();
+        }
+
         Header headerBox = new Header();
         headerBox.setTitle("COORDINATES");
         headerBox.setIcon(MaterialDesign.MDI_COMPASS);
 
-        getStyleClass().addAll("overview-box", "library-coordinates-box");
+        Node bodyNode = WebAPI.isBrowser() ? createInfoNodeForWeb(versionProperty) : createInfoNodeForFX(versionProperty);
+        contentBox.getChildren().setAll(headerBox, bodyNode);
+        contentBox.getStyleClass().add("content-box");
+        getChildren().setAll(contentBox);
 
-        repositoryCoordinatesLabel = new Label(StringUtil.LOADING_TIPS);
+    }
+
+    private VBox createInfoNodeForFX(StringProperty versionProperty) {
+        Label repositoryCoordinatesLabel = new Label(StringUtil.LOADING_TIPS);
         repositoryCoordinatesLabel.getStyleClass().add("coordinates-label");
         repositoryCoordinatesLabel.setWrapText(true);
         repositoryCoordinatesLabel.setMinHeight(Region.USE_PREF_SIZE);
         repositoryCoordinatesLabel.setMaxWidth(Double.MAX_VALUE);
+
+        if (isAvailable) {
+            repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
+                String version = versionProperty.get();
+                if (StringUtils.equalsIgnoreCase("unknown", version)) {
+                    return "WAIT TIMEOUT...";
+                }
+                if (getBuildTool().equals(BuildTool.MAVEN)) {
+                    return getMavenInfo(version);
+                }
+                return getGradleInfo(version);
+            }, versionProperty, buildTool));
+        }
 
         RadioButton mavenButton = new RadioButton("Maven");
         RadioButton gradleButton = new RadioButton("Gradle");
@@ -62,7 +105,7 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
             String content = repositoryCoordinatesLabel.getText();
             if (WebAPI.isBrowser()) {
                 WebAPIUtil.copyToClipboard(copyButton, content);
-            }else {
+            } else {
                 FXUtil.copyToClipboard(content);
             }
         });
@@ -77,34 +120,49 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
 
         VBox bodyBox = new VBox(descriptionLabel, buttonsBox, repositoryCoordinatesLabel);
         bodyBox.getStyleClass().add("body-box");
+        return bodyBox;
+    }
 
-        VBox contentBox = new VBox(headerBox, bodyBox);
-        contentBox.getStyleClass().add("content-box");
-        getChildren().setAll(contentBox);
+    private String getGradleInfo(String version) {
+        return "dependencies {" + LINED_SEPARATOR +
+                "    implementation '" + groupId + ":" + artifactId + ":" + version + "'" + LINED_SEPARATOR +
+                "}";
+    }
 
-        setVisible(StringUtils.isNotBlank(coordinates.getGroupId()) && StringUtils.isNotBlank(coordinates.getArtifactId()));
-        setManaged(StringUtils.isNotBlank(coordinates.getGroupId()) && StringUtils.isNotBlank(coordinates.getArtifactId()));
+    private String getMavenInfo(String version) {
+        return "<dependency>" + LINED_SEPARATOR +
+                "    <groupId>" + groupId + "</groupId>" + LINED_SEPARATOR +
+                "    <artifactId>" + artifactId + "</artifactId>" + LINED_SEPARATOR +
+                "    <version>" + version + "</version>" + LINED_SEPARATOR +
+                "</dependency>";
+    }
 
-        String groupId = coordinates.getGroupId();
-        String artifactId = coordinates.getArtifactId();
+    private Node createInfoNodeForWeb(StringProperty versionProperty) {
+        HTMLView view = new HTMLView();
 
-        if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
-            FXFuture.runBackground(() -> DataRepository2.getInstance().getArtifactVersion(coordinates)).map(property -> {
-                repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
-                    String s = property.get();
-                    if (StringUtils.equalsIgnoreCase("unknown", s)) {
-                        return "WAIT TIMEOUT...";
-                    }
-                    if (getBuildTool().equals(BuildTool.MAVEN)) {
-                        return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + property.get() + "</version>\n</dependency>";
-                    }
-                    return "dependencies {\n    implementation '" + groupId + ":" + artifactId + ":" + property.get() + "'\n}";
-                }, property, buildTool));
-                return null;
-            });
-        } else {
-            repositoryCoordinatesLabel.textProperty().unbind();
+        String str = FilesUtil.readText("/com/dlsc/jfxcentral2/htmlviews/LibraryCoordinatesView.html");
+        assert str != null;
+
+        view.setContent(str.replace("${mavenInfo}", StringUtil.LOADING_TIPS)
+                .replace("${gradleInfo}", StringUtil.LOADING_TIPS));
+
+        if (isAvailable) {
+            view.contentProperty().bind(Bindings.createStringBinding(() -> {
+                String version = versionProperty.get();
+                if (StringUtils.isEmpty(version)) {
+                    return str.replace("${mavenInfo}", StringUtil.LOADING_TIPS)
+                            .replace("${gradleInfo}", StringUtil.LOADING_TIPS);
+                } else if (StringUtils.equalsIgnoreCase("unknown", version)) {
+                    return str.replace("${mavenInfo}", "WAIT TIMEOUT...")
+                            .replace("${gradleInfo}", "WAIT TIMEOUT...");
+                }
+                return str.replace("${mavenInfo}", getMavenInfo(version))
+                        .replace("${gradleInfo}", getGradleInfo(version));
+            }, versionProperty));
         }
+
+        view.setPrefHeight(180);
+        return view;
     }
 
     private final StringProperty description = new SimpleStringProperty(this, "description");

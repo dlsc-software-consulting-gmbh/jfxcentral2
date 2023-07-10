@@ -22,7 +22,11 @@ public class BookTileView extends PreviewTileView<Book> {
 
         imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
 
-        LinkUtil.setLink(getButton1(), "/books/" + getData().getId());
+        //LinkUtil.setLink(getButton1(), "/books/" + book.getId());
+        getButton1().setOnAction(e -> {
+            LinkUtil.gotoPage(this, "/books/" + book.getId());
+            e.consume();
+        });
 
         if (StringUtils.isNotBlank(book.getAmazonASIN())) {
             setButton2Text("amazon");

@@ -16,11 +16,15 @@ public class IkonliPackTileView extends TileView<IkonliPack> {
 
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));
-        LinkUtil.setLink(getButton1(), "icons/" + pack.getId());
+        //LinkUtil.setLink(getButton1(), "icons/" + pack.getId());
+        getButton1().setOnAction(e -> {
+            LinkUtil.gotoPage(this, "/icons/" + pack.getId());
+            e.consume();
+        });
 
         setButton2Text("GitHub");
         setButton2Graphic(new FontIcon(IkonUtil.github));
-        LinkUtil.setLink(getButton2(), pack.getUrl());
+        LinkUtil.setExternalLink(getButton2(), pack.getUrl());
     }
 
     @Override

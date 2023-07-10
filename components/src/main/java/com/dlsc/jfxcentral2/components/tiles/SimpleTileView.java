@@ -109,14 +109,15 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
                 return;
             }
             if (WebAPI.isBrowser()) {
-                LinkUtil.setLink(avatarView, newUrl);
-                LinkUtil.setLink(topBox, newUrl);
-                LinkUtil.setLink(descriptionLabel, newUrl);
-                LinkUtil.setLink(linkedObjectBox, newUrl);
+                this.setOnMousePressed(e -> {
+                    e.consume();
+                    LinkUtil.gotoPage(SimpleTileView.this, newUrl);
+                });
+
             } else {
                 avatarView.setMouseTransparent(true);
                 detailButton.setMouseTransparent(true);
-                LinkUtil.setLink(this, newUrl);
+                LinkUtil.setLink(SimpleTileView.this, newUrl);
             }
         });
     }

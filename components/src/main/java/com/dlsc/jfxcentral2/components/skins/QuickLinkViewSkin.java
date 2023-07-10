@@ -9,14 +9,12 @@ import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
 import com.dlsc.jfxcentral2.model.SenaptQuickLink;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.WebAPIUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.time.format.DateTimeFormatter;
@@ -29,23 +27,16 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
     public QuickLinkViewSkin(QuickLinkView control) {
         super(control);
 
-        control.hoverProperty().addListener((observable, oldValue, isHover) -> {
-            if (isHover) {
-                control.toFront();
-            } else {
-                control.toBack();
-            }
-        });
-
-        if (WebAPI.isBrowser()) {
-            control.setOnMousePressed(event -> {
-                if (event.isPrimaryButtonDown()) {
-                    if (control.getQuickLink() != null && StringUtils.isNotBlank(control.getQuickLink().getLinkUrl())) {
-                        WebAPIUtil.navigateToPage(control, control.getQuickLink().getLinkUrl());
-                    }
+        if (!WebAPI.isBrowser()) {
+            control.hoverProperty().addListener((observable, oldValue, isHover) -> {
+                if (isHover) {
+                    control.toFront();
+                } else {
+                    control.toBack();
                 }
-                event.consume();
             });
+        }else {
+            control.getStyleClass().add("browser");
         }
 
         layoutBySize();
