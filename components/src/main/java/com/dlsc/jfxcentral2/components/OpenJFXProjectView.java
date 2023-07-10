@@ -62,7 +62,7 @@ public class OpenJFXProjectView extends PaneBase {
 
         Text text2 = new Text("GPL v2 with the Classpath exception");
         text2.getStyleClass().add("link");
-        LinkUtil.setLink(text2, "https://en.wikipedia.org/wiki/GPL_linking_exception#The_Classpath_exception");
+        LinkUtil.setExternalLink(text2, "https://en.wikipedia.org/wiki/GPL_linking_exception#The_Classpath_exception");
 
         Text text3 = new Text(", just like the JDK. Anybody is welcome to contribute to this project," +
                 " port it to other platforms or devices, or do anything else that " +
