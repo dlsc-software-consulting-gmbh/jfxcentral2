@@ -72,14 +72,11 @@ public class OpenJFXPage extends PageBase {
             pullRequestsView.setPullRequests(pullRequests.isEmpty() ? null : new ArrayList<>(filteredList));
         });
 
+        if (!pullRequests.isEmpty()) {
+            updateUI(pullRequestsFilterView, pullRequestsView);
+        }
 
-        pullRequests.addListener((InvalidationListener) it -> {
-            filteredList.setPredicate(pullRequestsFilterView.getPredicate());
-            if (!pullRequests.isEmpty()) {
-                pullRequestsFilterView.setDisable(false);
-            }
-            pullRequestsView.setPullRequests(pullRequests.isEmpty() ? null : new ArrayList<>(filteredList));
-        });
+        pullRequests.addListener((InvalidationListener) it -> updateUI(pullRequestsFilterView, pullRequestsView));
 
         // features
         FeaturesContainer featuresContainer = new FeaturesContainer();
@@ -89,5 +86,13 @@ public class OpenJFXPage extends PageBase {
         StripView stripView = new StripView(pullRequestsView, featuresContainer);
 
         return wrapContent(openJFXProjectView, pullRequestsFilterView, stripView);
+    }
+
+    private void updateUI(PullRequestsFilterView pullRequestsFilterView, PullRequestsView pullRequestsView) {
+        filteredList.setPredicate(pullRequestsFilterView.getPredicate());
+        if (!pullRequests.isEmpty()) {
+            pullRequestsFilterView.setDisable(false);
+        }
+        pullRequestsView.setPullRequests(pullRequests.isEmpty() ? null : new ArrayList<>(filteredList));
     }
 }

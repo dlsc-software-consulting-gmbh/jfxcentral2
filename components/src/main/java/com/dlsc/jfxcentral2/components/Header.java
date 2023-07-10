@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import javafx.animation.FadeTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -9,6 +10,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
@@ -16,7 +18,7 @@ import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 public class Header extends HBox {
 
     public Header() {
-        getStyleClass().add("header");
+        getStyleClass().addAll("header", "animated-header");
 
         Label title = new Label();
         title.getStyleClass().add("header-title");
@@ -39,6 +41,16 @@ public class Header extends HBox {
 
 
         getChildren().setAll(title, new Spacer(), wrapper);
+    }
+
+    public void playRemindAnimation() {
+        FadeTransition ft = new FadeTransition(Duration.millis(100), this);
+        ft.setFromValue(1);
+        ft.setToValue(0);
+        ft.setCycleCount(10);
+        ft.setAutoReverse(true);
+        ft.setDelay(Duration.millis(500));
+        ft.play();
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title", "Overview");

@@ -110,6 +110,10 @@ public class DetailsContentPane extends PaneBase {
             } else {
                 NodeUtil.scrollToNode(item);
             }
+            Node header = item.lookup(".animated-header");
+            if (header instanceof Header animatedHeader) {
+                animatedHeader.playRemindAnimation();
+            }
         };
     }
 

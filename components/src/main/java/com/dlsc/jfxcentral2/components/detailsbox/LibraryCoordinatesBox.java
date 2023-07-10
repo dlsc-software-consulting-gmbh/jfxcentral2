@@ -11,7 +11,6 @@ import com.dlsc.jfxcentral2.utils.FXUtil;
 import com.dlsc.jfxcentral2.utils.FilesUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
-import com.dlsc.jfxcentral2.utils.WebAPIUtil;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
@@ -21,11 +20,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -70,14 +68,13 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
     }
 
     private VBox createInfoNodeForFX(StringProperty versionProperty) {
-        Label repositoryCoordinatesLabel = new Label(StringUtil.LOADING_TIPS);
-        repositoryCoordinatesLabel.getStyleClass().add("coordinates-label");
-        repositoryCoordinatesLabel.setWrapText(true);
-        repositoryCoordinatesLabel.setMinHeight(Region.USE_PREF_SIZE);
-        repositoryCoordinatesLabel.setMaxWidth(Double.MAX_VALUE);
+        TextArea repositoryCoordinatesArea = new TextArea(StringUtil.LOADING_TIPS);
+        repositoryCoordinatesArea.getStyleClass().add("coordinates-text-area");
+        repositoryCoordinatesArea.setEditable(false);
+        repositoryCoordinatesArea.setMaxWidth(Double.MAX_VALUE);
 
         if (isAvailable) {
-            repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
+            repositoryCoordinatesArea.textProperty().bind(Bindings.createStringBinding(() -> {
                 String version = versionProperty.get();
                 if (StringUtils.equalsIgnoreCase("unknown", version)) {
                     return "WAIT TIMEOUT...";
@@ -102,12 +99,10 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         copyButton.setGraphic(new FontIcon(IkonUtil.copy));
         copyButton.setOnAction(evt -> {
             evt.consume();
-            String content = repositoryCoordinatesLabel.getText();
-            if (WebAPI.isBrowser()) {
-                WebAPIUtil.copyToClipboard(copyButton, content);
-            } else {
-                FXUtil.copyToClipboard(content);
-            }
+            repositoryCoordinatesArea.selectAll();
+            repositoryCoordinatesArea.requestFocus();
+            String content = repositoryCoordinatesArea.getText();
+            FXUtil.copyToClipboard(content);
         });
 
         HBox buttonsBox = new HBox(mavenButton, gradleButton, new Spacer());
@@ -118,7 +113,7 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.mdStringProperty().bind(descriptionProperty());
 
-        VBox bodyBox = new VBox(descriptionLabel, buttonsBox, repositoryCoordinatesLabel);
+        VBox bodyBox = new VBox(descriptionLabel, buttonsBox, repositoryCoordinatesArea);
         bodyBox.getStyleClass().add("body-box");
         return bodyBox;
     }

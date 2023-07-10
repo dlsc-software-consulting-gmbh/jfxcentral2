@@ -76,15 +76,10 @@ public class CommentsView extends PaneBase implements NameProvider {
     protected void layoutBySize() {
         getChildren().clear();
 
-        Label titleLabel = new Label();
-        titleLabel.getStyleClass().add("title");
-        titleLabel.textProperty().bind(titleProperty());
-
-        FontIcon icon = new FontIcon(JFXCentralIcon.COMMENTS);
-        icon.getStyleClass().add("icon");
-
-        HBox header = new HBox(titleLabel, new Spacer(), icon);
-        header.getStyleClass().add("header");
+        Header header = new Header();
+        header.setIcon(JFXCentralIcon.COMMENTS);
+        header.titleProperty().bind(titleProperty());
+        header.getStyleClass().add("comments-header");
 
         Region writeCommentPane = createWriteCommentPane();
         writeCommentPane.getStyleClass().add("write-comment-pane");

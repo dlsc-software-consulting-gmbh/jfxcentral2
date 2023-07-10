@@ -120,11 +120,10 @@ public class IkonDetailView extends DetailView<Ikon> {
         button.managedProperty().bind(button.visibleProperty());
 
         button.setOnAction(event -> {
-            if (WebAPI.isBrowser()) {
-                WebAPIUtil.copyToClipboard(button, contentText);
-            } else {
-                FXUtil.copyToClipboard(contentText);
-            }
+            event.consume();
+            textField.selectAll();
+            textField.requestFocus();
+            FXUtil.copyToClipboard(contentText);
         });
         HBox box = new HBox(titleLabel, textField, button);
         box.getStyleClass().add("row-box");
