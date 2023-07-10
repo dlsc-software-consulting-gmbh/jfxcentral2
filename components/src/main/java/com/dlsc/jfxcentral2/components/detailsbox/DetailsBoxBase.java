@@ -16,6 +16,7 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
+import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
@@ -55,12 +56,17 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
-
+    private final Header header;
     private PaginationControl2 pagination;
     private VBox pageBox;
 
     public DetailsBoxBase() {
         getStyleClass().add("details-box");
+
+        header = new Header();
+        header.titleProperty().bind(titleProperty());
+        header.iconProperty().bind(ikonProperty());
+
         itemsProperty().addListener((ob, ov, nv) -> layoutBySize());
 
         selectedItemProperty().addListener((ob, ov, item) -> {
@@ -114,8 +120,6 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
     @Override
     protected void layoutBySize() {
-        HBox headerBox = createHeaderBox();
-
         pagination = new PaginationControl2();
         pagination.getStyleClass().add("pagination2");
         //pagination.setMaxPageIndicatorCount(3);
@@ -134,7 +138,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         pagination.managedProperty().bind(pagination.visibleProperty());
         pagination.visibleProperty().bind(pagination.pageCountProperty().greaterThan(1));
 
-        VBox contentBox = new VBox(headerBox, page, pagination);
+        VBox contentBox = new VBox(header, page, pagination);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
     }
@@ -348,26 +352,6 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             return mainPreviewPane;
         }
         return null;
-    }
-
-    private HBox createHeaderBox() {
-        Label headerLabel = new Label();
-        headerLabel.getStyleClass().add("header-title");
-        headerLabel.textProperty().bind(titleProperty());
-        headerLabel.managedProperty().bind(headerLabel.visibleProperty());
-        headerLabel.visibleProperty().bind(titleProperty().isNotEmpty());
-
-        FontIcon headerIcon = new FontIcon();
-        headerIcon.getStyleClass().add("header-icon");
-        headerIcon.iconCodeProperty().bind(ikonProperty());
-        headerIcon.managedProperty().bind(headerIcon.visibleProperty());
-        headerIcon.visibleProperty().bind(ikonProperty().isNotNull());
-
-        HBox headerBox = new HBox(headerLabel, new Spacer(), headerIcon);
-        headerBox.managedProperty().bind(headerBox.visibleProperty());
-        headerBox.visibleProperty().bind(headerLabel.visibleProperty().or(headerIcon.visibleProperty()));
-        headerBox.getStyleClass().add("header-box");
-        return headerBox;
     }
 
     protected Button createDetailsButton(T model) {

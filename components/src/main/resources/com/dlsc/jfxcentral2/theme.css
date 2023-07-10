@@ -3380,6 +3380,7 @@
 .simple-tile-view {
     -fx-padding: 15px 10px;
     -fx-border-width: 1px;
+    -fx-cursor: hand;
 }
 
 .simple-tile-view .description {
@@ -4637,20 +4638,20 @@
 }
 
 .comments-view > .content-box .header {
-    -fx-padding: 5px 30px;
     -fx-background-color: -light-blue;
-    -fx-alignment: center-left;
 }
 
-.comments-view > .content-box .header > .title {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-font-family: "Roboto Condensed";
+.comments-view > .content-box .header > .header-title {
     -fx-text-fill: -grey-100;
 }
 
-.comments-view > .content-box .header > .icon {
-    -fx-icon-size: 28px
+.comments-view > .content-box .header > .header-icon-wrapper > .ikonli-font-icon {
+    -fx-icon-size: 25px;
+    -fx-icon-color: -grey-100;
+}
+
+.comments-view:sm > .content-box .header {
+    -fx-padding: 5px 20px;
 }
 
 .comments-view > .content-box .write-comment-pane .text-area {
@@ -6461,7 +6462,7 @@
 .library-coordinates-box .buttons-box > .copy-button {
     -fx-background-radius: 30px;
     -fx-background-insets: 0;
-    -fx-padding: 3PX 20px;
+    -fx-padding: 3px 20px;
 }
 
 .library-coordinates-box .buttons-box > .copy-button .ikonli-font-icon {
@@ -6469,19 +6470,40 @@
     -fx-icon-size: 16px;
 }
 
-.library-coordinates-box .coordinates-label {
-    -fx-background-color: -grey-10;
-    -fx-font-family: "JetBrains Mono";
+.library-coordinates-box .coordinates-text-area {
+    -fx-text-fill: -grey-100;
     -fx-font-size: 13px;
-    -fx-background-radius: 10px;
+    -fx-font-family: "JetBrains Mono";
+    -fx-max-height: 145px;
+    -fx-accent: #3a89f3;
 }
 
-.library-coordinates-box:md-lg .coordinates-label {
+.library-coordinates-box .coordinates-text-area,
+.library-coordinates-box .coordinates-text-area:focused {
+    -fx-background-color: -grey-10;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0px;
+    -fx-border-color: transparent;
+    -fx-border-insets: 0px;
+}
+
+.library-coordinates-box:md-lg .coordinates-text-area {
     -fx-padding: 20px;
 }
 
-.library-coordinates-box:sm .coordinates-label {
+.library-coordinates-box:sm .coordinates-text-area {
     -fx-padding: 5px;
+}
+
+.library-coordinates-box:sm .coordinates-text-area {
+    -fx-max-height: 115px;
+}
+
+.library-coordinates-box .coordinates-text-area .content {
+    -fx-background-color: -grey-10;
+    -fx-background-insets: 0px;
+    -fx-border-color: transparent;
+    -fx-border-insets: 0px;
 }
 
 /** ------------------------------------
@@ -7629,6 +7651,7 @@
     -fx-text-fill: -grey-100;
     -fx-border-width: 0 0 1px 0;
     -fx-border-color: -grey-10;
+    -fx-accent: #3a89f3;
 }
 
 .ikon-detail-view:md .ikon-info-grid-pane .text-field {
@@ -7838,6 +7861,20 @@
  */
 .header {
     -fx-alignment: center-left;
+    -fx-background-color: -bright-blue;
+    -fx-padding: 5px 30px;
+}
+
+.header > .header-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Roboto Condensed";
+    -fx-text-fill: -white;
+}
+
+.header > .header-icon-wrapper > .header-icon {
+    -fx-icon-size: 25px;
+    -fx-icon-color: -white;
 }
 
 /** ----------------------------------------------------------------------------
