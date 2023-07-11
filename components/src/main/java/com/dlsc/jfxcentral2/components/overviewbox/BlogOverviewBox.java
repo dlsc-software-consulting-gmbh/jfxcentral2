@@ -7,7 +7,11 @@ import com.dlsc.jfxcentral.data.model.Post;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.StringUtil;
 import com.rometools.rome.feed.synd.SyndEntry;
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -16,6 +20,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
+import org.kordamp.ikonli.antdesignicons.AntDesignIconsOutlined;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.time.Duration;
 import java.time.ZoneId;
@@ -23,6 +29,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
+import java.util.List;
 
 public class BlogOverviewBox extends OverviewBox<Blog> {
 
@@ -37,9 +44,28 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
 
     @Override
     protected Node createTopNode() {
-        VBox box = new VBox();
+        Label loadingTipsLabel = new Label(StringUtil.LOADING_TIPS, new FontIcon(AntDesignIconsOutlined.CLOUD_DOWNLOAD));
+        loadingTipsLabel.getStyleClass().add("loading-label");
+        VBox box = new VBox(loadingTipsLabel);
         box.getStyleClass().add("posts-box");
-        DataRepository2.getInstance().loadPosts(getModel()).forEach(post -> box.getChildren().add(new PostViewBuilder(post, getSize()).build()));
+        Service<Void> service = new Service<>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<>() {
+                    @Override
+                    protected Void call() throws InterruptedException {
+                        List<Post> posts = DataRepository2.getInstance().loadPosts(getModel());
+                        Thread.sleep(500);
+                        Platform.runLater(() -> {
+                            box.getChildren().clear();
+                            posts.forEach(post -> box.getChildren().add(new PostViewBuilder(post, getSize()).build()));
+                        });
+                        return null;
+                    }
+                };
+            }
+        };
+        service.start();
         return box;
     }
 
