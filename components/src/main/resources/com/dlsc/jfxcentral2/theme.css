@@ -6573,7 +6573,6 @@
 .downloads-box:sm {
     -fx-min-width: 415px;
     -fx-pref-width: 415px;
-    -fx-max-width: 415px;
 }
 
 .downloads-box > .content-box > .header {

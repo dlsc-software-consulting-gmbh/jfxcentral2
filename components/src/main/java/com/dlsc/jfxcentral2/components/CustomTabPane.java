@@ -16,12 +16,18 @@ public class CustomTabPane extends PaneBase {
     public CustomTabPane() {
         getStyleClass().add("custom-tab-pane");
 
-        tabsProperty().addListener((ob, ov, nv) -> layoutBySize());
-
+        tabsProperty().addListener((ob, ov, nv) -> updateUI());
+        updateUI();
     }
 
     @Override
     protected void layoutBySize() {
+        if (!isLgToMdOrMdToLg()) {
+            updateUI();
+        }
+    }
+
+    private void updateUI() {
         int size = getTabs().size();
         ToggleGroup group = new ToggleGroup();
 

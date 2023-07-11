@@ -70,10 +70,18 @@ public class CommentsView extends PaneBase implements NameProvider {
                 }
             }
         });
+
+        updateUI();
     }
 
     @Override
     protected void layoutBySize() {
+        if (!isLgToMdOrMdToLg()) {
+            updateUI();
+        }
+    }
+
+    private void updateUI() {
         getChildren().clear();
 
         Header header = new Header();

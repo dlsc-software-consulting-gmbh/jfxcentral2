@@ -17,11 +17,18 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
 
     public FeatureViewSkin(FeatureView control) {
         super(control);
-        layoutBySize();
-        control.featureProperty().addListener((observable, oldValue, newValue) -> layoutBySize());
+        updateUI();
+        control.featureProperty().addListener((observable, oldValue, newValue) -> updateUI());
     }
 
     protected void layoutBySize() {
+        if (isLgToMdOrMdToLg()) {
+            return;
+        }
+        updateUI();
+    }
+
+    private void updateUI() {
         Feature feature = getSkinnable().getFeature();
 
         Label tagLabel = NodeUtil.createLabel("tag");

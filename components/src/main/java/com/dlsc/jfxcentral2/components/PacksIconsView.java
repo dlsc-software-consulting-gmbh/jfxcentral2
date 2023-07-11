@@ -142,10 +142,18 @@ public class PacksIconsView extends PaneBase {
         VBox contentBox = new VBox(topWrapper, spacer, gridWrapper);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
+        updateUI();
     }
 
     @Override
     protected void layoutBySize() {
+        if (isLgToMdOrMdToLg()) {
+            return;
+        }
+        updateUI();
+    }
+
+    private void updateUI() {
         Pane topBox = isSmall() ? new VBox() : new HBox();
         topBox.getStyleClass().addAll("top-box");
         topBox.getChildren().addAll(searchField, scopeComboBoxWrapper, sortComboBoxWrapper);

@@ -57,7 +57,7 @@ public class DetailsContentPane extends PaneBase {
         detailBoxes.addListener((Observable it) -> updateMenuView());
         centerNodes.addListener((Observable it) -> updateMenuView());
 
-        centerNodesProperty().addListener((Observable it) -> layoutBySize());
+        centerNodesProperty().addListener((Observable it) -> updateUI());
 
         /*
          * When the page has enough horizontal space to be in "large" size then we can place
@@ -83,6 +83,7 @@ public class DetailsContentPane extends PaneBase {
         contentBox = new HBox();
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
+        updateUI();
     }
 
     private void updateMenuView() {
@@ -131,6 +132,13 @@ public class DetailsContentPane extends PaneBase {
 
     @Override
     protected void layoutBySize() {
+        if (isSmToMdOrMdToSm()) {
+            return;
+        }
+        updateUI();
+    }
+
+    private void updateUI() {
         Size size = getSize();
 
         centerBox.getChildren().setAll(getCenterNodes());
