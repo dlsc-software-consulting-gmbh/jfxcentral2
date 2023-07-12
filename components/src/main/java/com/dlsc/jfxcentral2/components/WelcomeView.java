@@ -41,7 +41,7 @@ public class WelcomeView extends PaneBase {
         Label label2 = new Label("related", fxLogo);
         label2.getStyleClass().add("related-label");
 
-        Label label3 = new Label("JFX Central is an opensource project you can find on GitHub, with the content in a separate project. Feel free to add your project, documentation, book, etc. via a pull-request!");
+        Label label3 = new Label("JFX Central is an open source project that you can find on GitHub, with its content in a separate data repository. Feel free to add your project, documentation, book, etc. via a simple pull-request!");
         label3.getStyleClass().add("description-label");
         label3.setWrapText(true);
         label3.setMinHeight(Region.USE_PREF_SIZE);
