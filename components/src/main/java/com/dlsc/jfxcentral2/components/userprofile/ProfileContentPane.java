@@ -30,6 +30,7 @@ public class ProfileContentPane extends PaneBase {
         initComponents();
 
         userProperty().addListener(it -> fillData());
+        updateUI();
     }
 
     private void initComponents() {
@@ -86,6 +87,13 @@ public class ProfileContentPane extends PaneBase {
 
     @Override
     protected void layoutBySize() {
+        if (isSmToMdOrMdToSm()) {
+            return;
+        }
+        updateUI();
+    }
+
+    private void updateUI() {
         Button uploadButton = new Button("UPLOAD", new FontIcon(JFXCentralIcon.CAMERA));
         uploadButton.getStyleClass().addAll("upload-button", "fill-button");
 

@@ -38,10 +38,19 @@ public class WeekLinksLiteView extends PaneBase {
 
         contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");
+
+        updateUI();
     }
 
     @Override
     protected void layoutBySize() {
+        if (isLgToMdOrMdToLg()) {
+            return;
+        }
+        updateUI();
+    }
+
+    private void updateUI() {
         contentBox.getChildren().clear();
         if (topBox != null) {
             contentBox.getChildren().clear();

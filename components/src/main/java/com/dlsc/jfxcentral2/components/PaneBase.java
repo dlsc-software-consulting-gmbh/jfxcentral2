@@ -58,6 +58,13 @@ public class PaneBase extends StackPane {
         return (oldSize.isLarge() && newSize.isMedium()) || (oldSize.isMedium() && newSize.isLarge());
     }
 
+    public boolean isSmToMdOrMdToSm() {
+        if (oldSize == null || newSize == null) {
+            return false;
+        }
+        return (oldSize.isSmall() && newSize.isMedium()) || (oldSize.isMedium() && newSize.isSmall());
+    }
+
     private void activateTargetPseudoClass() {
         Target target = getTarget();
         pseudoClassStateChanged(DESKTOP_PSEUDOCLASS_STATE, target.isDesktop());

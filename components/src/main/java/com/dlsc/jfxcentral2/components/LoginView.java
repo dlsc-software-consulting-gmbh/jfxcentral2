@@ -105,10 +105,19 @@ public class LoginView extends PaneBase {
         register.getStyleClass().add("registration");
         formVBox = new VBox(googleLoginButton, separator, microsoftLoginButton, register);
         formVBox.getStyleClass().add("form-v-box");
+
+        updateUI();
     }
 
     @Override
     protected void layoutBySize() {
+        if (isSmToMdOrMdToSm()) {
+            return;
+        }
+        updateUI();
+    }
+
+    private void updateUI() {
         super.layoutBySize();
         if (isLarge()) {
             HBox hBox = new HBox(descriptionStackPane, formVBox);
