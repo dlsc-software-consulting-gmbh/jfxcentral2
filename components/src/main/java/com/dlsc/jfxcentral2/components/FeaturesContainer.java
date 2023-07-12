@@ -66,6 +66,7 @@ public class FeaturesContainer extends PaneBase {
         allModelObjects.addAll(DataRepository2.getInstance().getRealWorldApps());
         allModelObjects.addAll(DataRepository2.getInstance().getTools());
         allModelObjects.addAll(DataRepository2.getInstance().getBooks());
+        allModelObjects.addAll(DataRepository2.getInstance().getBlogs());
         Collections.shuffle(allModelObjects);
 
         /*

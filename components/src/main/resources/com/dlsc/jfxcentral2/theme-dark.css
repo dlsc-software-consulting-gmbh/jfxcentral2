@@ -3931,14 +3931,14 @@
 }
 
 .icon-tile-view > .content-box > .flip-view .front-box .info-box {
-    -fx-padding: 0 3px 3px 0;
+    -fx-padding: 0 6px 8px 0;
 }
 
 .icon-tile-view > .content-box > .flip-view .front-box .info-box .label {
     -fx-text-fill: -white;
     -fx-background-color: rgba(128, 128, 128, 0.75);
     -fx-background-radius: 15px;
-    -fx-padding: 5px 10px;
+    -fx-padding: 3px 10px;
     -fx-font-weight: bold;
 }
 

@@ -21,6 +21,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.util.EnumSet;
 
 public class IconPreviewPane extends PaneBase {
+
     private int columnCount = 4;
     private Size cachedSize;
 
@@ -48,7 +49,8 @@ public class IconPreviewPane extends PaneBase {
         GridPane gridPane = new GridPane();
         gridPane.getStyleClass().add("icon-grid-pane");
         IkonliPack ikonPackModel = getModel();
-        //PaymentFont is a very big ,the width is too large;
+
+        //PaymentFont is a very big, the width is too large;
         if (ikonPackModel.getName().equalsIgnoreCase("PaymentFont")) {
             getStyleClass().add("payment-font-preview");
         }
@@ -65,14 +67,11 @@ public class IconPreviewPane extends PaneBase {
             fontIcon.setFill(generateColor());
             gridPane.add(fontIcon, i % columnCount, i / columnCount);
         }
+
         gridPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
-        Label countLabel = new Label("Icons: " + icons.size());
+        Label countLabel = new Label(icons.size() + " Icons");
         countLabel.getStyleClass().add("count-label");
-
-        //IconStyle iconStyle = iconModel.getIconStyle();
-        //Label styleLabel = new Label("Style: " + iconStyle.toString());
-        //styleLabel.getStyleClass().add("style-label");
 
         HBox infoBox = new HBox(new Spacer(), countLabel);
         infoBox.getStyleClass().add("info-box");

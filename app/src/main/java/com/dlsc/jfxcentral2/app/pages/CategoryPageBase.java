@@ -32,8 +32,9 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         header.setIkon(getCategoryIkon());
 
         // filter
-        SearchFilterView filterView = createSearchFilterView();
+        SearchFilterView<T> filterView = createSearchFilterView();
         filterView.sizeProperty().bind(sizeProperty());
+        blockingProperty().bind(filterView.blockingProperty());
 
         // data
         ObservableList<T> itemsList = getCategoryItems();
@@ -93,7 +94,7 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         return new CategoryContentPane(nodes);
     }
 
-    protected abstract SearchFilterView createSearchFilterView();
+    protected abstract SearchFilterView<T> createSearchFilterView();
 
     protected ModelGridView<T> createGridView() {
         return new ModelGridView<>();

@@ -250,7 +250,7 @@ public class SearchFilterView<T> extends PaneBase {
             if (comparator.isBound()) {
                 comparator.unbind();
             }
-            ComboBox<SortItem<T>> sortComboBox = new ComboBox<>();
+            ComboBox<SortItem<T>> sortComboBox = createComboBox();
             sortComboBox.getStyleClass().addAll("filter-combo-box", "sort-combo-box");
             sortComboBox.setConverter(new StringConverter<>() {
                 @Override
@@ -298,7 +298,7 @@ public class SearchFilterView<T> extends PaneBase {
         titleLabel.setMinWidth(Region.USE_PREF_SIZE);
         titleLabel.getStyleClass().add("filter-title");
 
-        Node comboBoxNode = createSingleSelection(filterGroup, childPredicateProperty);
+        Node comboBoxNode = createComboBox(filterGroup, childPredicateProperty);
         if (isSmall()) {
             box.getChildren().setAll(titleLabel, new Spacer(), comboBoxNode);
         } else {
@@ -310,8 +310,8 @@ public class SearchFilterView<T> extends PaneBase {
     /**
      * ComboBox: single selection
      */
-    private Node createSingleSelection(FilterGroup<T> filterGroup, ObjectProperty<Predicate<T>> childPredicateProperty) {
-        ComboBox<FilterItem<T>> comboBox = createSingleSelection();
+    private Node createComboBox(FilterGroup<T> filterGroup, ObjectProperty<Predicate<T>> childPredicateProperty) {
+        ComboBox<FilterItem<T>> comboBox = createComboBox();
         comboBox.setConverter(predicateItemStringConverter);
         comboBox.getStyleClass().addAll("filter-combo-box");
         comboBox.getItems().addAll(filterGroup.filterItems);
@@ -325,8 +325,8 @@ public class SearchFilterView<T> extends PaneBase {
         return comboBox;
     }
 
-    private <T> ComboBox<T> createSingleSelection() {
-        ComboBox<T> comboBox = new ComboBox<>();
+    private <S> ComboBox<S> createComboBox() {
+        ComboBox<S> comboBox = new ComboBox<>();
         if (binding == null) {
             binding = Bindings.createBooleanBinding(comboBox::isShowing, comboBox.showingProperty());
         } else {
