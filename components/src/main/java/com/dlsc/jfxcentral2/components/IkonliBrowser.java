@@ -17,6 +17,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -76,7 +77,11 @@ public class IkonliBrowser extends PaneBase {
                 wrapper.setAlignment(Pos.TOP_CENTER);
 
                 selectedIkonProperty().addListener(it -> updateWrapperStyleClass());
-                wrapper.setOnMouseClicked(me -> setSelectedIkon(getItem()));
+                wrapper.setOnMouseClicked(me -> {
+                    if (me.isStillSincePress() && me.getButton().equals(MouseButton.PRIMARY)) {
+                        setSelectedIkon(getItem());
+                    }
+                });
 
                 setGraphic(wrapper);
                 setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

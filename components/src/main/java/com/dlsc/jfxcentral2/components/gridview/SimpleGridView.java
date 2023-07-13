@@ -22,7 +22,7 @@ import java.util.List;
 public class SimpleGridView<T> extends PaneBase {
 
     private DetailView<T> currentDetailView;
-    private CellView<T> lasetSelectedCellView;
+    private CellView<T> lastSelectedCellView;
 
     public enum PaginationMode {
         ADVANCED,
@@ -64,10 +64,10 @@ public class SimpleGridView<T> extends PaneBase {
                 cellView.selectedProperty().addListener((ob, ov, nv) -> {
                     requestFocus();
                     if (nv) {
-                        if (lasetSelectedCellView != null) {
-                            lasetSelectedCellView.setSelected(false);
+                        if (lastSelectedCellView != null) {
+                            lastSelectedCellView.setSelected(false);
                         }
-                        lasetSelectedCellView = cellView;
+                        lastSelectedCellView = cellView;
                         if (currentDetailView != null) {
                             gridPane.getChildren().remove(currentDetailView);
                             currentDetailView = null;
@@ -79,7 +79,7 @@ public class SimpleGridView<T> extends PaneBase {
                             gridPane.add(currentDetailView, 0, row * 2 + 1, columns, 1);
                         }
                     } else {
-                        lasetSelectedCellView = null;
+                        lastSelectedCellView = null;
                         if (currentDetailView != null) {
                             gridPane.getChildren().remove(currentDetailView);
                             currentDetailView = null;

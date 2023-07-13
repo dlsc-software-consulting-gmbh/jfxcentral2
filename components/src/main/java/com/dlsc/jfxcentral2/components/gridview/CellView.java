@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.css.PseudoClass;
+import javafx.scene.input.MouseButton;
 
 import java.util.Objects;
 
@@ -21,7 +22,11 @@ public class CellView<T> extends PaneBase {
 
         selectedProperty().addListener(it -> activeSelectedPseudoClass());
 
-        setOnMousePressed(event -> setSelected(!isSelected()));
+        setOnMousePressed(event -> {
+            if (event.isStillSincePress() && event.getButton().equals(MouseButton.PRIMARY)) {
+                setSelected(!isSelected());
+            }
+        });
     }
 
     private void activeSelectedPseudoClass() {
