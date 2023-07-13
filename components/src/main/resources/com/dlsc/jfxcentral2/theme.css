@@ -4551,7 +4551,7 @@
 }
 
 .tips-tile-view:lg > .content-box > .flip-view .front-box .image-container {
-    -fx-background-color: -orange;
+    -fx-background-color: -white;
     -fx-min-height: 190px;
     -fx-pref-height: 190px;
     -fx-max-height: 190px;
