@@ -1,3 +1,5 @@
+[![Project Map](https://sourcespy.com/shield.svg)](https://sourcespy.com/github/dlemmermannjfxcentral2/)
+
 # JFXCentral 2
 
 Welcome to the next version of JFXCentral. This repository contains the codebase that is used for the desktop AND the web version.
