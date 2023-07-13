@@ -3249,6 +3249,10 @@
     -fx-padding: 0 20px;
 }
 
+.custom-markdown-tab-pane .grid-pane.header {
+    -fx-padding: 0px;
+}
+
 .custom-markdown-tab-pane > .content-box .tab-button {
     -fx-font-family: "Roboto Condensed";
     -fx-font-weight: bold;
