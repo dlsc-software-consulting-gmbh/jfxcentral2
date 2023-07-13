@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtil {
+
     public static final String LOADING_TIPS = "Please wait. Loading...";
+
     private StringUtil() {
     }
 
@@ -18,6 +20,7 @@ public class StringUtil {
         if (matcher.find()) {
             return matcher.group(1);
         }
+
         return null;
     }
 }

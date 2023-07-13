@@ -17,9 +17,11 @@ import javafx.scene.image.Image;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
+import java.util.Objects;
+
 public class PeopleCategoryPage extends CategoryPageBase<Person> {
 
-    private static final Image BANNER_IMAGE = new Image(PeopleCategoryPage.class.getResource("people-banner.jpg").toExternalForm());
+    private static final Image BANNER_IMAGE = new Image(Objects.requireNonNull(PeopleCategoryPage.class.getResource("people-banner.jpg")).toExternalForm());
 
     public PeopleCategoryPage(ObjectProperty<Size> size) {
         super(size);
@@ -64,7 +66,7 @@ public class PeopleCategoryPage extends CategoryPageBase<Person> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<Person> createSearchFilterView() {
         return new PeopleFilterView();
     }
 

@@ -52,7 +52,7 @@ public class LibrariesCategoryPage extends CategoryPageBase<Library> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<Library> createSearchFilterView() {
         return new LibrariesFilterView();
     }
 

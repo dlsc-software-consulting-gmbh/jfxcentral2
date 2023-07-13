@@ -42,7 +42,7 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
 
     public DetailsPageBase(ObjectProperty<Size> size, Class<? extends T> clazz, String itemId) {
         super(size, Mode.DARK);
-        setItem((T) DataRepository2.getInstance().getByID(clazz, itemId));
+        setItem(DataRepository2.getInstance().getByID(clazz, itemId));
     }
 
     public T getItem() {

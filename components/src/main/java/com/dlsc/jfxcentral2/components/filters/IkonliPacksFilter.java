@@ -9,19 +9,19 @@ import java.util.List;
 /**
  * Filters for selecting icon packs
  */
-public class IkonliPacksFilter extends SimpleSearchFilterView<IkonliPack> {
+public class IkonliPacksFilter extends SimpleModelObjectSearchFilterView<IkonliPack> {
 
     public IkonliPacksFilter() {
         getStyleClass().add("ikonli-packs-filter");
         setSearchPromptText("Search by name");
 
-        getFilterGroups().setAll(
+        getFilterGroups().setAll(List.of(
                 new FilterGroup<>("STYLE", List.of(
                         new FilterItem<>("ALL", item -> true, true),
                         new FilterItem<>("FILLED", item -> item.getIconStyle() == IconStyle.FILLED),
                         new FilterItem<>("OUTLINED", item -> item.getIconStyle() == IconStyle.OUTLINED),
                         new FilterItem<>("MIXING", item -> item.getIconStyle() == IconStyle.MIXING)
-                )));
+                ))));
 
         setOnSearch(text -> pack -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(pack.getName(), text)

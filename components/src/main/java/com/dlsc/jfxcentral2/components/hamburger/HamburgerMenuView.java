@@ -204,9 +204,7 @@ public class HamburgerMenuView extends PaneBase {
         this.menus = menus;
     }
 
-    private final ObjectProperty<Runnable> onClose = new SimpleObjectProperty<>(this, "onClose", () -> {
-        System.out.println("on close callback not set");
-    });
+    private final ObjectProperty<Runnable> onClose = new SimpleObjectProperty<>(this, "onClose", () -> System.out.println("on close callback not set"));
 
     public Runnable getOnClose() {
         return onClose.get();

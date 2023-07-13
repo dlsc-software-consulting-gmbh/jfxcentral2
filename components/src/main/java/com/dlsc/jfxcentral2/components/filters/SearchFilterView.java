@@ -162,10 +162,6 @@ public class SearchFilterView<T> extends PaneBase {
         return comparator.getReadOnlyProperty();
     }
 
-    private void setComparator(Comparator<T> comparator) {
-        this.comparator.set(comparator);
-    }
-
     private BooleanBinding binding;
 
     @Override

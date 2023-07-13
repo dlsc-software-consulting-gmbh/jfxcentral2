@@ -45,8 +45,8 @@ public class WeekLinksLiteView extends PaneBase {
             if (linksOfTheWeek == null) {
                 return "Error loading links of the week.";
             }
-            DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-            String date = String.format("## Posted: %s%n%n", formatter.format(linksOfTheWeek.getCreatedOn()));
+            DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
+            String date = String.format("## Posted on %s%n%n", formatter.format(linksOfTheWeek.getCreatedOn()));
             String mdStr = DataRepository2.getInstance().getLinksOfTheWeekReadMe(linksOfTheWeek);
             return date + mdStr;
         }, linksOfTheWeekProperty()));

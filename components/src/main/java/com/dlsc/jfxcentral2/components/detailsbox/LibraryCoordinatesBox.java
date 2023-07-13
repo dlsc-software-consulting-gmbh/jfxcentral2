@@ -32,19 +32,22 @@ import simplefx.experimental.parts.FXFuture;
 
 public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
     private static final String LINED_SEPARATOR = System.lineSeparator();
-    private final VBox contentBox;
     private final String groupId;
     private final String artifactId;
     private final boolean isAvailable;
 
     public LibraryCoordinatesBox(Coordinates coordinates) {
         getStyleClass().addAll("overview-box", "library-coordinates-box");
-        contentBox = new VBox();
+
+        VBox contentBox = new VBox();
+
         groupId = coordinates.getGroupId();
         artifactId = coordinates.getArtifactId();
         isAvailable = StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId);
+
         setVisible(isAvailable);
         setManaged(isAvailable);
+
         StringProperty versionProperty = new SimpleStringProperty(this, "version");
 
         if (isAvailable) {
@@ -64,7 +67,6 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         contentBox.getChildren().setAll(headerBox, bodyNode);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
-
     }
 
     private VBox createInfoNodeForFX(StringProperty versionProperty) {
@@ -87,12 +89,14 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         }
 
         RadioButton mavenButton = new RadioButton("Maven");
+        mavenButton.setOnAction(evt -> setBuildTool(BuildTool.MAVEN));
+        mavenButton.setSelected(true);
+
         RadioButton gradleButton = new RadioButton("Gradle");
+        gradleButton.setOnAction(evt -> setBuildTool(BuildTool.GRADLE));
+
         ToggleGroup toggleGroup = new ToggleGroup();
         toggleGroup.getToggles().addAll(mavenButton, gradleButton);
-        mavenButton.setOnAction(evt -> setBuildTool(BuildTool.MAVEN));
-        gradleButton.setOnAction(evt -> setBuildTool(BuildTool.GRADLE));
-        mavenButton.setSelected(true);
 
         Button copyButton = new Button();
         copyButton.getStyleClass().addAll("blue-button", "copy-button");
@@ -136,7 +140,6 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         HTMLView view = new HTMLView();
 
         String str = FilesUtil.readText("/com/dlsc/jfxcentral2/htmlviews/LibraryCoordinatesView.html");
-        assert str != null;
 
         view.setContent(str.replace("${mavenInfo}", StringUtil.LOADING_TIPS)
                 .replace("${gradleInfo}", StringUtil.LOADING_TIPS));

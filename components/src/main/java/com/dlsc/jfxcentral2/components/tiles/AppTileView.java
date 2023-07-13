@@ -10,6 +10,7 @@ public class AppTileView extends TileView<RealWorldApp> {
 
     public AppTileView(RealWorldApp app) {
         super(app);
+
         getStyleClass().add("app-tile-view");
 
         imageProperty().bind(ImageManager.getInstance().realWorldAppBannerImageProperty(app));

@@ -31,7 +31,7 @@ public class QuickLinksGenerator {
 
     public static List<QuickLink> generateQuickLinks(Size size) {
         if (size != Size.SMALL) {
-            return getLargeOrMediumQuickLinks(size);
+            return getLargeOrMediumQuickLinks();
         } else {
             return getSmallQuickLinks();
         }
@@ -54,7 +54,7 @@ public class QuickLinksGenerator {
         return list;
     }
 
-    private static List<QuickLink> getLargeOrMediumQuickLinks(Size size) {
+    private static List<QuickLink> getLargeOrMediumQuickLinks() {
         // Randomly generate 4 to 5 QuickLinks
         int count = new Random().nextInt(2) + 4;
         List<QuickLink> list = createQuickLinks(count);
@@ -72,7 +72,7 @@ public class QuickLinksGenerator {
         }
 
         Collections.shuffle(imageName);
-        imageName.subList(0, count2).forEach(url -> list.add(new ImageQuickLink(QuickLinksGenerator.class.getResource(url).toExternalForm())));
+        imageName.subList(0, count2).forEach(url -> list.add(new ImageQuickLink(Objects.requireNonNull(QuickLinksGenerator.class.getResource(url)).toExternalForm())));
 
         //If the above QuickLinks are less than 9 (must add main sponsor), fill null
         for (int i = 0; i < 9 - count - count2- 1 ; i++) {
@@ -193,7 +193,7 @@ public class QuickLinksGenerator {
             // image QuickLinks
             for (int i = 0; i < imageQuickLinkCount; i++) {
                 String imgUrl = "quick-link-image" + (i + 1) + ".jpg";
-                quickLinks.add(new ImageQuickLink(QuickLinksGenerator.class.getResource(imgUrl).toExternalForm()));
+                quickLinks.add(new ImageQuickLink(Objects.requireNonNull(QuickLinksGenerator.class.getResource(imgUrl)).toExternalForm()));
             }
 
             // empty QuickLinks
@@ -204,8 +204,7 @@ public class QuickLinksGenerator {
         } else { // small size
 
             // normal QuickLinks
-            for (int i = 0; i < recentItems.size(); i++) {
-                ModelObject changedModelObject = recentItems.get(i);
+            for (ModelObject changedModelObject : recentItems) {
                 quickLinks.add(createDateQuickLink(changedModelObject));
             }
         }

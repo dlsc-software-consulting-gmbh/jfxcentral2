@@ -72,6 +72,8 @@ import one.jpro.routing.dev.DevFilter;
 import one.jpro.routing.sessionmanager.SessionManager;
 import simplefx.experimental.parts.FXFuture;
 
+import java.util.Locale;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class JFXCentral2App extends Application {
@@ -79,6 +81,10 @@ public class JFXCentral2App extends Application {
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
     private TrayIconManager trayIconManager;
+
+    static {
+        Locale.setDefault(Locale.US);
+    }
 
     @Override
     public void start(Stage stage) {
@@ -117,7 +123,7 @@ public class JFXCentral2App extends Application {
         scene.setFill(Color.web("070B32"));
         scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
         scene.widthProperty().addListener(it -> System.out.println("width: " + scene.getWidth()));
-        scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css")).toExternalForm());
         scene.focusOwnerProperty().addListener(it -> System.out.println("new focus owner: " + scene.getFocusOwner()));
 
         updateSizeProperty(scene);

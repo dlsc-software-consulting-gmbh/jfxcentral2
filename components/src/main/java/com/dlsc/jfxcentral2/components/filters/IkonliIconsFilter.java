@@ -21,6 +21,5 @@ public class IkonliIconsFilter extends SimpleSearchFilterView<Ikon> {
         ));
 
         setOnSearch(text -> icon -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(icon.getDescription(), text));
-
     }
 }

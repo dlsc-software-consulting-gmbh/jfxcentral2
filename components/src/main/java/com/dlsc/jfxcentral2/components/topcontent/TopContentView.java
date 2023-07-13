@@ -62,9 +62,7 @@ public class TopContentView<T extends ModelObject> extends PaneBase {
         getChildren().setAll(contentBox);
 
         loadMoreButton.setOnAction(evt -> {
-            getItems().stream().skip(centerBox.getChildren().size()).limit(getLoadIncrement()).forEach(item -> {
-                centerBox.getChildren().add(createItemCell(item));
-            });
+            getItems().stream().skip(centerBox.getChildren().size()).limit(getLoadIncrement()).forEach(item -> centerBox.getChildren().add(createItemCell(item)));
             evt.consume();
         });
 
@@ -90,12 +88,10 @@ public class TopContentView<T extends ModelObject> extends PaneBase {
         }
         centerBox.getChildren().clear();
 
-        //TODO: Sort the items by saveCount + likeCount
-        //getItems().sort((o1, o2) ->));
+        // TODO: Sort the items by saveCount + likeCount
+        // getItems().sort((o1, o2) ->));
 
-        getItems().stream().limit(getInitCount()).forEach(item -> {
-            centerBox.getChildren().add(createItemCell(item));
-        });
+        getItems().stream().limit(getInitCount()).forEach(item -> centerBox.getChildren().add(createItemCell(item)));
     }
 
     protected Node createItemCell(T item) {

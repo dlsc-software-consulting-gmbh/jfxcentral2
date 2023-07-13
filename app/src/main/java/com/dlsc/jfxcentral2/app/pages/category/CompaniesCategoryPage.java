@@ -47,7 +47,7 @@ public class CompaniesCategoryPage extends CategoryPageBase<Company> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<Company> createSearchFilterView() {
         return new CompaniesFilterView();
     }
 

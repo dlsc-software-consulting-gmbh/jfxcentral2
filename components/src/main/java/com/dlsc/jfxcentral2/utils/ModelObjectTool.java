@@ -31,8 +31,7 @@ public class ModelObjectTool {
         if (modelObject instanceof Tool tool) {
             return ImageManager.getInstance().toolImageProperty(tool);
         } else if (modelObject instanceof Blog blog) {
-            return largerImageFirst ? ImageManager.getInstance().blogPageLargeImageProperty(blog)
-                    : ImageManager.getInstance().blogIconImageProperty(blog);
+            return largerImageFirst ? ImageManager.getInstance().blogPageLargeImageProperty(blog) : ImageManager.getInstance().blogIconImageProperty(blog);
         } else if (modelObject instanceof Download download) {
             return ImageManager.getInstance().downloadBannerImageProperty(download);
         } else if (modelObject instanceof Library library) {
@@ -48,11 +47,9 @@ public class ModelObjectTool {
         } else if (modelObject instanceof Person person) {
             return ImageManager.getInstance().personImageProperty(person);
         } else if (modelObject instanceof Tutorial tutorial) {
-            return largerImageFirst ? ImageManager.getInstance().tutorialImageLargeProperty(tutorial) :
-                    ImageManager.getInstance().tutorialImageProperty(tutorial);
+            return largerImageFirst ? ImageManager.getInstance().tutorialImageLargeProperty(tutorial) : ImageManager.getInstance().tutorialImageProperty(tutorial);
         } else if (modelObject instanceof RealWorldApp app) {
-            return largerImageFirst ? ImageManager.getInstance().realWorldAppLargeImageProperty(app) :
-                    ImageManager.getInstance().realWorldAppImageProperty(app);
+            return largerImageFirst ? ImageManager.getInstance().realWorldAppLargeImageProperty(app) : ImageManager.getInstance().realWorldAppImageProperty(app);
         } else if (modelObject instanceof News news) {
             return ImageManager.getInstance().newsBannerImageProperty(news);
         }
@@ -84,7 +81,7 @@ public class ModelObjectTool {
         } else if (modelObject instanceof RealWorldApp app) {
             return "/showcases/" + app.getId();
         } else if (modelObject instanceof News news) {
-            // There is currently no news page ?
+            // There is currently no news page
             return "/news/" + news.getId();
         }
 

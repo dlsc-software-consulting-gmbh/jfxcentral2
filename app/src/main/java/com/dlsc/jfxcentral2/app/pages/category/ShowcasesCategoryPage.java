@@ -47,7 +47,7 @@ public class ShowcasesCategoryPage extends CategoryPageBase<RealWorldApp> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<RealWorldApp> createSearchFilterView() {
         return new ShowcaseFilterView();
     }
 

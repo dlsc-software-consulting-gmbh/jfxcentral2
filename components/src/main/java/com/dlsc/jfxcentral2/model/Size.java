@@ -1,14 +1,17 @@
 package com.dlsc.jfxcentral2.model;
 
 public enum Size {
+
     /**
      * PseudoClassName: sm
      */
     SMALL,
+
     /**
      * PseudoClassName: md
      */
     MEDIUM,
+
     /**
      * PseudoClassName: lg
      */

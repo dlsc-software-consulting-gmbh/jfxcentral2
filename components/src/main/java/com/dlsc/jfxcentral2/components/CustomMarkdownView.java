@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.components;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -12,13 +11,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import one.jpro.routing.LinkUtil;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class CustomMarkdownView extends com.sandec.mdfx.MarkdownView {
 
     public CustomMarkdownView() {
         getStyleClass().add("custom-markdown-view");
-        getStylesheets().add(CustomMarkdownView.class.getResource("markdown.css").toExternalForm());
+        getStylesheets().add(Objects.requireNonNull(CustomMarkdownView.class.getResource("markdown.css")).toExternalForm());
     }
 
     public CustomMarkdownView(String mdString) {
@@ -74,7 +74,7 @@ public class CustomMarkdownView extends com.sandec.mdfx.MarkdownView {
 
     private void configureImage(Node node) {
         if (node instanceof ImageView imageView) {
-            imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> computeFitWidth(imageView), widthProperty(), imageView.getImage().progressProperty()));
+            imageView.fitWidthProperty().bind(widthProperty());
             imageView.setPreserveRatio(true);
             imageView.visibleProperty().bind(showImagesProperty());
             imageView.managedProperty().bind(showImagesProperty());
@@ -86,12 +86,6 @@ public class CustomMarkdownView extends com.sandec.mdfx.MarkdownView {
                 }
             });
         }
-    }
-
-    private double computeFitWidth(ImageView imageView) {
-//        Image image = imageView.getImage();
-//        return Math.min(image.getWidth(), getWidth());
-        return getWidth();
     }
 
     private final BooleanProperty showImages = new SimpleBooleanProperty(this, "showImages", true);

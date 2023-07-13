@@ -18,8 +18,11 @@ import javafx.scene.layout.VBox;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.util.Objects;
+
 public class ProfileContentPane extends PaneBase {
 
+    private static final Image PERSON_AVATAR_IMAGE = new Image(Objects.requireNonNull(ProfileContentPane.class.getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png")).toExternalForm());
     private PhotoView photoView;
     private EditTextField userNameField;
     private EditTextField fullNameField;
@@ -155,9 +158,8 @@ public class ProfileContentPane extends PaneBase {
             fullNameField.setText("");
             emailField.setText("");
         } else {
-            //photoView.setPhoto(ImageManager.getInstance().xxx);
-            // add test image
-            photoView.setPhoto(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png").toExternalForm()));
+            // TODO: photoView.setPhoto(ImageManager.getInstance().xxx);
+            photoView.setPhoto(PERSON_AVATAR_IMAGE);
             userNameField.setText(user.getUserName());
             fullNameField.setText(user.getFullName());
             emailField.setText(user.getEmail());

@@ -19,10 +19,12 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Objects;
 
 public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+    private static final Image SENAPT_COLOR_IMAGE = new Image(Objects.requireNonNull(QuickLinkViewSkin.class.getResource("/com/dlsc/jfxcentral2/components/logos/senapt-color.png")).toExternalForm(), true);
 
     public QuickLinkViewSkin(QuickLinkView control) {
         super(control);
@@ -109,7 +111,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             topLabel.getStyleClass().add("top-label");
 
             CustomImageView logoView = new CustomImageView();
-            logoView.setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/components/logos/senapt-color.png").toExternalForm(), true));
+            logoView.setImage(SENAPT_COLOR_IMAGE);
 
             Label bottomLabel = new Label("Main sponsor  /  Main sponsor  /  Main sponsor");
             bottomLabel.getStyleClass().add("bottom-label");

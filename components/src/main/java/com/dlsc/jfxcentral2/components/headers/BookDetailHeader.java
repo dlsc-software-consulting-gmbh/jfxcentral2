@@ -5,7 +5,11 @@ import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.scene.image.Image;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
+
 public class BookDetailHeader extends SimpleDetailHeader<Book> {
+
+    private static final Image BACKGROUND_IMAGE = new Image(Objects.requireNonNull(BookDetailHeader.class.getResource("books-banner.jpg")).toExternalForm());
 
     public BookDetailHeader(Book book) {
         super(book);
@@ -20,7 +24,7 @@ public class BookDetailHeader extends SimpleDetailHeader<Book> {
             setWebsite(book.getUrl());
         }
 
-        setBackgroundImage(new Image(BookDetailHeader.class.getResource("books-banner.jpg").toExternalForm()));
+        setBackgroundImage(BACKGROUND_IMAGE);
         setShareUrl("books/" + book.getId());
         setShareText("Found this book on @JFXCentral: " + book.getName() + " - " + book.getSubtitle());
         setShareTitle("JavaFX book: " + book.getName());

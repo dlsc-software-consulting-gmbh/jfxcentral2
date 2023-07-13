@@ -15,18 +15,22 @@ public class FilesUtil {
     public static String readText(String filePath) {
         String lineSeparator = System.lineSeparator();
 
-        try (InputStream inputStream = FilesUtil.class.getResourceAsStream(filePath);
-             Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8)) {
-            StringBuilder stringBuilder = new StringBuilder();
+        try (InputStream in = FilesUtil.class.getResourceAsStream(filePath)) {
+            if (in != null) {
+                try (Scanner scanner = new Scanner(in, StandardCharsets.UTF_8)) {
+                    StringBuilder stringBuilder = new StringBuilder();
 
-            while (scanner.hasNextLine()) {
-                stringBuilder.append(scanner.nextLine()).append(lineSeparator);
+                    while (scanner.hasNextLine()) {
+                        stringBuilder.append(scanner.nextLine()).append(lineSeparator);
+                    }
+
+                    return stringBuilder.toString();
+                }
             }
-
-            return stringBuilder.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+
+        return "";
     }
 }

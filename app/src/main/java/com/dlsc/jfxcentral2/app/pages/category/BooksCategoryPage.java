@@ -47,7 +47,7 @@ public class BooksCategoryPage extends CategoryPageBase<Book> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<Book> createSearchFilterView() {
         return new BooksFilterView();
     }
 

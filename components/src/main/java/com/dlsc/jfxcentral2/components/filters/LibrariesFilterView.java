@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.components.filters;
 import com.dlsc.jfxcentral.data.model.Library;
 import org.apache.commons.lang3.StringUtils;
 
-public class LibrariesFilterView extends SimpleSearchFilterView<Library> {
+public class LibrariesFilterView extends SimpleModelObjectSearchFilterView<Library> {
 
     public LibrariesFilterView() {
         getStyleClass().add("libraries-filter-view");

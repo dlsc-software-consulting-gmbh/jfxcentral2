@@ -9,7 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class ShowcaseFilterView extends SimpleSearchFilterView<RealWorldApp> {
+public class ShowcaseFilterView extends SimpleModelObjectSearchFilterView<RealWorldApp> {
+
     private static List<FilterItem<RealWorldApp>> domainFilterItems;
 
     public ShowcaseFilterView() {
@@ -20,9 +21,9 @@ public class ShowcaseFilterView extends SimpleSearchFilterView<RealWorldApp> {
             domainFilterItems = getDomainFilterItems();
         }
 
-        getFilterGroups().setAll(
+        getFilterGroups().setAll(List.of(
                 new FilterGroup<>("DOMAIN", domainFilterItems)
-        );
+        ));
 
         setOnSearch(text -> app -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(app.getName(), text)

@@ -14,6 +14,7 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class LibraryEnsembleBox extends PaneBase {
 
@@ -24,7 +25,7 @@ public class LibraryEnsembleBox extends PaneBase {
         headerBox.setTitle("ENSEMBLE / ONLINE DEMOS");
         headerBox.setIcon(MaterialDesign.MDI_EARTH);
 
-        ImageView imageView = new ImageView(LibraryEnsembleBox.class.getResource("jpro-logo.png").toExternalForm());
+        ImageView imageView = new ImageView(Objects.requireNonNull(LibraryEnsembleBox.class.getResource("jpro-logo.png")).toExternalForm());
         imageView.setFitHeight(48);
         imageView.setPreserveRatio(true);
 

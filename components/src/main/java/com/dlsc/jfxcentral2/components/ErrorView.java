@@ -25,7 +25,7 @@ import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class ErrorView extends PaneBase {
-    private static final String DEFAULT_MESSAGE = "We could not reach the page you were searching for Error 404: page not found";
+    private static final String DEFAULT_MESSAGE = "We could not reach the page you were searching for. Error 404: page not found";
     private static final int REPEAT_TIMES = 10;
     private static final DropShadow BLUE_SHADOW = new DropShadow(BlurType.GAUSSIAN, Color.rgb(14, 74, 228, 0.25), 30, 0.2, 0, 0);
 

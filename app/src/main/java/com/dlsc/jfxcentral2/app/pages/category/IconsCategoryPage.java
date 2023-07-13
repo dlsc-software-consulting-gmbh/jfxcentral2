@@ -53,7 +53,7 @@ public class IconsCategoryPage extends CategoryPageBase<IkonliPack> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<IkonliPack> createSearchFilterView() {
         return null;
     }
 

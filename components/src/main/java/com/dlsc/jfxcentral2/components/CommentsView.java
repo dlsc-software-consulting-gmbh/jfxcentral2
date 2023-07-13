@@ -33,6 +33,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class CommentsView extends PaneBase implements NameProvider {
 
@@ -112,7 +113,7 @@ public class CommentsView extends PaneBase implements NameProvider {
         loadMoreButton.visibleProperty().bind(comments.emptyProperty().not());
         loadMoreButton.setOnAction(evt -> {
             User writedUser = new User(
-                    "0", "Dirk Lemmermann", new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png").toExternalForm()),
+                    "0", "Dirk Lemmermann", new Image(Objects.requireNonNull(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png")).toExternalForm()),
                     List.of(new Badge("Champion", IkonUtil.champion),
                             new Badge("Rockstar", IkonUtil.rockstar)));
             comments.addAll(

@@ -47,7 +47,7 @@ public class TutorialsCategoryPage extends CategoryPageBase<Tutorial> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<Tutorial> createSearchFilterView() {
         return new TutorialsFilterView();
     }
 

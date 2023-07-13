@@ -9,14 +9,12 @@ import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -24,7 +22,6 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.util.List;
 
 public class PersonDetailHeader extends DetailHeader<Person> {
-
 
     public PersonDetailHeader(Person person) {
         super(person);

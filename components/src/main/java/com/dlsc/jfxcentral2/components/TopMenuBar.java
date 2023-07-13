@@ -107,7 +107,7 @@ public class TopMenuBar extends PaneBase {
                 super.commit();
 
                 ModelObject selectedItem = getSelectedItem();
-                if (selectedItem != null) {
+                if (selectedItem != null && view.sessionManager() != null) {
                     view.sessionManager().gotoURL(PageUtil.getLink(selectedItem));
                 }
             }

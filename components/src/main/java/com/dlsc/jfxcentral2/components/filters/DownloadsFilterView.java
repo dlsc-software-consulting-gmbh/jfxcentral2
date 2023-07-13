@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.components.filters;
 import com.dlsc.jfxcentral.data.model.Download;
 import org.apache.commons.lang3.StringUtils;
 
-public class DownloadsFilterView extends SimpleSearchFilterView<Download> {
+public class DownloadsFilterView extends SimpleModelObjectSearchFilterView<Download> {
 
     public DownloadsFilterView() {
         getStyleClass().add("downloads-filter-view");

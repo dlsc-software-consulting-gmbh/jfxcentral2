@@ -87,7 +87,7 @@ public class TrayIconManager {
         trayIcon.addSeparator();
 
         MenuItem cssDocs = new MenuItem("CSS Documentation");
-        cssDocs.setOnAction(evt -> showURL("https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/doc-files/cssref.html"));
+        cssDocs.setOnAction(evt -> showURL("https://openjfx.io/javadoc/20/javafx.graphics/javafx/scene/doc-files/cssref.html"));
         trayIcon.addMenuItem(cssDocs);
 
         trayIcon.addSeparator();

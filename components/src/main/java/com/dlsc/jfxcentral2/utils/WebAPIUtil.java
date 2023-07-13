@@ -8,6 +8,7 @@ import javafx.scene.Node;
  * Only used in web pages;
  */
 public class WebAPIUtil {
+
     private WebAPIUtil() {
     }
 

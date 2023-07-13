@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class LegalPage extends PageBase {
 
@@ -69,7 +70,7 @@ public class LegalPage extends PageBase {
     private static String readText(String filePath) {
         String text = "";
         try {
-            URI uri = LegalPage.class.getResource(filePath).toURI();
+            URI uri = Objects.requireNonNull(LegalPage.class.getResource(filePath)).toURI();
             text = Files.readString(Path.of(uri));
         } catch (Exception e) {
             e.printStackTrace();

@@ -24,7 +24,6 @@ public class PersonTileView extends SimpleTileView<Person> {
 
     private ContextMenu contextMenu;
     private MenuButton socialButton;
-    private SocialLinksView socialLinksView;
 
     public PersonTileView(Person person) {
         super(person);
@@ -78,7 +77,7 @@ public class PersonTileView extends SimpleTileView<Person> {
 
         Person person = getData();
 
-        socialLinksView = new SocialLinksView();
+        SocialLinksView socialLinksView = new SocialLinksView();
         socialLinksView.getStyleClass().add("person-social-links-view");
         socialLinksView.setPrefWidth(socialViewWidth);
         socialLinksView.setTwitterUrl(person.getTwitter());

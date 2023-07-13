@@ -44,7 +44,7 @@ public class VideosCategoryPage extends CategoryPageBase<Video> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<Video> createSearchFilterView() {
         return new VideosFilterView();
     }
 

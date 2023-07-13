@@ -88,7 +88,6 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
         String shareTitle = getShareTitle();
 
         if (StringUtils.isNotBlank(shareUrl) && StringUtils.isNotBlank(shareText) && StringUtils.isNotBlank(shareTitle)) {
-            // TODO: make sure facebook url works well
             String url = URLEncoder.encode("https://www.jfx-central.com/" + shareUrl, StandardCharsets.UTF_8);
             String title = URLEncoder.encode(shareTitle, StandardCharsets.UTF_8);
             String titleWithBody = URLEncoder.encode(shareTitle + " " + shareText, StandardCharsets.UTF_8);

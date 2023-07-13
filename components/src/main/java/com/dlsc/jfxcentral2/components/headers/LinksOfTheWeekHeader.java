@@ -10,7 +10,12 @@ import javafx.scene.layout.HBox;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.util.Objects;
+
 public class LinksOfTheWeekHeader extends CategoryHeader  {
+
+    private static final Image BACKGROUND_IMAGE = new Image(Objects.requireNonNull(LinksOfTheWeekHeader.class.getResource("links-of-the-week-banner.jpg")).toExternalForm());
+    private static final Image RSS_IMAGE = new Image(Objects.requireNonNull(LinksOfTheWeekHeader.class.getResource("rss.png")).toExternalForm());
 
     public LinksOfTheWeekHeader() {
         super();
@@ -28,8 +33,12 @@ public class LinksOfTheWeekHeader extends CategoryHeader  {
         label.visibleProperty().bind(titleProperty().isNotEmpty().or(ikonProperty().isNotNull()));
 
         CustomImageView rssImageView = new CustomImageView();
-        rssImageView.setImage(new Image(LinksOfTheWeekHeader.class.getResource("rss.png").toExternalForm()));
+        rssImageView.setImage(RSS_IMAGE);
         LinkUtil.setLink(rssImageView, "/links/rss");
+
+        // TODO: make visible once we have RSS support in place
+        rssImageView.setVisible(false);
+        rssImageView.setManaged(false);
 
         HBox box = new HBox(label, rssImageView);
         box.getStyleClass().add("rss-box");
@@ -38,6 +47,6 @@ public class LinksOfTheWeekHeader extends CategoryHeader  {
         setContent(box);
         setTitle("Links of the Week");
         setIkon(IkonUtil.getModelIkon(LinksOfTheWeek.class));
-        setBackgroundImage(new Image(LinksOfTheWeekHeader.class.getResource("links-of-the-week-banner.jpg").toExternalForm()));
+        setBackgroundImage(BACKGROUND_IMAGE);
     }
 }

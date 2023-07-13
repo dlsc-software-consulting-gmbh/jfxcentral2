@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.components.filters;
 import com.dlsc.jfxcentral.data.model.Company;
 import org.apache.commons.lang3.StringUtils;
 
-public class CompaniesFilterView extends SimpleSearchFilterView<Company> {
+public class CompaniesFilterView extends SimpleModelObjectSearchFilterView<Company> {
 
     public CompaniesFilterView() {
         getStyleClass().add("companies-filter-view");

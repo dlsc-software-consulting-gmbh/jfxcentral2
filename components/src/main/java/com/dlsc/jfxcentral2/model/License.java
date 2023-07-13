@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.model;
 
 public class License {
+
     private String type;
     private String version;
     private String url;

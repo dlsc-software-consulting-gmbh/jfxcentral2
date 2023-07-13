@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.model;
 
 public class CreditModel {
+
     private String name;
     private String id;
     private String version;

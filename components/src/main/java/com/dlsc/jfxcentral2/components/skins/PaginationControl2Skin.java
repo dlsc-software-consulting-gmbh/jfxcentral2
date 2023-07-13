@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
@@ -181,7 +182,7 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
             cacheScrollPane = findScrollPaneParent(control);
         }
         if (cacheScrollPane != null && cacheScrollPane.getContent() != null) {
-            javafx.application.Platform.runLater(() -> scrollToPagination());
+            Platform.runLater(this::scrollToPagination);
         }
     }
 

@@ -47,7 +47,7 @@ public class TipCategoryPage extends CategoryPageBase<Tip> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<Tip> createSearchFilterView() {
         return new TipsAndTricksFilterView();
     }
 

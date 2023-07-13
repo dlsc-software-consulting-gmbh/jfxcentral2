@@ -52,7 +52,7 @@ public class DownloadsCategoryPage extends CategoryPageBase<Download> {
         };
     }
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<Download> createSearchFilterView() {
         return new DownloadsFilterView();
     }
 

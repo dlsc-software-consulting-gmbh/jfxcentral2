@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class PeopleFilterView extends SimpleSearchFilterView<Person> {
+public class PeopleFilterView extends SimpleModelObjectSearchFilterView<Person> {
     public PeopleFilterView() {
         getStyleClass().add("people-filter-view");
         setSearchPromptText("Search for a JFX person");
@@ -33,7 +33,5 @@ public class PeopleFilterView extends SimpleSearchFilterView<Person> {
         setOnSearch(text -> person -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(person.getName(), text)
                 || StringUtils.containsIgnoreCase(person.getDescription(), text));
-
-
     }
 }

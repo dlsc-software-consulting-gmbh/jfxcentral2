@@ -10,7 +10,11 @@ import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.util.Objects;
+
 public class BookTileView extends PreviewTileView<Book> {
+
+    private static final Image AMAZON_IMAGE = new Image(Objects.requireNonNull(BookTileView.class.getResource("/com/dlsc/jfxcentral2/images/amazon.png")).toExternalForm());
 
     public BookTileView(Book book) {
         super(book);
@@ -26,7 +30,6 @@ public class BookTileView extends PreviewTileView<Book> {
 
         if (StringUtils.isNotBlank(book.getAmazonASIN())) {
             setButton2Text("amazon");
-            Image AMAZON_IMAGE = new Image(BookTileView.class.getResource("/com/dlsc/jfxcentral2/images/amazon.png").toExternalForm());
             setButton2Graphic(new ImageView(AMAZON_IMAGE));
             setButton2Visible(true);
             LinkUtil.setExternalLink(getButton2(), "https://www.amazon.com/dp/" + book.getAmazonASIN(), book.getName());

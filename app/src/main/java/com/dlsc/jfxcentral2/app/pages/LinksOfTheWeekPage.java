@@ -25,7 +25,7 @@ import java.util.List;
 
 public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
 
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 
     public LinksOfTheWeekPage(ObjectProperty<Size> size) {
         super(size);
@@ -95,7 +95,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<LinksOfTheWeek> createSearchFilterView() {
         return null;
     }
 
@@ -107,8 +107,7 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
                 .stream()
                 .sorted(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed())
                 .limit(20)
-                .map(links -> new MenuView.Item(DATE_FORMATTER.format(links.getCreatedOn()), null, null,
-                        () -> linksOfTheWeekView.goToPage(linksOfTheWeek.size()-linksOfTheWeek.indexOf(links)-1)))
+                .map(links -> new MenuView.Item(DATE_FORMATTER.format(links.getCreatedOn()), null, null, () -> linksOfTheWeekView.goToPage(linksOfTheWeek.size()-linksOfTheWeek.indexOf(links)-1)))
                 .toList();
     }
 }

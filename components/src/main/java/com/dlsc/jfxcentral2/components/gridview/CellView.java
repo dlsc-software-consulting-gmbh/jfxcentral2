@@ -8,19 +8,20 @@ import javafx.css.PseudoClass;
 import java.util.Objects;
 
 public class CellView<T> extends PaneBase {
+
     private final T item;
     private static final PseudoClass SELECTED_PSEUDO_CLASS = PseudoClass.getPseudoClass("selected");
 
     public CellView(T item) {
         getStyleClass().add("cell-view");
+
         this.item = Objects.requireNonNull(item, "item can not be null");
 
         activeSelectedPseudoClass();
+
         selectedProperty().addListener(it -> activeSelectedPseudoClass());
 
-        setOnMousePressed(event -> {
-            setSelected(!isSelected());
-        });
+        setOnMousePressed(event -> setSelected(!isSelected()));
     }
 
     private void activeSelectedPseudoClass() {

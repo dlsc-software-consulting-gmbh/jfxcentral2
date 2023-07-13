@@ -9,6 +9,7 @@ public class IkonCellView extends CellView<Ikon> {
 
     public IkonCellView(Ikon item) {
         super(item);
+
         getStyleClass().add("ikon-cell-view");
 
         FontIcon fontIcon = new FontIcon(item);
@@ -23,7 +24,5 @@ public class IkonCellView extends CellView<Ikon> {
         contentBox.getStyleClass().add("content-box");
         ikonLabel.setMaxHeight(Double.MAX_VALUE);
         getChildren().setAll(contentBox);
-
     }
-
 }

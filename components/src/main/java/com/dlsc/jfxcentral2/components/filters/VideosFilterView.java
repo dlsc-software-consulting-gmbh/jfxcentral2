@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
-public class VideosFilterView extends SimpleSearchFilterView<Video> {
+public class VideosFilterView extends SimpleModelObjectSearchFilterView<Video> {
 
     private static List<FilterItem<Video>> typeFilterItems;
     private static List<FilterItem<Video>> eventFilterItems;
@@ -19,6 +19,7 @@ public class VideosFilterView extends SimpleSearchFilterView<Video> {
 
     public VideosFilterView() {
         getStyleClass().add("videos-filter-view");
+
         setSortGroup(null);
         setSearchPromptText("Search for a video");
 
@@ -34,17 +35,16 @@ public class VideosFilterView extends SimpleSearchFilterView<Video> {
             domainFilterItems = getVideoFilterItems(Video::getDomain, createFilterPredicate(Video::getDomain));
         }
 
-        getFilterGroups().setAll(
+        getFilterGroups().setAll(List.of(
                 new FilterGroup<>("Type", typeFilterItems),
                 new FilterGroup<>("Event", eventFilterItems),
                 new FilterGroup<>("Domain", domainFilterItems)
-        );
+        ));
 
         setOnSearch(text -> video -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(video.getName(), text)
                 || StringUtils.containsIgnoreCase(video.getDescription(), text)
         );
-
     }
 
     private BiPredicate<Video, String> createFilterPredicate(Function<Video, String> attrGetter) {

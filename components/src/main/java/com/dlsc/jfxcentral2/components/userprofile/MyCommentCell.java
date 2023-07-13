@@ -20,10 +20,12 @@ import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class MyCommentCell extends PaneBase {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final Image PERSON_AVATAR_IMAGE = new Image(Objects.requireNonNull(MyCommentCell.class.getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png")).toExternalForm());
 
     public MyCommentCell() {
         getStyleClass().add("my-comment-cell");
@@ -105,9 +107,8 @@ public class MyCommentCell extends PaneBase {
 
         commentProperty().addListener((ob, ov, comment) -> {
             if (comment != null) {
-                //avatarView.setImage(ImageManager.getInstance().xxx);
-                //add test image
-                avatarView.setImage(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png").toExternalForm()));
+                // TODO: avatarView.setImage(ImageManager.getInstance().xxx);
+                avatarView.setImage(PERSON_AVATAR_IMAGE);
                 if (comment.isDeleted()) {
                     commentLabel.setText("Comment Deleted");
                     buttonsBox.setVisible(false);

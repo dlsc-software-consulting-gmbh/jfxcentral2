@@ -52,7 +52,7 @@ public class ToolsCategoryPage extends CategoryPageBase<Tool> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<Tool> createSearchFilterView() {
         return new ToolsFilterView();
     }
 

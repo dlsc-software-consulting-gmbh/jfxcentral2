@@ -52,7 +52,7 @@ public class BlogsCategoryPage extends CategoryPageBase<Blog> {
     }
 
     @Override
-    protected SearchFilterView createSearchFilterView() {
+    protected SearchFilterView<Blog> createSearchFilterView() {
         return new BlogsFilterView();
     }
 

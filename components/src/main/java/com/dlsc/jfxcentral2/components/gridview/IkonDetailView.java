@@ -1,7 +1,10 @@
 package com.dlsc.jfxcentral2.components.gridview;
 
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.*;
+import com.dlsc.jfxcentral2.utils.FXUtil;
+import com.dlsc.jfxcentral2.utils.FilesUtil;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
@@ -11,7 +14,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -28,6 +36,7 @@ public class IkonDetailView extends DetailView<Ikon> {
 
     public IkonDetailView(Ikon item) {
         super(item);
+
         getStyleClass().add("ikon-detail-view");
 
         if (item.getClass().getSimpleName().equals("PaymentFont")) {
@@ -125,6 +134,7 @@ public class IkonDetailView extends DetailView<Ikon> {
             textField.requestFocus();
             FXUtil.copyToClipboard(contentText);
         });
+
         HBox box = new HBox(titleLabel, textField, button);
         box.getStyleClass().add("row-box");
         flowPane.getChildren().add(box);

@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.components.filters;
 import com.dlsc.jfxcentral.data.model.Blog;
 import org.apache.commons.lang3.StringUtils;
 
-public class BlogsFilterView extends SimpleSearchFilterView<Blog> {
+public class BlogsFilterView extends SimpleModelObjectSearchFilterView<Blog> {
 
     public BlogsFilterView() {
         getStyleClass().add("blogs-filter-view");

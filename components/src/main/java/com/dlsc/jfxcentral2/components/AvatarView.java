@@ -187,8 +187,7 @@ public class AvatarView extends ControlBase {
     private static class StyleableProperties {
 
         private static final CssMetaData<AvatarView, Number> AVATAR_SIZE =
-                new CssMetaData<>("-fx-avatar-size",
-                        SizeConverter.getInstance(), DEFAULT_AVATAR_SIZE) {
+                new CssMetaData<>("-fx-avatar-size", SizeConverter.getInstance(), DEFAULT_AVATAR_SIZE) {
                     @Override
                     public boolean isSettable(AvatarView n) {
                         return !n.avatarSize.isBound();
@@ -201,8 +200,7 @@ public class AvatarView extends ControlBase {
                 };
 
         private static final CssMetaData<AvatarView, Type> TYPE =
-                new CssMetaData<>("-fx-avatar-type",
-                        new EnumConverter<>(Type.class), DEFAULT_TYPE) {
+                new CssMetaData<>("-fx-avatar-type", new EnumConverter<>(Type.class), DEFAULT_TYPE) {
                     @Override
                     public boolean isSettable(AvatarView control) {
                         return !control.type.isBound();
@@ -215,8 +213,7 @@ public class AvatarView extends ControlBase {
                 };
 
         private static final CssMetaData<AvatarView, Number> ROUND_SIZE =
-                new CssMetaData<>("-fx-round-size",
-                        SizeConverter.getInstance(), DEFAULT_ROUND_SIZE) {
+                new CssMetaData<>("-fx-round-size", SizeConverter.getInstance(), DEFAULT_ROUND_SIZE) {
                     @Override
                     public boolean isSettable(AvatarView n) {
                         return !n.roundSize.isBound();
@@ -228,8 +225,8 @@ public class AvatarView extends ControlBase {
                     }
                 };
 
-        private static final CssMetaData<AvatarView, Boolean> SMOOTH = new CssMetaData<>(
-                "-fx-smooth", BooleanConverter.getInstance(), DEFAULT_SMOOTH) {
+        private static final CssMetaData<AvatarView, Boolean> SMOOTH =
+                new CssMetaData<>("-fx-smooth", BooleanConverter.getInstance(), DEFAULT_SMOOTH) {
 
             @Override
             public boolean isSettable(AvatarView control) {

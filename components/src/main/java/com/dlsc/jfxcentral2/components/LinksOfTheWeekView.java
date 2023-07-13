@@ -120,8 +120,4 @@ public class LinksOfTheWeekView extends PaneBase {
     public ReadOnlyIntegerProperty selectedIndexProperty() {
         return selectedIndex.getReadOnlyProperty();
     }
-
-    private void setSelectedIndex(int selectedIndex) {
-        this.selectedIndex.set(selectedIndex);
-    }
 }
