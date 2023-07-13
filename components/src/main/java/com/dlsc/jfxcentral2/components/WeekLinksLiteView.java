@@ -1,7 +1,10 @@
 package com.dlsc.jfxcentral2.components;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +12,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class WeekLinksLiteView extends PaneBase {
 
@@ -34,7 +40,16 @@ public class WeekLinksLiteView extends PaneBase {
 
         markdownView = new CustomMarkdownView();
         markdownView.getStyleClass().add("md-view");
-        markdownView.mdStringProperty().bind(mdStringProperty());
+        markdownView.mdStringProperty().bind(Bindings.createStringBinding(() -> {
+            LinksOfTheWeek linksOfTheWeek = getLinksOfTheWeek();
+            if (linksOfTheWeek == null) {
+                return "Error loading links of the week.";
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+            String date = String.format("## Posted: %s%n%n", formatter.format(linksOfTheWeek.getCreatedOn()));
+            String mdStr = DataRepository2.getInstance().getLinksOfTheWeekReadMe(linksOfTheWeek);
+            return date + mdStr;
+        }, linksOfTheWeekProperty()));
 
         contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");
@@ -71,17 +86,17 @@ public class WeekLinksLiteView extends PaneBase {
         getChildren().setAll(contentBox);
     }
 
-    private final StringProperty mdString = new SimpleStringProperty(this,"mdString");
+    private final ObjectProperty<LinksOfTheWeek> linksOfTheWeek = new SimpleObjectProperty<>(this, "linksOfTheWeek");
 
-    public String getMdString() {
-        return mdString.get();
+    public LinksOfTheWeek getLinksOfTheWeek() {
+        return linksOfTheWeek.get();
     }
 
-    public StringProperty mdStringProperty() {
-        return mdString;
+    public ObjectProperty<LinksOfTheWeek> linksOfTheWeekProperty() {
+        return linksOfTheWeek;
     }
 
-    public void setMdString(String mdString) {
-        this.mdString.set(mdString);
+    public void setLinksOfTheWeek(LinksOfTheWeek linksOfTheWeek) {
+        this.linksOfTheWeek.set(linksOfTheWeek);
     }
 }
