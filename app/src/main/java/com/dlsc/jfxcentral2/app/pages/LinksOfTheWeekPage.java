@@ -19,6 +19,7 @@ import org.kordamp.ikonli.Ikon;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -100,13 +101,14 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
 
     protected List<MenuView.Item> createMenuItems(LinksOfTheWeekView linksOfTheWeekView) {
         List<LinksOfTheWeek> linksOfTheWeek = DataRepository2.getInstance().getLinksOfTheWeek();
-        linksOfTheWeek.sort(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed());
+        List<LinksOfTheWeek> weeks  = new ArrayList<>(linksOfTheWeek);
 
-        return linksOfTheWeek
+        return weeks
                 .stream()
-                .map(links -> new MenuView.Item(DATE_FORMATTER.format(links.getCreatedOn()), null, null,
-                        () -> linksOfTheWeekView.goToPage(linksOfTheWeek.indexOf(links))))
+                .sorted(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed())
                 .limit(20)
+                .map(links -> new MenuView.Item(DATE_FORMATTER.format(links.getCreatedOn()), null, null,
+                        () -> linksOfTheWeekView.goToPage(linksOfTheWeek.size()-linksOfTheWeek.indexOf(links)-1)))
                 .toList();
     }
 }

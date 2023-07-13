@@ -42,7 +42,7 @@ public class StartPage extends PageBase {
 
         WeekLinksLiteView weekLinksLiteView = new WeekLinksLiteView();
         weekLinksLiteView.sizeProperty().bind(sizeProperty());
-        weekLinksLiteView.setMdString(DataRepository2.getInstance().getLinksOfTheWeekReadMe(linksOfTheWeek.get(linksOfTheWeek.size() - 1)));
+        weekLinksLiteView.setLinksOfTheWeek(linksOfTheWeek.get(linksOfTheWeek.size() - 1));
 
         // website changes
         List<QuickLink> changes = QuickLinksGenerator.generateWebsiteChangesQuickLinks(sizeProperty());
