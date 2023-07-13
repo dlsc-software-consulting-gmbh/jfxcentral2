@@ -121,7 +121,7 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
             if (days <= 0) {
                 return between.toHours() + " hours";
             } else if (days < 100) {
-                return days + (days > 1 ? " days" : "day");
+                return days + (days > 1 ? " days" : " day");
             }
 
             return dateTimeFormatter.format(zonedDateTime);
