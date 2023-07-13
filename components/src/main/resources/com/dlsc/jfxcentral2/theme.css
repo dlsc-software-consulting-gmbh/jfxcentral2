@@ -8089,9 +8089,8 @@
 }
 
 .team-view .member-cell-view .effect-circle {
-    -fx-stroke: transparent;
-    -fx-fill: #808080;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0.15, 0, 0);
+    -fx-stroke-width: 2px;
+    -fx-stroke: -grey-50;
 }
 
 .team-view .member-cell-view:md-lg {
