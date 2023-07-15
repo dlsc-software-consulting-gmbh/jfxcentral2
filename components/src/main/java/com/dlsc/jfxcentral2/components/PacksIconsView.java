@@ -6,6 +6,8 @@ import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.components.gridview.IkonGridView;
 import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.IkonliPackTileView;
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -18,6 +20,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -131,7 +134,6 @@ public class PacksIconsView extends PaneBase {
             }
         }, scopeComboBox.getSelectionModel().selectedItemProperty(), searchField.textProperty());
 
-
         BorderPane gridWrapper = new BorderPane();
         gridWrapper.centerProperty().bind(gridViewNodeBinding);
         gridWrapper.getStyleClass().add("grid-wrapper");
@@ -139,7 +141,30 @@ public class PacksIconsView extends PaneBase {
         Region spacer = new Region();
         spacer.getStyleClass().add("view-spacer");
 
-        VBox contentBox = new VBox(topWrapper, spacer, gridWrapper);
+        ToggleButton collapsibleButton = new ToggleButton();
+        collapsibleButton.getStyleClass().add("collapsible-button");
+        collapsibleButton.setMaxWidth(Double.MAX_VALUE);
+        Header header = new Header();
+        header.setTitle("FILTERS");
+        header.setIcon(JFXCentralIcon.CHEVRON_TOP);
+        collapsibleButton.setGraphic(header);
+
+        collapsibleButton.setSelected(true);
+        topWrapper.managedProperty().bind(topWrapper.visibleProperty());
+        topWrapper.visibleProperty().bind(Bindings.createObjectBinding(() -> {
+            if (isSmall()) {
+                return collapsibleButton.isSelected();
+            } else {
+                return true;
+            }
+        }, collapsibleButton.selectedProperty(), sizeProperty()));
+        collapsibleButton.managedProperty().bind(collapsibleButton.visibleProperty());
+        collapsibleButton.visibleProperty().bind(sizeProperty().map(Size::isSmall));
+        VBox contentBoxWrapper = new VBox(collapsibleButton, topWrapper);
+        contentBoxWrapper.getStyleClass().add("content-box-wrapper");
+        contentBoxWrapper.setMaxWidth(Double.MAX_VALUE);
+
+        VBox contentBox = new VBox(contentBoxWrapper, spacer, gridWrapper);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
         updateUI();

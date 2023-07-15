@@ -182,7 +182,7 @@ public class SearchFilterView<T> extends PaneBase {
         contentBox.getChildren().setAll(searchField, filtersBox, spacer);
         contentBox.getChildren().addAll(getExtraNodes());
 
-        if (isSmall() && getOnSearch() == null) {
+        if (isSmall()) {
             ToggleButton collapsibleButton = new ToggleButton();
             collapsibleButton.getStyleClass().add("collapsible-button");
             collapsibleButton.setMaxWidth(Double.MAX_VALUE);
