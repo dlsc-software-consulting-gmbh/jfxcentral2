@@ -38,8 +38,7 @@ public class Header extends HBox {
             }
             evt.consume();
         });
-
-
+        wrapper.mouseTransparentProperty().bind(Bindings.createBooleanBinding(() -> getOnIconClickAction() == null, onIconClickActionProperty()));
         getChildren().setAll(title, new Spacer(), wrapper);
     }
 

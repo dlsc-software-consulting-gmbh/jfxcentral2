@@ -62,6 +62,7 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
 
             Button loadMoreButton = new Button("Load More");
             loadMoreButton.getStyleClass().addAll("blue-button", "load-more-button");
+            loadMoreButton.setFocusTraversable(false);
             VBox.setMargin(loadMoreButton, new Insets(20, 0, 0, 0));
             contentBox.getChildren().add(loadMoreButton);
             loadMoreButton.setOnAction(event -> {
