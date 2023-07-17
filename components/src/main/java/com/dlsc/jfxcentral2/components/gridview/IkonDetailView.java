@@ -1,14 +1,8 @@
 package com.dlsc.jfxcentral2.components.gridview;
 
-import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.FXUtil;
-import com.dlsc.jfxcentral2.utils.FilesUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
-import com.jpro.webapi.HTMLView;
-import com.jpro.webapi.WebAPI;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -16,10 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import one.jpro.routing.CopyUtil;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -55,21 +48,14 @@ public class IkonDetailView extends DetailView<Ikon> {
         previewPane.getStyleClass().add("ikon-preview-wrapper");
         HBox.setHgrow(previewPane, Priority.ALWAYS);
 
-        Node infoNode = WebAPI.isBrowser() ? createInfoNodeForWeb(previewPane) : createInfoNodeForFX();
+        Node infoNode = createInfoNode();
         StackPane.setAlignment(infoNode, Pos.CENTER);
         detailContent.getChildren().setAll(previewPane, infoNode);
         detailContent.getStyleClass().add("detail-content");
         getChildren().setAll(detailContent);
     }
 
-    @Override
-    protected void layoutBySize() {
-        if (WebAPI.isBrowser()) {
-            detailContent.getChildren().set(1, createInfoNodeForWeb(previewPane));
-        }
-    }
-
-    private FlowPane createInfoNodeForFX() {
+    private FlowPane createInfoNode() {
         FlowPane flowPane = new FlowPane();
         flowPane.getStyleClass().add("ikon-info-grid-pane");
         HBox.setHgrow(flowPane, Priority.ALWAYS);
@@ -83,57 +69,22 @@ public class IkonDetailView extends DetailView<Ikon> {
         return flowPane;
     }
 
-    public Node createInfoNodeForWeb(Pane previewPane) {
-        HTMLView view = new HTMLView();
-
-        String str = FilesUtil.readText("/com/dlsc/jfxcentral2/htmlviews/IkonDetailView.html");
-        str = str.replace("${width}", getSize() == Size.SMALL ? "width: 100%" : "width: calc(50% - 10px)")
-                .replace("${iconLiteral}", ikonInfo.iconLiteral())
-                .replace("${cssCode}", ikonInfo.cssCode().replace("\"", "&#34;"))
-                .replace("${javaCode}", ikonInfo.javaCode())
-                .replace("${unicode}", ikonInfo.unicode())
-                .replace("${mavenInfo}", ikonInfo.mavenInfo())
-                .replace("${gradleInfo}", ikonInfo.gradleInfo());
-
-        view.setContent(str);
-        view.maxWidthProperty().bind(view.prefWidthProperty());
-        view.minWidthProperty().bind(view.prefWidthProperty());
-        view.maxHeightProperty().bind(view.prefHeightProperty());
-        view.minHeightProperty().bind(view.prefHeightProperty());
-        view.prefHeightProperty().bind(sizeProperty().map(size -> isSmall() ? 230 : 115));
-        view.parentProperty().addListener(it -> {
-            Region parent = (Region) view.getParent();
-            if (parent != null) {
-                DoubleBinding widthBinding = Bindings.createDoubleBinding(() -> parent.getWidth() - parent.getInsets().getLeft() - parent.getInsets().getRight(), parent.widthProperty(), parent.insetsProperty());
-                view.prefWidthProperty().bind(widthBinding.subtract(previewPane.widthProperty()).subtract(detailContent.spacingProperty()));
-            }
-        });
-
-        return view;
-    }
-
     private void addRow(FlowPane flowPane, String title, String contentText) {
         Label titleLabel = new Label(title);
         titleLabel.getStyleClass().addAll("title");
         titleLabel.managedProperty().bind(titleLabel.visibleProperty());
-
-        TextField textField = new TextField(contentText);
-        textField.setFocusTraversable(false);
-        textField.setEditable(false);
-        textField.setContextMenu(null);
-        textField.managedProperty().bind(textField.visibleProperty());
 
         Button button = new Button();
         button.setGraphic(new FontIcon(IkonUtil.copy));
         button.getStyleClass().addAll("fill-button", "copy-button");
         button.managedProperty().bind(button.visibleProperty());
 
-        button.setOnAction(event -> {
-            event.consume();
-            textField.selectAll();
-            textField.requestFocus();
-            FXUtil.copyToClipboard(contentText);
-        });
+        TextField textField = new TextField(contentText);
+        textField.setFocusTraversable(false);
+        textField.setEditable(false);
+        textField.setContextMenu(null);
+        textField.managedProperty().bind(textField.visibleProperty());
+        CopyUtil.setCopyOnClick(button, contentText);
 
         HBox box = new HBox(titleLabel, textField, button);
         box.getStyleClass().add("row-box");

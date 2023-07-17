@@ -7,12 +7,8 @@ import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.NameProvider;
-import com.dlsc.jfxcentral2.utils.FXUtil;
-import com.dlsc.jfxcentral2.utils.FilesUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
-import com.jpro.webapi.HTMLView;
-import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -25,6 +21,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.CopyUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -63,13 +60,13 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         headerBox.setTitle("COORDINATES");
         headerBox.setIcon(MaterialDesign.MDI_COMPASS);
 
-        Node bodyNode = WebAPI.isBrowser() ? createInfoNodeForWeb(versionProperty) : createInfoNodeForFX(versionProperty);
+        Node bodyNode = createInfoNode(versionProperty);
         contentBox.getChildren().setAll(headerBox, bodyNode);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
     }
 
-    private VBox createInfoNodeForFX(StringProperty versionProperty) {
+    private VBox createInfoNode(StringProperty versionProperty) {
         TextArea repositoryCoordinatesArea = new TextArea(StringUtil.LOADING_TIPS);
         repositoryCoordinatesArea.getStyleClass().add("coordinates-text-area");
         repositoryCoordinatesArea.setEditable(false);
@@ -101,13 +98,6 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         Button copyButton = new Button();
         copyButton.getStyleClass().addAll("blue-button", "copy-button");
         copyButton.setGraphic(new FontIcon(IkonUtil.copy));
-        copyButton.setOnAction(evt -> {
-            evt.consume();
-            repositoryCoordinatesArea.selectAll();
-            repositoryCoordinatesArea.requestFocus();
-            String content = repositoryCoordinatesArea.getText();
-            FXUtil.copyToClipboard(content);
-        });
 
         HBox buttonsBox = new HBox(mavenButton, gradleButton, new Spacer());
         buttonsBox.getStyleClass().add("buttons-box");
@@ -116,6 +106,8 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         CustomMarkdownView descriptionLabel = new CustomMarkdownView();
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.mdStringProperty().bind(descriptionProperty());
+        CopyUtil.setCopyOnClick(copyButton, repositoryCoordinatesArea.getText());
+        repositoryCoordinatesArea.textProperty().addListener(it -> CopyUtil.setCopyOnClick(copyButton, repositoryCoordinatesArea.getText()));
 
         VBox bodyBox = new VBox(descriptionLabel, buttonsBox, repositoryCoordinatesArea);
         bodyBox.getStyleClass().add("body-box");
@@ -134,33 +126,6 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
                 "    <artifactId>" + artifactId + "</artifactId>" + LINED_SEPARATOR +
                 "    <version>" + version + "</version>" + LINED_SEPARATOR +
                 "</dependency>";
-    }
-
-    private Node createInfoNodeForWeb(StringProperty versionProperty) {
-        HTMLView view = new HTMLView();
-
-        String str = FilesUtil.readText("/com/dlsc/jfxcentral2/htmlviews/LibraryCoordinatesView.html");
-
-        view.setContent(str.replace("${mavenInfo}", StringUtil.LOADING_TIPS)
-                .replace("${gradleInfo}", StringUtil.LOADING_TIPS));
-
-        if (isAvailable) {
-            view.contentProperty().bind(Bindings.createStringBinding(() -> {
-                String version = versionProperty.get();
-                if (StringUtils.isEmpty(version)) {
-                    return str.replace("${mavenInfo}", StringUtil.LOADING_TIPS)
-                            .replace("${gradleInfo}", StringUtil.LOADING_TIPS);
-                } else if (StringUtils.equalsIgnoreCase("unknown", version)) {
-                    return str.replace("${mavenInfo}", "WAIT TIMEOUT...")
-                            .replace("${gradleInfo}", "WAIT TIMEOUT...");
-                }
-                return str.replace("${mavenInfo}", getMavenInfo(version))
-                        .replace("${gradleInfo}", getGradleInfo(version));
-            }, versionProperty));
-        }
-
-        view.setPrefHeight(180);
-        return view;
     }
 
     private final StringProperty description = new SimpleStringProperty(this, "description");
