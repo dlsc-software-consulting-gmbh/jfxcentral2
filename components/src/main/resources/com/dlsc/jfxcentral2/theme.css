@@ -2313,10 +2313,6 @@
     -fx-font-size: 20px;
 }
 
-.quick-link-view.browser:hover {
-    -fx-effect: innershadow(gaussian, rgba(14, 74, 228, 0.25), 20, 0.2, 0, 0);
-}
-
 .quick-link-view:hover {
     -fx-effect: -blue-shadow;
 }
@@ -2325,10 +2321,6 @@
     -fx-background-position: center;
     -fx-background-size: cover;
     -fx-cursor: default;
-}
-
-.quick-link-view.empty-link-view.browser:hover {
-    -fx-effect: null;
 }
 
 .quick-link-view.empty-link-view {
