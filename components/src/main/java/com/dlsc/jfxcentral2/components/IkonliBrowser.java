@@ -15,8 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -25,6 +23,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
+import one.jpro.routing.CopyUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.control.GridCell;
 import org.controlsfx.control.GridView;
@@ -124,11 +123,9 @@ public class IkonliBrowser extends PaneBase {
         Button copy = new Button();
         copy.setGraphic(FontIcon.of(MaterialDesign.MDI_CONTENT_COPY, Color.WHITE));
         copy.disableProperty().bind(selection.textProperty().isEmpty());
-        copy.setOnAction(e -> {
-            Clipboard clipboard = Clipboard.getSystemClipboard();
-            ClipboardContent content = new ClipboardContent();
-            content.putString(selection.getText());
-            clipboard.setContent(content);
+
+        selection.textProperty().addListener(it -> {
+            CopyUtil.setCopyOnClick(copy, selection.getText());
         });
 
         searchField = new IkonSearchField();
