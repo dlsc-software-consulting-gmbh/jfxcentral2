@@ -107,6 +107,8 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         CustomMarkdownView descriptionLabel = new CustomMarkdownView();
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.mdStringProperty().bind(descriptionProperty());
+
+        // copying to clipboard
         CopyUtil.setCopyOnClick(copyButton, repositoryCoordinatesArea.getText());
         repositoryCoordinatesArea.textProperty().addListener(it -> CopyUtil.setCopyOnClick(copyButton, repositoryCoordinatesArea.getText()));
 
