@@ -45,6 +45,10 @@
     <link rel="icon" sizes="192x192" href="favicon-192.png">
 
     <style type="text/css">
+        body {
+          overflow-x: hidden;
+        }
+
         .yt {
             position: relative;
             display: block;

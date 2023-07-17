@@ -11,6 +11,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import one.jpro.routing.HistoryEntry;
 import one.jpro.routing.sessionmanager.SessionManager;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
@@ -63,12 +64,12 @@ public class NavigationView extends HBox {
         getChildren().setAll(refreshButton, back, forward);
     }
 
-    private void showMenu(Button back, ObservableList<String> historyBackward) {
+    private void showMenu(Button back, ObservableList<HistoryEntry> historyBackward) {
         ContextMenu menu = new ContextMenu();
         for (int i = 0; i < Math.min(20, historyBackward.size()); i++) {
-            String url = historyBackward.get(i);
-            MenuItem item = new MenuItem(url);
-            item.setOnAction(evt -> sessionManager.gotoURL(url));
+            HistoryEntry url = historyBackward.get(i);
+            MenuItem item = new MenuItem(url.title());
+            item.setOnAction(evt -> sessionManager.gotoURL(url.path()));
             menu.getItems().add(item);
         }
         menu.show(back, Side.BOTTOM, 0, 0);
