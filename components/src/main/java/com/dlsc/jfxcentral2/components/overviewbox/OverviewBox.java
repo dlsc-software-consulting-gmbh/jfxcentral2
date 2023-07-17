@@ -35,10 +35,13 @@ public class OverviewBox<T extends ModelObject> extends PaneBase implements Name
 
         topWrapper = new StackPane();
         topWrapper.getStyleClass().add("top-wrapper");
+        topWrapper.managedProperty().bind(topWrapper.visibleProperty());
 
         CustomMarkdownView markdownView = new CustomMarkdownView();
         markdownView.mdStringProperty().bind(markdownProperty());
         markdownView.baseURLProperty().bind(baseURLProperty());
+        markdownView.managedProperty().bind(markdownView.visibleProperty());
+        markdownView.visibleProperty().bind(markdownView.mdStringProperty().isNotEmpty());
 
         bottomWrapper = new StackPane();
         bottomWrapper.getStyleClass().add("bottom-wrapper");
@@ -74,6 +77,7 @@ public class OverviewBox<T extends ModelObject> extends PaneBase implements Name
         Node topNode = createTopNode();
         if (topNode != null) {
             topWrapper.getChildren().add(topNode);
+            topWrapper.visibleProperty().bind(topNode.visibleProperty());
         }
 
         bottomWrapper.getChildren().clear();

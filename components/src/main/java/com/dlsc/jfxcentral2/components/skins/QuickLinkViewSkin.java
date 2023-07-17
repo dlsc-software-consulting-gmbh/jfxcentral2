@@ -9,7 +9,6 @@ import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
 import com.dlsc.jfxcentral2.model.SenaptQuickLink;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.jpro.webapi.WebAPI;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -29,17 +28,13 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
     public QuickLinkViewSkin(QuickLinkView control) {
         super(control);
 
-        if (!WebAPI.isBrowser()) {
-            control.hoverProperty().addListener((observable, oldValue, isHover) -> {
-                if (isHover) {
-                    control.toFront();
-                } else {
-                    control.toBack();
-                }
-            });
-        }else {
-            control.getStyleClass().add("browser");
-        }
+        control.hoverProperty().addListener((observable, oldValue, isHover) -> {
+            if (isHover) {
+                control.toFront();
+            } else {
+                control.toBack();
+            }
+        });
 
         layoutBySize();
     }

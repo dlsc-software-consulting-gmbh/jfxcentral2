@@ -69,7 +69,6 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         nameLabel.getStyleClass().add("name");
         nameLabel.setWrapText(true);
         nameLabel.textAlignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(TextAlignment.LEFT).otherwise(TextAlignment.CENTER));
-        nameLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         Label summaryLabel = new Label();
         summaryLabel.visibleProperty().bind(summaryLabel.textProperty().isNotEmpty());
