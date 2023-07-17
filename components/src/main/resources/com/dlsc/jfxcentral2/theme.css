@@ -5213,6 +5213,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-font-family: "Roboto Condensed";
+    -fx-cursor: hand;
 }
 
 .collapsible-button > .header {
