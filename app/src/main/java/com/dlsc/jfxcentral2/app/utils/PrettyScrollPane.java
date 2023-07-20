@@ -245,7 +245,7 @@ public class PrettyScrollPane extends ScrollPane {
     private static final int SHADOW_HEIGHT = 30;
 
 
-    private final ObjectProperty<Insets> verticalScrollBarPadding = new SimpleObjectProperty<>(this, "verticalScrollBarPadding", new Insets(5));
+    private final ObjectProperty<Insets> verticalScrollBarPadding = new SimpleObjectProperty<>(this, "verticalScrollBarPadding", new Insets(3));
 
     public Insets getVerticalScrollBarPadding() {
         return verticalScrollBarPadding.get();
@@ -259,7 +259,7 @@ public class PrettyScrollPane extends ScrollPane {
         this.verticalScrollBarPadding.set(verticalScrollBarPadding);
     }
 
-    private final ObjectProperty<Insets> horizontalScrollBarPadding = new SimpleObjectProperty<>(this, "horizontalScrollBarPadding", new Insets(5));
+    private final ObjectProperty<Insets> horizontalScrollBarPadding = new SimpleObjectProperty<>(this, "horizontalScrollBarPadding", new Insets(3));
 
     public Insets getHorizontalScrollBarPadding() {
         return horizontalScrollBarPadding.get();
