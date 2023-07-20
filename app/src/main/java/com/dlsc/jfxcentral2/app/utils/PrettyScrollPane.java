@@ -74,7 +74,7 @@ public class PrettyScrollPane extends ScrollPane {
             timeline.play();
         });
 
-        scrollToTopButtonNeeded.bind(vvalueProperty().greaterThan(0));
+        scrollToTopButtonNeeded.bind(vvalueProperty().greaterThan(0.1));
         scrollToTopButtonNeeded.addListener((it, oldNeeded, newNeeded) -> {
             if (isShowScrollToTopButton()) {
                 if (newNeeded) {
