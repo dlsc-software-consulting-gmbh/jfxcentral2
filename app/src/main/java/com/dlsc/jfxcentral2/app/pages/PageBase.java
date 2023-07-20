@@ -100,8 +100,8 @@ public abstract class PageBase extends View {
 
         StackPane glassPane = new StackPane();
         glassPane.getStyleClass().add("glass-pane");
-        glassPane.setMouseTransparent(true);
         glassPane.visibleProperty().bind(topMenuBar.usedProperty().or(blockingProperty()));
+        glassPane.setOnMouseClicked(evt -> setShowHamburgerMenu(false));
 
         if (menuMode.equals(Mode.LIGHT)) {
             // make sure the JFX logo can be fully seen (without this call it gets clipped)
