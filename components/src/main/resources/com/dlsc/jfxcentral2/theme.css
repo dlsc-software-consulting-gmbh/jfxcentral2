@@ -8528,3 +8528,80 @@
 .packs-icons-view:sm .content-box-wrapper .collapsible-button {
     -fx-padding: 10px 30px;
 }
+
+/* ----------------------------------------------------------------------------
+ * Pretty ScrollPane
+ */
+
+.pretty-scroll-pane {
+    -fx-padding: 0;
+    -fx-background-insets: 0; /* no focus border */
+    -fx-border-width: 0;
+}
+
+.pretty-scroll-pane > .scroll-to-top-button {
+    -fx-pref-width: 64;
+    -fx-pref-height: 64;
+    -fx-padding: 0;
+    -fx-background-color: -white, -bright-blue;
+    -fx-background-insets: 0px, 1px;
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .26), 10, 0.12, -1, 2);
+}
+
+.pretty-scroll-pane > .scroll-to-top-button .ikonli-font-icon {
+    -fx-icon-color: -white;
+    -fx-icon-size: 32px;
+    -fx-icon-code: mdi-format-vertical-align-top;
+}
+
+.pretty-scroll-pane > .scroll-to-top-button:hover .ikonli-font-icon {
+    -fx-icon-color: -blue;
+}
+
+.pretty-scroll-pane .viewport {
+}
+
+.pretty-scroll-pane .viewport .clipped-container {
+}
+
+.pretty-scroll-pane > .shadow {
+    -fx-pref-height: 10;
+    -fx-background-color: black;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .75), 20, 0.19, 0, 6);
+}
+
+.pretty-scroll-pane > .my-scroll-bar {
+    -fx-opacity: .25 !important;
+    -fx-padding: 0 !important;
+    -fx-background-insets: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-background-radius: 1000;
+    -fx-pref-width: 10 !important;
+    -fx-pref-height: 10 !important;
+}
+
+.pretty-scroll-pane > .my-scroll-bar .track {
+    -fx-padding: 0 !important;
+    -fx-background-insets: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-background-radius: 1000 !important;
+    -fx-pref-width: 10 !important;
+    -fx-pref-height: 10 !important;
+}
+
+.pretty-scroll-pane > .my-scroll-bar .thumb {
+    -fx-background-color: -white, black !important;
+    -fx-background-insets: 0px, 1px !important;
+    -fx-background-radius: 1000, 1000 !important;
+    -fx-pref-width: 10 !important;
+    -fx-pref-height: 10 !important;
+}
+
+.pretty-scroll-pane > .my-scroll-bar .increment-button,
+.pretty-scroll-pane > .my-scroll-bar .increment-arrow,
+.pretty-scroll-pane > .my-scroll-bar .decrement-button,
+.pretty-scroll-pane > .my-scroll-bar .decrement-arrow {
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
+}

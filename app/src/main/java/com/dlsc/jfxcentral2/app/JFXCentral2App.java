@@ -51,6 +51,7 @@ import com.dlsc.jfxcentral2.app.pages.details.ToolDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
+import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
@@ -88,7 +89,11 @@ public class JFXCentral2App extends Application {
 
     @Override
     public void start(Stage stage) {
-        System.setProperty("prism.lcdtext", "false");
+
+        if (!WebAPI.isBrowser()) {
+            System.setProperty("prism.lcdtext", "false");
+            System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
+        }
 
         stage.initStyle(StageStyle.UNDECORATED);
 
