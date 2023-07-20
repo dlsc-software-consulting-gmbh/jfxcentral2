@@ -36,10 +36,6 @@ public class LinksOfTheWeekHeader extends CategoryHeader  {
         rssImageView.setImage(RSS_IMAGE);
         LinkUtil.setLink(rssImageView, "/links/rss");
 
-        // TODO: make visible once we have RSS support in place
-        rssImageView.setVisible(false);
-        rssImageView.setManaged(false);
-
         HBox box = new HBox(label, rssImageView);
         box.getStyleClass().add("rss-box");
         box.setAlignment(Pos.CENTER);

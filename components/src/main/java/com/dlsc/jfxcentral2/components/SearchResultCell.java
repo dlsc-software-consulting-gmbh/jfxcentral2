@@ -83,7 +83,7 @@ public class SearchResultCell extends ListCell<ModelObject> {
         if (clazz.equals(Tip.class)) {
             return "Tip";
         } else if (clazz.equals(RealWorldApp.class)) {
-            return "Real World App";
+            return "Showcase";
         } else if (clazz.equals(Person.class)) {
             return "Person";
         } else if (clazz.equals(Company.class)) {
