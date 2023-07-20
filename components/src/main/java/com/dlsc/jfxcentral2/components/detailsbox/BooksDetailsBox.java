@@ -23,7 +23,7 @@ public class BooksDetailsBox extends DetailsBoxBase<Book> {
 
         setTitle("BOOKS");
         setIkon(IkonUtil.getModelIkon(Book.class));
-        setMaxItemsPerPage(1);
+        setMaxItemsPerPage(3);
         setHomepageUrlProvider(Book::getUrl);
         setOnWebsite(book -> {
             if (StringUtils.isNotBlank(book.getAmazonASIN())) {
