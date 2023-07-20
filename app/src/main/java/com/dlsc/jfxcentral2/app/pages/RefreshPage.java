@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.LinkUtil;
 import one.jpro.routing.sessionmanager.SessionManager;
 import org.eclipse.jgit.lib.ProgressMonitor;
 
@@ -29,7 +30,7 @@ public class RefreshPage extends PageBase {
     private final InvalidationListener invalidationListener = it -> {
         if (RepositoryManager.isRepositoryUpdated()) {
             Platform.runLater(() -> {
-                SessionManager sessionManager = sessionManager();
+                SessionManager sessionManager = LinkUtil.getSessionManager(realContent());
                 if (sessionManager != null) {
                     sessionManager.gotoURL("/");
                 }
@@ -44,7 +45,6 @@ public class RefreshPage extends PageBase {
 
     public RefreshPage(ObjectProperty<Size> size) {
         super(size, Mode.DARK);
-        RepositoryManager.repositoryUpdatedProperty().addListener(weakInvalidationListener);
     }
 
     @Override
@@ -68,6 +68,11 @@ public class RefreshPage extends PageBase {
 
     @Override
     public Node content() {
+        Platform.runLater(() -> {
+            RepositoryManager.repositoryUpdatedProperty().addListener(weakInvalidationListener);
+            invalidationListener.invalidated(null);
+        });
+
         updateView = createUpdateView();
         setupView = createSetupView();
 

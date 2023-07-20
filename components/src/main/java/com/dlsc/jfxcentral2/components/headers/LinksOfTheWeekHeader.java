@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
+import scala.Option;
 
 import java.util.Objects;
 
@@ -34,7 +35,7 @@ public class LinksOfTheWeekHeader extends CategoryHeader  {
 
         CustomImageView rssImageView = new CustomImageView();
         rssImageView.setImage(RSS_IMAGE);
-        LinkUtil.setLink(rssImageView, "/links/rss");
+        LinkUtil.setLinkInternalNoPush(rssImageView, "/lotw/rss.xml", Option.empty(), false);
 
         HBox box = new HBox(label, rssImageView);
         box.getStyleClass().add("rss-box");
