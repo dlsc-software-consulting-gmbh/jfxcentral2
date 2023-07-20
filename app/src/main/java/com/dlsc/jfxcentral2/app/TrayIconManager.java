@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral2.app.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import javafx.scene.control.Menu;
@@ -9,9 +10,11 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import one.jpro.routing.sessionmanager.SessionManager;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -26,7 +29,24 @@ public class TrayIconManager {
         this.stage = stage;
         this.sessionManager = sessionManager;
 
-        trayIcon = new FXTrayIcon(stage, Objects.requireNonNull(JFXCentral2App.class.getResource("tray-icon2.png")), 350, 210);
+        if (OSUtil.isWindows()) {
+            Dimension trayIconSize = SystemTray.getSystemTray().getTrayIconSize();
+
+            java.awt.Image image = null;
+            try {
+                URL url = getClass().getResource("tray-icon2-windows.png");
+                assert url != null;
+                image = ImageIO.read(url);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            assert image != null;
+
+            trayIcon = new FXTrayIcon(stage);
+            trayIcon.setGraphic(image.getScaledInstance(trayIconSize.width, trayIconSize.height, Image.SCALE_SMOOTH));
+        }else {
+            trayIcon = new FXTrayIcon(stage, Objects.requireNonNull(JFXCentral2App.class.getResource("tray-icon2.png")), 350, 210);
+        }
         refresh();
         trayIcon.show();
     }
