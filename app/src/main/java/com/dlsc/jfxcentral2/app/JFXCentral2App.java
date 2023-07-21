@@ -138,6 +138,8 @@ public class JFXCentral2App extends Application {
         // do not store stage width, height, location when we are running in a browser
         if (!WebAPI.isBrowser()) {
             StageManager.install(stage, "com/dlsc/jfxcentral2", 500, 800);
+            // Mike Hearn explicitly requested to use this approach to exit the app
+            stage.setOnCloseRequest(evt -> System.exit(0));
         }
 
         stage.show();
