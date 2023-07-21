@@ -57,7 +57,6 @@ import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Scene;
@@ -139,9 +138,10 @@ public class JFXCentral2App extends Application {
         // do not store stage width, height, location when we are running in a browser
         if (!WebAPI.isBrowser()) {
             StageManager.install(stage, "com/dlsc/jfxcentral2", 500, 800);
+            // Mike Hearn explicitly requested to use this approach to exit the app
+            stage.setOnCloseRequest(evt -> System.exit(0));
         }
 
-        stage.setOnCloseRequest(evt -> Platform.exit());
         stage.show();
     }
 
