@@ -57,6 +57,7 @@ import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Scene;
@@ -140,6 +141,7 @@ public class JFXCentral2App extends Application {
             StageManager.install(stage, "com/dlsc/jfxcentral2", 500, 800);
         }
 
+        stage.setOnCloseRequest(evt -> Platform.exit());
         stage.show();
     }
 
