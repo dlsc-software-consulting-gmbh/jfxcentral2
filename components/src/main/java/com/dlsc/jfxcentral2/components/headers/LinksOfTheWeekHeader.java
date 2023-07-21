@@ -36,6 +36,8 @@ public class LinksOfTheWeekHeader extends CategoryHeader  {
         CustomImageView rssImageView = new CustomImageView();
         rssImageView.setImage(RSS_IMAGE);
         LinkUtil.setLinkInternalNoPush(rssImageView, "/lotw/rss.xml", Option.empty(), false);
+        rssImageView.setVisible(false);
+        rssImageView.setManaged(false);
 
         HBox box = new HBox(label, rssImageView);
         box.getStyleClass().add("rss-box");
