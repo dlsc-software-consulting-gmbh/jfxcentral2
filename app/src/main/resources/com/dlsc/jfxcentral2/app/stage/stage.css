@@ -1,0 +1,126 @@
+.root {
+    -dark-blue: #070B32;
+}
+
+.custom-stage {
+    -fx-background-color: -dark-blue;
+    -fx-padding: 2 4 4 4;
+}
+
+.custom-stage:web {
+    -fx-padding: 0 0 0 0;
+    -fx-background-insets: 0;
+}
+
+.custom-stage .title-bar {
+    -fx-background-color: #070B32;
+}
+
+.custom-stage .title-bar > .front-box {
+    -fx-padding: 5 10 5 10;
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+}
+
+.custom-stage .title-bar .title {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 20px;
+    -fx-text-fill: -white;
+    -fx-padding: 5;
+    /*-fx-graphic: url("jfx.png");*/
+}
+
+.custom-stage .title-bar .button,
+.custom-stage .title-bar .toggle-button {
+    -fx-background-color: transparent;
+    -fx-padding: 2;
+}
+
+.custom-stage .title-bar .button .ikonli-font-icon,
+.custom-stage .title-bar .toggle-button .ikonli-font-icon {
+    -fx-icon-color: -white;
+    -fx-icon-size: 20px;
+}
+
+.custom-stage .title-bar .button:hover .ikonli-font-icon,
+.custom-stage .title-bar .toggle-button:hover .ikonli-font-icon {
+    -fx-icon-color: -orange;
+}
+
+.custom-stage .title-bar .button:pressed .ikonli-font-icon,
+.custom-stage .title-bar .toggle-button:pressed .ikonli-font-icon {
+    -fx-icon-color: -red;
+}
+
+.custom-stage .title-bar .close-button:hover .ikonli-font-icon {
+    -fx-icon-color: -red;
+}
+
+.custom-stage .title-bar.mac .control-box {
+    -fx-alignment: center-left;
+    -fx-padding: 0px 8px;
+    -fx-spacing: 8px;
+}
+
+.custom-stage .title-bar.mac .control-box:hover .control-button .ikonli-font-icon {
+    visibility: visible;
+}
+
+.custom-stage .title-bar.mac .control-button {
+    -color1: rgba(255,255,255, .2);
+    -fx-background-color: -color1;
+    -fx-background-insets: 0px
+;
+    -fx-background-radius: 1000px;
+    -size: 12px;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-padding: 0px;
+    -fx-cursor: hand;
+}
+
+.custom-stage .title-bar.mac .control-button:pressed {
+    -fx-opacity: .66;
+}
+
+.custom-stage .title-bar.mac > .front-box .control-button .ikonli-font-icon {
+    visibility: hidden;
+    -fx-icon-size: 8px;
+    -fx-icon-color: rgba(0, 0, 0, 0.9);
+}
+
+.custom-stage:stage-focused .title-bar.mac > .front-box .close-button {
+    -color1: #fc5350;
+}
+
+.custom-stage:stage-focused .title-bar.mac > .front-box .min-button {
+    -color1: #f8b63a;
+}
+
+.custom-stage:stage-focused .title-bar.mac > .front-box .max-button {
+    -color1: #35c046;
+}
+
+.custom-stage .title-bar.mac > .front-box .max-button .ikonli-font-icon {
+    -fx-icon-code: "oi-fullscreen-enter";
+    -fx-icon-size: 6px;
+}
+
+.custom-stage .title-bar.mac > .front-box .max-button:selected .ikonli-font-icon {
+    -fx-icon-code: "oi-fullscreen-exit";
+    -fx-icon-size: 6px;
+}
+
+.custom-stage .stage-content > .scroll-pane > .scroll-bar .track {
+    -fx-background-color: #070B32;
+}
+
+.custom-stage .stage-content > .scroll-pane > .scroll-bar .thumb {
+    -fx-background-color: rgba(255, 255, 255, .5);
+    -fx-background-insets: 0 0 0 4;
+    -fx-background-radius: 1000px;
+}

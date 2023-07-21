@@ -30,13 +30,16 @@ public class Spacer extends Region {
     public Spacer(Orientation orientation) {
         getStyleClass().add("spacer");
         setOrientation(orientation);
-        pseudoClassStateChanged(HORIZONTAL_PSEUDOCLASS_STATE, orientation == Orientation.HORIZONTAL);
-        pseudoClassStateChanged(VERTICAL_PSEUDOCLASS_STATE, orientation == Orientation.VERTICAL);
         updateGrowConstraints();
+        orientationProperty().addListener((ob, ov, nv) -> {
+            updateGrowConstraints();
+        });
     }
 
     private void updateGrowConstraints() {
         Orientation orientation = getOrientation();
+        pseudoClassStateChanged(HORIZONTAL_PSEUDOCLASS_STATE, orientation == Orientation.HORIZONTAL);
+        pseudoClassStateChanged(VERTICAL_PSEUDOCLASS_STATE, orientation == Orientation.VERTICAL);
         if (orientation == Orientation.HORIZONTAL) {
             VBox.setVgrow(this, Priority.NEVER);
             HBox.setHgrow(this, Priority.ALWAYS);
@@ -56,14 +59,6 @@ public class Spacer extends Region {
         @Override
         public String getName() {
             return "orientation";
-        }
-
-        @Override
-        protected void invalidated() {
-            boolean isVertical = (get() == Orientation.VERTICAL);
-            pseudoClassStateChanged(VERTICAL_PSEUDOCLASS_STATE, isVertical);
-            pseudoClassStateChanged(HORIZONTAL_PSEUDOCLASS_STATE, !isVertical);
-            updateGrowConstraints();
         }
 
         @Override
@@ -87,11 +82,6 @@ public class Spacer extends Region {
     private static class StyleableProperties {
 
         private static final CssMetaData<Spacer, Orientation> ORIENTATION = new CssMetaData<>("-fx-orientation", new EnumConverter<>(Orientation.class), Orientation.HORIZONTAL) {
-
-            @Override
-            public Orientation getInitialValue(Spacer node) {
-                return node.getOrientation();
-            }
 
             @Override
             public boolean isSettable(Spacer n) {

@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.demo.components;
 
 import com.dlsc.jfxcentral2.components.FooterView;
-import com.dlsc.jfxcentral2.components.Size;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import javafx.scene.Node;

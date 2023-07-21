@@ -5,8 +5,10 @@ import com.dlsc.jfxcentral2.model.Feature;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Skin;
+import one.jpro.routing.LinkUtil;
 
 public class FeatureView extends ControlBase {
+
     public FeatureView() {
         this(null);
     }
@@ -14,6 +16,7 @@ public class FeatureView extends ControlBase {
     public FeatureView(Feature feature) {
         getStyleClass().add("feature-view");
         setFeature(feature);
+        LinkUtil.setLink(this, feature.url());
     }
 
     @Override

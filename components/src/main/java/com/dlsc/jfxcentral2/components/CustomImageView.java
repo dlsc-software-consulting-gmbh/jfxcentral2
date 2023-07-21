@@ -21,8 +21,9 @@ import java.util.List;
  * Note: It is best to set the width and height at the same time, otherwise the picture may be deformed
  */
 public class CustomImageView extends ImageView {
-    private static final double DEFAULT_HEIGHT = 10;
-    private static final double DEFAULT_WIDTH = 10;
+
+    private static final double DEFAULT_HEIGHT = -1;
+    private static final double DEFAULT_WIDTH = -1;
 
     public CustomImageView() {
         getStyleClass().add("custom-image-view");
@@ -105,7 +106,7 @@ public class CustomImageView extends ImageView {
 
         private static final CssMetaData<CustomImageView, Number> FITTING_WIDTH =
                 new CssMetaData<>("-fx-fit-width",
-                        SizeConverter.getInstance(), DEFAULT_HEIGHT) {
+                        SizeConverter.getInstance(), DEFAULT_WIDTH) {
                     @Override
                     public boolean isSettable(CustomImageView n) {
                         return !n.fittingWidth.isBound();
@@ -119,7 +120,7 @@ public class CustomImageView extends ImageView {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            final List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(ImageView.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(ImageView.getClassCssMetaData());
             Collections.addAll(styleables, FITTING_HEIGHT, FITTING_WIDTH);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }

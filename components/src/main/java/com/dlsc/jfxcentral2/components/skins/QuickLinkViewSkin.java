@@ -1,37 +1,41 @@
 package com.dlsc.jfxcentral2.components.skins;
 
+import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.QuickLinkView;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.DateQuickLink;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
+import com.dlsc.jfxcentral2.model.SenaptQuickLink;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Objects;
 
 public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d'th' MMM yyyy");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+    private static final Image SENAPT_COLOR_IMAGE = new Image(Objects.requireNonNull(QuickLinkViewSkin.class.getResource("/com/dlsc/jfxcentral2/components/logos/senapt-color.png")).toExternalForm(), true);
 
     public QuickLinkViewSkin(QuickLinkView control) {
         super(control);
-        control.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-            control.toFront();
-        });
-        control.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-            if (event.isPrimaryButtonDown()) {
-                if (control.getQuickLink() != null && control.getQuickLink().getLinkUrl() != null) {
-                    System.out.println(control.getQuickLink().getLinkUrl());
-                }
+
+        control.hoverProperty().addListener((observable, oldValue, isHover) -> {
+            if (isHover) {
+                control.toFront();
+            } else {
+                control.toBack();
             }
         });
+
         layoutBySize();
     }
 
@@ -50,7 +54,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
                 titleLabel.setGraphic(icon);
             }
 
-            FontIcon linkIcon = new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT);
+            FontIcon linkIcon = new FontIcon(IkonUtil.link);
             linkIcon.getStyleClass().add("link-icon");
 
             HBox topBox = new HBox(titleLabel, new Spacer(), linkIcon);
@@ -59,7 +63,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             Label descriptionLabel = new Label(temp.getDescription());
             descriptionLabel.getStyleClass().add("description-label");
 
-            Label dateLabel = new Label(temp.getDate() == null ? null : temp.getDate().format(DATE_TIME_FORMATTER));
+            Label dateLabel = new Label(temp.getDate() == null ? null : temp.getDate().format(DATE_FORMATTER));
             dateLabel.getStyleClass().add("date-label");
 
             HBox bottomBox = new HBox(descriptionLabel, new Spacer(), dateLabel);
@@ -75,7 +79,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             FontIcon icon = new FontIcon(temp.getIkon());
             icon.getStyleClass().add("icon");
 
-            FontIcon linkIcon = new FontIcon(MaterialDesign.MDI_ARROW_TOP_RIGHT);
+            FontIcon linkIcon = new FontIcon(IkonUtil.link);
             linkIcon.getStyleClass().add("link-icon");
 
             HBox topBox = new HBox(icon, new Spacer(), linkIcon);
@@ -93,8 +97,40 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             getChildren().setAll(contentBox);
         } else if (quickLink instanceof ImageQuickLink temp) {
             control.getStyleClass().add("image-link-view");
-
             control.setStyle("-fx-background-image: url(" + temp.getImageUrl() + ");");
+        } else if (quickLink instanceof SenaptQuickLink) {
+            int randomStyle = (int) (Math.random() * 3);
+            control.getStyleClass().addAll("senapt-link-view", "senapt-link-view-" + randomStyle);
+
+            Label topLabel = new Label();
+            topLabel.getStyleClass().add("top-label");
+
+            CustomImageView logoView = new CustomImageView();
+            logoView.setImage(SENAPT_COLOR_IMAGE);
+
+            Label bottomLabel = new Label("Main sponsor  /  Main sponsor  /  Main sponsor");
+            bottomLabel.getStyleClass().add("bottom-label");
+
+            if (randomStyle == 0) {
+                if (isLarge()) {
+                    topLabel.setText("MAIN SPONSOR  /  MAIN SPONSOR  /  MAIN SPONSOR");
+                } else if (isMedium()) {
+                    topLabel.setText("MAIN SPONSOR  /  MAIN SPONSOR");
+                } else {
+                    topLabel.setText("MAIN SPONSOR  /  MAIN SPONSOR");
+                }
+                bottomLabel.setText(topLabel.getText());
+            } else if (randomStyle == 1) {
+                topLabel.setText("MAIN SPONSOR");
+                bottomLabel.setText("senapt.co.uk");
+            } else if (randomStyle == 2) {
+                topLabel.setText(isSmall() ? "MAIN SPONSOR" : "PLATINUM SPONSOR OF JFXCENTRAL");
+                bottomLabel.setText("senapt.co.uk");
+            }
+
+            VBox contentBox = new VBox(topLabel, logoView, bottomLabel);
+            contentBox.getStyleClass().add("content-box");
+            getChildren().setAll(contentBox);
         } else if (quickLink == null) {
             control.getStyleClass().add("empty-link-view");
         }

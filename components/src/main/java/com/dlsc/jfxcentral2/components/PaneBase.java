@@ -1,5 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.model.Target;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.css.PseudoClass;
@@ -23,7 +25,8 @@ public class PaneBase extends StackPane {
     private static final PseudoClass DESKTOP_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("desktop");
     private static final PseudoClass BROWSER_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("browser");
     private static final PseudoClass MOBILE_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("mobile");
-
+    private Size oldSize;
+    private Size newSize;
     public PaneBase() {
         // target styling
         activateTargetPseudoClass();
@@ -31,10 +34,35 @@ public class PaneBase extends StackPane {
 
         // size styling
         activateSizePseudoClass();
+        newSize = getSize();
         sizeProperty().addListener(it -> {
+            oldSize = newSize;
+            newSize = getSize();
             activateSizePseudoClass();
             layoutBySize();
         });
+    }
+
+    public Size getOldSize() {
+        return oldSize;
+    }
+
+    public Size getNewSize() {
+        return newSize;
+    }
+
+    public boolean isLgToMdOrMdToLg() {
+        if (oldSize == null || newSize == null) {
+            return false;
+        }
+        return (oldSize.isLarge() && newSize.isMedium()) || (oldSize.isMedium() && newSize.isLarge());
+    }
+
+    public boolean isSmToMdOrMdToSm() {
+        if (oldSize == null || newSize == null) {
+            return false;
+        }
+        return (oldSize.isSmall() && newSize.isMedium()) || (oldSize.isMedium() && newSize.isSmall());
     }
 
     private void activateTargetPseudoClass() {

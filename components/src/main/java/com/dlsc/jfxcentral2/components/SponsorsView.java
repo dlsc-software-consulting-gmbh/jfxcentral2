@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.components.skins.SponsorsSkin;
+import com.dlsc.jfxcentral2.components.skins.SponsorsViewSkin;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -46,14 +46,34 @@ public class SponsorsView extends ControlBase {
                         "https://www.jpro.one/"),
                 new SponsorsView.Sponsor("DLSC",
                         getClass().getResource("logos/dlsc.png").toExternalForm(),
-                        "https://www.jpro.one/"),
+                        "https://www.dlsc.com/"),
                 new SponsorsView.Sponsor("NAVIELEKTRO",
                         getClass().getResource("logos/navielektro.png").toExternalForm(),
-                        "https://www.jpro.one/"),
+                        "https://www.navielektro.fi/"),
                 new SponsorsView.Sponsor(
                         "Hydraulic",
                         getClass().getResource("logos/hydraulic.png").toExternalForm(),
-                        "https://www.jpro.one/"));
+                        "https://www.hydraulic.dev/"),
+                new SponsorsView.Sponsor(
+                        "Senapt",
+                        getClass().getResource("logos/Senapt.png").toExternalForm(),
+                        "https://www.senapt.co.uk"),
+                new SponsorsView.Sponsor(
+                        "TomatoEnergy",
+                        getClass().getResource("logos/TomatoEnergy.png").toExternalForm(),
+                        "https://www.tomato.energy/"),
+                new SponsorsView.Sponsor(
+                        "TomatoHomes",
+                        getClass().getResource("logos/TomatoHomes.png").toExternalForm(),
+                        "https://www.tomato.homes/"),
+                new SponsorsView.Sponsor(
+                        "MyWatts",
+                        getClass().getResource("logos/MyWatts.png").toExternalForm(),
+                        "https://www.mywatts.co.uk/"));
+//                new SponsorsView.Sponsor(
+//                        "EvXcen",
+//                        getClass().getResource("logos/EvXcen.png").toExternalForm(),
+//                        "http://www.evxcen.com/"));//TODO: unable to access the website
     }
 
     public record Sponsor(String name, String logoUrl, String url) {
@@ -61,7 +81,7 @@ public class SponsorsView extends ControlBase {
 
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new SponsorsSkin(this);
+        return new SponsorsViewSkin(this);
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title", DEFAULT_TITLE);
@@ -222,7 +242,7 @@ public class SponsorsView extends ControlBase {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            final List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(Control.getClassCssMetaData());
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(Control.getClassCssMetaData());
             Collections.addAll(styleables, DIVIDER_VISIBLE, LOGO_FIT_HEIGHT, LOGO_FIT_WIDTH);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }

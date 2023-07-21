@@ -36,3 +36,10 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/app/RUNNING_PID
+/app/logs/
+
+/scenicView.properties
+
+### Conveyor ###
+output/

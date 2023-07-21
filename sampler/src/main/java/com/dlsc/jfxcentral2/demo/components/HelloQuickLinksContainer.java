@@ -1,12 +1,13 @@
 package com.dlsc.jfxcentral2.demo.components;
 
 import com.dlsc.jfxcentral2.components.QuickLinksContainer;
-import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
+import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,7 +16,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignT;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,7 +47,7 @@ public class HelloQuickLinksContainer extends JFXCentralSampleBase {
     private List<QuickLink> getSmallQuickLinks() {
         List<QuickLink> list = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            list.add(new NormalQuickLink("Tools", "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", MaterialDesignT.TOOLS, "xxx url..."));
+            list.add(new NormalQuickLink("Tools", "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", IkonUtil.tool, "https://www.jfx-central.com"));
         }
         Collections.shuffle(list);
         return list;
@@ -58,7 +58,7 @@ public class HelloQuickLinksContainer extends JFXCentralSampleBase {
         // Randomly generate 4 to 6 QuickLinks
         int count = new Random().nextInt(3) + 4;
         for (int i = 0; i < count; i++) {
-            list.add(new NormalQuickLink("Tools", i + " Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", MaterialDesignT.TOOLS, "xxx url..."));
+            list.add(new NormalQuickLink("Tools", i + " Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur", IkonUtil.tool, "https://www.jfx-central.com"));
         }
         //Randomly generate 1~3 QuickLinks for image placeholders
         int count2 = new Random().nextInt(3) + 1;

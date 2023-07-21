@@ -1,11 +1,12 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.components.WebsiteChangesView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
 import com.dlsc.jfxcentral2.model.DateQuickLink;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
+import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -13,9 +14,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignT;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +64,7 @@ public class HelloWebsiteChangesView extends JFXCentralSampleBase {
         List<QuickLink> quickLinks = new ArrayList<>();
         if (size == Size.SMALL) {
             for (int i = 0; i < 3; i++) {
-                quickLinks.add(new DateQuickLink("", "Download", MaterialDesignT.TOOLS, "xxx url...", ZonedDateTime.now().plusDays(i)));
+                quickLinks.add(new DateQuickLink("", "Download", IkonUtil.tool, "https://www.jfx-central.com", LocalDate.now().plusDays(i)));
             }
             Collections.shuffle(quickLinks);
 
@@ -84,7 +84,7 @@ public class HelloWebsiteChangesView extends JFXCentralSampleBase {
             });
 
             for (int i = 0; i < dateQuickLinkCount; i++) {
-                quickLinks.add(new DateQuickLink("JDKMon", "Download", null, "xxx url...", ZonedDateTime.now().plusDays(i)));
+                quickLinks.add(new DateQuickLink("JDKMon", "Download", null, "https://www.jfx-central.com", LocalDate.now().plusDays(i)));
             }
             for (int i = 0; i < nullCount; i++) {
                 quickLinks.add(null);

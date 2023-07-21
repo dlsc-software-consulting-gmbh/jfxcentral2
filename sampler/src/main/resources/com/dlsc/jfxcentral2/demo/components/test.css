@@ -27,26 +27,26 @@
     -fx-rotate: 180;
 }
 
-.hello-social-links-view .menu-button  > .arrow-button > .arrow {
+.hello-social-links-view .menu-button > .arrow-button > .arrow {
     -fx-shape: "M6.03015 6L0 0H12.0603L6.03015 6Z";
     -fx-background-color: #0e4ae4;
 }
 
-.hello-social-links-view .menu-button:showing  > .arrow-button > .arrow {
+.hello-social-links-view .menu-button:showing > .arrow-button > .arrow {
     -fx-rotate: 180;
 }
 
-.hello-social-links-view .custom-menu-item ,
+.hello-social-links-view .custom-menu-item,
 .hello-social-links-view .custom-menu-item:hover,
 .hello-social-links-view .custom-menu-item:pressed,
 .hello-social-links-view .custom-menu-item:focused {
     -fx-padding: 0;
-    -fx-background-color: transparent ;
+    -fx-background-color: transparent;
 }
 
 .hello-social-links-view .menu-button .context-menu {
     -fx-border-color: transparent;
-    -fx-background-color: transparent ;
+    -fx-background-color: transparent;
     -fx-background-radius: 10px;
     -fx-padding: 0px;
 }
@@ -84,4 +84,24 @@
 .hello-flip-view .back-node > .button:hover {
     -fx-background-color: -grey-20;
     -fx-text-fill: -white;
+}
+
+.test-avatar-view {
+    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.8), 30, 0.2, 0, 0);
+}
+
+.bg-test {
+    -fx-pref-width: 304px;
+    -fx-max-width: 304px;
+    -fx-min-width: 304px;
+    -fx-pref-height: 228px;
+    -fx-max-height: 228px;
+    -fx-min-height: 228px;
+    -fx-background-color: -bright-blue;
+    -fx-border-color: -bright-blue;
+    -fx-border-width: 5px;
+    -fx-background-image: url('images/test-football.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }

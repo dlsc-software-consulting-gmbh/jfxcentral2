@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.model;
 
 public class QuickLink {
+
     private String linkUrl;
 
     public QuickLink() {

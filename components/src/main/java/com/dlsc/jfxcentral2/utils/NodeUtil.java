@@ -1,8 +1,11 @@
 package com.dlsc.jfxcentral2.utils;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -10,6 +13,7 @@ import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class NodeUtil {
+
     private NodeUtil() {
     }
 
@@ -72,4 +76,37 @@ public class NodeUtil {
         return label;
     }
 
+    public static void scrollToNode(Node node) {
+        ScrollPane pane = findScrollPane(node);
+        if (pane != null) {
+            Node content = pane.getContent();
+            double width = content.getBoundsInLocal().getWidth();
+            double height = content.getBoundsInLocal().getHeight();
+
+            Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+            Bounds bounds = content.sceneToLocal(boundsInScene);
+
+            double x = bounds.getMinX();
+            double y = bounds.getMinY();
+
+            // scrolling values range from 0 to 1
+            pane.setVvalue(y/height);
+            pane.setHvalue(x/width);
+
+            // just for usability
+            node.requestFocus();
+        }
+    }
+
+    public static ScrollPane findScrollPane(Node node) {
+        Parent parent = node.getParent();
+        do {
+            if (parent instanceof ScrollPane) {
+                return (ScrollPane) parent;
+            }
+            parent = parent.getParent();
+        } while (parent != null);
+
+        return null;
+    }
 }

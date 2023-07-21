@@ -1,44 +1,60 @@
 package com.dlsc.jfxcentral2.demo.components;
 
 import com.dlsc.jfxcentral2.components.FeaturesContainer;
-import com.dlsc.jfxcentral2.components.Size;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.model.Feature;
+import com.dlsc.jfxcentral2.model.Size;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
-
-import java.util.List;
+import javafx.scene.layout.StackPane;
 
 public class HelloFeaturesContainer extends JFXCentralSampleBase {
 
+    private FeaturesContainer smallFC;
+    private FeaturesContainer mediumFC;
+    private FeaturesContainer largerFC;
 
     @Override
     protected Region createControl() {
 
-        FeaturesContainer smallFC = new FeaturesContainer(createFeatures());
+        smallFC = new FeaturesContainer();
         smallFC.setSize(Size.SMALL);
 
-        FeaturesContainer mediumFC = new FeaturesContainer(createFeatures());
+        mediumFC = new FeaturesContainer();
         mediumFC.setSize(Size.MEDIUM);
 
-        FeaturesContainer largerFC = new FeaturesContainer(createFeatures());
+        largerFC = new FeaturesContainer();
         largerFC.setSize(Size.LARGE);
 
         return new TabPane(
-                new Tab("FeaturesContainer sm", smallFC),
-                new Tab("FeaturesContainer md", mediumFC),
-                new Tab("FeaturesContainer ld", largerFC)
+                new Tab("FeaturesContainer sm", wrap(smallFC)),
+                new Tab("FeaturesContainer md", wrap(mediumFC)),
+                new Tab("FeaturesContainer ld", wrap(largerFC))
         );
     }
 
-    private List<Feature> createFeatures() {
-        return List.of(
-                new Feature("Video", "[1] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", MaterialDesign.MDI_TIMER, Feature.Type.VIDEO, new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[2] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", MaterialDesign.MDI_TIMER, Feature.Type.VIDEO, new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/feature-img.png").toExternalForm()), "url ..."),
-                new Feature("Video", "[3] Having Fun with Java and JavaFX on the Raspberry PI lorem ipsum whatever long text", "Featured", "5 min video", MaterialDesign.MDI_TIMER, Feature.Type.VIDEO, new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/feature-img.png").toExternalForm()), "url ..."));
+    private Node wrap(Region node) {
+        node.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        StackPane wrapper = new StackPane(node);
+        StackPane.setAlignment(node, Pos.CENTER);
+        return wrapper;
+    }
+
+    @Override
+    public Node getControlPanel() {
+        ComboBox<Orientation> orientationBox = new ComboBox<>();
+        orientationBox.getItems().addAll(Orientation.HORIZONTAL, Orientation.VERTICAL);
+        orientationBox.getSelectionModel().select(Orientation.HORIZONTAL);
+        orientationBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            smallFC.setOrientation(newValue);
+            mediumFC.setOrientation(newValue);
+            largerFC.setOrientation(newValue);
+        });
+        return orientationBox;
     }
 
     @Override

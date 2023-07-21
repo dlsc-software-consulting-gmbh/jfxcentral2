@@ -8,10 +8,17 @@ public class QuickLinksContainer extends LinksContainerBase {
 
     public QuickLinksContainer() {
         getStyleClass().add("quick-links-container");
+        updateUI();
     }
 
     @Override
     protected void layoutBySize() {
+        if (!isLgToMdOrMdToLg()) {
+            updateUI();
+        }
+    }
+
+    private void updateUI() {
         gridPane.getChildren().clear();
         List<QuickLink> links = getQuickLinks();
         if (links == null || links.isEmpty()) {

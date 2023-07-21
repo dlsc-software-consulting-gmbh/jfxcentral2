@@ -93,20 +93,21 @@ public class FlipViewSkin extends SkinBase<FlipView> {
         });
     }
 
-    private void recalculateTransformation(final double angle) {
-        final double width = flipPane.widthProperty().doubleValue();
-        final double height = flipPane.heightProperty().doubleValue();
+    private void recalculateTransformation(double angle) {
+        double height = flipPane.heightProperty().doubleValue();
 
         double back = height / 10;
-        final double radius = flipPane.widthProperty().divide(2).doubleValue();
+        double radius = flipPane.widthProperty().divide(2).doubleValue();
+        double value0 = radius - Math.sin(angle) * radius;
+        double value1 = radius + Math.sin(angle) * radius;
 
-        transform.setUlx(radius - Math.sin(angle) * radius);
+        transform.setUlx(value0);
         transform.setUly(0 - Math.cos(angle) * back);
-        transform.setUrx(radius + Math.sin(angle) * radius);
+        transform.setUrx(value1);
         transform.setUry(0 + Math.cos(angle) * back);
-        transform.setLrx(radius + Math.sin(angle) * radius);
+        transform.setLrx(value1);
         transform.setLry(height - Math.cos(angle) * back);
-        transform.setLlx(radius - Math.sin(angle) * radius);
+        transform.setLlx(value0);
         transform.setLly(height + Math.cos(angle) * back);
     }
 

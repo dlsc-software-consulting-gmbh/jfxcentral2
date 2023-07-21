@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.model;
 import org.kordamp.ikonli.Ikon;
 
 public class NormalQuickLink extends QuickLink {
+
     private String title;
     private String description;
     private Ikon ikon;

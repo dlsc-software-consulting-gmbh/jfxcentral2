@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.utils.JFXCentralUtil;
+import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.HPos;
@@ -13,14 +13,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import one.jpro.routing.LinkUtil;
 
 public class FooterView extends PaneBase {
 
     private final HBox contentBox;
-    private final ImageView dukeImageView;
+    private final ImageView logoImageView;
     private final LineNumberPane linksPane;
     private final LineNumberPane legalInfoPane;
 
@@ -28,61 +30,73 @@ public class FooterView extends PaneBase {
         getStyleClass().add("footer-view");
         contentBox = new HBox();
         contentBox.getStyleClass().add("content");
+        contentBox.setAlignment(Pos.TOP_RIGHT);
+
         getChildren().add(contentBox);
 
-        dukeImageView = new ImageView();
-        dukeImageView.setPreserveRatio(true);
-        dukeImageView.getStyleClass().add("duke-image");
-        contentBox.getChildren().add(dukeImageView);
+        logoImageView = new ImageView();
+        logoImageView.setPreserveRatio(true);
+        logoImageView.getStyleClass().addAll("jfx-central-logo", "small", "color");
+        contentBox.getChildren().add(logoImageView);
 
         linksPane = initLinksPane();
         legalInfoPane = initLegalInfoPane();
+
+        HBox.setHgrow(logoImageView, Priority.ALWAYS);
+        HBox.setHgrow(linksPane, Priority.ALWAYS);
+        HBox.setHgrow(legalInfoPane, Priority.ALWAYS);
 
         setMinWidth(Region.USE_PREF_SIZE);
         layoutBySize();
     }
 
     public void layoutBySize() {
-        dukeImageView.setFitHeight(getSize().isLarge() ? 90 : 61);
+        logoImageView.setFitHeight(getSize().isLarge() ? 90 : 61);
         LineNumberPane contactPane = initContactPane();
+        HBox.setHgrow(contactPane, Priority.ALWAYS);
+
         Size size = getSize();
         if (size.isLarge() || size.isMedium()) {
-            contentBox.getChildren().setAll(dukeImageView, contactPane, linksPane, legalInfoPane);
+            contentBox.getChildren().setAll(logoImageView, new Spacer(), contactPane, linksPane, legalInfoPane);
         } else {
             VBox box = new VBox(contactPane, linksPane, legalInfoPane);
             box.getStyleClass().add("number-pane-box");
-            contentBox.getChildren().setAll(dukeImageView, box);
+            contentBox.getChildren().setAll(logoImageView, box);
         }
     }
 
     private LineNumberPane initLegalInfoPane() {
         Hyperlink tcLink = new Hyperlink("T&C");
-        tcLink.setOnAction(event -> JFXCentralUtil.run(onTC));
         Hyperlink cookiesLink = new Hyperlink("Cookies");
-        cookiesLink.setOnAction(event -> JFXCentralUtil.run(onCookies));
         Hyperlink privacyPolicyLink = new Hyperlink("Privacy policy");
-        privacyPolicyLink.setOnAction(event -> JFXCentralUtil.run(onPrivacyPolicy));
-        return new LineNumberPane(new Label("Legal info"), null, tcLink, cookiesLink, privacyPolicyLink);
+        Hyperlink creditsLink = new Hyperlink("Credits");
+
+        LinkUtil.setLink(tcLink, "/legal/terms");
+        LinkUtil.setLink(cookiesLink, "/legal/cookies");
+        LinkUtil.setLink(privacyPolicyLink, "/legal/privacy");
+        LinkUtil.setLink(creditsLink, "/credits");
+
+        return new LineNumberPane(new Label("Legal info"), null, tcLink, cookiesLink, privacyPolicyLink, creditsLink);
     }
 
     private LineNumberPane initLinksPane() {
         Hyperlink twitterLink = new Hyperlink("Twitter");
         twitterLink.getStyleClass().addAll("link", "twitter-link");
-        twitterLink.setOnAction(event -> JFXCentralUtil.run(onTwitter));
+        LinkUtil.setExternalLink(twitterLink, "https://twitter.com/dlemmermann");
 
-        Hyperlink LinkedinLink = new Hyperlink("Linkedin");
-        LinkedinLink.getStyleClass().addAll("link", "linkedin-link");
-        LinkedinLink.setOnAction(event -> JFXCentralUtil.run(onLinkedin));
+        Hyperlink linkedinLink = new Hyperlink("Linkedin");
+        linkedinLink.getStyleClass().addAll("link", "linkedin-link");
+        LinkUtil.setExternalLink(linkedinLink, "https://www.linkedin.com/in/dlemmermann/");
 
         Hyperlink githubLink = new Hyperlink("Github");
         githubLink.getStyleClass().addAll("link", "github-link");
-        githubLink.setOnAction(event -> JFXCentralUtil.run(onGithub));
+        LinkUtil.setExternalLink(githubLink, "https://github.com/dlemmermann");
 
         Hyperlink youtubeLink = new Hyperlink("Youtube");
         youtubeLink.getStyleClass().addAll("link", "youtube-link");
-        youtubeLink.setOnAction(event -> JFXCentralUtil.run(onYoutube));
+        LinkUtil.setExternalLink(youtubeLink, "https://www.youtube.com/@dlsc/videos");
 
-        LineNumberPane linksPane = new LineNumberPane(new Label("Stay in the loop"), null, twitterLink, LinkedinLink, githubLink, youtubeLink);
+        LineNumberPane linksPane = new LineNumberPane(new Label("Stay in the loop"), null, twitterLink, linkedinLink, githubLink, youtubeLink);
         linksPane.getStyleClass().add("links-pane");
         return linksPane;
     }
@@ -100,11 +114,11 @@ public class FooterView extends PaneBase {
 
         Hyperlink emailLink = new Hyperlink("dlemmermann@gmail.com");
         emailLink.getStyleClass().add("link");
-        emailLink.setOnAction(event -> JFXCentralUtil.run(onSendMail));
+        LinkUtil.setLink(emailLink, "mailto:dlemmermann@gmail.com");
 
         Label contactLabel = new Label("Contact");
-        Label dlscLabel = new Label("DLSC Gmbh");
-        Label addressLabel = new Label("Asylweg 28,8134 Adliswil,");
+        Label dlscLabel = new Label("DLSC GmbH");
+        Label addressLabel = new Label("Asylweg 28, 8134 Adliswil");
         Label countryLabel = new Label("Switzerland");
         LineNumberPane contactPane;
         if (getSize().isLarge()) {

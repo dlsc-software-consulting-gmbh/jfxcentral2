@@ -1,14 +1,14 @@
 package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
-import javafx.scene.control.SkinBase;
+import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignC;
 
-public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
+public class SaveAndLikeButtonSkin extends ControlBaseSkin<SaveAndLikeButton> {
 
     private final HBox content;
 
@@ -16,19 +16,27 @@ public class SaveAndLikeButtonSkin extends SkinBase<SaveAndLikeButton> {
         super(control);
 
         ToggleButton saveButton = new ToggleButton();
-        saveButton.setGraphic(new FontIcon(MaterialDesignC.CONTENT_SAVE_OUTLINE));
-        saveButton.textProperty().bind(control.saveButtonTextProperty());
+        saveButton.setGraphic(new FontIcon(IkonUtil.floppy));
+        saveButton.textProperty().bind(control.saveButtonTextProperty()
+                .concat(Bindings.when(control.showCountProperty())
+                        .then(Bindings.concat(" (", control.saveCountProperty(), ")"))
+                        .otherwise("")));
         saveButton.visibleProperty().bind(control.saveButtonVisibleProperty());
         saveButton.managedProperty().bind(control.saveButtonVisibleProperty());
         saveButton.getStyleClass().add("save-button");
+        saveButton.setFocusTraversable(false);
         saveButton.selectedProperty().bindBidirectional(control.saveButtonSelectedProperty());
 
         ToggleButton likeButton = new ToggleButton();
-        likeButton.setGraphic(new FontIcon(MaterialDesign.MDI_HEART_OUTLINE));
-        likeButton.textProperty().bind(control.likeButtonTextProperty());
+        likeButton.setGraphic(new FontIcon(JFXCentralIcon.HEART));
+        likeButton.textProperty().bind(control.likeButtonTextProperty()
+                .concat(Bindings.when(control.showCountProperty())
+                        .then(Bindings.concat(" (", control.likeCountProperty(), ")"))
+                        .otherwise("")));
         likeButton.visibleProperty().bind(control.likeButtonVisibleProperty());
         likeButton.managedProperty().bind(control.likeButtonVisibleProperty());
         likeButton.getStyleClass().add("like-button");
+        likeButton.setFocusTraversable(false);
         likeButton.selectedProperty().bindBidirectional(control.likeButtonSelectedProperty());
 
         content = new HBox();

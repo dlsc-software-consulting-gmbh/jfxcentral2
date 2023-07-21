@@ -14,6 +14,7 @@ import javafx.css.StyleableProperty;
 import javafx.css.converter.BooleanConverter;
 import javafx.css.converter.DurationConverter;
 import javafx.scene.Node;
+import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
@@ -31,14 +32,16 @@ import java.util.List;
  * Modified on: 2023-04-25
  */
 public class FlipView extends ControlBase {
-    private static final Duration DEFAULT_FLIP_TIME = Duration.seconds(1);
 
-    private static final boolean DEFAULT_ANIMATE_ON_FLIP = false;
+    private static final Duration DEFAULT_FLIP_TIME = Duration.millis(500);
+
+    private static final boolean DEFAULT_ANIMATE_ON_FLIP = false; //!WebAPI.isBrowser();
 
     private final FlipViewSkin flipViewSkin;
 
     public FlipView() {
         flipViewSkin = new FlipViewSkin(this);
+        setFocusTraversable(false);
         getStyleClass().add("flip-view");
     }
 
@@ -146,8 +149,8 @@ public class FlipView extends ControlBase {
         private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
 
         static {
-            final List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(ControlBase.getClassCssMetaData());
-            Collections.addAll(styleables, ANIMATE_ON_FLIP, ANIMATE_ON_FLIP);
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(Control.getClassCssMetaData());
+            Collections.addAll(styleables, FLIP_TIME, ANIMATE_ON_FLIP);
             STYLEABLES = Collections.unmodifiableList(styleables);
         }
     }

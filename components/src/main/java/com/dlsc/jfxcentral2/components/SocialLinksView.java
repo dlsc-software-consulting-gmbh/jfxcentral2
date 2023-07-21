@@ -1,48 +1,126 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.utils.IkonUtil;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
+import one.jpro.routing.LinkUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.kordamp.ikonli.coreui.CoreUiBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class SocialLinksView extends FlowPane {
+
+    private final Button twitterLinkBtn;
+    private final Button mastodonLinkBtn;
+    private final Button linkedInLinkBtn;
+    private final Button websiteLinkBtn;
+    private final Button mailLinkBtn;
+    private final Button githubLinkBtn;
+    private final Button facebookLinkBtn;
+    private final Button redditLinkBtn;
 
     public SocialLinksView() {
         getStyleClass().add("social-links-view");
 
-        Button twitterLinkBtn = new Button("Twitter", new FontIcon(MaterialDesign.MDI_TWITTER));
+        twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
         twitterLinkBtn.getStyleClass().add("twitter-link-btn");
-        twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
         twitterLinkBtn.visibleProperty().bind(twitterUrlProperty().isNotEmpty());
-        twitterLinkBtn.setOnAction(e -> System.out.println(getTwitterUrl()));
+        twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
+        twitterUrl.addListener(it -> updateLink(twitterLinkBtn, getTwitterUrl()));
 
-        Button linkedInLinkBtn = new Button("LinkedIn", new FontIcon(MaterialDesign.MDI_LINKEDIN_BOX));
+        mastodonLinkBtn = new Button("MASTODON", new FontIcon(CoreUiBrands.MASTODON));
+        mastodonLinkBtn.getStyleClass().add("mastodon-link-btn");
+        mastodonLinkBtn.visibleProperty().bind(mastodonUrlProperty().isNotEmpty());
+        mastodonLinkBtn.managedProperty().bind(mastodonLinkBtn.visibleProperty());
+        mastodonUrl.addListener(it -> updateLink(mastodonLinkBtn, getMastodonUrl()));
+
+        redditLinkBtn = new Button("REDDIT", new FontIcon(IkonUtil.reddit));
+        redditLinkBtn.getStyleClass().add("reddit-link-btn");
+        redditLinkBtn.visibleProperty().bind(redditUrlProperty().isNotEmpty());
+        redditLinkBtn.managedProperty().bind(redditLinkBtn.visibleProperty());
+        redditUrl.addListener(it -> updateLink(redditLinkBtn, getRedditUrl()));
+
+        linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(IkonUtil.linkedin));
         linkedInLinkBtn.getStyleClass().add("linkedin-link-btn");
-        linkedInLinkBtn.managedProperty().bind(linkedInLinkBtn.visibleProperty());
         linkedInLinkBtn.visibleProperty().bind(linkedInUrlProperty().isNotEmpty());
-        linkedInLinkBtn.setOnAction(e -> System.out.println(getLinkedInUrl()));
+        linkedInLinkBtn.managedProperty().bind(linkedInLinkBtn.visibleProperty());
+        linkedInUrl.addListener(it -> updateLink(linkedInLinkBtn, getLinkedInUrl()));
 
-        Button websiteLinkBtn = new Button("Website", new FontIcon(MaterialDesign.MDI_WEB));
+        websiteLinkBtn = new Button("WEBSITE", new FontIcon(IkonUtil.website));
         websiteLinkBtn.getStyleClass().add("website-link-btn");
-        websiteLinkBtn.managedProperty().bind(websiteLinkBtn.visibleProperty());
         websiteLinkBtn.visibleProperty().bind(websiteUrlProperty().isNotEmpty());
-        websiteLinkBtn.setOnAction(e -> System.out.println(getWebsiteUrl()));
+        websiteLinkBtn.managedProperty().bind(websiteLinkBtn.visibleProperty());
+        websiteUrl.addListener(it -> updateLink(websiteLinkBtn, getWebsiteUrl()));
 
-        Button mailLinkBtn = new Button("Mail", new FontIcon(MaterialDesign.MDI_SEND));
-        mailLinkBtn.getStyleClass().add("mail-link-btn");
-        mailLinkBtn.managedProperty().bind(mailLinkBtn.visibleProperty());
-        mailLinkBtn.visibleProperty().bind(mailUrlProperty().isNotEmpty());
-        mailLinkBtn.setOnAction(e -> System.out.println(getMailUrl()));
-
-        Button githubLinkBtn = new Button("GitHub", new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
+        githubLinkBtn = new Button("GITHUB", new FontIcon(IkonUtil.github));
         githubLinkBtn.getStyleClass().add("github-link-btn");
-        githubLinkBtn.managedProperty().bind(githubLinkBtn.visibleProperty());
         githubLinkBtn.visibleProperty().bind(githubUrlProperty().isNotEmpty());
-        githubLinkBtn.setOnAction(e -> System.out.println(getGithubUrl()));
+        githubLinkBtn.managedProperty().bind(githubLinkBtn.visibleProperty());
+        githubUrl.addListener(it -> updateLink(githubLinkBtn, getGithubUrl()));
 
-        getChildren().setAll(twitterLinkBtn, linkedInLinkBtn, websiteLinkBtn, mailLinkBtn, githubLinkBtn);
+        facebookLinkBtn = new Button("FACEBOOK", new FontIcon(IkonUtil.facebook));
+        facebookLinkBtn.getStyleClass().add("facebook-link-btn");
+        facebookLinkBtn.visibleProperty().bind(facebookUrlProperty().isNotEmpty());
+        facebookLinkBtn.managedProperty().bind(facebookLinkBtn.visibleProperty());
+        facebookUrl.addListener(it -> updateLink(facebookLinkBtn, getFacebookUrl()));
+
+        mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
+        mailLinkBtn.getStyleClass().add("mail-link-btn");
+        mailLinkBtn.visibleProperty().bind(mailUrlProperty().isNotEmpty());
+        mailLinkBtn.managedProperty().bind(mailLinkBtn.visibleProperty());
+        mailUrl.addListener(it -> updateLink(mailLinkBtn, getMailUrl()));
+
+        InvalidationListener updateViewListener = it -> updateView();
+
+        twitterUrl.addListener(updateViewListener);
+        mastodonUrl.addListener(updateViewListener);
+        linkedInUrl.addListener(updateViewListener);
+        websiteUrl.addListener(updateViewListener);
+        githubUrl.addListener(updateViewListener);
+        mailUrl.addListener(updateViewListener);
+        facebookUrl.addListener(updateViewListener);
+        redditUrl.addListener(updateViewListener);
+
+        updateView();
+    }
+
+    private void updateView() {
+        getChildren().clear();
+
+        if (StringUtils.isNotBlank(getTwitterUrl())) {
+            getChildren().add(twitterLinkBtn);
+        }
+        if (StringUtils.isNotBlank(getMastodonUrl())) {
+            getChildren().add(mastodonLinkBtn);
+        }
+        if (StringUtils.isNotBlank(getLinkedInUrl())) {
+            getChildren().add(linkedInLinkBtn);
+        }
+        if (StringUtils.isNotBlank(getWebsiteUrl())) {
+            getChildren().add(websiteLinkBtn);
+        }
+        if (StringUtils.isNotBlank(getGithubUrl())) {
+            getChildren().add(githubLinkBtn);
+        }
+        if (StringUtils.isNotBlank(getMailUrl())) {
+            getChildren().add(facebookLinkBtn);
+        }
+        if (StringUtils.isNotBlank(getRedditUrl())) {
+            getChildren().add(redditLinkBtn);
+        }
+        if (StringUtils.isNotBlank(getMailUrl())) {
+            getChildren().add(mailLinkBtn);
+        }
+    }
+
+    private void updateLink(Node node, String url) {
+        if (StringUtils.isNotBlank(url)) {
+            LinkUtil.setExternalLink(node, url);
+        }
     }
 
     private final StringProperty twitterUrl = new SimpleStringProperty(this, "twitterUrl");
@@ -57,6 +135,33 @@ public class SocialLinksView extends FlowPane {
 
     public void setTwitterUrl(String twitterUrl) {
         this.twitterUrl.set(twitterUrl);
+    }
+    private final StringProperty mastodonUrl = new SimpleStringProperty(this, "mastodonUrl");
+
+    public String getMastodonUrl() {
+        return mastodonUrl.get();
+    }
+
+    public StringProperty mastodonUrlProperty() {
+        return mastodonUrl;
+    }
+
+    public void setMastodonUrl(String mastodonUrl) {
+        this.mastodonUrl.set(mastodonUrl);
+    }
+
+    private final StringProperty facebookUrl = new SimpleStringProperty(this, "facebookUrl");
+
+    public String getFacebookUrl() {
+        return facebookUrl.get();
+    }
+
+    public StringProperty facebookUrlProperty() {
+        return facebookUrl;
+    }
+
+    public void setFacebookUrl(String facebookUrl) {
+        this.facebookUrl.set(facebookUrl);
     }
 
     private final StringProperty linkedInUrl = new SimpleStringProperty(this, "linkedInUrl");
@@ -85,6 +190,20 @@ public class SocialLinksView extends FlowPane {
 
     public void setWebsiteUrl(String websiteUrl) {
         this.websiteUrl.set(websiteUrl);
+    }
+
+    private final StringProperty redditUrl = new SimpleStringProperty(this, "redditUrl");
+
+    public String getRedditUrl() {
+        return redditUrl.get();
+    }
+
+    public StringProperty redditUrlProperty() {
+        return redditUrl;
+    }
+
+    public void setRedditUrl(String redditUrl) {
+        this.redditUrl.set(redditUrl);
     }
 
     private final StringProperty mailUrl = new SimpleStringProperty(this, "mailUrl");

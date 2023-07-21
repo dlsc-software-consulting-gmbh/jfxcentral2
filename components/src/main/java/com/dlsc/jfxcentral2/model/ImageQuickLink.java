@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.model;
 
 public class ImageQuickLink extends QuickLink {
+
     private String imageUrl;
 
     public ImageQuickLink() {
