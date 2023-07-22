@@ -106,15 +106,15 @@ public class JFXCentral2App extends Application {
         routeNode.start(sessionManager);
 
         // tray icon
-        RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
-            if (!WebAPI.isBrowser()) {
+        if (!WebAPI.isBrowser()) {
+            RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
                 if (trayIconManager == null) {
                     trayIconManager = new TrayIconManager(stage, sessionManager);
                 } else {
                     trayIconManager.refresh();
                 }
-            }
-        });
+            });
+        }
 
         // customs stage for decorations / the chrome
         CustomStage customStage = new CustomStage(stage, routeNode, sessionManager);
@@ -145,7 +145,7 @@ public class JFXCentral2App extends Application {
         stage.show();
     }
 
-    private Route createRoute() {
+    public Route createRoute() {
         Route route = Route.empty()
                 .and(RouteUtils.get("/", r -> {
                     if (RepositoryManager.isRepositoryUpdated()) {
