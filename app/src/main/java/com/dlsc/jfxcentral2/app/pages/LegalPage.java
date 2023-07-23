@@ -8,9 +8,10 @@ import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 
-import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class LegalPage extends PageBase {
@@ -67,14 +68,15 @@ public class LegalPage extends PageBase {
         return wrapContent(stripView);
     }
 
-    private static String readText(String filePath) {
-        String text = "";
-        try {
-            URI uri = Objects.requireNonNull(LegalPage.class.getResource(filePath)).toURI();
-            text = Files.readString(Path.of(uri));
-        } catch (Exception e) {
-            e.printStackTrace();
+    private static String readText(String fileName) {
+        String filePath = "/com/dlsc/jfxcentral2/app/pages/" + fileName;
+
+        try (InputStream inputStream = LegalPage.class.getResourceAsStream(filePath);
+             InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(inputStream));
+             BufferedReader bufferedReader = new BufferedReader(reader)) {
+            return bufferedReader.lines().reduce("", (s1, s2) -> s1 + "\n" + s2);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return text;
     }
 }
