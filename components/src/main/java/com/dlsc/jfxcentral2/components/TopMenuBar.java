@@ -194,11 +194,13 @@ public class TopMenuBar extends PaneBase {
             fillCommunityMenu(communityBtn);
 
             Button showcasesBtn = new Button("Showcases");
+            showcasesBtn.setFocusTraversable(false);
             showcasesBtn.setMinWidth(Region.USE_PREF_SIZE);
             showcasesBtn.getStyleClass().add("showcases-button");
             LinkUtil.setLink(showcasesBtn, "/showcases");
 
             Button downloadsBtn = new Button("Downloads");
+            downloadsBtn.setFocusTraversable(false);
             downloadsBtn.setMinWidth(Region.USE_PREF_SIZE);
             downloadsBtn.getStyleClass().add("downloads-button");
             downloadsBtn.setVisible(!view.isMobile());
@@ -206,6 +208,7 @@ public class TopMenuBar extends PaneBase {
             LinkUtil.setLink(downloadsBtn, "/downloads");
 
             Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));
+            loginBtn.setFocusTraversable(false);
             loginBtn.setVisible(SocialUtil.isSocialFeaturesEnabled());
             loginBtn.setManaged(SocialUtil.isSocialFeaturesEnabled());
             loginBtn.setMinWidth(Region.USE_PREF_SIZE);
@@ -224,6 +227,7 @@ public class TopMenuBar extends PaneBase {
             logoutRegion.getStyleClass().add("logout-region");
 
             Button logOutBtn = new Button(null, logoutRegion);
+            logOutBtn.setFocusTraversable(false);
             logOutBtn.getStyleClass().add("logout-button");
             logOutBtn.setVisible(SocialUtil.isSocialFeaturesEnabled());
             logOutBtn.setManaged(SocialUtil.isSocialFeaturesEnabled());
@@ -232,6 +236,7 @@ public class TopMenuBar extends PaneBase {
             searchRegion.getStyleClass().add("search-region");
 
             Button searchBtn = new Button(null, searchRegion);
+            searchBtn.setFocusTraversable(false);
             StackPane stackPane = new StackPane(searchField, searchBtn);
             stackPane.getStyleClass().add("search-stack-pane");
 
@@ -247,6 +252,7 @@ public class TopMenuBar extends PaneBase {
             searchBtn.getStyleClass().add("search-button");
 
             MenuButton menuBtn = createMenuButton("Menu");
+            menuBtn.setFocusTraversable(false);
             menuBtn.getStyleClass().add("top-menu-button");
             menuBtn.showingProperty().addListener(it -> {
                 if (menuBtn.isShowing()) {

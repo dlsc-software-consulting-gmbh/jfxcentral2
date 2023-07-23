@@ -75,6 +75,7 @@ public class IkonDetailView extends DetailView<Ikon> {
         titleLabel.managedProperty().bind(titleLabel.visibleProperty());
 
         Button button = new Button();
+        button.setFocusTraversable(false);
         button.setGraphic(new FontIcon(IkonUtil.copy));
         button.getStyleClass().addAll("fill-button", "copy-button");
         button.managedProperty().bind(button.visibleProperty());

@@ -356,6 +356,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
     protected Button createDetailsButton(T model) {
         Button detailsButton = new Button("DETAILS", new FontIcon(IkonUtil.link));
+        detailsButton.setFocusTraversable(false);
         detailsButton.getStyleClass().add("details-button");
         detailsButton.setMinWidth(Region.USE_PREF_SIZE);
         setLinkOnDetailsButton(model, detailsButton);
@@ -379,6 +380,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
 
     protected Button createHomepageButton(T model) {
         Button homepageButton = new Button("HOMEPAGE", new FontIcon(IkonUtil.link));
+        homepageButton.setFocusTraversable(false);
         homepageButton.setMinWidth(Region.USE_PREF_SIZE);
         setLinkOnHomepageButton(model, homepageButton);
         homepageUrlProviderProperty().addListener(it -> setLinkOnHomepageButton(model, homepageButton));

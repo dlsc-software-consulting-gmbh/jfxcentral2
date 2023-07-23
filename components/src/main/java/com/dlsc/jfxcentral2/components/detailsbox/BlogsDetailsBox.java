@@ -25,6 +25,7 @@ public class BlogsDetailsBox extends DetailsBoxBase<Blog> {
     @Override
     protected List<Node> createActionButtons(Blog blog) {
         Button visitBlogButton = new Button("VISIT BLOG", new FontIcon(IkonUtil.link));
+        visitBlogButton.setFocusTraversable(false);
         visitBlogButton.managedProperty().bind(visitBlogButton.visibleProperty());
         visitBlogButton.visibleProperty().bind(visitUrlProviderProperty().isNotNull());
         LinkUtil.setExternalLink(visitBlogButton, getVisitUrlProvider().call(blog));

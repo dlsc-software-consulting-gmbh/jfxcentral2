@@ -91,6 +91,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         });
 
         websiteButton = new Button();
+        websiteButton.setFocusTraversable(false);
         websiteButton.setMinWidth(Region.USE_PREF_SIZE);
         websiteButton.visibleProperty().bind(websiteProperty().isNotEmpty());
         websiteButton.managedProperty().bind(websiteProperty().isNotEmpty());

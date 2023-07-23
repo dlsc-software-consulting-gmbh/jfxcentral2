@@ -32,6 +32,7 @@ public class NavigationView extends HBox {
         setAlignment(Pos.CENTER);
 
         Button refreshButton = new Button();
+        refreshButton.setFocusTraversable(false);
         refreshButton.setGraphic(new FontIcon(MaterialDesign.MDI_REFRESH));
         refreshButton.setTooltip(new Tooltip("Refresh data"));
         refreshButton.getStyleClass().add("refresh-button");
@@ -40,12 +41,14 @@ public class NavigationView extends HBox {
         refreshButton.setOnAction(evt -> sessionManager.gotoURL("/refresh"));
 
         Button back = new Button();
+        back.setFocusTraversable(false);
         back.setGraphic(new FontIcon(Material.ARROW_BACK));
         back.setOnAction(evt -> sessionManager.goBack());
         back.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(back, Priority.ALWAYS);
 
         Button forward = new Button();
+        forward.setFocusTraversable(false);
         forward.setGraphic(new FontIcon(Material.ARROW_FORWARD));
         forward.setOnAction(evt -> sessionManager.goForward());
         forward.setMaxWidth(Double.MAX_VALUE);

@@ -323,6 +323,7 @@ public class SearchFilterView<T> extends PaneBase {
 
     private <S> ComboBox<S> createComboBox() {
         ComboBox<S> comboBox = new ComboBox<>();
+        comboBox.setFocusTraversable(false);
         if (binding == null) {
             binding = Bindings.createBooleanBinding(comboBox::isShowing, comboBox.showingProperty());
         } else {

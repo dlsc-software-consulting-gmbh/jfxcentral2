@@ -49,6 +49,7 @@ public class DownloadsBox extends PaneBase {
         if (downloadFiles != null && !downloadFiles.isEmpty()) {
             for (Download.DownloadFile downloadFile : downloadFiles) {
                 Button downloadButton = new Button();
+                downloadButton.setFocusTraversable(false);
                 downloadButton.getStyleClass().add("download-button");
                 String downloadName = downloadFile.getName();
                 Ikon downloadIcon;

@@ -98,13 +98,15 @@ public class ProfileContentPane extends PaneBase {
 
     private void updateUI() {
         Button uploadButton = new Button("UPLOAD", new FontIcon(JFXCentralIcon.CAMERA));
+        uploadButton.setFocusTraversable(false);
         uploadButton.getStyleClass().addAll("upload-button", "fill-button");
-
         uploadButton.setOnAction(it -> photoView.setPhoto(photoView.getPhotoSupplier().get()));
 
         Button removeButton = new Button("REMOVE", new FontIcon(JFXCentralIcon.CAMERA));
+        removeButton.setFocusTraversable(false);
         removeButton.getStyleClass().addAll("remove-button", "fill-button");
         removeButton.setOnAction(it -> photoView.setPhoto(null));
+        removeButton.setFocusTraversable(false);
 
         Label tipLabel = new Label("Do you want to delete your account?");
         tipLabel.getStyleClass().add("tip-label");

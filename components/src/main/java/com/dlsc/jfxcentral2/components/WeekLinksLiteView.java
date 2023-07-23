@@ -36,6 +36,7 @@ public class WeekLinksLiteView extends PaneBase {
 
         viewAllButton = new Button("VIEW ALL LINKS OF THE WEEK");
         viewAllButton.getStyleClass().add("view-all-button");
+        viewAllButton.setFocusTraversable(false);
         LinkUtil.setLink(viewAllButton, "/links");
 
         markdownView = new CustomMarkdownView();

@@ -51,19 +51,23 @@ public class WelcomeView extends PaneBase {
 
         flowPane = new FlowPane();
         flowPane.getStyleClass().add("flow-pane");
+
         jfxCentralButton = new Button("jfxcentral");
+        jfxCentralButton.setFocusTraversable(false);
         jfxCentralButton.setGraphic(new FontIcon(IkonUtil.github));
         jfxCentralButton.getStyleClass().addAll("transparent-button", "jfxcentral-button");
         LinkUtil.setExternalLink(jfxCentralButton, "https://github.com/dlemmermann/jfxcentral2");
 
         jfxcentralDataButton = new Button("jfxcentral-data", new FontIcon(IkonUtil.github));
         jfxcentralDataButton.getStyleClass().addAll("transparent-button", "jfxcentral-data-button");
+        jfxcentralDataButton.setFocusTraversable(false);
         LinkUtil.setExternalLink(jfxcentralDataButton, "https://github.com/dlemmermann/jfxcentral-data");
 
         Region downloadRegion = new Region();
         downloadRegion.getStyleClass().add("download-region");
         installLocallyButton = new Button("Install locally", downloadRegion);
         installLocallyButton.getStyleClass().addAll("fill-button", "install-button");
+        installLocallyButton.setFocusTraversable(false);
         LinkUtil.setExternalLink(installLocallyButton, "https://downloads.hydraulic.dev/jfxcentral2/download.html");
         installLocallyButton.setVisible(!mobile);
         installLocallyButton.setManaged(!mobile);
@@ -72,6 +76,7 @@ public class WelcomeView extends PaneBase {
         openjfxRegion.getStyleClass().add("openjfx-region");
         openJFXProjectButton = new Button("OpenJFX project", openjfxRegion);
         openJFXProjectButton.getStyleClass().addAll("fill-button", "openjfx-button");
+        openJFXProjectButton.setFocusTraversable(false);
         LinkUtil.setLink(openJFXProjectButton, "/openjfx");
         setMinHeight(Region.USE_PREF_SIZE);
 

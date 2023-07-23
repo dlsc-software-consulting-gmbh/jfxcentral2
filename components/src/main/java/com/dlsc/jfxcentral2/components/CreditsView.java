@@ -111,6 +111,7 @@ public class CreditsView extends PaneBase {
             }
 
             Button linkButton = new Button();
+            linkButton.setFocusTraversable(false);
             linkButton.getStyleClass().add("link-button");
             linkButton.setGraphic(new FontIcon(IkonUtil.link));
             LinkUtil.setExternalLink(linkButton, creditModel.getUrl());

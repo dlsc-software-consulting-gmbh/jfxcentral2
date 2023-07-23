@@ -95,6 +95,7 @@ public class PersonDetailHeader extends DetailHeader<Person> {
 
         if (StringUtils.isNotBlank(person.getTwitter())) {
             Button twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
+            twitterLinkBtn.setFocusTraversable(false);
             twitterLinkBtn.getStyleClass().addAll("twitter-link-btn","link-button");
             LinkUtil.setExternalLink(twitterLinkBtn, "https://twitter.com/" + person.getTwitter());
             socialFlowPane.getChildren().add(twitterLinkBtn);
@@ -102,6 +103,7 @@ public class PersonDetailHeader extends DetailHeader<Person> {
 
         if (StringUtils.isNotBlank(person.getMastodon())) {
             Button mastodonLinkBtn = new Button("MASTODON", new FontIcon(IkonUtil.mastodon));
+            mastodonLinkBtn.setFocusTraversable(false);
             mastodonLinkBtn.getStyleClass().addAll("mastodon-link-btn","link-button");
             LinkUtil.setExternalLink(mastodonLinkBtn, person.getMastodon());
             socialFlowPane.getChildren().add(mastodonLinkBtn);
@@ -109,6 +111,7 @@ public class PersonDetailHeader extends DetailHeader<Person> {
 
         if (StringUtils.isNotBlank(person.getLinkedIn())) {
             Button linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(IkonUtil.linkedin));
+            linkedInLinkBtn.setFocusTraversable(false);
             linkedInLinkBtn.getStyleClass().addAll("linkedin-link-btn","link-button");
             LinkUtil.setExternalLink(linkedInLinkBtn, "https://www.linkedin.com/in/" + person.getLinkedIn());
             socialFlowPane.getChildren().add(linkedInLinkBtn);
@@ -116,6 +119,7 @@ public class PersonDetailHeader extends DetailHeader<Person> {
 
         if (StringUtils.isNotBlank(person.getWebsite())) {
             Button websiteLinkBtn = new Button("WEBSITE", new FontIcon(IkonUtil.website));
+            websiteLinkBtn.setFocusTraversable(false);
             websiteLinkBtn.getStyleClass().addAll("website-link-btn","link-button");
             LinkUtil.setExternalLink(websiteLinkBtn, person.getWebsite());
             socialFlowPane.getChildren().add(websiteLinkBtn);
@@ -123,6 +127,7 @@ public class PersonDetailHeader extends DetailHeader<Person> {
 
         if (StringUtils.isNotBlank(person.getEmail())) {
             Button mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
+            mailLinkBtn.setFocusTraversable(false);
             mailLinkBtn.getStyleClass().addAll("mail-link-btn","link-button");
             LinkUtil.setExternalLink(mailLinkBtn, "mailto:" + person.getEmail());
             socialFlowPane.getChildren().add(mailLinkBtn);
@@ -130,6 +135,7 @@ public class PersonDetailHeader extends DetailHeader<Person> {
 
         if (StringUtils.isNotBlank(person.getGitHub())) {
             Button githubLinkBtn = new Button("GITHUB", new FontIcon(IkonUtil.github));
+            githubLinkBtn.setFocusTraversable(false);
             githubLinkBtn.getStyleClass().addAll("github-link-btn","link-button");
             LinkUtil.setExternalLink(githubLinkBtn, "https://github.com/" + person.getGitHub());
             socialFlowPane.getChildren().add(githubLinkBtn);

@@ -70,6 +70,7 @@ public class VideoViewFactory {
         webViewWrapper.getStyleClass().add("web-view-wrapper");
 
         Button closeButton = new Button();
+        closeButton.setFocusTraversable(false);
         closeButton.getStyleClass().addAll("close-button","blue-button");
         closeButton.setGraphic(new FontIcon(IkonUtil.close));
         closeButton.setOnAction(event -> {

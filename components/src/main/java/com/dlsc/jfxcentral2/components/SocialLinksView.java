@@ -30,48 +30,56 @@ public class SocialLinksView extends FlowPane {
         twitterLinkBtn.getStyleClass().add("twitter-link-btn");
         twitterLinkBtn.visibleProperty().bind(twitterUrlProperty().isNotEmpty());
         twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
+        twitterLinkBtn.setFocusTraversable(false);
         twitterUrl.addListener(it -> updateLink(twitterLinkBtn, getTwitterUrl()));
 
         mastodonLinkBtn = new Button("MASTODON", new FontIcon(CoreUiBrands.MASTODON));
         mastodonLinkBtn.getStyleClass().add("mastodon-link-btn");
         mastodonLinkBtn.visibleProperty().bind(mastodonUrlProperty().isNotEmpty());
         mastodonLinkBtn.managedProperty().bind(mastodonLinkBtn.visibleProperty());
+        mastodonLinkBtn.setFocusTraversable(false);
         mastodonUrl.addListener(it -> updateLink(mastodonLinkBtn, getMastodonUrl()));
 
         redditLinkBtn = new Button("REDDIT", new FontIcon(IkonUtil.reddit));
         redditLinkBtn.getStyleClass().add("reddit-link-btn");
         redditLinkBtn.visibleProperty().bind(redditUrlProperty().isNotEmpty());
         redditLinkBtn.managedProperty().bind(redditLinkBtn.visibleProperty());
+        redditLinkBtn.setFocusTraversable(false);
         redditUrl.addListener(it -> updateLink(redditLinkBtn, getRedditUrl()));
 
         linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(IkonUtil.linkedin));
         linkedInLinkBtn.getStyleClass().add("linkedin-link-btn");
         linkedInLinkBtn.visibleProperty().bind(linkedInUrlProperty().isNotEmpty());
         linkedInLinkBtn.managedProperty().bind(linkedInLinkBtn.visibleProperty());
+        linkedInLinkBtn.setFocusTraversable(false);
         linkedInUrl.addListener(it -> updateLink(linkedInLinkBtn, getLinkedInUrl()));
 
         websiteLinkBtn = new Button("WEBSITE", new FontIcon(IkonUtil.website));
         websiteLinkBtn.getStyleClass().add("website-link-btn");
         websiteLinkBtn.visibleProperty().bind(websiteUrlProperty().isNotEmpty());
         websiteLinkBtn.managedProperty().bind(websiteLinkBtn.visibleProperty());
+        websiteLinkBtn.setFocusTraversable(false);
         websiteUrl.addListener(it -> updateLink(websiteLinkBtn, getWebsiteUrl()));
 
         githubLinkBtn = new Button("GITHUB", new FontIcon(IkonUtil.github));
         githubLinkBtn.getStyleClass().add("github-link-btn");
         githubLinkBtn.visibleProperty().bind(githubUrlProperty().isNotEmpty());
         githubLinkBtn.managedProperty().bind(githubLinkBtn.visibleProperty());
+        githubLinkBtn.setFocusTraversable(false);
         githubUrl.addListener(it -> updateLink(githubLinkBtn, getGithubUrl()));
 
         facebookLinkBtn = new Button("FACEBOOK", new FontIcon(IkonUtil.facebook));
         facebookLinkBtn.getStyleClass().add("facebook-link-btn");
         facebookLinkBtn.visibleProperty().bind(facebookUrlProperty().isNotEmpty());
         facebookLinkBtn.managedProperty().bind(facebookLinkBtn.visibleProperty());
+        facebookLinkBtn.setFocusTraversable(false);
         facebookUrl.addListener(it -> updateLink(facebookLinkBtn, getFacebookUrl()));
 
         mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
         mailLinkBtn.getStyleClass().add("mail-link-btn");
         mailLinkBtn.visibleProperty().bind(mailUrlProperty().isNotEmpty());
         mailLinkBtn.managedProperty().bind(mailLinkBtn.visibleProperty());
+        mailLinkBtn.setFocusTraversable(false);
         mailUrl.addListener(it -> updateLink(mailLinkBtn, getMailUrl()));
 
         InvalidationListener updateViewListener = it -> updateView();

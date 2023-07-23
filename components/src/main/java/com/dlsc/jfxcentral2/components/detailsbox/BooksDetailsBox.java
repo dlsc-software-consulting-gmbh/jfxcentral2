@@ -40,6 +40,7 @@ public class BooksDetailsBox extends DetailsBoxBase<Book> {
         String url = getOnWebsite().call(book);
         if (StringUtils.isNotBlank(url)) {
             Button websiteBtn = new Button();
+            websiteBtn.setFocusTraversable(false);
             if (StringUtils.isNotBlank(book.getAmazonASIN())) {
                 websiteBtn.setText("amazon");
             }else if (StringUtils.isNotBlank(book.getUrl())) {

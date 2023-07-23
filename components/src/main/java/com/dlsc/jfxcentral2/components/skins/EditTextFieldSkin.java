@@ -25,6 +25,7 @@ public class EditTextFieldSkin extends ControlBaseSkin<EditTextField> {
         titleLabel.textProperty().bind(control.titleProperty());
 
         Button saveButton = new Button();
+        saveButton.setFocusTraversable(false);
         saveButton.getStyleClass().add("save-button");
         saveButton.managedProperty().bind(saveButton.visibleProperty());
         saveButton.visibleProperty().bind(editState.and(control.validProperty()));
@@ -38,6 +39,7 @@ public class EditTextFieldSkin extends ControlBaseSkin<EditTextField> {
         });
 
         Button editButton = new Button("EDIT");
+        editButton.setFocusTraversable(false);
         editButton.getStyleClass().add("edit-button");
         editButton.managedProperty().bind(editButton.visibleProperty());
         editButton.visibleProperty().bind(editState.not());

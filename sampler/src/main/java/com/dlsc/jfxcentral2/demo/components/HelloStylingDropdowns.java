@@ -44,6 +44,7 @@ public class HelloStylingDropdowns extends JFXCentralSampleBase {
 
     private MenuButton createMenuButton() {
         MenuButton menuButton = new MenuButton("Menu Button");
+        menuButton.setFocusTraversable(false);
         List<MenuItem> items = createMenuItems();
         menuButton.getItems().addAll(items);
         return menuButton;

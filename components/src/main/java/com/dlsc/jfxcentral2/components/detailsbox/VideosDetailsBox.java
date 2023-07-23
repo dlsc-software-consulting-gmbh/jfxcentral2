@@ -23,11 +23,13 @@ public class VideosDetailsBox extends DetailsBoxBase<Video> {
     @Override
     protected List<Node> createActionButtons(Video video) {
         Button playButton = new Button("PLAY", new FontIcon(IkonUtil.play));
+        playButton.setFocusTraversable(false);
         playButton.getStyleClass().add("play-button");
         playButton.managedProperty().bind(playButton.visibleProperty());
         playButton.setOnAction(evt -> setSelectedItem(video));
 
         Button youTubeButton = new Button("YouTube");
+        youTubeButton.setFocusTraversable(false);
         youTubeButton.getStyleClass().add("youtube-button");
         LinkUtil.setExternalLink(youTubeButton, "https://youtu.be/" + video.getId(), "https://youtu.be/" + video.getId());
 

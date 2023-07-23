@@ -70,6 +70,7 @@ public class PersonTileView extends SimpleTileView<Person> {
         graphic.getStyleClass().add("more-graphic");
 
         socialButton = new MenuButton();
+        socialButton.setFocusTraversable(false);
         socialButton.getStyleClass().add("social-button");
         socialButton.setGraphic(graphic);
 

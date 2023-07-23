@@ -108,6 +108,7 @@ public class CommentsView extends PaneBase implements NameProvider {
         StackPane pane = new StackPane();
 
         Button loadMoreButton = new Button("LOAD MORE");
+        loadMoreButton.setFocusTraversable(false);
         loadMoreButton.getStyleClass().addAll("load-more-button", "blue-button");
         loadMoreButton.managedProperty().bind(loadMoreButton.visibleProperty());
         loadMoreButton.visibleProperty().bind(comments.emptyProperty().not());
@@ -158,6 +159,7 @@ public class CommentsView extends PaneBase implements NameProvider {
         HBox.setHgrow(textArea, Priority.ALWAYS);
 
         Button submitButton = new Button("SUBMIT");
+        submitButton.setFocusTraversable(false);
         submitButton.getStyleClass().addAll("submit-button", "blue-button");
         submitButton.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         submitButton.managedProperty().bind(submitButton.visibleProperty());
@@ -172,6 +174,7 @@ public class CommentsView extends PaneBase implements NameProvider {
         submittedNotifylabel.getStyleClass().add("notify-label");
 
         Button closeButton = new Button();
+        closeButton.setFocusTraversable(false);
         closeButton.getStyleClass().add("close-button");
         closeButton.setGraphic(new FontIcon(IkonUtil.close));
         closeButton.setOnAction(e -> pane.setCenter(writeBox));

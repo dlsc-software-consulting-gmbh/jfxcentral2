@@ -96,6 +96,7 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         toggleGroup.getToggles().addAll(mavenButton, gradleButton);
 
         Button copyButton = new Button();
+        copyButton.setFocusTraversable(false);
         copyButton.getStyleClass().addAll("blue-button", "copy-button");
         copyButton.setGraphic(new FontIcon(IkonUtil.copy));
 

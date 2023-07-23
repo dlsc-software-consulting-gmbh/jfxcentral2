@@ -99,6 +99,7 @@ public class RefreshPage extends PageBase {
         Label label2 = new Label("Proceed with checkout or exit?");
 
         Button proceedButton = new Button("PROCEED");
+        proceedButton.setFocusTraversable(false);
         proceedButton.setDefaultButton(true);
         proceedButton.setOnAction(evt -> {
             updateView.setVisible(true);
@@ -109,6 +110,7 @@ public class RefreshPage extends PageBase {
         });
 
         Button exitButton = new Button("EXIT");
+        exitButton.setFocusTraversable(false);
         exitButton.setCancelButton(true);
         exitButton.setOnAction(evt -> Platform.exit());
 

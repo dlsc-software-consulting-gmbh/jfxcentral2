@@ -24,6 +24,7 @@ public class TutorialsDetailsBox extends DetailsBoxBase<Tutorial> {
     @Override
     protected List<Node> createActionButtons(Tutorial tutorial) {
         Button visitBlogButton = new Button("VISIT TUTORIAL", new FontIcon(IkonUtil.link));
+        visitBlogButton.setFocusTraversable(false);
         LinkUtil.setExternalLink(visitBlogButton, getVisitUrlProvider().call(tutorial));
         return List.of(createDetailsButton(tutorial), visitBlogButton);
     }

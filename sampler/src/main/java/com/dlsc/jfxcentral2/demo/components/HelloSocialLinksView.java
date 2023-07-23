@@ -25,6 +25,8 @@ public class HelloSocialLinksView extends JFXCentralSampleBase {
         socialLinksView.setGithubUrl("https://github.com/dlsc-software-consulting-gmbh");
 
         MenuButton menuButton = new MenuButton("Menu");
+        menuButton.setFocusTraversable(false);
+
         SocialLinksView menuLinksView = new SocialLinksView();
         menuLinksView.setTwitterUrl("https://twitter.com/");
         menuLinksView.setLinkedInUrl("https://www.linkedin.com/in/");

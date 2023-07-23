@@ -262,6 +262,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
     private Node createBack() {
         Button closeButton = new Button("CLOSE", new FontIcon(IkonUtil.close));
         closeButton.getStyleClass().addAll("close-button", "blue-button");
+        closeButton.setFocusTraversable(false);
         closeButton.setContentDisplay(ContentDisplay.RIGHT);
         closeButton.setOnMousePressed(event -> {
             event.consume();

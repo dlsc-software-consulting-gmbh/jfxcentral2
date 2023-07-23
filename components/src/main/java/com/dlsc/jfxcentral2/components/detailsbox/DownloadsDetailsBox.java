@@ -23,6 +23,7 @@ public class DownloadsDetailsBox extends DetailsBoxBase<Download> {
     @Override
     protected List<Node> createActionButtons(Download download) {
         Button downloadButton = new Button("DOWNLOADS", new FontIcon(IkonUtil.link));
+        downloadButton.setFocusTraversable(false);
         downloadButton.setMinWidth(Region.USE_PREF_SIZE);
         LinkUtil.setLink(downloadButton, PageUtil.getLink(download));
         return List.of(createDetailsButton(download), createHomepageButton(download), downloadButton);

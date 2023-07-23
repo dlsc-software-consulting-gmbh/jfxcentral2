@@ -121,12 +121,11 @@ public class IkonliBrowser extends PaneBase {
         selection.setEditable(false);
 
         Button copy = new Button();
+        copy.setFocusTraversable(false);
         copy.setGraphic(FontIcon.of(MaterialDesign.MDI_CONTENT_COPY, Color.WHITE));
         copy.disableProperty().bind(selection.textProperty().isEmpty());
 
-        selection.textProperty().addListener(it -> {
-            CopyUtil.setCopyOnClick(copy, selection.getText());
-        });
+        selection.textProperty().addListener(it -> CopyUtil.setCopyOnClick(copy, selection.getText()));
 
         searchField = new IkonSearchField();
         searchField.getSuggestions().addListener((Observable it) -> fillGridView(fontsListView.getSelectionModel().getSelectedItems()));

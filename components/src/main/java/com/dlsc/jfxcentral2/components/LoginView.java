@@ -77,6 +77,7 @@ public class LoginView extends PaneBase {
         ImageView googleLogo = new ImageView();
         googleLogo.getStyleClass().add("google-logo");
         Button googleLoginButton = new Button("LOG IN WITH GOOGLE", googleLogo);
+        googleLoginButton.setFocusTraversable(false);
         googleLoginButton.getStyleClass().add("button");
         googleLoginButton.setOnAction(event -> JFXCentralUtil.run(onGoogleLogin));
 
@@ -94,6 +95,7 @@ public class LoginView extends PaneBase {
         ImageView microsoftLogo = new ImageView();
         microsoftLogo.getStyleClass().add("microsoft-logo");
         Button microsoftLoginButton = new Button("LOG IN WITH MICROSOFT", microsoftLogo);
+        microsoftLoginButton.setFocusTraversable(false);
         microsoftLoginButton.getStyleClass().add("button");
         microsoftLoginButton.setOnAction(event -> JFXCentralUtil.run(onMicrosoftLogin));
 

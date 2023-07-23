@@ -50,6 +50,7 @@ public class CommentItemView extends PaneBase {
         }, hoverProperty(), commentProperty());
 
         deleteButton = new Button("DELETE");
+        deleteButton.setFocusTraversable(false);
         deleteButton.getStyleClass().addAll("delete-button", "blue-button");
         deleteButton.setGraphic(new FontIcon(IkonUtil.delete));
         deleteButton.managedProperty().bind(deleteButton.visibleProperty());
@@ -65,6 +66,7 @@ public class CommentItemView extends PaneBase {
         });
 
         Button editButton = new Button("EDIT");
+        editButton.setFocusTraversable(false);
         editButton.getStyleClass().addAll("edit-button");
         editButton.setGraphic(new FontIcon(JFXCentralIcon.EDIT));
         editButton.managedProperty().bind(editButton.visibleProperty());

@@ -103,6 +103,7 @@ public class ErrorView extends PaneBase {
         for (int i = 0; i < actions.size(); i++) {
             Action action = actions.get(i);
             Button button = new Button(action.text());
+            button.setFocusTraversable(false);
             if (action.ikon() != null) {
                 FontIcon icon = new FontIcon(action.ikon());
                 button.setGraphic(icon);

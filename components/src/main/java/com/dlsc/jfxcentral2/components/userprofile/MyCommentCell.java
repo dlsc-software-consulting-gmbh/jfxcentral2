@@ -58,11 +58,13 @@ public class MyCommentCell extends PaneBase {
         HBox.setHgrow(centerPane, Priority.ALWAYS);
 
         Button deleteButton = new Button("Delete", new FontIcon(IkonUtil.delete));
+        deleteButton.setFocusTraversable(false);
         deleteButton.getStyleClass().addAll("fill-button", "delete-button");
         deleteButton.managedProperty().bind(deleteButton.visibleProperty());
         deleteButton.visibleProperty().bind(editState.not());
 
         Button editButton = new Button("Edit", new FontIcon(IkonUtil.edit));
+        editButton.setFocusTraversable(false);
         editButton.getStyleClass().addAll("fill-button", "edit-button");
         editButton.managedProperty().bind(editButton.visibleProperty());
         editButton.visibleProperty().bind(editState.not());
@@ -73,6 +75,7 @@ public class MyCommentCell extends PaneBase {
         });
 
         Button saveButton = new Button();
+        saveButton.setFocusTraversable(false);
         saveButton.getStyleClass().addAll("fill-button", "save-button");
         saveButton.textProperty().bind(sizeProperty().map(it -> it.isSmall() ? "SAVE" : "SAVE CHANGES"));
         saveButton.managedProperty().bind(saveButton.visibleProperty());

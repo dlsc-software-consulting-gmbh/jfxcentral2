@@ -67,6 +67,7 @@ public class PrettyScrollPane extends ScrollPane {
         scrollToTopButton.getStyleClass().addAll("scroll-to-top-button");
         scrollToTopButton.setVisible(false);
         scrollToTopButton.setOpacity(0);
+        scrollToTopButton.setFocusTraversable(false);
         scrollToTopButton.setOnAction(evt -> {
             KeyValue value = new KeyValue(vvalueProperty(), 0);
             KeyFrame frame = new KeyFrame(Duration.millis(150), value);

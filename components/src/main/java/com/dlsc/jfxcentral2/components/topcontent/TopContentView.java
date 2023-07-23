@@ -55,6 +55,7 @@ public class TopContentView<T extends ModelObject> extends PaneBase {
 
         Button loadMoreButton = new Button("LOAD MORE");
         loadMoreButton.getStyleClass().addAll("fill-button", "load-more-button");
+        loadMoreButton.setFocusTraversable(false);
 
         VBox contentBox = new VBox(header, centerBox, loadMoreButton);
         contentBox.getStyleClass().add("content-box");
@@ -127,6 +128,7 @@ public class TopContentView<T extends ModelObject> extends PaneBase {
 
         //link button
         Button linkButton = new Button();
+        linkButton.setFocusTraversable(false);
         linkButton.getStyleClass().add("link-button");
         linkButton.setGraphic(new FontIcon(IkonUtil.link));
         LinkUtil.setLink(linkButton, ModelObjectTool.getModelLink(item));

@@ -70,6 +70,7 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
 
         toFirstButton = new Button("1");
         toFirstButton.getStyleClass().addAll("first", "number-button");
+        toFirstButton.setFocusTraversable(false);
         toFirstButton.setOnAction(e -> {
             control.setCurrentPageIndex(0);
             control.requestFocus();
@@ -83,6 +84,7 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
         ellipsisRightLabel.getStyleClass().addAll("ellipsis-label", "ellipsis-right");
 
         toLastButton = new Button();
+        toLastButton.setFocusTraversable(false);
         toLastButton.getStyleClass().addAll("last", "number-button");
         toLastButton.setOnAction(e -> {
             control.setCurrentPageIndex(control.getPageCount() - 1);

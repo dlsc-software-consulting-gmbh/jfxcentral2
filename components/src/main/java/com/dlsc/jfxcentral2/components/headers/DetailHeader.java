@@ -65,6 +65,7 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
         customMenuItem.setHideOnClick(false);
 
         MenuButton menuButton = new MenuButton("SHARE", new FontIcon(JFXCentralIcon.SHARE));
+        menuButton.setFocusTraversable(false);
         menuButton.getStyleClass().add("share-button");
         if (!WebAPI.isBrowser()) {
             menuButton.getStyleClass().add("standalone");

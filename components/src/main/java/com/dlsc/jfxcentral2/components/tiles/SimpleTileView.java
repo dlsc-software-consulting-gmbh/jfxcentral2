@@ -68,6 +68,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         detailButton = new Button();
         detailButton.getStyleClass().add("detail-button");
         detailButton.setGraphic(new FontIcon(IkonUtil.link));
+        detailButton.setFocusTraversable(false);
 
         badgeBox.getStyleClass().add("badge-box");
 
