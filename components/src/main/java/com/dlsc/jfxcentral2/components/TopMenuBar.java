@@ -16,7 +16,6 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -305,6 +304,7 @@ public class TopMenuBar extends PaneBase {
     private MenuButton createMenuButton(String text) {
         MenuButton menuButton = new MenuButton(text);
         menuButton.setMinWidth(Region.USE_PREF_SIZE);
+        menuButton.setFocusTraversable(false);
         if (blocking == null) {
             blocking = Bindings.createBooleanBinding(menuButton::isShowing, menuButton.showingProperty());
         } else {
