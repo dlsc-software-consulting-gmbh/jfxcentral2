@@ -64,6 +64,7 @@ public class PacksIconsView extends PaneBase {
 
         // top
         searchField = new SearchTextField();
+        searchField.setFocusTraversable(false);
         searchField.textProperty().addListener((ob, ov, str) -> {
             if (future != null) {
                 future.cancel(false);

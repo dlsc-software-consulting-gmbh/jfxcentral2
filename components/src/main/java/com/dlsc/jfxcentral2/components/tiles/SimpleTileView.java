@@ -57,6 +57,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         avatarView.typeProperty().bind(avatarTypeProperty());
         avatarView.visibleProperty().bind(avatarView.imageProperty().isNotNull());
         avatarView.managedProperty().bind(avatarView.imageProperty().isNotNull());
+        avatarView.setMouseTransparent(true);
 
         Label nameLabel = new Label();
         nameLabel.getStyleClass().add("title");
@@ -69,6 +70,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         detailButton.getStyleClass().add("detail-button");
         detailButton.setGraphic(new FontIcon(IkonUtil.link));
         detailButton.setFocusTraversable(false);
+        LinkUtil.setLink(detailButton, PageUtil.getLink(item));
 
         badgeBox.getStyleClass().add("badge-box");
 

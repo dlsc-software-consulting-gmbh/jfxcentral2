@@ -1415,7 +1415,7 @@
     -fx-pref-height: 225px;
     -fx-max-width: 303px;
     -fx-max-height: 225px;
-    -fx-hgap: 10px;
+    -fx-hgap: 8px;
     -fx-vgap: 15px;
 }
 
@@ -5728,7 +5728,7 @@
 }
 
 .library-preview-box:lg .previews-pane {
-    -fx-hgap: 12px;
+    -fx-hgap: 11px;
     -fx-vgap: 10px;
     -fx-padding: 0 0 0 5px;
 }
