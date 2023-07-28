@@ -1,9 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-
-
-
 import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -41,12 +38,19 @@ public class WelcomeView extends PaneBase {
         Label label2 = new Label("related", fxLogo);
         label2.getStyleClass().add("related-label");
 
-        Label label3 = new Label("JFX Central is an open source project that you can find on GitHub, with its content in a separate data repository. Feel free to add your project, documentation, book, etc. via a simple pull-request!");
-        label3.getStyleClass().add("description-label");
-        label3.setWrapText(true);
-        label3.setMinHeight(Region.USE_PREF_SIZE);
+        String fxDesc = "JavaFX is an advanced GUI toolkit accessible from any JVM language, which runs on desktop, mobile and the web." + (WebAPI.isBrowser() ? " What you're looking at right now is a JavaFX app [run with jpro.one]!" : "");
+        Label jfxDescLabel = new Label(fxDesc);
+        jfxDescLabel.getStyleClass().add("fx-description-label");
+        jfxDescLabel.setWrapText(true);
+        jfxDescLabel.setMinHeight(Region.USE_PREF_SIZE);
+        jfxDescLabel.managedProperty().bind(jfxDescLabel.visibleProperty());
 
-        labelBox.getChildren().addAll(label1, label2, label3);
+        Label jfxCentralDescLabel = new Label("JFX Central is an open source project that you can find on GitHub, with its content in a separate data repository. Feel free to add your project, documentation, book, etc. via a simple pull-request!");
+        jfxCentralDescLabel.getStyleClass().add("description-label");
+        jfxCentralDescLabel.setWrapText(true);
+        jfxCentralDescLabel.setMinHeight(Region.USE_PREF_SIZE);
+
+        labelBox.getChildren().addAll(label1, label2, jfxDescLabel, jfxCentralDescLabel);
         labelBox.setMinHeight(Region.USE_PREF_SIZE);
 
         flowPane = new FlowPane();
