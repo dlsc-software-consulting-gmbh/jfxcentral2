@@ -1552,19 +1552,19 @@
 }
 
 .welcome-view:sm .fx-description-label {
-    -fx-padding: 10px 0 0 0;
+    -fx-padding: 0 0 10px 0;
     -fx-font-size: 18px;
     -fx-text-alignment: center;
 }
 
 .welcome-view:md .fx-description-label {
-    -fx-padding: 20px 0 0 0;
+    -fx-padding: 0 0 20px 0;
     -fx-font-size: 20px;
     -fx-text-alignment: center;
 }
 
 .welcome-view:lg .fx-description-label {
-    -fx-padding: 15px 0 0 0;
+    -fx-padding: 0 0 15px 0;
     -fx-font-size: 24px;
     -fx-text-alignment: left;
 }
