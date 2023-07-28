@@ -1,9 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-
-
-
 import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,7 +43,14 @@ public class WelcomeView extends PaneBase {
         label3.setWrapText(true);
         label3.setMinHeight(Region.USE_PREF_SIZE);
 
-        labelBox.getChildren().addAll(label1, label2, label3);
+        String fxDesc = "JavaFX is an advanced GUI toolkit accessible from any JVM language, which runs on desktop, mobile and the web." + (WebAPI.isBrowser() ? " What you're looking at right now is a JavaFX app [run with jpro.one]!" : "");
+        Label label4 = new Label(fxDesc);
+        label4.getStyleClass().add("fx-description-label");
+        label4.setWrapText(true);
+        label4.setMinHeight(Region.USE_PREF_SIZE);
+        label4.managedProperty().bind(label4.visibleProperty());
+
+        labelBox.getChildren().addAll(label1, label2, label3, label4);
         labelBox.setMinHeight(Region.USE_PREF_SIZE);
 
         flowPane = new FlowPane();
