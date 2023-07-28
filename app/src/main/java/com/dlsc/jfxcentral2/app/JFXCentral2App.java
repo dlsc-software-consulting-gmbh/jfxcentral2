@@ -156,8 +156,8 @@ public class JFXCentral2App extends Application {
 
         Route route = Route.empty()
                 .and(RouteUtils.get("/", requestResponseFunction))
-                .and(RouteUtils.get("/home", requestResponseFunction))
-                .and(RouteUtils.get("/index", requestResponseFunction))
+                .and(RouteUtils.redirect("/home", "/"))
+                .and(RouteUtils.redirect("/index", "/"))
                 .and(createCategoryOrDetailRoute("/blogs", Blog.class, () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/books", Book.class, () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/companies", Company.class, () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
