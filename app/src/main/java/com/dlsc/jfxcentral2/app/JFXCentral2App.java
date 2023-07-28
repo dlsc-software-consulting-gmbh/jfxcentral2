@@ -75,6 +75,7 @@ import simplefx.experimental.parts.FXFuture;
 
 import java.util.Locale;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class JFXCentral2App extends Application {
@@ -146,13 +147,17 @@ public class JFXCentral2App extends Application {
     }
 
     public Route createRoute() {
+        Function<Request, Response> requestResponseFunction = r -> {
+            if (RepositoryManager.isRepositoryUpdated()) {
+                return new StartPage(size);
+            }
+            return new RefreshPage(size);
+        };
+
         Route route = Route.empty()
-                .and(RouteUtils.get("/", r -> {
-                    if (RepositoryManager.isRepositoryUpdated()) {
-                        return new StartPage(size);
-                    }
-                    return new RefreshPage(size);
-                }))
+                .and(RouteUtils.get("/", requestResponseFunction))
+                .and(RouteUtils.get("/home", requestResponseFunction))
+                .and(RouteUtils.get("/index", requestResponseFunction))
                 .and(createCategoryOrDetailRoute("/blogs", Blog.class, () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/books", Book.class, () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/companies", Company.class, () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
