@@ -10,19 +10,24 @@ import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class DetailsContentPane extends PaneBase {
 
     private final MenuView menuView = new MenuView();
+    private final BorderPane leftSidePane = new BorderPane();
 
     private final CommentsView commentsView = new CommentsView();
     private final FeaturesContainer featuresContainer = new FeaturesContainer();
@@ -48,7 +53,11 @@ public class DetailsContentPane extends PaneBase {
         menuView.visibleProperty().bind(sizeProperty().isEqualTo(Size.LARGE));
         menuView.managedProperty().bind(menuView.visibleProperty());
 
-        HBox.setHgrow(menuView, Priority.NEVER);
+        leftSidePane.setCenter(menuView);
+        leftSidePane.topProperty().bind(leftTopExtraNodeProperty());
+        leftSidePane.setMaxHeight(Region.USE_PREF_SIZE);
+
+        HBox.setHgrow(leftSidePane, Priority.NEVER);
 
         commentsView.sizeProperty().bind(sizeProperty());
         commentsView.setVisible(SocialUtil.isSocialFeaturesEnabled());
@@ -145,13 +154,13 @@ public class DetailsContentPane extends PaneBase {
         centerBox.getChildren().addAll(detailBoxesContainer, commentsView);
 
         if (size.equals(Size.SMALL) || size.equals(Size.MEDIUM)) {
-            VBox intermediateBox = new VBox(menuView, centerBox, featuresContainer);
+            VBox intermediateBox = new VBox(leftSidePane, centerBox, featuresContainer);
             intermediateBox.getStyleClass().add("intermediate-box");
             intermediateBox.setAlignment(Pos.TOP_CENTER);
             HBox.setHgrow(intermediateBox, Priority.ALWAYS);
             contentBox.getChildren().setAll(intermediateBox);
         } else {
-            contentBox.getChildren().setAll(menuView, centerBox, featuresContainer);
+            contentBox.getChildren().setAll(leftSidePane, centerBox, featuresContainer);
         }
     }
 
@@ -173,5 +182,19 @@ public class DetailsContentPane extends PaneBase {
 
     public ObservableList<DetailsBoxBase<?>> getDetailBoxes() {
         return detailBoxes;
+    }
+
+    private final ObjectProperty<Node> leftTopExtraNode = new SimpleObjectProperty<>(this, "leftTopExtraNode");
+
+    public Node getLeftTopExtraNode() {
+        return leftTopExtraNode.get();
+    }
+
+    public ObjectProperty<Node> leftTopExtraNodeProperty() {
+        return leftTopExtraNode;
+    }
+
+    public void setLeftTopExtraNode(Node leftTopExtraNode) {
+        this.leftTopExtraNode.set(leftTopExtraNode);
     }
 }
