@@ -22,6 +22,7 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.property.IntegerProperty;
@@ -307,28 +308,11 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
     protected Node createMainPreView(T model) {
         ObjectProperty<Image> imageProperty = null;
         String mins = null;
-        if (model instanceof RealWorldApp app) {
-            imageProperty = ImageManager.getInstance().realWorldAppBannerImageProperty(app);
-        } else if (model instanceof Download download) {
-            imageProperty = ImageManager.getInstance().downloadBannerImageProperty(download);
-        } else if (model instanceof Book book) {
-            imageProperty = ImageManager.getInstance().bookCoverImageProperty(book);
-        } else if (model instanceof Tip tip) {
-            imageProperty = ImageManager.getInstance().tipBannerImageProperty(tip);
-        } else if (model instanceof Company company) {
-            imageProperty = ImageManager.getInstance().companyImageProperty(company);
-        } else if (model instanceof Person person) {
-            imageProperty = ImageManager.getInstance().personImageProperty(person);
-        } else if (model instanceof Video video) {
-            imageProperty = ImageManager.getInstance().youTubeImageProperty(video);
+
+        if (model instanceof Video video) {
             mins = video.getMinutes() + " mins";
-        } else if (model instanceof Blog blog) {
-            imageProperty = ImageManager.getInstance().blogIconImageProperty(blog);
-        } else if (model instanceof Tool tool) {
-            imageProperty = ImageManager.getInstance().toolImageProperty(tool);
-        } else if (model instanceof Tutorial tutorial) {
-            imageProperty = ImageManager.getInstance().tutorialImageProperty(tutorial);
         }
+        ModelObjectTool.getModelPreviewFile(model, false);
 
         if (imageProperty != null && imageProperty.get() != null) {
             CustomImageView imageView = new CustomImageView();

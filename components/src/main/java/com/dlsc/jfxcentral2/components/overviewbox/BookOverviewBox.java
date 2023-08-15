@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
-
+import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
 import java.time.format.DateTimeFormatter;
 
 public class BookOverviewBox extends OverviewBox<Book> {
@@ -34,7 +34,8 @@ public class BookOverviewBox extends OverviewBox<Book> {
         Label isbnLabel = new Label();
 
         CustomImageView previewImageView = new CustomImageView();
-        previewImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
+
+        previewImageView.imageProperty().set(CentralImageManager.getBookCoverImage2(book));
 
         writtenByLabel.getStyleClass().add("field-value");
         writtenByLabel.setWrapText(true);

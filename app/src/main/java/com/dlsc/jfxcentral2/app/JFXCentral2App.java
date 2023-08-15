@@ -73,6 +73,7 @@ import one.jpro.routing.dev.DevFilter;
 import one.jpro.routing.sessionmanager.SessionManager;
 import simplefx.experimental.parts.FXFuture;
 
+import java.io.File;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -94,6 +95,9 @@ public class JFXCentral2App extends Application {
             System.setProperty("prism.lcdtext", "false");
             System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
         }
+        // set jpro.imagemanager.cache to ~/.jfxcentral/imagecache
+        System.setProperty("jpro.imagemanager.cache", new File(new File(System.getProperty("user.home")), ".jfxcentral/imagecache").getAbsolutePath());
+        System.out.println("jpro.imagemanager.cache: " + System.getProperty("jpro.imagemanager.cache"));
 
         stage.initStyle(StageStyle.UNDECORATED);
 
