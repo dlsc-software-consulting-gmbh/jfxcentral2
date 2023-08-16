@@ -74,7 +74,11 @@ public class ModelObjectTool {
         }
         File file = getModelPreviewFile(modelObject, large);
 
-        return new SimpleObjectProperty<>(CentralImageManager.getPreviewImage(file, large));
+        if (file.exists()) {
+            return new SimpleObjectProperty<>(CentralImageManager.getPreviewImage(file, large));
+        } else {
+            return new SimpleObjectProperty<>(null);
+        }
     }
 
     public static String getModelLink(ModelObject modelObject) {

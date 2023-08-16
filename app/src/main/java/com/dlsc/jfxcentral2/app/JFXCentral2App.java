@@ -73,6 +73,7 @@ import one.jpro.routing.dev.DevFilter;
 import one.jpro.routing.sessionmanager.SessionManager;
 import simplefx.experimental.parts.FXFuture;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Locale;
 import java.util.Objects;
@@ -90,6 +91,10 @@ public class JFXCentral2App extends Application {
 
     @Override
     public void start(Stage stage) {
+
+        // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
+        BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+        bi.createGraphics();
 
         if (!WebAPI.isBrowser()) {
             System.setProperty("prism.lcdtext", "false");
