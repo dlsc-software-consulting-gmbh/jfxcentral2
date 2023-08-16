@@ -30,7 +30,6 @@ public class ModelObjectTool {
 
 
     public static File getModelPreviewFile(ModelObject modelObject, boolean largerImageFirst) {
-        // HERE
         if (modelObject instanceof Tool tool) {
             return ImageManager.getInstance().toolFile(tool);
         } else if (modelObject instanceof Blog blog) {
@@ -65,16 +64,16 @@ public class ModelObjectTool {
      * Returns the image property for the given model object.
      */
     public static ObjectProperty<Image> getModelPreviewImageProperty(ModelObject modelObject, boolean large) {
-        if(modelObject instanceof Video video) {
-            if(WebAPI.isBrowser()) {
-                return new SimpleObjectProperty<>(WebAPI.createVirtualImage(ImageManager.getInstance().youTubeImageURL(video), 480,360));
+        if (modelObject instanceof Video video) {
+            if (WebAPI.isBrowser()) {
+                return new SimpleObjectProperty<>(WebAPI.createVirtualImage(ImageManager.getInstance().youTubeImageURL(video), 480, 360));
             } else {
                 return ImageManager.getInstance().youTubeImageProperty(video);
             }
         }
-        File file = getModelPreviewFile(modelObject, large);
 
-        if (file.exists()) {
+        File file = getModelPreviewFile(modelObject, large);
+        if (file != null && file.exists()) {
             return new SimpleObjectProperty<>(CentralImageManager.getPreviewImage(file, large));
         } else {
             return new SimpleObjectProperty<>(null);
