@@ -3,13 +3,11 @@ package com.dlsc.jfxcentral2.utils.images;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
-import javafx.beans.property.ObjectProperty;
 import javafx.scene.image.Image;
 import one.jpro.utils.imagemanager.ImageDefinition;
 import one.jpro.utils.imagemanager.ImageManager;
 import one.jpro.utils.imagemanager.imageencoder.ImageEncoder;
 import one.jpro.utils.imagemanager.imageencoder.ImageEncoderJPG;
-import one.jpro.utils.imagemanager.imageencoder.ImageEncoderPNG;
 import one.jpro.utils.imagemanager.imagesource.ImageSource;
 import one.jpro.utils.imagemanager.imagesource.ImageSourceFile;
 import one.jpro.utils.imagemanager.imagetransformer.ImageTransformer;
@@ -34,17 +32,9 @@ public class CentralImageManager {
 
     }
 
-    public File realWorldAppImageFile(RealWorldApp app) {
-        return getImage( "realworld/" + app.getId() + "/", "small.jpg");
-    }
-
-    public File realWorldAppLargeImageProperty(RealWorldApp app) {
-        return getImage( "realworld/" + app.getId() + "/", "large.jpg");
-    }
-
-
     static int HEIGHT_PREVIEW_LARGE = 147;
     static int HEIGHT_PREVIEW_SMALL = 71;
+
     public static Image getPreviewImage(File file, boolean large) {
 
         System.out.println("getPreviewImage: " + file.getAbsolutePath());
@@ -66,7 +56,7 @@ public class CentralImageManager {
 
 
     public static File realWorldAppBannerImageFile(RealWorldApp app) {
-        return getImage( "realworld/" + app.getId() + "/", "banner.jpg");
+        return getImage("realworld/" + app.getId() + "/", "banner.jpg");
     }
 
     public static Image getBookCoverImage1(Book book) {
@@ -94,11 +84,11 @@ public class CentralImageManager {
 
     public static File getImage(String folder, String filename) {
         File f = new File(DataRepository.getInstance().getRepositoryDirectory(), folder + filename);
-        if(f.exists()) {
+        if (f.exists()) {
             return f;
         } else {
             File missing = new File(MISSING_IMAGE.getFile());
-            if(missing.exists()) {
+            if (missing.exists()) {
                 return missing;
             } else {
                 throw new RuntimeException("MISSING IS MISSING");
