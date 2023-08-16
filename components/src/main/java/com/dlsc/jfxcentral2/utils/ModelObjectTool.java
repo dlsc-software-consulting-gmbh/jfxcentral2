@@ -53,7 +53,7 @@ public class ModelObjectTool {
         } else if (modelObject instanceof Tutorial tutorial) {
             return largerImageFirst ? ImageManager.getInstance().tutorialLargeFile(tutorial) : ImageManager.getInstance().tutorialFile(tutorial);
         } else if (modelObject instanceof RealWorldApp app) {
-            return largerImageFirst ? ImageManager.getInstance().realWorldAppLargeFile(app) : ImageManager.getInstance().realWorldAppFile(app);
+            return ImageManager.getInstance().realWorldAppBannerFile(app);
         } else if (modelObject instanceof News news) {
             return ImageManager.getInstance().newsBannerFile(news);
         }
