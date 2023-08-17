@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.utils.images;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import javafx.scene.image.Image;
 import one.jpro.utils.imagemanager.ImageDefinition;
@@ -56,7 +57,17 @@ public class CentralImageManager {
 
 
     public static File realWorldAppBannerImageFile(RealWorldApp app) {
-        return getImage("realworld/" + app.getId() + "/", "banner.jpg");
+        return com.dlsc.jfxcentral.data.ImageManager.getInstance().realWorldAppBannerFile(app);
+    }
+
+    public static Image getDownloadImage(Download download) {
+        ImageEncoder encoding = new ImageEncoderJPG(0.85);
+        //ImageEncoder encoding = new ImageEncoderPNG();
+        ImageTransformer transformer = new ImageTransformerWH(413, 233, 2);
+        File file = com.dlsc.jfxcentral.data.ImageManager.getInstance().downloadBannerFile(download);
+        ImageSource source = new ImageSourceFile(file);
+
+        return manager.loadImage(new ImageDefinition(source, transformer, encoding)).toFXImage();
     }
 
     public static Image getBookCoverImage1(Book book) {

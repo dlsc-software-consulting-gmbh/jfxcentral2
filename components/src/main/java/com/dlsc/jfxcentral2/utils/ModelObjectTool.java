@@ -74,7 +74,11 @@ public class ModelObjectTool {
 
         File file = getModelPreviewFile(modelObject, large);
         if (file != null && file.exists()) {
-            return new SimpleObjectProperty<>(CentralImageManager.getPreviewImage(file, large));
+            if(file.getName().endsWith("png")) {
+                return new SimpleObjectProperty<>(new Image(file.toURI().toString()));
+            } else {
+                return new SimpleObjectProperty<>(CentralImageManager.getPreviewImage(file, large));
+            }
         } else {
             return new SimpleObjectProperty<>(null);
         }
