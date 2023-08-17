@@ -2369,7 +2369,7 @@
 }
 
 .quick-link-view.senapt-link-view-0 {
-    -fx-background-image: url("utils/senapt-bg0.png");
+    -fx-background-image: url("utils/senapt-bg0.jpg");
 }
 
 .quick-link-view.senapt-link-view-0 .content-box {
@@ -2397,7 +2397,7 @@
 }
 
 .quick-link-view.senapt-link-view-1 {
-    -fx-background-image: url("utils/senapt-bg1.png");
+    -fx-background-image: url("utils/senapt-bg1.jpg");
 }
 
 .quick-link-view.senapt-link-view-1 .content-box,
@@ -2434,7 +2434,7 @@
 }
 
 .quick-link-view.senapt-link-view-2 {
-    -fx-background-image: url("utils/senapt-bg2.png");
+    -fx-background-image: url("utils/senapt-bg2.jpg");
 }
 
 /** -------------------------------
