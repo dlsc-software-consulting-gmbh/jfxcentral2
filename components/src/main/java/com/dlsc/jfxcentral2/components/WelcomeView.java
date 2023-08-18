@@ -1,9 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-
-
-
 import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +17,7 @@ public class WelcomeView extends PaneBase {
     private final VBox labelBox;
     private final FlowPane flowPane;
     private final Button openJFXProjectButton;
-    private final Button installLocallyButton;
+    private final Button clientWebSwitchButton;
     private final Button jfxcentralDataButton;
     private final Button jfxCentralButton;
     private double xOffset;
@@ -41,12 +38,19 @@ public class WelcomeView extends PaneBase {
         Label label2 = new Label("related", fxLogo);
         label2.getStyleClass().add("related-label");
 
-        Label label3 = new Label("JFX Central is an open source project that you can find on GitHub, with its content in a separate data repository. Feel free to add your project, documentation, book, etc. via a simple pull-request!");
-        label3.getStyleClass().add("description-label");
-        label3.setWrapText(true);
-        label3.setMinHeight(Region.USE_PREF_SIZE);
+        String fxDesc = "JavaFX is an advanced GUI toolkit accessible from any JVM language, which runs on desktop, mobile and the web." + (WebAPI.isBrowser() ? " What you're looking at right now is a JavaFX app [run with jpro.one]!" : "");
+        Label jfxDescLabel = new Label(fxDesc);
+        jfxDescLabel.getStyleClass().add("fx-description-label");
+        jfxDescLabel.setWrapText(true);
+        jfxDescLabel.setMinHeight(Region.USE_PREF_SIZE);
+        jfxDescLabel.managedProperty().bind(jfxDescLabel.visibleProperty());
 
-        labelBox.getChildren().addAll(label1, label2, label3);
+        Label jfxCentralDescLabel = new Label("JFX Central is an open source project that you can find on GitHub, with its content in a separate data repository. Feel free to add your project, documentation, book, etc. via a simple pull-request!");
+        jfxCentralDescLabel.getStyleClass().add("description-label");
+        jfxCentralDescLabel.setWrapText(true);
+        jfxCentralDescLabel.setMinHeight(Region.USE_PREF_SIZE);
+
+        labelBox.getChildren().addAll(label1, label2, jfxDescLabel, jfxCentralDescLabel);
         labelBox.setMinHeight(Region.USE_PREF_SIZE);
 
         flowPane = new FlowPane();
@@ -63,18 +67,25 @@ public class WelcomeView extends PaneBase {
         jfxcentralDataButton.setFocusTraversable(false);
         LinkUtil.setExternalLink(jfxcentralDataButton, "https://github.com/dlemmermann/jfxcentral-data");
 
-        Region downloadRegion = new Region();
-        downloadRegion.getStyleClass().add("download-region");
-        installLocallyButton = new Button("Install locally", downloadRegion);
-        installLocallyButton.getStyleClass().addAll("fill-button", "install-button");
-        installLocallyButton.setFocusTraversable(false);
-        LinkUtil.setExternalLink(installLocallyButton, "https://downloads.hydraulic.dev/jfxcentral2/download.html");
-        installLocallyButton.setVisible(!mobile);
-        installLocallyButton.setManaged(!mobile);
+        Region graphicRegion = new Region();
+        clientWebSwitchButton = new Button("Install locally", graphicRegion);
+        if (WebAPI.isBrowser()) {
+            clientWebSwitchButton.setText("Install locally");
+            graphicRegion.getStyleClass().add("download-region");
+            LinkUtil.setExternalLink(clientWebSwitchButton, "https://downloads.hydraulic.dev/jfxcentral2/download.html");
+        } else {
+            clientWebSwitchButton.setText("Online Version");
+            graphicRegion.getStyleClass().add("openjfx-region");
+            LinkUtil.setLink(clientWebSwitchButton, "https://www.jfx-central.com/");
+        }
+        clientWebSwitchButton.getStyleClass().addAll("fill-button", "install-button");
+        clientWebSwitchButton.setFocusTraversable(false);
+        clientWebSwitchButton.setVisible(!mobile);
+        clientWebSwitchButton.setManaged(!mobile);
 
         Region openjfxRegion = new Region();
         openjfxRegion.getStyleClass().add("openjfx-region");
-        openJFXProjectButton = new Button("OpenJFX project", openjfxRegion);
+        openJFXProjectButton = new Button("OpenJFX Project", openjfxRegion);
         openJFXProjectButton.getStyleClass().addAll("fill-button", "openjfx-button");
         openJFXProjectButton.setFocusTraversable(false);
         LinkUtil.setLink(openJFXProjectButton, "/openjfx");
@@ -97,9 +108,9 @@ public class WelcomeView extends PaneBase {
 
     protected void layoutBySize() {
         if (isMedium()) {
-            flowPane.getChildren().setAll(jfxCentralButton, installLocallyButton, jfxcentralDataButton, openJFXProjectButton);
+            flowPane.getChildren().setAll(jfxCentralButton, clientWebSwitchButton, jfxcentralDataButton, openJFXProjectButton);
         } else {
-            flowPane.getChildren().setAll(jfxCentralButton, jfxcentralDataButton, installLocallyButton, openJFXProjectButton);
+            flowPane.getChildren().setAll(jfxCentralButton, jfxcentralDataButton, clientWebSwitchButton, openJFXProjectButton);
         }
         Pane content = isLarge() ? new HBox() : new VBox();
         content.getStyleClass().add("content");

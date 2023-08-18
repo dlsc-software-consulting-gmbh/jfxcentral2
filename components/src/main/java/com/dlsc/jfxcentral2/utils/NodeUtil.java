@@ -1,5 +1,8 @@
 package com.dlsc.jfxcentral2.utils;
 
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -96,6 +99,22 @@ public class NodeUtil {
             // just for usability
             node.requestFocus();
         }
+    }
+
+    public static void scrollToNode(Node node, long delayMillis) {
+        new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        Thread.sleep(delayMillis);
+                        Platform.runLater(() -> scrollToNode(node));
+                        return null;
+                    }
+                };
+            }
+        }.start();
     }
 
     public static ScrollPane findScrollPane(Node node) {

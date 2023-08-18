@@ -15,6 +15,7 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.model.Feature;
 import com.dlsc.jfxcentral2.model.Feature.Type;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -108,28 +109,9 @@ public class FeaturesContainer extends PaneBase {
 
     private ObjectProperty<Image> getImageProperty(ModelObject mo) {
         Objects.requireNonNull(mo, "model object can not be null");
+        // HERE
 
-        if (mo instanceof Video video) {
-            return ImageManager.getInstance().youTubeImageProperty(video);
-        } else if (mo instanceof Tip tip) {
-            return ImageManager.getInstance().tipBannerImageProperty(tip);
-        } else if (mo instanceof Tutorial tutorial) {
-            return ImageManager.getInstance().tutorialImageProperty(tutorial);
-        } else if (mo instanceof Library library) {
-            return ImageManager.getInstance().libraryImageProperty(library);
-        } else if (mo instanceof RealWorldApp app) {
-            return ImageManager.getInstance().realWorldAppBannerImageProperty(app);
-        } else if (mo instanceof Person person) {
-            return ImageManager.getInstance().personImageProperty(person);
-        } else if (mo instanceof Blog blog) {
-            return ImageManager.getInstance().blogIconImageProperty(blog);
-        } else if (mo instanceof Tool tool) {
-            return ImageManager.getInstance().toolImageProperty(tool);
-        } else if (mo instanceof Book book) {
-            return ImageManager.getInstance().bookCoverImageProperty(book);
-        } else {
-            throw new IllegalArgumentException("model object of type " + mo.getClass().getSimpleName() + " is not supported");
-        }
+        return ModelObjectTool.getModelPreviewImageProperty(mo, true);
     }
 
     private Type getType(ModelObject mo) {

@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral.data.ImageManager;
+import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
@@ -24,7 +25,7 @@ public class BookTileView extends PreviewTileView<Book> {
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));
 
-        imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
+        imageProperty().set(CentralImageManager.getBookCoverImage1(book));
 
         LinkUtil.setLink(getButton1(), "/books/" + book.getId());
 

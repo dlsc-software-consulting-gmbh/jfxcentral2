@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components.tiles;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
 import one.jpro.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -13,7 +14,7 @@ public class AppTileView extends TileView<RealWorldApp> {
 
         getStyleClass().add("app-tile-view");
 
-        imageProperty().bind(ImageManager.getInstance().realWorldAppBannerImageProperty(app));
+        imageProperty().set(CentralImageManager.getRealWorldAppBannerImage2(app));
 
         setButton1Text("DISCOVER");
         setButton1Graphic(new FontIcon(IkonUtil.link));

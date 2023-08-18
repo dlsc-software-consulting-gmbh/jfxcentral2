@@ -73,6 +73,8 @@ import one.jpro.routing.dev.DevFilter;
 import one.jpro.routing.sessionmanager.SessionManager;
 import simplefx.experimental.parts.FXFuture;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -90,10 +92,17 @@ public class JFXCentral2App extends Application {
     @Override
     public void start(Stage stage) {
 
+        // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
+        BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+        bi.createGraphics();
+
         if (!WebAPI.isBrowser()) {
             System.setProperty("prism.lcdtext", "false");
             System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
         }
+        // set jpro.imagemanager.cache to ~/.jfxcentral/imagecache
+        System.setProperty("jpro.imagemanager.cache", new File(new File(System.getProperty("user.home")), ".jfxcentral/imagecache").getAbsolutePath());
+        System.out.println("jpro.imagemanager.cache: " + System.getProperty("jpro.imagemanager.cache"));
 
         stage.initStyle(StageStyle.UNDECORATED);
 
@@ -153,6 +162,8 @@ public class JFXCentral2App extends Application {
                     }
                     return new RefreshPage(size);
                 }))
+                .and(RouteUtils.redirect("/home", "/"))
+                .and(RouteUtils.redirect("/index", "/"))
                 .and(createCategoryOrDetailRoute("/blogs", Blog.class, () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/books", Book.class, () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/companies", Company.class, () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
