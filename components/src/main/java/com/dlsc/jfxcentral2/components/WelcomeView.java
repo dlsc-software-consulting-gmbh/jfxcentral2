@@ -17,7 +17,7 @@ public class WelcomeView extends PaneBase {
     private final VBox labelBox;
     private final FlowPane flowPane;
     private final Button openJFXProjectButton;
-    private final Button installLocallyButton;
+    private final Button clientWebSwitchButton;
     private final Button jfxcentralDataButton;
     private final Button jfxCentralButton;
     private double xOffset;
@@ -67,14 +67,21 @@ public class WelcomeView extends PaneBase {
         jfxcentralDataButton.setFocusTraversable(false);
         LinkUtil.setExternalLink(jfxcentralDataButton, "https://github.com/dlemmermann/jfxcentral-data");
 
-        Region downloadRegion = new Region();
-        downloadRegion.getStyleClass().add("download-region");
-        installLocallyButton = new Button("Install locally", downloadRegion);
-        installLocallyButton.getStyleClass().addAll("fill-button", "install-button");
-        installLocallyButton.setFocusTraversable(false);
-        LinkUtil.setExternalLink(installLocallyButton, "https://downloads.hydraulic.dev/jfxcentral2/download.html");
-        installLocallyButton.setVisible(!mobile);
-        installLocallyButton.setManaged(!mobile);
+        Region graphicRegion = new Region();
+        clientWebSwitchButton = new Button("Install locally", graphicRegion);
+        if (WebAPI.isBrowser()) {
+            clientWebSwitchButton.setText("Install locally");
+            graphicRegion.getStyleClass().add("download-region");
+            LinkUtil.setExternalLink(clientWebSwitchButton, "https://downloads.hydraulic.dev/jfxcentral2/download.html");
+        } else {
+            clientWebSwitchButton.setText("JFXCentral Home");
+            graphicRegion.getStyleClass().add("openjfx-region");
+            LinkUtil.setLink(clientWebSwitchButton, "https://www.jfx-central.com/");
+        }
+        clientWebSwitchButton.getStyleClass().addAll("fill-button", "install-button");
+        clientWebSwitchButton.setFocusTraversable(false);
+        clientWebSwitchButton.setVisible(!mobile);
+        clientWebSwitchButton.setManaged(!mobile);
 
         Region openjfxRegion = new Region();
         openjfxRegion.getStyleClass().add("openjfx-region");
@@ -101,9 +108,9 @@ public class WelcomeView extends PaneBase {
 
     protected void layoutBySize() {
         if (isMedium()) {
-            flowPane.getChildren().setAll(jfxCentralButton, installLocallyButton, jfxcentralDataButton, openJFXProjectButton);
+            flowPane.getChildren().setAll(jfxCentralButton, clientWebSwitchButton, jfxcentralDataButton, openJFXProjectButton);
         } else {
-            flowPane.getChildren().setAll(jfxCentralButton, jfxcentralDataButton, installLocallyButton, openJFXProjectButton);
+            flowPane.getChildren().setAll(jfxCentralButton, jfxcentralDataButton, clientWebSwitchButton, openJFXProjectButton);
         }
         Pane content = isLarge() ? new HBox() : new VBox();
         content.getStyleClass().add("content");
