@@ -89,6 +89,7 @@ public class OpenJFXPage extends PageBase {
     }
 
     private void updateUI(PullRequestsFilterView pullRequestsFilterView, PullRequestsView pullRequestsView) {
+        filteredList.setPredicate(null);
         filteredList.setPredicate(pullRequestsFilterView.getPredicate());
         if (!pullRequests.isEmpty()) {
             pullRequestsFilterView.setDisable(false);
