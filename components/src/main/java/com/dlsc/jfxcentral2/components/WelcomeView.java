@@ -74,7 +74,7 @@ public class WelcomeView extends PaneBase {
             graphicRegion.getStyleClass().add("download-region");
             LinkUtil.setExternalLink(clientWebSwitchButton, "https://downloads.hydraulic.dev/jfxcentral2/download.html");
         } else {
-            clientWebSwitchButton.setText("JFXCentral Home");
+            clientWebSwitchButton.setText("Online Version");
             graphicRegion.getStyleClass().add("openjfx-region");
             LinkUtil.setLink(clientWebSwitchButton, "https://www.jfx-central.com/");
         }
@@ -85,7 +85,7 @@ public class WelcomeView extends PaneBase {
 
         Region openjfxRegion = new Region();
         openjfxRegion.getStyleClass().add("openjfx-region");
-        openJFXProjectButton = new Button("OpenJFX project", openjfxRegion);
+        openJFXProjectButton = new Button("OpenJFX Project", openjfxRegion);
         openJFXProjectButton.getStyleClass().addAll("fill-button", "openjfx-button");
         openJFXProjectButton.setFocusTraversable(false);
         LinkUtil.setLink(openJFXProjectButton, "/openjfx");
