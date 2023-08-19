@@ -2,17 +2,10 @@ package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.Blog;
-import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
-import com.dlsc.jfxcentral.data.model.RealWorldApp;
-import com.dlsc.jfxcentral.data.model.Tip;
-import com.dlsc.jfxcentral.data.model.Tool;
-import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
@@ -312,6 +305,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         if (model instanceof Video video) {
             mins = video.getMinutes() + " mins";
         }
+
         imageProperty = ModelObjectTool.getModelPreviewImageProperty(model, false);
 
         if (imageProperty != null && imageProperty.get() != null) {
