@@ -312,7 +312,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
         if (model instanceof Video video) {
             mins = video.getMinutes() + " mins";
         }
-        ModelObjectTool.getModelPreviewFile(model, false);
+        imageProperty = ModelObjectTool.getModelPreviewImageProperty(model, false);
 
         if (imageProperty != null && imageProperty.get() != null) {
             CustomImageView imageView = new CustomImageView();
