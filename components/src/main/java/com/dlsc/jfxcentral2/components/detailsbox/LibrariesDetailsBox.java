@@ -29,6 +29,18 @@ public class LibrariesDetailsBox extends DetailsBoxBase<Library> {
     }
 
     @Override
+    protected Node createMainPreView(Library model) {
+        /*
+         * Not all libraries have an icon, so we are not showing in here,
+         * but as part of the title.
+         *
+         * With this approach, we end up with a consistent
+         * layout within the box.
+         */
+        return null;
+    }
+
+    @Override
     protected Node createPreviewsBox(Library library) {
         LibraryPreviewBox previewsBox = new LibraryPreviewBox(library);
         previewsBox.sizeProperty().bind(sizeProperty());
