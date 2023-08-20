@@ -43,7 +43,7 @@ public class RepositoryManager {
         if (!repoDirectory.exists()) {
             Git.cloneRepository()
                     .setProgressMonitor(monitor)
-                    .setURI("https://github.com/dlemmermann/jfxcentral-data.git") //
+                    .setURI("https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data.git") //
                     .setBranch("live")
                     .setDirectory(repoDirectory)
                     .call();
