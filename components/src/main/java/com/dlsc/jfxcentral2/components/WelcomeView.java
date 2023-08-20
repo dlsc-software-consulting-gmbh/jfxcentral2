@@ -60,12 +60,12 @@ public class WelcomeView extends PaneBase {
         jfxCentralButton.setFocusTraversable(false);
         jfxCentralButton.setGraphic(new FontIcon(IkonUtil.github));
         jfxCentralButton.getStyleClass().addAll("transparent-button", "jfxcentral-button");
-        LinkUtil.setExternalLink(jfxCentralButton, "https://github.com/dlemmermann/jfxcentral2");
+        LinkUtil.setExternalLink(jfxCentralButton, "https://github.com/dlsc-software-consulting-gmbh/jfxcentral2");
 
         jfxcentralDataButton = new Button("jfxcentral-data", new FontIcon(IkonUtil.github));
         jfxcentralDataButton.getStyleClass().addAll("transparent-button", "jfxcentral-data-button");
         jfxcentralDataButton.setFocusTraversable(false);
-        LinkUtil.setExternalLink(jfxcentralDataButton, "https://github.com/dlemmermann/jfxcentral-data");
+        LinkUtil.setExternalLink(jfxcentralDataButton, "https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data");
 
         Region graphicRegion = new Region();
         clientWebSwitchButton = new Button("Install locally", graphicRegion);

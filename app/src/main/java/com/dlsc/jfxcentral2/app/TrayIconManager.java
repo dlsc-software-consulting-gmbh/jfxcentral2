@@ -113,11 +113,11 @@ public class TrayIconManager {
         trayIcon.addSeparator();
 
         MenuItem addInfoToJfxCentral = new MenuItem("Add Info to JFX-Central");
-        addInfoToJfxCentral.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral-data"));
+        addInfoToJfxCentral.setOnAction(evt -> showURL("https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data"));
         trayIcon.addMenuItem(addInfoToJfxCentral);
 
         MenuItem reportIssue = new MenuItem("Report an Issue");
-        reportIssue.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral2/issues"));
+        reportIssue.setOnAction(evt -> showURL("https://github.com/dlsc-software-consulting-gmbh/jfxcentral2/issues"));
         trayIcon.addMenuItem(reportIssue);
 
         trayIcon.addSeparator();
