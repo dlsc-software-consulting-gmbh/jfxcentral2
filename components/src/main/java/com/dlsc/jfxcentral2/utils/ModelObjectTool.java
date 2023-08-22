@@ -1,19 +1,7 @@
 package com.dlsc.jfxcentral2.utils;
 
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.Blog;
-import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral.data.model.Company;
-import com.dlsc.jfxcentral.data.model.Download;
-import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral.data.model.News;
-import com.dlsc.jfxcentral.data.model.Person;
-import com.dlsc.jfxcentral.data.model.RealWorldApp;
-import com.dlsc.jfxcentral.data.model.Tip;
-import com.dlsc.jfxcentral.data.model.Tool;
-import com.dlsc.jfxcentral.data.model.Tutorial;
-import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
@@ -110,6 +98,8 @@ public class ModelObjectTool {
         } else if (modelObject instanceof News news) {
             // There is currently no news page
             return "/news/" + news.getId();
+        } else if (modelObject instanceof IkonliPack pack) {
+            return "/icons/" + pack.getId();
         }
 
         return "";

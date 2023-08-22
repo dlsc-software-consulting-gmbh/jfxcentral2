@@ -16,6 +16,7 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -100,13 +101,13 @@ public class TopMenuBar extends PaneBase {
     }
 
     private SearchField<ModelObject> createSearchField() {
-        SearchField<ModelObject> searchField = new SearchField<>() {
-            @Override
-            public void commit() {
-                super.commit();
+        SearchField<ModelObject> searchField = new SearchField<>();
+        searchField.addEventHandler(SearchField.SearchEvent.SUGGESTION_SELECTED, evt -> {
+            ModelObject selectedItem = (ModelObject) evt.getSelectedSuggestion();
+            if (selectedItem != null) {
+                view.sessionManager().gotoURL(ModelObjectTool.getModelLink(selectedItem));
             }
-        };
-
+        });
         searchField.getPopup().setPrefWidth(600);
         searchField.getEditor().setFocusTraversable(false);
         searchField.setPromptText("Search");

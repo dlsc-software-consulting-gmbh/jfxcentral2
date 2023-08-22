@@ -53,12 +53,6 @@ public class SearchResultCell extends ListCell<ModelObject> {
         setPrefWidth(0);
 
         hBox.visibleProperty().bind(itemProperty().isNotNull());
-        itemProperty().addListener(it -> {
-            ModelObject item = getItem();
-            if (item != null) {
-                LinkUtil.setLink(this, PageUtil.getLink(item));
-            }
-        });
 
         setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
