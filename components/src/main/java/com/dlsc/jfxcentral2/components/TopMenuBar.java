@@ -41,6 +41,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
 import one.jpro.routing.LinkUtil;
 import one.jpro.routing.View;
+import one.jpro.routing.sessionmanager.SessionManager;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -61,8 +62,8 @@ public class TopMenuBar extends PaneBase {
     private SearchField<ModelObject> searchField;
     private final HBox contentBox;
     private final StackPane logoWrapper;
-
     private Node searchTextField;
+    private SessionManager sessionManager;
 
     public TopMenuBar(View view) {
         this.view = view;
@@ -90,7 +91,6 @@ public class TopMenuBar extends PaneBase {
         logoWrapper = new StackPane(jfxCentralLogoView);
         LinkUtil.setLink(logoWrapper, "/", "Back to homepage");
 
-        createSearchField();
         layoutBySize();
 
         sceneProperty().addListener(it -> {
@@ -105,7 +105,7 @@ public class TopMenuBar extends PaneBase {
         searchField.addEventHandler(SearchField.SearchEvent.SUGGESTION_SELECTED, evt -> {
             ModelObject selectedItem = (ModelObject) evt.getSelectedSuggestion();
             if (selectedItem != null) {
-                view.sessionManager().gotoURL(ModelObjectTool.getModelLink(selectedItem));
+                getSessionManager().gotoURL(ModelObjectTool.getModelLink(selectedItem));
             }
         });
         searchField.getPopup().setPrefWidth(600);
@@ -129,6 +129,16 @@ public class TopMenuBar extends PaneBase {
             }
         });
         return searchField;
+    }
+
+    private SessionManager getSessionManager() {
+        if (sessionManager == null) {
+            sessionManager = LinkUtil.getSessionManager(view.realContent());
+            if (sessionManager == null) {
+                throw new IllegalStateException("Failed to initialize SessionManager.");
+            }
+        }
+        return sessionManager;
     }
 
     public List<ModelObject> search(String pattern) {
