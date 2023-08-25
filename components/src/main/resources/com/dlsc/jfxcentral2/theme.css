@@ -3493,6 +3493,17 @@
 }
 
 /** ------------------------------------
+ * DocumentationTileView
+ */
+.doc-tile-view .avatar-view {
+    -fx-avatar-size: 46px;
+}
+
+.doc-tile-view.cssref-tile-view .avatar-view {
+    -fx-avatar-size: 36px;
+}
+
+/** ------------------------------------
  * BlogTileView
  */
 .blog-tile-view .avatar-view {
