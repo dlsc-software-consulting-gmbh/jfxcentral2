@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.app.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
@@ -70,6 +71,7 @@ public class TrayIconManager {
         Menu realWorld = new Menu("Real World Apps");
         Menu tips = new Menu("Tips & Tricks");
         Menu icons = new Menu("Icons");
+        Menu documentation = new Menu("Documentation");
 
         DataRepository2 repository = DataRepository2.getInstance();
 
@@ -84,6 +86,15 @@ public class TrayIconManager {
         repository.getRealWorldApps().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(realWorld, mo));
         repository.getTips().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tips, mo));
         repository.getIkonliPacks().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(icons, mo));
+        repository.getDocumentation().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(documentation, mo, modelObject -> {
+            try {
+                if (modelObject instanceof Documentation doc) {
+                    Desktop.getDesktop().browse(URI.create(doc.getUrl()));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }));
         repository.getVideos().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(videos, mo, modelObject -> {
             try {
                 Desktop.getDesktop().browse(URI.create("https://www.youtube.com/watch?v=" + modelObject.getId()));
@@ -106,12 +117,6 @@ public class TrayIconManager {
 
         trayIcon.addSeparator();
 
-        MenuItem cssDocs = new MenuItem("CSS Documentation");
-        cssDocs.setOnAction(evt -> showURL("https://openjfx.io/javadoc/20/javafx.graphics/javafx/scene/doc-files/cssref.html"));
-        trayIcon.addMenuItem(cssDocs);
-
-        trayIcon.addSeparator();
-
         MenuItem addInfoToJfxCentral = new MenuItem("Add Info to JFX-Central");
         addInfoToJfxCentral.setOnAction(evt -> showURL("https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data"));
         trayIcon.addMenuItem(addInfoToJfxCentral);
@@ -120,6 +125,8 @@ public class TrayIconManager {
         reportIssue.setOnAction(evt -> showURL("https://github.com/dlsc-software-consulting-gmbh/jfxcentral2/issues"));
         trayIcon.addMenuItem(reportIssue);
 
+        trayIcon.addSeparator();
+        trayIcon.addMenuItem(documentation);
         trayIcon.addSeparator();
 
         trayIcon.addMenuItem(libraries);
@@ -146,14 +153,14 @@ public class TrayIconManager {
         }
     }
 
-    private void createMenuItem(Menu people, ModelObject mo) {
-        createMenuItem(people, mo, this::showModelObject);
+    private void createMenuItem(Menu menu, ModelObject mo) {
+        createMenuItem(menu, mo, this::showModelObject);
     }
 
-    private void createMenuItem(Menu people, ModelObject mo, Consumer<ModelObject> consumer) {
+    private void createMenuItem(Menu menu, ModelObject mo, Consumer<ModelObject> consumer) {
         MenuItem item = new MenuItem(mo.getName());
         item.setOnAction(evt -> consumer.accept(mo));
-        people.getItems().add(item);
+        menu.getItems().add(item);
     }
 
     private void showModelObject(ModelObject mo) {
