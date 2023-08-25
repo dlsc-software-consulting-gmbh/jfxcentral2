@@ -71,7 +71,6 @@ public class RefreshPage extends PageBase {
     public Node content() {
         Platform.runLater(() -> {
             RepositoryManager.repositoryUpdatedProperty().addListener(weakInvalidationListener);
-
             invalidationListener.invalidated(null);
         });
 
