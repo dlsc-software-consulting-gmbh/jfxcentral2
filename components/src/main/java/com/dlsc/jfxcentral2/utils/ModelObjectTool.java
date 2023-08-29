@@ -53,11 +53,7 @@ public class ModelObjectTool {
      */
     public static ObjectProperty<Image> getModelPreviewImageProperty(ModelObject modelObject, boolean large) {
         if (modelObject instanceof Video video) {
-            if (WebAPI.isBrowser()) {
-                return new SimpleObjectProperty<>(WebAPI.createVirtualImage(ImageManager.getInstance().youTubeImageURL(video), 480, 360));
-            } else {
-                return ImageManager.getInstance().youTubeImageProperty(video);
-            }
+            return ImageManager.getInstance().youTubeImageProperty(video);
         }
 
         File file = getModelPreviewFile(modelObject, large);
