@@ -299,7 +299,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
     }
 
     protected Node createMainPreView(T model) {
-        ObjectProperty<Image> imageProperty = null;
+        ObjectProperty<Image> imageProperty;
         String mins = null;
 
         if (model instanceof Video video) {
