@@ -48,10 +48,10 @@ public class RepositoryManager {
     }
 
     private static void initialLoad(ProgressMonitor monitor) throws Exception {
-        System.out.println("调用了initialLoad方法");
         // Network not available, skip initial load
         if (!isNetworkAvailable()) {
             monitor.beginTask("Network not available.", 1);
+            monitor.endTask();
             return;
         }
 
@@ -112,7 +112,7 @@ public class RepositoryManager {
             }
 
         } catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             // If there is an exception, use Github directly
             return false;
         }
