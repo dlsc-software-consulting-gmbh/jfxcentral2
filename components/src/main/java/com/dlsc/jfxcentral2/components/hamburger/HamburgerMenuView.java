@@ -51,6 +51,7 @@ public class HamburgerMenuView extends PaneBase {
         imageView.getStyleClass().addAll("jfx-central-logo", "black");
 
         Button closeButton = new Button();
+        closeButton.setFocusTraversable(false);
         closeButton.setGraphic(new FontIcon(IkonUtil.close));
         closeButton.getStyleClass().add("close-button");
         closeButton.setOnAction(e -> getOnClose().run());

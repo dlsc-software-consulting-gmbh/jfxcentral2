@@ -87,7 +87,9 @@ public class JFXCentral2App extends Application {
     private TrayIconManager trayIconManager;
 
     static {
-        Locale.setDefault(Locale.US);
+        if (WebAPI.isBrowser() || !"zh_CN".equalsIgnoreCase(Locale.getDefault().toString())) {
+            Locale.setDefault(Locale.US);
+        }
     }
 
     @Override
