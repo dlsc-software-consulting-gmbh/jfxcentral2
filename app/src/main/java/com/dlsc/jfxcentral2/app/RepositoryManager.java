@@ -49,7 +49,7 @@ public class RepositoryManager {
     }
 
     private static void initialLoad(ProgressMonitor monitor) throws Exception {
-        // Network not available, skip initial load
+        // Network not available, skip the initial load
         if (!isNetworkAvailable()) {
             monitor.beginTask("Network not available.", 1);
             monitor.endTask();
@@ -60,7 +60,7 @@ public class RepositoryManager {
         if (!repoDirectory.exists()) {
             String repoUrl = GITHUB_REPOSITORY_URL;
 
-            if (isLocalIsCN()) {
+            if (isCountryEqualToChina()) {
                 monitor.beginTask("Checking network...", 1);
                 repoUrl = shouldUseGiteeMirror() ? GITEE_REPOSITORY_URL : GITHUB_REPOSITORY_URL;
                 monitor.endTask();
@@ -86,14 +86,14 @@ public class RepositoryManager {
     }
 
     private static boolean shouldUseGiteeMirror() {
-        if (!isLocalIsCN()) {
+        if (!isCountryEqualToChina()) {
             return false;
         }
         // If locale is CN, then test both GitHub and Gitee to see which one is faster.
         return isGiteeFaster();
     }
 
-    private static boolean isLocalIsCN() {
+    private static boolean isCountryEqualToChina() {
         return "CN".equalsIgnoreCase(Locale.getDefault().getCountry());
     }
 
