@@ -38,7 +38,7 @@ public class WelcomeView extends PaneBase {
         Label label2 = new Label("related", fxLogo);
         label2.getStyleClass().add("related-label");
 
-        String fxDesc = "JavaFX is an advanced GUI toolkit accessible from any JVM language, which runs on desktop, mobile and the web." + (WebAPI.isBrowser() ? " What you're looking at right now is a JavaFX app [run with jpro.one]!" : "");
+        String fxDesc = "JavaFX is an advanced GUI toolkit accessible from any JVM language, which runs on desktop, mobile and the web." + (WebAPI.isBrowser() ? " In fact, this website was written in JavaFX!" : "");
         Label jfxDescLabel = new Label(fxDesc);
         jfxDescLabel.getStyleClass().add("fx-description-label");
         jfxDescLabel.setWrapText(true);

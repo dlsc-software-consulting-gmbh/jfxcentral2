@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
@@ -50,7 +51,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
 
         getStyleClass().addAll("simple-tile-view");
 
-        LinkUtil.setLink(this, PageUtil.getLink(item));
+        setLinkForItem(this, item);
 
         AvatarView avatarView = new AvatarView();
         avatarView.imageProperty().bind(imageProperty());
@@ -70,7 +71,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         detailButton.getStyleClass().add("detail-button");
         detailButton.setGraphic(new FontIcon(IkonUtil.link));
         detailButton.setFocusTraversable(false);
-        LinkUtil.setLink(detailButton, PageUtil.getLink(item));
+        setLinkForItem(detailButton, item);
 
         badgeBox.getStyleClass().add("badge-box");
 
@@ -107,6 +108,16 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
     }
+
+    private void setLinkForItem(Node target, ModelObject item) {
+        if (item instanceof Documentation doc) {
+            //The document link is external, and there's no detailed page.
+            LinkUtil.setExternalLink(target, doc.getUrl());
+        } else {
+            LinkUtil.setLink(target, PageUtil.getLink(item));
+        }
+    }
+
 
     public Button getDetailButton() {
         return detailButton;

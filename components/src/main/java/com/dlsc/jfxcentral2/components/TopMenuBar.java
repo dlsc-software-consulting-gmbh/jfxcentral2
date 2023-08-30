@@ -16,6 +16,7 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -40,6 +41,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
 import one.jpro.routing.LinkUtil;
 import one.jpro.routing.View;
+import one.jpro.routing.sessionmanager.SessionManager;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -60,8 +62,8 @@ public class TopMenuBar extends PaneBase {
     private SearchField<ModelObject> searchField;
     private final HBox contentBox;
     private final StackPane logoWrapper;
-
     private Node searchTextField;
+    private SessionManager sessionManager;
 
     public TopMenuBar(View view) {
         this.view = view;
@@ -89,7 +91,6 @@ public class TopMenuBar extends PaneBase {
         logoWrapper = new StackPane(jfxCentralLogoView);
         LinkUtil.setLink(logoWrapper, "/", "Back to homepage");
 
-        createSearchField();
         layoutBySize();
 
         sceneProperty().addListener(it -> {
@@ -100,13 +101,13 @@ public class TopMenuBar extends PaneBase {
     }
 
     private SearchField<ModelObject> createSearchField() {
-        SearchField<ModelObject> searchField = new SearchField<>() {
-            @Override
-            public void commit() {
-                super.commit();
+        SearchField<ModelObject> searchField = new SearchField<>();
+        searchField.addEventHandler(SearchField.SearchEvent.SUGGESTION_SELECTED, evt -> {
+            ModelObject selectedItem = (ModelObject) evt.getSelectedSuggestion();
+            if (selectedItem != null) {
+                getSessionManager().gotoURL(ModelObjectTool.getModelLink(selectedItem));
             }
-        };
-
+        });
         searchField.getPopup().setPrefWidth(600);
         searchField.getEditor().setFocusTraversable(false);
         searchField.setPromptText("Search");
@@ -128,6 +129,16 @@ public class TopMenuBar extends PaneBase {
             }
         });
         return searchField;
+    }
+
+    private SessionManager getSessionManager() {
+        if (sessionManager == null) {
+            sessionManager = LinkUtil.getSessionManager(view.realContent());
+            if (sessionManager == null) {
+                throw new IllegalStateException("Failed to initialize SessionManager.");
+            }
+        }
+        return sessionManager;
     }
 
     public List<ModelObject> search(String pattern) {
@@ -199,6 +210,12 @@ public class TopMenuBar extends PaneBase {
             showcasesBtn.getStyleClass().add("showcases-button");
             LinkUtil.setLink(showcasesBtn, "/showcases");
 
+            Button documentationBtn = new Button("Documentation");
+            documentationBtn.setFocusTraversable(false);
+            documentationBtn.setMinWidth(Region.USE_PREF_SIZE);
+            documentationBtn.getStyleClass().add("docs-button");
+            LinkUtil.setLink(documentationBtn, "/documentation");
+
             Button downloadsBtn = new Button("Downloads");
             downloadsBtn.setFocusTraversable(false);
             downloadsBtn.setMinWidth(Region.USE_PREF_SIZE);
@@ -221,7 +238,7 @@ public class TopMenuBar extends PaneBase {
 
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn,documentationBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");

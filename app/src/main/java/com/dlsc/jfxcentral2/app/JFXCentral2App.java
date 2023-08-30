@@ -29,6 +29,7 @@ import com.dlsc.jfxcentral2.app.pages.UserProfilePage;
 import com.dlsc.jfxcentral2.app.pages.category.BlogsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.BooksCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.CompaniesCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.DocumentationCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.DownloadsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.IconsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.LibrariesCategoryPage;
@@ -86,7 +87,9 @@ public class JFXCentral2App extends Application {
     private TrayIconManager trayIconManager;
 
     static {
-        Locale.setDefault(Locale.US);
+        if (WebAPI.isBrowser() || !"zh_CN".equalsIgnoreCase(Locale.getDefault().toString())) {
+            Locale.setDefault(Locale.US);
+        }
     }
 
     @Override
@@ -186,6 +189,7 @@ public class JFXCentral2App extends Application {
                 .and(RouteUtils.get("/links/rss", r -> new LinksOfTheWeekPage(size))) // TODO: how to return raw data?
                 .and(RouteUtils.get("/team", r -> new TeamPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
+                .and(RouteUtils.get("/documentation", r -> new DocumentationCategoryPage(size)))
                 .and(RouteUtils.get("/refresh", r -> {
                     RepositoryManager.prepareForRefresh();
                     return new RefreshPage(size);

@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.utils;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
@@ -17,6 +18,7 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import org.kordamp.ikonli.Ikon;
+import org.kordamp.ikonli.codicons.Codicons;
 import org.kordamp.ikonli.coreui.CoreUiBrands;
 import org.kordamp.ikonli.hawcons.HawconsStroke;
 import org.kordamp.ikonli.lineawesome.LineAwesomeSolid;
@@ -59,6 +61,7 @@ public interface IkonUtil {
     Ikon tutorial = JFXCentralIcon.TUTORIALS;
     Ikon video = JFXCentralIcon.VIDEOS;
     Ikon icons = MaterialDesign.MDI_EMOTICON;
+    Ikon documentation = Codicons.BOOK;
 
     Ikon news = MaterialDesignN.NEWSPAPER_VARIANT_OUTLINE;
     Ikon linkOfTheWeek = JFXCentralIcon.LINKS_OF_THE_WEEK;
@@ -96,7 +99,9 @@ public interface IkonUtil {
             return icons;
         } else if (clazz == News.class) {
             return news;
-        }else {
+        } else if (clazz == Documentation.class) {
+            return documentation;
+        } else {
             return null;
         }
     }
