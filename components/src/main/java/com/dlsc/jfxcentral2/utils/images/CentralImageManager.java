@@ -18,28 +18,18 @@ import one.jpro.utils.imagemanager.imagetransformer.ImageTransformerWH;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 
 public class CentralImageManager {
 
-    private static final Image MISSING_USER_IMAGE = new Image(com.dlsc.jfxcentral.data.ImageManager.class.getResource("missing-user.png").toExternalForm());
     private static final URL MISSING_IMAGE = com.dlsc.jfxcentral.data.ImageManager.class.getResource("missing-image.jpg");
-    private static final Image MISSING_VIDEO_IMAGE = new Image(com.dlsc.jfxcentral.data.ImageManager.class.getResource("missing-video.png").toExternalForm());
 
-
-    static ImageManager manager = ImageManager.getInstance();
-
-    //manager = ImageM
-    public void booksCoverImage() {
-
-    }
+    private static final ImageManager manager = ImageManager.getInstance();
 
     static int HEIGHT_PREVIEW_LARGE = 147;
     static int HEIGHT_PREVIEW_SMALL = 71;
 
     public static Image getPreviewImage(File file, boolean large) {
-
-        System.out.println("getPreviewImage: " + file.getAbsolutePath());
-
         ImageEncoder encoding = new ImageEncoderJPG(0.85);
         int height = large ? HEIGHT_PREVIEW_LARGE : HEIGHT_PREVIEW_SMALL;
         ImageTransformer transformer = new ImageTransformerFitHeight(height, 2);
@@ -49,12 +39,10 @@ public class CentralImageManager {
 
     public static Image getRealWorldAppBannerImage2(RealWorldApp app) {
         ImageEncoder encoding = new ImageEncoderJPG(0.85);
-        //ImageEncoder encoding = new ImageEncoderPNG();
         ImageTransformer transformer = new ImageTransformerWH(413, 233, 2);
         ImageSource source = new ImageSourceFile(realWorldAppBannerImageFile(app));
         return manager.loadImage(new ImageDefinition(source, transformer, encoding)).toFXImage();
     }
-
 
     public static File realWorldAppBannerImageFile(RealWorldApp app) {
         return com.dlsc.jfxcentral.data.ImageManager.getInstance().realWorldAppBannerFile(app);
@@ -62,11 +50,9 @@ public class CentralImageManager {
 
     public static Image getDownloadImage(Download download) {
         ImageEncoder encoding = new ImageEncoderJPG(0.85);
-        //ImageEncoder encoding = new ImageEncoderPNG();
         ImageTransformer transformer = new ImageTransformerWH(413, 233, 2);
         File file = com.dlsc.jfxcentral.data.ImageManager.getInstance().downloadBannerFile(download);
         ImageSource source = new ImageSourceFile(file);
-
         return manager.loadImage(new ImageDefinition(source, transformer, encoding)).toFXImage();
     }
 
@@ -89,7 +75,7 @@ public class CentralImageManager {
         if (f.exists()) {
             return f;
         } else {
-            return new File(MISSING_IMAGE.getFile());
+            return new File(Objects.requireNonNull(MISSING_IMAGE).getFile());
         }
     }
 
@@ -98,13 +84,12 @@ public class CentralImageManager {
         if (f.exists()) {
             return f;
         } else {
-            File missing = new File(MISSING_IMAGE.getFile());
+            File missing = new File(Objects.requireNonNull(MISSING_IMAGE).getFile());
             if (missing.exists()) {
                 return missing;
             } else {
                 throw new RuntimeException("MISSING IS MISSING");
             }
         }
-        //return DataRepository.getInstance().getRepositoryDirectory() + folder + filename;
     }
 }

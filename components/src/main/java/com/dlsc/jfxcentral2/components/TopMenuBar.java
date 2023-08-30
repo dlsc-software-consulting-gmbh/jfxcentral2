@@ -102,12 +102,12 @@ public class TopMenuBar extends PaneBase {
 
     private SearchField<ModelObject> createSearchField() {
         SearchField<ModelObject> searchField = new SearchField<>();
-        searchField.addEventHandler(SearchField.SearchEvent.SUGGESTION_SELECTED, evt -> {
-            ModelObject selectedItem = (ModelObject) evt.getSelectedSuggestion();
+        searchField.setOnCommit(selectedItem -> {
             if (selectedItem != null) {
                 getSessionManager().gotoURL(ModelObjectTool.getModelLink(selectedItem));
             }
         });
+
         searchField.getPopup().setPrefWidth(600);
         searchField.getEditor().setFocusTraversable(false);
         searchField.setPromptText("Search");
@@ -144,21 +144,23 @@ public class TopMenuBar extends PaneBase {
     public List<ModelObject> search(String pattern) {
         DataRepository2 repository = DataRepository2.getInstance();
 
-        List<ModelObject> result = new ArrayList<>();
-        search(repository.getBooks(), pattern, result);
-        search(repository.getBlogs(), pattern, result);
-        search(repository.getCompanies(), pattern, result);
-        search(repository.getPeople(), pattern, result);
-        search(repository.getLibraries(), pattern, result);
-        search(repository.getRealWorldApps(), pattern, result);
-        search(repository.getTools(), pattern, result);
-        search(repository.getVideos(), pattern, result);
-        search(repository.getNews(), pattern, result);
-        search(repository.getDownloads(), pattern, result);
-        search(repository.getTutorials(), pattern, result);
-        search(repository.getTips(), pattern, result);
-        search(repository.getIkonliPacks(), pattern, result);
-        return result;
+        List<ModelObject> results = new ArrayList<>();
+        search(repository.getBooks(), pattern, results);
+        search(repository.getBlogs(), pattern, results);
+        search(repository.getCompanies(), pattern, results);
+        search(repository.getPeople(), pattern, results);
+        search(repository.getLibraries(), pattern, results);
+        search(repository.getRealWorldApps(), pattern, results);
+        search(repository.getTools(), pattern, results);
+        search(repository.getVideos(), pattern, results);
+        search(repository.getNews(), pattern, results);
+        search(repository.getDownloads(), pattern, results);
+        search(repository.getTutorials(), pattern, results);
+        search(repository.getTips(), pattern, results);
+        search(repository.getIkonliPacks(), pattern, results);
+
+        System.out.println("results " + results.size());
+        return results;
     }
 
     private void search(List<? extends ModelObject> modelObjects, String pattern, List<ModelObject> result) {
