@@ -12,7 +12,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
+import java.net.*;
 import java.util.Locale;
 
 public class RepositoryManager {
@@ -23,6 +23,7 @@ public class RepositoryManager {
     private static final String GITHUB_REPOSITORY_URL = "https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data.git";
     private static final String GITEE_REPOSITORY_URL = "https://gitee.com/leewyatt/jfxcentral-data-mirror.git";
     private static final int TIMEOUT = 2000;
+    private static final int HTTP_PORT = 443;
 
     public static boolean isRepositoryUpdated() {
         return repositoryUpdated.get();
@@ -49,17 +50,25 @@ public class RepositoryManager {
 
     private static void initialLoad(ProgressMonitor monitor) throws Exception {
         // Network not available, skip initial load
-//        if (!isNetworkAvailable()) {
-//            monitor.beginTask("Network not available.", 1);
-//            monitor.endTask();
-//            return;
-//        }
+        if (!isNetworkAvailable()) {
+            monitor.beginTask("Network not available.", 1);
+            monitor.endTask();
+            return;
+        }
 
         File repoDirectory = DataRepository2.getRepositoryDirectory();
         if (!repoDirectory.exists()) {
+            String repoUrl = GITHUB_REPOSITORY_URL;
+
+            if (isLocalIsCN()) {
+                monitor.beginTask("Checking network...", 1);
+                repoUrl = shouldUseGiteeMirror() ? GITEE_REPOSITORY_URL : GITHUB_REPOSITORY_URL;
+                monitor.endTask();
+            }
+
             CloneCommand cloneCmd = Git.cloneRepository()
                     .setProgressMonitor(monitor)
-                    .setURI(shouldUseGitee() ? GITEE_REPOSITORY_URL : GITHUB_REPOSITORY_URL)
+                    .setURI(repoUrl)
                     .setBranch("live")
                     .setDirectory(repoDirectory);
             try (Git git = cloneCmd.call()) {
@@ -76,14 +85,26 @@ public class RepositoryManager {
         }
     }
 
-
-    public static boolean shouldUseGitee() {
-        boolean localIsCN = "zh_CN".equalsIgnoreCase(Locale.getDefault().toString());
-        if (!localIsCN) {
+    private static boolean shouldUseGiteeMirror() {
+        if (!isLocalIsCN()) {
             return false;
         }
-        // If locale is zh_CN, then test both GitHub and Gitee to see which one is faster.
+        // If locale is CN, then test both GitHub and Gitee to see which one is faster.
         return isGiteeFaster();
+    }
+
+    private static boolean isLocalIsCN() {
+        return "CN".equalsIgnoreCase(Locale.getDefault().getCountry());
+    }
+
+    private static long pingHost(String host) {
+        try (Socket socket = new Socket()) {
+            long startTime = System.currentTimeMillis();
+            socket.connect(new InetSocketAddress(host, HTTP_PORT), TIMEOUT);
+            return System.currentTimeMillis() - startTime;
+        } catch (IOException e) {
+            return TIMEOUT;
+        }
     }
 
     private static boolean isGiteeFaster() {
@@ -91,49 +112,27 @@ public class RepositoryManager {
         long giteeTotalTime = 0;
         long githubTotalTime = 0;
 
-        try {
-            InetAddress giteeAddress = InetAddress.getByName(GITEE_HOST);
-            InetAddress githubAddress = InetAddress.getByName(GITHUB_HOST);
-
-            for (int i = 0; i < numberOfPings; i++) {
-                long startTime = System.currentTimeMillis();
-                if (giteeAddress.isReachable(TIMEOUT)) {
-                    giteeTotalTime += (System.currentTimeMillis() - startTime);
-                } else {
-                    giteeTotalTime += TIMEOUT;
-                }
-
-                startTime = System.currentTimeMillis();
-                if (githubAddress.isReachable(TIMEOUT)) {
-                    githubTotalTime += (System.currentTimeMillis() - startTime);
-                } else {
-                    githubTotalTime += TIMEOUT;
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            // If there is an exception, use Github directly
-            return false;
+        for (int i = 0; i < numberOfPings; i++) {
+            giteeTotalTime += pingHost(GITEE_HOST);
+            githubTotalTime += pingHost(GITHUB_HOST);
         }
 
-        // Calculate average ping time, choose faster server
-        return (giteeTotalTime / numberOfPings) < (githubTotalTime / numberOfPings);
+        return (giteeTotalTime * 1.0 / numberOfPings) < (githubTotalTime * 1.0 / numberOfPings);
     }
 
-    private static boolean isNetworkAvailable() {
-        return isHostReachable(GITHUB_HOST) || isHostReachable(GITEE_HOST);
+    private static boolean isNetworkAvailable() throws IOException {
+        return isHostAvailable(GITEE_HOST) || isHostAvailable(GITHUB_HOST);
     }
 
-    private static boolean isHostReachable(String host) {
-        try {
-            InetAddress address = InetAddress.getByName(host);
-            return address.isReachable(TIMEOUT);
-        } catch (Exception e) {
+    private static boolean isHostAvailable(String hostName) throws IOException {
+        try (Socket socket = new Socket()) {
+            InetSocketAddress socketAddress = new InetSocketAddress(hostName, HTTP_PORT);
+            socket.connect(socketAddress, TIMEOUT);
+            return true;
+        } catch (UnknownHostException unknownHost) {
             return false;
         }
     }
-
 
     public static void prepareForRefresh() {
         repositoryUpdated.set(false);
