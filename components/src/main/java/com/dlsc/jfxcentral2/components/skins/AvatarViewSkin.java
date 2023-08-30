@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.AvatarView;
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Group;
 import javafx.scene.control.SkinBase;
@@ -27,7 +26,7 @@ public class AvatarViewSkin extends SkinBase<AvatarView> {
         imageView.imageProperty().bind(control.imageProperty());
         imageView.smoothProperty().bind(control.smoothProperty());
         imageView.setPreserveRatio(true);
-        imageView.clipProperty().bind(Bindings.createObjectBinding(this::createClip, control.typeProperty(),control.roundSizeProperty(), control.avatarSizeProperty(), control.sizeProperty()));
+        imageView.setClip(createClip());
         imageView.imageProperty().addListener((ob, ov, nv) -> {
             if (ov != null) {
                 ov.progressProperty().removeListener(progressChangeListener);
@@ -44,6 +43,9 @@ public class AvatarViewSkin extends SkinBase<AvatarView> {
         wrapper.getChildren().setAll(new Group(imageView));
         wrapper.prefWidthProperty().bind(control.avatarSizeProperty());
         wrapper.prefHeightProperty().bind(control.avatarSizeProperty());
+
+        control.typeProperty().addListener(it -> control.setClip(createClip()));
+        control.roundSizeProperty().addListener(it -> control.setClip(createClip()));
 
         getChildren().setAll(wrapper);
     }
