@@ -129,7 +129,7 @@ public class RepositoryManager {
             InetSocketAddress socketAddress = new InetSocketAddress(hostName, HTTP_PORT);
             socket.connect(socketAddress, TIMEOUT);
             return true;
-        } catch (UnknownHostException unknownHost) {
+        } catch (Exception unknownHost) {
             return false;
         }
     }
