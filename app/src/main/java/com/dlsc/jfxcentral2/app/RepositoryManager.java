@@ -49,11 +49,11 @@ public class RepositoryManager {
 
     private static void initialLoad(ProgressMonitor monitor) throws Exception {
         // Network not available, skip initial load
-        if (!isNetworkAvailable()) {
-            monitor.beginTask("Network not available.", 1);
-            monitor.endTask();
-            return;
-        }
+//        if (!isNetworkAvailable()) {
+//            monitor.beginTask("Network not available.", 1);
+//            monitor.endTask();
+//            return;
+//        }
 
         File repoDirectory = DataRepository2.getRepositoryDirectory();
         if (!repoDirectory.exists()) {
