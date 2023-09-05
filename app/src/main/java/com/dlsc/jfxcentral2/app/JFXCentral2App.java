@@ -74,6 +74,7 @@ import one.jpro.routing.dev.DevFilter;
 import one.jpro.routing.sessionmanager.SessionManager;
 import simplefx.experimental.parts.FXFuture;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Locale;
@@ -87,14 +88,13 @@ public class JFXCentral2App extends Application {
     private TrayIconManager trayIconManager;
 
     static {
-        if (WebAPI.isBrowser() || !"CN".equalsIgnoreCase(Locale.getDefault().getCountry())) {
+        if (WebAPI.isBrowser() || !RepositoryManager.isCountryEqualToChina()) {
             Locale.setDefault(Locale.US);
         }
     }
 
     @Override
     public void start(Stage stage) {
-
         // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
         BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
         bi.createGraphics();
@@ -102,7 +102,17 @@ public class JFXCentral2App extends Application {
         if (!WebAPI.isBrowser()) {
             System.setProperty("prism.lcdtext", "false");
             System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
+
+            if (Taskbar.isTaskbarSupported()) {
+                Taskbar taskbar = Taskbar.getTaskbar();
+                if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
+                    Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+                    Image dockIcon = defaultToolkit.getImage(JFXCentral2App.class.getResource("app-icon.png"));
+                    taskbar.setIconImage(dockIcon);
+                }
+            }
         }
+
         // set jpro.imagemanager.cache to ~/.jfxcentral/imagecache
         System.setProperty("jpro.imagemanager.cache", new File(new File(System.getProperty("user.home")), ".jfxcentral/imagecache").getAbsolutePath());
         System.out.println("jpro.imagemanager.cache: " + System.getProperty("jpro.imagemanager.cache"));

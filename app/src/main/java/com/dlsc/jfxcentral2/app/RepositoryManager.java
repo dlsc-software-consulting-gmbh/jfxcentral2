@@ -93,7 +93,7 @@ public class RepositoryManager {
         return isGiteeFaster();
     }
 
-    private static boolean isCountryEqualToChina() {
+    static boolean isCountryEqualToChina() {
         return "CN".equalsIgnoreCase(Locale.getDefault().getCountry());
     }
 
