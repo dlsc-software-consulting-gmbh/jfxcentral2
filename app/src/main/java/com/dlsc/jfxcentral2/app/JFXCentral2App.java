@@ -149,9 +149,7 @@ public class JFXCentral2App extends Application {
         Scene scene = new Scene(customStage, 1400, 800);
         scene.setFill(Color.web("070B32"));
         scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
-        scene.widthProperty().addListener(it -> System.out.println("width: " + scene.getWidth()));
         scene.getStylesheets().add(Objects.requireNonNull(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css")).toExternalForm());
-        scene.focusOwnerProperty().addListener(it -> System.out.println("new focus owner: " + scene.getFocusOwner()));
 
         updateSizeProperty(scene);
 
