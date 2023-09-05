@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.app.pages;
 
-import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral2.app.RepositoryManager;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.Mode;
@@ -163,6 +162,10 @@ public class RefreshPage extends PageBase {
             double acc;
 
             @Override
+            public void showDuration(boolean b) {
+            }
+
+            @Override
             public void start(int i) {
             }
 
@@ -189,7 +192,6 @@ public class RefreshPage extends PageBase {
 
             @Override
             public void endTask() {
-                DataRepository2.getInstance().reload();
             }
 
             @Override

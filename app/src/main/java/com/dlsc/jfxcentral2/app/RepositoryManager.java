@@ -12,7 +12,8 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.*;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.Locale;
 
 public class RepositoryManager {
@@ -70,6 +71,7 @@ public class RepositoryManager {
                     .setProgressMonitor(monitor)
                     .setURI(repoUrl)
                     .setBranch("live")
+                    .setDepth(1)
                     .setDirectory(repoDirectory);
             try (Git git = cloneCmd.call()) {
                 // Git object is here only to ensure resources are properly closed; no other actions needed.
