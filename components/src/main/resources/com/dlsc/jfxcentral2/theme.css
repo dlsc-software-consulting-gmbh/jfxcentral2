@@ -1803,7 +1803,7 @@
 }
 
 .feature-view .type-icon {
-    -fx-icon-size: 34px;
+    -fx-icon-size: 20px;
     -fx-translate-y: -3px;
 }
 
@@ -1864,7 +1864,7 @@
 }
 
 .feature-view:lg .title {
-    -fx-font-size: 44px;
+    -fx-font-size: 34px;
 }
 
 .feature-view:lg .custom-image-view {
@@ -1874,7 +1874,7 @@
 
 .feature-view:lg .description {
     -fx-padding: 10px 0 0 0;
-    -fx-font-size: 24px;
+    -fx-font-size: 20px;
 }
 
 .feature-view:md {
@@ -2273,7 +2273,7 @@
 }
 
 .quick-link-view .link-icon {
-    -fx-icon-size: 26px;
+    -fx-icon-size: 20px;
 }
 
 .quick-link-view .ikonli-font-icon {
@@ -3395,7 +3395,7 @@
 .simple-tile-view .description {
     -fx-font-size: 13px;
     -fx-text-fill: -grey-60;
-    -fx-padding: 0px 0px 10px 0px;
+    -fx-padding: 0px 40px 10px 0px;
 }
 
 .simple-tile-view .avatar-view,
