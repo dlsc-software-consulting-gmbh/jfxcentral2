@@ -112,7 +112,9 @@ public class LinksOfTheWeekView extends PaneBase {
             });
 
             if (WebAPI.isBrowser()) {
-                WebAPIUtil.scrollToTop(scrollAnchorNode, false);
+                if (scrollAnchorNode != null) {
+                    WebAPIUtil.scrollToTop(scrollAnchorNode, false);
+                }
             } else {
                 if (scrollAnchorNode == null) {
                     scrollAnchorNode = pagination.getScene().lookup(".links-of-the-week-header");
