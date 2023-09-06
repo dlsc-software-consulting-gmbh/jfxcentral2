@@ -15,14 +15,17 @@ import javafx.scene.layout.VBox;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class HelloTermsAndConditionsView extends JFXCentralSampleBase {
+
     private CustomMarkdownTabPane largeTabPane;
     private CustomMarkdownTabPane mediumTabPane;
     private CustomMarkdownTabPane smallTabPane;
     private final String termsText = readStrFromFile("/com/dlsc/jfxcentral2/demo/components/text/TermsAndConditions.txt");
     private final String privacyText = readStrFromFile("/com/dlsc/jfxcentral2/demo/components/text/PrivacyPolicy.txt");
     private final String cookieText = readStrFromFile("/com/dlsc/jfxcentral2/demo/components/text/CookiePolicy.txt");
+
     @Override
     protected Region createControl() {
         largeTabPane = createTabPane(Size.LARGE,2);
@@ -50,7 +53,7 @@ public class HelloTermsAndConditionsView extends JFXCentralSampleBase {
     private String readStrFromFile(String filePath) {
         String text = "";
         try {
-            URI uri = getClass().getResource(filePath).toURI();
+            URI uri = Objects.requireNonNull(getClass().getResource(filePath)).toURI();
             text = Files.readString(Path.of(uri));
         } catch (Exception e) {
             e.printStackTrace();
