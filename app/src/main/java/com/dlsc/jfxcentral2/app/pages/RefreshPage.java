@@ -29,7 +29,12 @@ public class RefreshPage extends PageBase {
 
     private final InvalidationListener invalidationListener = it -> {
         if (RepositoryManager.isRepositoryUpdated()) {
-            Platform.runLater(() -> getSessionManager().gotoURL("/"));
+            Platform.runLater(() -> {
+                SessionManager sessionManager = getSessionManager();
+                if (sessionManager != null) {
+                    sessionManager.gotoURL("/");
+                }
+            });
         }
     };
 
