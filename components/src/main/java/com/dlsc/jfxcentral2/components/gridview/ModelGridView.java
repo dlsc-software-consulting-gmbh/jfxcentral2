@@ -66,9 +66,6 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
             VBox.setMargin(loadMoreButton, new Insets(20, 0, 0, 0));
             contentBox.getChildren().add(loadMoreButton);
             loadMoreButton.setOnAction(event -> {
-                for (int i = 0; i < contentBox.getChildren().size(); i++) {
-                    System.out.println(contentBox.getChildren().get(i));
-                }
                 int endIndex = Math.min(currentIndex + getRows(), items.size());
                 for (int i = currentIndex + 1 ; i < endIndex; i++) {
                     TileViewBase<T> tileView = createTileView(contentBox, i);

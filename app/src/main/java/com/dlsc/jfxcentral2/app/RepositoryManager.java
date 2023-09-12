@@ -4,6 +4,8 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.ProgressMonitor;
@@ -17,7 +19,7 @@ import java.net.Socket;
 import java.util.Locale;
 
 public class RepositoryManager {
-
+    private static final Logger LOGGER = LogManager.getLogger(RepositoryManager.class);
     private static final BooleanProperty repositoryUpdated = new SimpleBooleanProperty();
     private static final String GITHUB_HOST = "github.com";
     private static final String GITEE_HOST = "gitee.com";
@@ -40,7 +42,7 @@ public class RepositoryManager {
                 initialLoad(monitor);
                 Platform.runLater(() -> repositoryUpdated.set(true));
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("Failed to update the repository", e);
             }
         }
     }
@@ -105,6 +107,7 @@ public class RepositoryManager {
             socket.connect(new InetSocketAddress(host, HTTP_PORT), TIMEOUT);
             return System.currentTimeMillis() - startTime;
         } catch (IOException e) {
+            LOGGER.warn("Failed to ping host: " + host, e);
             return TIMEOUT;
         }
     }
@@ -126,12 +129,13 @@ public class RepositoryManager {
         return isHostAvailable(GITEE_HOST) || isHostAvailable(GITHUB_HOST);
     }
 
-    private static boolean isHostAvailable(String hostName) throws IOException {
+    private static boolean isHostAvailable(String hostName) {
         try (Socket socket = new Socket()) {
             InetSocketAddress socketAddress = new InetSocketAddress(hostName, HTTP_PORT);
             socket.connect(socketAddress, TIMEOUT);
             return true;
         } catch (Exception unknownHost) {
+            LOGGER.warn("Host not available: " + hostName, unknownHost);
             return false;
         }
     }

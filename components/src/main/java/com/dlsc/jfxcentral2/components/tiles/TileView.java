@@ -45,6 +45,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import one.jpro.routing.LinkUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
@@ -52,7 +54,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class TileView<T extends ModelObject> extends TileViewBase<T> {
-
+    private static final Logger LOGGER = LogManager.getLogger(TileView.class);
     private final FlipView flipView = new FlipView();
     private final Button button1;
     private final Button button2;
@@ -87,14 +89,14 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, saved) -> {
             setSaveSelected(saved);
             if (getData() != null) {
-                System.out.println((saved ? "SELECTED: " : "UNSELECTED: ") + getData().getName());
+                LOGGER.info(" {}'s TileView: {}", getData().getName(), saved ? "SELECTED" : "UNSELECTED");
             }
         });
 
         saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, liked) -> {
             setLikeSelected(liked);
             if (getData() != null) {
-                System.out.println((liked ? "LIKED: " : "UNLIKED: ") + getData().getName());
+                LOGGER.info(" {}'s TileView: {}", getData().getName(), liked ? "LIKED" : "UNLIKED");
             }
         });
 

@@ -14,6 +14,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.BufferedReader;
@@ -22,11 +24,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class CreditsView extends PaneBase {
-
+    private static final Logger LOGGER = LogManager.getLogger(CreditsView.class);
     public CreditsView() {
         getStyleClass().add("credits-view");
         VBox container = new VBox();
@@ -65,7 +68,8 @@ public class CreditsView extends PaneBase {
              BufferedReader bufferedReader = new BufferedReader(reader)) {
             return new Gson().fromJson(bufferedReader, listType);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.error("Failed to load credits from " + filePath, e);
+            return Collections.emptyList();
         }
     }
 

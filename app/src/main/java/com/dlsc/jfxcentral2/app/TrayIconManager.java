@@ -10,6 +10,8 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import one.jpro.routing.sessionmanager.SessionManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -21,7 +23,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class TrayIconManager {
-
+    private static final Logger LOGGER = LogManager.getLogger(TrayIconManager.class);
     private final SessionManager sessionManager;
     private final Stage stage;
     private final FXTrayIcon trayIcon;
@@ -34,18 +36,19 @@ public class TrayIconManager {
             Dimension trayIconSize = SystemTray.getSystemTray().getTrayIconSize();
 
             java.awt.Image image = null;
+            URL url = null;
             try {
-                URL url = getClass().getResource("tray-icon2-windows.png");
+                url = getClass().getResource("tray-icon2-windows.png");
                 assert url != null;
                 image = ImageIO.read(url);
             } catch (IOException ex) {
-                ex.printStackTrace();
+                LOGGER.error("Failed to load the tray icon image: {}", url, ex);
             }
             assert image != null;
 
             trayIcon = new FXTrayIcon(stage);
             trayIcon.setGraphic(image.getScaledInstance(trayIconSize.width, trayIconSize.height, Image.SCALE_SMOOTH));
-        }else {
+        } else {
             trayIcon = new FXTrayIcon(stage, Objects.requireNonNull(JFXCentral2App.class.getResource("tray-icon2.png")), 350, 210);
         }
         refresh();
@@ -87,19 +90,23 @@ public class TrayIconManager {
         repository.getTips().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tips, mo));
         repository.getIkonliPacks().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(icons, mo));
         repository.getDocumentation().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(documentation, mo, modelObject -> {
+            String docUrl = null;
             try {
                 if (modelObject instanceof Documentation doc) {
-                    Desktop.getDesktop().browse(URI.create(doc.getUrl()));
+                    docUrl = doc.getUrl();
+                    Desktop.getDesktop().browse(URI.create(docUrl));
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("Failed to browse the documentation URL: {}", docUrl, e);
             }
         }));
         repository.getVideos().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(videos, mo, modelObject -> {
+            String videoUrl = null;
             try {
-                Desktop.getDesktop().browse(URI.create("https://www.youtube.com/watch?v=" + modelObject.getId()));
+                videoUrl = "https://www.youtube.com/watch?v=" + modelObject.getId();
+                Desktop.getDesktop().browse(URI.create(videoUrl));
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("Failed to browse the YouTube video URL: {}", videoUrl , e);
             }
         }));
 
@@ -149,7 +156,7 @@ public class TrayIconManager {
         try {
             Desktop.getDesktop().browse(URI.create(url));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Failed to open the URL: {}", url, e);
         }
     }
 

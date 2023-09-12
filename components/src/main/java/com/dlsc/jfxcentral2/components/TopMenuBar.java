@@ -42,6 +42,8 @@ import javafx.util.StringConverter;
 import one.jpro.routing.LinkUtil;
 import one.jpro.routing.View;
 import one.jpro.routing.sessionmanager.SessionManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -51,7 +53,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class TopMenuBar extends PaneBase {
-
+    private static final Logger LOGGER = LogManager.getLogger(TopMenuBar.class);
     private static final Mode DEFAULT_MODE = Mode.DARK;
 
     private static final PseudoClass LIGHT_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("light");
@@ -135,6 +137,7 @@ public class TopMenuBar extends PaneBase {
         if (sessionManager == null) {
             sessionManager = LinkUtil.getSessionManager(view.realContent());
             if (sessionManager == null) {
+                LOGGER.error("Failed to initialize SessionManager.");
                 throw new IllegalStateException("Failed to initialize SessionManager.");
             }
         }
@@ -159,7 +162,6 @@ public class TopMenuBar extends PaneBase {
         search(repository.getTips(), pattern, results);
         search(repository.getIkonliPacks(), pattern, results);
 
-        System.out.println("results " + results.size());
         return results;
     }
 

@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.time.LocalDate;
@@ -19,7 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class SaveAndLikeCell extends PaneBase {
-
+    private static final Logger LOGGER = LogManager.getLogger(SaveAndLikeCell.class);
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
 
     public SaveAndLikeCell() {
@@ -67,7 +69,7 @@ public class SaveAndLikeCell extends PaneBase {
                 item.setSaved(selected);
                 item.setSavedDate(selected ? LocalDate.now() : null);
                 refreshDateLabel(item.isSaved(), item.getSavedDate(), savedDateLabel, "Saved on ");
-                System.out.println(selected ? "Saved" : "Unsaved");
+                LOGGER.info("{}: {}", item.getTitle(), selected ? "Saved" : "Unsaved");
             }
         });
 
@@ -78,7 +80,7 @@ public class SaveAndLikeCell extends PaneBase {
                 item.setLiked(selected);
                 item.setLikedDate(selected ? LocalDate.now() : null);
                 refreshDateLabel(item.isLiked(), item.getLikedDate(), likedDateLabel, "Liked on ");
-                System.out.println(selected ? "Liked" : "Unliked");
+                LOGGER.info("{}: {}", item.getTitle(), selected ? "Liked" : "Unliked");
             }
         });
 
