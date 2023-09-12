@@ -63,7 +63,6 @@ public class DownloadsCategoryPage extends CategoryPageBase<Download> {
 
     @Override
     protected Callback<Download, Node> getDetailNodeProvider() {
-        System.out.println("DownloadsCategoryPage.getDetailNodeProvider()");
         return  download -> {
             DownloadsBox downloadsBox = new DownloadsBox(download);
             downloadsBox.sizeProperty().bind(sizeProperty());

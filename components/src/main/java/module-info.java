@@ -13,6 +13,7 @@ open module com.dlsc.jfxcentral2.components {
     requires com.dlsc.gemsfx;
     requires com.sandec.mdfx;
     requires org.apache.commons.lang3;
+    requires org.apache.logging.log4j;
 
     requires jpro.webapi;
     requires one.jpro.routing.core;

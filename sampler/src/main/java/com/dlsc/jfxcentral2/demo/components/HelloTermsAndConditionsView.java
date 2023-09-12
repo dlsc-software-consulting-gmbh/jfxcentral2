@@ -56,7 +56,7 @@ public class HelloTermsAndConditionsView extends JFXCentralSampleBase {
             URI uri = Objects.requireNonNull(getClass().getResource(filePath)).toURI();
             text = Files.readString(Path.of(uri));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error reading file: " + filePath);
         }
         return text;
     }

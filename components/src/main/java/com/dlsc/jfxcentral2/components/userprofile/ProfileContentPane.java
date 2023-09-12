@@ -16,12 +16,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.Objects;
 
 public class ProfileContentPane extends PaneBase {
-
+    private static final Logger LOGGER = LogManager.getLogger(ProfileContentPane.class);
     private static final Image PERSON_AVATAR_IMAGE = new Image(Objects.requireNonNull(ProfileContentPane.class.getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png")).toExternalForm());
     private PhotoView photoView;
     private EditTextField userNameField;
@@ -51,7 +53,7 @@ public class ProfileContentPane extends PaneBase {
             RegisteredUser user = getUser();
             if (user != null) {
                 user.setUserName(s);
-                System.out.println("saved user name...");
+                LOGGER.info("saved user name: {}" , s);
             }
         });
 
@@ -67,7 +69,7 @@ public class ProfileContentPane extends PaneBase {
             RegisteredUser user = getUser();
             if (user != null) {
                 user.setFullName(s);
-                System.out.println("saved full name...");
+                LOGGER.info("saved full name: {}" , s);
             }
         });
 
@@ -83,7 +85,7 @@ public class ProfileContentPane extends PaneBase {
             RegisteredUser user = getUser();
             if (user != null) {
                 user.setEmail(s);
-                System.out.println("saved email...");
+                LOGGER.info("saved email: {}" , s);
             }
         });
     }
@@ -115,7 +117,7 @@ public class ProfileContentPane extends PaneBase {
         clickHereLabel.setOnMousePressed(event -> {
             RegisteredUser user = getUser();
             if (user != null) {
-                System.out.println("delete account...");
+                LOGGER.info("delete account: {}" , user.getUserName());
             }
         });
 

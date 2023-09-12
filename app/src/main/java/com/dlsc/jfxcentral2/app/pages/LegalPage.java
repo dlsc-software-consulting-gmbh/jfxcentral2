@@ -7,6 +7,8 @@ import com.dlsc.jfxcentral2.model.MarkdownTab;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +17,7 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class LegalPage extends PageBase {
-
+    private static final Logger LOGGER = LogManager.getLogger(LegalPage.class);
     private static final String termsText = readText("terms-and-conditions.md");
     private static final String privacyText = readText("privacy-policy.md");
     private static final String cookieText = readText("cookie-policy.md");
@@ -76,6 +78,7 @@ public class LegalPage extends PageBase {
              BufferedReader bufferedReader = new BufferedReader(reader)) {
             return bufferedReader.lines().reduce("", (s1, s2) -> s1 + "\n" + s2);
         } catch (IOException e) {
+            LOGGER.error("Failed to read the file: " + filePath, e);
             throw new RuntimeException(e);
         }
     }

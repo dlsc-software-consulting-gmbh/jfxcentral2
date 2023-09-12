@@ -14,8 +14,11 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PageUtil {
+    private static final Logger LOGGER = LogManager.getLogger(PageUtil.class);
 
     public static View getViewFromURL(String url) {
         if (!url.startsWith("/")) return null;
@@ -29,6 +32,7 @@ public class PageUtil {
         try {
             return View.valueOf(viewString.toUpperCase());
         } catch (IllegalArgumentException ex) {
+            LOGGER.warn("Failed to derive a view from URL: {}", url);
             return null;
         }
     }
@@ -100,6 +104,8 @@ public class PageUtil {
         if (view == View.TIPS) return Tip.class;
         if (view == View.ICONS) return IkonliPack.class;
         if (view == View.HOME) return null;
-        throw new RuntimeException("No Class associated with the view " + view);
+        String errorMessage = "No Class associated with the view: " + view;
+        LOGGER.error(errorMessage);
+        throw new RuntimeException(errorMessage);
     }
 }
