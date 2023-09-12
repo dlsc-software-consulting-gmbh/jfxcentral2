@@ -52,6 +52,7 @@ import com.dlsc.jfxcentral2.app.pages.details.ToolDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
+import com.dlsc.jfxcentral2.app.utils.LoggerOutputStream;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
@@ -72,6 +73,7 @@ import one.jpro.routing.RouteNode;
 import one.jpro.routing.RouteUtils;
 import one.jpro.routing.dev.DevFilter;
 import one.jpro.routing.sessionmanager.SessionManager;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import simplefx.experimental.parts.FXFuture;
@@ -79,6 +81,7 @@ import simplefx.experimental.parts.FXFuture;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.PrintStream;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -256,5 +259,12 @@ public class JFXCentral2App extends Application {
         } else {
             size.set(Size.LARGE);
         }
+    }
+
+    public static void main(String[] args) {
+        Logger logger = LogManager.getLogger();
+        System.setOut(new PrintStream(new LoggerOutputStream(logger, Level.INFO), true));
+        System.setErr(new PrintStream(new LoggerOutputStream(logger, Level.ERROR), true));
+        launch(args);
     }
 }
