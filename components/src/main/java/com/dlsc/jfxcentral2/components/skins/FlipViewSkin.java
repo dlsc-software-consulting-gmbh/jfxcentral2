@@ -24,7 +24,6 @@ import javafx.util.Duration;
 public class FlipViewSkin extends SkinBase<FlipView> {
 
     private static final Double PIE = Math.PI;
-
     private static final Double HALF_PIE = Math.PI / 2;
     private final SimpleDoubleProperty angle = new SimpleDoubleProperty(HALF_PIE);
 
@@ -35,6 +34,10 @@ public class FlipViewSkin extends SkinBase<FlipView> {
     private final StackPane flipPane = new StackPane();
     private final FlipView control;
     private Timeline flipAnimation;
+    private Node frontNode;
+    private Node backNode;
+    private boolean isFrontNodeSupplierChanged;
+    private boolean isBackNodeSupplierChanged;
 
     public FlipViewSkin(FlipView control) {
         super(control);
@@ -46,28 +49,32 @@ public class FlipViewSkin extends SkinBase<FlipView> {
         flipPane.heightProperty().addListener((ob, ov, nv) -> recalculateTransformation(angle.doubleValue()));
         getChildren().add(flipPane);
 
-        control.frontNodeProperty().addListener((ob, ov, frontNode) -> {
-            flipPane.getChildren().clear();
-            frontNode.getStyleClass().add("front-node");
-            frontNode.visibleProperty().bind(flippedProperty);
-            frontNode.setEffect(control.getAnimateOnFlip() ? transform : null);
-            flipPane.getChildren().setAll(control.getBackNode(), frontNode);
+        control.frontNodeSupplierProperty().addListener((ob, ov, nv) -> {
+            isFrontNodeSupplierChanged = true;
+            if (flippedProperty.get()) {
+                initFrontNode();
+                if (frontNode != null) {
+                    flipPane.getChildren().setAll(frontNode);
+                    isFrontNodeSupplierChanged = false;
+                }
+            }
         });
 
-        control.backNodeProperty().addListener((ob, ov, backNode) -> {
-            flipPane.getChildren().clear();
-            backNode.getStyleClass().add("back-node");
-            backNode.visibleProperty().bind(flippedProperty.not());
-            backNode.setEffect(control.getAnimateOnFlip() ? transform : null);
-            flipPane.getChildren().setAll(backNode, control.getFrontNode());
+        control.backNodeSupplierProperty().addListener((ob, ov, nv) -> {
+            isBackNodeSupplierChanged = true;
+            if (!flippedProperty.get()) {
+                initBackNode();
+                if (backNode != null) {
+                    flipPane.getChildren().setAll(backNode);
+                    isBackNodeSupplierChanged = false;
+                }
+            }
         });
 
         control.animateOnFlipProperty().addListener((ob, ov, nv) -> {
-            Node frontNode = control.getFrontNode();
             if (frontNode != null) {
                 frontNode.setEffect(nv ? transform : null);
             }
-            Node backNode = control.getBackNode();
             if (backNode != null) {
                 backNode.setEffect(nv ? transform : null);
             }
@@ -76,7 +83,6 @@ public class FlipViewSkin extends SkinBase<FlipView> {
                 flipAnimation.stop();
                 flipAnimation = null;
             }
-
         });
 
         control.flipTimeProperty().addListener((ob, ov, nv) -> {
@@ -122,19 +128,52 @@ public class FlipViewSkin extends SkinBase<FlipView> {
         );
     }
 
-    public void flipToFront() {
-        if (control.getFrontNode() != null && control.getBackNode() != null && control.getBackNode().isVisible()) {
-            flip(false);
+    private void initBackNode() {
+        if (control.getBackNodeSupplier() == null ) {
+            return;
+        }
+        if (backNode == null || isBackNodeSupplierChanged) {
+            backNode = control.getBackNodeSupplier().get();
+            backNode.getStyleClass().add("back-node");
+            backNode.visibleProperty().bind(flippedProperty.not());
+            backNode.setEffect(control.getAnimateOnFlip() ? transform : null);
+            isBackNodeSupplierChanged = false;
+        }
+    }
+
+    private void initFrontNode() {
+        if (control.getFrontNodeSupplier() == null) {
+            return;
+        }
+        if (frontNode == null || isFrontNodeSupplierChanged) {
+            frontNode = control.getFrontNodeSupplier().get();
+            frontNode.getStyleClass().add("front-node");
+            frontNode.visibleProperty().bind(flippedProperty);
+            frontNode.setEffect(control.getAnimateOnFlip() ? transform : null);
+            isFrontNodeSupplierChanged = false;
         }
     }
 
     public void flipToBack() {
-        if (control.getFrontNode() != null && control.getBackNode() != null && control.getFrontNode().isVisible()) {
+        initFrontNode();
+        initBackNode();
+
+        if (frontNode != null && backNode != null && frontNode.isVisible()) {
             flip(true);
         }
     }
 
+    public void flipToFront() {
+        initFrontNode();
+        initBackNode();
+
+        if (frontNode != null && backNode != null && backNode.isVisible()) {
+            flip(false);
+        }
+    }
+
     private void flip(boolean isToBack) {
+        flipPane.getChildren().setAll(backNode, frontNode);
         if (control.getAnimateOnFlip()) {
             if (flipAnimation == null) {
                 flipAnimation = createAnimation();
