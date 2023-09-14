@@ -29,6 +29,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.time.ZonedDateTime;
@@ -36,7 +38,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommentsView extends PaneBase implements NameProvider {
-
+    private static final Logger LOGGER = LogManager.getLogger(CommentsView.class);
     private final VBox commentsBox;
 
     public CommentsView() {
@@ -121,7 +123,7 @@ public class CommentsView extends PaneBase implements NameProvider {
                     new Comment("001abc", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.", writedUser, ZonedDateTime.now().minusMinutes(5), 125, false, false),
                     new Comment("001abc", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.", writedUser, ZonedDateTime.now().minusHours(3), 125, false, false),
                     new Comment("001abc", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.", writedUser, ZonedDateTime.now().minusDays(7), 125, false, false));
-            System.out.println("load more comments");
+            LOGGER.info("load more comments");
 
         });
 

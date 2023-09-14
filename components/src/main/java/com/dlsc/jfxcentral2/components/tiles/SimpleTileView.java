@@ -26,6 +26,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import one.jpro.routing.LinkUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -39,7 +41,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @param <T>
  */
 public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
-
+    private static final Logger LOGGER = LogManager.getLogger(SimpleTileView.class);
     private final Button detailButton;
     protected HBox badgeBox = new HBox();
     protected SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
@@ -144,14 +146,14 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
             saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, saved) -> {
                 setSaveSelected(saved);
                 if (getData() != null) {
-                    System.out.println((saved ? "SELECTED: " : "UNSELECTED: ") + getData().getName());
+                    LOGGER.info("{}: {}", getData().getName(), saved ? "SELECTED:" : "UNSELECTED:");
                 }
             });
 
             saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, liked) -> {
                 setLikeSelected(liked);
                 if (getData() != null) {
-                    System.out.println((liked ? "LIKED: " : "UNLIKED: ") + getData().getName());
+                    LOGGER.info("{}: {}", getData().getName(), liked ? "LIKED:" : "UNLIKED:");
                 }
             });
 

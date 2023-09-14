@@ -26,31 +26,41 @@ public class HelloFlipView extends JFXCentralSampleBase {
     protected Region createControl() {
         flipView = new FlipView();
         flipView.getStyleClass().add("hello-flip-view");
-        // create front node
-        ImageView frontImage = new ImageView(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/quick-link-lg1.png").toExternalForm()));
-        frontImage.setPreserveRatio(true);
-        frontImage.setFitWidth(420);
 
-        Button flipToBackBtn = new Button("Click Flip to Back");
-        flipToBackBtn.setOnAction(evt -> flipView.flipToBack());
-        StackPane frontPane = new StackPane(frontImage, flipToBackBtn);
-        StackPane.setAlignment(flipToBackBtn, Pos.TOP_LEFT);
-        StackPane.setMargin(flipToBackBtn, new Insets(10));
+        flipView.setFrontNodeSupplier(()-> {
+            // create front node
+            ImageView frontImage = new ImageView(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/quick-link-lg1.png").toExternalForm()));
+            frontImage.setPreserveRatio(true);
+            frontImage.setFitWidth(420);
 
-        flipView.setFrontNode(frontPane);
+            Button flipToBackBtn = new Button("Click Flip to Back");
+            flipToBackBtn.setOnAction(evt -> flipView.flipToBack());
 
-        // create back node
-        ImageView backImage = new ImageView(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/quick-link-lg2.png").toExternalForm()));
-        backImage.setPreserveRatio(true);
-        backImage.setFitWidth(420);
+            StackPane frontPane = new StackPane(frontImage, flipToBackBtn);
+            StackPane.setAlignment(flipToBackBtn, Pos.TOP_LEFT);
+            StackPane.setMargin(flipToBackBtn, new Insets(10));
+            System.out.println("create front node");
+            return frontPane;
+        });
 
-        Button flipToFrontBtn = new Button("Click Flip to Front");
-        flipToFrontBtn.setOnAction(evt -> flipView.flipToFront());
-        StackPane backPane = new StackPane(backImage, flipToFrontBtn);
-        StackPane.setAlignment(flipToFrontBtn, Pos.TOP_LEFT);
-        StackPane.setMargin(flipToFrontBtn, new Insets(10));
 
-        flipView.setBackNode(backPane);
+
+        flipView.setBackNodeSupplier(()-> {
+            // create back node
+            ImageView backImage = new ImageView(new Image(getClass().getResource("/com/dlsc/jfxcentral2/demo/components/images/quick-link-lg2.png").toExternalForm()));
+            backImage.setPreserveRatio(true);
+            backImage.setFitWidth(420);
+
+            Button flipToFrontBtn = new Button("Click Flip to Front");
+            flipToFrontBtn.setOnAction(evt -> flipView.flipToFront());
+
+            StackPane backPane = new StackPane(backImage, flipToFrontBtn);
+            StackPane.setAlignment(flipToFrontBtn, Pos.TOP_LEFT);
+            StackPane.setMargin(flipToFrontBtn, new Insets(10));
+            System.out.println("create back node");
+            return backPane;
+        });
+
         flipView.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         return new StackPane(flipView);
     }

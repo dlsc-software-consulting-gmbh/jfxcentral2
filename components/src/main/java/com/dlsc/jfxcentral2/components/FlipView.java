@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.components.skins.FlipViewSkin;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -16,12 +17,12 @@ import javafx.css.converter.DurationConverter;
 import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
-import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * @author ggrec
@@ -35,7 +36,7 @@ public class FlipView extends ControlBase {
 
     private static final Duration DEFAULT_FLIP_TIME = Duration.millis(500);
 
-    private static final boolean DEFAULT_ANIMATE_ON_FLIP = false; //!WebAPI.isBrowser();
+    private static final boolean DEFAULT_ANIMATE_ON_FLIP = !WebAPI.isBrowser();
 
     private final FlipViewSkin flipViewSkin;
 
@@ -58,32 +59,32 @@ public class FlipView extends ControlBase {
         return flipViewSkin;
     }
 
-    private final ObjectProperty<Node> frontNode = new SimpleObjectProperty<>(this, "frontNode", new StackPane());
+    private final ObjectProperty<Supplier<Node>> frontNodeSupplier = new SimpleObjectProperty<>(this, "frontNode");
 
-    public Node getFrontNode() {
-        return frontNode.get();
+    public Supplier<Node> getFrontNodeSupplier() {
+        return frontNodeSupplier.get();
     }
 
-    public ObjectProperty<Node> frontNodeProperty() {
-        return frontNode;
+    public ObjectProperty<Supplier<Node>> frontNodeSupplierProperty() {
+        return frontNodeSupplier;
     }
 
-    public void setFrontNode(Node frontNode) {
-        this.frontNode.set(frontNode);
+    public void setFrontNodeSupplier(Supplier<Node> frontNodeSupplier) {
+        this.frontNodeSupplier.set(frontNodeSupplier);
     }
 
-    private final ObjectProperty<Node> backNode = new SimpleObjectProperty<>(this, "backNode", new StackPane());
+    private final ObjectProperty<Supplier<Node>> backNodeSupplier = new SimpleObjectProperty<>(this, "backNode");
 
-    public Node getBackNode() {
-        return backNode.get();
+    public Supplier<Node> getBackNodeSupplier() {
+        return backNodeSupplier.get();
     }
 
-    public ObjectProperty<Node> backNodeProperty() {
-        return backNode;
+    public ObjectProperty<Supplier<Node>> backNodeSupplierProperty() {
+        return backNodeSupplier;
     }
 
-    public void setBackNode(Node backNode) {
-        this.backNode.set(backNode);
+    public void setBackNodeSupplier(Supplier<Node> backNodeSupplier) {
+        this.backNodeSupplier.set(backNodeSupplier);
     }
 
     private final StyleableObjectProperty<Duration> flipTime = new SimpleStyleableObjectProperty<>(StyleableProperties.FLIP_TIME, this,

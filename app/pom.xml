@@ -19,6 +19,15 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -405,6 +414,8 @@
                 <version>${jpro.version}</version>
                 <configuration>
                     <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
+                    <releaseName>jfxcentral</releaseName>
+                    <port>8088</port>
                 </configuration>
             </plugin>
 

@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
-import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Library;
@@ -33,6 +32,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,6 +42,7 @@ import java.util.Objects;
 
 public class FeaturesContainer extends PaneBase {
 
+    private static final Logger LOGGER = LogManager.getLogger(FeaturesContainer.class);
     private static final PseudoClass VERTICAL_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("vertical");
 
     private static final PseudoClass HORIZONTAL_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("horizontal");
@@ -134,7 +136,9 @@ public class FeaturesContainer extends PaneBase {
         } else if (mo instanceof Book) {
             return Type.BOOK;
         } else {
-            throw new IllegalArgumentException("model object of type " + mo.getClass().getSimpleName() + " is not supported");
+            String errorMessage = "model object of type " + mo.getClass().getSimpleName() + " is not supported";
+            LOGGER.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
         }
     }
 

@@ -23,6 +23,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -30,7 +32,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
  * AppDetailHeader or BookDetailHeader
  */
 public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
-
+    private static final Logger LOGGER = LogManager.getLogger(SimpleDetailHeader.class);
     private Button websiteButton;
 
     public SimpleDetailHeader(T model) {
@@ -83,12 +85,10 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         saveAndLikeButton.setMinWidth(Region.USE_PREF_SIZE);
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
         saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(model));
-        saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, nv) -> {
-            System.out.println(model.getName() + " is saved: " + nv);
-        });
-        saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, nv) -> {
-            System.out.println(model.getName() + " is liked: " + nv);
-        });
+        saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, nv) ->
+                LOGGER.info("{} Save: {}",model.getName(), nv? "YES" : "NO"));
+        saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, nv) ->
+                LOGGER.info("{} Like: {}",model.getName(), nv? "YES" : "NO"));
 
         websiteButton = new Button();
         websiteButton.setFocusTraversable(false);

@@ -15,13 +15,15 @@ import one.jpro.utils.imagemanager.imagetransformer.ImageTransformer;
 import one.jpro.utils.imagemanager.imagetransformer.ImageTransformerFitHeight;
 import one.jpro.utils.imagemanager.imagetransformer.ImageTransformerScaleToArea;
 import one.jpro.utils.imagemanager.imagetransformer.ImageTransformerWH;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 
 public class CentralImageManager {
-
+    private static final Logger LOGGER = LogManager.getLogger(CentralImageManager.class);
     private static final URL MISSING_IMAGE = com.dlsc.jfxcentral.data.ImageManager.class.getResource("missing-image.jpg");
 
     private static final ImageManager manager = ImageManager.getInstance();
@@ -88,7 +90,9 @@ public class CentralImageManager {
             if (missing.exists()) {
                 return missing;
             } else {
-                throw new RuntimeException("MISSING IS MISSING");
+                String errorMessage = "MISSING IS MISSING: failed to find both the main and missing image files.";
+                LOGGER.error(errorMessage);
+                throw new RuntimeException(errorMessage);
             }
         }
     }
