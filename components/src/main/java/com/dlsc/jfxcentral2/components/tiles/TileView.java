@@ -76,8 +76,9 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         contentBox.setClip(clip);
 
         // [Top] FlipView
-        flipView.frontNodeProperty().bind(Bindings.createObjectBinding(this::createFront, sizeProperty()));
-        flipView.setBackNode(createBack());
+        flipView.frontNodeSupplierProperty().bind(Bindings.createObjectBinding(()->this::createFront, sizeProperty()));
+        flipView.backNodeSupplierProperty().bind(Bindings.createObjectBinding(()->this::createBack, sizeProperty()));
+        flipView.setFocusTraversable(false);
         VBox.setVgrow(flipView, Priority.ALWAYS);
 
         // [Bottom] nodes,save button,like button
@@ -268,11 +269,13 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         closeButton.setContentDisplay(ContentDisplay.RIGHT);
         closeButton.setOnMousePressed(event -> {
             event.consume();
+            flipView.requestFocus();
             flipView.flipToFront();
         });
         closeButton.setFocusTraversable(false);
 
         TextArea descriptionArea = new TextArea();
+        descriptionArea.setFocusTraversable(false);
         descriptionArea.setContextMenu(new ContextMenu());
         descriptionArea.setEditable(false);
         descriptionArea.setWrapText(true);
