@@ -109,10 +109,6 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         button1.managedProperty().bind(button1.visibleProperty());
         button1.visibleProperty().bind(button1TextProperty().isNotEmpty().or(button1GraphicProperty().isNotNull()));
 
-        Separator separator1 = new Separator(Orientation.VERTICAL);
-        separator1.managedProperty().bind(button1.visibleProperty());
-        separator1.visibleProperty().bind(button1.visibleProperty());
-
         button2 = new Button();
         button2.setFocusTraversable(false);
         button2.getStyleClass().addAll("bg-transparent-button", "button2");
@@ -120,6 +116,10 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         button2.graphicProperty().bind(button2GraphicProperty());
         button2.managedProperty().bind(button2.visibleProperty());
         button2.visibleProperty().bind(button2TextProperty().isNotEmpty().or(button2GraphicProperty().isNotNull()));
+
+        Separator separator1 = new Separator(Orientation.VERTICAL);
+        separator1.managedProperty().bind(button1.visibleProperty());
+        separator1.visibleProperty().bind(button1.visibleProperty().and(button2.visibleProperty()));
 
         Separator separator2 = new Separator(Orientation.VERTICAL);
         separator2.managedProperty().bind(button2.visibleProperty());
