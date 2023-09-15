@@ -4379,8 +4379,8 @@
 }
 
 .tutorial-tile-view:md-lg > .content-box > .flip-view .front-box .custom-image-view {
-    -fx-fit-width: 115px;
-    -fx-fit-height: 184px;
+    -fx-fit-width: 185px;
+    -fx-fit-height: 195px;
 }
 
 .tutorial-tile-view:md-lg > .content-box > .bottom-pane .button2 {
@@ -4400,7 +4400,7 @@
 }
 
 .tutorial-tile-view:sm > .content-box > .flip-view .front-box .custom-image-view {
-    -fx-fit-width: 115px;
+    -fx-fit-width: 158px;
     -fx-fit-height: 184px;
 }
 
@@ -4439,6 +4439,11 @@
     -fx-max-height: 90px;
 }
 
+.company-tile-view:lg > .content-box > .flip-view .front-box .image-container .custom-image-view {
+    -fx-fit-height: 50px;
+    -fx-fit-width: 235px;
+}
+
 .company-tile-view:lg > .content-box > .flip-view .front-box .main-image-region {
     -region-h: 90px;
 }
@@ -4459,6 +4464,11 @@
     -fx-max-height: 68px;
 }
 
+.company-tile-view:md > .content-box > .flip-view .front-box .image-container .custom-image-view {
+    -fx-fit-height: 45px;
+    -fx-fit-width: 230px;
+}
+
 .company-tile-view:md > .content-box > .flip-view .front-box .main-image-region {
     -region-h: 68px;
 }
@@ -4472,6 +4482,11 @@
     -fx-min-height: 90px;
     -fx-pref-height: 90px;
     -fx-max-height: 90px;
+}
+
+.company-tile-view:sm > .content-box > .flip-view .front-box .image-container .custom-image-view {
+    -fx-fit-height: 60px;
+    -fx-fit-width: 220px;
 }
 
 .company-tile-view:sm > .content-box > .flip-view .front-box .main-image-region {

@@ -8,35 +8,27 @@ import javafx.scene.layout.StackPane;
 
 public class PreviewTileView<T extends ModelObject> extends TileView<T> {
 
-    private StackPane imageContainer;
-
     public PreviewTileView(T model) {
         super(model);
         getStyleClass().add("preview-tile-view");
-    }
-
-    public StackPane getImageViewContainer() {
-        return imageContainer;
     }
 
     protected Node createFrontTop() {
         CustomImageView imageView = new CustomImageView();
         imageView.setMouseTransparent(true);
 
-        imageContainer = new StackPane();
+        StackPane imageContainer = new StackPane();
         imageContainer.getStyleClass().add("image-container");
         imageContainer.getChildren().setAll(imageView);
         imageContainer.setCursor(Cursor.HAND);
-
         imageView.imageProperty().bind(imageProperty());
-        imageView.fitWidthProperty().bind(imageContainer.widthProperty().subtract(getSizeReduction()));
-        imageView.fitHeightProperty().bind(imageContainer.heightProperty().subtract(getSizeReduction()));
-
+        imageViewSizeBinding(imageView, imageContainer);
         return imageContainer;
     }
 
-    protected int getSizeReduction() {
-        return 0;
+    protected void imageViewSizeBinding(CustomImageView imageView, StackPane imageContainer) {
     }
+
+
 
 }

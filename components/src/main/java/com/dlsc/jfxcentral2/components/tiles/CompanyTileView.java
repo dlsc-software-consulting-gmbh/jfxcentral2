@@ -17,8 +17,4 @@ public class CompanyTileView extends PreviewTileView<Company> {
         LinkUtil.setLink(getButton1(), "/companies/" + company.getId());
     }
 
-    @Override
-    protected int getSizeReduction() {
-        return 40;
-    }
 }
