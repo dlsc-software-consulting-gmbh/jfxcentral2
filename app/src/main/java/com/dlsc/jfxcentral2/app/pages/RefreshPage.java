@@ -27,6 +27,10 @@ import org.eclipse.jgit.lib.ProgressMonitor;
 
 public class RefreshPage extends PageBase {
 
+    /**
+     * The invalidation listener is called from the RepositoryManager thread,
+     * so any changes done to the UI must be in Platform.runLater.
+     */
     private final InvalidationListener invalidationListener = it -> {
         if (RepositoryManager.isRepositoryUpdated()) {
             Platform.runLater(() -> {

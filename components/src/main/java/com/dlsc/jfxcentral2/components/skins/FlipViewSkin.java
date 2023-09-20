@@ -7,6 +7,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.SkinBase;
 import javafx.scene.effect.PerspectiveTransform;
@@ -22,8 +23,6 @@ import javafx.util.Duration;
  * Modified on: 2023-04-25
  */
 public class FlipViewSkin extends SkinBase<FlipView> {
-
-    private static final Double PIE = Math.PI;
     private static final Double HALF_PIE = Math.PI / 2;
     private final SimpleDoubleProperty angle = new SimpleDoubleProperty(HALF_PIE);
 
@@ -43,10 +42,12 @@ public class FlipViewSkin extends SkinBase<FlipView> {
         super(control);
         this.control = control;
 
-        angle.addListener((ob, ov, nv) -> recalculateTransformation(nv.doubleValue()));
+        ChangeListener<Number> numberChangeListener = (ob, ov, nv) -> recalculateTransformation(angle.doubleValue());
+
         flipPane.getStyleClass().add("content-pane");
-        flipPane.widthProperty().addListener((ob, ov, nv) -> recalculateTransformation(angle.doubleValue()));
-        flipPane.heightProperty().addListener((ob, ov, nv) -> recalculateTransformation(angle.doubleValue()));
+        angle.addListener(numberChangeListener);
+        flipPane.widthProperty().addListener(numberChangeListener);
+        flipPane.heightProperty().addListener(numberChangeListener);
         getChildren().add(flipPane);
 
         control.frontNodeSupplierProperty().addListener((ob, ov, nv) -> {
@@ -73,10 +74,10 @@ public class FlipViewSkin extends SkinBase<FlipView> {
 
         control.animateOnFlipProperty().addListener((ob, ov, nv) -> {
             if (frontNode != null) {
-                frontNode.setEffect(nv ? transform : null);
+                frontNode.setEffect(null);
             }
             if (backNode != null) {
-                backNode.setEffect(nv ? transform : null);
+                backNode.setEffect(null);
             }
             if (!nv && flipAnimation != null && flipAnimation.getStatus() == Timeline.Status.RUNNING) {
                 flipAnimation.jumpTo(flipAnimation.getTotalDuration());
@@ -120,23 +121,39 @@ public class FlipViewSkin extends SkinBase<FlipView> {
     private Timeline createAnimation() {
         Duration flipTime = control.getFlipTime();
         return new Timeline(
-                new KeyFrame(Duration.millis(0), new KeyValue(angle, HALF_PIE)),
-                new KeyFrame(flipTime.divide(2), new KeyValue(angle, 0, Interpolator.EASE_IN)),
-                new KeyFrame(flipTime.divide(2), evt -> flippedProperty.set(flippedProperty.not().get())),
-                new KeyFrame(flipTime.divide(2), new KeyValue(angle, PIE)),
-                new KeyFrame(flipTime, new KeyValue(angle, HALF_PIE, Interpolator.EASE_OUT))
+                new KeyFrame(Duration.millis(0),
+                        event -> {
+                            frontNode.setEffect(transform);
+                            backNode.setEffect(transform);
+                        },
+                        new KeyValue(angle, HALF_PIE)
+                ),
+                new KeyFrame(flipTime.divide(2),
+                        evt -> flippedProperty.set(!flippedProperty.get()),
+                        new KeyValue(angle, 0d, Interpolator.EASE_IN)
+                ),
+                new KeyFrame(flipTime.divide(2).add(Duration.millis(1)),
+                        new KeyValue(angle, Math.PI, Interpolator.EASE_OUT)
+                ),
+                new KeyFrame(flipTime,
+                        event -> {
+                            frontNode.setEffect(null);
+                            backNode.setEffect(null);
+                        },
+                        new KeyValue(angle, HALF_PIE, Interpolator.EASE_OUT)
+                )
         );
+
     }
 
     private void initBackNode() {
-        if (control.getBackNodeSupplier() == null ) {
+        if (control.getBackNodeSupplier() == null) {
             return;
         }
         if (backNode == null || isBackNodeSupplierChanged) {
             backNode = control.getBackNodeSupplier().get();
             backNode.getStyleClass().add("back-node");
             backNode.visibleProperty().bind(flippedProperty.not());
-            backNode.setEffect(control.getAnimateOnFlip() ? transform : null);
             isBackNodeSupplierChanged = false;
         }
     }
@@ -149,7 +166,6 @@ public class FlipViewSkin extends SkinBase<FlipView> {
             frontNode = control.getFrontNodeSupplier().get();
             frontNode.getStyleClass().add("front-node");
             frontNode.visibleProperty().bind(flippedProperty);
-            frontNode.setEffect(control.getAnimateOnFlip() ? transform : null);
             isFrontNodeSupplierChanged = false;
         }
     }
@@ -179,7 +195,7 @@ public class FlipViewSkin extends SkinBase<FlipView> {
                 flipAnimation = createAnimation();
             }
             flipAnimation.setRate(isToBack ? 1 : -1);
-            flipAnimation.play();
+            flipAnimation.playFromStart();
         } else {
             flippedProperty.set(!isToBack);
         }

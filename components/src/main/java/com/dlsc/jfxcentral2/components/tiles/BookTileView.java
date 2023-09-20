@@ -1,12 +1,13 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
-import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
+import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import one.jpro.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -45,8 +46,9 @@ public class BookTileView extends PreviewTileView<Book> {
     }
 
     @Override
-    protected int getSizeReduction() {
-        return 10;
+    protected void imageViewSizeBinding(CustomImageView imageView, StackPane imageContainer) {
+        imageView.fitWidthProperty().bind(imageContainer.widthProperty().subtract(10));
+        imageView.fitHeightProperty().bind(imageContainer.heightProperty().subtract(10));
     }
 }
 
