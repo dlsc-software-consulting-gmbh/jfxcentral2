@@ -65,10 +65,7 @@ public class CustomStage extends BorderPane {
         titleBar.getLabel().setText("JFXCentral");
 
         if (!WebAPI.isBrowser()) {
-            VBox vBox = new VBox(titleBar);
-            vBox.setPadding(new Insets(0, 0, 2, 0));
-            vBox.setAlignment(Pos.CENTER_RIGHT);
-            setTop(vBox);
+            setTop(titleBar);
         }
 
         centerProperty().bind(contentProperty());
