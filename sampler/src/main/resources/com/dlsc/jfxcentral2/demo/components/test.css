@@ -105,3 +105,14 @@
     -fx-background-position: center;
     -fx-background-size: cover;
 }
+
+.double-text-field-container {
+    -fx-background-color: white;
+    -fx-border-color: -grey-20;
+    -fx-spacing: 20px;
+    -fx-padding: 30px;
+}
+
+.double-text-field-container .value-label {
+    -fx-text-fill: -grey-30;
+}

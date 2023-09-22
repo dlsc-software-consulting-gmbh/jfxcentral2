@@ -68,7 +68,7 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
 
     private VBox createInfoNode(StringProperty versionProperty) {
         TextArea repositoryCoordinatesArea = new TextArea(StringUtil.LOADING_TIPS);
-        repositoryCoordinatesArea.getStyleClass().add("coordinates-text-area");
+        repositoryCoordinatesArea.getStyleClass().add("code-text-area");
         repositoryCoordinatesArea.setEditable(false);
         repositoryCoordinatesArea.setMaxWidth(Double.MAX_VALUE);
 

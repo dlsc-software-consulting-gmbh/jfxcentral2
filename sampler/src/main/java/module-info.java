@@ -17,6 +17,7 @@ open module com.dlsc.jfxcentral.sampler {
     requires com.dlsc.jfxcentral2.components;
     requires com.sandec.mdfx;
     requires com.dlsc.jfxcentral2.iconfont;
+    requires com.dlsc.jfxcentral2.devtools;
 
     provides fxsampler.FXSamplerProject with JFXCentralSamplerProject;
 
