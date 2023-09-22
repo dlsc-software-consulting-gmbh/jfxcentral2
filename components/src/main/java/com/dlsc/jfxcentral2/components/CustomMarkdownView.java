@@ -56,7 +56,9 @@ public class CustomMarkdownView extends com.sandec.mdfx.MarkdownView {
 
     @Override
     public void setLink(Node node, String link, String description) {
-        LinkUtil.setExternalLink(node, link, description);
+        if(link != null && link != "") {
+            LinkUtil.setExternalLink(node, link, description);
+        }
     }
 
     @Override
