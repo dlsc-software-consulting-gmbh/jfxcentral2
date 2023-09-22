@@ -68,6 +68,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.dlsc.jfxcentral2</groupId>
+            <artifactId>devtools</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-core</artifactId>
         </dependency>

@@ -51,6 +51,7 @@ import com.dlsc.jfxcentral2.app.pages.details.TipDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.ToolDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.devtools.SvgPathExtractToolPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.app.utils.LoggerOutputStream;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
@@ -207,6 +208,7 @@ public class JFXCentral2App extends Application {
                 .and(RouteUtils.get("/team", r -> new TeamPage(size)))
                 .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
                 .and(RouteUtils.get("/documentation", r -> new DocumentationCategoryPage(size)))
+                .and(RouteUtils.get("/etools/svg", r -> new SvgPathExtractToolPage(size)))
                 .and(RouteUtils.get("/refresh", r -> {
                     RepositoryManager.prepareForRefresh();
                     return new RefreshPage(size);

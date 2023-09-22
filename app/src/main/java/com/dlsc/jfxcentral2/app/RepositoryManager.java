@@ -54,6 +54,7 @@ public class RepositoryManager {
     private static void initialLoad(ProgressMonitor monitor) throws Exception {
         // Network not available, skip the initial load
         if (!isNetworkAvailable()) {
+            LOGGER.warn("Network not available.");
             Platform.runLater(() -> {
                 monitor.beginTask("Network not available.", 1);
                 monitor.endTask();
@@ -67,6 +68,7 @@ public class RepositoryManager {
 
             if (isCountryEqualToChina()) {
                 repoUrl = shouldUseGiteeMirror() ? GITEE_REPOSITORY_URL : GITHUB_REPOSITORY_URL;
+                LOGGER.info("Using {} as the repository URL.", repoUrl);
                 Platform.runLater(() -> {
                     monitor.beginTask("Checking network...", 1);
                     monitor.endTask();

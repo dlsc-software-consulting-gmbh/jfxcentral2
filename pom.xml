@@ -22,6 +22,7 @@
         <module>sampler</module>
         <module>app</module>
         <module>iconfont</module>
+        <module>devtools</module>
     </modules>
 
     <properties>
@@ -69,6 +70,12 @@
             <dependency>
                 <groupId>com.dlsc.jfxcentral2</groupId>
                 <artifactId>components</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dlsc.jfxcentral2</groupId>
+                <artifactId>devtools</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -262,6 +269,13 @@
                 <artifactId>slf4j-api</artifactId>
                 <version>2.0.7</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.github.weisj</groupId>
+                <artifactId>jsvg</artifactId>
+                <version>1.1.0</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.kordamp.ikonli</groupId>
                 <artifactId>ikonli-core</artifactId>

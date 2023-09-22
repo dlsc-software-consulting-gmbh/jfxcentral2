@@ -117,6 +117,7 @@
 }
 
 .text {
+    /*---The "gray" here represents a smoothing strategy for the font, not the color of the text---*/
     -fx-font-smoothing-type: gray;
 }
 
@@ -373,6 +374,68 @@
     -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, -bright-blue 0.0%, -bright-blue 2.1%, #ffffff00 2.101%, #ffffff00 100.0%);
     -fx-background-insets: 12px 0 12px 0;
     -fx-border-color: transparent;
+}
+
+/** -------------------------------
+ * code-text-area (TextArea)
+ */
+.code-text-area {
+    -fx-text-fill: -grey-100;
+    -fx-font-size: 13px;
+    -fx-font-family: "JetBrains Mono";
+    -fx-accent: #3a89f3;
+}
+
+.code-text-area,
+.code-text-area:focused {
+    -fx-background-color: -grey-10;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0px;
+    -fx-border-color: transparent;
+    -fx-border-insets: 0px;
+}
+
+.code-text-area .content {
+    -fx-background-color: -grey-10;
+    -fx-background-insets: 0px;
+    -fx-border-color: transparent;
+    -fx-border-insets: 0px;
+}
+
+/** -------------------------------
+ * RadioButton
+ */
+.radio-button {
+    -fx-font-size: 16px;
+}
+
+.radio-button .radio {
+    -fx-background-color: -light-blue;
+    -fx-border-color: -light-blue;
+    -fx-border-width: 1px;
+    -fx-border-radius: 100px;
+}
+
+.radio-button .dot {
+    -fx-translate-y: -1px;
+}
+
+.radio-button:selected .dot {
+    -fx-background-color: -bright-blue;
+}
+
+/** -------------------------------
+ * CopyButton (Button)
+ */
+.copy-button {
+    -fx-background-radius: 30px;
+    -fx-background-insets: 0;
+    -fx-padding: 3px 20px;
+}
+
+.copy-button .ikonli-font-icon {
+    -fx-icon-color: -white;
+    -fx-icon-size: 16px;
 }
 
 /** -------------------------------
@@ -3259,7 +3322,7 @@
     -fx-padding: 0 20px;
 }
 
-.custom-markdown-tab-pane  > .content-box > .grid-pane.header {
+.custom-markdown-tab-pane > .content-box > .grid-pane.header {
     -fx-padding: 0px;
     -fx-background-color: -grey-10;
 }
@@ -6504,70 +6567,20 @@
     -fx-spacing: 20px;
 }
 
-.library-coordinates-box .buttons-box > .radio-button {
-    -fx-font-size: 16px;
-}
-
-.library-coordinates-box .buttons-box > .radio-button .radio {
-    -fx-background-color: -light-blue;
-    -fx-border-color: -light-blue;
-    -fx-border-width: 1px;
-    -fx-border-radius: 100px;
-}
-
-.library-coordinates-box .buttons-box > .radio-button .dot {
-    -fx-translate-y: -1px;
-}
-
-.library-coordinates-box .buttons-box > .radio-button:selected .dot {
-    -fx-background-color: -bright-blue;
-}
-
-.library-coordinates-box .buttons-box > .copy-button {
-    -fx-background-radius: 30px;
-    -fx-background-insets: 0;
-    -fx-padding: 3px 20px;
-}
-
-.library-coordinates-box .buttons-box > .copy-button .ikonli-font-icon {
-    -fx-icon-color: -white;
-    -fx-icon-size: 16px;
-}
-
-.library-coordinates-box .coordinates-text-area {
-    -fx-text-fill: -grey-100;
-    -fx-font-size: 13px;
-    -fx-font-family: "JetBrains Mono";
+.library-coordinates-box .code-text-area {
     -fx-max-height: 145px;
-    -fx-accent: #3a89f3;
 }
 
-.library-coordinates-box .coordinates-text-area,
-.library-coordinates-box .coordinates-text-area:focused {
-    -fx-background-color: -grey-10;
-    -fx-background-radius: 10px;
-    -fx-background-insets: 0px;
-    -fx-border-color: transparent;
-    -fx-border-insets: 0px;
-}
-
-.library-coordinates-box:md-lg .coordinates-text-area {
+.library-coordinates-box:md-lg .code-text-area {
     -fx-padding: 20px;
 }
 
-.library-coordinates-box:sm .coordinates-text-area {
+.library-coordinates-box:sm .code-text-area {
     -fx-padding: 5px;
 }
 
-.library-coordinates-box:sm .coordinates-text-area {
+.library-coordinates-box:sm .code-text-area {
     -fx-max-height: 115px;
-}
-
-.library-coordinates-box .coordinates-text-area .content {
-    -fx-background-color: -grey-10;
-    -fx-background-insets: 0px;
-    -fx-border-color: transparent;
-    -fx-border-insets: 0px;
 }
 
 /** ------------------------------------
@@ -6629,7 +6642,7 @@
     -fx-background-color: transparent;
 }
 
-.links-of-the-week-view .links-box > .pagination-title-box > .button:disabled  .ikonli-font-icon {
+.links-of-the-week-view .links-box > .pagination-title-box > .button:disabled .ikonli-font-icon {
     -fx-icon-color: transparent;
 }
 
@@ -8704,4 +8717,324 @@
 .pretty-scroll-pane > .my-scroll-bar .decrement-arrow {
     -fx-pref-width: 0 !important;
     -fx-pref-height: 0 !important;
+}
+
+/** ----------------------------------------------------------------------------
+ * FileHandlerView
+ */
+.file-handler-view {
+    -fx-cursor: hand;
+    -fx-background-color: #01010102;
+}
+
+.file-handler-view .inner-label {
+    -fx-content-display: top;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-size: 18px;
+    -fx-graphic-text-gap: 10px;
+    -fx-font-family: "Roboto Condensed";
+}
+
+.file-handler-view .inner-label .ikonli-font-icon {
+    -fx-icon-size: 40px;
+    -fx-icon-color: -grey-100;
+}
+
+/** ----------------------------------------------------------------------------
+ * SVGPathExtractorView
+ */
+.svg-path-extractor-view {
+    -fx-spacing: 30px;
+}
+
+.svg-path-extractor-view:lg {
+    -fx-padding: 0 120px;
+    -fx-max-width: -lg-width;
+}
+
+.svg-path-extractor-view:md {
+    -fx-padding: 0 50px;
+}
+
+.svg-path-extractor-view:sm {
+    -fx-padding: 0px 20px;
+}
+
+.svg-path-extractor-view .container {
+    -fx-spacing: 10px;
+    -fx-background-color: -white;
+}
+
+.preview-pane {
+    -fx-border-color: -grey-10;
+    -fx-pref-width: 178px;
+    -fx-max-width: 178px;
+    -fx-pref-height: 178px;
+    -fx-background-repeat: repeat;
+    -fx-background-image: null;
+}
+
+.svg-path-extractor-view .value-label {
+    -fx-text-overrun: leading-ellipsis;
+}
+
+.svg-path-extractor-view .preview-pane {
+    -fx-border-color: -grey-10;
+    -fx-pref-width: 174px;
+    -fx-max-width: 174px;
+    -fx-pref-height: 174px;
+    -fx-background-repeat: repeat;
+    -fx-background-image: null;
+}
+
+.svg-path-extractor-view:sm-md .preview-pane {
+    -fx-pref-width: 132px;
+    -fx-max-width: 132px;
+    -fx-pref-height: 132px;
+}
+
+.svg-path-extractor-view .jsvg-box {
+    -fx-padding: 10px 10px 0 10px;
+    -fx-background-color: -white;
+    -fx-spacing: 10px;
+    -fx-max-height: 210px;
+}
+
+.svg-path-extractor-view .jsvg-box .left-box {
+    -fx-spacing: 2px;
+    -fx-background-color: -white;
+}
+
+.svg-path-extractor-view .preview-pane > .drag-tip-label {
+    -fx-text-alignment: center;
+    -fx-font-family: "JetBrains Mono";
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
+.svg-path-extractor-view .bg-box {
+    -fx-spacing: 1.3px;
+}
+
+.svg-path-extractor-view .preview-pane.white-bg,
+.svg-path-extractor-view .bg-box > .white-bg-btn {
+    -fx-background-color: -white;
+}
+
+.svg-path-extractor-view .preview-pane.grey-bg,
+.svg-path-extractor-view .bg-box > .grey-bg-btn {
+    -fx-background-color: grey;
+}
+
+.svg-path-extractor-view .preview-pane.grey-bg .file-handler-view .inner-label {
+    -fx-text-fill: -grey-10;
+}
+
+.svg-path-extractor-view .preview-pane.grey-bg .file-handler-view .inner-label .ikonli-font-icon {
+    -fx-icon-color: -grey-10;
+}
+
+.svg-path-extractor-view .preview-pane.black-bg,
+.svg-path-extractor-view .bg-box > .black-bg-btn {
+    -fx-background-color: black;
+}
+
+.svg-path-extractor-view .preview-pane.black-bg .file-handler-view .inner-label {
+    -fx-text-fill: -grey-30;
+}
+
+.svg-path-extractor-view .preview-pane.black-bg .file-handler-view .inner-label .ikonli-font-icon {
+    -fx-icon-color: -grey-30;
+}
+
+.svg-path-extractor-view .preview-pane.transparent-bg,
+.svg-path-extractor-view .bg-box > .transparent-bg-btn {
+    -fx-background-color: transparent;
+    -fx-background-image: url("images/transparent-bg.png");
+}
+
+.svg-path-extractor-view .preview-pane.translucent-bg,
+.svg-path-extractor-view .bg-box > .translucent-bg-btn {
+    -fx-background-color: transparent;
+    -fx-background-image: url("images/translucent-bg.png");
+}
+
+.svg-path-extractor-view .bg-btn {
+    -fx-background-color: -white;
+    -fx-background-radius: 0;
+    -fx-border-color: -grey-30;
+    -fx-padding: 5px 8px;
+    -fx-background-insets: 0px;
+}
+
+.svg-path-extractor-view .bg-btn:focused,
+.svg-path-extractor-view .bg-btn:selected,
+.svg-path-extractor-view .bg-btn:hover {
+    -fx-background-insets: 0px;
+}
+
+.svg-path-extractor-view .bg-btn .ikonli-font-icon {
+    -fx-icon-color: -bright-blue;
+    -fx-icon-size: 15px;
+    visibility: hidden;
+}
+
+.svg-path-extractor-view .bg-btn:selected .ikonli-font-icon {
+    visibility: visible;
+}
+
+.svg-path-extractor-view:sm-md .bg-btn {
+    -fx-padding: 2px 4px;
+}
+
+.svg-path-extractor-view .grid-pane {
+    -fx-padding: 10px;
+    -fx-hgap: 10px;
+    -fx-vgap: 15px;
+    -fx-border-color: -grey-10;
+    -fx-background-color: -white;
+}
+
+.svg-path-extractor-view:md .grid-pane {
+    -fx-padding: 5px;
+    -fx-hgap: 5px;
+    -fx-vgap: 8px;
+}
+
+.svg-path-extractor-view:sm .grid-pane {
+    -fx-padding: 5px;
+    -fx-hgap: 5px;
+    -fx-vgap: 4px;
+}
+
+.svg-path-extractor-view .info-box {
+    -fx-padding: 8px 0 0 0;
+    -fx-spacing: 17px;
+}
+
+.svg-path-extractor-view .icon-label {
+    -fx-graphic-text-gap: 5px;
+    -fx-font-size: 16px;
+    -fx-text-fill: -grey-60;
+    -fx-font-family: "Roboto Condensed";
+}
+
+.svg-path-extractor-view .icon-label .ikonli-font-icon {
+    -fx-icon-size: 18px;
+    -fx-icon-color: -grey-60;
+}
+
+.svg-path-extractor-view .download-box {
+    -fx-spacing: 10px;
+    -fx-alignment: center-left;
+}
+
+.svg-path-extractor-view .download-box .fill-button {
+    -fx-background-radius: 2px;
+}
+
+.svg-path-extractor-view .text-field {
+    -fx-background-radius: 5px;
+    -fx-focus-color: -grey-10;
+    -fx-faint-focus-color: transparent;
+}
+
+.svg-path-extractor-view .recent-tips-label {
+    -fx-padding: 0 0 0 10px;
+}
+
+.svg-path-extractor-view .recent-tile-pane {
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+    -fx-alignment: center-left;
+}
+
+.svg-path-extractor-view .recent-image {
+    -fx-fit-width: 30px;
+    -fx-fit-height: 30px;
+    -fx-cursor: hand;
+}
+
+.svg-path-extractor-view:sm .recent-image {
+    -fx-fit-width: 20px;
+    -fx-fit-height: 20px;
+}
+
+.svg-path-extractor-view .recent-image-view {
+    -fx-border-color: -grey-10;
+}
+
+.svg-path-extractor-view .fxsvg-box {
+    -fx-max-height: 200px;
+    -fx-spacing: 10px;
+    -fx-background-color: -white;
+    -fx-padding: 0 10px 10px 10px;
+}
+
+.svg-path-extractor-view .fx-preview-pane {
+    -fx-background-color: -white;
+}
+
+.svg-path-extractor-view .fxsvg-box .code-box {
+    -fx-padding: 0 5px 0px 5px;
+    -fx-background-color: -white;
+    -fx-border-color: -grey-10;
+}
+
+.svg-path-extractor-view:md .fxsvg-box .code-box {
+    -fx-padding: 5px;
+}
+
+.svg-path-extractor-view .fxsvg-box .button-box {
+    -fx-spacing: 10px;
+    -fx-padding: 5px 0px 7px 0;
+    -fx-alignment: center-left;
+}
+
+.svg-path-extractor-view:sm .fxsvg-box .button-box {
+    -fx-spacing: 3px;
+}
+
+.svg-path-extractor-view:sm .fxsvg-box .button-box .radio-button {
+    -fx-font-size: 14px;
+}
+
+.svg-path-extractor-view .fxsvg-box .copy-button {
+    -fx-background-radius: 2px;
+    -fx-padding: 2px 8px;
+}
+
+.svg-path-extractor-view .fxsvg-box .code-text-area {
+    -fx-background-radius: 2px;
+    -fx-pref-height: 120px;
+}
+
+.svg-path-extractor-view:sm .fxsvg-box .code-text-area {
+    -fx-pref-height: 90px;
+}
+
+.svg-path-extractor-view:md .fxsvg-box .code-text-area {
+    -fx-pref-height: 80px;
+}
+
+.svg-path-extractor-view:lg .fxsvg-box .code-text-area {
+    -fx-pref-height: 120px;
+}
+
+/** ----------------------------------------------------------------------------
+ * tools-strip-wrapper
+ */
+.tools-strip-view {
+    -fx-padding: 20px 0px;
+    -fx-spacing: 50px;
+    -fx-background-color: -background;
+}
+
+.tools-strip-view.light {
+    -fx-background-color: white;
+}
+
+.tools-strip-view:lg {
+    -fx-padding: 10px 0px;
 }

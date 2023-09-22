@@ -189,6 +189,18 @@
     }
   },
   {
+    "name": "JSVG",
+    "id": "jsvg",
+    "version": "v1.1.0",
+    "url": "https://github.com/weisJ/jsvg",
+    "description": "Java SVG renderer.This library aims to be as lightweight as possible. Generally JSVG uses ~50% less memory than svgSalamander and ~98% less than Batik.JSVG is used by the Jetbrains IDEA IDE suite for rendering their interface icons.",
+    "license": {
+      "type": "License",
+      "version": "MIT",
+      "url": "https://github.com/weisJ/jsvg/blob/master/LICENSE"
+    }
+  },
+  {
     "name": "SLF4J",
     "id": "slf4j",
     "version": "2.0.6",

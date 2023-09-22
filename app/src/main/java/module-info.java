@@ -8,6 +8,7 @@ open module com.dlsc.jfxcentral2.app {
     requires org.eclipse.jgit;
     requires fr.brouillard.oss.cssfx;
     requires com.dlsc.jfxcentral2.components;
+    requires com.dlsc.jfxcentral2.devtools;
     requires one.jpro.routing.core;
     requires one.jpro.routing.dev;
     requires com.dlsc.gemsfx;
@@ -82,4 +83,5 @@ open module com.dlsc.jfxcentral2.app {
     exports com.dlsc.jfxcentral2.app.pages;
     exports com.dlsc.jfxcentral2.app.stage;
     exports com.dlsc.jfxcentral2.app.service;
+    exports com.dlsc.jfxcentral2.app.pages.devtools;
 }
