@@ -1,11 +1,14 @@
 package com.dlsc.jfxcentral2.devtools.pathextractor;
 
 import com.dlsc.gemsfx.Spacer;
+import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.devtools.FileHandlerView;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.ReadTextFile;
+import com.dlsc.jfxcentral2.utils.SVGPathExtractor;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
@@ -69,7 +72,7 @@ public class SVGPathExtractorView extends PaneBase {
     private StackPane jsvgPane;
 
     public SVGPathExtractorView() {
-        getStyleClass().add("svg-path-extractor-view");
+        getStyleClass().addAll("online-tools-view", "svg-path-extractor-view");
 
         imageResultProperty.bind(svgFileProperty.map(file -> SvgToImageUtil.parserSVG(file, PREF_WIDTH, PREF_HEIGHT)));
         pathProperty.bind(svgFileProperty.map(SVGPathExtractor::extractPaths));
@@ -82,11 +85,16 @@ public class SVGPathExtractorView extends PaneBase {
         // Top
         HBox jsvgBox = createJSVGBox();
 
-        // Bottom
+        // Center
         HBox fxSvgBox = createFXSVGBox();
 
+        // Bottom
+        String mdTips = ReadTextFile.readText(this.getClass(), "/com/dlsc/jfxcentral2/devtools/path-extractor-tips.md");
+        CustomMarkdownView tipsView = new CustomMarkdownView(mdTips);
+        tipsView.getStyleClass().add("tips-view");
+
         // Container
-        VBox container = new VBox(header, jsvgBox, fxSvgBox);
+        VBox container = new VBox(header, jsvgBox, fxSvgBox, tipsView);
         container.getStyleClass().add("container");
 
         getChildren().setAll(container);
@@ -245,7 +253,6 @@ public class SVGPathExtractorView extends PaneBase {
                 imageView.setImageResult(recentSvgList.get(i));
             }
         });
-
 
         // init GridPane
         GridPane gridPane = new GridPane();

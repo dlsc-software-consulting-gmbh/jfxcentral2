@@ -1,6 +1,6 @@
-package com.dlsc.jfxcentral2.app.utils;
+package com.dlsc.jfxcentral2.utils;
 
-import org.eclipse.jgit.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class OSUtil {
     public enum Desktop {
@@ -16,7 +16,7 @@ public class OSUtil {
         if (desktop == null) {
             String osName = System.getProperty("os.name");
 
-            if (StringUtils.isEmptyOrNull(osName)) {
+            if (StringUtils.isEmpty(osName)) {
                 desktop = Desktop.UNKNOWN;
             } else {
                 String lowerCaseOSName = osName.toLowerCase();

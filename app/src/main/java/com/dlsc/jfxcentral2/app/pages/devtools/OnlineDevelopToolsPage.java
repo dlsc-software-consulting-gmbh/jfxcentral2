@@ -9,10 +9,11 @@ import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
+import org.kordamp.ikonli.Ikon;
 
-public abstract class DevelopToolsPage extends PageBase {
+public abstract class OnlineDevelopToolsPage extends PageBase {
 
-    public DevelopToolsPage(ObjectProperty<Size> size) {
+    public OnlineDevelopToolsPage(ObjectProperty<Size> size) {
         super(size, Mode.DARK);
     }
 
@@ -32,8 +33,8 @@ public abstract class DevelopToolsPage extends PageBase {
         PacksIconsHeader header = new PacksIconsHeader();
         header.sizeProperty().bind(sizeProperty());
 
-        header.setTitle("SVG Path Extractor");
-        header.setIkon(JFXCentralIcon.TOOLS);
+        header.setTitle(getHeaderTitle());
+        header.setIkon(getHeaderIcon());
 
         // content;
         Node toolView = getToolView(sizeProperty());
@@ -44,9 +45,19 @@ public abstract class DevelopToolsPage extends PageBase {
 
         StripView stripView = new StripView(toolView, featuresContainer);
         stripView.getStyleClass().add("tools-strip-view");
+        stripView.sizeProperty().bind(sizeProperty());
 
         return wrapContent(header, stripView);
     }
 
     protected abstract Node getToolView(ObjectProperty<Size> sizeProperty);
+
+    protected String getHeaderTitle(){
+        return "Online Tools";
+    }
+
+    protected Ikon getHeaderIcon(){
+        return JFXCentralIcon.TOOLS;
+    }
+
 }

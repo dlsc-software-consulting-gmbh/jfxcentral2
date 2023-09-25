@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.devtools.pathextractor;
+package com.dlsc.jfxcentral2.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

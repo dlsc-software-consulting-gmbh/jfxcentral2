@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.app;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral2.app.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import javafx.scene.control.Menu;

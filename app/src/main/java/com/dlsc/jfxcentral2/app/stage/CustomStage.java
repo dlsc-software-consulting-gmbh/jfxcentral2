@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.app.stage;
 
-import com.dlsc.jfxcentral2.app.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
