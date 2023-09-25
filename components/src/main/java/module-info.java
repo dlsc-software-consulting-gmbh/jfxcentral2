@@ -4,6 +4,9 @@ open module com.dlsc.jfxcentral2.components {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.swing;
+    requires batik.dom;
+    requires batik.svggen;
 
     requires fr.brouillard.oss.cssfx;
 
@@ -14,6 +17,7 @@ open module com.dlsc.jfxcentral2.components {
     requires com.sandec.mdfx;
     requires org.apache.commons.lang3;
     requires org.apache.logging.log4j;
+    requires org.apache.commons.io;
 
     requires jpro.webapi;
     requires one.jpro.routing.core;

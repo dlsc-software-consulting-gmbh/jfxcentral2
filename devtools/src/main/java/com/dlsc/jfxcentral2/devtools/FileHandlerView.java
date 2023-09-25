@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -36,11 +37,12 @@ public class FileHandlerView extends StackPane {
     private final boolean isMultipleFiles;
     private final boolean rememberLastDirectory;
     private final SimpleBooleanProperty progressingProperty = new SimpleBooleanProperty(this, "progressVisible");
+
     public FileHandlerView() {
-        this(true, false,true);
+        this(true, false, true);
     }
 
-    public FileHandlerView(boolean useProgressIndicator, boolean isMultipleFiles , boolean rememberLastDirectory) {
+    public FileHandlerView(boolean useProgressIndicator, boolean isMultipleFiles, boolean rememberLastDirectory) {
         getStyleClass().add("file-handler-view");
 
         this.useProgressIndicator = useProgressIndicator;
@@ -96,57 +98,63 @@ public class FileHandlerView extends StackPane {
             }
         });
 
-        setOnMousePressed(event -> {
-            Window window = getScene().getWindow();
-            File lastDirectory = getLastDirectory();
-            if (rememberLastDirectory && lastDirectory != null) {
-                if (this.lastDirectory != null) {
-                    fileChooser.setInitialDirectory(lastDirectory);
-                }
+        setOnMouseClicked(event -> handleMouseClicked(multipleFiles, fileChooser));
+        setOnDragOver(this::handleDragOver);
+        setOnDragDropped(this::handleDragDropped);
+        setOnDragEntered(this::handleDragEntered);
+        setOnDragExited(this::handleDragExited);
+    }
+
+    private void handleMouseClicked(boolean multipleFiles, FileChooser fileChooser) {
+        Window window = getScene().getWindow();
+        File lastDirectory = getLastDirectory();
+        if (rememberLastDirectory && lastDirectory != null) {
+            if (this.lastDirectory != null) {
+                fileChooser.setInitialDirectory(lastDirectory);
             }
-            if (multipleFiles) {
-                List<File> files = fileChooser.showOpenMultipleDialog(window);
-                onUploadFileHandler(files);
+        }
+        if (multipleFiles) {
+            List<File> files = fileChooser.showOpenMultipleDialog(window);
+            onUploadFileHandler(files);
+        } else {
+            File file = fileChooser.showOpenDialog(window);
+            if (file != null) {
+                onUploadFileHandler(List.of(file));
+            }
+        }
+    }
+
+    private void handleDragExited(DragEvent evt) {
+        getStyleClass().remove("active");
+    }
+
+    private void handleDragEntered(DragEvent evt) {
+        getStyleClass().add("active");
+    }
+
+    private void handleDragOver(DragEvent evt) {
+        if (evt.getDragboard().hasFiles()) {
+            boolean hasSupportedExtension = evt.getDragboard().getFiles().stream().anyMatch(file -> getSupportedExtensions().stream().anyMatch(extension -> file.getName().endsWith(extension)));
+            if (hasSupportedExtension) {
+                evt.acceptTransferModes(TransferMode.COPY_OR_MOVE);
             } else {
-                File file = fileChooser.showOpenDialog(window);
-                if (file != null) {
-                    onUploadFileHandler(List.of(file));
-                }
+                evt.consume();
             }
-        });
+        }
+    }
 
-        setOnDragEntered(evt -> getStyleClass().add("active"));
-        setOnDragExited(evt -> getStyleClass().remove("active"));
-
-        setOnDragOver(evt -> {
-            if (evt.getDragboard().hasFiles()) {
-                boolean hasSupportedExtension = evt.getDragboard().getFiles().stream()
-                        .anyMatch(file -> getSupportedExtensions().stream()
-                                .anyMatch(extension -> file.getName().endsWith(extension)));
-                if (hasSupportedExtension) {
-                    evt.acceptTransferModes(TransferMode.ANY);
-                }
+    private void handleDragDropped(DragEvent evt) {
+        if (evt.getDragboard().hasFiles()) {
+            if (isMultipleFiles) {
+                List<File> supportedFiles = evt.getDragboard().getFiles().stream().filter(file -> getSupportedExtensions().stream().anyMatch(extension -> file.getName().endsWith(extension))).collect(Collectors.toList());
+                onUploadFileHandler(supportedFiles);
+            } else {
+                evt.getDragboard().getFiles().stream().filter(file -> getSupportedExtensions().stream().anyMatch(extension -> file.getName().endsWith(extension))).findFirst().ifPresent(supportedFile -> onUploadFileHandler(List.of(supportedFile)));
             }
-        });
-
-
-        setOnDragDropped(evt -> {
-            if (evt.getDragboard().hasFiles()) {
-                if (isMultipleFiles) {
-                    List<File> supportedFiles = evt.getDragboard().getFiles().stream()
-                            .filter(file -> getSupportedExtensions().stream()
-                                    .anyMatch(extension -> file.getName().endsWith(extension)))
-                            .collect(Collectors.toList());
-                    onUploadFileHandler(supportedFiles);
-                }else {
-                    evt.getDragboard().getFiles().stream()
-                            .filter(file -> getSupportedExtensions().stream()
-                                    .anyMatch(extension -> file.getName().endsWith(extension)))
-                            .findFirst().ifPresent(supportedFile -> onUploadFileHandler(List.of(supportedFile)));
-                }
-            }
-        });
-
+            evt.setDropCompleted(true);
+        } else {
+            evt.setDropCompleted(false);
+        }
     }
 
     /**
@@ -180,9 +188,8 @@ public class FileHandlerView extends StackPane {
         });
 
         fileHandler.uploadedFileProperty().addListener((ob, ov, file) -> {
-            if (file != null ) {
-                boolean isValid = supportedExtensions.stream()
-                        .anyMatch(extension -> file.getName().endsWith(extension));
+            if (file != null) {
+                boolean isValid = supportedExtensions.stream().anyMatch(extension -> file.getName().endsWith(extension));
 
                 if (isValid) {
                     onUploadFileHandler(List.of(file));

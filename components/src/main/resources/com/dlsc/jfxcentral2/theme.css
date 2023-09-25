@@ -7761,6 +7761,23 @@
     -fx-pref-width: 100px;
 }
 
+.ikon-detail-view .ikon-info-grid-pane .row-box > .combo-box {
+    -fx-padding: 3px 2px;
+}
+
+.ikon-detail-view .ikon-info-grid-pane .row-box > .combo-box {
+    -fx-pref-width: 260px;
+}
+
+.ikon-detail-view:md .ikon-info-grid-pane .row-box > .combo-box {
+    -fx-pref-width: 120px;
+}
+
+.ikon-detail-view:sm .ikon-info-grid-pane .row-box > .combo-box {
+    -fx-pref-width: 100px;
+    -fx-font-size: 12px;
+}
+
 .ikon-detail-view .ikon-info-grid-pane .title {
     -fx-font-family: "Roboto Condensed";
     -fx-pref-width: 82px;
@@ -8740,6 +8757,19 @@
     -fx-icon-size: 40px;
     -fx-icon-color: -grey-100;
 }
+/** ----------------------------------------------------------------------------
+ * online-tools-view
+ */
+.online-tools-view > .container {
+    -fx-padding: 10px;
+    -fx-border-color: -grey-10;
+}
+
+.online-tools-view > .container > .tips-view {
+    -fx-padding: 10px;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 1px 0 0 0;
+}
 
 /** ----------------------------------------------------------------------------
  * SVGPathExtractorView
@@ -8795,7 +8825,6 @@
 }
 
 .svg-path-extractor-view .jsvg-box {
-    -fx-padding: 10px 10px 0 10px;
     -fx-background-color: -white;
     -fx-spacing: 10px;
     -fx-max-height: 210px;
@@ -8953,7 +8982,6 @@
 .svg-path-extractor-view .recent-image {
     -fx-fit-width: 30px;
     -fx-fit-height: 30px;
-    -fx-cursor: hand;
 }
 
 .svg-path-extractor-view:sm .recent-image {
@@ -8963,13 +8991,14 @@
 
 .svg-path-extractor-view .recent-image-view {
     -fx-border-color: -grey-10;
+    -fx-background-color: rgba(226, 226, 226, 0.35);
 }
 
 .svg-path-extractor-view .fxsvg-box {
     -fx-max-height: 200px;
     -fx-spacing: 10px;
     -fx-background-color: -white;
-    -fx-padding: 0 10px 10px 10px;
+    -fx-padding: 0 0 10px 0;
 }
 
 .svg-path-extractor-view .fx-preview-pane {

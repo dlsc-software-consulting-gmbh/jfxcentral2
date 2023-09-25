@@ -5,7 +5,7 @@ import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 
-public class SvgPathExtractToolPage extends DevelopToolsPage {
+public class SvgPathExtractToolPage extends OnlineDevelopToolsPage {
 
     public SvgPathExtractToolPage(ObjectProperty<Size> size) {
         super(size);
@@ -19,6 +19,11 @@ public class SvgPathExtractToolPage extends DevelopToolsPage {
     @Override
     public String description() {
         return "JFXCentral - Extract the path in the SVG file.";
+    }
+
+    @Override
+    protected String getHeaderTitle() {
+        return "SVG Path Extractor";
     }
 
     protected Node getToolView(ObjectProperty<Size> sizeProperty) {

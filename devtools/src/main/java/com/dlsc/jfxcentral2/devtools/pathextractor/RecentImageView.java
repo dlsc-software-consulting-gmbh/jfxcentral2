@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.devtools.pathextractor;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Cursor;
 import javafx.scene.layout.StackPane;
 
 public class RecentImageView extends StackPane {
@@ -14,6 +15,8 @@ public class RecentImageView extends StackPane {
         getChildren().add(imageView);
 
         imageView.imageProperty().bind(imageResultProperty().map(SvgToImageUtil.ImageResult::image));
+        cursorProperty().bind(imageView.imageProperty().map(image -> image == null ? Cursor.DEFAULT : Cursor.HAND));
+        disableProperty().bind(imageView.imageProperty().isNull());
     }
 
     private final ObjectProperty<SvgToImageUtil.ImageResult> imageResult = new SimpleObjectProperty<>(this, "imageResult");
