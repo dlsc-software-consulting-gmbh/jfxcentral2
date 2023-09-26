@@ -7762,15 +7762,17 @@
 }
 
 .ikon-detail-view .ikon-info-grid-pane .row-box > .combo-box {
-    -fx-padding: 3px 2px;
+    -fx-padding: 2px;
 }
 
 .ikon-detail-view .ikon-info-grid-pane .row-box > .combo-box {
     -fx-pref-width: 260px;
+    -fx-font-size: 14px;
 }
 
 .ikon-detail-view:md .ikon-info-grid-pane .row-box > .combo-box {
     -fx-pref-width: 120px;
+    -fx-font-size: 14px;
 }
 
 .ikon-detail-view:sm .ikon-info-grid-pane .row-box > .combo-box {
