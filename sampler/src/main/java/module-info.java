@@ -84,7 +84,7 @@ open module com.dlsc.jfxcentral.sampler {
     requires org.kordamp.ikonli.whhg;
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
-    requires one.jpro.routing.core;
+    requires one.jpro.platform.routing.core;
     // ikonli icon packs END
 
     uses org.kordamp.ikonli.IkonProvider;

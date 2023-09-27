@@ -5,7 +5,7 @@ import com.dlsc.jfxcentral2.model.Feature;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Skin;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 
 public class FeatureView extends ControlBase {
 

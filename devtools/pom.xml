@@ -19,15 +19,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>one.jpro</groupId>
+            <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-core</artifactId>
-            <version>${routing.version}</version>
+            <version>${jpro.platform.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>one.jpro</groupId>
+            <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-dev</artifactId>
-            <version>${routing.version}</version>
+            <version>${jpro.platform.version}</version>
         </dependency>
 
         <dependency>

@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.View;
+import one.jpro.platform.routing.View;
 
 public class HelloTopMenuBar extends JFXCentralSampleBase {
 

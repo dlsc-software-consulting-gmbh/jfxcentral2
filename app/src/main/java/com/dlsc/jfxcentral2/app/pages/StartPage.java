@@ -58,6 +58,6 @@ public class StartPage extends PageBase {
         videoGallery.sizeProperty().bind(sizeProperty());
         videoGallery.getVideos().setAll(randomSubList(DataRepository2.getInstance().getVideos(), 12));
 
-        return wrapContent(homePageTopView, weekLinksLiteView, websiteChangesView, videoGallery);
+        return wrapContent(homePageTopView/*, weekLinksLiteView*/, websiteChangesView, videoGallery);
     }
 }

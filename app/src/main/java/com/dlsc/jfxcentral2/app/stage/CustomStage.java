@@ -26,7 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import one.jpro.routing.sessionmanager.SessionManager;
+import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 

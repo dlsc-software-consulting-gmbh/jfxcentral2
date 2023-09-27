@@ -9,8 +9,8 @@ open module com.dlsc.jfxcentral2.app {
     requires fr.brouillard.oss.cssfx;
     requires com.dlsc.jfxcentral2.components;
     requires com.dlsc.jfxcentral2.devtools;
-    requires one.jpro.routing.core;
-    requires one.jpro.routing.dev;
+    requires one.jpro.platform.routing.core;
+    requires one.jpro.platform.routing.dev;
     requires com.dlsc.gemsfx;
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;

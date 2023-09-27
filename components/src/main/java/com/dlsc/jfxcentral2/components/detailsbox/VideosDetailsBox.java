@@ -5,7 +5,7 @@ import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;

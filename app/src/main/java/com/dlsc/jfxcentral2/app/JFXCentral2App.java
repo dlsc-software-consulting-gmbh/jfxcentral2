@@ -67,13 +67,14 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import one.jpro.routing.Request;
-import one.jpro.routing.Response;
-import one.jpro.routing.Route;
-import one.jpro.routing.RouteNode;
-import one.jpro.routing.RouteUtils;
-import one.jpro.routing.dev.DevFilter;
-import one.jpro.routing.sessionmanager.SessionManager;
+import one.jpro.platform.routing.Request;
+import one.jpro.platform.routing.Response;
+import one.jpro.platform.routing.Route;
+import one.jpro.platform.routing.RouteNode;
+import one.jpro.platform.routing.RouteUtils;
+import one.jpro.platform.routing.dev.DevFilter;
+import one.jpro.platform.routing.dev.StatisticsFilter;
+import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -226,6 +227,7 @@ public class JFXCentral2App extends Application {
 
         if (Boolean.getBoolean("develop")) {
             route = route.filter(DevFilter.create());
+            route = route.filter(StatisticsFilter.create());
         }
 
         return route;
