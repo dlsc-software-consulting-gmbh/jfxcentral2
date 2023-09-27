@@ -76,8 +76,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.sandec</groupId>
-			<artifactId>mdfx</artifactId>
+			<groupId>one.jpro.platform</groupId>
+			<artifactId>jpro-mdfx</artifactId>
 		</dependency>
 
 		<dependency>

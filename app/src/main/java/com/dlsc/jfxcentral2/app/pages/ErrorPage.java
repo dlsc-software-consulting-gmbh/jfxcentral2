@@ -6,7 +6,7 @@ import com.dlsc.jfxcentral2.components.StripView;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
-import one.jpro.routing.Request;
+import one.jpro.platform.routing.Request;
 
 public class ErrorPage extends PageBase {
 

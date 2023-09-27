@@ -50,15 +50,15 @@
         </dependency>
 
         <dependency>
-            <groupId>one.jpro</groupId>
+            <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-core</artifactId>
-            <version>${routing.version}</version>
+            <version>${jpro.platform.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>one.jpro</groupId>
+            <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-dev</artifactId>
-            <version>${routing.version}</version>
+            <version>${jpro.platform.version}</version>
         </dependency>
 
         <dependency>
@@ -421,6 +421,7 @@
                 <configuration>
                     <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
                     <releaseName>jfxcentral</releaseName>
+                    <localJVMArgs>-Ddevelop=true</localJVMArgs>
                     <port>8088</port>
                 </configuration>
             </plugin>

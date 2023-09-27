@@ -9,12 +9,12 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class CustomMarkdownView extends com.sandec.mdfx.MarkdownView {
+public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
 
     public CustomMarkdownView() {
         getStyleClass().add("custom-markdown-view");

@@ -31,8 +31,8 @@
         <junit.version>5.10.0</junit.version>
         <javafx.version>20</javafx.version>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2023.2.2</jpro.version>
-        <routing.version>0.17.0</routing.version>
+        <jpro.version>2023.3.0-M2</jpro.version>
+        <jpro.platform.version>0.2.4</jpro.platform.version>
         <batik.version>1.16</batik.version>
     </properties>
 
@@ -207,9 +207,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.sandec</groupId>
-                <artifactId>mdfx</artifactId>
-                <version>0.2.12</version>
+                <groupId>one.jpro.platform</groupId>
+                <artifactId>jpro-mdfx</artifactId>
+                <version>${jpro.platform.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.openjfx</groupId>

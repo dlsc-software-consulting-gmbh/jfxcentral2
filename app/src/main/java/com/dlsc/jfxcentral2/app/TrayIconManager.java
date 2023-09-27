@@ -9,7 +9,7 @@ import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import one.jpro.routing.sessionmanager.SessionManager;
+import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

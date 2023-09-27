@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.components.tiles;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class CompanyTileView extends PreviewTileView<Company> {

@@ -5,8 +5,8 @@ open module com.dlsc.jfxcentral2.devtools {
     requires org.apache.logging.log4j.core;
     requires org.apache.logging.log4j;
     requires com.github.weisj.jsvg;
-    requires one.jpro.routing.core;
-    requires one.jpro.routing.dev;
+    requires one.jpro.platform.routing.core;
+    requires one.jpro.platform.routing.dev;
     requires com.dlsc.jfxcentral2.components;
 
     requires org.kordamp.ikonli.core;

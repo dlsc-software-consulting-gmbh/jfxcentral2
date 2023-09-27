@@ -18,7 +18,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.View;
+import one.jpro.platform.routing.View;
 
 import java.util.ArrayList;
 import java.util.Collections;

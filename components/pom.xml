@@ -109,17 +109,17 @@
             <artifactId>model</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sandec</groupId>
-            <artifactId>mdfx</artifactId>
+            <groupId>one.jpro.platform</groupId>
+            <artifactId>jpro-mdfx</artifactId>
         </dependency>
         <dependency>
             <groupId>fr.brouillard.oss</groupId>
             <artifactId>cssfx</artifactId>
         </dependency>
         <dependency>
-            <groupId>one.jpro</groupId>
+            <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-core</artifactId>
-            <version>${routing.version}</version>
+            <version>${jpro.platform.version}</version>
         </dependency>
 
         <!--    ** Icon pack dependencies START **  -->
