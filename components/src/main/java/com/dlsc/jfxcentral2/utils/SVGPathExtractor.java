@@ -19,6 +19,8 @@ import java.io.IOException;
  */
 public class SVGPathExtractor {
     private static final Logger LOGGER = LogManager.getLogger(SVGPathExtractor.class);
+    public static final String EXTERNAL_GENERAL_ENTITIES = "http://xml.org/sax/features/external-general-entities";
+    public static final String EXTERNAL_PARAMETER_ENTITIES = "http://xml.org/sax/features/external-parameter-entities";
 
     private SVGPathExtractor() {
     }
@@ -36,12 +38,23 @@ public class SVGPathExtractor {
         // Disabling DTD validation can speed up XML parsing but might overlook some errors in the XML document
         dbFactory.setValidating(false);
 
+        try {
+            // Disable loading external entities
+            dbFactory.setFeature(EXTERNAL_GENERAL_ENTITIES, false);
+            dbFactory.setFeature(EXTERNAL_PARAMETER_ENTITIES, false);
+        } catch (ParserConfigurationException e) {
+            LOGGER.error("Error while configuring DocumentBuilderFactory {}.", svgFilePath, e);
+            throw new RuntimeException(e);
+        }
+
         DocumentBuilder dBuilder;
         try {
             dBuilder = dbFactory.newDocumentBuilder();
+            // Setting a custom EntityResolver to prevent loading from any external references
+            dBuilder.setEntityResolver(EmptyEntityResolver.INSTANCE);
         } catch (ParserConfigurationException e) {
-            LOGGER.error("Error while creating DocumentBuilder {}.",svgFilePath, e);
-            return  "";
+            LOGGER.error("Error while creating DocumentBuilder {}.", svgFilePath, e);
+            return "";
         }
 
         Document doc;
