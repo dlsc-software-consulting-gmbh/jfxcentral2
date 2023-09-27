@@ -207,9 +207,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.sandec</groupId>
-                <artifactId>mdfx</artifactId>
-                <version>0.2.12</version>
+                <groupId>one.jpro.platform</groupId>
+                <artifactId>jpro-mdfx</artifactId>
+                <version>${jpro.platform.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.openjfx</groupId>

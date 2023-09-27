@@ -14,7 +14,7 @@ import one.jpro.platform.routing.LinkUtil;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class CustomMarkdownView extends com.sandec.mdfx.MarkdownView {
+public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
 
     public CustomMarkdownView() {
         getStyleClass().add("custom-markdown-view");

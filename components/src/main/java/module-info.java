@@ -14,7 +14,7 @@ open module com.dlsc.jfxcentral2.components {
     requires org.controlsfx.controls;
     requires net.synedra.validatorfx;
     requires com.dlsc.gemsfx;
-    requires com.sandec.mdfx;
+    requires one.jpro.platform.mdfx;
     requires org.apache.commons.lang3;
     requires org.apache.logging.log4j;
     requires org.apache.commons.io;

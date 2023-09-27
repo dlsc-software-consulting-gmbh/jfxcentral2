@@ -15,7 +15,7 @@ open module com.dlsc.jfxcentral.sampler {
     requires org.apache.commons.lang3;
 
     requires com.dlsc.jfxcentral2.components;
-    requires com.sandec.mdfx;
+    requires one.jpro.platform.mdfx;
     requires com.dlsc.jfxcentral2.iconfont;
     requires com.dlsc.jfxcentral2.devtools;
 
