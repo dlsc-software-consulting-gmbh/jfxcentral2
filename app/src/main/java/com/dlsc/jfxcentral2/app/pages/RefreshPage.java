@@ -47,14 +47,8 @@ public class RefreshPage extends PageBase {
     private Node updateView;
     private Node setupView;
 
-    private SessionManager sessionManager;
-
     public RefreshPage(ObjectProperty<Size> size) {
         super(size, Mode.DARK);
-    }
-
-    public SessionManager getSessionManager() {
-        return sessionManager;
     }
 
     @Override
@@ -78,7 +72,6 @@ public class RefreshPage extends PageBase {
 
     @Override
     public Node content() {
-        sessionManager = getSessionManager();
         Platform.runLater(() -> {
             RepositoryManager.repositoryUpdatedProperty().addListener(weakInvalidationListener);
             invalidationListener.invalidated(null);
