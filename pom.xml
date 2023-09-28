@@ -29,10 +29,10 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.0</junit.version>
-        <javafx.version>20</javafx.version>
+        <javafx.version>21</javafx.version>
         <ikonli.version>12.3.1</ikonli.version>
         <jpro.version>2023.3.0-M2</jpro.version>
-        <jpro.platform.version>0.2.4</jpro.platform.version>
+        <jpro.platform.version>0.2.5</jpro.platform.version>
         <batik.version>1.16</batik.version>
     </properties>
 
