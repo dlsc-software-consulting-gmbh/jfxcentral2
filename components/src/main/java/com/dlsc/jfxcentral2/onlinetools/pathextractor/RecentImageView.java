@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.devtools.pathextractor;
+package com.dlsc.jfxcentral2.onlinetools.pathextractor;
 
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import javafx.beans.property.ObjectProperty;

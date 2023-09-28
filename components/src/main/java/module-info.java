@@ -7,6 +7,7 @@ open module com.dlsc.jfxcentral2.components {
     requires javafx.swing;
     requires batik.dom;
     requires batik.svggen;
+    requires com.github.weisj.jsvg;
 
     requires fr.brouillard.oss.cssfx;
 
@@ -104,6 +105,7 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.components.userprofile;
     exports com.dlsc.jfxcentral2.components.hamburger;
     exports com.dlsc.jfxcentral2.components.topcontent;
+    exports com.dlsc.jfxcentral2.onlinetools.pathextractor;
 
     uses IkonProvider;
 }

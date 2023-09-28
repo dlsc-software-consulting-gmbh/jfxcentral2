@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.devtools;
+package com.dlsc.jfxcentral2.components;
 
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
@@ -21,7 +21,6 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-import org.apache.logging.log4j.core.util.FileUtils;
 import org.kordamp.ikonli.icomoon.Icomoon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -181,7 +180,6 @@ public class FileHandlerView extends StackPane {
             }
             boolean isValid = supportedExtensions.stream().anyMatch(file::endsWith);
             if (isValid) {
-                FileUtils.getFileExtension(new File(file));
                 updateProgressDisplay();
                 fileHandler.uploadFile();
             }

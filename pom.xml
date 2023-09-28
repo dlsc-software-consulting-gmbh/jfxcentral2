@@ -22,7 +22,6 @@
         <module>sampler</module>
         <module>app</module>
         <module>iconfont</module>
-        <module>devtools</module>
     </modules>
 
     <properties>
@@ -71,12 +70,6 @@
             <dependency>
                 <groupId>com.dlsc.jfxcentral2</groupId>
                 <artifactId>components</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.dlsc.jfxcentral2</groupId>
-                <artifactId>devtools</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -256,7 +249,7 @@
             <dependency>
                 <groupId>com.dlsc.jfxcentral</groupId>
                 <artifactId>model</artifactId>
-                <version>1.21.0</version>
+                <version>1.22.0</version>
             </dependency>
 
             <dependency>

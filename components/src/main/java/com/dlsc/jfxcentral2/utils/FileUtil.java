@@ -1,5 +1,7 @@
 package com.dlsc.jfxcentral2.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 
 public class FileUtil {
@@ -30,6 +32,21 @@ public class FileUtil {
                 file.delete();
             }
         }
+    }
+
+    public static String getFileExtension(File file) {
+        return extractFileExtension(file.getName());
+    }
+
+    public static String extractFileExtension(String fileName) {
+        if (StringUtils.isBlank(fileName)) {
+            return null;
+        }
+        int dotIndex = fileName.lastIndexOf('.');
+        if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
+            return fileName.substring(dotIndex);
+        }
+        return null;
     }
 
 }

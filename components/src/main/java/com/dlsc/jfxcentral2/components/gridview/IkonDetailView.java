@@ -47,6 +47,7 @@ public class IkonDetailView extends DetailView<Ikon> {
     private static final String TEMP_DIR_SUFFIX = "_dir";
     private static final String SVG_EXTENSION = ".svg";
     private static final Logger LOGGER = LogManager.getLogger(IkonDetailView.class);
+    private static final float SVG_FONT_SIZE = 24;
 
     private enum SVGType {
         FILL,
@@ -139,7 +140,7 @@ public class IkonDetailView extends DetailView<Ikon> {
          * to ensure the InputStream gets closed properly.
          */
         try (InputStream inputStream = handler.getFontResourceAsStream()) {
-            font = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(24f);
+            font = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(SVG_FONT_SIZE);
         } catch (FontFormatException | IOException e) {
             LOGGER.error("Failed to load font: {}", handler.getFontFamily(), e);
             throw new RuntimeException(e);
@@ -149,13 +150,19 @@ public class IkonDetailView extends DetailView<Ikon> {
         GlyphVector glyphVector = font.createGlyphVector(new FontRenderContext(new AffineTransform(), true, true), "" + iconChar);
         Shape glyphShape = glyphVector.getGlyphOutline(0);
 
+        // Center the glyph vertically
+        java.awt.geom.Rectangle2D bounds = glyphShape.getBounds2D();
+        double yOffset = (SVG_FONT_SIZE + bounds.getHeight()) / 2 - bounds.getMaxY();
+        AffineTransform transform = AffineTransform.getTranslateInstance(0, yOffset);
+        Shape centeredGlyph = transform.createTransformedShape(glyphShape);
+
         DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
         Document document = domImpl.createDocument("http://www.w3.org/2000/svg", "svg", null);
         SVGGraphics2D g2d = new SVGGraphics2D(document);
         if (svgType == SVGType.FILL) {
-            g2d.fill(glyphShape);
+            g2d.fill(centeredGlyph);
         } else {
-            g2d.draw(glyphShape);
+            g2d.draw(centeredGlyph);
         }
         return g2d;
     }

@@ -74,6 +74,7 @@ public class TrayIconManager {
         Menu realWorld = new Menu("Real World Apps");
         Menu tips = new Menu("Tips & Tricks");
         Menu icons = new Menu("Icons");
+        Menu onlineTools = new Menu("Online Tools");
         Menu documentation = new Menu("Documentation");
 
         DataRepository2 repository = DataRepository2.getInstance();
@@ -89,6 +90,7 @@ public class TrayIconManager {
         repository.getRealWorldApps().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(realWorld, mo));
         repository.getTips().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tips, mo));
         repository.getIkonliPacks().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(icons, mo));
+        repository.getOnlineTools().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(onlineTools, mo));
         repository.getDocumentation().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(documentation, mo, modelObject -> {
             String docUrl = null;
             try {
@@ -133,9 +135,10 @@ public class TrayIconManager {
         trayIcon.addMenuItem(reportIssue);
 
         trayIcon.addSeparator();
-        trayIcon.addMenuItem(documentation);
+        trayIcon.addMenuItem(onlineTools);
         trayIcon.addSeparator();
 
+        trayIcon.addMenuItem(documentation);
         trayIcon.addMenuItem(libraries);
         trayIcon.addMenuItem(tools);
         trayIcon.addMenuItem(books);
