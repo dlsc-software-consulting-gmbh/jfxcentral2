@@ -109,7 +109,7 @@ public class JFXCentral2App extends Application {
 
         if (!WebAPI.isBrowser()) {
             System.setProperty("prism.lcdtext", "false");
-            System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
+          //  System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
 
             if (Taskbar.isTaskbarSupported()) {
                 Taskbar taskbar = Taskbar.getTaskbar();
