@@ -45,12 +45,21 @@ public class WelcomeView extends PaneBase {
         jfxDescLabel.setMinHeight(Region.USE_PREF_SIZE);
         jfxDescLabel.managedProperty().bind(jfxDescLabel.visibleProperty());
 
-        Label jfxCentralDescLabel = new Label("JFX Central is an open source project that you can find on GitHub, with its content in a separate data repository. Feel free to add your project, documentation, book, etc. via a simple pull-request!");
+        Label jfxCentralDescLabel = new Label("JFX Central is an open source project that you can find on GitHub, " +
+                "with its content in a separate data repository. Feel free to add your project, documentation, book, " +
+                "etc. via a simple pull-request!");
         jfxCentralDescLabel.getStyleClass().add("description-label");
         jfxCentralDescLabel.setWrapText(true);
         jfxCentralDescLabel.setMinHeight(Region.USE_PREF_SIZE);
 
-        labelBox.getChildren().addAll(label1, label2, jfxDescLabel, jfxCentralDescLabel);
+        String javaVersion = System.getProperty("java.version");
+        String fxVersion = System.getProperty("javafx.version");
+
+        Label versionLabel = new Label("This site runs on Java " + javaVersion + " with JavaFX " + fxVersion + ".");
+        versionLabel.getStyleClass().add("version-label");
+        versionLabel.setWrapText(true);
+
+        labelBox.getChildren().addAll(label1, label2, jfxDescLabel, jfxCentralDescLabel, versionLabel);
         labelBox.setMinHeight(Region.USE_PREF_SIZE);
 
         flowPane = new FlowPane();

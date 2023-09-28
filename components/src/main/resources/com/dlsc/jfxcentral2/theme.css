@@ -1471,6 +1471,12 @@
 
 .welcome-view:lg .label-box .description-label {
     -fx-font-size: 24px;
+    -fx-padding: 0 0 30px 0;
+}
+
+.welcome-view:lg .label-box .version-label {
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
 }
 
 .welcome-view:lg .flow-pane {
@@ -1538,6 +1544,12 @@
 .welcome-view:md .description-label {
     -fx-font-size: 20px;
     -fx-text-alignment: center;
+    -fx-padding: 0 0 30px 0;
+}
+
+.welcome-view:md .version-label {
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
 }
 
 .welcome-view:md .flow-pane {
@@ -1596,6 +1608,12 @@
 .welcome-view:sm .description-label {
     -fx-text-alignment: center;
     -fx-font-size: 18px;
+    -fx-padding: 0 0 20px 0;
+}
+
+.welcome-view:sm .version-label {
+    -fx-text-alignment: center;
+    -fx-font-size: 14px;
 }
 
 .welcome-view:sm .flow-pane {
