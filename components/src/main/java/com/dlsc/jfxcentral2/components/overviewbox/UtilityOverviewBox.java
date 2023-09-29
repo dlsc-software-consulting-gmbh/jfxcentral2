@@ -45,7 +45,9 @@ public class UtilityOverviewBox extends OverviewBox<Utility> {
             if (StringUtils.containsIgnoreCase(model.getDescription(), "path")) {
                 setTitle("SVG Path Extractor");
                 setIcon(MaterialDesignS.SHAPE_OUTLINE);
-                return new SVGPathExtractorView(model);
+                SVGPathExtractorView view = new SVGPathExtractorView(model);
+                view.sizeProperty().bind(sizeProperty());
+                return view;
             }
             return createComingSoonPane();
         }
