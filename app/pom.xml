@@ -421,7 +421,7 @@
                 <configuration>
                     <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
                     <releaseName>jfxcentral</releaseName>
-                    <localJVMArgs>-Ddevelop=true</localJVMArgs>
+                    <localJVMArgs>-Ddevelop=false</localJVMArgs>
                     <port>8088</port>
                 </configuration>
             </plugin>
