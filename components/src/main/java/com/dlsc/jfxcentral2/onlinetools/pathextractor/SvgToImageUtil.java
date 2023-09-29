@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.devtools.pathextractor;
+package com.dlsc.jfxcentral2.onlinetools.pathextractor;
 
 import com.github.weisj.jsvg.SVGDocument;
 import com.github.weisj.jsvg.attributes.ViewBox;
@@ -19,8 +19,7 @@ import java.net.URL;
 import java.util.Objects;
 
 public class SvgToImageUtil {
-
-    public record ImageResult(Image image, int originalWidth, int originalHeight, File file) {
+    public record ImageResult(Image image, int originalWidth, int originalHeight,File file) {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -51,8 +50,8 @@ public class SvgToImageUtil {
     /**
      * Parses an SVG file to generate an ImageResult, which contains a WritableImage alongside the dimensions of the image.
      *
-     * @param svgFile    The SVG file to be parsed.
-     * @param prefWidth  The desired maximum width for the output image. If set to -1 along with prefHeight being -1, the original dimensions of the SVG will be maintained. Any other negative number or zero will throw an IllegalArgumentException.
+     * @param svgFile The SVG file to be parsed.
+     * @param prefWidth The desired maximum width for the output image. If set to -1 along with prefHeight being -1, the original dimensions of the SVG will be maintained. Any other negative number or zero will throw an IllegalArgumentException.
      * @param prefHeight The desired maximum height for the output image. If set to -1 along with prefWidth being -1, the original dimensions of the SVG will be maintained. Any other negative number or zero will throw an IllegalArgumentException.
      * @return An ImageResult object containing the WritableImage generated from the SVG file and its dimensions, or null if the SVG document could not be loaded successfully.
      * @throws IllegalArgumentException If prefWidth or prefHeight are zero or negative (except -1 to maintain original size).
@@ -172,7 +171,7 @@ public class SvgToImageUtil {
 
     public static Image toImage(String url, double requestedWidth, double requestedHeight, double outputScaleX, double outputScaleY, boolean preserveRatio) {
         try {
-            return toImage(new URL(url), requestedWidth, requestedHeight, outputScaleX, outputScaleY, preserveRatio);
+           return toImage(new URL(url), requestedWidth, requestedHeight, outputScaleX, outputScaleY, preserveRatio);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -186,4 +185,5 @@ public class SvgToImageUtil {
         BufferedImage image = renderImage(requestedWidth, requestedHeight, outputScaleX, outputScaleY, preserveRatio, svgDocument);
         return SwingFXUtils.toFXImage(image, null);
     }
+
 }

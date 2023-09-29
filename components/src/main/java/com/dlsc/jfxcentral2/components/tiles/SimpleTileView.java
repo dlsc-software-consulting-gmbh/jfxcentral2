@@ -120,7 +120,6 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         }
     }
 
-
     public Button getDetailButton() {
         return detailButton;
     }
@@ -198,4 +197,9 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
 
     public record LinkedObjectBadge(String name, Ikon ikon, int count) {
     }
+
+    protected HBox getLinkedObjectBox() {
+        return linkedObjectBox;
+    }
+
 }

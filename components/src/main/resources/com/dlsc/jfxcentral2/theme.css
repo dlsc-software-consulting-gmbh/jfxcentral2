@@ -86,6 +86,7 @@
     -red: #ff7b72;
     -blue: #58a6ff;
     -green: #08e093;
+    -dark-green: #5a8860;
     -purple: #d2a8ff;
     -orange: #f9990f;
     -white: #ffffff;
@@ -3265,6 +3266,13 @@
 }
 
 /** ------------------------------------
+ * OnlineToolDetailHeader
+ */
+.online-tool-detail-header:sm > .content-pane .content-box > .name {
+    -fx-font-size: 30px;
+}
+
+/** ------------------------------------
  * AppDetailHeader
  */
 
@@ -3571,6 +3579,40 @@
 
 .tool-tile-view .bottom-box {
     -fx-alignment: center-right;
+}
+
+/** ------------------------------------
+ * online-tool-tile-view
+ */
+.online-tool-tile-view .linked-object-box .linked-badge {
+    -fx-pref-width: 85px;
+    -fx-alignment: center;
+    -fx-text-fill: -white;
+}
+
+.online-tool-tile-view:disabled {
+    -fx-background-color: #f6f5f5;
+}
+
+.online-tool-tile-view:disabled .avatar-view {
+    -fx-opacity: 0.68;
+}
+
+.online-tool-tile-view.completed .linked-object-box .linked-badge {
+    -fx-background-color: -dark-green;
+}
+
+.online-tool-tile-view.beta .linked-object-box .linked-badge {
+    -fx-background-color: #3465e3;
+}
+
+.online-tool-tile-view.developing .linked-object-box .linked-badge {
+    -fx-background-color: -orange;
+}
+
+.online-tool-tile-view.planning .linked-object-box .linked-badge {
+    -fx-background-color: -grey-60;
+    -fx-text-fill: -white;
 }
 
 /** ------------------------------------
@@ -6570,6 +6612,40 @@
 }
 
 /** ------------------------------------
+ * OnlineToolOverviewBox
+ */
+.online-tool-overview-box > .content-box > .body-box > .bottom-wrapper > .custom-markdown-view {
+    -fx-border-color: -grey-10;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.online-tool-overview-box > .content-box > .body-box > .bottom-wrapper > .custom-markdown-view:disabled {
+    -fx-opacity: 0.5;
+}
+
+.online-tool-overview-box > .content-box > .body-box > .top-wrapper > .coming-soon-label {
+    -fx-text-fill: -grey-60;
+    -fx-padding: 100px 0;
+    -fx-graphic-text-gap: 20px;
+    -fx-font-size: 32px;
+}
+
+.online-tool-overview-box .body-box > .top-wrapper > .coming-soon-label .ikonli-font-icon {
+    -fx-icon-color: -grey-60;
+    -fx-icon-size: 50px;
+}
+
+.online-tool-overview-box:sm > .content-box > .body-box > .top-wrapper > .coming-soon-label {
+    -fx-content-display: top;
+    -fx-font-size: 24px;
+    -fx-graphic-text-gap: 20px;
+}
+
+.online-tool-overview-box:sm .body-box > .top-wrapper > .coming-soon-label .ikonli-font-icon {
+    -fx-icon-size: 60px;
+}
+
+/** ------------------------------------
  * LibraryCoordinatesBox
  */
 .library-coordinates-box {
@@ -8777,40 +8853,10 @@
     -fx-icon-size: 40px;
     -fx-icon-color: -grey-100;
 }
-/** ----------------------------------------------------------------------------
- * online-tools-view
- */
-.online-tools-view > .container {
-    -fx-padding: 10px;
-    -fx-border-color: -grey-10;
-}
-
-.online-tools-view > .container > .tips-view {
-    -fx-padding: 10px;
-    -fx-border-color: -grey-10;
-    -fx-border-width: 1px 0 0 0;
-}
 
 /** ----------------------------------------------------------------------------
  * SVGPathExtractorView
  */
-.svg-path-extractor-view {
-    -fx-spacing: 30px;
-}
-
-.svg-path-extractor-view:lg {
-    -fx-padding: 0 120px;
-    -fx-max-width: -lg-width;
-}
-
-.svg-path-extractor-view:md {
-    -fx-padding: 0 50px;
-}
-
-.svg-path-extractor-view:sm {
-    -fx-padding: 0px 20px;
-}
-
 .svg-path-extractor-view .container {
     -fx-spacing: 10px;
     -fx-background-color: -white;

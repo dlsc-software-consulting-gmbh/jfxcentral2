@@ -1,13 +1,11 @@
-package com.dlsc.jfxcentral2.devtools.pathextractor;
+package com.dlsc.jfxcentral2.onlinetools.pathextractor;
 
 import com.dlsc.gemsfx.Spacer;
-import com.dlsc.jfxcentral2.components.CustomMarkdownView;
+import com.dlsc.jfxcentral.data.model.OnlineTool;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
-import com.dlsc.jfxcentral2.components.Header;
+import com.dlsc.jfxcentral2.components.FileHandlerView;
 import com.dlsc.jfxcentral2.components.PaneBase;
-import com.dlsc.jfxcentral2.devtools.FileHandlerView;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.ReadTextFile;
 import com.dlsc.jfxcentral2.utils.SVGPathExtractor;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.beans.InvalidationListener;
@@ -40,7 +38,6 @@ import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.antdesignicons.AntDesignIconsOutlined;
 import org.kordamp.ikonli.boxicons.BoxiconsRegular;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignS;
 import org.kordamp.ikonli.whhg.WhhgAL;
 
 import java.io.File;
@@ -71,16 +68,12 @@ public class SVGPathExtractorView extends PaneBase {
     private Region fxSvgRegion;
     private StackPane jsvgPane;
 
-    public SVGPathExtractorView() {
+    public SVGPathExtractorView(OnlineTool model) {
         getStyleClass().addAll("online-tools-view", "svg-path-extractor-view");
 
         imageResultProperty.bind(svgFileProperty.map(file -> SvgToImageUtil.parserSVG(file, PREF_WIDTH, PREF_HEIGHT)));
         pathProperty.bind(svgFileProperty.map(SVGPathExtractor::extractPaths));
 
-        // Header
-        Header header = new Header();
-        header.setTitle("SVG Path Extractor");
-        header.setIcon(MaterialDesignS.SHAPE_OUTLINE);
 
         // Top
         HBox jsvgBox = createJSVGBox();
@@ -88,13 +81,8 @@ public class SVGPathExtractorView extends PaneBase {
         // Center
         HBox fxSvgBox = createFXSVGBox();
 
-        // Bottom
-        String mdTips = ReadTextFile.readText(this.getClass(), "/com/dlsc/jfxcentral2/devtools/path-extractor-tips.md");
-        CustomMarkdownView tipsView = new CustomMarkdownView(mdTips);
-        tipsView.getStyleClass().add("tips-view");
-
         // Container
-        VBox container = new VBox(header, jsvgBox, fxSvgBox, tipsView);
+        VBox container = new VBox(jsvgBox, fxSvgBox);
         container.getStyleClass().add("container");
 
         getChildren().setAll(container);

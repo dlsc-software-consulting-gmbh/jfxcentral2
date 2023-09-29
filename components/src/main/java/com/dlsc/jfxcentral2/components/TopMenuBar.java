@@ -214,6 +214,12 @@ public class TopMenuBar extends PaneBase {
             showcasesBtn.getStyleClass().add("showcases-button");
             LinkUtil.setLink(showcasesBtn, "/showcases");
 
+            Button onlineToolsBtn = new Button("Online Tools");
+            onlineToolsBtn.setFocusTraversable(false);
+            onlineToolsBtn.setMinWidth(Region.USE_PREF_SIZE);
+            onlineToolsBtn.getStyleClass().add("online-tools-button");
+            LinkUtil.setLink(onlineToolsBtn, "/onlinetools");
+
             Button documentationBtn = new Button("Documentation");
             documentationBtn.setFocusTraversable(false);
             documentationBtn.setMinWidth(Region.USE_PREF_SIZE);
@@ -242,7 +248,7 @@ public class TopMenuBar extends PaneBase {
 
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn,documentationBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, onlineToolsBtn, documentationBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");
