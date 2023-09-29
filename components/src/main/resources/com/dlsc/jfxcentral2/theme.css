@@ -8862,21 +8862,13 @@
     -fx-background-color: -white;
 }
 
-.preview-pane {
-    -fx-border-color: -grey-10;
-    -fx-pref-width: 178px;
-    -fx-max-width: 178px;
-    -fx-pref-height: 178px;
-    -fx-background-repeat: repeat;
-    -fx-background-image: null;
-}
-
 .svg-path-extractor-view .value-label {
     -fx-text-overrun: leading-ellipsis;
 }
 
 .svg-path-extractor-view .preview-pane {
     -fx-border-color: -grey-10;
+    -fx-min-width: 174px;
     -fx-pref-width: 174px;
     -fx-max-width: 174px;
     -fx-pref-height: 174px;
@@ -8885,6 +8877,7 @@
 }
 
 .svg-path-extractor-view:sm-md .preview-pane {
+    -fx-min-width: 132px;
     -fx-pref-width: 132px;
     -fx-max-width: 132px;
     -fx-pref-height: 132px;

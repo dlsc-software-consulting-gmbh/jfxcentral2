@@ -105,13 +105,6 @@ public class SVGPathExtractorView extends PaneBase {
 
         StackPane fxPreviewPane = new StackPane(fxSvgRegion);
         fxPreviewPane.getStyleClass().addAll("fx-preview-pane", "preview-pane");
-        fxPreviewPane.minWidthProperty().bind(jsvgPane.widthProperty());
-        fxPreviewPane.prefWidthProperty().bind(jsvgPane.widthProperty());
-        fxPreviewPane.maxWidthProperty().bind(jsvgPane.widthProperty());
-
-        fxPreviewPane.minHeightProperty().bind(jsvgPane.heightProperty());
-        fxPreviewPane.prefHeightProperty().bind(jsvgPane.heightProperty());
-        fxPreviewPane.maxHeightProperty().bind(jsvgPane.heightProperty());
 
         ToggleGroup codeGroup = new ToggleGroup();
 
