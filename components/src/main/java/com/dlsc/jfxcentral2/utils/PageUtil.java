@@ -7,7 +7,7 @@ import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral.data.model.OnlineTool;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
@@ -85,8 +85,8 @@ public class PageUtil {
             return View.TIPS;
         } else if (obj instanceof IkonliPack) {
             return View.ICONS;
-        } else if (obj instanceof OnlineTool){
-            return View.ONLINETOOLS;
+        } else if (obj instanceof Utility){
+            return View.UTILITIES;
         } else {
             return View.HOME;
         }
@@ -106,7 +106,7 @@ public class PageUtil {
         if (view == View.DOWNLOADS) return Download.class;
         if (view == View.TIPS) return Tip.class;
         if (view == View.ICONS) return IkonliPack.class;
-        if (view == View.ONLINETOOLS) return OnlineTool.class;
+        if (view == View.UTILITIES) return Utility.class;
         if (view == View.HOME) return null;
         String errorMessage = "No Class associated with the view: " + view;
         LOGGER.error(errorMessage);

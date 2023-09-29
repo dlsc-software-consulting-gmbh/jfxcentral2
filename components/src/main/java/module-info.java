@@ -105,7 +105,7 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.components.userprofile;
     exports com.dlsc.jfxcentral2.components.hamburger;
     exports com.dlsc.jfxcentral2.components.topcontent;
-    exports com.dlsc.jfxcentral2.onlinetools.pathextractor;
+    exports com.dlsc.jfxcentral2.utilities.pathextractor;
 
     uses IkonProvider;
 }

@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.onlinetools.pathextractor;
+package com.dlsc.jfxcentral2.utilities.pathextractor;
 
 import com.github.weisj.jsvg.SVGDocument;
 import com.github.weisj.jsvg.attributes.ViewBox;

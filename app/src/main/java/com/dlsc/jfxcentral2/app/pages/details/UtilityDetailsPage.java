@@ -1,31 +1,30 @@
 package com.dlsc.jfxcentral2.app.pages.details;
 
-import com.dlsc.jfxcentral.data.model.OnlineTool;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.headers.OnlineToolDetailHeader;
-import com.dlsc.jfxcentral2.components.overviewbox.OnlineToolOverviewBox;
+import com.dlsc.jfxcentral2.components.headers.UtilityDetailHeader;
+import com.dlsc.jfxcentral2.components.overviewbox.UtilityOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 
-public class OnlineToolsDetailsPage extends DetailsPageBase<OnlineTool> {
+public class UtilityDetailsPage extends DetailsPageBase<Utility> {
 
-    public OnlineToolsDetailsPage(ObjectProperty<Size> size, String itemId) {
-        super(size, OnlineTool.class, itemId);
+    public UtilityDetailsPage(ObjectProperty<Size> size, String itemId) {
+        super(size, Utility.class, itemId);
     }
-
 
     @Override
     public Node content() {
-        OnlineTool onlineTool = getItem();
+        Utility utility = getItem();
 
         // header
-        OnlineToolDetailHeader header = new OnlineToolDetailHeader(onlineTool);
+        UtilityDetailHeader header = new UtilityDetailHeader(utility);
         header.sizeProperty().bind(sizeProperty());
 
         // overview
-        OnlineToolOverviewBox overviewBox = new OnlineToolOverviewBox(onlineTool);
+        UtilityOverviewBox overviewBox = new UtilityOverviewBox(utility);
         overviewBox.sizeProperty().bind(sizeProperty());
 
         // details

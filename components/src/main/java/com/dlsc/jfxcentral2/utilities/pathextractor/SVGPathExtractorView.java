@@ -1,7 +1,7 @@
-package com.dlsc.jfxcentral2.onlinetools.pathextractor;
+package com.dlsc.jfxcentral2.utilities.pathextractor;
 
 import com.dlsc.gemsfx.Spacer;
-import com.dlsc.jfxcentral.data.model.OnlineTool;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.components.FileHandlerView;
 import com.dlsc.jfxcentral2.components.PaneBase;
@@ -68,7 +68,7 @@ public class SVGPathExtractorView extends PaneBase {
     private Region fxSvgRegion;
     private StackPane jsvgPane;
 
-    public SVGPathExtractorView(OnlineTool model) {
+    public SVGPathExtractorView(Utility model) {
         getStyleClass().addAll("online-tools-view", "svg-path-extractor-view");
 
         imageResultProperty.bind(svgFileProperty.map(file -> SvgToImageUtil.parserSVG(file, PREF_WIDTH, PREF_HEIGHT)));

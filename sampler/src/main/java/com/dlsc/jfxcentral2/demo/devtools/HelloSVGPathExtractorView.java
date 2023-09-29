@@ -1,10 +1,10 @@
 package com.dlsc.jfxcentral2.demo.devtools;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
-import com.dlsc.jfxcentral.data.model.OnlineTool;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.onlinetools.pathextractor.SVGPathExtractorView;
+import com.dlsc.jfxcentral2.utilities.pathextractor.SVGPathExtractorView;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
@@ -17,7 +17,7 @@ public class HelloSVGPathExtractorView extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        Optional<OnlineTool> path = DataRepository2.getInstance().getOnlineTools().stream().filter(t -> t.getId().contains("path")).findFirst();
+        Optional<Utility> path = DataRepository2.getInstance().getUtilities().stream().filter(t -> t.getId().contains("path")).findFirst();
         view = new SVGPathExtractorView(path.get());
         ScrollPane scrollPane = new ScrollPane(view);
         scrollPane.setPrefWidth(1600);

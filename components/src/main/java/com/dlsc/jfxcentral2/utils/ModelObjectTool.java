@@ -10,7 +10,7 @@ import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.News;
-import com.dlsc.jfxcentral.data.model.OnlineTool;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
@@ -29,7 +29,6 @@ public class ModelObjectTool {
 
     private ModelObjectTool() {
     }
-
 
     public static File getModelPreviewFile(ModelObject modelObject, boolean largerImageFirst) {
         if (modelObject instanceof Tool tool) {
@@ -110,8 +109,8 @@ public class ModelObjectTool {
             return "/news/" + news.getId();
         } else if (modelObject instanceof IkonliPack pack) {
             return "/icons/" + pack.getId();
-        } else if (modelObject instanceof OnlineTool onlineTool) {
-            return "/onlinetools/" + onlineTool.getId();
+        } else if (modelObject instanceof Utility utility) {
+            return "/utilities/" + utility.getId();
         }
 
         return "";
@@ -150,23 +149,22 @@ public class ModelObjectTool {
             return "Apps";
         } else if (clazz == News.class) {
             return "News";
-        } else if (clazz == OnlineTool.class) {
-            return "Online Tools";
+        } else if (clazz == Utility.class) {
+            return "Utilities";
         }
 
         return "ModelObject";
     }
 
-
     public static String getModelName(ModelObject modelObject) {
         return getModelName(modelObject.getClass());
     }
 
-    public static boolean isOnlineToolCanBeUsed(OnlineTool onlineTool) {
-        if (onlineTool == null) {
+    public static boolean isUtilityCanBeUsed(Utility utility) {
+        if (utility == null) {
             return false;
         }
-        DevelopmentStatus status = onlineTool.getStatus();
+        DevelopmentStatus status = utility.getStatus();
         return status == DevelopmentStatus.BETA || status == DevelopmentStatus.COMPLETED;
     }
 

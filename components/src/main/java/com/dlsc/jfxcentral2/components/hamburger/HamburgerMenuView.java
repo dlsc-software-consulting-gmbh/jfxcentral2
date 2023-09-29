@@ -95,13 +95,13 @@ public class HamburgerMenuView extends PaneBase {
         }
 
         HamburgerMenu showcases = new HamburgerMenu("Showcases", "/showcases");
-        HamburgerMenu onlineTools = new HamburgerMenu("Online Tools", "/onlinetools");
+        HamburgerMenu utilities = new HamburgerMenu("Utilities", "/utilities");
         HamburgerMenu documentation = new HamburgerMenu("Documentation", "/documentation");
         HamburgerMenu downloads = new HamburgerMenu("Downloads", "/downloads");
 
         setMaxHeight(Region.USE_PREF_SIZE);
 
-        getMenus().addAll(resourcesMenu, communityMenu, showcases,onlineTools, documentation);
+        getMenus().addAll(resourcesMenu, communityMenu, showcases,utilities, documentation);
         if (!mobile) {
             getMenus().add(downloads);
         }

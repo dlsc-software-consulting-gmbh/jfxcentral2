@@ -1,11 +1,11 @@
 package com.dlsc.jfxcentral2.app.pages.category;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
-import com.dlsc.jfxcentral.data.model.OnlineTool;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.components.filters.OnlineToolsFilterView;
+import com.dlsc.jfxcentral2.components.filters.UtilitiesFilterView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.tiles.OnlineToolTileView;
+import com.dlsc.jfxcentral2.components.tiles.UtilityTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -15,30 +15,30 @@ import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
-public class OnlineToolsCategoryPage extends CategoryPageBase<OnlineTool> {
+public class UtilitiesCategoryPage extends CategoryPageBase<Utility> {
 
-    public OnlineToolsCategoryPage(ObjectProperty<Size> size) {
+    public UtilitiesCategoryPage(ObjectProperty<Size> size) {
         super(size);
     }
 
     @Override
     public String title() {
-        return "JFXCentral - Online Develop Tools";
+        return "JFXCentral - Utilities";
     }
 
     @Override
     public String description() {
-        return "Online tools for developing JavaFX applications.";
+        return "Utilities for developing JavaFX applications.";
     }
 
     @Override
     protected String getCategoryTitle() {
-        return "Online Tools";
+        return "Utilities";
     }
 
     @Override
     protected Ikon getCategoryIkon() {
-        return IkonUtil.getModelIkon(OnlineTool.class);
+        return IkonUtil.getModelIkon(Utility.class);
     }
 
     @Override
@@ -47,18 +47,18 @@ public class OnlineToolsCategoryPage extends CategoryPageBase<OnlineTool> {
     }
 
     @Override
-    protected Callback<OnlineTool, TileViewBase<OnlineTool>> getTileViewProvider() {
-        return OnlineToolTileView::new;
+    protected Callback<Utility, TileViewBase<Utility>> getTileViewProvider() {
+        return UtilityTileView::new;
     }
 
     @Override
-    protected SearchFilterView<OnlineTool> createSearchFilterView() {
-        return new OnlineToolsFilterView();
+    protected SearchFilterView<Utility> createSearchFilterView() {
+        return new UtilitiesFilterView();
     }
 
     @Override
-    protected ObservableList<OnlineTool> getCategoryItems() {
-        return FXCollections.observableArrayList(DataRepository2.getInstance().getOnlineTools());
+    protected ObservableList<Utility> getCategoryItems() {
+        return FXCollections.observableArrayList(DataRepository2.getInstance().getUtilities());
     }
 
 }

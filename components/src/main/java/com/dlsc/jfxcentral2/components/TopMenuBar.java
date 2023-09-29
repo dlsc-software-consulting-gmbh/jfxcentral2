@@ -160,7 +160,9 @@ public class TopMenuBar extends PaneBase {
         search(repository.getDownloads(), pattern, results);
         search(repository.getTutorials(), pattern, results);
         search(repository.getTips(), pattern, results);
+        search(repository.getUtilities(), pattern, results);
         search(repository.getIkonliPacks(), pattern, results);
+
 
         return results;
     }
@@ -214,11 +216,11 @@ public class TopMenuBar extends PaneBase {
             showcasesBtn.getStyleClass().add("showcases-button");
             LinkUtil.setLink(showcasesBtn, "/showcases");
 
-            Button onlineToolsBtn = new Button("Online Tools");
-            onlineToolsBtn.setFocusTraversable(false);
-            onlineToolsBtn.setMinWidth(Region.USE_PREF_SIZE);
-            onlineToolsBtn.getStyleClass().add("online-tools-button");
-            LinkUtil.setLink(onlineToolsBtn, "/onlinetools");
+            Button utilitiesButton = new Button("Utilities");
+            utilitiesButton.setFocusTraversable(false);
+            utilitiesButton.setMinWidth(Region.USE_PREF_SIZE);
+            utilitiesButton.getStyleClass().add("online-tools-button");
+            LinkUtil.setLink(utilitiesButton, "/utilities");
 
             Button documentationBtn = new Button("Documentation");
             documentationBtn.setFocusTraversable(false);
@@ -248,7 +250,7 @@ public class TopMenuBar extends PaneBase {
 
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, onlineToolsBtn, documentationBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, utilitiesButton, documentationBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");

@@ -15,5 +15,5 @@ public enum View {
     DOWNLOADS,
     TIPS,
     ICONS,
-    ONLINETOOLS
+    UTILITIES
 }

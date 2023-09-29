@@ -15,8 +15,8 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.PageUtil;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -24,15 +24,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import one.jpro.platform.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class SearchResultCell extends ListCell<ModelObject> {
 
-    private FontIcon fontIcon = new FontIcon();
-    private Label titleLabel = new Label();
-    private Label subtitleLabel = new Label();
+    private final FontIcon fontIcon = new FontIcon();
+    private final Label titleLabel = new Label();
+    private final Label subtitleLabel = new Label();
 
     public SearchResultCell() {
         getStyleClass().add("search-result-list-cell");
@@ -102,6 +101,8 @@ public class SearchResultCell extends ListCell<ModelObject> {
             return "Post";
         } else if (clazz.equals(IkonliPack.class)) {
             return "Icon Pack";
+        } else if (clazz.equals(Utility.class)) {
+            return "Utility";
         } else {
             return "Item";
         }

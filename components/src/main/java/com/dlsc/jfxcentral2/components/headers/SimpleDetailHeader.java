@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral.data.model.OnlineTool;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -42,8 +42,8 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         getStyleClass().add("simple-detail-header");
 
         setCenter(createCenterNode());
-        if (model instanceof OnlineTool onlineTool) {
-            setSummary(onlineTool.getDescription());
+        if (model instanceof Utility utility) {
+            setSummary(utility.getDescription());
         }else {
             setSummary(model.getSummary());
         }

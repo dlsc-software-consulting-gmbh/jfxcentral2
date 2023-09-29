@@ -3266,9 +3266,9 @@
 }
 
 /** ------------------------------------
- * OnlineToolDetailHeader
+ * UtilityDetailHeader
  */
-.online-tool-detail-header:sm > .content-pane .content-box > .name {
+.utility-detail-header:sm > .content-pane .content-box > .name {
     -fx-font-size: 30px;
 }
 
@@ -3582,35 +3582,35 @@
 }
 
 /** ------------------------------------
- * online-tool-tile-view
+ * utility-tile-view
  */
-.online-tool-tile-view .linked-object-box .linked-badge {
+.utility-tile-view .linked-object-box .linked-badge {
     -fx-pref-width: 85px;
     -fx-alignment: center;
     -fx-text-fill: -white;
 }
 
-.online-tool-tile-view:disabled {
+.utility-tile-view:disabled {
     -fx-background-color: #f6f5f5;
 }
 
-.online-tool-tile-view:disabled .avatar-view {
+.utility-tile-view:disabled .avatar-view {
     -fx-opacity: 0.68;
 }
 
-.online-tool-tile-view.completed .linked-object-box .linked-badge {
+.utility-tile-view.completed .linked-object-box .linked-badge {
     -fx-background-color: -dark-green;
 }
 
-.online-tool-tile-view.beta .linked-object-box .linked-badge {
+.utility-tile-view.beta .linked-object-box .linked-badge {
     -fx-background-color: #3465e3;
 }
 
-.online-tool-tile-view.developing .linked-object-box .linked-badge {
+.utility-tile-view.developing .linked-object-box .linked-badge {
     -fx-background-color: -orange;
 }
 
-.online-tool-tile-view.planning .linked-object-box .linked-badge {
+.utility-tile-view.planning .linked-object-box .linked-badge {
     -fx-background-color: -grey-60;
     -fx-text-fill: -white;
 }
@@ -6612,36 +6612,36 @@
 }
 
 /** ------------------------------------
- * OnlineToolOverviewBox
+ * UtilityOverviewBox
  */
-.online-tool-overview-box > .content-box > .body-box > .bottom-wrapper > .custom-markdown-view {
+.utility-overview-box > .content-box > .body-box > .bottom-wrapper > .custom-markdown-view {
     -fx-border-color: -grey-10;
     -fx-border-width: 1px 0 0 0;
 }
 
-.online-tool-overview-box > .content-box > .body-box > .bottom-wrapper > .custom-markdown-view:disabled {
+.utility-overview-box > .content-box > .body-box > .bottom-wrapper > .custom-markdown-view:disabled {
     -fx-opacity: 0.5;
 }
 
-.online-tool-overview-box > .content-box > .body-box > .top-wrapper > .coming-soon-label {
+.utility-overview-box > .content-box > .body-box > .top-wrapper > .coming-soon-label {
     -fx-text-fill: -grey-60;
     -fx-padding: 100px 0;
     -fx-graphic-text-gap: 20px;
     -fx-font-size: 32px;
 }
 
-.online-tool-overview-box .body-box > .top-wrapper > .coming-soon-label .ikonli-font-icon {
+.utility-overview-box .body-box > .top-wrapper > .coming-soon-label .ikonli-font-icon {
     -fx-icon-color: -grey-60;
     -fx-icon-size: 50px;
 }
 
-.online-tool-overview-box:sm > .content-box > .body-box > .top-wrapper > .coming-soon-label {
+.utility-overview-box:sm > .content-box > .body-box > .top-wrapper > .coming-soon-label {
     -fx-content-display: top;
     -fx-font-size: 24px;
     -fx-graphic-text-gap: 20px;
 }
 
-.online-tool-overview-box:sm .body-box > .top-wrapper > .coming-soon-label .ikonli-font-icon {
+.utility-overview-box:sm .body-box > .top-wrapper > .coming-soon-label .ikonli-font-icon {
     -fx-icon-size: 60px;
 }
 

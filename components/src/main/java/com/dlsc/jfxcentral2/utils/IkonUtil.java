@@ -10,7 +10,7 @@ import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.News;
-import com.dlsc.jfxcentral.data.model.OnlineTool;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
@@ -64,7 +64,7 @@ public interface IkonUtil {
     Ikon video = JFXCentralIcon.VIDEOS;
     Ikon icons = MaterialDesign.MDI_EMOTICON;
     Ikon documentation = Codicons.BOOK;
-    Ikon onlineTools = FluentUiRegularAL.DOCUMENT_TOOLBOX_20;
+    Ikon utility = FluentUiRegularAL.DOCUMENT_TOOLBOX_20;
 
     Ikon news = MaterialDesignN.NEWSPAPER_VARIANT_OUTLINE;
     Ikon linkOfTheWeek = JFXCentralIcon.LINKS_OF_THE_WEEK;
@@ -104,8 +104,8 @@ public interface IkonUtil {
             return news;
         } else if (clazz == Documentation.class) {
             return documentation;
-        }  else if (clazz == OnlineTool.class){
-            return onlineTools;
+        }  else if (clazz == Utility.class){
+            return utility;
         } else {
             return null;
         }

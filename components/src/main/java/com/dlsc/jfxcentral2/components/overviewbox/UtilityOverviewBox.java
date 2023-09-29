@@ -1,9 +1,9 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
-import com.dlsc.jfxcentral.data.model.OnlineTool;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
-import com.dlsc.jfxcentral2.onlinetools.pathextractor.SVGPathExtractorView;
+import com.dlsc.jfxcentral2.utilities.pathextractor.SVGPathExtractorView;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -13,16 +13,16 @@ import org.kordamp.ikonli.fileicons.FileIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignS;
 
-public class OnlineToolOverviewBox extends OverviewBox<OnlineTool> {
+public class UtilityOverviewBox extends OverviewBox<Utility> {
+
     private Node toolPane;
     private Node readmeView;
-    private static final Logger LOGGER = org.apache.logging.log4j.LogManager.getLogger(OnlineToolOverviewBox.class);
-    public OnlineToolOverviewBox(OnlineTool model) {
+    private static final Logger LOGGER = org.apache.logging.log4j.LogManager.getLogger(UtilityOverviewBox.class);
+
+    public UtilityOverviewBox(Utility model) {
         super(model);
-        getStyleClass().add("online-tool-overview-box");
+        getStyleClass().add("utility-overview-box");
     }
-
-
 
     @Override
     protected Node createTopNode() {
@@ -40,8 +40,8 @@ public class OnlineToolOverviewBox extends OverviewBox<OnlineTool> {
         return readmeView;
     }
 
-    private Node createToolPane(OnlineTool model) {
-        if (ModelObjectTool.isOnlineToolCanBeUsed(model)) {
+    private Node createToolPane(Utility model) {
+        if (ModelObjectTool.isUtilityCanBeUsed(model)) {
             if (StringUtils.containsIgnoreCase(model.getDescription(), "path")) {
                 setTitle("SVG Path Extractor");
                 setIcon(MaterialDesignS.SHAPE_OUTLINE);
@@ -53,10 +53,10 @@ public class OnlineToolOverviewBox extends OverviewBox<OnlineTool> {
         return createComingSoonPane();
     }
 
-    private Node readmeView(OnlineTool model) {
-        String onlineToolReadMe = DataRepository2.getInstance().getOnlineToolReadMe(model);
-        CustomMarkdownView markdownView = new CustomMarkdownView(onlineToolReadMe);
-        markdownView.setDisable(!ModelObjectTool.isOnlineToolCanBeUsed(model));
+    private Node readmeView(Utility model) {
+        String readme = DataRepository2.getInstance().getUtilityReadMe(model);
+        CustomMarkdownView markdownView = new CustomMarkdownView(readme);
+        markdownView.setDisable(!ModelObjectTool.isUtilityCanBeUsed(model));
         return markdownView;
     }
 
@@ -65,5 +65,4 @@ public class OnlineToolOverviewBox extends OverviewBox<OnlineTool> {
         label.getStyleClass().add("coming-soon-label");
         return label;
     }
-
 }
