@@ -44,7 +44,7 @@ public abstract class JFXCentralSampleBase extends SampleBase {
                 return;
             }
 
-            scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
+            scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/jfxcentral2-theme.css").toExternalForm());
 
             stylesheetsAdded = true;
         });
