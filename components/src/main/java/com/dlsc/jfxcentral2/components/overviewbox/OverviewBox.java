@@ -91,6 +91,10 @@ public class OverviewBox<T extends ModelObject> extends PaneBase implements Name
         return null;
     }
 
+    public Node getTopNode() {
+        return topWrapper.getChildren().get(0);
+    }
+
     protected Node createBottomNode() {
         return null;
     }

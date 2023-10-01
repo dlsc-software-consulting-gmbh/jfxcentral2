@@ -112,12 +112,12 @@
     -mdfx-bq-color-background: #0000ff0c; /* the blockquote's background color */
 }
 
-.root {
+.root .normal-page {
     -fx-font-family: "Spline Sans";
     -fx-font-size: 16px;
 }
 
-.text {
+.normal-page .text {
     /*---The "gray" here represents a smoothing strategy for the font, not the color of the text---*/
     -fx-font-smoothing-type: gray;
 }
@@ -190,16 +190,16 @@
     -fx-font-family: "Spline Sans";
 }
 
-.label,
-.button {
+.normal-page .label,
+.normal-page .button {
     -fx-text-fill: -grey-100;
 }
 
 /** -------------------------------
  * Button
  */
-.button,
-.menu-button {
+.normal-page .button,
+.normal-page .menu-button {
     -fx-cursor: hand;
 }
 
@@ -214,20 +214,20 @@
 /** -------------------------------
  * ComboBox
  */
-.combo-box-base {
+.normal-page .combo-box-base {
     -fx-font-size: 16px;
     -fx-background-color: -white;
     -fx-padding: 6px 10px;
     -fx-background-radius: 26px;
 }
 
-.combo-box .combo-box-popup .list-view,
-.combo-box .combo-box-popup .list-cell {
+.normal-page .combo-box .combo-box-popup .list-view,
+.normal-page .combo-box .combo-box-popup .list-cell {
     -fx-background-color: -white;
     -fx-text-fill: -grey-100;
 }
 
-.combo-box .combo-box-popup .list-view {
+.normal-page .combo-box .combo-box-popup .list-view {
     -fx-background-color: -white;
     -fx-background-radius: 10px;
     -fx-effect: -blue-shadow;
@@ -236,7 +236,7 @@
     -fx-translate-y: 8px;
 }
 
-.combo-box .combo-box-popup .list-view .list-cell {
+.normal-page .combo-box .combo-box-popup .list-view .list-cell {
     -fx-cursor: hand;
     -fx-text-fill: -grey-100;
     -fx-padding: 3px 10px 3px 12px;
@@ -244,71 +244,71 @@
     -fx-cell-size: 45px;
 }
 
-.combo-box .combo-box-popup .list-view .list-cell:selected {
+.normal-page .combo-box .combo-box-popup .list-view .list-cell:selected {
     -fx-background-color: derive(-grey-10, 50%);
 }
 
-.combo-box .combo-box-popup .list-view .check-box {
+.normal-page .combo-box .combo-box-popup .list-view .check-box {
     -fx-border-color: -grey-20;
 }
 
-.combo-box .combo-box-popup .list-view .check-box .box {
+.normal-page .combo-box .combo-box-popup .list-view .check-box .box {
     -fx-background-color: transparent;
 }
 
 /** ------------------------------------
  * ScrollBar
  **/
-.scroll-bar:horizontal,
-.scroll-bar:horizontal:focused,
-.scroll-bar:vertical,
-.scroll-bar:vertical:focused {
+.normal-page .scroll-bar:horizontal,
+.normal-page .scroll-bar:horizontal:focused,
+.normal-page .scroll-bar:vertical,
+.normal-page .scroll-bar:vertical:focused {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
 }
 
-.scroll-bar:horizontal > .thumb {
+.normal-page .scroll-bar:horizontal > .thumb {
     -fx-scale-y: 0.7;
 }
 
-.scroll-bar:vertical > .thumb {
+.normal-page .scroll-bar:vertical > .thumb {
     -fx-scale-x: 0.7;
 }
 
-.scroll-bar:horizontal > .thumb,
-.scroll-bar:vertical > .thumb {
+.normal-page .scroll-bar:horizontal > .thumb,
+.normal-page .scroll-bar:vertical > .thumb {
     -fx-background-color: -grey-10;
     -fx-background-insets: 0;
     -fx-background-radius: 0;
 }
 
-.scroll-bar:horizontal > .thumb:hover,
-.scroll-bar:vertical > .thumb:hover,
-.scroll-bar:horizontal > .thumb:pressed,
-.scroll-bar:vertical > .thumb:pressed {
+.normal-page .scroll-bar:horizontal > .thumb:hover,
+.normal-page .scroll-bar:vertical > .thumb:hover,
+.normal-page .scroll-bar:horizontal > .thumb:pressed,
+.normal-page .scroll-bar:vertical > .thumb:pressed {
     -fx-background-color: -grey-20;
 }
 
-.scroll-bar:horizontal > .track,
-.scroll-bar:horizontal > .track-background,
-.scroll-bar:vertical > .track,
-.scroll-bar:vertical > .track-background {
+.normal-page .scroll-bar:horizontal > .track,
+.normal-page .scroll-bar:horizontal > .track-background,
+.normal-page .scroll-bar:vertical > .track,
+.normal-page .scroll-bar:vertical > .track-background {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-background-radius: 0;
 }
 
-.scroll-bar > .increment-button,
-.scroll-bar > .decrement-button {
+.normal-page .scroll-bar > .increment-button,
+.normal-page .scroll-bar > .decrement-button {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-padding: 0;
 }
 
-.scroll-bar:horizontal > .increment-button > .increment-arrow,
-.scroll-bar:vertical > .increment-button > .increment-arrow,
-.scroll-bar:horizontal > .decrement-button > .decrement-arrow,
-.scroll-bar:vertical > .decrement-button > .decrement-arrow {
+.normal-page .scroll-bar:horizontal > .increment-button > .increment-arrow,
+.normal-page .scroll-bar:vertical > .increment-button > .increment-arrow,
+.normal-page .scroll-bar:horizontal > .decrement-button > .decrement-arrow,
+.normal-page .scroll-bar:vertical > .decrement-button > .decrement-arrow {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-shape: null;
@@ -317,7 +317,7 @@
 /** -------------------------------
  * ContextMenu
 */
-.context-menu {
+.normal-page .context-menu {
     -hover-text-icon-color: -grey-100; /* (hover)label:textFill; (hover)ikonli-font-icon:iconColor */
     -normal-text-icon-color: -grey-100; /* label:textFill; ikonli-font-icon:iconColor */
     -fx-background-color: -white;
@@ -328,36 +328,36 @@
     -fx-padding: 20px 30px 20px 2px;
 }
 
-.context-menu .menu-item {
+.normal-page .context-menu .menu-item {
     -fx-cursor: hand;
     -fx-border-color: transparent;
     -fx-border-width: 0 0 0 5px;
     -fx-padding: 7px 0 7px 20px;
 }
 
-.context-menu .menu-item > .label,
-.context-menu .menu-item > * > .label {
+.normal-page .context-menu .menu-item > .label,
+.normal-page .context-menu .menu-item > * > .label {
     -fx-padding: 3px 0px 3px 0px;
     -fx-text-fill: -normal-text-icon-color;
     -fx-graphic-text-gap: 20px;
 }
 
-.context-menu .menu-item * .ikonli-font-icon {
+.normal-page .context-menu .menu-item * .ikonli-font-icon {
     -fx-icon-color: -normal-text-icon-color;
     -fx-icon-size: 25px;
 }
 
-.context-menu .menu-item:hover > .label,
-.context-menu .menu-item:hover > * > .label {
+.normal-page .context-menu .menu-item:hover > .label,
+.normal-page .context-menu .menu-item:hover > * > .label {
     -fx-text-fill: -hover-text-icon-color;
 }
 
-.context-menu .menu-item:hover * .ikonli-font-icon {
+.normal-page .context-menu .menu-item:hover * .ikonli-font-icon {
     -fx-icon-color: -hover-text-icon-color;
 }
 
-.context-menu .menu-item:hover,
-.context-menu .menu-item:focused {
+.normal-page .context-menu .menu-item:hover,
+.normal-page .context-menu .menu-item:focused {
     -fx-background-color: transparent;
     -fx-border-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #ffffff00 0.0%, #ffffff00 0.6667%, #ffffff00 12%, #ffffff 20.0%, #0e4ae4 20.1%, #0e4ae4 80%, #ffffff00 80.1%, #ffffff00 100.0%);
     -fx-border-width: 0 0 0 5px;
@@ -406,22 +406,22 @@
 /** -------------------------------
  * RadioButton
  */
-.radio-button {
+.normal-page .radio-button {
     -fx-font-size: 16px;
 }
 
-.radio-button .radio {
+.normal-page .radio-button .radio {
     -fx-background-color: -light-blue;
     -fx-border-color: -light-blue;
     -fx-border-width: 1px;
     -fx-border-radius: 100px;
 }
 
-.radio-button .dot {
+.normal-page .radio-button .dot {
     -fx-translate-y: -1px;
 }
 
-.radio-button:selected .dot {
+.normal-page .radio-button:selected .dot {
     -fx-background-color: -bright-blue;
 }
 
@@ -2128,7 +2128,7 @@
 /** -------------------------------
  * PaginationControl
  */
-.pagination-control .control-box {
+.normal-page .pagination-control .control-box {
     -fx-min-width: 220px;
     -fx-min-height: 54px;
     -fx-pref-width: 220px;
@@ -5773,7 +5773,7 @@
 /* ----------------------------------------------------------------------------
  * GlassPane
  */
-.glass-pane {
+.page-glass-pane {
     -fx-background-color: black;
     -fx-opacity: 0.5;
 }
@@ -9125,4 +9125,78 @@
 
 .tools-strip-view:lg {
     -fx-padding: 10px 0px;
+}
+
+/** ----------------------------------------------------------------------------
+ * Css Playground Page (css-playground-page)
+ * This page is used to testing custom css styles
+ */
+.css-playground-page .utility-detail-header,
+.css-playground-page .top-menu-bar {
+    -fx-font-family: "Spline Sans";
+    -fx-font-size: 16px;
+}
+
+/** ----------------------------------------------------------------------------
+ * Css Playground View
+ */
+.css-playground-view {
+    -fx-spacing: 20px;
+}
+
+.css-playground-view .container {
+    -fx-spacing: 10px;
+}
+
+.css-playground-view .file-handler-view {
+    -fx-border-color: -grey-20;
+    -fx-border-width: 1px;
+    -fx-background-color: #e2e2e255;
+}
+
+.css-playground-view:md-lg .file-handler-view .inner-label {
+    -fx-content-display: left;
+}
+
+.css-playground-view .file-handler-view .inner-label {
+    -fx-text-fill: -grey-60;
+    -fx-font-size: 30px;
+    -fx-font-family: "Spline Sans";
+    -fx-padding: 15px 0;
+}
+
+.css-playground-view .file-handler-view .inner-label .ikonli-font-icon {
+    -fx-icon-color: -grey-60;
+    -fx-icon-size: 50px
+}
+
+.css-playground-view .css-showcase-view .top-tool-bar {
+    -fx-font-size: 15px;
+    -fx-font-family: "Spline Sans";
+    -fx-text-fill: -grey-100;
+    -fx-background-color: -white;
+    -fx-spacing: 15px;
+    -fx-padding: 10px 0 15px 10px;
+    -fx-border-color: -grey-10;
+}
+
+.css-playground-view .css-showcase-view .top-tool-bar .combo-box {
+    -fx-pref-width: 125px;
+}
+
+.css-playground-view .css-showcase-view .top-tool-bar > .container {
+    -fx-spacing: 15;
+}
+
+.css-playground-view > .container {
+    -fx-alignment: center;
+}
+
+.css-playground-view > .container > .tips-label {
+    -fx-padding: 60px 0;
+    -fx-font-size: 35px;
+}
+
+.css-playground-view .tips-label .ikonli-font-icon {
+    -fx-icon-size: 50px;
 }

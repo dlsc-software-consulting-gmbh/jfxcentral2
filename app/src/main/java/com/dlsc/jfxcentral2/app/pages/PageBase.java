@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages;
 
+import com.dlsc.jfxcentral2.app.pages.details.UtilityDetailsPage;
 import com.dlsc.jfxcentral2.components.CopyrightView;
 import com.dlsc.jfxcentral2.components.FooterView;
 import com.dlsc.jfxcentral2.components.Mode;
@@ -99,7 +100,7 @@ public abstract class PageBase extends View {
         vbox.getChildren().addAll(topStackPane, sponsorsView, footerView, copyrightView);
 
         StackPane glassPane = new StackPane();
-        glassPane.getStyleClass().add("glass-pane");
+        glassPane.getStyleClass().add("page-glass-pane");
         glassPane.visibleProperty().bind(topMenuBar.usedProperty().or(blockingProperty()));
         glassPane.setOnMouseClicked(evt -> setShowHamburgerMenu(false));
 
@@ -111,6 +112,19 @@ public abstract class PageBase extends View {
 
         StackPane root = new StackPane(vbox, glassPane, hamburgerMenuView);
         root.getStyleClass().add("background");
+
+        /*
+         * The CSS playground is a special case, because it used for testing custom CSS styles.
+         */
+        if (this instanceof UtilityDetailsPage utilityDetailsPage) {
+            if (!utilityDetailsPage.getItem().getId().equals("cssplayground")) {
+                root.getStyleClass().add("normal-page");
+            }else {
+                root.getStyleClass().add("css-playground-page");
+            }
+        } else {
+            root.getStyleClass().add("normal-page");
+        }
 
         return root;
     }

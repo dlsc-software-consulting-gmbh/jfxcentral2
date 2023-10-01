@@ -4,7 +4,6 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.DevelopmentStatus;
 import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.components.AvatarView;
-import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -24,7 +23,7 @@ public class UtilityTileView extends SimpleTileView<Utility> {
         titleProperty().set(utility.getName());
         setDescription(utility.getDescription());
 
-        setDisable(!ModelObjectTool.isUtilityCanBeUsed(utility));
+        //setDisable(!ModelObjectTool.isUtilityCanBeUsed(utility));
 
         updateLinkedObjectBadges();
     }
