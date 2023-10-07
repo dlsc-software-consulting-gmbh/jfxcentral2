@@ -1,3 +1,26 @@
+.control-panel .combo-box-base {
+    -fx-font-size: 12px;
+    -fx-background-radius: 2px;
+    -fx-padding: 5px 2px;
+}
+
+.control-panel .combo-box .combo-box-popup .list-view,
+.control-panel .combo-box .combo-box-popup .list-cell {
+    -fx-background-color: -white;
+    -fx-text-fill: -grey-100;
+}
+
+.control-panel .combo-box .combo-box-popup .list-view {
+    -fx-background-radius: 2px;
+    -fx-padding: 5px;
+}
+
+.control-panel .combo-box .combo-box-popup .list-view .list-cell {
+    -fx-font-size: 12px;
+    -fx-padding: 3px 10px 3px 12px;
+    -fx-cell-size: 30px;
+}
+
 .top-menu-bar {
     -fx-background-image: url('images/welcome.jpg');
 }
