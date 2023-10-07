@@ -244,6 +244,10 @@
     -fx-cell-size: 45px;
 }
 
+.paint-picker .combo-box .combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: -grey-10;
+}
+
 .normal-page .combo-box .combo-box-popup .list-view .list-cell:selected {
     -fx-background-color: derive(-grey-10, 50%);
 }
@@ -9199,4 +9203,177 @@
 
 .css-playground-view .tips-label .ikonli-font-icon {
     -fx-icon-size: 50px;
+}
+
+/** ----------------------------------------------------------------------------
+ * TextCopyView
+ */
+.text-copy-view {
+    -fx-background-color: -white;
+    -fx-padding: 3px;
+}
+
+.text-copy-view .container {
+    -fx-spacing: 5px;
+}
+
+.text-copy-view .top-box {
+    -fx-alignment: center;
+}
+
+.text-copy-view .top-box .fill-button {
+    -fill: -white;
+    -bg: -bright-blue;
+    -fx-background-radius: 2px;
+    -fx-padding: 5px 6px;
+}
+
+.text-copy-view .options-box {
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+}
+
+/** ----------------------------------------------------------------------------
+ * GradientDesignerView
+ */
+.gradient-designer-view {
+    -fx-alignment: top-center;
+    -fx-hgap: 10px;
+}
+
+.gradient-designer-view {
+    -fx-row-valignment: top;
+}
+
+.gradient-designer-view .color-rect {
+    -fx-cursor: hand;
+    -fx-stroke-width: 1px;
+    -fx-stroke: -grey-10;
+}
+
+.gradient-designer-view .color-rect:hover {
+    -fx-stroke: -grey-30;
+}
+
+.gradient-designer-view .named-colors-view .top-box {
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+}
+
+.gradient-designer-view .named-colors-view .top-box .search-text-field {
+    -fx-pref-width: 202px;
+}
+
+.gradient-designer-view .named-colors-view .tile-pane {
+    -fx-padding: 4px;
+}
+
+.gradient-designer-view .additional-pane {
+    -fx-spacing: 5px;
+    -fx-border-color: -grey-10;
+    -fx-padding: 2px;
+}
+
+.gradient-designer-view .additional-pane .text-copy-view {
+    -fx-max-height: 180px;
+}
+
+.gradient-designer-view .additional-pane .code-text-area {
+    -fx-background-radius: 2px;
+}
+
+.gradient-designer-view .additional-pane .colors-box-wrapper {
+    -fx-spacing: 2px;
+}
+
+.gradient-designer-view .additional-pane .colors-box-wrapper .colors-box {
+    -fx-spacing: 10px;
+}
+
+.gradient-designer-overview-box:sm .gradient-designer-view .additional-pane {
+    -fx-min-width: 322px;
+    -fx-pref-width: 322px;
+    -fx-max-width: 322px;
+    -fx-border-color: -grey-10;
+    -fx-padding: 3px;
+}
+
+.gradient-designer-overview-box:sm .gradient-designer-view .additional-pane .monochromatic-colors-box .colors-box {
+    -fx-spacing: 3px;
+}
+
+.gradient-designer-overview-box .gradient-designer-view .additional-pane .details-colors-box {
+    -fx-spacing: 20px;
+}
+
+.gradient-designer-overview-box .gradient-designer-view .additional-pane .details-colors-box {
+    -fx-spacing: 5px;
+}
+
+.gradient-designer-overview-box .gradient-designer-view .additional-pane .colors-box-wrapper {
+    -fx-spacing: 8px;
+}
+
+.gradient-designer-view .colors-box-wrapper .title {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 18px;
+    -fx-text-fill: -grey-60;
+}
+
+.gradient-designer-view .colors-box-wrapper .title .graphic {
+    -fx-pref-width: 18px;
+    -fx-pref-height: 18px;
+    -fx-background-color: -grey-60;
+}
+
+.gradient-designer-view .split-complementary-colors-box .title .graphic {
+    -fx-shape: "M41.9,76.6l3.8,1.7l15.6-35.4l-3.8-1.7L41.9,76.6zM74.9,32c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S74.9,26,74.9,32zM85.5,85.5v4.2H44.3v-4.2H85.5zM63.9,120.2C32.9,120.2,7.7,95,7.7,64c0-31,25.2-56.1,56.1-56.1c31,0,56.1,25.2,56.1,56.1C120,95,94.8,120.2,63.9,120.2z   M63.9,16.9c-26,0-47.1,21.1-47.1,47.1s21.1,47.1,47.1,47.1S111,90,111,64S89.9,16.9,63.9,16.9zM52.9,87.6c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S52.9,81.6,52.9,87.6zM100,86.3c0,6.1-4.9,11-11,11c-6.1,0-11-4.9-11-11c0-6.1,4.9-11,11-11C95.1,75.3,100,80.2,100,86.3zM90.4,81.5l-3.8,1.7L68.2,41.4l3.8-1.7L90.4,81.5z";
+}
+
+.gradient-designer-view .triadic-harmonies-box .title .graphic {
+    -fx-shape: "M73.8,45.9c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S73.8,39.9,73.8,45.9zM85.3,74.4v4.2H44.1v-4.2H85.3zM63.5,119.6c-31,0-56.1-25.2-56.1-56.1c0-31,25.2-56.1,56.1-56.1c31,0,56.1,25.2,56.1,56.1  C119.6,94.5,94.5,119.6,63.5,119.6z M63.5,16.4c-26,0-47.1,21.1-47.1,47.1s21.1,47.1,47.1,47.1s47.1-21.1,47.1-47.1  S89.5,16.4,63.5,16.4zM46.5,75.8c0,6.1-4.9,11-11,11s-11-4.9-11-11c0-6.1,4.9-11,11-11S46.5,69.7,46.5,75.8zM101.1,76.5c0,6.1-4.9,11-11,11s-11-4.9-11-11c0-6.1,4.9-11,11-11S101.1,70.4,101.1,76.5zM94.3,79.2l-3.2,2.6L62.1,46.5l3.2-2.6L94.3,79.2zM41.7,66.6l3.2,2.6l11.8-14.4l-3.2-2.6L41.7,66.6z";
+}
+
+.gradient-designer-view .complementary-colors-box .title .graphic {
+    -fx-shape: "M75,32c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S75,25.9,75,32zM66.1,83.4h-4.2V44.6h4.2V83.4zM64,120.1C33,120.1,7.9,95,7.9,64C7.9,33,33,7.9,64,7.9c31,0,56.1,25.2,56.1,56.1C120.1,95,95,120.1,64,120.1z M64,16.9  C38,16.9,16.9,38,16.9,64S38,111.1,64,111.1S111.1,90,111.1,64S90,16.9,64,16.9zM75,96c0,6.1-4.9,11-11,11s-11-4.9-11-11c0-6.1,4.9-11,11-11S75,89.9,75,96z";
+}
+
+.gradient-designer-view .monochromatic-colors-box .title .graphic {
+    -fx-shape: "M75,28.2c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S75,22.2,75,28.2zM63.5,119.6c-31,0-56.1-25.2-56.1-56.1c0-31,25.2-56.1,56.1-56.1c31,0,56.1,25.2,56.1,56.1  C119.6,94.5,94.5,119.6,63.5,119.6z M63.5,16.4c-26,0-47.1,21.1-47.1,47.1s21.1,47.1,47.1,47.1s47.1-21.1,47.1-47.1  S89.5,16.4,63.5,16.4zM74.5,80.1c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S74.5,74,74.5,80.1zM74.2,53.9c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S74.2,47.9,74.2,53.9zM61.9,38.5h4.2v34.3h-4.2V38.5z";
+}
+
+.gradient-designer-view .analogous-colors-box .title .graphic {
+    -fx-shape: "M48.9,32.4c4.3,4.3,4.3,11.3,0,15.6s-11.3,4.3-15.6,0s-4.3-11.3,0-15.6S44.7,28.1,48.9,32.4zM63.5,119.6c-31,0-56.1-25.2-56.1-56.1c0-31,25.2-56.1,56.1-56.1c31,0,56.1,25.2,56.1,56.1  C119.6,94.5,94.5,119.6,63.5,119.6z M63.5,16.4c-26,0-47.1,21.1-47.1,47.1s21.1,47.1,47.1,47.1s47.1-21.1,47.1-47.1  S89.5,16.4,63.5,16.4zM71.9,21.4c4.3,4.3,4.3,11.3,0,15.6s-11.3,4.3-15.6,0s-4.3-11.3,0-15.6S67.6,17.1,71.9,21.4zM92.9,33.2c4.3,4.3,4.3,11.3,0,15.6s-11.3,4.3-15.6,0c-4.3-4.3-4.3-11.3,0-15.6C81.6,28.9,88.6,28.9,92.9,33.2   zM36.4,53.5c4.3,4.3,4.3,11.3,0,15.6c-4.3,4.3-11.3,4.3-15.6,0c-4.3-4.3-4.3-11.3,0-15.6S32.1,49.2,36.4,53.5zM106.8,53.9c4.3,4.3,4.3,11.3,0,15.6c-4.3,4.3-11.3,4.3-15.6,0c-4.3-4.3-4.3-11.3,0-15.6   S102.5,49.7,106.8,53.9z";
+}
+
+.gradient-designer-view .tetradic-colors-box .title .graphic {
+    -fx-shape: "M50,40.1c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S50,34,50,40.1zM79.6,84.5v4.2H48.9v-4.2H79.6zM63.5,119.6c-31,0-56.1-25.2-56.1-56.1c0-31,25.2-56.1,56.1-56.1c31,0,56.1,25.2,56.1,56.1  C119.6,94.5,94.5,119.6,63.5,119.6z M63.5,16.4c-26,0-47.1,21.1-47.1,47.1s21.1,47.1,47.1,47.1s47.1-21.1,47.1-47.1  S89.5,16.4,63.5,16.4zM50,86.9c0,6.1-4.9,11-11,11s-11-4.9-11-11c0-6.1,4.9-11,11-11S50,80.8,50,86.9zM100.3,40.1c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S100.3,34,100.3,40.1zM100.3,85.9c0,6.1-4.9,11-11,11s-11-4.9-11-11c0-6.1,4.9-11,11-11S100.3,79.8,100.3,85.9zM80.1,38.5v4.2H49.3v-4.2H80.1zM87.2,47.8h4.2v30.8h-4.2V47.8zM36.9,48.1H41v30.8h-4.2V48.1z";
+}
+
+.gradient-designer-view  .linear-gradient-view {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 20px;
+    -fx-padding: 10px 0 0 0;
+    -fx-spacing: 10px;
+}
+
+.gradient-designer-view  .linear-gradient-view .flow-pane {
+    -fx-hgap: 12px;
+    -fx-vgap: 10px;
+}
+
+.gradient-designer-overview-box:md .gradient-designer-view .additional-pane {
+    -fx-pref-width: 405px;
+}
+
+.gradient-designer-overview-box .gradient-designer-view {
+    -fx-vgap: 10px;
+}
+
+.gradient-designer-overview-box:md .gradient-designer-view {
+    -fx-hgap: 15px;
+}
+
+.gradient-designer-overview-box:lg .gradient-designer-view {
+    -fx-hgap: 50px;
 }

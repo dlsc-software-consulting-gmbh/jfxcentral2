@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.utilities.cssplayground.CssPlaygroundView;
+import com.dlsc.jfxcentral2.utilities.paintpicker.GradientDesignerView;
 import com.dlsc.jfxcentral2.utilities.pathextractor.SVGPathExtractorView;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import javafx.scene.Node;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.elusive.Elusive;
 import org.kordamp.ikonli.fileicons.FileIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.material2.Material2OutlinedAL;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignS;
 
 public class UtilityOverviewBox extends OverviewBox<Utility> {
@@ -56,6 +58,11 @@ public class UtilityOverviewBox extends OverviewBox<Utility> {
                 CssPlaygroundView cssPlaygroundView = new CssPlaygroundView();
                 cssPlaygroundView.sizeProperty().bind(sizeProperty());
                 return cssPlaygroundView;
+            } else if (StringUtils.equalsIgnoreCase(model.getId(), "gradientdesigner")){
+                setTitle("Gradient Designer");
+                setIcon(Material2OutlinedAL.COLOR_LENS);
+                getStyleClass().add("gradient-designer-overview-box");
+                return new GradientDesignerView(sizeProperty());
             }
 
             return createComingSoonPane();
@@ -75,4 +82,5 @@ public class UtilityOverviewBox extends OverviewBox<Utility> {
         label.getStyleClass().add("coming-soon-label");
         return label;
     }
+
 }
