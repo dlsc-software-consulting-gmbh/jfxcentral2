@@ -27,7 +27,7 @@ open module com.dlsc.jfxcentral2.components {
     requires com.dlsc.jfxcentral2.iconfont;
     requires com.google.gson;
 
-    requires one.jpro.imagemanager;
+    requires one.jpro.platform.image.manager;
 
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;

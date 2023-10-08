@@ -31,9 +31,9 @@
         </dependency>
 
         <dependency>
-            <groupId>one.jpro</groupId>
-            <artifactId>jpro-imagemanager</artifactId>
-            <version>0.1.0</version>
+            <groupId>one.jpro.platform</groupId>
+            <artifactId>jpro-image-manager</artifactId>
+            <version>${jpro.platform.version}</version>
         </dependency>
 
         <dependency>
