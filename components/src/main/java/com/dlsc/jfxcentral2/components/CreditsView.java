@@ -108,6 +108,8 @@ public class CreditsView extends PaneBase {
                 licenceVersionLabel.setText(license.getVersion());
 
                 licenceBox.getChildren().addAll(licenceTypeLabel, licenceVersionLabel);
+
+                LinkUtil.setExternalLink(licenceBox, license.getUrl());
             } else {
                 Label version = new Label("V " + creditModel.getVersion());
                 version.getStyleClass().add("version-label");
