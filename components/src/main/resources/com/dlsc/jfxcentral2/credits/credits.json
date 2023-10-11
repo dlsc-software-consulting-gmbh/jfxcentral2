@@ -216,5 +216,29 @@
       "version": "2.0",
       "url": "https://github.com/junit-team/junit5/blob/main/LICENSE.md"
     }
+  },
+  {
+    "name": "Scene Builder",
+    "id": "scenebuilder",
+    "version": "21.0.0",
+    "url": "https://github.com/gluonhq/scenebuilder",
+    "description": "Scene Builder is a visual, drag 'n' drop, layout tool for designing JavaFX application user interfaces.\"Kit\" module offers a set of useful utility components.",
+    "license": {
+      "type": "License",
+      "version": "Gluon & Oracle",
+      "url": "https://github.com/gluonhq/scenebuilder/blob/master/LICENSE.txt"
+    }
+  },
+  {
+    "name": "slf4j",
+    "id": "slf4j",
+    "version": "2.0.9",
+    "url": "https://github.com/qos-ch/slf4j",
+    "description": "Simple Logging Facade for Java. The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, reload4j, log4j 2.x) allowing the end user to plug in the desired logging framework at deployment time.",
+    "license": {
+      "type": "License",
+      "version": "MIT",
+      "url": "https://github.com/qos-ch/slf4j/blob/master/LICENSE.txt"
+    }
   }
 ]

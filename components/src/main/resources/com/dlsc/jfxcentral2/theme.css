@@ -117,7 +117,7 @@
     -fx-font-size: 16px;
 }
 
-.normal-page .text {
+.text {
     /*---The "gray" here represents a smoothing strategy for the font, not the color of the text---*/
     -fx-font-smoothing-type: gray;
 }
