@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.utilities.cssplayground.CssPlaygroundView;
 import com.dlsc.jfxcentral2.utilities.paintpicker.GradientDesignerView;
 import com.dlsc.jfxcentral2.utilities.pathextractor.SVGPathExtractorView;
+import com.dlsc.jfxcentral2.utilities.shadowdesigner.ShadowDesignerView;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -16,6 +17,7 @@ import org.kordamp.ikonli.fileicons.FileIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material2.Material2OutlinedAL;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignS;
+import org.kordamp.ikonli.simplelineicons.SimpleLineIcons;
 
 public class UtilityOverviewBox extends OverviewBox<Utility> {
 
@@ -63,6 +65,13 @@ public class UtilityOverviewBox extends OverviewBox<Utility> {
                 setIcon(Material2OutlinedAL.COLOR_LENS);
                 getStyleClass().add("gradient-designer-overview-box");
                 return new GradientDesignerView(sizeProperty());
+            } else if (StringUtils.equalsIgnoreCase(model.getId(), "shadowdesigner")){
+                setTitle("Shadow Designer");
+                setIcon(SimpleLineIcons.MAGIC_WAND);
+                getStyleClass().add("shadow-designer-overview-box");
+                ShadowDesignerView shadowDesignerView = new ShadowDesignerView();
+                shadowDesignerView.sizeProperty().bind(sizeProperty());
+                return shadowDesignerView;
             }
 
             return createComingSoonPane();

@@ -222,7 +222,7 @@
 
 .paint-picker .text-field {
     -fx-background-radius: 0;
-    -fx-text-fill: -grey-90;
+    -fx-text-fill: -grey-100;
     -fx-font-size: 12px;
     -fx-focus-color: -grey-30;
     -fx-faint-focus-color: transparent;
@@ -304,4 +304,12 @@
     -fx-background-color: derive(-fx-accent, -26.4%);
     -fx-background-insets: 0, 1;
     -fx-background-radius: 2px, 1px;
+}
+
+.paint-picker.only-color-mode .mode-buttons-box {
+    visibility: hidden;
+}
+
+.paint-picker.only-color-mode .info-root-pane {
+    visibility: hidden;
 }

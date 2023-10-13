@@ -252,12 +252,79 @@
     -fx-background-color: derive(-grey-10, 50%);
 }
 
-.normal-page .combo-box .combo-box-popup .list-view .check-box {
+.normal-page .check-box {
     -fx-border-color: -grey-20;
 }
 
-.normal-page .combo-box .combo-box-popup .list-view .check-box .box {
+.normal-page .check-box:hover {
+    -fx-border-color: -grey-60;
+}
+
+.normal-page .check-box .box {
     -fx-background-color: transparent;
+}
+
+.normal-page .text-field {
+    -fx-focus-color: -grey-30;
+    -fx-faint-focus-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+}
+
+.normal-page .spinner {
+    -fx-focus-color: -grey-30;
+    -fx-faint-focus-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+}
+
+.normal-page .spinner .text-field {
+    -fx-background-radius: 0px;
+}
+
+.normal-page .spinner .increment-arrow-button,
+.normal-page .spinner .decrement-arrow-button {
+    -fx-background-color: -grey-10;
+    -fx-background-radius: 0px;
+    -fx-cursor: hand;
+}
+
+.normal-page .spinner .increment-arrow-button:hover,
+.normal-page .spinner .decrement-arrow-button:hover {
+    -fx-background-color: -light-blue;
+}
+
+.normal-page .spinner .increment-arrow-button:pressed,
+.normal-page .spinner .decrement-arrow-button:pressed {
+    -fx-background-color: -bright-blue;
+}
+
+.normal-page .spinner .increment-arrow-button:pressed .increment-arrow,
+.normal-page .spinner .decrement-arrow-button:pressed .decrement-arrow {
+    -fx-background-color: -white;
+}
+
+.md-combo-box.combo-box-base {
+    -fx-font-size: 12px;
+    -fx-background-radius: 2px;
+    -fx-padding: 5px 2px;
+}
+
+.md-combo-box.combo-box .combo-box-popup .list-view,
+.md-combo-box.combo-box .combo-box-popup .list-cell {
+    -fx-background-color: -white;
+    -fx-text-fill: -grey-100;
+}
+
+.md-combo-box.combo-box .combo-box-popup .list-view {
+    -fx-background-radius: 2px;
+    -fx-padding: 5px;
+}
+
+.md-combo-box.combo-box .combo-box-popup .list-view .list-cell {
+    -fx-font-size: 12px;
+    -fx-padding: 3px 10px 3px 12px;
+    -fx-cell-size: 30px;
 }
 
 /** ------------------------------------
@@ -9376,4 +9443,231 @@
 
 .gradient-designer-overview-box:lg .gradient-designer-view {
     -fx-hgap: 50px;
+}
+
+/** ----------------------------------------------------------------------------
+ * ShadowDesignerView
+ */
+.shadow-designer-view {
+    -fx-min-height: 560px;
+}
+
+.shadow-designer-view .left-box .effect-preview-pane {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 200px;
+    -fx-background-color: -white;
+    -fx-border-color: -grey-10;
+}
+
+.shadow-designer-view > .flow-pane {
+    -fx-hgap: 60px;
+    -fx-vgap: 30px;
+}
+
+.shadow-designer-view:md > .flow-pane {
+    -fx-hgap: 120px;
+}
+
+.shadow-designer-view:sm-md > .flow-pane {
+    -fx-alignment: center;
+}
+
+.shadow-designer-view .left-box .effect-preview-pane .label {
+    -fx-font-size: 20px;
+}
+
+.shadow-designer-view > .flow-pane {
+    /*-fx-border-color: #08e093;*/
+}
+
+.shadow-designer-view > .flow-pane > .left-box {
+    -fx-padding: 50px;
+}
+
+.shadow-designer-view > .flow-pane > .right-box {
+}
+
+.shadow-designer-view > .flow-pane > .right-box.with-non-effect .menu-button {
+    -fx-pref-width: 200px;
+    -fx-background-radius: 200px;
+    -fx-font-size: 20px;
+}
+
+.shadow-designer-view > .flow-pane > .right-box.with-non-effect .menu-button .ikonli-font-icon {
+    -fx-icon-size: 30px;
+}
+
+
+/** ----------------------------------------------------------------------------
+ * EffectEditor
+ */
+.effect-editor {
+    -fx-background-color: -white;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-spacing: 10px;
+}
+
+.shadow-designer-view:lg .effect-editor {
+    -fx-pref-width: 420px;
+    -fx-max-width: 420px;
+}
+
+.shadow-designer-view:sm .effect-editor .property-name-label {
+    -fx-font-size: 12px;
+}
+
+.shadow-designer-view:sm .effect-editor .property-name-label .ikonli-font-icon {
+    -fx-icon-size: 14px;
+}
+
+.effect-editor .top-box {
+    -fx-alignment: center-left;
+    -fx-background-color: -bright-blue;
+    -fx-padding: 5px;
+}
+
+.effect-editor .top-box .title-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: -white;
+    -fx-graphic-text-gap: 10px;
+}
+
+.effect-editor .top-box .title-label .ikonli-font-icon{
+    -fx-icon-size: 18px;
+    -fx-icon-color: -white;
+}
+
+.effect-editor .top-box .delete-button {
+    -fx-background-radius: 20px;
+    -fx-padding: 5px 6px;
+    -fx-background-color: -white;
+}
+
+.effect-editor .top-box .delete-button .ikonli-font-icon {
+    -fx-icon-size: 16px;
+    -fx-icon-color: #fc6363;
+    -fx-scale-x: 1.5;
+    -fx-scale-y: 1.5;
+}
+
+.effect-editor .top-box .delete-button:hover {
+    -fx-background-color: -grey-10;
+}
+
+.effect-editor .top-box .delete-button:hover .ikonli-font-icon {
+    -fx-icon-color: red;
+}
+
+.effect-editor .content-pane {
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+    -fx-row-valignment: top;
+    -fx-column-halignment: right;
+}
+
+.effect-editor .content-pane .combo-box-base {
+    -fx-border-color: -grey-10;
+    -fx-padding: 2px;
+    -fx-pref-width: 226px;
+}
+
+.effect-editor .spinner {
+    -fx-pref-width: 226px;
+}
+
+.effect-editor .content-pane .combo-box-base .arrow-button .arrow {
+    -fx-background-color: -grey-100;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+.effect-editor .content-pane .slider-box {
+    -fx-spacing: 5px;
+    -fx-alignment: top-left;
+}
+
+.effect-editor .content-pane .slider-box > .value-label {
+    -fx-pref-width: 50px;
+    -fx-border-color: -grey-10;
+    -fx-padding: 1px 2px;
+}
+
+.effect-editor .content-pane .slider-box > .slider {
+    -fx-pref-width: 170px;
+}
+
+.effect-editor .content-pane .slider-box > .slider .track {
+    -fx-background-color: -grey-10;
+    -fx-background-radius: 0px;
+}
+
+.effect-editor .content-pane .slider-box > .slider .thumb {
+    -fx-background-color: #A4D7EC;
+    -fx-cursor: hand;
+}
+
+.effect-editor .content-pane .slider-box > .slider .thumb:hover,
+.effect-editor .content-pane .slider-box > .slider .thumb:pressed {
+    -fx-background-color: -bright-blue;
+}
+
+.effect-editor .file-handler-view {
+    -fx-border-color: -grey-10;
+    -fx-background-image: url("images/transparent-bg.png");
+}
+
+.effect-editor .paint-picker {
+    -fx-border-color: transparent;
+}
+
+.effect-editor .paint-picker .info-root-pane {
+    visibility: hidden;
+}
+
+.effect-editor .property-name-label {
+    -fx-font-size: 15px;
+}
+
+.effect-editor .property-name-label .ikonli-font-icon {
+    -fx-icon-size: 18px;
+    -fx-icon-color: -grey-60;
+}
+
+/** ----------------------------------------------------------------------------
+ * EffectFlowPane
+ */
+.effect-flow-pane {
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+    -fx-alignment: center;
+}
+
+.effect-flow-pane .toggle-button {
+    -fx-background-color: -white;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 0;
+    -fx-border-color: -grey-20;
+    -fx-border-radius: 15px;
+    -fx-padding: 6px 10px;
+    -fx-graphic-text-gap: 5px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-content-display: right;
+}
+
+.effect-flow-pane .toggle-button .ikonli-font-icon {
+    -fx-icon-size: 16px;
+    -fx-scale-x: 1.5;
+    -fx-scale-y: 1.5;
+}
+
+.effect-flow-pane .toggle-button:selected {
+    -fx-background-color: -green;
+    -fx-border-color: transparent;
+}
+
+.effect-flow-pane .menu-button .ikonli-font-icon {
+    -fx-icon-size: 20px;
 }
