@@ -38,7 +38,17 @@ public class NumberUtil {
         }
     }
 
-
+    /**
+     * Clamps a value between a minimum and maximum value.
+     *
+     * @param value The value to be clamped.
+     * @param min   The minimum allowable value.
+     * @param max   The maximum allowable value.
+     * @return The clamped value, which will be between min and max (inclusive).
+     */
+    public static double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(max, value));
+    }
 
 
 }

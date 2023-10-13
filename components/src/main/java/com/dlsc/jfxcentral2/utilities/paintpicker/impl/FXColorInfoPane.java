@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.utilities.paintpicker.impl;
 
 import com.dlsc.jfxcentral2.utilities.paintpicker.impl.datamodel.ColorFormat;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -60,6 +61,7 @@ public class FXColorInfoPane extends BorderPane {
         fieldHsl.setText("0,0,0,1.0");
         fieldRgb.setText("0,0,0,1.0");
         fieldHex.setText("#000000FF");
+        managedProperty().bind(visibleProperty());
 
         buildUI();
     }
@@ -126,10 +128,10 @@ public class FXColorInfoPane extends BorderPane {
             Paint fxPaint = paintPickerController.paintProperty().get();
             if (type == CodeType.JAVAFX_CODE) {
                 String javaCode = PaintConvertUtil.convertPaintToJavaCode(fxPaint);
-                CopyUtil.setCopyOnClick(copyCodeBtn, javaCode);
+                Platform.runLater(() -> CopyUtil.setCopyOnClick(copyCodeBtn, javaCode));
             } else if (type == CodeType.JAVAFX_CSS) {
                 String cssCode = PaintConvertUtil.convertPaintToCss(fxPaint);
-                CopyUtil.setCopyOnClick(copyCodeBtn, cssCode);
+                Platform.runLater(() -> CopyUtil.setCopyOnClick(copyCodeBtn, cssCode));
             }
         }
     }
@@ -144,8 +146,8 @@ public class FXColorInfoPane extends BorderPane {
         Button copyBtn = new Button("", new FontIcon(IkonUtil.copy));
         copyBtn.getStyleClass().addAll("fill-button", "copy-button");
         pane.setRight(copyBtn);
-        CopyUtil.setCopyOnClick(copyBtn, text);
-        field.textProperty().addListener((ob, ov, nv) -> CopyUtil.setCopyOnClick(copyBtn, field.getText()));
+        Platform.runLater(() -> CopyUtil.setCopyOnClick(copyBtn, field.getText()));
+        field.textProperty().addListener((ob, ov, nv) -> Platform.runLater(() -> CopyUtil.setCopyOnClick(copyBtn, field.getText())));
         return pane;
     }
 

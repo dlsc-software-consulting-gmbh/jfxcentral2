@@ -149,6 +149,7 @@ public class ColorPicker extends VBox {
         chip_region = new Region();
         hexaTextfield = new TextField();
         hue_slider = new Slider();
+        hue_slider.setFocusTraversable(false);
         gridPane = new GridPane();
         stackPane0 = new StackPane();
         region2 = new Region();
@@ -303,6 +304,7 @@ public class ColorPicker extends VBox {
         alpha_region.setStyle("");
 
         alpha_slider.setBlockIncrement(0.01);
+        alpha_slider.setFocusTraversable(false);
         alpha_slider.setMax(1.0);
         alpha_slider.getStyleClass().add("opacity-slider");
         GridPane.setMargin(stackPane0, new Insets(0.0, 0.0, 2.0, 0.0));

@@ -85,10 +85,12 @@ public class PaintPicker extends Pane {
 
         modeSwitch.getToggles().addAll(colorToggleButton, linearToggleButton, radialToggleButton);
 
-        HBox hBox = new HBox( colorToggleButton, linearToggleButton, radialToggleButton);
-        hBox.setAlignment(Pos.CENTER_LEFT);
+        HBox modeButtonsBox = new HBox( colorToggleButton, linearToggleButton, radialToggleButton);
+        modeButtonsBox.setAlignment(Pos.CENTER_LEFT);
+        modeButtonsBox.getStyleClass().add("mode-buttons-box");
+        modeButtonsBox.managedProperty().bind(modeButtonsBox.visibleProperty());
 
-        root_vbox = new VBox(hBox);
+        root_vbox = new VBox(modeButtonsBox);
         root_vbox.setAlignment(Pos.CENTER);
         root_vbox.setMinHeight(-1.0);
         root_vbox.setPrefHeight(-1.0);
@@ -111,7 +113,14 @@ public class PaintPicker extends Pane {
         controller.setSingleMode(paintMode);
     }
 
-
+    /**
+     * Creates a color picker.
+     */
+    public static PaintPicker createColorPicker() {
+        PaintPicker paintPicker = new PaintPicker((warningKey, arguments) -> {});
+        paintPicker.getStyleClass().add("only-color-mode");
+        return paintPicker;
+    }
 
     public final ObjectProperty<Paint> paintProperty() {
         return controller.paintProperty();
