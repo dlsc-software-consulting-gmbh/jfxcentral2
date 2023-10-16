@@ -53,7 +53,7 @@ public class WelcomeView extends PaneBase {
         jfxCentralDescLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         String javaVersion = System.getProperty("java.version");
-        String fxVersion = System.getProperty("javafx.version");
+        String fxVersion = System.getProperty("javafx.runtime.version");
 
         Label versionLabel = new Label("This site runs on Java " + javaVersion + " with JavaFX " + fxVersion + ".");
         versionLabel.getStyleClass().add("version-label");
