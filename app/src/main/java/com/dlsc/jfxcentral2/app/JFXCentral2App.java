@@ -82,8 +82,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import simplefx.experimental.parts.FXFuture;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.Locale;
@@ -95,7 +93,7 @@ public class JFXCentral2App extends Application {
     private static final Logger LOGGER = LogManager.getLogger(JFXCentral2App.class);
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
-    private TrayIconManager trayIconManager;
+//    private TrayIconManager trayIconManager;
 
     static {
         if (WebAPI.isBrowser() || !RepositoryManager.isCountryEqualToChina()) {
@@ -106,21 +104,21 @@ public class JFXCentral2App extends Application {
     @Override
     public void start(Stage stage) {
         // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
-        BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-        bi.createGraphics();
+//        BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+//        bi.createGraphics();
 
         if (!WebAPI.isBrowser()) {
             System.setProperty("prism.lcdtext", "false");
             System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
 
-            if (Taskbar.isTaskbarSupported()) {
-                Taskbar taskbar = Taskbar.getTaskbar();
-                if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
-                    Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
-                    Image dockIcon = defaultToolkit.getImage(JFXCentral2App.class.getResource("app-icon.png"));
-                    taskbar.setIconImage(dockIcon);
-                }
-            }
+//            if (Taskbar.isTaskbarSupported()) {
+//                Taskbar taskbar = Taskbar.getTaskbar();
+//                if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
+//                    Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+//                    Image dockIcon = defaultToolkit.getImage(JFXCentral2App.class.getResource("app-icon.png"));
+//                    taskbar.setIconImage(dockIcon);
+//                }
+//            }
         }
 
         // set jpro.imagemanager.cache to ~/.jfxcentral/imagecache
@@ -138,22 +136,22 @@ public class JFXCentral2App extends Application {
         routeNode.start(sessionManager);
 
         // tray icon
-        if (!WebAPI.isBrowser() && SystemTray.isSupported()) {
-            RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
-                if (trayIconManager == null) {
-                    trayIconManager = new TrayIconManager(stage, sessionManager);
-                } else {
-                    trayIconManager.refresh();
-                }
-            });
-        }
+//        if (!WebAPI.isBrowser() && SystemTray.isSupported()) {
+//            RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
+//                if (trayIconManager == null) {
+//                    trayIconManager = new TrayIconManager(stage, sessionManager);
+//                } else {
+//                    trayIconManager.refresh();
+//                }
+//            });
+//        }
 
         // customs stage for decorations / the chrome
         CustomStage customStage = new CustomStage(stage, routeNode, sessionManager);
         customStage.setCloseHandler(() -> {
-            if (SystemTray.isSupported()) {
-                trayIconManager.hide();
-            }
+  //          if (SystemTray.isSupported()) {
+  //                trayIconManager.hide();
+  //          }
             stage.close();
         });
 

@@ -1,0 +1,73 @@
+{
+  "resources":{
+  "includes":[
+    {
+      "condition": {
+        "typeReachable": "org.apache.log4j.helpers.Loader"
+      },
+      "pattern": "\\Qlog4j.xml\\E"
+    },
+    {
+      "condition": {
+        "typeReachable": "org.apache.log4j.xml.Log4jEntityResolver"
+      },
+      "pattern": "\\Qorg/apache/log4j/xml/log4j.dtd\\E"
+    },
+    {
+      "condition": {
+        "typeReachable": "org.apache.log4j.helpers.Loader"
+      },
+      "pattern": "\\Qlog4j.properties\\E"
+    },
+    {
+      "pattern":"\\QMETA-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.core.util.ContextDataProvider\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.spi.Provider\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.util.PropertySource\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/org.slf4j.spi.SLF4JServiceProvider\\E"
+    }, 
+    {
+      "pattern":"\\Qcom/dlsc/jfxcentral2/components/headers/bg-lg.jpg\\E"
+    }, 
+    {
+      "pattern":"\\Qlog4j2.xml\\E"
+    }, 
+    {
+      "pattern":"\\Qreference.conf\\E"
+    }
+  ]},
+  "bundles":[
+    {
+      "name":"com.apple.laf.resources.aqua",
+      "classNames":["com.apple.laf.resources.aqua"]
+    }, 
+    {
+      "name":"com.sun.javafx.tk.quantum.QuantumMessagesBundle",
+      "locales":[""]
+    }, 
+    {
+      "name":"com/sun/javafx/scene/control/skin/resources/controls",
+      "locales":[""]
+    }, 
+    {
+      "name":"org.eclipse.jgit.internal.JGitText",
+      "locales":[""]
+    }, 
+    {
+      "name":"sun.awt.resources.awt",
+      "classNames":["sun.awt.resources.awt"]
+    }, 
+    {
+      "name":"sun.awt.resources.awtosx",
+      "classNames":["sun.awt.resources.awtosx"]
+    }
+  ]
+}

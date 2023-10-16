@@ -78,6 +78,7 @@ public class RepositoryManager {
             CloneCommand cloneCmd = Git.cloneRepository()
                     .setProgressMonitor(monitor)
                     .setURI(repoUrl)
+                    .
                     .setBranch("live")
                     .setDepth(1)
                     .setDirectory(repoDirectory);
