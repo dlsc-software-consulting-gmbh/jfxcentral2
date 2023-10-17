@@ -59,6 +59,7 @@ import com.dlsc.jfxcentral2.app.utils.LoggerOutputStream;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
@@ -82,6 +83,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import simplefx.experimental.parts.FXFuture;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.Locale;
@@ -93,7 +96,7 @@ public class JFXCentral2App extends Application {
     private static final Logger LOGGER = LogManager.getLogger(JFXCentral2App.class);
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
-//    private TrayIconManager trayIconManager;
+    private TrayIconManager trayIconManager;
 
     static {
         if (WebAPI.isBrowser() || !RepositoryManager.isCountryEqualToChina()) {
@@ -104,21 +107,26 @@ public class JFXCentral2App extends Application {
     @Override
     public void start(Stage stage) {
         // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
-//        BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-//        bi.createGraphics();
+        if (!OSUtil.isNative()) {
+            BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+            bi.createGraphics();
+        }
 
         if (!WebAPI.isBrowser()) {
-            System.setProperty("prism.lcdtext", "false");
             System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
 
-//            if (Taskbar.isTaskbarSupported()) {
-//                Taskbar taskbar = Taskbar.getTaskbar();
-//                if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
-//                    Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
-//                    Image dockIcon = defaultToolkit.getImage(JFXCentral2App.class.getResource("app-icon.png"));
-//                    taskbar.setIconImage(dockIcon);
-//                }
-//            }
+            if (!OSUtil.isNative()) {
+                System.setProperty("prism.lcdtext", "false");
+
+                if (Taskbar.isTaskbarSupported()) {
+                    Taskbar taskbar = Taskbar.getTaskbar();
+                    if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
+                        Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+                        Image dockIcon = defaultToolkit.getImage(JFXCentral2App.class.getResource("app-icon.png"));
+                        taskbar.setIconImage(dockIcon);
+                    }
+                }
+            }
         }
 
         // set jpro.imagemanager.cache to ~/.jfxcentral/imagecache
@@ -136,22 +144,24 @@ public class JFXCentral2App extends Application {
         routeNode.start(sessionManager);
 
         // tray icon
-//        if (!WebAPI.isBrowser() && SystemTray.isSupported()) {
-//            RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
-//                if (trayIconManager == null) {
-//                    trayIconManager = new TrayIconManager(stage, sessionManager);
-//                } else {
-//                    trayIconManager.refresh();
-//                }
-//            });
-//        }
+        if (!WebAPI.isBrowser() && !OSUtil.isNative() && SystemTray.isSupported()) {
+            RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
+                if (trayIconManager == null) {
+                    trayIconManager = new TrayIconManager(stage, sessionManager);
+                } else {
+                    trayIconManager.refresh();
+                }
+            });
+        }
 
         // customs stage for decorations / the chrome
         CustomStage customStage = new CustomStage(stage, routeNode, sessionManager);
         customStage.setCloseHandler(() -> {
-  //          if (SystemTray.isSupported()) {
-  //                trayIconManager.hide();
-  //          }
+            if (!OSUtil.isNative()) {
+                if (SystemTray.isSupported()) {
+                    trayIconManager.hide();
+                }
+            }
             stage.close();
         });
 
@@ -259,6 +269,7 @@ public class JFXCentral2App extends Application {
 
     private void updateSizeProperty(Scene scene) {
         double sceneWidth = scene.getWidth();
+        System.out.println("scene width: " + sceneWidth);
         if (sceneWidth < 865) {
             size.set(Size.SMALL);
         } else if (sceneWidth <= 1320) {

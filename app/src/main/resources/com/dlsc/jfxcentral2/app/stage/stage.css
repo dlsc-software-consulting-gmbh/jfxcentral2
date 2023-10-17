@@ -22,6 +22,17 @@
     -fx-alignment: center-left;
 }
 
+.custom-stage .title-bar.native > .front-box {
+    -fx-padding: 15;
+    -fx-alignment: center;
+}
+
+.custom-stage .title-bar.native > .navigation-view {
+    -fx-alignment: center;
+    -fx-padding: 15px;
+    -fx-spacing: 50px;
+}
+
 .custom-stage .title-bar .title {
     -fx-font-family: "Roboto Condensed";
     -fx-font-size: 20px;
@@ -40,6 +51,11 @@
 .custom-stage .title-bar .toggle-button .ikonli-font-icon {
     -fx-icon-color: -white;
     -fx-icon-size: 20px;
+}
+
+.custom-stage .title-bar.native .button .ikonli-font-icon,
+.custom-stage .title-bar.native .toggle-button .ikonli-font-icon {
+    -fx-icon-size: 32px;
 }
 
 .custom-stage .title-bar .button:hover .ikonli-font-icon,

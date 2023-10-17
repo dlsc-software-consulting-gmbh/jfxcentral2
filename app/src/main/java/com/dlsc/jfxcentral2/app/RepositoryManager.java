@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import one.jpro.platform.internal.openlink.util.PlatformUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jgit.api.CloneCommand;
@@ -11,6 +12,8 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.merge.ContentMergeStrategy;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.util.FS;
+import org.eclipse.jgit.util.FS_POSIX;
 
 import java.io.File;
 import java.io.IOException;
@@ -81,6 +84,16 @@ public class RepositoryManager {
                     .setBranch("live")
                     .setDepth(1)
                     .setDirectory(repoDirectory);
+
+            if (PlatformUtils.isAndroid() || PlatformUtils.isIOS()) {
+                cloneCmd = cloneCmd.setFs(new FS_POSIX() {
+                    @Override
+                    public boolean supportsExecute() {
+                        return false;
+                    }
+                });
+            }
+
             try (Git git = cloneCmd.call()) {
                 // Git object is here only to ensure resources are properly closed; no other actions needed.
             }

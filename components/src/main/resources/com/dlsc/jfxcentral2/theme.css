@@ -1820,6 +1820,10 @@
     -fx-padding: 15px 25px 15px 25px;
 }
 
+.top-menu-bar.native:lg {
+    -fx-padding: 25px 25px 15px 25px;
+}
+
 .top-menu-bar:lg .text-field {
     -fx-pref-width: 197px;
 }
@@ -1847,6 +1851,10 @@
 .top-menu-bar:md {
     -fx-pref-width: -md-width;
     -fx-padding: 15px 25px;
+}
+
+.top-menu-bar.native:md {
+    -fx-padding: 25px 25px;
 }
 
 .top-menu-bar:md .content {
@@ -1880,6 +1888,10 @@
     -fx-pref-width: -sm-width;
     -fx-max-height: 84px;
     -fx-padding: 15px 25px 15px 25px;
+}
+
+.top-menu-bar.native:sm {
+    -fx-padding: 25px 25px 15px 25px;
 }
 
 .top-menu-bar:sm .content {

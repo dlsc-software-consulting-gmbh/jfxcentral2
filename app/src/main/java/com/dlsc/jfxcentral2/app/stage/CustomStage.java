@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
@@ -66,9 +65,12 @@ public class CustomStage extends BorderPane {
 
         if (!WebAPI.isBrowser()) {
             VBox vBox = new VBox(titleBar);
-            vBox.setPadding(new Insets(0, 0, 2, 0));
             vBox.setAlignment(Pos.CENTER_RIGHT);
-            setTop(vBox);
+            if (OSUtil.isNative()) {
+                setBottom(vBox);
+            } else {
+                setTop(vBox);
+            }
         }
 
         centerProperty().bind(contentProperty());
@@ -320,6 +322,8 @@ public class CustomStage extends BorderPane {
 
             label = new Label();
             label.getStyleClass().add("title");
+            label.setVisible(!OSUtil.isNative());
+            label.setManaged(!OSUtil.isNative());
 
             FontIcon maxIcon = new FontIcon(MaterialDesign.MDI_WINDOW_MAXIMIZE);
             FontIcon restoreIcon = new FontIcon(MaterialDesign.MDI_WINDOW_RESTORE);
@@ -386,7 +390,10 @@ public class CustomStage extends BorderPane {
 
             NavigationView navigationView = new NavigationView(sessionManager);
 
-            if (OSUtil.isMac()) {
+            if (OSUtil.isNative()) {
+                getStyleClass().add("native");
+                getChildren().addAll(navigationView);
+            } else if (OSUtil.isMac()) {
                 getStyleClass().add("mac");
                 HBox controlBox = new HBox(closeButton, minButton, maxButton);
                 controlBox.getStyleClass().add("control-box");

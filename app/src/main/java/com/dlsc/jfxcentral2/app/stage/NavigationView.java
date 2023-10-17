@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.app.stage;
 
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
@@ -10,7 +11,6 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import one.jpro.platform.routing.HistoryEntry;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -45,14 +45,12 @@ public class NavigationView extends HBox {
         back.setGraphic(new FontIcon(Material.ARROW_BACK));
         back.setOnAction(evt -> sessionManager.goBack());
         back.setMaxWidth(Double.MAX_VALUE);
-        HBox.setHgrow(back, Priority.ALWAYS);
 
         Button forward = new Button();
         forward.setFocusTraversable(false);
         forward.setGraphic(new FontIcon(Material.ARROW_FORWARD));
         forward.setOnAction(evt -> sessionManager.goForward());
         forward.setMaxWidth(Double.MAX_VALUE);
-        HBox.setHgrow(forward, Priority.ALWAYS);
 
         sceneProperty().addListener(it -> {
             if (getScene() != null) {
@@ -64,7 +62,11 @@ public class NavigationView extends HBox {
         back.setOnContextMenuRequested(evt -> showMenu(back, sessionManager.getHistoryBackward()));
         forward.setOnContextMenuRequested(evt -> showMenu(forward, sessionManager.getHistoryForwards()));
 
-        getChildren().setAll(refreshButton, back, forward);
+        if (OSUtil.isNative()) {
+            getChildren().setAll(back, refreshButton, forward);
+        } else {
+            getChildren().setAll(refreshButton, back, forward);
+        }
     }
 
     private void showMenu(Button back, ObservableList<HistoryEntry> historyBackward) {

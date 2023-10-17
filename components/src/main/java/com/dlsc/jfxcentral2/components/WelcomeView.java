@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.text.MessageFormat;
+
 public class WelcomeView extends PaneBase {
 
     private final VBox labelBox;
@@ -53,9 +55,9 @@ public class WelcomeView extends PaneBase {
         jfxCentralDescLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         String javaVersion = System.getProperty("java.version");
-        String fxVersion = System.getProperty("javafx.runtime.version");
+        String fxVersion = System.getProperty("javafx.version");
 
-        Label versionLabel = new Label("This site runs on Java " + javaVersion + " with JavaFX " + fxVersion + ".");
+        Label versionLabel = new Label(MessageFormat.format("This {0} runs on Java " + javaVersion + " with JavaFX " + fxVersion + ".", WebAPI.isBrowser() ? "site" : "application"));
         versionLabel.getStyleClass().add("version-label");
         versionLabel.setWrapText(true);
 

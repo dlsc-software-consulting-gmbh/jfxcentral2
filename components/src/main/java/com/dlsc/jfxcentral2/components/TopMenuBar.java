@@ -17,6 +17,7 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -199,7 +200,8 @@ public class TopMenuBar extends PaneBase {
 
     protected void layoutBySize() {
         searchField = createSearchField();
-        searchField.setFocusTraversable(false);
+        searchField.setFocusTraversable(!OSUtil.isNative());
+
         if (isLarge()) {
             MenuButton resourcesBtn = createMenuButton("Resources");
             resourcesBtn.getStyleClass().add("resources-button");
@@ -250,7 +252,11 @@ public class TopMenuBar extends PaneBase {
 
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, utilitiesButton, documentationBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn);
+            if (!OSUtil.isNative()) {
+                contentBox.getChildren().add(utilitiesButton);
+            }
+            contentBox.getChildren().addAll(documentationBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");
