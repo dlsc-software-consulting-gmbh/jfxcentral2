@@ -47,11 +47,6 @@ import javafx.scene.effect.Shadow;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-//TODO 1. 如果是ImageInput, 那么注意写一个注释在代码里, 强调这个url 可能需要参考自己的路径进行修改
-//TODO 2. 完善Lighting的两个子类的Editor(都继承自LightingEditor),然后需要完善的是Light的类型啥的
-//TODO 3. ColorPicker的bug
-//TODO 4. 通知一个属性,我们进行了更改, 注意添加和移除listener (我们打开某个特效的详情时,那么我们就需要添加listener,当我们关闭时,我们就需要移除listener)
-//TODO 5. DropShadow和InnerShadow的CSS转换
 
 public class ShadowDesignerView extends PaneBase {
 
