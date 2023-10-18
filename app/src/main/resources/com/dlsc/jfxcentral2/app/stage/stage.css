@@ -26,9 +26,9 @@
     -fx-alignment: center-left;
 }
 
-.custom-stage .title-bar.native > .front-box {
-    -fx-padding: 15;
-    -fx-alignment: center;
+.custom-stage .title-bar.native {
+    -fx-border-color: white;
+    -fx-border-width: 1px 0px 0px 0px;
 }
 
 .custom-stage .title-bar.native > .navigation-view {
