@@ -113,10 +113,10 @@ public class JFXCentral2App extends Application {
         }
 
         if (!WebAPI.isBrowser()) {
-            System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
 
             if (!OSUtil.isNative()) {
                 System.setProperty("prism.lcdtext", "false");
+                System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
 
                 if (Taskbar.isTaskbarSupported()) {
                     Taskbar taskbar = Taskbar.getTaskbar();
@@ -281,8 +281,10 @@ public class JFXCentral2App extends Application {
 
     public static void main(String[] args) {
         Logger logger = LogManager.getLogger();
-        System.setOut(new PrintStream(new LoggerOutputStream(logger, Level.INFO), true));
-        System.setErr(new PrintStream(new LoggerOutputStream(logger, Level.ERROR), true));
+        if (!OSUtil.isNative()) {
+            System.setOut(new PrintStream(new LoggerOutputStream(logger, Level.INFO), true));
+            System.setErr(new PrintStream(new LoggerOutputStream(logger, Level.ERROR), true));
+        }
         launch(args);
     }
 }
