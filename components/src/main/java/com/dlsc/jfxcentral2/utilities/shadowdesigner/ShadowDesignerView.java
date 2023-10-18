@@ -13,6 +13,8 @@ import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.GaussianBlurEditor;
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.GlowEditor;
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.ImageInputEditor;
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.InnerShadowEditor;
+import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.LightingBumpInputEditor;
+import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.LightingContentInputEditor;
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.MotionBlurEditor;
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.PerspectiveTransformEditor;
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.ReflectionEditor;
@@ -20,8 +22,9 @@ import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.SepiaToneEditor;
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.editor.ShadowEditor;
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.effect.BlendBottomInput;
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.effect.BlendTopInput;
+import com.dlsc.jfxcentral2.utilities.shadowdesigner.effect.LightingBumpInput;
+import com.dlsc.jfxcentral2.utilities.shadowdesigner.effect.LightingContentInput;
 import javafx.beans.InvalidationListener;
-import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -44,6 +47,11 @@ import javafx.scene.effect.Shadow;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+//TODO 1. 如果是ImageInput, 那么注意写一个注释在代码里, 强调这个url 可能需要参考自己的路径进行修改
+//TODO 2. 完善Lighting的两个子类的Editor(都继承自LightingEditor),然后需要完善的是Light的类型啥的
+//TODO 3. ColorPicker的bug
+//TODO 4. 通知一个属性,我们进行了更改, 注意添加和移除listener (我们打开某个特效的详情时,那么我们就需要添加listener,当我们关闭时,我们就需要移除listener)
+//TODO 5. DropShadow和InnerShadow的CSS转换
 
 public class ShadowDesignerView extends PaneBase {
 
@@ -67,7 +75,10 @@ public class ShadowDesignerView extends PaneBase {
             if (newEffect == null) {
                 effectPaneWrapper.getChildren().clear();
             }
-            Node node = createOptionPane(newEffect, () -> effectFlowPane.getEffects().remove(newEffect));
+            Node node = createOptionPane(newEffect, () -> {
+                effectFlowPane.requestFocus();
+                effectFlowPane.getEffects().remove(newEffect);
+            });
             if (node == null) {
                 effectPaneWrapper.getChildren().clear();
             } else {
@@ -80,8 +91,6 @@ public class ShadowDesignerView extends PaneBase {
 
         VBox rightBox = new VBox(effectFlowPane, effectPaneWrapper);
         rightBox.getStyleClass().addAll("right-box", "with-non-effect");
-        rightBox.alignmentProperty().bind(Bindings.createObjectBinding(() ->
-                effectPaneWrapper.isVisible() && !effectFlowPane.getEffects().isEmpty() ? Pos.TOP_LEFT : Pos.CENTER, effectPaneWrapper.visibleProperty()));
 
         effectFlowPane.getEffects().addListener((InvalidationListener) observable -> {
             if (effectFlowPane.getEffects().isEmpty()) {
@@ -125,6 +134,10 @@ public class ShadowDesignerView extends PaneBase {
             node = new ImageInputEditor(effect, deleteAction);
         } else if (newEffect instanceof InnerShadow effect) {
             node = new InnerShadowEditor(effect, deleteAction);
+        } else if (newEffect instanceof LightingBumpInput effect){
+            node = new LightingBumpInputEditor(effect, deleteAction);
+        } else if (newEffect instanceof LightingContentInput effect){
+            node = new LightingContentInputEditor(effect, deleteAction);
         } else if (newEffect instanceof MotionBlur effect) {
             node = new MotionBlurEditor(effect, deleteAction);
         } else if (newEffect instanceof PerspectiveTransform effect) {

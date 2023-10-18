@@ -1,19 +1,25 @@
 package com.dlsc.jfxcentral2.utilities.shadowdesigner;
 
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
-import javafx.beans.InvalidationListener;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.JFXCentralUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.effect.Blend;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Effect;
+import javafx.scene.effect.InnerShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -21,6 +27,7 @@ import org.kordamp.ikonli.material2.Material2AL;
 import org.kordamp.ikonli.material2.Material2OutlinedMZ;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,12 +38,17 @@ public class EffectFlowPane extends FlowPane {
     public EffectFlowPane() {
         getStyleClass().add("effect-flow-pane");
 
-        value.bind(Bindings.createObjectBinding(() -> effects.stream().reduce((effect1, effect2) -> {
-            if (effect2 instanceof Blend blend2) {
-                blend2.setTopInput(effect1);
-                return blend2;
-            }
+        effectValueBind();
 
+        effectsAddListener();
+
+        getChildren().addAll(createAddEffectButton(), createCopyCodeButton());
+
+        toggleGroupAddListener();
+    }
+
+    private void effectValueBind() {
+        value.bind(Bindings.createObjectBinding(() -> effects.stream().reduce((effect1, effect2) -> {
             if (supportsInputMethod(effect2)) {
                 try {
                     effect2.getClass().getMethod("setInput", Effect.class).invoke(effect2, effect1);
@@ -46,41 +58,52 @@ public class EffectFlowPane extends FlowPane {
             }
             return effect2;
         }).orElse(null), effects));
+    }
 
-        effects.addListener((InvalidationListener) it -> {
-            Toggle selectedToggle = TOGGLE_GROUP.getSelectedToggle();
-            int index = TOGGLE_GROUP.getToggles().indexOf(selectedToggle);
-            Effect selectedEffect;
-            if (selectedToggle != null && index >= 0 && index < effects.size()) {
-                selectedEffect = effects.get(index);
-            } else {
-                selectedEffect = null;
+    private void toggleGroupAddListener() {
+        TOGGLE_GROUP.selectedToggleProperty().addListener((ob, ov, nv) -> {
+            if (effects.isEmpty()) {
+                setSelectedEffect(null);
+                return;
             }
-            TOGGLE_GROUP.getToggles().clear();
-            int lastIndex = getChildren().size() - 1;
-            getChildren().remove(0, lastIndex);
-            effects.forEach(effect -> {
-                int i = getChildren().size() - 1;
-                CustomToggleButton effectButton = new CustomToggleButton((i + 1) + "  " + effect.getClass().getSimpleName());
-                effectButton.getStyleClass().add("effect-button");
-                effectButton.setFocusTraversable(false);
-                if (i != effects.size() - 1) {
-                    effectButton.setGraphic(new FontIcon(Material2OutlinedMZ.NAVIGATE_NEXT));
-                }
-                getChildren().add(i, effectButton);
-                effectButton.setToggleGroup(TOGGLE_GROUP);
-            });
-            //effects.forEach(effect -> {
-            //    CustomToggleButton effectView = (CustomToggleButton) getChildren().get(effects.indexOf(effect));
-            //    effectView.setSelected(effect == selectedEffect);
-            //});
+            setSelectedEffect(effects.get(TOGGLE_GROUP.getToggles().indexOf(nv)));
         });
+    }
 
+    private MenuButton createCopyCodeButton() {
+        MenuButton copyCodeButton = new MenuButton("Copy Code");
+        copyCodeButton.getStyleClass().addAll("fill-button", "copy-effect-code-button");
+        copyCodeButton.setFocusTraversable(false);
+        copyCodeButton.setGraphic(new FontIcon(IkonUtil.copy));
+
+        CopyEffectCodeView copyEffectCodeView = new CopyEffectCodeView(() -> JFXCentralUtil.runInFXThread(copyCodeButton::hide, 220));
+        CustomMenuItem customMenuItem = new CustomMenuItem(copyEffectCodeView, false);
+        copyCodeButton.setOnShowing(event -> {
+            String javaCode = EffectCodeGenerator.effectsToJavaCode(effects);
+            copyEffectCodeView.setJavaCode(javaCode);
+
+            String cssCode = "";
+            if (effects.size() == 1) {
+                Effect effect = effects.get(0);
+                if (effect instanceof DropShadow shadow) {
+                    cssCode = EffectCodeGenerator.convertToCss(shadow);
+                } else if (effect instanceof InnerShadow shadow) {
+                    cssCode = EffectCodeGenerator.convertToCss(shadow);
+                }
+            }
+            copyEffectCodeView.setCssCode(cssCode);
+        });
+        copyCodeButton.getItems().addAll(customMenuItem);
+        copyCodeButton.managedProperty().bind(copyCodeButton.visibleProperty());
+        copyCodeButton.visibleProperty().bind(Bindings.createBooleanBinding(() -> !effects.isEmpty(), effects));
+        return copyCodeButton;
+    }
+
+    private MenuButton createAddEffectButton() {
         MenuButton addEffectButton = new MenuButton("Add Effect");
         addEffectButton.setFocusTraversable(false);
         addEffectButton.setGraphic(new FontIcon(Material2AL.ADD_CIRCLE));
         addEffectButton.getStyleClass().add("fill-button");
-        getChildren().add(addEffectButton);
 
         List<MenuItem> menuItems = Arrays.stream(EffectEnum.getAllNames())
                 .map(name -> {
@@ -102,15 +125,58 @@ public class EffectFlowPane extends FlowPane {
                 })
                 .toList();
         addEffectButton.getItems().addAll(menuItems);
+        return addEffectButton;
+    }
 
-        TOGGLE_GROUP.selectedToggleProperty().addListener((ob, ov, nv) -> {
-            if (nv == null) {
-                setSelectedEffect(null);
-                return;
+    private void effectsAddListener() {
+        effects.addListener((ListChangeListener.Change<? extends Effect> change) -> {
+            while (change.next()) {
+                if (change.wasRemoved()) {
+                    for (Effect removedEffect : change.getRemoved()) {
+                        for (Effect effect : effects) {
+                            try {
+                                Method setInputMethod = effect.getClass().getMethod("setInput", Effect.class);
+                                Effect currentInput = (Effect) effect.getClass().getMethod("getInput").invoke(effect);
+                                if (currentInput == removedEffect) {
+                                    setInputMethod.invoke(effect, (Effect) null);
+                                }
+                            } catch (Exception e) {
+                                LOGGER.error("Error while removing input for effect", e);
+                            }
+                        }
+                    }
+                }
             }
-            setSelectedEffect(effects.get(TOGGLE_GROUP.getToggles().indexOf(nv)));
-        });
 
+            TOGGLE_GROUP.getToggles().clear();
+            int lastIndex = getChildren().size() - 2;
+            getChildren().remove(0, lastIndex);
+            effects.forEach(effect -> {
+                int i = getChildren().size() - 2;
+                String className = effect.getClass().getSimpleName();
+                if (StringUtils.equalsIgnoreCase(className, "BlendTopInput")) {
+                    className = "Blend Top";
+                } else if (StringUtils.equalsIgnoreCase(className, "BlendBottomInput")) {
+                    className = "Blend Bottom";
+                } else if (StringUtils.equalsIgnoreCase(className, "LightingBumpInput")) {
+                    className = "Lighting Bump";
+                } else if (StringUtils.equalsIgnoreCase(className, "LightingContentInput")) {
+                    className = "Lighting Content";
+                }
+                CustomToggleButton effectButton = new CustomToggleButton((i + 1) + "  " + className);
+                effectButton.getStyleClass().add("effect-button");
+                effectButton.setFocusTraversable(false);
+                if (i != effects.size() - 1) {
+                    effectButton.setGraphic(new FontIcon(Material2OutlinedMZ.NAVIGATE_NEXT));
+                }
+                getChildren().add(i, effectButton);
+                effectButton.setToggleGroup(TOGGLE_GROUP);
+                effectButton.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> this.requestFocus());
+            });
+            requestFocus();
+            ObservableList<Toggle> toggles = TOGGLE_GROUP.getToggles();
+            toggles.get(toggles.size() - 1).setSelected(true);
+        });
     }
 
     private final ObservableList<Effect> effects = FXCollections.observableArrayList();

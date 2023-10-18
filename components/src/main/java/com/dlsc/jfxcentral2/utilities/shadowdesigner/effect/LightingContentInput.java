@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.utilities.shadowdesigner.effect;
 
+import javafx.scene.effect.Effect;
 import javafx.scene.effect.Lighting;
 
 public class LightingContentInput extends Lighting {
@@ -8,7 +9,11 @@ public class LightingContentInput extends Lighting {
 
     }
 
-    public void setInput(LightingContentInput contentInput) {
-        setContentInput(contentInput);
+    public void setInput(Effect effect) {
+        setContentInput(effect);
+    }
+
+    public Effect getInput() {
+        return getContentInput();
     }
 }

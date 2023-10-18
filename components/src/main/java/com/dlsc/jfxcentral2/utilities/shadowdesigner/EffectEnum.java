@@ -2,6 +2,8 @@ package com.dlsc.jfxcentral2.utilities.shadowdesigner;
 
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.effect.BlendBottomInput;
 import com.dlsc.jfxcentral2.utilities.shadowdesigner.effect.BlendTopInput;
+import com.dlsc.jfxcentral2.utilities.shadowdesigner.effect.LightingBumpInput;
+import com.dlsc.jfxcentral2.utilities.shadowdesigner.effect.LightingContentInput;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.ColorAdjust;
@@ -24,8 +26,8 @@ import org.apache.logging.log4j.Logger;
 
 public enum EffectEnum {
     //BLEND("Blend", Blend.class),
-    BLEND_TOP_INPUT("Blend (TopInPut)", BlendTopInput.class),
-    BLEND_BOTTOM_INPUT("Blend (BottomInput)", BlendBottomInput.class),
+    BLEND_TOP_INPUT("Blend (Top)", BlendTopInput.class),
+    BLEND_BOTTOM_INPUT("Blend (Bottom)", BlendBottomInput.class),
     BLOOM("Bloom", Bloom.class),
     BOX_BLUR("BoxBlur", BoxBlur.class),
     COLOR_ADJUST("ColorAdjust", ColorAdjust.class),
@@ -37,8 +39,8 @@ public enum EffectEnum {
     IMAGE_INPUT("ImageInput", ImageInput.class),
     INNER_SHADOW("InnerShadow", InnerShadow.class),
     //LIGHTING("Lighting", Lighting.class),
-    //LIGHTING_BUMP_INPUT("Lighting (BumpInput)", LightingBumpInput.class),
-    //LIGHTING_CONTENT_INPUT("Lighting (ContentInput)", LightingContentInput.class),
+    LIGHTING_BUMP_INPUT("Lighting (Bump)", LightingBumpInput.class),
+    LIGHTING_CONTENT_INPUT("Lighting (Content)", LightingContentInput.class),
     MOTION_BLUR("MotionBlur", MotionBlur.class),
     PERSPECTIVE_TRANSFORM("PerspectiveTransform", PerspectiveTransform.class),
     REFLECTION("Reflection", Reflection.class),
