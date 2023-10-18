@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
@@ -34,7 +35,7 @@ public class VideoTileView extends TileView<Video> {
 
         setRemark(video.getMinutes() + " mins");
 
-        LinkUtil.setExternalLink(getButton2(), "https://www.youtube.com/watch?v=" + video.getId());
+        ExternalLinkUtil.setExternalLink(getButton2(), "https://www.youtube.com/watch?v=" + video.getId());
     }
 
     protected Node createFrontTop() {

@@ -15,40 +15,8 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class PageUtil {
-    private static final Logger LOGGER = LogManager.getLogger(PageUtil.class);
-
-    public static View getViewFromURL(String url) {
-        if (!url.startsWith("/")) return null;
-        int secondSlash = url.indexOf("/", "/".length());
-        if (secondSlash == -1) secondSlash = url.length();
-        String viewString = url.substring("/".length(), secondSlash);
-        int paramIndex = viewString.indexOf("?"); // cut of parameters
-        if (paramIndex != -1) {
-            viewString = viewString.substring(0, paramIndex);
-        }
-        try {
-            return View.valueOf(viewString.toUpperCase());
-        } catch (IllegalArgumentException ex) {
-            LOGGER.warn("Failed to derive a view from URL: {}", url);
-            return null;
-        }
-    }
-
-    public static String getIdFromURL(String url) {
-        if (!url.startsWith("/")) return null;
-        int secondSlash = url.indexOf("/", "/".length());
-        if (secondSlash == -1) return null;
-        String idString = url.substring(secondSlash + 1);
-        int paramIndex = idString.indexOf("?"); // cut of parameters
-        if (paramIndex != -1) {
-            idString = idString.substring(0, paramIndex);
-        }
-        return idString;
-    }
 
     public static String getLink(View view) {
         return "/" + view.name().toLowerCase();
@@ -90,26 +58,5 @@ public class PageUtil {
         } else {
             return View.HOME;
         }
-    }
-
-    public static Class getClassOfView(View view) {
-        if (view == View.OPENJFX) return PullRequest.class;
-        if (view == View.PEOPLE) return Person.class;
-        if (view == View.TUTORIALS) return Tutorial.class;
-        if (view == View.REAL_WORLD) return RealWorldApp.class;
-        if (view == View.COMPANIES) return Company.class;
-        if (view == View.TOOLS) return Tool.class;
-        if (view == View.LIBRARIES) return Library.class;
-        if (view == View.BLOGS) return Blog.class;
-        if (view == View.BOOKS) return Book.class;
-        if (view == View.VIDEOS) return Video.class;
-        if (view == View.DOWNLOADS) return Download.class;
-        if (view == View.TIPS) return Tip.class;
-        if (view == View.ICONS) return IkonliPack.class;
-        if (view == View.UTILITIES) return Utility.class;
-        if (view == View.HOME) return null;
-        String errorMessage = "No Class associated with the view: " + view;
-        LOGGER.error(errorMessage);
-        throw new RuntimeException(errorMessage);
     }
 }

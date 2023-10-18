@@ -11,6 +11,8 @@ open module com.dlsc.jfxcentral2.components {
 
     requires fr.brouillard.oss.cssfx;
 
+    requires com.gluonhq.attach.browser;
+    requires com.gluonhq.attach.display;
     requires jfxcentral.data;
     requires org.controlsfx.controls;
     requires net.synedra.validatorfx;

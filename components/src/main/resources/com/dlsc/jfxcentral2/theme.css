@@ -1891,7 +1891,7 @@
 }
 
 .top-menu-bar.native:sm {
-    -fx-padding: 25px 25px 15px 25px;
+    -fx-padding: 50px 25px 15px 25px;
 }
 
 .top-menu-bar:sm .content {

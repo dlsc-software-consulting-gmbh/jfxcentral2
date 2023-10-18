@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.scene.Node;
@@ -31,7 +32,7 @@ public class VideosDetailsBox extends DetailsBoxBase<Video> {
         Button youTubeButton = new Button("YouTube");
         youTubeButton.setFocusTraversable(false);
         youTubeButton.getStyleClass().add("youtube-button");
-        LinkUtil.setExternalLink(youTubeButton, "https://youtu.be/" + video.getId(), "https://youtu.be/" + video.getId());
+        ExternalLinkUtil.setExternalLink(youTubeButton, "https://youtu.be/" + video.getId(), "https://youtu.be/" + video.getId());
 
         return List.of(playButton, youTubeButton);
     }

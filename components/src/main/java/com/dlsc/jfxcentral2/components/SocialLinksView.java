@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
@@ -127,7 +128,7 @@ public class SocialLinksView extends FlowPane {
 
     private void updateLink(Node node, String url) {
         if (StringUtils.isNotBlank(url)) {
-            LinkUtil.setExternalLink(node, url);
+            ExternalLinkUtil.setExternalLink(node, url);
         }
     }
 

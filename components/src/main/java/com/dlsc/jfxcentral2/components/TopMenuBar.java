@@ -19,6 +19,7 @@ import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
+import com.gluonhq.attach.display.DisplayService;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -30,6 +31,7 @@ import javafx.css.Styleable;
 import javafx.css.StyleableObjectProperty;
 import javafx.css.StyleableProperty;
 import javafx.css.converter.EnumConverter;
+import javafx.geometry.Dimension2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CustomMenuItem;
@@ -112,7 +114,7 @@ public class TopMenuBar extends PaneBase {
         });
 
         searchField.getPopup().setPrefWidth(600);
-        searchField.getEditor().setFocusTraversable(false);
+        searchField.getEditor().setFocusTraversable(OSUtil.isNative());
         searchField.setPromptText("Search");
         searchField.setCellFactory(listView -> new SearchResultCell());
         searchField.setSuggestionProvider(request -> search(request.getUserText()));

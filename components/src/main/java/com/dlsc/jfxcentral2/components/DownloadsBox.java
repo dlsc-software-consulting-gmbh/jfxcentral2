@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -74,7 +75,7 @@ public class DownloadsBox extends PaneBase {
                 downloadButton.setGraphic(new FontIcon(downloadIcon));
                 downloadButton.setMaxWidth(Double.MAX_VALUE);
                 downloadButton.setWrapText(true);
-                LinkUtil.setExternalLink(downloadButton, downloadFile.getUrl());
+                ExternalLinkUtil.setExternalLink(downloadButton, downloadFile.getUrl());
                 downloadButtons.add(downloadButton);
             }
         }

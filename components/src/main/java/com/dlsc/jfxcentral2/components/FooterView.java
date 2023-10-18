@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.HPos;
@@ -82,19 +83,19 @@ public class FooterView extends PaneBase {
     private LineNumberPane initLinksPane() {
         Hyperlink twitterLink = new Hyperlink("Twitter");
         twitterLink.getStyleClass().addAll("link", "twitter-link");
-        LinkUtil.setExternalLink(twitterLink, "https://twitter.com/dlemmermann");
+        ExternalLinkUtil.setExternalLink(twitterLink, "https://twitter.com/dlemmermann");
 
         Hyperlink linkedinLink = new Hyperlink("Linkedin");
         linkedinLink.getStyleClass().addAll("link", "linkedin-link");
-        LinkUtil.setExternalLink(linkedinLink, "https://www.linkedin.com/in/dlemmermann/");
+        ExternalLinkUtil.setExternalLink(linkedinLink, "https://www.linkedin.com/in/dlemmermann/");
 
         Hyperlink githubLink = new Hyperlink("Github");
         githubLink.getStyleClass().addAll("link", "github-link");
-        LinkUtil.setExternalLink(githubLink, "https://github.com/dlemmermann");
+        ExternalLinkUtil.setExternalLink(githubLink, "https://github.com/dlemmermann");
 
         Hyperlink youtubeLink = new Hyperlink("Youtube");
         youtubeLink.getStyleClass().addAll("link", "youtube-link");
-        LinkUtil.setExternalLink(youtubeLink, "https://www.youtube.com/@dlsc/videos");
+        ExternalLinkUtil.setExternalLink(youtubeLink, "https://www.youtube.com/@dlsc/videos");
 
         LineNumberPane linksPane = new LineNumberPane(new Label("Stay in the loop"), null, twitterLink, linkedinLink, githubLink, youtubeLink);
         linksPane.getStyleClass().add("links-pane");

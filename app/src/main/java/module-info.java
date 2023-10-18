@@ -4,6 +4,9 @@ open module com.dlsc.jfxcentral2.app {
     requires javafx.web;
     requires javafx.swing;
 
+    requires com.gluonhq.attach.browser;
+    requires com.gluonhq.attach.statusbar;
+
     requires jfxcentral.data;
     requires org.eclipse.jgit;
     requires fr.brouillard.oss.cssfx;

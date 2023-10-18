@@ -76,9 +76,7 @@ public class CustomStage extends BorderPane {
         if (!WebAPI.isBrowser()) {
             VBox vBox = new VBox(titleBar);
             vBox.setAlignment(Pos.CENTER_RIGHT);
-            if (OSUtil.isNative()) {
-                setBottom(vBox);
-            } else {
+            if (!OSUtil.isNative()) {
                 setTop(vBox);
             }
         }

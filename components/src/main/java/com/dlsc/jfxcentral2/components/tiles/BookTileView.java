@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral2.components.CustomImageView;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
@@ -34,12 +35,12 @@ public class BookTileView extends PreviewTileView<Book> {
             setButton2Text("amazon");
             setButton2Graphic(new ImageView(AMAZON_IMAGE));
             setButton2Visible(true);
-            LinkUtil.setExternalLink(getButton2(), "https://www.amazon.com/dp/" + book.getAmazonASIN(), book.getName());
+            ExternalLinkUtil.setExternalLink(getButton2(), "https://www.amazon.com/dp/" + book.getAmazonASIN(), book.getName());
         } else if (StringUtils.isNotBlank(book.getUrl())) {
             setButton2Text(StringUtil.getDomainName(book.getUrl()));
             setButton2Graphic(new FontIcon(IkonUtil.website));
             setButton2Visible(true);
-            LinkUtil.setExternalLink(getButton2(), book.getUrl(), book.getName());
+            ExternalLinkUtil.setExternalLink(getButton2(), book.getUrl(), book.getName());
         } else {
             setButton2Visible(false);
         }

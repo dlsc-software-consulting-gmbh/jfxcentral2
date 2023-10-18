@@ -61,6 +61,7 @@ import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
+import com.gluonhq.attach.statusbar.StatusBarService;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
@@ -110,13 +111,15 @@ public class JFXCentral2App extends Application {
         if (!OSUtil.isNative()) {
             BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
             bi.createGraphics();
+        } else {
+            StatusBarService.create().ifPresent(service -> service.setColor(Color.WHITE));
         }
 
         if (!WebAPI.isBrowser()) {
+            System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
 
             if (!OSUtil.isNative()) {
                 System.setProperty("prism.lcdtext", "false");
-                System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
 
                 if (Taskbar.isTaskbarSupported()) {
                     Taskbar taskbar = Taskbar.getTaskbar();

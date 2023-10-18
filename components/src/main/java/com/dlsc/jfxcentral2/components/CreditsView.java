@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.model.CreditModel;
 import com.dlsc.jfxcentral2.model.License;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -109,7 +110,7 @@ public class CreditsView extends PaneBase {
 
                 licenceBox.getChildren().addAll(licenceTypeLabel, licenceVersionLabel);
 
-                LinkUtil.setExternalLink(licenceBox, license.getUrl());
+                ExternalLinkUtil.setExternalLink(licenceBox, license.getUrl());
             } else {
                 Label version = new Label("V " + creditModel.getVersion());
                 version.getStyleClass().add("version-label");
@@ -120,7 +121,7 @@ public class CreditsView extends PaneBase {
             linkButton.setFocusTraversable(false);
             linkButton.getStyleClass().add("link-button");
             linkButton.setGraphic(new FontIcon(IkonUtil.link));
-            LinkUtil.setExternalLink(linkButton, creditModel.getUrl());
+            ExternalLinkUtil.setExternalLink(linkButton, creditModel.getUrl());
 
             Label descriptionLabel = new Label();
             descriptionLabel.getStyleClass().add("description-label");

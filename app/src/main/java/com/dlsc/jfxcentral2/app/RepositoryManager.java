@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -50,8 +51,12 @@ public class RepositoryManager {
         }
     }
 
+    private static File getRepositoryDirectory() {
+        return DataRepository2.getRepositoryDirectory();
+    }
+
     public static boolean isFirstTimeSetup() {
-        return !DataRepository2.getRepositoryDirectory().exists();
+        return !getRepositoryDirectory().exists();
     }
 
     private static void initialLoad(ProgressMonitor monitor) throws Exception {
@@ -65,7 +70,7 @@ public class RepositoryManager {
             return;
         }
 
-        File repoDirectory = DataRepository2.getRepositoryDirectory();
+        File repoDirectory = getRepositoryDirectory();
         if (!repoDirectory.exists()) {
             String repoUrl = GITHUB_REPOSITORY_URL;
 
@@ -98,7 +103,7 @@ public class RepositoryManager {
                 // Git object is here only to ensure resources are properly closed; no other actions needed.
             }
         } else {
-            repoDirectory = new File(DataRepository2.getRepositoryDirectory(), "/.git");
+            repoDirectory = new File(repoDirectory, "/.git");
             try (Git git = new Git(FileRepositoryBuilder.create(repoDirectory))) {
                 git.pull()
                         .setProgressMonitor(monitor)

@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -25,7 +26,7 @@ public class TutorialsDetailsBox extends DetailsBoxBase<Tutorial> {
     protected List<Node> createActionButtons(Tutorial tutorial) {
         Button visitBlogButton = new Button("VISIT TUTORIAL", new FontIcon(IkonUtil.link));
         visitBlogButton.setFocusTraversable(false);
-        LinkUtil.setExternalLink(visitBlogButton, getVisitUrlProvider().call(tutorial));
+        ExternalLinkUtil.setExternalLink(visitBlogButton, getVisitUrlProvider().call(tutorial));
         return List.of(createDetailsButton(tutorial), visitBlogButton);
     }
 

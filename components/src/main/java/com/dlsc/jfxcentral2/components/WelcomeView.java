@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
@@ -71,23 +72,23 @@ public class WelcomeView extends PaneBase {
         jfxCentralButton.setFocusTraversable(false);
         jfxCentralButton.setGraphic(new FontIcon(IkonUtil.github));
         jfxCentralButton.getStyleClass().addAll("transparent-button", "jfxcentral-button");
-        LinkUtil.setExternalLink(jfxCentralButton, "https://github.com/dlsc-software-consulting-gmbh/jfxcentral2");
+        ExternalLinkUtil.setExternalLink(jfxCentralButton, "https://github.com/dlsc-software-consulting-gmbh/jfxcentral2");
 
         jfxcentralDataButton = new Button("jfxcentral-data", new FontIcon(IkonUtil.github));
         jfxcentralDataButton.getStyleClass().addAll("transparent-button", "jfxcentral-data-button");
         jfxcentralDataButton.setFocusTraversable(false);
-        LinkUtil.setExternalLink(jfxcentralDataButton, "https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data");
+        ExternalLinkUtil.setExternalLink(jfxcentralDataButton, "https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data");
 
         Region graphicRegion = new Region();
         clientWebSwitchButton = new Button("Install locally", graphicRegion);
         if (WebAPI.isBrowser()) {
             clientWebSwitchButton.setText("Install locally");
             graphicRegion.getStyleClass().add("download-region");
-            LinkUtil.setExternalLink(clientWebSwitchButton, "https://downloads.hydraulic.dev/jfxcentral2/download.html");
+            ExternalLinkUtil.setExternalLink(clientWebSwitchButton, "https://downloads.hydraulic.dev/jfxcentral2/download.html");
         } else {
             clientWebSwitchButton.setText("Online Version");
             graphicRegion.getStyleClass().add("openjfx-region");
-            LinkUtil.setLink(clientWebSwitchButton, "https://www.jfx-central.com/");
+            ExternalLinkUtil.setExternalLink(clientWebSwitchButton, "https://www.jfx-central.com/");
         }
         clientWebSwitchButton.getStyleClass().addAll("fill-button", "install-button");
         clientWebSwitchButton.setFocusTraversable(false);

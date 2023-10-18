@@ -18,7 +18,16 @@
     }, 
     {
       "pattern":"\\Qcom/dlsc/jfxcentral2/components/headers/bg-lg.jpg\\E"
-    }, 
+    },
+    {
+      "pattern":"\\Qcom/dlsc/jfxcentral2/app/pages/cookie-policy.md\\E"
+    },
+    {
+      "pattern":"\\Qcom/dlsc/jfxcentral2/app/pages/privacy-policy.md\\E"
+    },
+    {
+      "pattern":"\\Qcom/dlsc/jfxcentral2/app/pages/terms-and-conditions.md\\E"
+    },
     {
       "condition":{"typeReachable":"org.apache.log4j.helpers.Loader"},
       "pattern":"\\Qlog4j.properties\\E"

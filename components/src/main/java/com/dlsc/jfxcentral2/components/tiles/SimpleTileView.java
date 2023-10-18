@@ -13,6 +13,7 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
@@ -114,7 +115,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
     private void setLinkForItem(Node target, ModelObject item) {
         if (item instanceof Documentation doc) {
             //The document link is external, and there's no detailed page.
-            LinkUtil.setExternalLink(target, doc.getUrl());
+            ExternalLinkUtil.setExternalLink(target, doc.getUrl());
         } else {
             LinkUtil.setLink(target, PageUtil.getLink(item));
         }

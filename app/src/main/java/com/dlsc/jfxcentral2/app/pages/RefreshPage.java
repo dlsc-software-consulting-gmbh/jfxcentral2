@@ -116,7 +116,9 @@ public class RefreshPage extends PageBase {
         Button exitButton = new Button("EXIT");
         exitButton.setFocusTraversable(false);
         exitButton.setCancelButton(true);
-        exitButton.setOnAction(evt -> Platform.exit());
+
+        // use system exit so it works properly everywhere, including native
+        exitButton.setOnAction(evt -> System.exit(0));
 
         HBox hBox = new HBox(exitButton, proceedButton);
         hBox.getStyleClass().add("button-box");

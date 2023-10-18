@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.JFXCentralUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -62,7 +63,7 @@ public class OpenJFXProjectView extends PaneBase {
 
         Text text2 = new Text("GPL v2 with the Classpath exception");
         text2.getStyleClass().add("link");
-        LinkUtil.setExternalLink(text2, "https://en.wikipedia.org/wiki/GPL_linking_exception#The_Classpath_exception");
+        ExternalLinkUtil.setExternalLink(text2, "https://en.wikipedia.org/wiki/GPL_linking_exception#The_Classpath_exception");
 
         Text text3 = new Text(", just like the JDK. Anybody is welcome to contribute to this project," +
                 " port it to other platforms or devices, or do anything else that " +
@@ -77,7 +78,7 @@ public class OpenJFXProjectView extends PaneBase {
         visitHomePageButton = new Button("Visit project homepage", openjfxRegion);
         visitHomePageButton.getStyleClass().addAll("fill-button", "visit-homepage-button");
         visitHomePageButton.setFocusTraversable(false);
-        LinkUtil.setExternalLink(visitHomePageButton, "https://openjfx.io");
+        ExternalLinkUtil.setExternalLink(visitHomePageButton, "https://openjfx.io");
 
         Region openjfxRegion2 = new Region();
         openjfxRegion2.getStyleClass().add("openjfx-region2");
@@ -85,7 +86,7 @@ public class OpenJFXProjectView extends PaneBase {
         reportAnIssueButton.getStyleClass().addAll("fill-button", "report-issue-button");
         reportAnIssueButton.setOnAction(event -> JFXCentralUtil.run(onReportAnIssue));
         reportAnIssueButton.setFocusTraversable(false);
-        LinkUtil.setExternalLink(reportAnIssueButton, "https://bugreport.java.com/bugreport/");
+        ExternalLinkUtil.setExternalLink(reportAnIssueButton, "https://bugreport.java.com/bugreport/");
 
         /*image*/
         imageRegion = new Region();
