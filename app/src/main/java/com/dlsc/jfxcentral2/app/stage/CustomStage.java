@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.app.stage;
 
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -29,6 +30,8 @@ import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
+import java.util.Objects;
+
 public class CustomStage extends BorderPane {
 
     private static final int OFFSET = 5;
@@ -51,12 +54,19 @@ public class CustomStage extends BorderPane {
         RESIZE_SE
     }
 
-    public CustomStage(Stage stage, Node node, SessionManager sessionManager) {
+    public CustomStage(Stage stage, Node node, SessionManager sessionManager, ObjectProperty<Size> size) {
         setContent(node);
         node.getStyleClass().add("stage-content");
 
-        getStylesheets().add(CustomStage.class.getResource("stage.css").toExternalForm());
+        getStylesheets().add(Objects.requireNonNull(CustomStage.class.getResource("stage.css")).toExternalForm());
         getStyleClass().add("custom-stage");
+
+        if (OSUtil.isNative()) {
+            getStyleClass().add("native");
+        }
+
+        size.addListener(it -> updateStyleBasedOnSize(size.get()));
+        updateStyleBasedOnSize(size.get());
 
         stage.focusedProperty().addListener(it -> updateStyleBasedOnStageFocus(stage));
 
@@ -288,6 +298,17 @@ public class CustomStage extends BorderPane {
 
     private void setOperation(Operation operation) {
         this.operation.set(operation);
+    }
+
+    private void updateStyleBasedOnSize(Size size) {
+        getStyleClass().removeAll("lg", "md", "sm");
+        if (size.equals(Size.LARGE)) {
+            getStyleClass().add("lg");
+        } else if (size.equals(Size.MEDIUM)) {
+            getStyleClass().add("md");
+        } else {
+            getStyleClass().add("sm");
+        }
     }
 
     private void updateStyleBasedOnStageFocus(Stage stage) {

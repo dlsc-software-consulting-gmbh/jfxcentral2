@@ -61,7 +61,7 @@ public class FooterView extends PaneBase {
         } else {
             VBox box = new VBox(contactPane, linksPane, legalInfoPane);
             box.getStyleClass().add("number-pane-box");
-            contentBox.getChildren().setAll(logoImageView, box);
+            contentBox.getChildren().setAll(box);
         }
     }
 

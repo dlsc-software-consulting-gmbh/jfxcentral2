@@ -7,6 +7,10 @@
     -fx-padding: 2 4 4 4;
 }
 
+.custom-stage.native {
+    -fx-padding: 0;
+}
+
 .custom-stage:web {
     -fx-padding: 0 0 0 0;
     -fx-background-insets: 0;

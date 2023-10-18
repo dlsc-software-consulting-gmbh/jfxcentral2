@@ -155,7 +155,7 @@ public class JFXCentral2App extends Application {
         }
 
         // customs stage for decorations / the chrome
-        CustomStage customStage = new CustomStage(stage, routeNode, sessionManager);
+        CustomStage customStage = new CustomStage(stage, routeNode, sessionManager, size);
         customStage.setCloseHandler(() -> {
             if (!OSUtil.isNative()) {
                 if (SystemTray.isSupported()) {
