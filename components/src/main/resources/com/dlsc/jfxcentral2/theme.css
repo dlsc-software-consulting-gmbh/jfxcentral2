@@ -1656,7 +1656,7 @@
     -fx-pref-width: 317px;
     -fx-max-width: 317px;
     -fx-alignment: center;
-    -fx-spacing: 25px;
+    -fx-spacing: 5px;
 }
 
 .welcome-view:sm .fx-logo {
