@@ -72,27 +72,51 @@ public class PaintConvertUtil {
     }
 
     public static String convertPaintToJavaCode(Paint fxPaint) {
+        return convertPaintToJavaCode(fxPaint, true);
+    }
+
+    public static String convertPaintToJavaCode(Paint fxPaint, boolean withDeclaration) {
+        StringBuilder sb = new StringBuilder();
+
+        if (withDeclaration) {
+            if (fxPaint instanceof LinearGradient) {
+                sb.append("LinearGradient paint = ");
+            } else if (fxPaint instanceof RadialGradient) {
+                sb.append("RadialGradient paint = ");
+            } else if (fxPaint instanceof Color) {
+                sb.append("Color paint = ");
+            }
+        }
+
         if (fxPaint instanceof LinearGradient) {
             LinearGradient paint = (LinearGradient) fxPaint;
-            return "LinearGradient paint = new LinearGradient(" + System.lineSeparator() +
-                    round(paint.getStartX()) + ", " + round(paint.getStartY()) + ", " +
-                    round(paint.getEndX()) + ", " + round(paint.getEndY()) + ", " +
-                    paint.isProportional() + ", " +
-                    cycleMethodToStr(paint.getCycleMethod()) + "," + System.lineSeparator() +
-                    stopsToString(paint.getStops()) +
-                    ");";
+            sb.append("new LinearGradient(").append(System.lineSeparator())
+                    .append(round(paint.getStartX())).append(", ").append(round(paint.getStartY())).append(", ")
+                    .append(round(paint.getEndX())).append(", ").append(round(paint.getEndY())).append(", ")
+                    .append(paint.isProportional()).append(", ")
+                    .append(cycleMethodToStr(paint.getCycleMethod())).append(",").append(System.lineSeparator())
+                    .append(stopsToString(paint.getStops()))
+                    .append(")");
         } else if (fxPaint instanceof RadialGradient) {
             RadialGradient paint = (RadialGradient) fxPaint;
-            return "RadialGradient paint = new RadialGradient(" + System.lineSeparator() +
-                    round(paint.getFocusAngle()) + ", " + round(paint.getFocusDistance()) + ", " + round(paint.getCenterX()) + ", "
-                    + round(paint.getCenterY()) + ", " + round(paint.getRadius()) + ", " + paint.isProportional() + ", "
-                    + cycleMethodToStr(paint.getCycleMethod())+ "," + System.lineSeparator()
-                    + stopsToString(paint.getStops()) + ");";
+            sb.append("new RadialGradient(").append(System.lineSeparator())
+                    .append(round(paint.getFocusAngle())).append(", ").append(round(paint.getFocusDistance())).append(", ")
+                    .append(round(paint.getCenterX())).append(", ").append(round(paint.getCenterY())).append(", ")
+                    .append(round(paint.getRadius())).append(", ").append(paint.isProportional()).append(", ")
+                    .append(cycleMethodToStr(paint.getCycleMethod())).append(",").append(System.lineSeparator())
+                    .append(stopsToString(paint.getStops()))
+                    .append(")");
         } else if (fxPaint instanceof Color) {
-            return "Color paint = " + colorToJavaStr((Color) fxPaint) + ";";
+            sb.append(colorToJavaStr((Color) fxPaint));
         }
-        return "";
+
+        if (withDeclaration) {
+            sb.append(";");
+        }
+
+        return sb.toString();
     }
+
 
     private static void connectCycleMethodAndStops(StringBuilder strBuilder, CycleMethod cycleMethod, List<Stop> stops) {
         switch (cycleMethod) {

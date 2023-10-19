@@ -106,10 +106,10 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.components.hamburger;
     exports com.dlsc.jfxcentral2.components.topcontent;
     exports com.dlsc.jfxcentral2.utilities.pathextractor;
-    exports com.dlsc.jfxcentral2.utilities.shadowdesigner;
-    exports com.dlsc.jfxcentral2.utilities.shadowdesigner.editor;
+    exports com.dlsc.jfxcentral2.utilities.effectdesigner;
+    exports com.dlsc.jfxcentral2.utilities.effectdesigner.editor;
     exports com.dlsc.jfxcentral2.utilities.paintpicker.impl;
-    exports com.dlsc.jfxcentral2.utilities.shadowdesigner.effect;
+    exports com.dlsc.jfxcentral2.utilities.effectdesigner.effect;
 
     uses IkonProvider;
 }

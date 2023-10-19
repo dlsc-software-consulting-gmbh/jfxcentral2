@@ -9417,14 +9417,14 @@
     -fx-shape: "M50,40.1c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S50,34,50,40.1zM79.6,84.5v4.2H48.9v-4.2H79.6zM63.5,119.6c-31,0-56.1-25.2-56.1-56.1c0-31,25.2-56.1,56.1-56.1c31,0,56.1,25.2,56.1,56.1  C119.6,94.5,94.5,119.6,63.5,119.6z M63.5,16.4c-26,0-47.1,21.1-47.1,47.1s21.1,47.1,47.1,47.1s47.1-21.1,47.1-47.1  S89.5,16.4,63.5,16.4zM50,86.9c0,6.1-4.9,11-11,11s-11-4.9-11-11c0-6.1,4.9-11,11-11S50,80.8,50,86.9zM100.3,40.1c0,6.1-4.9,11-11,11s-11-4.9-11-11s4.9-11,11-11S100.3,34,100.3,40.1zM100.3,85.9c0,6.1-4.9,11-11,11s-11-4.9-11-11c0-6.1,4.9-11,11-11S100.3,79.8,100.3,85.9zM80.1,38.5v4.2H49.3v-4.2H80.1zM87.2,47.8h4.2v30.8h-4.2V47.8zM36.9,48.1H41v30.8h-4.2V48.1z";
 }
 
-.gradient-designer-view  .linear-gradient-view {
+.gradient-designer-view .linear-gradient-view {
     -fx-font-family: "Roboto Condensed";
     -fx-font-size: 20px;
     -fx-padding: 10px 0 0 0;
     -fx-spacing: 10px;
 }
 
-.gradient-designer-view  .linear-gradient-view .flow-pane {
+.gradient-designer-view .linear-gradient-view .flow-pane {
     -fx-hgap: 12px;
     -fx-vgap: 10px;
 }
@@ -9446,55 +9446,78 @@
 }
 
 /** ----------------------------------------------------------------------------
- * ShadowDesignerView
+ * EffectDesignerView
  */
-.shadow-designer-view {
+.effect-designer-view {
     -fx-min-height: 560px;
 }
 
-.shadow-designer-view .left-box .effect-preview-pane {
+.effect-designer-view .left-box .effect-preview-pane {
     -fx-pref-width: 200px;
     -fx-pref-height: 200px;
     -fx-background-color: -white;
-    -fx-border-color: -grey-10;
+    -fx-border-color: -grey-30;
+    -fx-border-width: 1px;
 }
 
-.shadow-designer-view > .flow-pane {
+.effect-designer-view > .flow-pane {
     -fx-hgap: 60px;
     -fx-vgap: 30px;
 }
 
-.shadow-designer-view:md > .flow-pane {
+.effect-designer-view:md > .flow-pane {
     -fx-hgap: 120px;
 }
 
-.shadow-designer-view:sm-md > .flow-pane {
+.effect-designer-view:sm-md > .flow-pane {
     -fx-alignment: center;
 }
 
-.shadow-designer-view .left-box .effect-preview-pane .label {
-    -fx-font-size: 20px;
+.effect-designer-view .left-box .effect-preview-pane .label {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #fa00fc 0.0%, #03dbde 100.0%);
 }
 
-.shadow-designer-view > .flow-pane {
+.effect-designer-view > .flow-pane {
     /*-fx-border-color: #08e093;*/
 }
 
-.shadow-designer-view > .flow-pane > .left-box {
+.effect-designer-view > .flow-pane > .left-box {
     -fx-padding: 50px;
 }
 
-.shadow-designer-view > .flow-pane > .right-box {
+.effect-designer-view > .flow-pane > .right-box {
+    -fx-alignment: top-left;
 }
 
-.shadow-designer-view > .flow-pane > .right-box.with-non-effect .menu-button {
+.effect-designer-view > .flow-pane > .right-box.with-non-effect {
+    -fx-alignment: center;
+}
+
+.effect-designer-view > .flow-pane > .right-box.with-non-effect .menu-button {
     -fx-pref-width: 200px;
     -fx-background-radius: 200px;
     -fx-font-size: 20px;
 }
 
-.shadow-designer-view > .flow-pane > .right-box.with-non-effect .menu-button .ikonli-font-icon {
+.effect-designer-view > .flow-pane > .right-box.with-non-effect .menu-button .ikonli-font-icon {
     -fx-icon-size: 30px;
+}
+
+.effect-designer-view .right-box .copy-effect-code-view {
+    -fx-spacing: 10px;
+}
+
+.effect-designer-view .copy-effect-code-view .fill-button {
+    -fx-background-radius: 2px;
+    -fx-padding: 2px 5px;
+    -fx-font-size: 14px;
+}
+
+.effect-designer-view .copy-effect-code-view .fill-button > .ikonli-font-icon {
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
 }
 
 
@@ -9508,16 +9531,16 @@
     -fx-spacing: 10px;
 }
 
-.shadow-designer-view:lg .effect-editor {
+.effect-designer-view:lg .effect-editor {
     -fx-pref-width: 420px;
     -fx-max-width: 420px;
 }
 
-.shadow-designer-view:sm .effect-editor .property-name-label {
+.effect-designer-view:sm .effect-editor .property-name-label {
     -fx-font-size: 12px;
 }
 
-.shadow-designer-view:sm .effect-editor .property-name-label .ikonli-font-icon {
+.effect-designer-view:sm .effect-editor .property-name-label .ikonli-font-icon {
     -fx-icon-size: 14px;
 }
 
@@ -9533,7 +9556,7 @@
     -fx-graphic-text-gap: 10px;
 }
 
-.effect-editor .top-box .title-label .ikonli-font-icon{
+.effect-editor .top-box .title-label .ikonli-font-icon {
     -fx-icon-size: 18px;
     -fx-icon-color: -white;
 }
@@ -9634,6 +9657,35 @@
     -fx-icon-color: -grey-60;
 }
 
+.effect-editor .light-pane-wrapper {
+    -fx-padding: 5px 0 0 0;
+}
+
+.effect-editor .light-pane {
+    -fx-vgap: 5px;
+}
+
+.effect-editor .light-pane .label {
+    -fx-text-alignment: center;
+    -fx-vgap: 5px;
+}
+
+.effect-editor .light-box .combo-box-base {
+    -fx-pref-width: 320px;
+}
+
+.effect-editor .light-box.distant .slider {
+    -fx-pref-width: 186px;
+}
+
+.effect-editor .light-box.point .slider {
+    -fx-pref-width: 236px;
+}
+
+.effect-editor .light-box.spot .slider {
+    -fx-pref-width: 185px;
+}
+
 /** ----------------------------------------------------------------------------
  * EffectFlowPane
  */
@@ -9670,4 +9722,20 @@
 
 .effect-flow-pane .menu-button .ikonli-font-icon {
     -fx-icon-size: 20px;
+}
+
+.effect-flow-pane .copy-effect-code-button .context-menu {
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(three-pass-box, #2659d9d9, 10.0, 0.0, 0.0, 0.0);
+}
+
+.effect-flow-pane .copy-effect-code-button .context-menu .menu-item {
+    -fx-border-width: 0;
+    -fx-padding: 0px;
+}
+
+.effect-flow-pane .copy-effect-code-button .context-menu .menu-item:hover,
+.effect-flow-pane .copy-effect-code-button .context-menu .menu-item:focused {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
 }
