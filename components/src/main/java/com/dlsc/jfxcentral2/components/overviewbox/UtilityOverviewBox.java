@@ -6,7 +6,7 @@ import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.utilities.cssplayground.CssPlaygroundView;
 import com.dlsc.jfxcentral2.utilities.paintpicker.GradientDesignerView;
 import com.dlsc.jfxcentral2.utilities.pathextractor.SVGPathExtractorView;
-import com.dlsc.jfxcentral2.utilities.shadowdesigner.ShadowDesignerView;
+import com.dlsc.jfxcentral2.utilities.effectdesigner.EffectDesignerView;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -65,13 +65,13 @@ public class UtilityOverviewBox extends OverviewBox<Utility> {
                 setIcon(Material2OutlinedAL.COLOR_LENS);
                 getStyleClass().add("gradient-designer-overview-box");
                 return new GradientDesignerView(sizeProperty());
-            } else if (StringUtils.equalsIgnoreCase(model.getId(), "shadowdesigner")){
-                setTitle("Shadow Designer");
+            } else if (StringUtils.equalsIgnoreCase(model.getId(), "effectdesigner")){
+                setTitle("Effect Designer");
                 setIcon(SimpleLineIcons.MAGIC_WAND);
-                getStyleClass().add("shadow-designer-overview-box");
-                ShadowDesignerView shadowDesignerView = new ShadowDesignerView();
-                shadowDesignerView.sizeProperty().bind(sizeProperty());
-                return shadowDesignerView;
+                getStyleClass().add("effect-designer-overview-box");
+                EffectDesignerView effectDesignerView = new EffectDesignerView();
+                effectDesignerView.sizeProperty().bind(sizeProperty());
+                return effectDesignerView;
             }
 
             return createComingSoonPane();

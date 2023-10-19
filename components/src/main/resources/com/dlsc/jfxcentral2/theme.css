@@ -9446,13 +9446,13 @@
 }
 
 /** ----------------------------------------------------------------------------
- * ShadowDesignerView
+ * EffectDesignerView
  */
-.shadow-designer-view {
+.effect-designer-view {
     -fx-min-height: 560px;
 }
 
-.shadow-designer-view .left-box .effect-preview-pane {
+.effect-designer-view .left-box .effect-preview-pane {
     -fx-pref-width: 200px;
     -fx-pref-height: 200px;
     -fx-background-color: -white;
@@ -9460,62 +9460,62 @@
     -fx-border-width: 1px;
 }
 
-.shadow-designer-view > .flow-pane {
+.effect-designer-view > .flow-pane {
     -fx-hgap: 60px;
     -fx-vgap: 30px;
 }
 
-.shadow-designer-view:md > .flow-pane {
+.effect-designer-view:md > .flow-pane {
     -fx-hgap: 120px;
 }
 
-.shadow-designer-view:sm-md > .flow-pane {
+.effect-designer-view:sm-md > .flow-pane {
     -fx-alignment: center;
 }
 
-.shadow-designer-view .left-box .effect-preview-pane .label {
+.effect-designer-view .left-box .effect-preview-pane .label {
     -fx-font-size: 25px;
     -fx-font-weight: bold;
     -fx-text-fill: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #fa00fc 0.0%, #03dbde 100.0%);
 }
 
-.shadow-designer-view > .flow-pane {
+.effect-designer-view > .flow-pane {
     /*-fx-border-color: #08e093;*/
 }
 
-.shadow-designer-view > .flow-pane > .left-box {
+.effect-designer-view > .flow-pane > .left-box {
     -fx-padding: 50px;
 }
 
-.shadow-designer-view > .flow-pane > .right-box {
+.effect-designer-view > .flow-pane > .right-box {
     -fx-alignment: top-left;
 }
 
-.shadow-designer-view > .flow-pane > .right-box.with-non-effect {
+.effect-designer-view > .flow-pane > .right-box.with-non-effect {
     -fx-alignment: center;
 }
 
-.shadow-designer-view > .flow-pane > .right-box.with-non-effect .menu-button {
+.effect-designer-view > .flow-pane > .right-box.with-non-effect .menu-button {
     -fx-pref-width: 200px;
     -fx-background-radius: 200px;
     -fx-font-size: 20px;
 }
 
-.shadow-designer-view > .flow-pane > .right-box.with-non-effect .menu-button .ikonli-font-icon {
+.effect-designer-view > .flow-pane > .right-box.with-non-effect .menu-button .ikonli-font-icon {
     -fx-icon-size: 30px;
 }
 
-.shadow-designer-view .right-box .copy-effect-code-view {
+.effect-designer-view .right-box .copy-effect-code-view {
     -fx-spacing: 10px;
 }
 
-.shadow-designer-view .copy-effect-code-view .fill-button {
+.effect-designer-view .copy-effect-code-view .fill-button {
     -fx-background-radius: 2px;
     -fx-padding: 2px 5px;
     -fx-font-size: 14px;
 }
 
-.shadow-designer-view .copy-effect-code-view .fill-button > .ikonli-font-icon {
+.effect-designer-view .copy-effect-code-view .fill-button > .ikonli-font-icon {
     -fx-scale-x: 0.8;
     -fx-scale-y: 0.8;
 }
@@ -9531,16 +9531,16 @@
     -fx-spacing: 10px;
 }
 
-.shadow-designer-view:lg .effect-editor {
+.effect-designer-view:lg .effect-editor {
     -fx-pref-width: 420px;
     -fx-max-width: 420px;
 }
 
-.shadow-designer-view:sm .effect-editor .property-name-label {
+.effect-designer-view:sm .effect-editor .property-name-label {
     -fx-font-size: 12px;
 }
 
-.shadow-designer-view:sm .effect-editor .property-name-label .ikonli-font-icon {
+.effect-designer-view:sm .effect-editor .property-name-label .ikonli-font-icon {
     -fx-icon-size: 14px;
 }
 
