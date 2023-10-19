@@ -1,7 +1,9 @@
 package com.dlsc.jfxcentral2.utils;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
+import javafx.util.Duration;
 
 public class JFXCentralUtil {
     private JFXCentralUtil() {
@@ -37,6 +39,16 @@ public class JFXCentralUtil {
             return;
         }
         runInFXThread(runnableProperty.get());
+    }
+
+    public static void runInFXThread(Runnable runnable, long delayMillis) {
+        PauseTransition pauseTransition = new PauseTransition(Duration.millis(delayMillis));
+        pauseTransition.setOnFinished(event -> {
+            if (runnable != null) {
+                runnable.run();
+            }
+        });
+        pauseTransition.play();
     }
 
 }
