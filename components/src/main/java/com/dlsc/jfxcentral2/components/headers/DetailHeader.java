@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral2.components.SocialLinksView;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
@@ -67,7 +68,7 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
         MenuButton menuButton = new MenuButton("SHARE", new FontIcon(JFXCentralIcon.SHARE));
         menuButton.setFocusTraversable(false);
         menuButton.getStyleClass().add("share-button");
-        if (!WebAPI.isBrowser()) {
+        if (!WebAPI.isBrowser() && !OSUtil.isNative()) {
             menuButton.getStyleClass().add("standalone");
         }
         menuButton.getItems().addAll(customMenuItem);

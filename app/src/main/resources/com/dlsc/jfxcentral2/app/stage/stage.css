@@ -7,6 +7,10 @@
     -fx-padding: 2 4 4 4;
 }
 
+.custom-stage.native {
+    -fx-padding: 0;
+}
+
 .custom-stage:web {
     -fx-padding: 0 0 0 0;
     -fx-background-insets: 0;
@@ -20,6 +24,17 @@
     -fx-padding: 5 10 5 10;
     -fx-spacing: 10;
     -fx-alignment: center-left;
+}
+
+.custom-stage .title-bar.native {
+    -fx-border-color: white;
+    -fx-border-width: 1px 0px 0px 0px;
+}
+
+.custom-stage .title-bar.native > .navigation-view {
+    -fx-alignment: center;
+    -fx-padding: 15px;
+    -fx-spacing: 50px;
 }
 
 .custom-stage .title-bar .title {
@@ -40,6 +55,11 @@
 .custom-stage .title-bar .toggle-button .ikonli-font-icon {
     -fx-icon-color: -white;
     -fx-icon-size: 20px;
+}
+
+.custom-stage .title-bar.native .button .ikonli-font-icon,
+.custom-stage .title-bar.native .toggle-button .ikonli-font-icon {
+    -fx-icon-size: 32px;
 }
 
 .custom-stage .title-bar .button:hover .ikonli-font-icon,

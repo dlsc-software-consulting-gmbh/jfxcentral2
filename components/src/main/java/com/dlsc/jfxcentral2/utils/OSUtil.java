@@ -1,8 +1,10 @@
 package com.dlsc.jfxcentral2.utils;
 
+import one.jpro.platform.internal.openlink.util.PlatformUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class OSUtil {
+
     public enum Desktop {
         WINDOWS,
         MAC,
@@ -52,4 +54,10 @@ public class OSUtil {
         return getDesktop() == Desktop.UNKNOWN;
     }
 
+    public static boolean isNative() {
+        if (Boolean.getBoolean("native")) {
+            return true;
+        }
+        return PlatformUtils.isIOS() || PlatformUtils.isAndroid();
+    }
 }

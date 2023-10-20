@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Post;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import com.rometools.rome.feed.synd.SyndEntry;
@@ -100,7 +101,7 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
                 HBox.setHgrow(titleLabel, Priority.ALWAYS);
             }
 
-            LinkUtil.setExternalLink(postView, post.getSyndEntry().getLink());
+            ExternalLinkUtil.setExternalLink(postView, post.getSyndEntry().getLink());
         }
 
         private Node build() {

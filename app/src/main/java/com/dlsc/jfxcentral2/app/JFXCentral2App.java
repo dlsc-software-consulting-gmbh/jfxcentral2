@@ -57,14 +57,23 @@ import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.app.utils.LoggerOutputStream;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
+import com.dlsc.jfxcentral2.components.Mode;
+import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
+import com.dlsc.jfxcentral2.utils.WebAPIUtil;
+import com.gluonhq.attach.statusbar.StatusBarService;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -88,6 +97,7 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Stack;
 import java.util.function.Supplier;
 
 public class JFXCentral2App extends Application {
@@ -105,20 +115,25 @@ public class JFXCentral2App extends Application {
 
     @Override
     public void start(Stage stage) {
-        // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
-        BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-        bi.createGraphics();
+        if (!OSUtil.isNative()) {
+            // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
+            BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+            bi.createGraphics();
+        }
 
         if (!WebAPI.isBrowser()) {
-            System.setProperty("prism.lcdtext", "false");
             System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
 
-            if (Taskbar.isTaskbarSupported()) {
-                Taskbar taskbar = Taskbar.getTaskbar();
-                if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
-                    Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
-                    Image dockIcon = defaultToolkit.getImage(JFXCentral2App.class.getResource("app-icon.png"));
-                    taskbar.setIconImage(dockIcon);
+            if (!OSUtil.isNative()) {
+                System.setProperty("prism.lcdtext", "false");
+
+                if (Taskbar.isTaskbarSupported()) {
+                    Taskbar taskbar = Taskbar.getTaskbar();
+                    if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
+                        Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+                        Image dockIcon = defaultToolkit.getImage(JFXCentral2App.class.getResource("app-icon.png"));
+                        taskbar.setIconImage(dockIcon);
+                    }
                 }
             }
         }
@@ -138,7 +153,7 @@ public class JFXCentral2App extends Application {
         routeNode.start(sessionManager);
 
         // tray icon
-        if (!WebAPI.isBrowser() && SystemTray.isSupported()) {
+        if (!WebAPI.isBrowser() && !OSUtil.isNative() && SystemTray.isSupported()) {
             RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
                 if (trayIconManager == null) {
                     trayIconManager = new TrayIconManager(stage, sessionManager);
@@ -148,21 +163,33 @@ public class JFXCentral2App extends Application {
             });
         }
 
+        Parent parent = routeNode;
+
+        if (OSUtil.isNative()) {
+            StackPane notchPane = new StackPane();
+            notchPane.getStyleClass().add("notch-pane");
+            VBox.setVgrow(routeNode, Priority.ALWAYS);
+            parent = new VBox(notchPane, routeNode);
+        }
+
+
         // customs stage for decorations / the chrome
-        CustomStage customStage = new CustomStage(stage, routeNode, sessionManager);
+        CustomStage customStage = new CustomStage(stage, parent, sessionManager, size);
         customStage.setCloseHandler(() -> {
-            if (SystemTray.isSupported()) {
-                trayIconManager.hide();
+            if (!OSUtil.isNative()) {
+                if (SystemTray.isSupported()) {
+                    trayIconManager.hide();
+                }
             }
             stage.close();
         });
 
         // scene
         Scene scene = new Scene(customStage, 1400, 800);
-        scene.setFill(Color.web("070B32"));
+        scene.setFill(Color.web("#070B32"));
         scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
         scene.getStylesheets().add(Objects.requireNonNull(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css")).toExternalForm());
-
+        scene.focusOwnerProperty().addListener(it -> System.out.println("focus owner: " + scene.getFocusOwner()));
         updateSizeProperty(scene);
 
         stage.setScene(scene);
@@ -261,6 +288,7 @@ public class JFXCentral2App extends Application {
 
     private void updateSizeProperty(Scene scene) {
         double sceneWidth = scene.getWidth();
+        System.out.println("scene width: " + sceneWidth);
         if (sceneWidth < 865) {
             size.set(Size.SMALL);
         } else if (sceneWidth <= 1320) {
@@ -272,8 +300,10 @@ public class JFXCentral2App extends Application {
 
     public static void main(String[] args) {
         Logger logger = LogManager.getLogger();
-        System.setOut(new PrintStream(new LoggerOutputStream(logger, Level.INFO), true));
-        System.setErr(new PrintStream(new LoggerOutputStream(logger, Level.ERROR), true));
+        if (!OSUtil.isNative()) {
+            System.setOut(new PrintStream(new LoggerOutputStream(logger, Level.INFO), true));
+            System.setErr(new PrintStream(new LoggerOutputStream(logger, Level.ERROR), true));
+        }
         launch(args);
     }
 }

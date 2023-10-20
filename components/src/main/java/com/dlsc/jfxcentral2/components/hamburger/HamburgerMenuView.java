@@ -16,6 +16,7 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -101,7 +102,11 @@ public class HamburgerMenuView extends PaneBase {
 
         setMaxHeight(Region.USE_PREF_SIZE);
 
-        getMenus().addAll(resourcesMenu, communityMenu, showcases,utilities, documentation);
+        getMenus().addAll(resourcesMenu, communityMenu, showcases);
+        if (!OSUtil.isNative()) {
+            getMenus().add(utilities);
+        }
+        getMenus().add(documentation);
         if (!mobile) {
             getMenus().add(downloads);
         }

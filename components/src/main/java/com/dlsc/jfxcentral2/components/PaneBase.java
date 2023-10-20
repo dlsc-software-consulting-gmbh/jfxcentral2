@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.model.Target;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.css.PseudoClass;
@@ -25,8 +26,10 @@ public class PaneBase extends StackPane {
     private static final PseudoClass DESKTOP_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("desktop");
     private static final PseudoClass BROWSER_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("browser");
     private static final PseudoClass MOBILE_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("mobile");
+
     private Size oldSize;
     private Size newSize;
+
     public PaneBase() {
         // target styling
         activateTargetPseudoClass();
@@ -41,6 +44,10 @@ public class PaneBase extends StackPane {
             activateSizePseudoClass();
             layoutBySize();
         });
+
+        if (OSUtil.isNative()) {
+            getStyleClass().add("native");
+        }
     }
 
     public Size getOldSize() {

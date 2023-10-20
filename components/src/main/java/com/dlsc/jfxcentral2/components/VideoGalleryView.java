@@ -2,7 +2,10 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.tiles.VideoGalleryTileView;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
+import com.gluonhq.attach.browser.BrowserService;
+import com.gluonhq.attach.video.VideoService;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -15,6 +18,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.LinkUtil;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class VideoGalleryView extends PaneBase {
 
@@ -80,10 +86,20 @@ public class VideoGalleryView extends PaneBase {
                 videoTileView.sizeProperty().bind(pagination.sizeProperty());
                 //Play button action
                 videoTileView.getButton1().setOnAction(evt -> {
-                    if (centerPlayBox.getChildren().size() > 1) {
-                        centerPlayBox.getChildren().remove(1);
+                    if (OSUtil.isNative()) {
+                        BrowserService.create().ifPresent(service -> {
+                            try {
+                                service.launchExternalBrowser("https://www.youtube.com/watch?v=" + video.getId());
+                            } catch (IOException | URISyntaxException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    } else {
+                        if (centerPlayBox.getChildren().size() > 1) {
+                            centerPlayBox.getChildren().remove(1);
+                        }
+                        centerPlayBox.getChildren().add(VideoViewFactory.createVideoViewNode(video, true));
                     }
-                    centerPlayBox.getChildren().add(VideoViewFactory.createVideoViewNode(video, true));
                 });
 
                 videosBox.getChildren().add(videoTileView);

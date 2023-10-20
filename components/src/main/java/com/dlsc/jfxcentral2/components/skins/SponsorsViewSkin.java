@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.skins;
 
 import com.dlsc.jfxcentral2.components.SponsorsView;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -80,7 +81,7 @@ public class SponsorsViewSkin extends ControlBaseSkin<SponsorsView> {
             logo.fitHeightProperty().bind(control.logoFitHeightProperty());
             logo.fitWidthProperty().bind(control.logoFitWidthProperty());
             logo.getStyleClass().addAll("logo", "logo-" + sponsor.name().toLowerCase(), "logo-" + i);
-            LinkUtil.setExternalLink(logo, sponsor.url());
+            ExternalLinkUtil.setExternalLink(logo, sponsor.url());
             nodes.add(logo);
         }
         gridPane.getChildren().clear();

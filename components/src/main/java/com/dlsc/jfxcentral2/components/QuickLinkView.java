@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.components.skins.QuickLinkViewSkin;
 import com.dlsc.jfxcentral2.model.QuickLink;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Skin;
@@ -17,7 +18,7 @@ public class QuickLinkView extends ControlBase {
         if (quickLink != null && StringUtils.isNotBlank(quickLink.getLinkUrl())) {
             String linkUrl = quickLink.getLinkUrl();
             if (linkUrl.startsWith("http://") || linkUrl.startsWith("https://")) {
-                LinkUtil.setExternalLink(this, linkUrl);
+                ExternalLinkUtil.setExternalLink(this, linkUrl);
             } else {
                 LinkUtil.setLink(this, linkUrl);
             }

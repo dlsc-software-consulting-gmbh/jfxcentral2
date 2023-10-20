@@ -219,9 +219,11 @@ public class SVGPathExtractorView extends PaneBase {
         for (int i = 0; i < MAX_RECENT_SVG; i++) {
             RecentImageView imageView = new RecentImageView();
             imageView.setOnMouseClicked(event -> {
-                if (!imageResultProperty.get().equals(imageView.getImageResult())) {
-                    if (imageView.getImageResult().file().exists()) {
-                        svgFileProperty.set(imageView.getImageResult().file());
+                if (event.isStillSincePress()) {
+                    if (!imageResultProperty.get().equals(imageView.getImageResult())) {
+                        if (imageView.getImageResult().file().exists()) {
+                            svgFileProperty.set(imageView.getImageResult().file());
+                        }
                     }
                 }
             });

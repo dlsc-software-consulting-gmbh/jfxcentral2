@@ -97,7 +97,11 @@ public class FileHandlerView extends StackPane {
             }
         });
 
-        setOnMouseClicked(event -> handleMouseClicked(multipleFiles, fileChooser));
+        setOnMouseClicked(event -> {
+            if (event.isStillSincePress()) {
+                handleMouseClicked(multipleFiles, fileChooser);
+            }
+        });
         setOnDragOver(this::handleDragOver);
         setOnDragDropped(this::handleDragDropped);
         setOnDragEntered(this::handleDragEntered);

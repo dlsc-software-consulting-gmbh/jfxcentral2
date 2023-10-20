@@ -9,12 +9,14 @@ import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.TopPane;
 import com.dlsc.jfxcentral2.components.hamburger.HamburgerMenuView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -54,8 +56,9 @@ public abstract class PageBase extends View {
         sizeProperty().addListener(it -> updateStyleClassBasedOnSize(vbox));
 
         // menubar
-        TopMenuBar topMenuBar = new TopMenuBar(this);
+        TopMenuBar topMenuBar = new TopMenuBar(isMobile());
         topMenuBar.sizeProperty().bind(sizeProperty());
+        topMenuBar.setSessionManager(getSessionManager());
         topMenuBar.setMode(menuMode);
         topMenuBar.showHamburgerMenuProperty().bindBidirectional(showHamburgerMenuProperty());
 
@@ -102,7 +105,11 @@ public abstract class PageBase extends View {
         StackPane glassPane = new StackPane();
         glassPane.getStyleClass().add("page-glass-pane");
         glassPane.visibleProperty().bind(topMenuBar.usedProperty().or(blockingProperty()));
-        glassPane.setOnMouseClicked(evt -> setShowHamburgerMenu(false));
+        glassPane.setOnMouseClicked(evt -> {
+            if (evt.isStillSincePress()) {
+                setShowHamburgerMenu(false);
+            }
+        });
 
         if (menuMode.equals(Mode.LIGHT)) {
             // make sure the JFX logo can be fully seen (without this call it gets clipped)
@@ -125,6 +132,9 @@ public abstract class PageBase extends View {
         } else {
             root.getStyleClass().add("normal-page");
         }
+
+        root.addEventFilter(SwipeEvent.SWIPE_LEFT, evt -> getSessionManager().goForward());
+        root.addEventFilter(SwipeEvent.SWIPE_RIGHT, evt -> getSessionManager().goBack());
 
         return root;
     }

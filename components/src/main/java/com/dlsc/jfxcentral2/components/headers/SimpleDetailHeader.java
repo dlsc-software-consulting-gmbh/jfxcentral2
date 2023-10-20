@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
@@ -112,13 +113,13 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
         String website = getWebsite();
         if (StringUtils.isNotBlank(website)) {
-            LinkUtil.setExternalLink(websiteButton, website);
+            ExternalLinkUtil.setExternalLink(websiteButton, website);
         }
 
         websiteProperty().addListener(it -> {
             String url = getWebsite();
             if (StringUtils.isNotBlank(url)) {
-                LinkUtil.setExternalLink(websiteButton, url);
+                ExternalLinkUtil.setExternalLink(websiteButton, url);
             }
         });
 

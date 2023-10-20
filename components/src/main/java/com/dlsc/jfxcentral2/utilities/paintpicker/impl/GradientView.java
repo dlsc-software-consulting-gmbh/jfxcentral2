@@ -73,7 +73,11 @@ public class GradientView extends VBox {
             rectangle.getStyleClass().add("color-rect");
             rectangle.managedProperty().bind(rectangle.visibleProperty());
             rectangle.fillProperty().bind(paintPicker.paintProperty().map(paint -> paint instanceof LinearGradient ? linearGradient.linearGradient() : linearGradient.radialGradient()));
-            rectangle.setOnMouseClicked(event -> paintPicker.setPaintProperty(rectangle.getFill()));
+            rectangle.setOnMouseClicked(event -> {
+                if (event.isStillSincePress()) {
+                    paintPicker.setPaintProperty(rectangle.getFill());
+                }
+            });
             flowPane.getChildren().add(rectangle);
         }
 
