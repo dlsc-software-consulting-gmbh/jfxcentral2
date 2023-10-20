@@ -64,6 +64,7 @@ import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import com.dlsc.jfxcentral2.utils.WebAPIUtil;
+import com.gluonhq.attach.display.DisplayService;
 import com.gluonhq.attach.statusbar.StatusBarService;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
@@ -170,6 +171,11 @@ public class JFXCentral2App extends Application {
             notchPane.getStyleClass().add("notch-pane");
             VBox.setVgrow(routeNode, Priority.ALWAYS);
             parent = new VBox(notchPane, routeNode);
+
+            DisplayService.create().ifPresent(service -> {
+                notchPane.setVisible(service.hasNotch());
+                notchPane.setManaged(service.hasNotch());
+            });
         }
 
 
