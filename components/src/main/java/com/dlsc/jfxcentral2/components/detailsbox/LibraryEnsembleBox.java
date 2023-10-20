@@ -4,12 +4,13 @@ import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.PaneBase;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.net.URLEncoder;
@@ -36,8 +37,8 @@ public class LibraryEnsembleBox extends PaneBase {
 
         String url = "https://www.jfx-ensemble.com/?page=project/" + URLEncoder.encode(library.getName(), StandardCharsets.UTF_8);
         markdownView.setMdString("Online demos are available for this library on the JFX-Ensemble website. These demos can be [run in the browser](" + url + ") via JPro (free for open source projects).");
-        LinkUtil.setExternalLink(markdownView, url, library.getName());
-        LinkUtil.setExternalLink(imageView, url, library.getName());
+        ExternalLinkUtil.setExternalLink(markdownView, url, library.getName());
+        ExternalLinkUtil.setExternalLink(imageView, url, library.getName());
 
         HBox bodyBox = new HBox(imageView, markdownView);
         bodyBox.getStyleClass().add("body-box");

@@ -29,4 +29,4 @@ Most browsers allow you to refuse to accept cookies and to delete cookies. The m
 Blocking all cookies will have a negative impact upon the usability of many websites. If you block cookies, you will not be able to use all the features on our website.
 
 ##	Our details
-This website is owned and operated by **DLSC Software & Consulting GmbH**. We are registered in Switzerland under registration number **CHE-236.427.986**, and our registered office is at Asylweg 28, 8134 Adliswil, Switzerland.
+This website is owned and operated by **DLSC Software & Consulting GmbH**. We are registered in Switzerland under registration number **CHE-236.427.986**, and our registered office is at Albisstrasse 3, 8134 Adliswil, Switzerland.

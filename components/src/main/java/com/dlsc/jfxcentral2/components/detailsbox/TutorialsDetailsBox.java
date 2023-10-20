@@ -1,13 +1,14 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.util.Callback;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class TutorialsDetailsBox extends DetailsBoxBase<Tutorial> {
     protected List<Node> createActionButtons(Tutorial tutorial) {
         Button visitBlogButton = new Button("VISIT TUTORIAL", new FontIcon(IkonUtil.link));
         visitBlogButton.setFocusTraversable(false);
-        LinkUtil.setExternalLink(visitBlogButton, getVisitUrlProvider().call(tutorial));
+        ExternalLinkUtil.setExternalLink(visitBlogButton, getVisitUrlProvider().call(tutorial));
         return List.of(createDetailsButton(tutorial), visitBlogButton);
     }
 

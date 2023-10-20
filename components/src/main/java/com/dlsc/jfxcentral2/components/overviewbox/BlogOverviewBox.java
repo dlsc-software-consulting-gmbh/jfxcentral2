@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Post;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import com.rometools.rome.feed.synd.SyndEntry;
@@ -19,7 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.antdesignicons.AntDesignIconsOutlined;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -100,7 +101,7 @@ public class BlogOverviewBox extends OverviewBox<Blog> {
                 HBox.setHgrow(titleLabel, Priority.ALWAYS);
             }
 
-            LinkUtil.setExternalLink(postView, post.getSyndEntry().getLink());
+            ExternalLinkUtil.setExternalLink(postView, post.getSyndEntry().getLink());
         }
 
         private Node build() {

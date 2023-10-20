@@ -1,0 +1,315 @@
+/*
+ * Copyright (c) 2012, 2014, Oracle and/or its affiliates.
+ * All rights reserved. Use is subject to license terms.
+ *
+ * This file is available and licensed under the following license:
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *  - Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *  - Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the distribution.
+ *  - Neither the name of Oracle Corporation nor the names of its
+ *    contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+.icon-btn SVGPath {
+    -fx-fill: #6E6E6E;
+}
+
+.icon-btn-blue SVGPath {
+    -fx-fill: #3c72d2;
+}
+
+.icon-btn:pressed SVGPath, .icon-btn-blue:pressed SVGPath {
+    -fx-fill: #64a9cc;
+}
+
+.paint-root-pane {
+    -fx-font-family: "Source Han Sans CN";
+}
+
+.text-field {
+    -fx-font-size: 10px;
+}
+
+.region-btn {
+    -fx-background-color: #E8E8E8;
+}
+
+.region-btn Region {
+    -fx-pref-width: 13px;
+    -fx-pref-height: 13px;
+    -fx-background-color: black;
+}
+
+.region-btn:hover {
+    -fx-background-color: #c7c7c7;
+}
+
+.region-btn:pressed {
+    -fx-background-color: #888888;
+    -fx-text-fill: white;
+}
+
+.region-btn:pressed Region {
+    -fx-background-color: white;
+}
+
+.picker-content {
+    -fx-cursor: default;
+}
+
+.small-label {
+    -fx-font-size: 0.750em;
+    -fx-padding: 0;
+}
+
+.chip-background {
+    -fx-border-color: -fx-box-border, white;
+    -fx-border-insets: 0, 1;
+    -fx-background-color: white;
+    -fx-background-image: url("chequers.png");
+    -fx-background-position: center;
+}
+
+.hue-slider {
+    -fx-background-insets: 0 4 0 4;
+    -fx-background-radius: 0;
+}
+
+.theme-presets .property-sheet .slider > .track {
+    -fx-background-color: transparent;
+    -fx-fill: linear-gradient(from 0% 0% to 100% 100%, #FFF720 10%, #3CD500 100%);
+}
+
+/* opacity slider background is applied to a region behind the slider itself */
+.opacity-slider-background {
+    -fx-background-image: url("chequers.png");
+    -fx-background-position: left center;
+    -fx-background-radius: 0;
+}
+
+.brightnessRect {
+    -fx-background-color: linear-gradient(to bottom, transparent, black);
+}
+
+.saturationRect {
+    -fx-background-color: linear-gradient(to bottom right, white, transparent);
+}
+
+.opacity-slider .track,
+.hue-slider .track {
+    -fx-background-color: #00000000;
+}
+
+/*.slider .track{*/
+/*    -fx-background-color: #00000000;*/
+/*}*/
+
+.small-label {
+    -fx-font-size: 0.750em;
+    -fx-text-fill: derive(rgb(147, 147, 147), 25%);
+    -fx-padding: 0;
+}
+
+.gradient-background {
+    -fx-border-color: -fx-box-border, white;
+    -fx-border-insets: 0, 1;
+    -fx-background-color: white;
+    -fx-background-image: url("chequers.png");
+    -fx-background-position: center;
+}
+
+.track-background {
+    -fx-background-color: derive(derive(rgb(147, 147, 147), -32%), -3%), derive(rgb(147, 147, 147), -32%);
+    -fx-background-insets: 0, 1;
+}
+
+/*.slider .track {*/
+/*    -fx-background-color: null;*/
+/*}*/
+
+
+.gradient-stop-thumb {
+    /*-fx-padding: 0.25em 0.25em 0.25em 0.25em;*/
+    -fx-padding: 0;
+    -fx-background-radius: 0;
+    -fx-min-width: 18px;
+    -fx-max-width: 18px;
+    -fx-max-height: 18px;
+    -fx-min-height: 18px;
+}
+
+.gradient-stop-chip {
+    -fx-stroke: -fx-outer-border;
+}
+
+.info-root-pane .button {
+    -fx-min-width: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+    -fx-min-height: 30px;
+}
+
+.rotation-dial {
+    -fx-background-radius: 50px;
+    -fx-pref-width: 25px;
+    -fx-pref-height: 25px;
+    -fx-min-width: 25px;
+    -fx-min-height: 25px;
+}
+
+.rotation-handle {
+    -fx-background-color: null;
+    -fx-background-image: url("rotate-handle.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+}
+
+
+.paint-picker .toggle-button {
+    -fx-background-radius: 0;
+    -fx-background-color: #E8E8E8;
+    -fx-background-insets: 0px;
+    -fx-cursor: hand;
+    -fx-padding: 5px 8.5px;
+}
+
+.paint-picker .toggle-button:selected {
+    -fx-background-color: -bright-blue;
+    -fx-text-fill: -white;
+}
+
+.paint-picker .toggle-button:selected .ikonli-font-icon {
+    -fx-icon-color: -white;
+}
+
+.paint-picker .toggle-button.center-pill {
+    -fx-border-width: 0 2px;
+    -fx-border-color: transparent -white;
+}
+
+.paint-picker {
+    -fx-border-color: -grey-10;
+    -fx-padding: 0px;
+}
+
+.paint-picker .fill-button {
+    -bg: -blue;
+    -fill: -white;
+    -fx-padding: 0px;
+    -fx-background-radius: 0;
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
+}
+
+.paint-picker .text-field {
+    -fx-background-radius: 0;
+    -fx-text-fill: -grey-100;
+    -fx-font-size: 12px;
+    -fx-focus-color: -grey-30;
+    -fx-faint-focus-color: transparent;
+}
+
+.paint-picker .combo-box-base {
+    -fx-font-size: 16px;
+    -fx-background-color: -white;
+    -fx-padding: 6px 10px;
+    -fx-background-radius: 2px;
+}
+
+.paint-picker .combo-box .combo-box-popup .list-view {
+    -fx-font-size: 15px;
+    -fx-padding: 5px;
+    -fx-background-radius: 2px;
+}
+
+.paint-picker .combo-box .combo-box-popup .list-view .list-cell {
+    -fx-cell-size: 30px;
+}
+
+.paint-picker .slider .track {
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+}
+
+.paint-picker .slider .track {
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+}
+
+.paint-picker .track-pane {
+    -fx-background-color: rgba(234, 234, 234, 0.58);
+}
+
+.paint-picker .stop-label {
+    -fx-text-fill: -white;
+}
+
+.paint-picker .gradient-picker .slider .track {
+    -fx-background-color: -grey-10;
+    -fx-padding: 2.5px;
+}
+
+.gradient-picker .gradient-gridpane .slider .thumb {
+    -fx-background-color: -bright-blue;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 3px, 2px;
+    -fx-shape: "M100 10 L190 190 L10 190 Z";
+    -fx-padding: 7px;
+    -fx-rotate: -180;
+}
+
+.paint-picker * {
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: -grey-30;
+}
+
+.paint-picker .preview-rect {
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0px;
+}
+
+.gradient-picker .gradient-gridpane .slider.center-y-slider .thumb,
+.gradient-picker .gradient-gridpane .slider.start-y-slider .thumb {
+    -fx-rotate: 270;
+}
+
+.gradient-picker .gradient-gridpane .slider.end-y-slider .thumb {
+    -fx-rotate: 90;
+}
+
+.gradient-picker .gradient-gridpane .slider.end-x-slider .thumb {
+    -fx-rotate: 0;
+}
+
+.gradient-picker .gradient-gridpane .slider .filled {
+    -fx-background-color: derive(-fx-accent, -26.4%);
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 2px, 1px;
+}
+
+.paint-picker.only-color-mode .mode-buttons-box {
+    visibility: hidden;
+}
+
+.paint-picker.only-color-mode .info-root-pane {
+    visibility: hidden;
+}

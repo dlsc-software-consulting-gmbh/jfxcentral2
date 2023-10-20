@@ -2,9 +2,10 @@ package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.components.IconPreviewPane;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.Node;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class IkonliPackTileView extends TileView<IkonliPack> {
@@ -22,7 +23,7 @@ public class IkonliPackTileView extends TileView<IkonliPack> {
         // button 2
         setButton2Text("GitHub");
         setButton2Graphic(new FontIcon(IkonUtil.github));
-        LinkUtil.setExternalLink(getButton2(), pack.getUrl());
+        ExternalLinkUtil.setExternalLink(getButton2(), pack.getUrl());
     }
 
     @Override

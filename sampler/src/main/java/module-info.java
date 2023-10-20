@@ -15,7 +15,7 @@ open module com.dlsc.jfxcentral.sampler {
     requires org.apache.commons.lang3;
 
     requires com.dlsc.jfxcentral2.components;
-    requires com.sandec.mdfx;
+    requires one.jpro.platform.mdfx;
     requires com.dlsc.jfxcentral2.iconfont;
 
     provides fxsampler.FXSamplerProject with JFXCentralSamplerProject;
@@ -83,7 +83,7 @@ open module com.dlsc.jfxcentral.sampler {
     requires org.kordamp.ikonli.whhg;
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
-    requires one.jpro.routing.core;
+    requires one.jpro.platform.routing.core;
     // ikonli icon packs END
 
     uses org.kordamp.ikonli.IkonProvider;

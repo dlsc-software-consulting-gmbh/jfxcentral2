@@ -4,13 +4,14 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.PaneBase;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
@@ -83,7 +84,7 @@ public class SinglePullRequestView extends PaneBase {
         sizeProperty().addListener(it -> layoutBySize());
         layoutBySize();
 
-        LinkUtil.setExternalLink(this, pr.getHtmlUrl());
+        ExternalLinkUtil.setExternalLink(this, pr.getHtmlUrl());
     }
 
     @Override

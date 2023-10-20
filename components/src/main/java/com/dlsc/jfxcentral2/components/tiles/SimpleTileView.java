@@ -13,6 +13,7 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
@@ -25,7 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.Ikon;
@@ -114,12 +115,11 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
     private void setLinkForItem(Node target, ModelObject item) {
         if (item instanceof Documentation doc) {
             //The document link is external, and there's no detailed page.
-            LinkUtil.setExternalLink(target, doc.getUrl());
+            ExternalLinkUtil.setExternalLink(target, doc.getUrl());
         } else {
             LinkUtil.setLink(target, PageUtil.getLink(item));
         }
     }
-
 
     public Button getDetailButton() {
         return detailButton;
@@ -198,4 +198,9 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
 
     public record LinkedObjectBadge(String name, Ikon ikon, int count) {
     }
+
+    protected HBox getLinkedObjectBox() {
+        return linkedObjectBox;
+    }
+
 }

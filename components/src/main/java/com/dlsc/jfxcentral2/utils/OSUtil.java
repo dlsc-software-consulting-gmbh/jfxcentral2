@@ -1,8 +1,10 @@
-package com.dlsc.jfxcentral2.app.utils;
+package com.dlsc.jfxcentral2.utils;
 
-import org.eclipse.jgit.util.StringUtils;
+import one.jpro.platform.internal.openlink.util.PlatformUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class OSUtil {
+
     public enum Desktop {
         WINDOWS,
         MAC,
@@ -16,7 +18,7 @@ public class OSUtil {
         if (desktop == null) {
             String osName = System.getProperty("os.name");
 
-            if (StringUtils.isEmptyOrNull(osName)) {
+            if (StringUtils.isEmpty(osName)) {
                 desktop = Desktop.UNKNOWN;
             } else {
                 String lowerCaseOSName = osName.toLowerCase();
@@ -52,4 +54,10 @@ public class OSUtil {
         return getDesktop() == Desktop.UNKNOWN;
     }
 
+    public static boolean isNative() {
+        if (Boolean.getBoolean("native")) {
+            return true;
+        }
+        return PlatformUtils.isIOS() || PlatformUtils.isAndroid();
+    }
 }

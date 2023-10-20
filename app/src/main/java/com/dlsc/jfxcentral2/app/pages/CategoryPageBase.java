@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -49,7 +50,9 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         ModelGridView<T> gridView = createGridView();
         gridView.sizeProperty().bind(sizeProperty());
         gridView.setTileViewProvider(getTileViewProvider());
-        gridView.setDetailNodeProvider(getDetailNodeProvider());
+        if (!OSUtil.isNative()) {
+            gridView.setDetailNodeProvider(getDetailNodeProvider());
+        }
         gridView.setColumns(getNumberOfGridViewColumns());
         gridView.setRows(getNumberOfGridViewRows());
         gridView.setItems(sortedList);

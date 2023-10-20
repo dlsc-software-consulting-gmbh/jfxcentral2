@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -9,12 +10,13 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class CustomMarkdownView extends com.sandec.mdfx.MarkdownView {
+public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
 
     public CustomMarkdownView() {
         getStyleClass().add("custom-markdown-view");
@@ -56,8 +58,8 @@ public class CustomMarkdownView extends com.sandec.mdfx.MarkdownView {
 
     @Override
     public void setLink(Node node, String link, String description) {
-        if(link != null && link != "") {
-            LinkUtil.setExternalLink(node, link, description);
+        if (StringUtils.isNotBlank(link)) {
+            ExternalLinkUtil.setExternalLink(node, link, description);
         }
     }
 

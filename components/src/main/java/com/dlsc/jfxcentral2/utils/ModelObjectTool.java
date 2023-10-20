@@ -1,9 +1,23 @@
 package com.dlsc.jfxcentral2.utils;
 
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.*;
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.DevelopmentStatus;
+import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.News;
+import com.dlsc.jfxcentral.data.model.Utility;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
-import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
@@ -15,7 +29,6 @@ public class ModelObjectTool {
 
     private ModelObjectTool() {
     }
-
 
     public static File getModelPreviewFile(ModelObject modelObject, boolean largerImageFirst) {
         if (modelObject instanceof Tool tool) {
@@ -96,6 +109,8 @@ public class ModelObjectTool {
             return "/news/" + news.getId();
         } else if (modelObject instanceof IkonliPack pack) {
             return "/icons/" + pack.getId();
+        } else if (modelObject instanceof Utility utility) {
+            return "/utilities/" + utility.getId();
         }
 
         return "";
@@ -134,14 +149,23 @@ public class ModelObjectTool {
             return "Apps";
         } else if (clazz == News.class) {
             return "News";
+        } else if (clazz == Utility.class) {
+            return "Utilities";
         }
 
         return "ModelObject";
     }
 
-
     public static String getModelName(ModelObject modelObject) {
         return getModelName(modelObject.getClass());
+    }
+
+    public static boolean isUtilityCanBeUsed(Utility utility) {
+        if (utility == null) {
+            return false;
+        }
+        DevelopmentStatus status = utility.getStatus();
+        return status == DevelopmentStatus.BETA || status == DevelopmentStatus.COMPLETED;
     }
 
 }

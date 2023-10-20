@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.app.utils;
 
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -118,12 +119,20 @@ public class PrettyScrollPane extends ScrollPane {
         vBar.setManaged(false);
         vBar.setOrientation(Orientation.VERTICAL);
         vBar.getStyleClass().addAll("my-scroll-bar", "vertical-scroll-bar");
-        vBar.visibleProperty().bind(hoverProperty());
+        if (OSUtil.isNative()) {
+            vBar.setVisible(false);
+        } else {
+            vBar.visibleProperty().bind(hoverProperty());
+        }
 
         hBar.setManaged(false);
         hBar.setOrientation(Orientation.HORIZONTAL);
         hBar.getStyleClass().addAll("my-scroll-bar", "horizontal-scroll-bar");
-        hBar.visibleProperty().bind(hBar.visibleAmountProperty().lessThan(1).or(alwaysShowHorizontalScrollBar));
+        if (OSUtil.isNative()) {
+            hBar.setVisible(false);
+        } else {
+            hBar.visibleProperty().bind(hBar.visibleAmountProperty().lessThan(1).or(alwaysShowHorizontalScrollBar));
+        }
 
         shadow.setManaged(false);
         shadow.getStyleClass().add("shadow");

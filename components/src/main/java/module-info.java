@@ -4,25 +4,33 @@ open module com.dlsc.jfxcentral2.components {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.swing;
+    requires batik.dom;
+    requires batik.svggen;
+    requires com.github.weisj.jsvg;
 
     requires fr.brouillard.oss.cssfx;
 
+    requires com.gluonhq.attach.browser;
+    requires com.gluonhq.attach.display;
+    requires com.gluonhq.attach.video;
     requires jfxcentral.data;
     requires org.controlsfx.controls;
     requires net.synedra.validatorfx;
     requires com.dlsc.gemsfx;
-    requires com.sandec.mdfx;
+    requires one.jpro.platform.mdfx;
     requires org.apache.commons.lang3;
     requires org.apache.logging.log4j;
+    requires org.apache.commons.io;
 
     requires jpro.webapi;
-    requires one.jpro.routing.core;
+    requires one.jpro.platform.routing.core;
     requires java.desktop;
     requires commons.validator;
     requires com.dlsc.jfxcentral2.iconfont;
     requires com.google.gson;
 
-    requires one.jpro.imagemanager;
+    requires one.jpro.platform.image.manager;
 
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;
@@ -100,6 +108,11 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.components.userprofile;
     exports com.dlsc.jfxcentral2.components.hamburger;
     exports com.dlsc.jfxcentral2.components.topcontent;
+    exports com.dlsc.jfxcentral2.utilities.pathextractor;
+    exports com.dlsc.jfxcentral2.utilities.effectdesigner;
+    exports com.dlsc.jfxcentral2.utilities.effectdesigner.editor;
+    exports com.dlsc.jfxcentral2.utilities.paintpicker.impl;
+    exports com.dlsc.jfxcentral2.utilities.effectdesigner.effect;
 
     uses IkonProvider;
 }

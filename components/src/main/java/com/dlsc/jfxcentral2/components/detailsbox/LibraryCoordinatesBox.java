@@ -21,7 +21,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.CopyUtil;
+import one.jpro.platform.routing.CopyUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -68,7 +68,7 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
 
     private VBox createInfoNode(StringProperty versionProperty) {
         TextArea repositoryCoordinatesArea = new TextArea(StringUtil.LOADING_TIPS);
-        repositoryCoordinatesArea.getStyleClass().add("coordinates-text-area");
+        repositoryCoordinatesArea.getStyleClass().add("code-text-area");
         repositoryCoordinatesArea.setEditable(false);
         repositoryCoordinatesArea.setMaxWidth(Double.MAX_VALUE);
 
@@ -107,6 +107,8 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         CustomMarkdownView descriptionLabel = new CustomMarkdownView();
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.mdStringProperty().bind(descriptionProperty());
+
+        // copying to clipboard
         CopyUtil.setCopyOnClick(copyButton, repositoryCoordinatesArea.getText());
         repositoryCoordinatesArea.textProperty().addListener(it -> CopyUtil.setCopyOnClick(copyButton, repositoryCoordinatesArea.getText()));
 

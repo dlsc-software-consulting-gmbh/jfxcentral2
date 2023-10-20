@@ -52,21 +52,14 @@
     "id": "jpro",
     "version": "2023.2.0-SNAPSHOT",
     "url": "https://www.jpro.one/",
-    "description": "Write your App with Java!TRUE \"WORA“ APPLICATIONS! CROSS PLATFORM DEVELOPMENT WITH JAVA! Basically you can run it wherever a JVM is running (i.e. on a Raspberry Pi)"
-  },
-  {
-    "name": "simplefx_2.12",
-    "id": "simplefx_2.12",
-    "version": "3.2.23",
-    "url": "https://www.jpro.one/",
-    "description": "simplefx"
+    "description": "Write your web application with Java! True WORA applications! Cross platform development with Java! Basically you can run it wherever a JVM is running (for example on a Raspberry Pi)"
   },
   {
     "name": "GemsFX",
     "id": "gemsfx",
     "version": "1.74.0",
     "url": "https://github.com/dlsc-software-consulting-gmbh/GemsFX",
-    "description": "A collection of JavaFX controls and utilities.Such as: CalendarView,CalendarPicker,YearMonthPicker,StripView,InfoCenterPane,ScreensView,Search Text Field,Tags Field,Dialog Pane,Resizable Text Area,Expanding Text Area,Time Picker,Duration Picker,Photo View,Payment Option Controls,DrawerStackPane,FilterView ...",
+    "description": "A collection of JavaFX controls and utilities.Such as: CalendarView, CalendarPicker, YearMonthPicker, StripView, InfoCenterPane, ScreensView, Search Text Field, Tags Field, Dialog Pane, Resizable Text Area, Expanding Text Area, Time Picker, Duration Picker, Photo View, Payment Option Controls, DrawerStackPane, FilterView ...",
     "license": {
       "type": "Apache",
       "version": "2.0",
@@ -78,7 +71,7 @@
     "id": "scala",
     "version": "2.12.12",
     "url": "https://github.com/scala/scala",
-    "description": "Standard library for the Scala Programming Language",
+    "description": "Standard library for the Scala programming Language.",
     "license": {
       "type": "Apache",
       "version": "2.0",
@@ -90,14 +83,14 @@
     "id": "mdfx",
     "version": "0.2.9",
     "url": "https://www.jpro.one/",
-    "description": "A Java FX control to display Markdown information."
+    "description": "A Java FX control to display markdown information."
   },
   {
     "name": "CSSFX",
     "id": "cssfx",
     "version": "11.5.1",
     "url": "https://github.com/mcfoggy/cssfx",
-    "description": "Allow runtime modification of JavaFX CSS.CSSFX enhances developer productivity by providing CSS reloading functionality in your running application.",
+    "description": "Allow runtime modification of JavaFX CSS. CSSFX enhances developer productivity by providing CSS reloading functionality in your running application.",
     "license": {
       "type": "Apache",
       "version": "2.0",
@@ -189,15 +182,15 @@
     }
   },
   {
-    "name": "SLF4J",
-    "id": "slf4j",
-    "version": "2.0.6",
-    "url": "https://github.com/qos-ch/slf4j",
-    "description": "The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, reload4j, log4j 2.x) allowing the end user to plug in the desired logging framework at deployment time.",
+    "name": "JSVG",
+    "id": "jsvg",
+    "version": "v1.1.0",
+    "url": "https://github.com/weisJ/jsvg",
+    "description": "Java SVG renderer.This library aims to be as lightweight as possible. Generally JSVG uses ~50% less memory than svgSalamander and ~98% less than Batik.JSVG is used by the Jetbrains IDEA IDE suite for rendering their interface icons.",
     "license": {
       "type": "License",
       "version": "MIT",
-      "url": "https://github.com/qos-ch/slf4j/blob/master/LICENSE.txt"
+      "url": "https://github.com/weisJ/jsvg/blob/master/LICENSE"
     }
   },
   {
@@ -217,7 +210,7 @@
     "id": "junit",
     "version": "5.9.1",
     "url": "https://github.com/junit-team/junit5",
-    "description": "The 5th major version of the programmer-friendly testing framework for Java and the JVM",
+    "description": "The 5th major version of the programmer-friendly testing framework for Java and the JVM.",
     "license": {
       "type": "Eclipse Public License",
       "version": "2.0",
@@ -225,15 +218,27 @@
     }
   },
   {
-    "name": "Maven Compiler Plugin",
-    "id": "maven-compiler-plugin",
-    "version": "3.10.1",
-    "url": "https://github.com/apache/maven-compiler-plugin",
-    "description": "The 5th major version of the programmer-friendly testing framework for Java and the JVM",
+    "name": "Scene Builder",
+    "id": "scenebuilder",
+    "version": "21.0.0",
+    "url": "https://github.com/gluonhq/scenebuilder",
+    "description": "Scene Builder is a visual, drag 'n' drop, layout tool for designing JavaFX application user interfaces.\"Kit\" module offers a set of useful utility components.",
     "license": {
-      "type": "Apache",
-      "version": "2.0",
-      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+      "type": "License",
+      "version": "Gluon & Oracle",
+      "url": "https://github.com/gluonhq/scenebuilder/blob/master/LICENSE.txt"
+    }
+  },
+  {
+    "name": "slf4j",
+    "id": "slf4j",
+    "version": "2.0.9",
+    "url": "https://github.com/qos-ch/slf4j",
+    "description": "Simple Logging Facade for Java. The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, reload4j, log4j 2.x) allowing the end user to plug in the desired logging framework at deployment time.",
+    "license": {
+      "type": "License",
+      "version": "MIT",
+      "url": "https://github.com/qos-ch/slf4j/blob/master/LICENSE.txt"
     }
   }
 ]

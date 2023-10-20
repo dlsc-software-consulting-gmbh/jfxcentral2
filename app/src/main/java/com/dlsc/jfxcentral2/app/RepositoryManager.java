@@ -1,9 +1,11 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import one.jpro.platform.internal.openlink.util.PlatformUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jgit.api.CloneCommand;
@@ -11,6 +13,8 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.merge.ContentMergeStrategy;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.util.FS;
+import org.eclipse.jgit.util.FS_POSIX;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,13 +51,18 @@ public class RepositoryManager {
         }
     }
 
+    private static File getRepositoryDirectory() {
+        return DataRepository2.getRepositoryDirectory();
+    }
+
     public static boolean isFirstTimeSetup() {
-        return !DataRepository2.getRepositoryDirectory().exists();
+        return !getRepositoryDirectory().exists();
     }
 
     private static void initialLoad(ProgressMonitor monitor) throws Exception {
         // Network not available, skip the initial load
         if (!isNetworkAvailable()) {
+            LOGGER.warn("Network not available.");
             Platform.runLater(() -> {
                 monitor.beginTask("Network not available.", 1);
                 monitor.endTask();
@@ -61,12 +70,13 @@ public class RepositoryManager {
             return;
         }
 
-        File repoDirectory = DataRepository2.getRepositoryDirectory();
+        File repoDirectory = getRepositoryDirectory();
         if (!repoDirectory.exists()) {
             String repoUrl = GITHUB_REPOSITORY_URL;
 
             if (isCountryEqualToChina()) {
                 repoUrl = shouldUseGiteeMirror() ? GITEE_REPOSITORY_URL : GITHUB_REPOSITORY_URL;
+                LOGGER.info("Using {} as the repository URL.", repoUrl);
                 Platform.runLater(() -> {
                     monitor.beginTask("Checking network...", 1);
                     monitor.endTask();
@@ -79,11 +89,21 @@ public class RepositoryManager {
                     .setBranch("live")
                     .setDepth(1)
                     .setDirectory(repoDirectory);
+
+            if (OSUtil.isNative()) {
+                cloneCmd = cloneCmd.setFs(new FS_POSIX() {
+                    @Override
+                    public boolean supportsExecute() {
+                        return false;
+                    }
+                });
+            }
+
             try (Git git = cloneCmd.call()) {
                 // Git object is here only to ensure resources are properly closed; no other actions needed.
             }
         } else {
-            repoDirectory = new File(DataRepository2.getRepositoryDirectory(), "/.git");
+            repoDirectory = new File(repoDirectory, "/.git");
             try (Git git = new Git(FileRepositoryBuilder.create(repoDirectory))) {
                 git.pull()
                         .setProgressMonitor(monitor)

@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.beans.property.ObjectProperty;
@@ -8,7 +9,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.util.Callback;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
@@ -47,7 +48,7 @@ public class BooksDetailsBox extends DetailsBoxBase<Book> {
                 websiteBtn.setText(StringUtil.getDomainName(book.getUrl()));
             }
             websiteBtn.getStyleClass().add("amazon-button");
-            LinkUtil.setExternalLink(websiteBtn, url);
+            ExternalLinkUtil.setExternalLink(websiteBtn, url);
             return List.of(createDetailsButton(book), createHomepageButton(book), websiteBtn);
         }
         return Collections.emptyList();

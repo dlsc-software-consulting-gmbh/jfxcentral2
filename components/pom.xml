@@ -21,6 +21,48 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>display</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>lifecycle</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>statusbar</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>storage</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>browser</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>video</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>util</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
         </dependency>
@@ -31,11 +73,16 @@
         </dependency>
 
         <dependency>
-            <groupId>one.jpro</groupId>
-            <artifactId>jpro-imagemanager</artifactId>
-            <version>0.1.0</version>
+            <groupId>one.jpro.platform</groupId>
+            <artifactId>jpro-image-manager</artifactId>
+            <version>${jpro.platform.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.weisj</groupId>
+            <artifactId>jsvg</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -87,22 +134,39 @@
             <groupId>com.dlsc.gemsfx</groupId>
             <artifactId>gemsfx</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-svggen</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-dom</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.dlsc.jfxcentral</groupId>
             <artifactId>model</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sandec</groupId>
-            <artifactId>mdfx</artifactId>
+            <groupId>one.jpro.platform</groupId>
+            <artifactId>jpro-mdfx</artifactId>
         </dependency>
         <dependency>
             <groupId>fr.brouillard.oss</groupId>
             <artifactId>cssfx</artifactId>
         </dependency>
         <dependency>
-            <groupId>one.jpro</groupId>
+            <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-core</artifactId>
-            <version>${routing.version}</version>
+            <version>${jpro.platform.version}</version>
         </dependency>
 
         <!--    ** Icon pack dependencies START **  -->

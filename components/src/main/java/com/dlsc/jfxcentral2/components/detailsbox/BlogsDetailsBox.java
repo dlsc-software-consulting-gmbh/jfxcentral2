@@ -1,13 +1,14 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
 import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.util.Callback;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class BlogsDetailsBox extends DetailsBoxBase<Blog> {
         visitBlogButton.setFocusTraversable(false);
         visitBlogButton.managedProperty().bind(visitBlogButton.visibleProperty());
         visitBlogButton.visibleProperty().bind(visitUrlProviderProperty().isNotNull());
-        LinkUtil.setExternalLink(visitBlogButton, getVisitUrlProvider().call(blog));
+        ExternalLinkUtil.setExternalLink(visitBlogButton, getVisitUrlProvider().call(blog));
         return List.of(createDetailsButton(blog), visitBlogButton);
     }
 

@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app.stage;
 
-import com.dlsc.jfxcentral2.app.utils.OSUtil;
+import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
@@ -9,7 +10,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
@@ -26,9 +26,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import one.jpro.routing.sessionmanager.SessionManager;
+import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
+
+import java.util.Objects;
 
 public class CustomStage extends BorderPane {
 
@@ -52,12 +54,19 @@ public class CustomStage extends BorderPane {
         RESIZE_SE
     }
 
-    public CustomStage(Stage stage, Node node, SessionManager sessionManager) {
+    public CustomStage(Stage stage, Node node, SessionManager sessionManager, ObjectProperty<Size> size) {
         setContent(node);
         node.getStyleClass().add("stage-content");
 
-        getStylesheets().add(CustomStage.class.getResource("stage.css").toExternalForm());
+        getStylesheets().add(Objects.requireNonNull(CustomStage.class.getResource("stage.css")).toExternalForm());
         getStyleClass().add("custom-stage");
+
+        if (OSUtil.isNative()) {
+            getStyleClass().add("native");
+        }
+
+        size.addListener(it -> updateStyleBasedOnSize(size.get()));
+        updateStyleBasedOnSize(size.get());
 
         stage.focusedProperty().addListener(it -> updateStyleBasedOnStageFocus(stage));
 
@@ -65,7 +74,11 @@ public class CustomStage extends BorderPane {
         titleBar.getLabel().setText("JFXCentral");
 
         if (!WebAPI.isBrowser()) {
-            setTop(titleBar);
+            VBox vBox = new VBox(titleBar);
+            vBox.setAlignment(Pos.CENTER_RIGHT);
+            if (!OSUtil.isNative()) {
+                setTop(vBox);
+            }
         }
 
         centerProperty().bind(contentProperty());
@@ -285,6 +298,17 @@ public class CustomStage extends BorderPane {
         this.operation.set(operation);
     }
 
+    private void updateStyleBasedOnSize(Size size) {
+        getStyleClass().removeAll("lg", "md", "sm");
+        if (size.equals(Size.LARGE)) {
+            getStyleClass().add("lg");
+        } else if (size.equals(Size.MEDIUM)) {
+            getStyleClass().add("md");
+        } else {
+            getStyleClass().add("sm");
+        }
+    }
+
     private void updateStyleBasedOnStageFocus(Stage stage) {
         pseudoClassStateChanged(PseudoClass.getPseudoClass("stage-focused"), stage.isFocused());
     }
@@ -317,6 +341,8 @@ public class CustomStage extends BorderPane {
 
             label = new Label();
             label.getStyleClass().add("title");
+            label.setVisible(!OSUtil.isNative());
+            label.setManaged(!OSUtil.isNative());
 
             FontIcon maxIcon = new FontIcon(MaterialDesign.MDI_WINDOW_MAXIMIZE);
             FontIcon restoreIcon = new FontIcon(MaterialDesign.MDI_WINDOW_RESTORE);
@@ -383,7 +409,10 @@ public class CustomStage extends BorderPane {
 
             NavigationView navigationView = new NavigationView(sessionManager);
 
-            if (OSUtil.isMac()) {
+            if (OSUtil.isNative()) {
+                getStyleClass().add("native");
+                getChildren().addAll(navigationView);
+            } else if (OSUtil.isMac()) {
                 getStyleClass().add("mac");
                 HBox controlBox = new HBox(closeButton, minButton, maxButton);
                 controlBox.getStyleClass().add("control-box");

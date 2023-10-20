@@ -11,6 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
+
 import java.time.format.DateTimeFormatter;
 
 public class BookOverviewBox extends OverviewBox<Book> {
@@ -34,8 +35,7 @@ public class BookOverviewBox extends OverviewBox<Book> {
         Label isbnLabel = new Label();
 
         CustomImageView previewImageView = new CustomImageView();
-
-        previewImageView.imageProperty().set(CentralImageManager.getBookCoverImage2(book));
+        previewImageView.setImage(CentralImageManager.getBookCoverImage2(book));
 
         writtenByLabel.getStyleClass().add("field-value");
         writtenByLabel.setWrapText(true);
@@ -81,13 +81,12 @@ public class BookOverviewBox extends OverviewBox<Book> {
 
         HBox topBoxWrapper = new HBox();
         topBoxWrapper.getStyleClass().add("top-box-wrapper");
-        if (!isSmall()) {
-            previewImageView.getStyleClass().add("preview-image");
 
-            StackPane imageWrapper = new StackPane(previewImageView);
-            imageWrapper.getStyleClass().add("image-wrapper");
-            topBoxWrapper.getChildren().add(imageWrapper);
-        }
+        previewImageView.getStyleClass().add("preview-image");
+
+        StackPane imageWrapper = new StackPane(previewImageView);
+        imageWrapper.getStyleClass().add("image-wrapper");
+        topBoxWrapper.getChildren().add(imageWrapper);
 
         topBoxWrapper.getChildren().add(topBox);
 

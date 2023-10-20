@@ -22,7 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.sessionmanager.SessionManager;
+import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.eclipse.jgit.lib.ProgressMonitor;
 
 public class RefreshPage extends PageBase {
@@ -47,14 +47,8 @@ public class RefreshPage extends PageBase {
     private Node updateView;
     private Node setupView;
 
-    private SessionManager sessionManager;
-
     public RefreshPage(ObjectProperty<Size> size) {
         super(size, Mode.DARK);
-    }
-
-    public SessionManager getSessionManager() {
-        return sessionManager;
     }
 
     @Override
@@ -78,7 +72,6 @@ public class RefreshPage extends PageBase {
 
     @Override
     public Node content() {
-        sessionManager = sessionManager();
         Platform.runLater(() -> {
             RepositoryManager.repositoryUpdatedProperty().addListener(weakInvalidationListener);
             invalidationListener.invalidated(null);
@@ -123,7 +116,9 @@ public class RefreshPage extends PageBase {
         Button exitButton = new Button("EXIT");
         exitButton.setFocusTraversable(false);
         exitButton.setCancelButton(true);
-        exitButton.setOnAction(evt -> Platform.exit());
+
+        // use system exit so it works properly everywhere, including native
+        exitButton.setOnAction(evt -> System.exit(0));
 
         HBox hBox = new HBox(exitButton, proceedButton);
         hBox.getStyleClass().add("button-box");

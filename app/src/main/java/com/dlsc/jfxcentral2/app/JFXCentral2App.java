@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
@@ -33,6 +34,7 @@ import com.dlsc.jfxcentral2.app.pages.category.DocumentationCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.DownloadsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.IconsCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.LibrariesCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.UtilitiesCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.PeopleCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.ShowcasesCategoryPage;
 import com.dlsc.jfxcentral2.app.pages.category.TipCategoryPage;
@@ -45,6 +47,7 @@ import com.dlsc.jfxcentral2.app.pages.details.CompanyDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.DownloadDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.IconPackDetailPage;
 import com.dlsc.jfxcentral2.app.pages.details.LibraryDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.UtilityDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.PersonDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.ShowcaseDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.TipDetailsPage;
@@ -54,25 +57,35 @@ import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.app.utils.LoggerOutputStream;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
+import com.dlsc.jfxcentral2.components.Mode;
+import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
+import com.dlsc.jfxcentral2.utils.WebAPIUtil;
+import com.gluonhq.attach.statusbar.StatusBarService;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import one.jpro.routing.Request;
-import one.jpro.routing.Response;
-import one.jpro.routing.Route;
-import one.jpro.routing.RouteNode;
-import one.jpro.routing.RouteUtils;
-import one.jpro.routing.dev.DevFilter;
-import one.jpro.routing.sessionmanager.SessionManager;
+import one.jpro.platform.routing.Request;
+import one.jpro.platform.routing.Response;
+import one.jpro.platform.routing.Route;
+import one.jpro.platform.routing.RouteNode;
+import one.jpro.platform.routing.RouteUtils;
+import one.jpro.platform.routing.dev.DevFilter;
+import one.jpro.platform.routing.dev.StatisticsFilter;
+import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -84,6 +97,7 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Stack;
 import java.util.function.Supplier;
 
 public class JFXCentral2App extends Application {
@@ -101,20 +115,25 @@ public class JFXCentral2App extends Application {
 
     @Override
     public void start(Stage stage) {
-        // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
-        BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-        bi.createGraphics();
+        if (!OSUtil.isNative()) {
+            // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
+            BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+            bi.createGraphics();
+        }
 
         if (!WebAPI.isBrowser()) {
-            System.setProperty("prism.lcdtext", "false");
             System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
 
-            if (Taskbar.isTaskbarSupported()) {
-                Taskbar taskbar = Taskbar.getTaskbar();
-                if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
-                    Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
-                    Image dockIcon = defaultToolkit.getImage(JFXCentral2App.class.getResource("app-icon.png"));
-                    taskbar.setIconImage(dockIcon);
+            if (!OSUtil.isNative()) {
+                System.setProperty("prism.lcdtext", "false");
+
+                if (Taskbar.isTaskbarSupported()) {
+                    Taskbar taskbar = Taskbar.getTaskbar();
+                    if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
+                        Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+                        Image dockIcon = defaultToolkit.getImage(JFXCentral2App.class.getResource("app-icon.png"));
+                        taskbar.setIconImage(dockIcon);
+                    }
                 }
             }
         }
@@ -134,7 +153,7 @@ public class JFXCentral2App extends Application {
         routeNode.start(sessionManager);
 
         // tray icon
-        if (!WebAPI.isBrowser() && SystemTray.isSupported()) {
+        if (!WebAPI.isBrowser() && !OSUtil.isNative() && SystemTray.isSupported()) {
             RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
                 if (trayIconManager == null) {
                     trayIconManager = new TrayIconManager(stage, sessionManager);
@@ -144,21 +163,33 @@ public class JFXCentral2App extends Application {
             });
         }
 
+        Parent parent = routeNode;
+
+        if (OSUtil.isNative()) {
+            StackPane notchPane = new StackPane();
+            notchPane.getStyleClass().add("notch-pane");
+            VBox.setVgrow(routeNode, Priority.ALWAYS);
+            parent = new VBox(notchPane, routeNode);
+        }
+
+
         // customs stage for decorations / the chrome
-        CustomStage customStage = new CustomStage(stage, routeNode, sessionManager);
+        CustomStage customStage = new CustomStage(stage, parent, sessionManager, size);
         customStage.setCloseHandler(() -> {
-            if (SystemTray.isSupported()) {
-                trayIconManager.hide();
+            if (!OSUtil.isNative()) {
+                if (SystemTray.isSupported()) {
+                    trayIconManager.hide();
+                }
             }
             stage.close();
         });
 
         // scene
         Scene scene = new Scene(customStage, 1400, 800);
-        scene.setFill(Color.web("070B32"));
+        scene.setFill(Color.web("#070B32"));
         scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
         scene.getStylesheets().add(Objects.requireNonNull(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css")).toExternalForm());
-
+        scene.focusOwnerProperty().addListener(it -> System.out.println("focus owner: " + scene.getFocusOwner()));
         updateSizeProperty(scene);
 
         stage.setScene(scene);
@@ -197,6 +228,7 @@ public class JFXCentral2App extends Application {
                 .and(createCategoryOrDetailRoute("/tutorials", Tutorial.class, () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/videos", Video.class, () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/icons", IkonliPack.class, () -> new IconsCategoryPage(size), id -> new IconPackDetailPage(size, id)))
+                .and(createCategoryOrDetailRoute("/utilities", Utility.class, () -> new UtilitiesCategoryPage(size), id -> new UtilityDetailsPage(size, id)))
                 .and(RouteUtils.get("/credits", r -> new CreditsPage(size)))
                 .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
@@ -224,6 +256,7 @@ public class JFXCentral2App extends Application {
 
         if (Boolean.getBoolean("develop")) {
             route = route.filter(DevFilter.create());
+            route = route.filter(StatisticsFilter.create());
         }
 
         return route;
@@ -255,6 +288,7 @@ public class JFXCentral2App extends Application {
 
     private void updateSizeProperty(Scene scene) {
         double sceneWidth = scene.getWidth();
+        System.out.println("scene width: " + sceneWidth);
         if (sceneWidth < 865) {
             size.set(Size.SMALL);
         } else if (sceneWidth <= 1320) {
@@ -266,8 +300,10 @@ public class JFXCentral2App extends Application {
 
     public static void main(String[] args) {
         Logger logger = LogManager.getLogger();
-        System.setOut(new PrintStream(new LoggerOutputStream(logger, Level.INFO), true));
-        System.setErr(new PrintStream(new LoggerOutputStream(logger, Level.ERROR), true));
+        if (!OSUtil.isNative()) {
+            System.setOut(new PrintStream(new LoggerOutputStream(logger, Level.INFO), true));
+            System.setErr(new PrintStream(new LoggerOutputStream(logger, Level.ERROR), true));
+        }
         launch(args);
     }
 }

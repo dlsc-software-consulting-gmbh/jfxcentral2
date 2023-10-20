@@ -2,9 +2,10 @@ package com.dlsc.jfxcentral2.components.tiles;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.jpro.webapi.WebAPI;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class VideoGalleryTileView extends TileView<Video> {
@@ -22,7 +23,7 @@ public class VideoGalleryTileView extends TileView<Video> {
         setRemark(video.getMinutes() + " mins");
 
         if (WebAPI.isBrowser()) {
-            LinkUtil.setExternalLink(getButton2(), "https://www.youtube.com/watch?v=" + video.getId());
+            ExternalLinkUtil.setExternalLink(getButton2(), "https://www.youtube.com/watch?v=" + video.getId());
         }
     }
 }

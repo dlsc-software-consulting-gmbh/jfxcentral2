@@ -3,13 +3,13 @@ package com.dlsc.jfxcentral2.app;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral2.app.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import one.jpro.routing.sessionmanager.SessionManager;
+import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -74,6 +74,7 @@ public class TrayIconManager {
         Menu realWorld = new Menu("Real World Apps");
         Menu tips = new Menu("Tips & Tricks");
         Menu icons = new Menu("Icons");
+        Menu utilities = new Menu("Utilities");
         Menu documentation = new Menu("Documentation");
 
         DataRepository2 repository = DataRepository2.getInstance();
@@ -89,6 +90,7 @@ public class TrayIconManager {
         repository.getRealWorldApps().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(realWorld, mo));
         repository.getTips().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tips, mo));
         repository.getIkonliPacks().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(icons, mo));
+        repository.getUtilities().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(utilities, mo));
         repository.getDocumentation().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(documentation, mo, modelObject -> {
             String docUrl = null;
             try {
@@ -133,9 +135,10 @@ public class TrayIconManager {
         trayIcon.addMenuItem(reportIssue);
 
         trayIcon.addSeparator();
-        trayIcon.addMenuItem(documentation);
+        trayIcon.addMenuItem(utilities);
         trayIcon.addSeparator();
 
+        trayIcon.addMenuItem(documentation);
         trayIcon.addMenuItem(libraries);
         trayIcon.addMenuItem(tools);
         trayIcon.addMenuItem(books);

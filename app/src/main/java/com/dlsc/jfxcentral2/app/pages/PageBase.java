@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.app.pages;
 
+import com.dlsc.jfxcentral2.app.pages.details.UtilityDetailsPage;
 import com.dlsc.jfxcentral2.components.CopyrightView;
 import com.dlsc.jfxcentral2.components.FooterView;
 import com.dlsc.jfxcentral2.components.Mode;
@@ -8,17 +9,19 @@ import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.TopPane;
 import com.dlsc.jfxcentral2.components.hamburger.HamburgerMenuView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.View;
+import one.jpro.platform.routing.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,8 +56,9 @@ public abstract class PageBase extends View {
         sizeProperty().addListener(it -> updateStyleClassBasedOnSize(vbox));
 
         // menubar
-        TopMenuBar topMenuBar = new TopMenuBar(this);
+        TopMenuBar topMenuBar = new TopMenuBar(isMobile());
         topMenuBar.sizeProperty().bind(sizeProperty());
+        topMenuBar.setSessionManager(getSessionManager());
         topMenuBar.setMode(menuMode);
         topMenuBar.showHamburgerMenuProperty().bindBidirectional(showHamburgerMenuProperty());
 
@@ -99,9 +103,13 @@ public abstract class PageBase extends View {
         vbox.getChildren().addAll(topStackPane, sponsorsView, footerView, copyrightView);
 
         StackPane glassPane = new StackPane();
-        glassPane.getStyleClass().add("glass-pane");
+        glassPane.getStyleClass().add("page-glass-pane");
         glassPane.visibleProperty().bind(topMenuBar.usedProperty().or(blockingProperty()));
-        glassPane.setOnMouseClicked(evt -> setShowHamburgerMenu(false));
+        glassPane.setOnMouseClicked(evt -> {
+            if (evt.isStillSincePress()) {
+                setShowHamburgerMenu(false);
+            }
+        });
 
         if (menuMode.equals(Mode.LIGHT)) {
             // make sure the JFX logo can be fully seen (without this call it gets clipped)
@@ -111,6 +119,22 @@ public abstract class PageBase extends View {
 
         StackPane root = new StackPane(vbox, glassPane, hamburgerMenuView);
         root.getStyleClass().add("background");
+
+        /*
+         * The CSS playground is a special case, because it used for testing custom CSS styles.
+         */
+        if (this instanceof UtilityDetailsPage utilityDetailsPage) {
+            if (!utilityDetailsPage.getItem().getId().equals("cssplayground")) {
+                root.getStyleClass().add("normal-page");
+            }else {
+                root.getStyleClass().add("css-playground-page");
+            }
+        } else {
+            root.getStyleClass().add("normal-page");
+        }
+
+        root.addEventFilter(SwipeEvent.SWIPE_LEFT, evt -> getSessionManager().goForward());
+        root.addEventFilter(SwipeEvent.SWIPE_RIGHT, evt -> getSessionManager().goBack());
 
         return root;
     }

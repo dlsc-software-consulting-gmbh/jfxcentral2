@@ -14,10 +14,7 @@ import com.dlsc.jfxcentral2.components.PaginationControl2;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.components.Spacer;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.ModelObjectTool;
-import com.dlsc.jfxcentral2.utils.PageUtil;
-import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
+import com.dlsc.jfxcentral2.utils.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -41,7 +38,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -374,7 +371,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             if (StringUtils.isNotBlank(url)) {
                 homepageButton.setVisible(true);
                 homepageButton.setManaged(true);
-                LinkUtil.setExternalLink(homepageButton, homepageUrlProvider.get().call(model));
+                ExternalLinkUtil.setExternalLink(homepageButton, homepageUrlProvider.get().call(model));
             }
         }
     }

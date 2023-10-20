@@ -15,9 +15,9 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.ModelObjectTool;
-import com.dlsc.jfxcentral2.utils.SocialUtil;
+import com.dlsc.jfxcentral2.utils.*;
+import com.gluonhq.attach.display.DisplayService;
+import com.jpro.webapi.WebAPI;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -29,6 +29,7 @@ import javafx.css.Styleable;
 import javafx.css.StyleableObjectProperty;
 import javafx.css.StyleableProperty;
 import javafx.css.converter.EnumConverter;
+import javafx.geometry.Dimension2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CustomMenuItem;
@@ -39,9 +40,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
-import one.jpro.routing.LinkUtil;
-import one.jpro.routing.View;
-import one.jpro.routing.sessionmanager.SessionManager;
+import one.jpro.platform.routing.LinkUtil;
+import one.jpro.platform.routing.View;
+import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.Ikon;
@@ -53,6 +54,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class TopMenuBar extends PaneBase {
+
     private static final Logger LOGGER = LogManager.getLogger(TopMenuBar.class);
     private static final Mode DEFAULT_MODE = Mode.DARK;
 
@@ -60,16 +62,18 @@ public class TopMenuBar extends PaneBase {
     private static final PseudoClass DARK_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("dark");
 
     private final CustomImageView jfxCentralLogoView;
-    private final View view;
+    private final boolean mobile;
+    //    private final View view;
     private SearchField<ModelObject> searchField;
     private final HBox contentBox;
     private final StackPane logoWrapper;
     private Node searchTextField;
     private SessionManager sessionManager;
 
-    public TopMenuBar(View view) {
-        this.view = view;
-
+    public TopMenuBar(boolean mobile) { //iew view) {
+//        this.view = view;
+        this.mobile = mobile;
+        
         getStyleClass().add("top-menu-bar");
 
         activateModePseudoClass();
@@ -111,7 +115,7 @@ public class TopMenuBar extends PaneBase {
         });
 
         searchField.getPopup().setPrefWidth(600);
-        searchField.getEditor().setFocusTraversable(false);
+        searchField.getEditor().setFocusTraversable(OSUtil.isNative());
         searchField.setPromptText("Search");
         searchField.setCellFactory(listView -> new SearchResultCell());
         searchField.setSuggestionProvider(request -> search(request.getUserText()));
@@ -133,14 +137,11 @@ public class TopMenuBar extends PaneBase {
         return searchField;
     }
 
+    public void setSessionManager(SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
+    }
+
     private SessionManager getSessionManager() {
-        if (sessionManager == null) {
-            sessionManager = LinkUtil.getSessionManager(view.realContent());
-            if (sessionManager == null) {
-                LOGGER.error("Failed to initialize SessionManager.");
-                throw new IllegalStateException("Failed to initialize SessionManager.");
-            }
-        }
         return sessionManager;
     }
 
@@ -160,7 +161,9 @@ public class TopMenuBar extends PaneBase {
         search(repository.getDownloads(), pattern, results);
         search(repository.getTutorials(), pattern, results);
         search(repository.getTips(), pattern, results);
+        search(repository.getUtilities(), pattern, results);
         search(repository.getIkonliPacks(), pattern, results);
+
 
         return results;
     }
@@ -197,7 +200,8 @@ public class TopMenuBar extends PaneBase {
 
     protected void layoutBySize() {
         searchField = createSearchField();
-        searchField.setFocusTraversable(false);
+        searchField.setFocusTraversable(OSUtil.isNative());
+
         if (isLarge()) {
             MenuButton resourcesBtn = createMenuButton("Resources");
             resourcesBtn.getStyleClass().add("resources-button");
@@ -214,6 +218,12 @@ public class TopMenuBar extends PaneBase {
             showcasesBtn.getStyleClass().add("showcases-button");
             LinkUtil.setLink(showcasesBtn, "/showcases");
 
+            Button utilitiesButton = new Button("Utilities");
+            utilitiesButton.setFocusTraversable(false);
+            utilitiesButton.setMinWidth(Region.USE_PREF_SIZE);
+            utilitiesButton.getStyleClass().add("online-tools-button");
+            LinkUtil.setLink(utilitiesButton, "/utilities");
+
             Button documentationBtn = new Button("Documentation");
             documentationBtn.setFocusTraversable(false);
             documentationBtn.setMinWidth(Region.USE_PREF_SIZE);
@@ -224,8 +234,8 @@ public class TopMenuBar extends PaneBase {
             downloadsBtn.setFocusTraversable(false);
             downloadsBtn.setMinWidth(Region.USE_PREF_SIZE);
             downloadsBtn.getStyleClass().add("downloads-button");
-            downloadsBtn.setVisible(!view.isMobile());
-            downloadsBtn.setManaged(!view.isMobile());
+            downloadsBtn.setVisible(!mobile);
+            downloadsBtn.setManaged(!mobile);
             LinkUtil.setLink(downloadsBtn, "/downloads");
 
             Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));
@@ -242,7 +252,11 @@ public class TopMenuBar extends PaneBase {
 
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn,documentationBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn);
+            if (!OSUtil.isNative()) {
+                contentBox.getChildren().add(utilitiesButton);
+            }
+            contentBox.getChildren().addAll(documentationBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");

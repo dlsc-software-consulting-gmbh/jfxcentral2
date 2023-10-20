@@ -1,10 +1,12 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 
 import java.time.Year;
 
@@ -17,7 +19,7 @@ public class CopyrightView extends PaneBase {
         getStyleClass().add("copyright-view");
 
         copyrightLabel = new Label("© " + Year.now() + " DLSC Software & Consulting GmbH");
-        LinkUtil.setExternalLink(copyrightLabel, "https://dlsc.com");
+        ExternalLinkUtil.setExternalLink(copyrightLabel, "https://dlsc.com");
 
         Region leftCurlyBraces = new Region();
         leftCurlyBraces.getStyleClass().addAll("curly-braces", "left");
@@ -33,7 +35,7 @@ public class CopyrightView extends PaneBase {
 
         poweredByBox = new HBox(poweredByLabel, leftCurlyBraces, jproLabel, rightCurlyBraces);
         poweredByBox.getStyleClass().add("powered-by-box");
-        LinkUtil.setExternalLink(poweredByBox, "https://www.jpro.one");
+        ExternalLinkUtil.setExternalLink(poweredByBox, "https://www.jpro.one");
 
         updateUI();
     }

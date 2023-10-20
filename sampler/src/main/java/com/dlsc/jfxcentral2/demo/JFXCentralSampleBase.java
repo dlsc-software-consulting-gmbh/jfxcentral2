@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral2.utils.NodeUtil;
 import fr.brouillard.oss.cssfx.CSSFX;
 import fxsampler.SampleBase;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -39,12 +40,20 @@ public abstract class JFXCentralSampleBase extends SampleBase {
 
         panel.sceneProperty().addListener(it -> {
             Scene scene = panel.getScene();
+            if (scene != null && scene.getRoot()!=null) {
+                Parent root = scene.getRoot();
+                if (!root.getStyleClass().contains("normal-page")) {
+                    root.getStyleClass().add("normal-page");
+                }
+            }
 
             if (scene == null || stylesheetsAdded) {
                 return;
             }
 
+
             scene.getStylesheets().add(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css").toExternalForm());
+            scene.getStylesheets().add(JFXCentralSampleBase.class.getResource("/com/dlsc/jfxcentral2/demo/components/test.css").toExternalForm());
 
             stylesheetsAdded = true;
         });

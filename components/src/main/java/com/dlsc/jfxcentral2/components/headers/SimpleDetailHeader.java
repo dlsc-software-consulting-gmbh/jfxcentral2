@@ -1,8 +1,10 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
@@ -21,7 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,7 +43,11 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         getStyleClass().add("simple-detail-header");
 
         setCenter(createCenterNode());
-        setSummary(model.getSummary());
+        if (model instanceof Utility utility) {
+            setSummary(utility.getDescription());
+        }else {
+            setSummary(model.getSummary());
+        }
         sizeProperty().addListener(it-> setCenter(createCenterNode()));
     }
 
@@ -107,13 +113,13 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
 
         String website = getWebsite();
         if (StringUtils.isNotBlank(website)) {
-            LinkUtil.setExternalLink(websiteButton, website);
+            ExternalLinkUtil.setExternalLink(websiteButton, website);
         }
 
         websiteProperty().addListener(it -> {
             String url = getWebsite();
             if (StringUtils.isNotBlank(url)) {
-                LinkUtil.setExternalLink(websiteButton, url);
+                ExternalLinkUtil.setExternalLink(websiteButton, url);
             }
         });
 

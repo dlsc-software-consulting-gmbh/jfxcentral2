@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.model.CreditModel;
 import com.dlsc.jfxcentral2.model.License;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,7 +14,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -108,6 +109,8 @@ public class CreditsView extends PaneBase {
                 licenceVersionLabel.setText(license.getVersion());
 
                 licenceBox.getChildren().addAll(licenceTypeLabel, licenceVersionLabel);
+
+                ExternalLinkUtil.setExternalLink(licenceBox, license.getUrl());
             } else {
                 Label version = new Label("V " + creditModel.getVersion());
                 version.getStyleClass().add("version-label");
@@ -118,7 +121,7 @@ public class CreditsView extends PaneBase {
             linkButton.setFocusTraversable(false);
             linkButton.getStyleClass().add("link-button");
             linkButton.setGraphic(new FontIcon(IkonUtil.link));
-            LinkUtil.setExternalLink(linkButton, creditModel.getUrl());
+            ExternalLinkUtil.setExternalLink(linkButton, creditModel.getUrl());
 
             Label descriptionLabel = new Label();
             descriptionLabel.getStyleClass().add("description-label");

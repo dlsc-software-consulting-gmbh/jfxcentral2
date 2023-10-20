@@ -16,6 +16,7 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -34,7 +35,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -95,12 +96,17 @@ public class HamburgerMenuView extends PaneBase {
         }
 
         HamburgerMenu showcases = new HamburgerMenu("Showcases", "/showcases");
+        HamburgerMenu utilities = new HamburgerMenu("Utilities", "/utilities");
         HamburgerMenu documentation = new HamburgerMenu("Documentation", "/documentation");
         HamburgerMenu downloads = new HamburgerMenu("Downloads", "/downloads");
 
         setMaxHeight(Region.USE_PREF_SIZE);
 
-        getMenus().addAll(resourcesMenu, communityMenu, showcases, documentation);
+        getMenus().addAll(resourcesMenu, communityMenu, showcases);
+        if (!OSUtil.isNative()) {
+            getMenus().add(utilities);
+        }
+        getMenus().add(documentation);
         if (!mobile) {
             getMenus().add(downloads);
         }

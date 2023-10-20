@@ -44,7 +44,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import one.jpro.routing.LinkUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -204,7 +204,11 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         titleLabel.managedProperty().bind(titleProperty().isNotEmpty());
         titleLabel.visibleProperty().bind(titleProperty().isNotEmpty());
         titleLabel.setWrapText(true);
-        titleLabel.setOnMousePressed(event -> flipView.flipToBack());
+        titleLabel.setOnMouseClicked(event -> {
+            if (event.isStillSincePress()) {
+                flipView.flipToBack();
+            }
+        });
         titleLabel.minHeightProperty().bind(Bindings.createDoubleBinding(() -> {
             boolean isVideoGallery = getStyleClass().contains("video-gallery-tile");
             double height = titleLabel.getFont().getSize() * 1.5 * (isVideoGallery ? 2 : isSmall() ? 2 : 2.2);
@@ -218,7 +222,11 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         descriptionLabel.visibleProperty().bind(descriptionProperty().isNotEmpty());
         descriptionLabel.textProperty().bind(descriptionProperty());
         descriptionLabel.setWrapText(true);
-        descriptionLabel.setOnMousePressed(event -> flipView.flipToBack());
+        descriptionLabel.setOnMouseClicked(event -> {
+            if (event.isStillSincePress()) {
+                flipView.flipToBack();
+            }
+        });
 
         VBox centerBox = new VBox(titleLabel, descriptionLabel);
         centerBox.getStyleClass().add("center-box");
