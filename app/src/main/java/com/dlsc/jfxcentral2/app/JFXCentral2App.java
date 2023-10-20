@@ -57,16 +57,23 @@ import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.app.utils.LoggerOutputStream;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
+import com.dlsc.jfxcentral2.components.Mode;
+import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
+import com.dlsc.jfxcentral2.utils.WebAPIUtil;
 import com.gluonhq.attach.statusbar.StatusBarService;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -90,6 +97,7 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Stack;
 import java.util.function.Supplier;
 
 public class JFXCentral2App extends Application {
@@ -107,12 +115,10 @@ public class JFXCentral2App extends Application {
 
     @Override
     public void start(Stage stage) {
-        // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
         if (!OSUtil.isNative()) {
+            // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
             BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
             bi.createGraphics();
-        } else {
-            StatusBarService.create().ifPresent(service -> service.setColor(Color.WHITE));
         }
 
         if (!WebAPI.isBrowser()) {
@@ -157,8 +163,18 @@ public class JFXCentral2App extends Application {
             });
         }
 
+        Parent parent = routeNode;
+
+        if (OSUtil.isNative()) {
+            StackPane notchPane = new StackPane();
+            notchPane.getStyleClass().add("notch-pane");
+            VBox.setVgrow(routeNode, Priority.ALWAYS);
+            parent = new VBox(notchPane, routeNode);
+        }
+
+
         // customs stage for decorations / the chrome
-        CustomStage customStage = new CustomStage(stage, routeNode, sessionManager, size);
+        CustomStage customStage = new CustomStage(stage, parent, sessionManager, size);
         customStage.setCloseHandler(() -> {
             if (!OSUtil.isNative()) {
                 if (SystemTray.isSupported()) {
@@ -170,10 +186,10 @@ public class JFXCentral2App extends Application {
 
         // scene
         Scene scene = new Scene(customStage, 1400, 800);
-        scene.setFill(Color.web("070B32"));
+        scene.setFill(Color.web("#070B32"));
         scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
         scene.getStylesheets().add(Objects.requireNonNull(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css")).toExternalForm());
-
+        scene.focusOwnerProperty().addListener(it -> System.out.println("focus owner: " + scene.getFocusOwner()));
         updateSizeProperty(scene);
 
         stage.setScene(scene);

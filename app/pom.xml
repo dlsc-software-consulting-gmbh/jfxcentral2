@@ -19,6 +19,17 @@
         <gluonfx.plugin.version>1.0.21</gluonfx.plugin.version>
         <javafx.plugin.version>0.0.8</javafx.plugin.version>
         <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
+        <app.description>JFXCentral for anything JavaFX</app.description>
+        <package.type/>
+        <mac.app.store/>
+        <mac.signing.user.name/>
+        <bundle.version/>
+        <bundle.short.version/>
+        <version.code/>
+        <provided.keystore.path/>
+        <provided.keystore.password/>
+        <provided.key.alias/>
+        <provided.key.alias.password/>
     </properties>
 
     <dependencies>
@@ -430,8 +441,24 @@
                         <list>statusbar</list>
                         <list>storage</list>
                         <list>browser</list>
+                        <list>video</list>
                     </attachList>
                     <mainClass>${mainClassName}</mainClass>
+                    <releaseConfiguration>
+                        <vendor>Gluon</vendor>
+                        <description>${app.description}</description>
+                        <packageType>${package.type}</packageType>
+                        <!-- for macOS/iOS -->
+                        <macAppStore>${mac.app.store}</macAppStore>
+                        <bundleShortVersion>${bundle.short.version}</bundleShortVersion>
+                        <bundleVersion>${bundle.version}</bundleVersion>
+                        <!-- for Android -->
+                        <versionCode>${version.code}</versionCode>
+                        <providedKeyStorePath>${provided.keystore.path}</providedKeyStorePath>
+                        <providedKeyStorePassword>${provided.keystore.password}</providedKeyStorePassword>
+                        <providedKeyAlias>${provided.key.alias}</providedKeyAlias>
+                        <providedKeyAliasPassword>${provided.key.alias.password}</providedKeyAliasPassword>
+                    </releaseConfiguration>
                 </configuration>
             </plugin>
 
@@ -472,15 +499,56 @@
 
     <profiles>
         <profile>
+            <id>desktop</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <gluonfx.target>host</gluonfx.target>
+            </properties>
+        </profile>
+        <profile>
+            <id>mac</id>
+            <properties>
+                <package.type>pkg</package.type>
+                <mac.app.store>false</mac.app.store>
+                <bundle.version>${env.GITHUB_RUN_NUMBER}</bundle.version>
+                <bundle.short.version>1.0</bundle.short.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>macstore</id>
+            <properties>
+                <package.type>pkg</package.type>
+                <mac.app.store>true</mac.app.store>
+                <bundle.version>1.${env.GITHUB_RUN_NUMBER}</bundle.version>
+                <bundle.short.version>1.6</bundle.short.version>
+            </properties>
+        </profile>
+        <profile>
             <id>ios</id>
             <properties>
                 <gluonfx.target>ios</gluonfx.target>
+                <bundle.version>${env.GITHUB_RUN_NUMBER}</bundle.version>
+                <bundle.short.version>1.0</bundle.short.version>
             </properties>
         </profile>
         <profile>
             <id>android</id>
             <properties>
                 <gluonfx.target>android</gluonfx.target>
+                <app.identifier>com.gluonhq.samples.hellogluon</app.identifier>
+                <version.code>${env.GITHUB_RUN_NUMBER}</version.code>
+                <provided.keystore.path>${env.GLUON_ANDROID_KEYSTOREPATH}</provided.keystore.path>
+                <provided.keystore.password>${env.GLUON_ANDROID_KEYSTORE_PASSWORD}</provided.keystore.password>
+                <provided.key.alias>${env.GLUON_ANDROID_KEYALIAS}</provided.key.alias>
+                <provided.key.alias.password>${env.GLUON_ANDROID_KEYALIAS_PASSWORD}</provided.key.alias.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>pi</id>
+            <properties>
+                <gluonfx.target>linux-aarch64</gluonfx.target>
             </properties>
         </profile>
     </profiles>

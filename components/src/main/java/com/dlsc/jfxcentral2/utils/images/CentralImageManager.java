@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.scene.image.Image;
 import one.jpro.platform.image.manager.ImageDefinition;
 import one.jpro.platform.image.manager.ImageManager;
@@ -38,15 +39,13 @@ public class CentralImageManager {
     public static Image loadImage(File file) {
         try (FileInputStream in = new FileInputStream(file)) {
             return new Image(in);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static Image getPreviewImage(File file, boolean large) {
-        if (PlatformUtils.isIOS() || PlatformUtils.isAndroid()) {
+        if (OSUtil.isNative()) {
             return loadImage(file);
         }
 
@@ -58,7 +57,7 @@ public class CentralImageManager {
     }
 
     public static Image getRealWorldAppBannerImage2(RealWorldApp app) {
-        if (PlatformUtils.isIOS() || PlatformUtils.isAndroid()) {
+        if (OSUtil.isNative()) {
             return loadImage(realWorldAppBannerImageFile(app));
         }
 
@@ -73,7 +72,7 @@ public class CentralImageManager {
     }
 
     public static Image getDownloadImage(Download download) {
-        if (PlatformUtils.isIOS() || PlatformUtils.isAndroid()) {
+        if (OSUtil.isNative()) {
             return loadImage(com.dlsc.jfxcentral.data.ImageManager.getInstance().downloadBannerFile(download));
         }
 
@@ -85,7 +84,7 @@ public class CentralImageManager {
     }
 
     public static Image getBookCoverImage1(Book book) {
-        if (PlatformUtils.isIOS() || PlatformUtils.isAndroid()) {
+        if (OSUtil.isNative()) {
             return loadImage(bookCoverImageFile(book));
         }
 
@@ -96,7 +95,7 @@ public class CentralImageManager {
     }
 
     public static Image getBookCoverImage2(Book book) {
-        if (PlatformUtils.isIOS() || PlatformUtils.isAndroid()) {
+        if (OSUtil.isNative()) {
             return loadImage(bookCoverImageFile(book));
         }
 
@@ -112,22 +111,6 @@ public class CentralImageManager {
             return f;
         } else {
             return new File(Objects.requireNonNull(MISSING_IMAGE).getFile());
-        }
-    }
-
-    public static File getImage(String folder, String filename) {
-        File f = new File(DataRepository.getInstance().getRepositoryDirectory(), folder + filename);
-        if (f.exists()) {
-            return f;
-        } else {
-            File missing = new File(Objects.requireNonNull(MISSING_IMAGE).getFile());
-            if (missing.exists()) {
-                return missing;
-            } else {
-                String errorMessage = "MISSING IS MISSING: failed to find both the main and missing image files.";
-                LOGGER.error(errorMessage);
-                throw new RuntimeException(errorMessage);
-            }
         }
     }
 }

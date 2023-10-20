@@ -27,7 +27,11 @@ public class NamedColorsView extends VBox {
             Color color = Color.web(namedColor.hex());
             rectangle.setFill(color);
             rectangle.managedProperty().bind(rectangle.visibleProperty());
-            rectangle.setOnMouseClicked(event -> colorConsumer.accept(color));
+            rectangle.setOnMouseClicked(event -> {
+                if (event.isStillSincePress()) {
+                    colorConsumer.accept(color);
+                }
+            });
             tilePane.getChildren().add(rectangle);
         }
 

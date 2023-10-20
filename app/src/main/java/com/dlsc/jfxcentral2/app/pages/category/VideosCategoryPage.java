@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.components.tiles.VideoTileView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
@@ -50,6 +51,9 @@ public class VideosCategoryPage extends CategoryPageBase<Video> {
 
     @Override
     protected Callback<Video, Node> getDetailNodeProvider() {
+        if (OSUtil.isNative()) {
+            return null;
+        }
         return video -> VideoViewFactory.createVideoViewNode(video, true);
     }
 

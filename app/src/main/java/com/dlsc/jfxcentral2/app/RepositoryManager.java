@@ -90,7 +90,7 @@ public class RepositoryManager {
                     .setDepth(1)
                     .setDirectory(repoDirectory);
 
-            if (PlatformUtils.isAndroid() || PlatformUtils.isIOS()) {
+            if (OSUtil.isNative()) {
                 cloneCmd = cloneCmd.setFs(new FS_POSIX() {
                     @Override
                     public boolean supportsExecute() {

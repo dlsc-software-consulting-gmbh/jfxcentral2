@@ -90,6 +90,12 @@
 
             <dependency>
                 <groupId>com.gluonhq.attach</groupId>
+                <artifactId>video</artifactId>
+                <version>${attach.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gluonhq.attach</groupId>
                 <artifactId>util</artifactId>
                 <version>${attach.version}</version>
             </dependency>

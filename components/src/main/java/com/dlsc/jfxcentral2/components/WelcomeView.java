@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -48,21 +49,21 @@ public class WelcomeView extends PaneBase {
         jfxDescLabel.setMinHeight(Region.USE_PREF_SIZE);
         jfxDescLabel.managedProperty().bind(jfxDescLabel.visibleProperty());
 
-        Label jfxCentralDescLabel = new Label("JFX Central is an open source project that you can find on GitHub, " +
-                "with its content in a separate data repository. Feel free to add your project, documentation, book, " +
-                "etc. via a simple pull-request!");
-        jfxCentralDescLabel.getStyleClass().add("description-label");
-        jfxCentralDescLabel.setWrapText(true);
-        jfxCentralDescLabel.setMinHeight(Region.USE_PREF_SIZE);
+//        Label jfxCentralDescLabel = new Label("JFX Central is an open source project that you can find on GitHub, " +
+//                "with its content in a separate data repository. Feel free to add your project, documentation, book, " +
+//                "etc. via a simple pull-request!");
+//        jfxCentralDescLabel.getStyleClass().add("description-label");
+//        jfxCentralDescLabel.setWrapText(true);
+//        jfxCentralDescLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         String javaVersion = System.getProperty("java.version");
         String fxVersion = System.getProperty("javafx.runtime.version");
 
-        Label versionLabel = new Label(MessageFormat.format("This {0} runs on Java " + javaVersion + " with JavaFX " + fxVersion + ".", WebAPI.isBrowser() ? "site" : "application"));
+        Label versionLabel = new Label(MessageFormat.format("This {0} runs on Java " + javaVersion + " with JavaFX " + fxVersion + ".", WebAPI.isBrowser() ? "site" : OSUtil.isNative() ? "app" : "application"));
         versionLabel.getStyleClass().add("version-label");
         versionLabel.setWrapText(true);
 
-        labelBox.getChildren().addAll(label1, label2, jfxDescLabel, jfxCentralDescLabel, versionLabel);
+        labelBox.getChildren().addAll(label1, label2, jfxDescLabel, versionLabel);
         labelBox.setMinHeight(Region.USE_PREF_SIZE);
 
         flowPane = new FlowPane();

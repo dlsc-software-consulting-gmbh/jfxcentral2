@@ -13,29 +13,33 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.View;
 
+import java.util.Objects;
+
 public class HelloTopMenuBar extends JFXCentralSampleBase {
 
     private TopMenuBar topMenuBar;
 
     @Override
     protected Region createControl() {
-        topMenuBar = new TopMenuBar(new View() {
-            @Override
-            public String title() {
-                return "Test";
-            }
+        topMenuBar = new TopMenuBar(false);
 
-            @Override
-            public String description() {
-                return "";
-            }
-
-            @Override
-            public Node content() {
-                return new Label();
-            }
-        });
-        topMenuBar.getStylesheets().add(HelloTopMenuBar.class.getResource("test.css").toExternalForm());
+//        new View() {
+//            @Override
+//            public String title() {
+//                return "Test";
+//            }
+//
+//            @Override
+//            public String description() {
+//                return "";
+//            }
+//
+//            @Override
+//            public Node content() {
+//                return new Label();
+//            }
+//        });
+        topMenuBar.getStylesheets().add(Objects.requireNonNull(HelloTopMenuBar.class.getResource("test.css")).toExternalForm());
         return new ScrollPane(topMenuBar);
     }
 

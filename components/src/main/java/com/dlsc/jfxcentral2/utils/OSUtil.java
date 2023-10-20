@@ -55,6 +55,9 @@ public class OSUtil {
     }
 
     public static boolean isNative() {
+        if (Boolean.getBoolean("native")) {
+            return true;
+        }
         return PlatformUtils.isIOS() || PlatformUtils.isAndroid();
     }
 }

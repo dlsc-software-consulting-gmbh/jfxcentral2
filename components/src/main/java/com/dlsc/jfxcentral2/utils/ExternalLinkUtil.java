@@ -16,13 +16,15 @@ public class ExternalLinkUtil {
     public static void setExternalLink(Node node, String url, String description) {
         if (OSUtil.isNative()) {
             node.setOnMouseClicked(evt -> {
-                BrowserService.create().ifPresent(service -> {
-                    try {
-                        service.launchExternalBrowser(url);
-                    } catch (IOException | URISyntaxException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+                if (evt.isStillSincePress()) {
+                    BrowserService.create().ifPresent(service -> {
+                        try {
+                            service.launchExternalBrowser(url);
+                        } catch (IOException | URISyntaxException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                }
             });
         } else {
             LinkUtil.setExternalLink(node, url, description);

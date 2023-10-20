@@ -117,6 +117,12 @@
     -fx-font-size: 16px;
 }
 
+.notch-pane {
+    -fx-background-color: -background;
+    -fx-pref-height: 60px;
+    -fx-min-height: 60px;
+}
+
 .text {
     /*---The "gray" here represents a smoothing strategy for the font, not the color of the text---*/
     -fx-font-smoothing-type: gray;
@@ -1686,6 +1692,7 @@
 .welcome-view:sm .version-label {
     -fx-text-alignment: center;
     -fx-font-size: 14px;
+    -fx-padding: 20px 0px 50px 0px;
 }
 
 .welcome-view:sm .flow-pane {
@@ -1820,10 +1827,6 @@
     -fx-padding: 15px 25px 15px 25px;
 }
 
-.top-menu-bar.native:lg {
-    -fx-padding: 25px 25px 15px 25px;
-}
-
 .top-menu-bar:lg .text-field {
     -fx-pref-width: 197px;
 }
@@ -1851,10 +1854,6 @@
 .top-menu-bar:md {
     -fx-pref-width: -md-width;
     -fx-padding: 15px 25px;
-}
-
-.top-menu-bar.native:md {
-    -fx-padding: 25px 25px;
 }
 
 .top-menu-bar:md .content {
@@ -1888,10 +1887,6 @@
     -fx-pref-width: -sm-width;
     -fx-max-height: 84px;
     -fx-padding: 15px 25px 15px 25px;
-}
-
-.top-menu-bar.native:sm {
-    -fx-padding: 50px 25px 15px 25px;
 }
 
 .top-menu-bar:sm .content {
@@ -1936,18 +1931,19 @@
 }
 
 .copyright-view:lg {
-    -fx-pref-height: 42px;
     -fx-padding: 10px 68px 10px 68px;
 }
 
 .copyright-view:md {
-    -fx-pref-height: 42px;
     -fx-padding: 10px 30px 10px 30px;
 }
 
 .copyright-view:sm {
-    -fx-pref-height: 69px;
     -fx-padding: 10px 30px 10px 30px;
+}
+
+.copyright-view.native:sm {
+    -fx-padding: 10px 30px 25px 30px;
 }
 
 .copyright-view:sm .content {

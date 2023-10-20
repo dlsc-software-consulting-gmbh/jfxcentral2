@@ -248,8 +248,10 @@ public class GradientDesignerView extends FlowPane {
         Rectangle rectangle = new Rectangle(w, h);
         rectangle.getStyleClass().addAll("color-rect");
         rectangle.setOnMouseClicked(e -> {
-            Paint paint = rectangle.getFill();
-            paintPicker.setPaintProperty(paint);
+            if (e.isStillSincePress()) {
+                Paint paint = rectangle.getFill();
+                paintPicker.setPaintProperty(paint);
+            }
         });
         return rectangle;
     }
