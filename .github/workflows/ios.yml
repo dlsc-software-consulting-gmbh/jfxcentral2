@@ -33,11 +33,11 @@ jobs:
           gluon-license: ${{ secrets.GLUON_LICENSE }}
 
       - name: Gluon Build
-        run: ./mvnw -Pios gluonfx:build gluonfx:package
+        run: ./mvnw -pl app -Pios gluonfx:build gluonfx:package
 
       - uses: Apple-Actions/upload-testflight-build@master
         with:
-          app-path: target/gluonfx/arm64-ios/HelloGluon.ipa
+          app-path: app/target/gluonfx/arm64-ios/app.ipa
           issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
           api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
