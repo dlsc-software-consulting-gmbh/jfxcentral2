@@ -27,6 +27,9 @@ jobs:
           api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
           api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
 
+      - name: Project Build
+        run: ./mvnw install
+
       - name: Gluon Build
         run: ./mvnw -pl app -Pios gluonfx:build gluonfx:package
 
