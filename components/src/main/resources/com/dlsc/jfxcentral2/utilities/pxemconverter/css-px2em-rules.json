@@ -1,0 +1,21 @@
+{
+  "convertibleProps": [
+    "-fx-font-size",
+    "-fx-padding",
+    "-fx-pref-width",
+    "-fx-pref-height",
+    "-fx-min-width",
+    "-fx-min-height",
+    "-fx-max-width",
+    "-fx-max-height",
+    "-fx-spacing",
+    "-fx-background-radius",
+    "-fx-border-radius"
+  ],
+  "ignoredProps": [
+    "-fx-border-width",
+    "-fx-stroke-width",
+    "-fx-line-spacing",
+    "-fx-insets"
+  ]
+}

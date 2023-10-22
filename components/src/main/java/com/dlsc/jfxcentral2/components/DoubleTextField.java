@@ -29,7 +29,11 @@ public class DoubleTextField extends TextField {
             if (text == null || text.isEmpty() || SPECIAL_CASES.contains(text)) {
                 return 0.0;
             }
-            return Double.parseDouble(text);
+            try {
+                return Double.parseDouble(text);
+            } catch (NumberFormatException e) {
+                return 0.0;
+            }
         }, textProperty()));
     }
 

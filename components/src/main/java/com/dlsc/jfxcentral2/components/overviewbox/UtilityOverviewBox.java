@@ -4,14 +4,16 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.utilities.cssplayground.CssPlaygroundView;
+import com.dlsc.jfxcentral2.utilities.effectdesigner.EffectDesignerView;
 import com.dlsc.jfxcentral2.utilities.paintpicker.GradientDesignerView;
 import com.dlsc.jfxcentral2.utilities.pathextractor.SVGPathExtractorView;
-import com.dlsc.jfxcentral2.utilities.effectdesigner.EffectDesignerView;
+import com.dlsc.jfxcentral2.utilities.pxemconverter.Px2EmView;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
+import org.kordamp.ikonli.carbonicons.CarbonIcons;
 import org.kordamp.ikonli.elusive.Elusive;
 import org.kordamp.ikonli.fileicons.FileIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -72,6 +74,13 @@ public class UtilityOverviewBox extends OverviewBox<Utility> {
                 EffectDesignerView effectDesignerView = new EffectDesignerView();
                 effectDesignerView.sizeProperty().bind(sizeProperty());
                 return effectDesignerView;
+            } else if (StringUtils.equalsIgnoreCase(model.getId(), "pxtoemconverter")) {
+                setTitle("Pixel-to-EM Converter");
+                setIcon(CarbonIcons.CD_CREATE_EXCHANGE);
+                getStyleClass().add("px-2-em-overview-box");
+                Px2EmView view =  new Px2EmView();
+                view.sizeProperty().bind(sizeProperty());
+                return view;
             }
 
             return createComingSoonPane();

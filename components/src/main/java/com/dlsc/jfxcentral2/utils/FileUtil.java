@@ -49,4 +49,19 @@ public class FileUtil {
         return null;
     }
 
+    /**
+     * Returns the name of the file without its file extension.
+     *
+     * @param file the file
+     * @return the name of the file without its file extension
+     */
+    public static String getFileNameWithoutExtension(File file) {
+        String fileName = file.getName();
+        int dotIndex = fileName.lastIndexOf(".");
+        if (dotIndex == -1) {
+            return fileName;
+        }
+        return fileName.substring(0, dotIndex);
+    }
+
 }
