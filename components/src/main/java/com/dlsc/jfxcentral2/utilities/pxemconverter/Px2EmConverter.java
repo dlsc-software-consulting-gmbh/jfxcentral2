@@ -76,35 +76,6 @@ public class Px2EmConverter {
         Files.writeString(Objects.requireNonNullElse(targetFile, sourceFile).toPath(), content);
     }
 
-    //public static void convert(File sourceFile, File targetFile, List<String> propertiesToConvert, double baseFontSize, boolean addComment) throws IOException {
-    //    String content = Files.readString(sourceFile.toPath());
-    //
-    //    for (String property : propertiesToConvert) {
-    //        String regex = property + "\\s*:\\s*([0-9]+(?:\\.[0-9]+)?(?:em|px)?(?:\\s*[0-9]+(?:\\.[0-9]+)?(?:em|px)?)*)\\s*;?";
-    //        Pattern pattern = Pattern.compile(regex);
-    //        Matcher matcher = pattern.matcher(content);
-    //
-    //        StringBuilder sb = new StringBuilder();
-    //        while (matcher.find()) {
-    //            String values = matcher.group(1);
-    //            if (!values.contains("em")) {
-    //                String emValues = convertToEm(values, baseFontSize);
-    //                if (addComment) {
-    //                    matcher.appendReplacement(sb, property + ": " + emValues + ";" + " /* " + values + " */");
-    //                } else {
-    //                    matcher.appendReplacement(sb, property + ": " + emValues + ";");
-    //                }
-    //            } else {
-    //                matcher.appendReplacement(sb, property + ": " + values + ";");
-    //            }
-    //        }
-    //        matcher.appendTail(sb);
-    //        content = sb.toString();
-    //    }
-    //
-    //    Files.writeString(Objects.requireNonNullElse(targetFile, sourceFile).toPath(), content);
-    //}
-
     public static String convertToEm(String values, double baseFontSize) {
         if (values.trim().endsWith("em")) {
             return values.trim();
