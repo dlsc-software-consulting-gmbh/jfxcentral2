@@ -191,6 +191,54 @@
     -fx-alignment: center;
 }
 
+/** ----------------------------------------------------------------------------
+ * CustomSearchField
+ */
+.custom-search-field {
+    -fx-background-color: -white;
+    -fx-background-radius: 2px;
+    -fx-border-color: -grey-30;
+    -fx-border-radius: 2px;
+    -fx-border-width: 1px;
+    -fx-padding: 0.15em 0.4em;
+    -fx-font-size: 16px;
+}
+
+.custom-search-field.round {
+    -fx-background-radius: 1000px;
+    -fx-border-radius: 1000px;
+}
+
+.custom-search-field > .container .inner-text-field {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-padding: 0.25em 0.05em;
+}
+
+.custom-search-field > .container .ikonli-font-icon {
+    -fx-icon-size: 17px;
+    -fx-icon-color: -grey-60;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+.custom-search-field > .container .right-wrapper {
+    -fx-cursor: hand;
+}
+
+.custom-search-field > .container .right-wrapper:hover .ikonli-font-icon,
+.custom-search-field > .container .right-wrapper:pressed  .ikonli-font-icon{
+    -fx-icon-color: -grey-100;
+}
+
+.custom-search-field.filter-search-field {
+    -fx-background-radius: 26px;
+    -fx-border-color: transparent;
+    -fx-focus-color: -grey-10;
+    -fx-faint-focus-color: transparent;
+    -fx-padding: 6px 10px;
+}
+
 /** -------------------------------
  * MarkdownView
  */
@@ -5304,18 +5352,6 @@
     -fx-alignment: center;
 }
 
-.search-filter-view .search-text-field {
-    -fx-background-radius: 26px;
-    -fx-focus-color: -grey-10;
-    -fx-faint-focus-color: transparent;
-    -fx-padding: 12px 10px 12px 20px;
-}
-
-.search-filter-view .search-field .graphic-wrapper {
-    -fx-padding: 9px;
-    -fx-background-color: transparent;
-}
-
 .search-filter-view:lg .content-box,
 .search-filter-view:lg .content-box > .filters-box {
     -fx-spacing: 30px;
@@ -5421,20 +5457,6 @@
     -fx-padding: 10px 15px;
 }
 
-.search-filter-view .content-box .search-text-field {
-    -fx-padding: 14px 5px;
-}
-
-.search-filter-view .content-box .search-text-field .clear-icon-wrapper {
-    -fx-cursor: hand;
-}
-
-.search-filter-view .content-box .search-text-field .clear-icon {
-    -fx-cursor: hand;
-    -fx-scale-x: 1.2;
-    -fx-scale-y: 1.2;
-}
-
 .collapsible-button,
 .collapsible-button:focused,
 .collapsible-button:selected {
@@ -5492,7 +5514,7 @@
     -fx-spacing: 30px;
 }
 
-.simple-filter-view:md .search-field {
+.simple-filter-view:md .custom-search-field {
     -fx-pref-width: 385px;
 }
 
@@ -5552,7 +5574,7 @@
     -fx-filter-box-orientation: vertical;
 }
 
-.videos-filter-view:md .search-text-field {
+.videos-filter-view:md .custom-search-field {
     -fx-translate-y: 15px;
 }
 
@@ -5710,11 +5732,11 @@
     -fx-max-width: 1305px;
 }
 
-.showcases-filter-view:lg .search-text-field {
+.showcases-filter-view:lg .custom-search-field {
     -fx-min-width: 210px;
 }
 
-.showcases-filter-view:md .search-text-field {
+.showcases-filter-view:md .custom-search-field {
     -fx-min-width: 200px;
     -fx-translate-y: 15px;
 }
@@ -5727,7 +5749,7 @@
     -fx-filter-box-orientation: vertical;
 }
 
-.showcases-filter-view:md .search-text-field {
+.showcases-filter-view:md .custom-search-field {
     -fx-min-width: 200px;
 }
 
@@ -5816,7 +5838,7 @@
     -fx-pref-width: 248px;
 }
 
-.people-filter-view:lg .content-box .search-field {
+.people-filter-view:lg .content-box .custom-search-field {
     -fx-pref-width: 633px;
 }
 
@@ -5828,7 +5850,7 @@
     -fx-pref-width: 161px;
 }
 
-.people-filter-view:md .content-box .search-field {
+.people-filter-view:md .content-box .custom-search-field {
     -fx-pref-width: 216px;
 }
 
@@ -8765,14 +8787,6 @@
     -fx-alignment: center;
 }
 
-.packs-icons-view .top-box .search-text-field {
-    -fx-background-radius: 26px;
-    -fx-focus-color: -grey-10;
-    -fx-faint-focus-color: transparent;
-    -fx-padding: 12px 10px 12px 20px;
-    -fx-pref-width: 100px;
-}
-
 .packs-icons-view .content-box {
     -fx-alignment: top-center;
 }
@@ -9331,10 +9345,19 @@
 .gradient-designer-view .named-colors-view .top-box {
     -fx-alignment: center;
     -fx-spacing: 15px;
+    -fx-padding: 3px 0 0 0;
 }
 
-.gradient-designer-view .named-colors-view .top-box .search-text-field {
-    -fx-pref-width: 202px;
+.gradient-designer-view .named-colors-view .top-box .custom-search-field {
+    -fx-padding: 0px 5px;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+    -fx-border-color: -grey-10;
+}
+
+.gradient-designer-view .named-colors-view .top-box .custom-search-field .inner-text-field {
+    -fx-pref-width: 156px;
+    -fx-max-width: 156px;
 }
 
 .gradient-designer-view .named-colors-view .tile-pane {

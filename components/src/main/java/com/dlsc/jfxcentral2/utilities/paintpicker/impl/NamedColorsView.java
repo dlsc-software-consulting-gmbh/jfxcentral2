@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.utilities.paintpicker.impl;
 
-import com.dlsc.gemsfx.SearchTextField;
+import com.dlsc.jfxcentral2.components.CustomSearchField;
 import com.dlsc.jfxcentral2.utilities.paintpicker.impl.datamodel.NamedColor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -35,7 +35,7 @@ public class NamedColorsView extends VBox {
             tilePane.getChildren().add(rectangle);
         }
 
-        SearchTextField searchField = new SearchTextField();
+        CustomSearchField searchField = new CustomSearchField();
         searchField.setPromptText("Search color");
 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
