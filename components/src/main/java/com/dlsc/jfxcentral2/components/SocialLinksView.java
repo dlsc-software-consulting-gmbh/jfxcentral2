@@ -32,6 +32,7 @@ public class SocialLinksView extends VBox {
 
         twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
         twitterLinkBtn.getStyleClass().add("twitter-link-btn");
+        twitterLinkBtn.setMaxWidth(Double.MAX_VALUE);
         twitterLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
         twitterLinkBtn.visibleProperty().bind(twitterUrlProperty().isNotEmpty());
         twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
@@ -41,6 +42,7 @@ public class SocialLinksView extends VBox {
         mastodonLinkBtn = new Button("MASTODON", new FontIcon(CoreUiBrands.MASTODON));
         mastodonLinkBtn.getStyleClass().add("mastodon-link-btn");
         mastodonLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        mastodonLinkBtn.setMaxWidth(Double.MAX_VALUE);
         mastodonLinkBtn.visibleProperty().bind(mastodonUrlProperty().isNotEmpty());
         mastodonLinkBtn.managedProperty().bind(mastodonLinkBtn.visibleProperty());
         mastodonLinkBtn.setFocusTraversable(false);
@@ -48,7 +50,8 @@ public class SocialLinksView extends VBox {
 
         redditLinkBtn = new Button("REDDIT", new FontIcon(IkonUtil.reddit));
         redditLinkBtn.getStyleClass().add("reddit-link-btn");
-        twitterLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        redditLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        redditLinkBtn.setMaxWidth(Double.MAX_VALUE);
         redditLinkBtn.visibleProperty().bind(redditUrlProperty().isNotEmpty());
         redditLinkBtn.managedProperty().bind(redditLinkBtn.visibleProperty());
         redditLinkBtn.setFocusTraversable(false);
@@ -57,6 +60,7 @@ public class SocialLinksView extends VBox {
         linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(IkonUtil.linkedin));
         linkedInLinkBtn.getStyleClass().add("linkedin-link-btn");
         linkedInLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        linkedInLinkBtn.setMaxWidth(Double.MAX_VALUE);
         linkedInLinkBtn.visibleProperty().bind(linkedInUrlProperty().isNotEmpty());
         linkedInLinkBtn.managedProperty().bind(linkedInLinkBtn.visibleProperty());
         linkedInLinkBtn.setFocusTraversable(false);
@@ -65,6 +69,7 @@ public class SocialLinksView extends VBox {
         websiteLinkBtn = new Button("WEBSITE", new FontIcon(IkonUtil.website));
         websiteLinkBtn.getStyleClass().add("website-link-btn");
         websiteLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        websiteLinkBtn.setMaxWidth(Double.MAX_VALUE);
         websiteLinkBtn.visibleProperty().bind(websiteUrlProperty().isNotEmpty());
         websiteLinkBtn.managedProperty().bind(websiteLinkBtn.visibleProperty());
         websiteLinkBtn.setFocusTraversable(false);
@@ -73,6 +78,7 @@ public class SocialLinksView extends VBox {
         githubLinkBtn = new Button("GITHUB", new FontIcon(IkonUtil.github));
         githubLinkBtn.getStyleClass().add("github-link-btn");
         githubLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        githubLinkBtn.setMaxWidth(Double.MAX_VALUE);
         githubLinkBtn.visibleProperty().bind(githubUrlProperty().isNotEmpty());
         githubLinkBtn.managedProperty().bind(githubLinkBtn.visibleProperty());
         githubLinkBtn.setFocusTraversable(false);
@@ -81,6 +87,7 @@ public class SocialLinksView extends VBox {
         facebookLinkBtn = new Button("FACEBOOK", new FontIcon(IkonUtil.facebook));
         facebookLinkBtn.getStyleClass().add("facebook-link-btn");
         facebookLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        facebookLinkBtn.setMaxWidth(Double.MAX_VALUE);
         facebookLinkBtn.visibleProperty().bind(facebookUrlProperty().isNotEmpty());
         facebookLinkBtn.managedProperty().bind(facebookLinkBtn.visibleProperty());
         facebookLinkBtn.setFocusTraversable(false);
@@ -89,6 +96,7 @@ public class SocialLinksView extends VBox {
         mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
         mailLinkBtn.getStyleClass().add("mail-link-btn");
         mailLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        mailLinkBtn.setMaxWidth(Double.MAX_VALUE);
         mailLinkBtn.visibleProperty().bind(mailUrlProperty().isNotEmpty());
         mailLinkBtn.managedProperty().bind(mailLinkBtn.visibleProperty());
         mailLinkBtn.setFocusTraversable(false);
