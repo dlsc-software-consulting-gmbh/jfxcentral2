@@ -37,7 +37,7 @@ public class FlipView extends ControlBase {
 
     private static final Duration DEFAULT_FLIP_TIME = Duration.millis(500);
 
-    private static final boolean DEFAULT_ANIMATE_ON_FLIP = !WebAPI.isBrowser() && !OSUtil.isNative();
+    private static final boolean DEFAULT_ANIMATE_ON_FLIP = !WebAPI.isBrowser() && !OSUtil.isAndroidOrIOS();
 
     private final FlipViewSkin flipViewSkin;
 

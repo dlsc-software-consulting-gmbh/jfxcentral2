@@ -133,6 +133,11 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"com.dlsc.jfxcentral.data.model.Learn",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"com.dlsc.jfxcentral.data.model.Library",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]

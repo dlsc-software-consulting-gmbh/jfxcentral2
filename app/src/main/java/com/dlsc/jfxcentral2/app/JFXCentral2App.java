@@ -57,15 +57,11 @@ import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.app.utils.LoggerOutputStream;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
-import com.dlsc.jfxcentral2.components.Mode;
-import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
-import com.dlsc.jfxcentral2.utils.WebAPIUtil;
 import com.gluonhq.attach.display.DisplayService;
-import com.gluonhq.attach.statusbar.StatusBarService;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
@@ -98,7 +94,6 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Stack;
 import java.util.function.Supplier;
 
 public class JFXCentral2App extends Application {
@@ -116,7 +111,7 @@ public class JFXCentral2App extends Application {
 
     @Override
     public void start(Stage stage) {
-        if (!OSUtil.isNative()) {
+        if (!OSUtil.isAndroidOrIOS()) {
             // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
             BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
             bi.createGraphics();
@@ -125,7 +120,7 @@ public class JFXCentral2App extends Application {
         if (!WebAPI.isBrowser()) {
             System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
 
-            if (!OSUtil.isNative()) {
+            if (!OSUtil.isAndroidOrIOS()) {
                 System.setProperty("prism.lcdtext", "false");
 
                 if (Taskbar.isTaskbarSupported()) {
@@ -154,7 +149,7 @@ public class JFXCentral2App extends Application {
         routeNode.start(sessionManager);
 
         // tray icon
-        if (!WebAPI.isBrowser() && !OSUtil.isNative() && SystemTray.isSupported()) {
+        if (!WebAPI.isBrowser() && !OSUtil.isAndroidOrIOS() && SystemTray.isSupported()) {
             RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
                 if (trayIconManager == null) {
                     trayIconManager = new TrayIconManager(stage, sessionManager);
@@ -166,7 +161,7 @@ public class JFXCentral2App extends Application {
 
         Parent parent = routeNode;
 
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             StackPane notchPane = new StackPane();
             notchPane.getStyleClass().add("notch-pane");
             VBox.setVgrow(routeNode, Priority.ALWAYS);
@@ -182,8 +177,8 @@ public class JFXCentral2App extends Application {
         // customs stage for decorations / the chrome
         CustomStage customStage = new CustomStage(stage, parent, sessionManager, size);
         customStage.setCloseHandler(() -> {
-            if (!OSUtil.isNative()) {
-                if (SystemTray.isSupported()) {
+            if (!OSUtil.isAndroidOrIOS()) {
+                if (SystemTray.isSupported() && trayIconManager != null) {
                     trayIconManager.hide();
                 }
             }
@@ -306,7 +301,7 @@ public class JFXCentral2App extends Application {
 
     public static void main(String[] args) {
         Logger logger = LogManager.getLogger();
-        if (!OSUtil.isNative()) {
+        if (!OSUtil.isAndroidOrIOS()) {
             System.setOut(new PrintStream(new LoggerOutputStream(logger, Level.INFO), true));
             System.setErr(new PrintStream(new LoggerOutputStream(logger, Level.ERROR), true));
         }

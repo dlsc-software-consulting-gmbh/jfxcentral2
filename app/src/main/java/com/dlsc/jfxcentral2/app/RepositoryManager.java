@@ -5,7 +5,7 @@ import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import one.jpro.platform.internal.openlink.util.PlatformUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jgit.api.CloneCommand;
@@ -13,16 +13,17 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.merge.ContentMergeStrategy;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
-import org.eclipse.jgit.util.FS;
 import org.eclipse.jgit.util.FS_POSIX;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.List;
 import java.util.Locale;
 
 public class RepositoryManager {
+
     private static final Logger LOGGER = LogManager.getLogger(RepositoryManager.class);
     private static final BooleanProperty repositoryUpdated = new SimpleBooleanProperty();
     private static final String GITHUB_HOST = "github.com";
@@ -46,7 +47,17 @@ public class RepositoryManager {
                 initialLoad(monitor);
                 repositoryUpdated.set(true);
             } catch (Exception e) {
-                LOGGER.error("Failed to update the repository", e);
+                LOGGER.error("failed to update the repository", e);
+                monitor.beginTask("Repository operation failed.\nRemoving application data.\nPlease relaunch.", -1);
+                File repositoryDirectory = getRepositoryDirectory();
+                LOGGER.info("repository clone / update failed, deleting it ...");
+                if (repositoryDirectory.exists()) {
+                    try {
+                        FileUtils.forceDelete(repositoryDirectory);
+                    } catch (IOException ex) {
+                        LOGGER.error("problem when deleting repository directory", ex);
+                    }
+                }
             }
         }
     }
@@ -62,7 +73,7 @@ public class RepositoryManager {
     private static void initialLoad(ProgressMonitor monitor) throws Exception {
         // Network not available, skip the initial load
         if (!isNetworkAvailable()) {
-            LOGGER.warn("Network not available.");
+            LOGGER.warn("network not available.");
             Platform.runLater(() -> {
                 monitor.beginTask("Network not available.", 1);
                 monitor.endTask();
@@ -76,9 +87,9 @@ public class RepositoryManager {
 
             if (isCountryEqualToChina()) {
                 repoUrl = shouldUseGiteeMirror() ? GITEE_REPOSITORY_URL : GITHUB_REPOSITORY_URL;
-                LOGGER.info("Using {} as the repository URL.", repoUrl);
+                LOGGER.info("using {} as the repository URL.", repoUrl);
                 Platform.runLater(() -> {
-                    monitor.beginTask("Checking network...", 1);
+                    monitor.beginTask("checking network...", 1);
                     monitor.endTask();
                 });
             }
@@ -87,10 +98,12 @@ public class RepositoryManager {
                     .setProgressMonitor(monitor)
                     .setURI(repoUrl)
                     .setBranch("live")
+                    .setCloneAllBranches(false)
+                    .setBranchesToClone(List.of("refs/heads/live"))
                     .setDepth(1)
                     .setDirectory(repoDirectory);
 
-            if (OSUtil.isNative()) {
+            if (OSUtil.isAndroidOrIOS()) {
                 cloneCmd = cloneCmd.setFs(new FS_POSIX() {
                     @Override
                     public boolean supportsExecute() {
@@ -131,7 +144,7 @@ public class RepositoryManager {
             socket.connect(new InetSocketAddress(host, HTTP_PORT), TIMEOUT);
             return System.currentTimeMillis() - startTime;
         } catch (IOException e) {
-            LOGGER.warn("Failed to ping host: " + host, e);
+            LOGGER.warn("failed to ping host: " + host, e);
             return TIMEOUT;
         }
     }
@@ -159,7 +172,7 @@ public class RepositoryManager {
             socket.connect(socketAddress, TIMEOUT);
             return true;
         } catch (Exception unknownHost) {
-            LOGGER.warn("Host not available: " + hostName, unknownHost);
+            LOGGER.warn("host not available: " + hostName, unknownHost);
             return false;
         }
     }

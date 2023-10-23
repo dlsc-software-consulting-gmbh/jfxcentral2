@@ -62,7 +62,7 @@ public class NavigationView extends HBox {
         back.setOnContextMenuRequested(evt -> showMenu(back, sessionManager.getHistoryBackward()));
         forward.setOnContextMenuRequested(evt -> showMenu(forward, sessionManager.getHistoryForwards()));
 
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             getChildren().setAll(back, refreshButton, forward);
         } else {
             getChildren().setAll(refreshButton, back, forward);

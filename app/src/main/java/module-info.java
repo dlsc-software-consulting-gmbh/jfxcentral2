@@ -1,4 +1,5 @@
 open module com.dlsc.jfxcentral2.app {
+
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -8,19 +9,27 @@ open module com.dlsc.jfxcentral2.app {
     requires com.gluonhq.attach.browser;
     requires com.gluonhq.attach.statusbar;
 
+    requires org.apache.commons.io;
+
     requires jfxcentral.data;
-    requires org.eclipse.jgit;
     requires fr.brouillard.oss.cssfx;
+
+    requires com.dlsc.jfxcentral2.iconfont;
     requires com.dlsc.jfxcentral2.components;
+    requires com.dlsc.gemsfx;
+
+    requires com.dustinredmond.fxtrayicon;
+
     requires one.jpro.platform.routing.core;
     requires one.jpro.platform.routing.dev;
-    requires com.dlsc.gemsfx;
+
+    requires org.eclipse.jgit;
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;
 
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;
-    // ikonli icon packs START
+
     requires org.kordamp.ikonli.antdesignicons;
     requires org.kordamp.ikonli.bootstrapicons;
     requires org.kordamp.ikonli.boxicons;
@@ -78,9 +87,6 @@ open module com.dlsc.jfxcentral2.app {
     requires org.kordamp.ikonli.whhg;
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
-    requires com.dustinredmond.fxtrayicon;
-    requires com.dlsc.jfxcentral2.iconfont;
-    // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.app;
     exports com.dlsc.jfxcentral2.app.pages;

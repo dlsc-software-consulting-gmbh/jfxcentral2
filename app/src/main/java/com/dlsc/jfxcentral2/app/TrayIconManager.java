@@ -49,7 +49,7 @@ public class TrayIconManager {
             trayIcon = new FXTrayIcon(stage);
             trayIcon.setGraphic(image.getScaledInstance(trayIconSize.width, trayIconSize.height, Image.SCALE_SMOOTH));
         } else {
-            trayIcon = new FXTrayIcon(stage, Objects.requireNonNull(JFXCentral2App.class.getResource("tray-icon2.png")), 350, 210);
+            trayIcon = new FXTrayIcon(stage, Objects.requireNonNull(JFXCentral2App.class.getResource("tray-icon2-dark.png")), 350, 210);
         }
         refresh();
         trayIcon.show();

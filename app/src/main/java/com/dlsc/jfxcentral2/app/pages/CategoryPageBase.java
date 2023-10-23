@@ -50,7 +50,7 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         ModelGridView<T> gridView = createGridView();
         gridView.sizeProperty().bind(sizeProperty());
         gridView.setTileViewProvider(getTileViewProvider());
-        if (!OSUtil.isNative()) {
+        if (!OSUtil.isAndroidOrIOS()) {
             gridView.setDetailNodeProvider(getDetailNodeProvider());
         }
         gridView.setColumns(getNumberOfGridViewColumns());

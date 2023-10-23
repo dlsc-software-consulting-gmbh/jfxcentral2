@@ -54,7 +54,7 @@ public class OSUtil {
         return getDesktop() == Desktop.UNKNOWN;
     }
 
-    public static boolean isNative() {
+    public static boolean isAndroidOrIOS() {
         if (Boolean.getBoolean("native")) {
             return true;
         }

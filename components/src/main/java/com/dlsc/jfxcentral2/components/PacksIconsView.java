@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.gemsfx.SearchTextField;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.components.gridview.IkonGridView;
@@ -34,19 +33,25 @@ import org.kordamp.ikonli.Ikon;
 
 import java.util.Comparator;
 import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class PacksIconsView extends PaneBase {
+
     private static final int SEARCH_DELAY = 200;
-    private final SearchTextField searchField;
+
+    private final CustomSearchField searchField;
     private final StackPane topWrapper;
     private final HBox sortComboBoxWrapper;
     private final HBox scopeComboBoxWrapper;
     private final StringProperty searchText = new SimpleStringProperty(this, "searchText", "");
-    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
+    private final ScheduledExecutorService executorService  = Executors.newSingleThreadScheduledExecutor(r -> {
+        Thread thread = new Thread(r);
+        thread.setName("Packs Search Thread");
+        thread.setDaemon(true);
+        return thread;
+    });
+
     private final IkonGridView ikonGridView;
     private final ComboBox<Scope> scopeComboBox;
     private ScheduledFuture<?> future;
@@ -63,7 +68,8 @@ public class PacksIconsView extends PaneBase {
         getStyleClass().addAll("packs-icons-view");
 
         // top
-        searchField = new SearchTextField();
+        searchField = new CustomSearchField(true);
+        searchField.getStyleClass().add("filter-search-field");
         searchField.setFocusTraversable(false);
         searchField.textProperty().addListener((ob, ov, str) -> {
             if (future != null) {

@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral2.components.tiles.UtilityTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,6 +59,9 @@ public class UtilitiesCategoryPage extends CategoryPageBase<Utility> {
 
     @Override
     protected ObservableList<Utility> getCategoryItems() {
+        if (OSUtil.isAndroidOrIOS()) {
+            return FXCollections.observableArrayList(DataRepository2.getInstance().getUtilities().stream().filter(Utility::isNativeSupported).toList());
+        }
         return FXCollections.observableArrayList(DataRepository2.getInstance().getUtilities());
     }
 

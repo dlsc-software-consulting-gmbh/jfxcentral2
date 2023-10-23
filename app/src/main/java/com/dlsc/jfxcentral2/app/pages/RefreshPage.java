@@ -22,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.eclipse.jgit.lib.ProgressMonitor;
 
@@ -86,7 +87,7 @@ public class RefreshPage extends PageBase {
         setupView.setVisible(RepositoryManager.isFirstTimeSetup());
 
         if (!RepositoryManager.isFirstTimeSetup()) {
-            performUpdate();
+            performUpdate(true);
         }
 
         return new StackPane(updateView, setupView);
@@ -110,7 +111,7 @@ public class RefreshPage extends PageBase {
             updateView.setManaged(true);
             setupView.setVisible(false);
             setupView.setManaged(false);
-            performUpdate();
+            performUpdate(false);
         });
 
         Button exitButton = new Button("EXIT");
@@ -138,6 +139,7 @@ public class RefreshPage extends PageBase {
         logo.getStyleClass().addAll("jfx-central-logo", "color", "small");
 
         Label label = new Label();
+        label.setTextAlignment(TextAlignment.CENTER);
         label.textProperty().bind(Bindings.createStringBinding(() -> {
             if (loadMessage.get().toLowerCase().startsWith("pull")) {
                 return "Checking for updates ...";
@@ -161,7 +163,11 @@ public class RefreshPage extends PageBase {
         return wrapper;
     }
 
-    private void performUpdate() {
+    /*
+     * The "refresh" parameter states whether the update is called due to the first setup of the
+     * data repository or because of a call to the refresh page.
+     */
+    private void performUpdate(boolean refresh) {
         Thread thread = new Thread(() -> RepositoryManager.updateRepository(new ProgressMonitor() {
 
             double total;
@@ -177,12 +183,22 @@ public class RefreshPage extends PageBase {
 
             @Override
             public void beginTask(String taskName, int totalWork) {
-                Platform.runLater(() -> {
-                    loadMessage.set(taskName);
-                    loadPercentage.set(0);
-                });
-                acc = 0;
-                total = totalWork;
+                // clean up some messy message we get
+                final String name = taskName.replace("remote: ", "");
+
+                if (totalWork == -1) {
+                    Platform.runLater(() -> {
+                        loadMessage.set(name);
+                        loadPercentage.set(-1);
+                    });
+                } else {
+                    Platform.runLater(() -> {
+                        loadMessage.set(name);
+                        loadPercentage.set(0);
+                    });
+                    acc = 0;
+                    total = totalWork;
+                }
             }
 
             @Override
@@ -198,7 +214,9 @@ public class RefreshPage extends PageBase {
 
             @Override
             public void endTask() {
-                DataRepository2.getInstance().reload();
+                if (refresh) {
+                    DataRepository2.getInstance().reload();
+                }
             }
 
             @Override
