@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.format.DateTimeFormatter;
 
@@ -31,32 +32,17 @@ public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
 
     @Override
     protected Node createTopNode() {
-        Label locationHeader = new Label("LOCATION");
-        locationHeader.getStyleClass().add("field-title");
+        FieldGroup locationGroup = new FieldGroup("LOCATION", new String[]{"field-value"});
+        locationLabel = locationGroup.getLabel();
 
-        locationLabel = new Label();
-        locationLabel.getStyleClass().add("field-value");
-        locationLabel.setWrapText(true);
+        FieldGroup domainGroup = new FieldGroup("DOMAIN", new String[]{"field-value"});
+        domainLabel = domainGroup.getLabel();
 
-        Label domainHeader = new Label("DOMAIN");
-        domainHeader.getStyleClass().add("field-title");
+        FieldGroup createdByGroup = new FieldGroup("CREATED BY", new String[]{"field-value", "created-by-label"});
+        createdByLabel = createdByGroup.getLabel();
 
-        domainLabel = new Label();
-        domainLabel.getStyleClass().add("field-value");
-        domainLabel.setWrapText(true);
-
-        Label createdByHeader = new Label("CREATED BY");
-        createdByHeader.getStyleClass().add("field-title");
-
-        createdByLabel = new Label();
-        createdByLabel.getStyleClass().addAll("field-value", "created-by-label");
-        createdByLabel.setWrapText(true);
-
-        Label createdOnHeader = new Label("CREATED ON");
-        createdOnHeader.getStyleClass().add("field-title");
-
-        createdOnLabel = new Label();
-        createdOnLabel.getStyleClass().add("field-value");
+        FieldGroup createdOnGroup = new FieldGroup("CREATED ON", new String[]{"field-value"});
+        createdOnLabel = createdOnGroup.getLabel();
 
         setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "realworld/" + getModel().getId());
         fillData();
@@ -67,7 +53,15 @@ public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
             for (int i = 0; i < 4; i++) {
                 ColumnConstraints columnConstraints = new ColumnConstraints();
                 columnConstraints.setHalignment(HPos.LEFT);
-                columnConstraints.setHgrow(Priority.ALWAYS);
+                if (i == 0) {
+                    columnConstraints.hgrowProperty().bind(locationLabel.visibleProperty().map(b -> b ? Priority.ALWAYS : Priority.NEVER));
+                }else if (i == 1) {
+                    columnConstraints.hgrowProperty().bind(domainLabel.visibleProperty().map(b -> b ? Priority.ALWAYS : Priority.NEVER));
+                }else if (i == 2) {
+                    columnConstraints.hgrowProperty().bind(createdByLabel.visibleProperty().map(b -> b ? Priority.ALWAYS : Priority.NEVER));
+                } else {
+                    columnConstraints.hgrowProperty().bind(createdOnLabel.visibleProperty().map(b -> b ? Priority.ALWAYS : Priority.NEVER));
+                }
                 gridPane.getColumnConstraints().add(columnConstraints);
             }
             for (int i = 0; i < 2; i++) {
@@ -75,24 +69,24 @@ public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
                 rowConstraints.setValignment(VPos.TOP);
                 gridPane.getRowConstraints().add(rowConstraints);
             }
-            gridPane.add(locationHeader, 0, 0);
+            gridPane.add(locationGroup.getHeader(), 0, 0);
             gridPane.add(locationLabel, 0, 1);
-            gridPane.add(domainHeader, 1, 0);
+            gridPane.add(domainGroup.getHeader(), 1, 0);
             gridPane.add(domainLabel, 1, 1);
-            gridPane.add(createdByHeader, 2, 0);
+            gridPane.add(createdByGroup.getHeader(), 2, 0);
             gridPane.add(createdByLabel, 2, 1);
-            gridPane.add(createdOnHeader, 3, 0);
+            gridPane.add(createdOnGroup.getHeader(), 3, 0);
             gridPane.add(createdOnLabel, 3, 1);
             return gridPane;
         } else {
             VBox topBox = new VBox(
-                    locationHeader,
+                    locationGroup.getHeader(),
                     locationLabel,
-                    domainHeader,
+                    domainGroup.getHeader(),
                     domainLabel,
-                    createdByHeader,
+                    createdByGroup.getHeader(),
                     createdByLabel,
-                    createdOnHeader,
+                    createdOnGroup.getHeader(),
                     createdOnLabel
             );
             createdOnLabel.getStyleClass().add("last");
@@ -117,6 +111,32 @@ public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
             createdByLabel.setText("");
             createdOnLabel.setText("");
             setMarkdown("");
+        }
+    }
+
+    private static class FieldGroup {
+        private final Label header;
+        private final Label label;
+
+        public FieldGroup(String headerText, String[] labelStyles) {
+            header = new Label(headerText);
+            header.getStyleClass().add("field-title");
+            header.managedProperty().bind(header.visibleProperty());
+
+            label = new Label();
+            label.getStyleClass().addAll(labelStyles);
+            label.setWrapText(true);
+            label.managedProperty().bind(label.visibleProperty());
+            label.visibleProperty().bind(label.textProperty().map(s -> !StringUtils.isEmpty(s) && !StringUtils.equalsIgnoreCase(s, "Unknown")));
+            header.visibleProperty().bind(label.visibleProperty());
+        }
+
+        public Label getHeader() {
+            return header;
+        }
+
+        public Label getLabel() {
+            return label;
         }
     }
 }

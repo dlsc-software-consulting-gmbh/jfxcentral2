@@ -34,6 +34,7 @@ import org.kordamp.ikonli.hawcons.HawconsStroke;
 import org.kordamp.ikonli.ionicons4.Ionicons4IOS;
 import org.kordamp.ikonli.lineawesome.LineAwesomeSolid;
 import org.kordamp.ikonli.material.Material;
+import org.kordamp.ikonli.material2.Material2AL;
 import org.kordamp.ikonli.material2.Material2MZ;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
@@ -124,6 +125,7 @@ public interface IkonUtil {
     Ikon ury = Subway.RECTANGLE_2;
     Ikon fraction = CarbonIcons.REFLECT_VERTICAL;
     Ikon topOffset = AntDesignIconsOutlined.VERTICAL_ALIGN_TOP;
+    Ikon font = Material2AL.FORMAT_SIZE;
 
     static Ikon getModelIkon(ModelObject mo) {
         return getModelIkon(mo.getClass());

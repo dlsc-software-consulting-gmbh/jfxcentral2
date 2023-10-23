@@ -110,6 +110,8 @@
 
     -mdfx-bq-color-border: #4488cc; /* the blockquote's border color */
     -mdfx-bq-color-background: #0000ff0c; /* the blockquote's background color */
+
+    -fx-focus-traversable: false;
 }
 
 .root .normal-page {
@@ -271,6 +273,8 @@
 }
 
 .normal-page .text-field {
+    -fx-focus-color: -grey-30;
+    -fx-faint-focus-color: transparent;
     -fx-focus-color: -grey-30;
     -fx-faint-focus-color: transparent;
     -fx-background-radius: 0px;
@@ -9746,4 +9750,124 @@
 .effect-flow-pane .copy-effect-code-button .context-menu .menu-item:focused {
     -fx-background-color: transparent;
     -fx-border-width: 0;
+}
+
+/** ----------------------------------------------------------------------------
+ * Px2EmView
+ */
+.px-2-em-view > .container {
+    -fx-spacing: 10px;
+}
+
+.px-2-em-view > .container .font-size-pane {
+    -fx-alignment: bottom-left;
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+}
+
+.px-2-em-view > .container .font-size-pane .text-field {
+    -fx-max-width: 50px;
+}
+
+.px-2-em-view > .container .font-size-pane .convert-tips-label {
+    -fx-padding: 0 30px 0 0;
+}
+
+.px-2-em-view > .container .size-tips-label {
+    -fx-text-fill: -grey-60;
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 17px;
+}
+
+.px-2-em-view > .container .size-tips-label .ikonli-font-icon {
+    -fx-icon-color: -grey-60;
+}
+
+.px-2-em-view > .container .file-handler-view {
+    -fx-background-color: #f7f7f7;
+    -fx-padding: 5px 0;
+    -fx-border-color: -grey-60;
+    -fx-border-style: dashed;
+    -fx-border-width: 1px;
+}
+
+.px-2-em-view > .container .file-handler-view.active {
+    -fx-background-color: -grey-10;
+}
+
+.px-2-em-view > .container .list-selection-view {
+    -fx-padding: 5px 0;
+}
+
+.px-2-em-view > .container .list-selection-view > .grid-pane {
+    -fx-vgap: 5px;
+    -fx-hgap: 5px;
+}
+
+.px-2-em-view > .container .list-selection-view > .grid-pane .list-view {
+    -fx-focus-color: -grey-30;
+    -fx-faint-focus-color: transparent;
+}
+
+.px-2-em-view .list-selection-view > .grid-pane .list-view .list-cell:selected {
+    -fx-background-color: -light-blue;
+    -fx-text-fill: -grey-100;
+}
+
+.px-2-em-view .list-selection-view > .grid-pane .button {
+    -fx-background-radius: 0px;
+    -fx-background-color: -grey-10;
+    -fx-border-color: -grey-30;
+}
+
+.px-2-em-view .list-selection-view > .grid-pane .button:hover {
+    -fx-background-color: derive(-grey-10, 30%)
+}
+
+.px-2-em-view .list-selection-view > .grid-pane .button:pressed {
+    -fx-background-color: derive(-grey-10, -20%)
+}
+
+.px-2-em-view > .container .file-name-box {
+    -fx-alignment: center-left;
+    -fx-spacing: 5px;
+}
+
+.px-2-em-view > .container .name-label {
+    -fx-pref-width: 115px;
+    -fx-min-width: 115px;
+}
+
+.px-2-em-view > .container .name-label .ikonli-font-icon {
+    -fx-icon-size: 25px;
+}
+
+.px-2-em-view > .container .name-value-label {
+    -fx-text-overrun: leading-ellipsis;
+    -fx-text-fill: -grey-60;
+}
+
+.px-2-em-view > .container .check-box {
+    -fx-icon-size: 25px;
+    -fx-border-color: transparent;
+}
+
+.px-2-em-view > .container .check-box .box {
+    -fx-border-color: -grey-10;
+}
+
+.px-2-em-view > .container .convert-button {
+    -fx-font-size: 18px;
+    -fx-graphic-text-gap: 10px;
+}
+
+.px-2-em-view > .container .convert-button .ikonli-font-icon {
+    -fx-icon-size: 25px;
+    -fx-translate-y: 2px;
+}
+
+.px-2-em-view > .container .eg-label {
+    -fx-text-fill: -grey-30;
+    -fx-font-family: "JetBrains Mono Medium";
+    -fx-padding: 0 0 0 35px;
 }
