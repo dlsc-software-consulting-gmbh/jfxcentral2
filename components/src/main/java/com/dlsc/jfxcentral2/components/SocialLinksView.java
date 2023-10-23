@@ -8,12 +8,15 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.coreui.CoreUiBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class SocialLinksView extends FlowPane {
+public class SocialLinksView extends VBox {
 
     private final Button twitterLinkBtn;
     private final Button mastodonLinkBtn;
@@ -29,6 +32,7 @@ public class SocialLinksView extends FlowPane {
 
         twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
         twitterLinkBtn.getStyleClass().add("twitter-link-btn");
+        twitterLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
         twitterLinkBtn.visibleProperty().bind(twitterUrlProperty().isNotEmpty());
         twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
         twitterLinkBtn.setFocusTraversable(false);
@@ -36,6 +40,7 @@ public class SocialLinksView extends FlowPane {
 
         mastodonLinkBtn = new Button("MASTODON", new FontIcon(CoreUiBrands.MASTODON));
         mastodonLinkBtn.getStyleClass().add("mastodon-link-btn");
+        mastodonLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
         mastodonLinkBtn.visibleProperty().bind(mastodonUrlProperty().isNotEmpty());
         mastodonLinkBtn.managedProperty().bind(mastodonLinkBtn.visibleProperty());
         mastodonLinkBtn.setFocusTraversable(false);
@@ -43,6 +48,7 @@ public class SocialLinksView extends FlowPane {
 
         redditLinkBtn = new Button("REDDIT", new FontIcon(IkonUtil.reddit));
         redditLinkBtn.getStyleClass().add("reddit-link-btn");
+        twitterLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
         redditLinkBtn.visibleProperty().bind(redditUrlProperty().isNotEmpty());
         redditLinkBtn.managedProperty().bind(redditLinkBtn.visibleProperty());
         redditLinkBtn.setFocusTraversable(false);
@@ -50,6 +56,7 @@ public class SocialLinksView extends FlowPane {
 
         linkedInLinkBtn = new Button("LINKEDIN", new FontIcon(IkonUtil.linkedin));
         linkedInLinkBtn.getStyleClass().add("linkedin-link-btn");
+        linkedInLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
         linkedInLinkBtn.visibleProperty().bind(linkedInUrlProperty().isNotEmpty());
         linkedInLinkBtn.managedProperty().bind(linkedInLinkBtn.visibleProperty());
         linkedInLinkBtn.setFocusTraversable(false);
@@ -57,6 +64,7 @@ public class SocialLinksView extends FlowPane {
 
         websiteLinkBtn = new Button("WEBSITE", new FontIcon(IkonUtil.website));
         websiteLinkBtn.getStyleClass().add("website-link-btn");
+        websiteLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
         websiteLinkBtn.visibleProperty().bind(websiteUrlProperty().isNotEmpty());
         websiteLinkBtn.managedProperty().bind(websiteLinkBtn.visibleProperty());
         websiteLinkBtn.setFocusTraversable(false);
@@ -64,6 +72,7 @@ public class SocialLinksView extends FlowPane {
 
         githubLinkBtn = new Button("GITHUB", new FontIcon(IkonUtil.github));
         githubLinkBtn.getStyleClass().add("github-link-btn");
+        githubLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
         githubLinkBtn.visibleProperty().bind(githubUrlProperty().isNotEmpty());
         githubLinkBtn.managedProperty().bind(githubLinkBtn.visibleProperty());
         githubLinkBtn.setFocusTraversable(false);
@@ -71,6 +80,7 @@ public class SocialLinksView extends FlowPane {
 
         facebookLinkBtn = new Button("FACEBOOK", new FontIcon(IkonUtil.facebook));
         facebookLinkBtn.getStyleClass().add("facebook-link-btn");
+        facebookLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
         facebookLinkBtn.visibleProperty().bind(facebookUrlProperty().isNotEmpty());
         facebookLinkBtn.managedProperty().bind(facebookLinkBtn.visibleProperty());
         facebookLinkBtn.setFocusTraversable(false);
@@ -78,6 +88,7 @@ public class SocialLinksView extends FlowPane {
 
         mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
         mailLinkBtn.getStyleClass().add("mail-link-btn");
+        mailLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
         mailLinkBtn.visibleProperty().bind(mailUrlProperty().isNotEmpty());
         mailLinkBtn.managedProperty().bind(mailLinkBtn.visibleProperty());
         mailLinkBtn.setFocusTraversable(false);

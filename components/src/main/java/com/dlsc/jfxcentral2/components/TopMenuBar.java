@@ -218,11 +218,11 @@ public class TopMenuBar extends PaneBase {
             showcasesBtn.getStyleClass().add("showcases-button");
             LinkUtil.setLink(showcasesBtn, "/showcases");
 
-            Button utilitiesButton = new Button("Utilities");
-            utilitiesButton.setFocusTraversable(false);
-            utilitiesButton.setMinWidth(Region.USE_PREF_SIZE);
-            utilitiesButton.getStyleClass().add("online-tools-button");
-            LinkUtil.setLink(utilitiesButton, "/utilities");
+            Button utilitiesBtn = new Button("Utilities");
+            utilitiesBtn.setFocusTraversable(false);
+            utilitiesBtn.setMinWidth(Region.USE_PREF_SIZE);
+            utilitiesBtn.getStyleClass().add("online-tools-button");
+            LinkUtil.setLink(utilitiesBtn, "/utilities");
 
             Button documentationBtn = new Button("Documentation");
             documentationBtn.setFocusTraversable(false);
@@ -252,11 +252,11 @@ public class TopMenuBar extends PaneBase {
 
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, utilitiesBtn, documentationBtn);
             if (!OSUtil.isNative()) {
-                contentBox.getChildren().add(utilitiesButton);
+                contentBox.getChildren().add(downloadsBtn);
             }
-            contentBox.getChildren().addAll(documentationBtn, downloadsBtn, separatorRegion, loginBtn, searchField);
+            contentBox.getChildren().addAll(separatorRegion, loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");

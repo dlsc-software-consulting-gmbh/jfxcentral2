@@ -3079,12 +3079,10 @@
     -fx-background-color: transparent;
     -fx-background-radius: 10px;
     -fx-padding: 0px;
-    -fx-translate-x: -20px;
     -fx-translate-y: 10px;
 }
 
 .detail-header .share-button.standalone .context-menu {
-    -fx-translate-x: -210px;
 }
 
 .detail-header .share-button .custom-menu-item,
@@ -3104,10 +3102,6 @@
 .detail-header .social-links-view {
     -fx-background-color: -white;
     -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.35), 15, 0.2, 0, 0);
-    -fx-pref-width: 311px;
-    -fx-pref-height: 90px;
-    -fx-max-width: 311px;
-    -fx-max-height: 90px;
 }
 
 .detail-header .social-links-view .button {
