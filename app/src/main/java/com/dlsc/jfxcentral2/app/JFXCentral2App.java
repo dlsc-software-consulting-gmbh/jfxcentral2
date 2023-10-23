@@ -183,7 +183,7 @@ public class JFXCentral2App extends Application {
         CustomStage customStage = new CustomStage(stage, parent, sessionManager, size);
         customStage.setCloseHandler(() -> {
             if (!OSUtil.isNative()) {
-                if (SystemTray.isSupported()) {
+                if (SystemTray.isSupported() && trayIconManager != null) {
                     trayIconManager.hide();
                 }
             }

@@ -278,7 +278,7 @@ public class TopMenuBar extends PaneBase {
             searchField.managedProperty().bind(searchField.visibleProperty());
             searchBtn.managedProperty().bind(searchBtn.visibleProperty());
             searchBtn.visibleProperty().bind(searchField.visibleProperty().not());
-            searchField.setVisible(false);
+            searchField.setVisible(true);
 
             searchBtn.setOnAction(event -> {
                 searchField.setVisible(true);
