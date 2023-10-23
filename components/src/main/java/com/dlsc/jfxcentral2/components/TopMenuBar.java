@@ -200,7 +200,6 @@ public class TopMenuBar extends PaneBase {
 
     protected void layoutBySize() {
         searchField = createSearchField();
-        searchField.setFocusTraversable(OSUtil.isNative());
 
         if (isLarge()) {
             MenuButton resourcesBtn = createMenuButton("Resources");
@@ -275,14 +274,19 @@ public class TopMenuBar extends PaneBase {
             StackPane stackPane = new StackPane(searchField, searchBtn);
             stackPane.getStyleClass().add("search-stack-pane");
 
+            searchField.getEditor().setFocusTraversable(false);
             searchField.managedProperty().bind(searchField.visibleProperty());
             searchBtn.managedProperty().bind(searchBtn.visibleProperty());
             searchBtn.visibleProperty().bind(searchField.visibleProperty().not());
-            searchField.setVisible(true);
+            searchField.setVisible(false);
 
             searchBtn.setOnAction(event -> {
                 searchField.setVisible(true);
-                Platform.runLater(() -> getSearchTextField().requestFocus());
+                if (!OSUtil.isNative()) {
+                    // on ios or android do not automatically request the focus,
+                    // otherwise the keyboard will not show
+                    Platform.runLater(() -> getSearchTextField().requestFocus());
+                }
             });
             searchBtn.getStyleClass().add("search-button");
 
