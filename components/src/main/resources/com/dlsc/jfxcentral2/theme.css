@@ -2776,11 +2776,11 @@
 }
 
 .social-links-view .button {
+    -fx-alignment: center-left;
     -fx-background-color: -white;
     -fx-background-radius: 30px;
     -fx-background-insets: 0;
     -fx-padding: 4px 9px;
-    -fx-content-display: right;
     -fx-graphic-text-gap: 5px;
     -fx-text-fill: -bright-blue;
     -fx-font-size: 13px;

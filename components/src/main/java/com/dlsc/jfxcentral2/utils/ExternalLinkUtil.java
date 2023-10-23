@@ -14,7 +14,7 @@ public class ExternalLinkUtil {
     }
 
     public static void setExternalLink(Node node, String url, String description) {
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             node.setOnMouseClicked(evt -> {
                 if (evt.isStillSincePress()) {
                     BrowserService.create().ifPresent(service -> {

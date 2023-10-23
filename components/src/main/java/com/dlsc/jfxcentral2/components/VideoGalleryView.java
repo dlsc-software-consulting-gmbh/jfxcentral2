@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral2.components.tiles.VideoGalleryTileView;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import com.gluonhq.attach.browser.BrowserService;
-import com.gluonhq.attach.video.VideoService;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -86,7 +85,7 @@ public class VideoGalleryView extends PaneBase {
                 videoTileView.sizeProperty().bind(pagination.sizeProperty());
                 //Play button action
                 videoTileView.getButton1().setOnAction(evt -> {
-                    if (OSUtil.isNative()) {
+                    if (OSUtil.isAndroidOrIOS()) {
                         BrowserService.create().ifPresent(service -> {
                             try {
                                 service.launchExternalBrowser("https://www.youtube.com/watch?v=" + video.getId());

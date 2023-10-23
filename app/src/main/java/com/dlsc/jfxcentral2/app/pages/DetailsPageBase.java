@@ -28,6 +28,7 @@ import com.dlsc.jfxcentral2.components.detailsbox.ToolsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.TutorialsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.VideosDetailsBox;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -92,7 +93,7 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
         maybeAddBox(modelObject, Blog.class, BlogsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Tutorial.class, TutorialsDetailsBox::new, boxes);
 
-        if (!isMobile()) {
+        if (!isMobile() && !OSUtil.isAndroidOrIOS()) {
             maybeAddBox(modelObject, Download.class, DownloadsDetailsBox::new, boxes);
         }
 

@@ -2,18 +2,7 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SearchField;
 import com.dlsc.jfxcentral.data.DataRepository2;
-import com.dlsc.jfxcentral.data.model.Blog;
-import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral.data.model.Company;
-import com.dlsc.jfxcentral.data.model.IkonliPack;
-import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
-import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral.data.model.Person;
-import com.dlsc.jfxcentral.data.model.Tip;
-import com.dlsc.jfxcentral.data.model.Tool;
-import com.dlsc.jfxcentral.data.model.Tutorial;
-import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.*;
 import com.gluonhq.attach.display.DisplayService;
@@ -31,11 +20,8 @@ import javafx.css.StyleableProperty;
 import javafx.css.converter.EnumConverter;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CustomMenuItem;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
+import javafx.scene.control.skin.TextFieldSkin;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -73,7 +59,7 @@ public class TopMenuBar extends PaneBase {
     public TopMenuBar(boolean mobile) { //iew view) {
 //        this.view = view;
         this.mobile = mobile;
-        
+
         getStyleClass().add("top-menu-bar");
 
         activateModePseudoClass();
@@ -115,7 +101,7 @@ public class TopMenuBar extends PaneBase {
         });
 
         searchField.getPopup().setPrefWidth(600);
-        searchField.getEditor().setFocusTraversable(OSUtil.isNative());
+        searchField.getEditor().setFocusTraversable(OSUtil.isAndroidOrIOS());
         searchField.setPromptText("Search");
         searchField.setCellFactory(listView -> new SearchResultCell());
         searchField.setSuggestionProvider(request -> search(request.getUserText()));
@@ -164,6 +150,10 @@ public class TopMenuBar extends PaneBase {
         search(repository.getUtilities(), pattern, results);
         search(repository.getIkonliPacks(), pattern, results);
 
+        // TODO: uncomment once learning content can be shown
+//        search(repository.getLearn(Learn.LearnType.JAVA_FX), pattern, results);
+//        search(repository.getLearn(Learn.LearnType.MOBILE), pattern, results);
+//        search(repository.getLearn(Learn.LearnType.RASPBERRY_PI), pattern, results);
 
         return results;
     }
@@ -252,7 +242,7 @@ public class TopMenuBar extends PaneBase {
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
             contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, utilitiesBtn, documentationBtn);
-            if (!OSUtil.isNative()) {
+            if (!OSUtil.isAndroidOrIOS()) {
                 contentBox.getChildren().add(downloadsBtn);
             }
             contentBox.getChildren().addAll(separatorRegion, loginBtn, searchField);
@@ -271,6 +261,7 @@ public class TopMenuBar extends PaneBase {
 
             Button searchBtn = new Button(null, searchRegion);
             searchBtn.setFocusTraversable(false);
+
             StackPane stackPane = new StackPane(searchField, searchBtn);
             stackPane.getStyleClass().add("search-stack-pane");
 
@@ -282,7 +273,7 @@ public class TopMenuBar extends PaneBase {
 
             searchBtn.setOnAction(event -> {
                 searchField.setVisible(true);
-                if (!OSUtil.isNative()) {
+                if (!OSUtil.isAndroidOrIOS()) {
                     // on ios or android do not automatically request the focus,
                     // otherwise the keyboard will not show
                     Platform.runLater(() -> getSearchTextField().requestFocus());
@@ -309,7 +300,11 @@ public class TopMenuBar extends PaneBase {
             separatorRegion.visibleProperty().bind(logOutBtn.visibleProperty());
             separatorRegion.managedProperty().bind(logOutBtn.managedProperty());
 
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, separatorRegion, stackPane, createSeparatorRegion(), menuBtn);
+            if (OSUtil.isAndroidOrIOS()) {
+                contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, separatorRegion, menuBtn);
+            } else {
+                contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, separatorRegion, stackPane, createSeparatorRegion(), menuBtn);
+            }
         }
 
         usedProperty().bind(blocking);

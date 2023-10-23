@@ -59,7 +59,7 @@ public class WelcomeView extends PaneBase {
         String javaVersion = System.getProperty("java.version");
         String fxVersion = System.getProperty("javafx.runtime.version");
 
-        Label versionLabel = new Label(MessageFormat.format("This {0} runs on Java " + javaVersion + " with JavaFX " + fxVersion + ".", WebAPI.isBrowser() ? "site" : OSUtil.isNative() ? "app" : "application"));
+        Label versionLabel = new Label(MessageFormat.format("This {0} runs on Java " + javaVersion + " with JavaFX " + fxVersion + ".", WebAPI.isBrowser() ? "site" : OSUtil.isAndroidOrIOS() ? "app" : "application"));
         versionLabel.getStyleClass().add("version-label");
         versionLabel.setWrapText(true);
 

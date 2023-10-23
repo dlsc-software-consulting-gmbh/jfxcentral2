@@ -106,7 +106,7 @@ public class HamburgerMenuView extends PaneBase {
         getMenus().add(utilities);
         getMenus().add(documentation);
 
-        if (!mobile && !OSUtil.isNative()) {
+        if (!mobile && !OSUtil.isAndroidOrIOS()) {
             getMenus().add(downloads);
         }
 

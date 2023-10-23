@@ -61,7 +61,7 @@ public class CustomStage extends BorderPane {
         getStylesheets().add(Objects.requireNonNull(CustomStage.class.getResource("stage.css")).toExternalForm());
         getStyleClass().add("custom-stage");
 
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             getStyleClass().add("native");
         }
 
@@ -76,7 +76,7 @@ public class CustomStage extends BorderPane {
         if (!WebAPI.isBrowser()) {
             VBox vBox = new VBox(titleBar);
             vBox.setAlignment(Pos.CENTER_RIGHT);
-            if (!OSUtil.isNative()) {
+            if (!OSUtil.isAndroidOrIOS()) {
                 setTop(vBox);
             }
         }
@@ -341,8 +341,8 @@ public class CustomStage extends BorderPane {
 
             label = new Label();
             label.getStyleClass().add("title");
-            label.setVisible(!OSUtil.isNative());
-            label.setManaged(!OSUtil.isNative());
+            label.setVisible(!OSUtil.isAndroidOrIOS());
+            label.setManaged(!OSUtil.isAndroidOrIOS());
 
             FontIcon maxIcon = new FontIcon(MaterialDesign.MDI_WINDOW_MAXIMIZE);
             FontIcon restoreIcon = new FontIcon(MaterialDesign.MDI_WINDOW_RESTORE);
@@ -409,7 +409,7 @@ public class CustomStage extends BorderPane {
 
             NavigationView navigationView = new NavigationView(sessionManager);
 
-            if (OSUtil.isNative()) {
+            if (OSUtil.isAndroidOrIOS()) {
                 getStyleClass().add("native");
                 getChildren().addAll(navigationView);
             } else if (OSUtil.isMac()) {

@@ -183,14 +183,17 @@ public class RefreshPage extends PageBase {
 
             @Override
             public void beginTask(String taskName, int totalWork) {
+                // clean up some messy message we get
+                final String name = taskName.replace("remote: ", "");
+
                 if (totalWork == -1) {
                     Platform.runLater(() -> {
-                        loadMessage.set(taskName);
+                        loadMessage.set(name);
                         loadPercentage.set(-1);
                     });
                 } else {
                     Platform.runLater(() -> {
-                        loadMessage.set(taskName);
+                        loadMessage.set(name);
                         loadPercentage.set(0);
                     });
                     acc = 0;

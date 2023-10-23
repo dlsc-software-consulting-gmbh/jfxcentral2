@@ -119,7 +119,7 @@ public class PrettyScrollPane extends ScrollPane {
         vBar.setManaged(false);
         vBar.setOrientation(Orientation.VERTICAL);
         vBar.getStyleClass().addAll("my-scroll-bar", "vertical-scroll-bar");
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             vBar.setVisible(false);
         } else {
             vBar.visibleProperty().bind(hoverProperty());
@@ -128,7 +128,7 @@ public class PrettyScrollPane extends ScrollPane {
         hBar.setManaged(false);
         hBar.setOrientation(Orientation.HORIZONTAL);
         hBar.getStyleClass().addAll("my-scroll-bar", "horizontal-scroll-bar");
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             hBar.setVisible(false);
         } else {
             hBar.visibleProperty().bind(hBar.visibleAmountProperty().lessThan(1).or(alwaysShowHorizontalScrollBar));

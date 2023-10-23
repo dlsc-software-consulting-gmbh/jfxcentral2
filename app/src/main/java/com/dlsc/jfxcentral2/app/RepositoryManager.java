@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import one.jpro.platform.internal.openlink.util.PlatformUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +13,6 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.merge.ContentMergeStrategy;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
-import org.eclipse.jgit.util.FS;
 import org.eclipse.jgit.util.FS_POSIX;
 
 import java.io.File;
@@ -105,7 +103,7 @@ public class RepositoryManager {
                     .setDepth(1)
                     .setDirectory(repoDirectory);
 
-            if (OSUtil.isNative()) {
+            if (OSUtil.isAndroidOrIOS()) {
                 cloneCmd = cloneCmd.setFs(new FS_POSIX() {
                     @Override
                     public boolean supportsExecute() {

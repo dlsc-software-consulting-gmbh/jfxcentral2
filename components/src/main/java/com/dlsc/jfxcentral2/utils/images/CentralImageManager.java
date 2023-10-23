@@ -16,13 +16,11 @@ import one.jpro.platform.image.manager.transformer.ImageTransformer;
 import one.jpro.platform.image.manager.transformer.ImageTransformerFitHeight;
 import one.jpro.platform.image.manager.transformer.ImageTransformerScaleToArea;
 import one.jpro.platform.image.manager.transformer.ImageTransformerWH;
-import one.jpro.platform.internal.openlink.util.PlatformUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -45,7 +43,7 @@ public class CentralImageManager {
     }
 
     public static Image getPreviewImage(File file, boolean large) {
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             return loadImage(file);
         }
 
@@ -57,7 +55,7 @@ public class CentralImageManager {
     }
 
     public static Image getRealWorldAppBannerImage2(RealWorldApp app) {
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             return loadImage(realWorldAppBannerImageFile(app));
         }
 
@@ -72,7 +70,7 @@ public class CentralImageManager {
     }
 
     public static Image getDownloadImage(Download download) {
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             return loadImage(com.dlsc.jfxcentral.data.ImageManager.getInstance().downloadBannerFile(download));
         }
 
@@ -84,7 +82,7 @@ public class CentralImageManager {
     }
 
     public static Image getBookCoverImage1(Book book) {
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             return loadImage(bookCoverImageFile(book));
         }
 
@@ -95,7 +93,7 @@ public class CentralImageManager {
     }
 
     public static Image getBookCoverImage2(Book book) {
-        if (OSUtil.isNative()) {
+        if (OSUtil.isAndroidOrIOS()) {
             return loadImage(bookCoverImageFile(book));
         }
 
