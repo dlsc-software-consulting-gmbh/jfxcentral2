@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
-import com.dlsc.jfxcentral2.utils.DaemonScheduledExecutorService;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -46,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -67,7 +67,13 @@ public class SearchFilterView<T> extends PaneBase {
      * delayed search text
      */
     private final StringProperty searchText = new SimpleStringProperty(this, "searchText", "");
-    private final ScheduledExecutorService executorService = DaemonScheduledExecutorService.create();
+
+    private final ScheduledExecutorService executorService  = Executors.newSingleThreadScheduledExecutor(r -> {
+        Thread thread = new Thread(r);
+        thread.setName("Search Filter Thread");
+        thread.setDaemon(true);
+        return thread;
+    });
 
     private ScheduledFuture<?> future;
     private final CustomSearchField searchField = new CustomSearchField(true);
