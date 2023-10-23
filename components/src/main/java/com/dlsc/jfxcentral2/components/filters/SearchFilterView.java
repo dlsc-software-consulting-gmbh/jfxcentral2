@@ -1,10 +1,11 @@
 package com.dlsc.jfxcentral2.components.filters;
 
-import com.dlsc.gemsfx.SearchTextField;
+import com.dlsc.jfxcentral2.components.CustomSearchField;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.utils.DaemonScheduledExecutorService;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -45,7 +46,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -54,7 +54,6 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class SearchFilterView<T> extends PaneBase {
-
     private static final String DEFAULT_STYLE_CLASS = "search-filter-view";
     private static final Orientation FILTER_BOX_DEFAULT_ORIENTATION = Orientation.HORIZONTAL;
     private static final String WITH_SEARCH_FIELD = "with-search-field";
@@ -68,9 +67,10 @@ public class SearchFilterView<T> extends PaneBase {
      * delayed search text
      */
     private final StringProperty searchText = new SimpleStringProperty(this, "searchText", "");
-    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService executorService = DaemonScheduledExecutorService.create();
+
     private ScheduledFuture<?> future;
-    private final SearchTextField searchField = new SearchTextField(true);
+    private final CustomSearchField searchField = new CustomSearchField(true);
     private final StringConverter<FilterItem<T>> predicateItemStringConverter = new StringConverter<>() {
         @Override
         public String toString(FilterItem<T> object) {
@@ -105,6 +105,7 @@ public class SearchFilterView<T> extends PaneBase {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
         searchField.setFocusTraversable(false);
+        searchField.getStyleClass().add("filter-search-field");
         searchField.promptTextProperty().bind(searchPromptTextProperty());
         searchField.managedProperty().bind(searchField.visibleProperty());
         searchField.visibleProperty().bind(onSearchProperty().isNotNull());
