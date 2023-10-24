@@ -51,6 +51,8 @@
 	<key>UIRequiresFullScreen</key>
 	<string>YES</string>
     <key>UIStatusBarStyle</key>
-    <string>UIStatusBarStyleLightContent</string>
+    <string>UIStatusBarStyleDarkContent</string>
+    <key>UIUserInterfaceStyle</key>
+    <string>light</string>
 </dict>
 </plist>

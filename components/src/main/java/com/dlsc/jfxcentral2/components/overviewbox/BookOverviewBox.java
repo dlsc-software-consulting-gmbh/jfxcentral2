@@ -84,9 +84,7 @@ public class BookOverviewBox extends OverviewBox<Book> {
 
         previewImageView.getStyleClass().add("preview-image");
 
-        StackPane imageWrapper = new StackPane(previewImageView);
-        imageWrapper.getStyleClass().add("image-wrapper");
-        topBoxWrapper.getChildren().add(imageWrapper);
+        topBoxWrapper.getChildren().add(previewImageView);
 
         topBoxWrapper.getChildren().add(topBox);
 

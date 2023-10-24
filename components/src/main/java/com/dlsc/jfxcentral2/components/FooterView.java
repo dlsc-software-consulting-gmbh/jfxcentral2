@@ -57,8 +57,10 @@ public class FooterView extends PaneBase {
         HBox.setHgrow(contactPane, Priority.ALWAYS);
 
         Size size = getSize();
-        if (size.isLarge() || size.isMedium()) {
+        if (size.isLarge()) {
             contentBox.getChildren().setAll(logoImageView, new Spacer(), contactPane, linksPane, legalInfoPane);
+        } else if (size.isMedium()) {
+            contentBox.getChildren().setAll(contactPane, linksPane, legalInfoPane);
         } else {
             VBox box = new VBox(contactPane, linksPane, legalInfoPane);
             box.getStyleClass().add("number-pane-box");
