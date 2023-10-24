@@ -241,10 +241,18 @@ public class TopMenuBar extends PaneBase {
 
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, utilitiesBtn, documentationBtn);
+
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn);
+            if (!OSUtil.isAndroidOrIOS()) {
+                contentBox.getChildren().add(utilitiesBtn);
+            }
+
+            contentBox.getChildren().add(documentationBtn);
+
             if (!OSUtil.isAndroidOrIOS()) {
                 contentBox.getChildren().add(downloadsBtn);
             }
+
             contentBox.getChildren().addAll(separatorRegion, loginBtn, searchField);
         } else {
             Region logoutRegion = new Region();

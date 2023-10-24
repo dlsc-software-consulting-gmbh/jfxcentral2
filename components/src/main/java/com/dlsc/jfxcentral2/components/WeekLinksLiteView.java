@@ -30,7 +30,7 @@ public class WeekLinksLiteView extends PaneBase {
         title = new Label("Links of the week");
         title.getStyleClass().add("title");
 
-        subtitle = new Label("Miscellaneous JavaFX stuff found on the web");
+        subtitle = new Label("Miscellaneous stuff found on the web");
         subtitle.setWrapText(true);
         subtitle.getStyleClass().add("subtitle");
 

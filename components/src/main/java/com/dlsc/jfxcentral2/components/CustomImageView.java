@@ -31,6 +31,7 @@ public class CustomImageView extends ImageView {
         fitWidthProperty().bind(fittingWidthProperty());
         fitHeightProperty().bind(fittingHeightProperty());
     }
+
     private final DoubleProperty fittingHeight = new StyleableDoubleProperty(DEFAULT_HEIGHT) {
         @Override
         public Object getBean() {

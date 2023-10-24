@@ -120,7 +120,12 @@
 }
 
 .notch-pane {
-    -fx-background-color: -background;
+    -fx-background-color: white;
+    -fx-pref-height: 30px;
+    -fx-min-height: 30px;
+}
+
+.notch-pane.notch {
     -fx-pref-height: 60px;
     -fx-min-height: 60px;
 }
@@ -132,7 +137,7 @@
 
 .setup-view {
     -fx-background-color: #070B32;
-    -fx-padding: 50px;
+    -fx-padding: 20px;
 }
 
 .setup-view .inner-box {
@@ -147,7 +152,7 @@
 
 .setup-view .inner-box .label {
     -fx-background-color: #070B32;
-    -fx-font-size: 1.5em;
+    -fx-font-size: 1.2em;
     -fx-text-fill: -white !important;
 }
 
@@ -161,7 +166,7 @@
     -fx-background-radius: 0px;
     -fx-padding: 10px 20px;
     -fx-font-family: "Spline Sans Medium";
-    -fx-font-size: 1.5em;
+    -fx-font-size: 1.2em;
     -fx-text-fill: -white;
 }
 
@@ -227,7 +232,7 @@
 }
 
 .custom-search-field > .container .right-wrapper:hover .ikonli-font-icon,
-.custom-search-field > .container .right-wrapper:pressed  .ikonli-font-icon{
+.custom-search-field > .container .right-wrapper:pressed .ikonli-font-icon {
     -fx-icon-color: -grey-100;
 }
 
@@ -2813,10 +2818,17 @@
     -fx-padding: 15px 15px 15px 15px;
     -fx-background-radius: 10px;
     -fx-effect: -blue-shadow;
-    -fx-spacing: 5px;
+    -fx-alignment: center-right;
+}
+
+.social-links-view > .flow-pane {
     -fx-hgap: 5px;
     -fx-vgap: 10px;
-    -fx-alignment: center-right;
+    -fx-alignment: center-left;
+}
+
+.social-links-view > .vbox {
+    -fx-spacing: 5px;
 }
 
 .social-links-view .button {
@@ -6610,18 +6622,7 @@
     -fx-padding: 0 0 15px 0;
 }
 
-.book-overview-box .body-box .top-box-wrapper .image-wrapper {
-    -wrapper-size: 260px;
-    -fx-min-width: -wrapper-size;
-    -fx-pref-width: -wrapper-size;
-    -fx-max-width: -wrapper-size;
-    -fx-min-height: -wrapper-size;
-    -fx-pref-height: -wrapper-size;
-    -fx-max-height: -wrapper-size;
-    -fx-background-color: -light-blue;
-}
-
-.book-overview-box .body-box .top-box-wrapper .image-wrapper > .preview-image {
+.book-overview-box .body-box .top-box-wrapper .preview-image {
     -fx-fit-width: 206px;
     -fx-fit-height: 206px;
 }
@@ -8450,11 +8451,14 @@
 .team-view .member-cell-view .social-links-view {
     -fx-background-color: -white;
     -fx-effect: null;
-    -fx-alignment: center-left;
     -fx-padding: 15px 0 0 0;
 }
 
-.team-view .member-cell-view:sm .social-links-view {
+.team-view .member-cell-view .social-links-view .flow-pane {
+    -fx-alignment: center-left;
+}
+
+.team-view .member-cell-view:sm .social-links-view .flow-pane {
     -fx-alignment: center;
 }
 

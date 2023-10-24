@@ -7,16 +7,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import one.jpro.platform.routing.LinkUtil;
+import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.coreui.CoreUiBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class SocialLinksView extends VBox {
+public class SocialLinksView extends StackPane {
 
     private final Button twitterLinkBtn;
     private final Button mastodonLinkBtn;
@@ -26,9 +22,24 @@ public class SocialLinksView extends VBox {
     private final Button githubLinkBtn;
     private final Button facebookLinkBtn;
     private final Button redditLinkBtn;
+    private final Pane pane;
 
     public SocialLinksView() {
+        this(true);
+    }
+
+    public SocialLinksView(boolean useFlowPane) {
         getStyleClass().add("social-links-view");
+
+        if (useFlowPane) {
+            pane = new FlowPane();
+            pane.getStyleClass().addAll("pane", "flow-pane");
+        } else {
+            pane = new VBox();
+            pane.getStyleClass().addAll("pane", "vbox");
+        }
+
+        getChildren().add(pane);
 
         twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
         twitterLinkBtn.getStyleClass().add("twitter-link-btn");
@@ -116,32 +127,36 @@ public class SocialLinksView extends VBox {
         updateView();
     }
 
+    public final Pane getParentPane() {
+        return pane;
+    }
+
     private void updateView() {
-        getChildren().clear();
+        pane.getChildren().clear();
 
         if (StringUtils.isNotBlank(getTwitterUrl())) {
-            getChildren().add(twitterLinkBtn);
+            pane.getChildren().add(twitterLinkBtn);
         }
         if (StringUtils.isNotBlank(getMastodonUrl())) {
-            getChildren().add(mastodonLinkBtn);
+            pane.getChildren().add(mastodonLinkBtn);
         }
         if (StringUtils.isNotBlank(getLinkedInUrl())) {
-            getChildren().add(linkedInLinkBtn);
+            pane.getChildren().add(linkedInLinkBtn);
         }
         if (StringUtils.isNotBlank(getWebsiteUrl())) {
-            getChildren().add(websiteLinkBtn);
+            pane.getChildren().add(websiteLinkBtn);
         }
         if (StringUtils.isNotBlank(getGithubUrl())) {
-            getChildren().add(githubLinkBtn);
+            pane.getChildren().add(githubLinkBtn);
         }
         if (StringUtils.isNotBlank(getMailUrl())) {
-            getChildren().add(facebookLinkBtn);
+            pane.getChildren().add(facebookLinkBtn);
         }
         if (StringUtils.isNotBlank(getRedditUrl())) {
-            getChildren().add(redditLinkBtn);
+            pane.getChildren().add(redditLinkBtn);
         }
         if (StringUtils.isNotBlank(getMailUrl())) {
-            getChildren().add(mailLinkBtn);
+            pane.getChildren().add(mailLinkBtn);
         }
     }
 

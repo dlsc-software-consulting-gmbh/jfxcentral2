@@ -60,7 +60,7 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
         backButton.getStyleClass().addAll("back-button");
         backUrlProperty().addListener(it -> LinkUtil.setLink(backButton, getBackUrl()));
 
-        SocialLinksView socialLinksView = new SocialLinksView();
+        SocialLinksView socialLinksView = new SocialLinksView(false);
 
         CustomMenuItem customMenuItem = new CustomMenuItem(socialLinksView);
         customMenuItem.setHideOnClick(false);

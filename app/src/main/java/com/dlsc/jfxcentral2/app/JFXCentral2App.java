@@ -168,8 +168,9 @@ public class JFXCentral2App extends Application {
             parent = new VBox(notchPane, routeNode);
 
             DisplayService.create().ifPresent(service -> {
-                notchPane.setVisible(service.hasNotch());
-                notchPane.setManaged(service.hasNotch());
+                if (service.hasNotch()) {
+                    notchPane.getStyleClass().add("notch");
+                }
             });
         }
 
@@ -290,7 +291,7 @@ public class JFXCentral2App extends Application {
     private void updateSizeProperty(Scene scene) {
         double sceneWidth = scene.getWidth();
         System.out.println("scene width: " + sceneWidth);
-        if (sceneWidth < 865) {
+        if (sceneWidth < 760) {
             size.set(Size.SMALL);
         } else if (sceneWidth <= 1320) {
             size.set(Size.MEDIUM);
