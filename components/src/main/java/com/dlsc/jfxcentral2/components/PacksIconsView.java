@@ -122,7 +122,7 @@ public class PacksIconsView extends PaneBase {
         });
 
         ObjectBinding<? extends PaneBase> gridViewNodeBinding = Bindings.createObjectBinding(() -> {
-            if (StringUtils.isBlank(searchField.getText().trim()) || (scopeComboBox.getSelectionModel().getSelectedItem() == Scope.PACKS)) {
+            if (StringUtils.isBlank(searchField.getText()) || (scopeComboBox.getSelectionModel().getSelectedItem() == Scope.PACKS)) {
                 getStyleClass().remove("icons");
                 if (!getStyleClass().contains("packs")) {
                     getStyleClass().add("packs");
