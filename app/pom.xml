@@ -456,7 +456,8 @@
                         <!-- simulatorDevice>iPhone SE (3rd generation)</simulatorDevice -->
                         <!-- simulatorDevice>iPad Pro (12.9-inch) (6th generation)</simulatorDevice -->
                         <!-- simulatorDevice>iPad Pro (11-inch) (4th generation)</simulatorDevice -->
-                        <simulatorDevice>iPad Pro (12.9-inch) (2nd generation)</simulatorDevice>
+                        <!-- simulatorDevice>iPad Pro (12.9-inch) (2nd generation)</simulatorDevice -->
+                        <simulatorDevice>iPad (10th generation)</simulatorDevice>
                         <!-- for Android -->
                         <versionCode>${version.code}</versionCode>
                         <providedKeyStorePath>${provided.keystore.path}</providedKeyStorePath>
