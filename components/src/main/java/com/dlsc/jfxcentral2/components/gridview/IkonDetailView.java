@@ -1,10 +1,6 @@
 package com.dlsc.jfxcentral2.components.gridview;
 
-import com.dlsc.jfxcentral2.utils.FileUtil;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
-import com.dlsc.jfxcentral2.utils.SVGPathExtractor;
-import com.dlsc.jfxcentral2.utils.WebAPIUtil;
+import com.dlsc.jfxcentral2.utils.*;
 import com.jpro.webapi.WebAPI;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
@@ -84,9 +80,13 @@ public class IkonDetailView extends DetailView<Ikon> {
         HBox.setHgrow(previewPane, Priority.ALWAYS);
 
         Node infoNode = createInfoNode();
-        StackPane.setAlignment(infoNode, Pos.CENTER);
+        HBox.setHgrow(infoNode, Priority.ALWAYS);
         HBox detailContent = new HBox();
-        detailContent.getChildren().setAll(previewPane, infoNode);
+        if (OSUtil.isAndroidOrIOS()) {
+            detailContent.getChildren().setAll(infoNode);
+        } else {
+            detailContent.getChildren().setAll(previewPane, infoNode);
+        }
         detailContent.getStyleClass().add("detail-content");
         getChildren().setAll(detailContent);
     }
@@ -102,8 +102,12 @@ public class IkonDetailView extends DetailView<Ikon> {
         addRow(flowPane, "Unicode:", ikonInfo.unicode());
         addRow(flowPane, "Maven:", ikonInfo.mavenInfo());
         addRow(flowPane, "Gradle :", ikonInfo.gradleInfo());
-        addRow(flowPane, "Path:", ikonInfo.path());
-        addDownloadSvgRow(flowPane);
+
+        if (!OSUtil.isAndroidOrIOS()) {
+            addRow(flowPane, "Path:", ikonInfo.path());
+            addDownloadSvgRow(flowPane);
+        }
+
         return flowPane;
     }
 
@@ -118,17 +122,22 @@ public class IkonDetailView extends DetailView<Ikon> {
     }
 
     private String extractorPathFromIcon(String iconLiteral) {
-        SVGType type = SVGType.FILL;
-        SVGGraphics2D g2d = getSvgGraphics2D(type);
+        // no AWT support on ios / android
+        if (!OSUtil.isAndroidOrIOS()) {
+            SVGType type = SVGType.FILL;
+            SVGGraphics2D g2d = getSvgGraphics2D(type);
 
-        File cacheDir = getCacheDirectory();
-        File tempFile = createSvgTempFile(g2d, cacheDir, type, iconLiteral);
+            File cacheDir = getCacheDirectory();
+            File tempFile = createSvgTempFile(g2d, cacheDir, type, iconLiteral);
 
-        String paths = SVGPathExtractor.extractPaths(tempFile);
+            String paths = SVGPathExtractor.extractPaths(tempFile);
 
-        g2d.dispose();
-        FileUtil.clearDirectory(cacheDir);
-        return paths;
+            g2d.dispose();
+            FileUtil.clearDirectory(cacheDir);
+
+            return paths;
+        }
+        return "";
     }
 
     private SVGGraphics2D getSvgGraphics2D(SVGType svgType) {
@@ -264,6 +273,7 @@ public class IkonDetailView extends DetailView<Ikon> {
         textField.setContextMenu(null);
         textField.managedProperty().bind(textField.visibleProperty());
         CopyUtil.setCopyOnClick(button, contentText);
+        HBox.setHgrow(textField, Priority.ALWAYS);
 
         HBox box = new HBox(titleLabel, textField, button);
         box.getStyleClass().add("row-box");

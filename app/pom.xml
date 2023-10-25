@@ -452,6 +452,12 @@
                         <macAppStore>${mac.app.store}</macAppStore>
                         <bundleShortVersion>${bundle.short.version}</bundleShortVersion>
                         <bundleVersion>${bundle.version}</bundleVersion>
+                        <!-- simulatorDevice>iPhone 15 Pro Max</simulatorDevice -->
+                        <!-- simulatorDevice>iPhone SE (3rd generation)</simulatorDevice -->
+                        <!-- simulatorDevice>iPad Pro (12.9-inch) (6th generation)</simulatorDevice -->
+                        <!-- simulatorDevice>iPad Pro (11-inch) (4th generation)</simulatorDevice -->
+                        <!-- simulatorDevice>iPad Pro (12.9-inch) (2nd generation)</simulatorDevice -->
+                        <simulatorDevice>iPad (10th generation)</simulatorDevice>
                         <!-- for Android -->
                         <versionCode>${version.code}</versionCode>
                         <providedKeyStorePath>${provided.keystore.path}</providedKeyStorePath>
@@ -529,6 +535,14 @@
             <id>ios</id>
             <properties>
                 <gluonfx.target>ios</gluonfx.target>
+                <bundle.version>${env.GITHUB_RUN_NUMBER}</bundle.version>
+                <bundle.short.version>1.0</bundle.short.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>ios-sim</id>
+            <properties>
+                <gluonfx.target>ios-sim</gluonfx.target>
                 <bundle.version>${env.GITHUB_RUN_NUMBER}</bundle.version>
                 <bundle.short.version>1.0</bundle.short.version>
             </properties>
