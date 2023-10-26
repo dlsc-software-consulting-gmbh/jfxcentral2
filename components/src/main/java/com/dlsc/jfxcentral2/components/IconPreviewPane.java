@@ -45,8 +45,8 @@ public class IconPreviewPane extends PaneBase {
     }
 
     protected void layoutBySize() {
+        getChildren().clear();
         if (getModel() == null) {
-            getChildren().clear();
             return;
         }
         if (showIconsService == null) {
@@ -74,7 +74,9 @@ public class IconPreviewPane extends PaneBase {
 
                         // PaymentFont is a very big, the width is too large;
                         if (ikonPackModel.getName().equalsIgnoreCase("PaymentFont")) {
-                            getStyleClass().add("payment-font-preview");
+                            if (!getStyleClass().contains("payment-font-preview")) {
+                                getStyleClass().add("payment-font-preview");
+                            }
                         }
 
                         ObservableList<? extends Ikon> icons = FXCollections.observableArrayList();
@@ -100,12 +102,7 @@ public class IconPreviewPane extends PaneBase {
                         infoBox.setMaxHeight(Region.USE_PREF_SIZE);
                         StackPane.setAlignment(infoBox, Pos.BOTTOM_CENTER);
 
-                        Platform.runLater(() -> {
-                            getStyleClass().add("icon-grid-wrapper");
-                            getChildren().setAll(gridPane, infoBox);
-                        });
-
-                        //service return null
+                        Platform.runLater(() -> getChildren().setAll(gridPane, infoBox));
                         return null;
                     }
                 };
