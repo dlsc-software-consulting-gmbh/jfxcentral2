@@ -55,7 +55,6 @@ public class PacksIconsView extends PaneBase {
     private final IkonGridView ikonGridView;
     private final ComboBox<Scope> scopeComboBox;
     private ScheduledFuture<?> future;
-    private IkonliPackTileView ikonliPackTileView;
 
     private enum Scope {
         PACKS, ICONS
