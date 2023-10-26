@@ -3,10 +3,13 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -24,6 +27,7 @@ public class IconPreviewPane extends PaneBase {
 
     private int columnCount = 4;
     private Size cachedSize;
+    private Service<Void> showIconsService;
 
     public IconPreviewPane() {
         getStyleClass().addAll("icon-preview-pane", "icon-grid-wrapper");
@@ -40,46 +44,70 @@ public class IconPreviewPane extends PaneBase {
         });
     }
 
-    @Override
     protected void layoutBySize() {
+        getChildren().clear();
         if (getModel() == null) {
-            getChildren().clear();
             return;
         }
-        GridPane gridPane = new GridPane();
-        gridPane.getStyleClass().add("icon-grid-pane");
-        IkonliPack ikonPackModel = getModel();
-
-        //PaymentFont is a very big, the width is too large;
-        if (ikonPackModel.getName().equalsIgnoreCase("PaymentFont")) {
-            getStyleClass().add("payment-font-preview");
+        if (showIconsService == null) {
+            showIconsService = createShowIkonsService();
+            showIconsService.start();
+        } else {
+            if (showIconsService.isRunning()) {
+                showIconsService.cancel();
+            }
+            showIconsService.restart();
         }
+    }
 
-        ObservableList<? extends Ikon> icons = FXCollections.observableArrayList();
-        IkonProvider ikonProvider = IkonliPackUtil.getInstance().getIkonData(ikonPackModel.getName()).getIkonProvider();
-        EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
-        icons.addAll(enumSet);
-        FXCollections.shuffle(icons);
+    private Service<Void> createShowIkonsService() {
+        return new Service<>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<>() {
+                    @Override
+                    protected Void call() {
+                        GridPane gridPane = new GridPane();
+                        gridPane.getStyleClass().add("icon-grid-pane");
 
-        for (int i = 0; i < columnCount * 4 && i < icons.size(); i++) {
-            FontIcon fontIcon = new FontIcon(icons.get(i));
-            fontIcon.getStyleClass().add("icon-font");
-            fontIcon.setFill(generateColor());
-            gridPane.add(fontIcon, i % columnCount, i / columnCount);
-        }
+                        IkonliPack ikonPackModel = getModel();
 
-        gridPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+                        // PaymentFont is a very big, the width is too large;
+                        if (ikonPackModel.getName().equalsIgnoreCase("PaymentFont")) {
+                            if (!getStyleClass().contains("payment-font-preview")) {
+                                getStyleClass().add("payment-font-preview");
+                            }
+                        }
 
-        Label countLabel = new Label(icons.size() + " Icons");
-        countLabel.getStyleClass().add("count-label");
+                        ObservableList<? extends Ikon> icons = FXCollections.observableArrayList();
+                        IkonProvider ikonProvider = IkonliPackUtil.getInstance().getIkonData(ikonPackModel.getName()).getIkonProvider();
+                        EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
+                        icons.addAll(enumSet);
+                        FXCollections.shuffle(icons);
 
-        HBox infoBox = new HBox(new Spacer(), countLabel);
-        infoBox.getStyleClass().add("info-box");
-        infoBox.setMaxHeight(Region.USE_PREF_SIZE);
-        StackPane.setAlignment(infoBox, Pos.BOTTOM_CENTER);
+                        for (int i = 0; i < columnCount * 4 && i < icons.size(); i++) {
+                            FontIcon fontIcon = new FontIcon(icons.get(i));
+                            fontIcon.getStyleClass().add("icon-font");
+                            fontIcon.setFill(generateColor());
+                            gridPane.add(fontIcon, i % columnCount, i / columnCount);
+                        }
 
-        getStyleClass().add("icon-grid-wrapper");
-        getChildren().setAll(gridPane, infoBox);
+                        gridPane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+
+                        Label countLabel = new Label(icons.size() + " Icons");
+                        countLabel.getStyleClass().add("count-label");
+
+                        HBox infoBox = new HBox(new Spacer(), countLabel);
+                        infoBox.getStyleClass().add("info-box");
+                        infoBox.setMaxHeight(Region.USE_PREF_SIZE);
+                        StackPane.setAlignment(infoBox, Pos.BOTTOM_CENTER);
+
+                        Platform.runLater(() -> getChildren().setAll(gridPane, infoBox));
+                        return null;
+                    }
+                };
+            }
+        };
     }
 
     /**
