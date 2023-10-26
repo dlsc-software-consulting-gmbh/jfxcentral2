@@ -45,7 +45,7 @@ public class PacksIconsView extends PaneBase {
     private final HBox scopeComboBoxWrapper;
     private final StringProperty searchText = new SimpleStringProperty(this, "searchText", "");
 
-    private final ScheduledExecutorService executorService  = Executors.newSingleThreadScheduledExecutor(r -> {
+    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor(r -> {
         Thread thread = new Thread(r);
         thread.setName("Packs Search Thread");
         thread.setDaemon(true);
@@ -55,6 +55,7 @@ public class PacksIconsView extends PaneBase {
     private final IkonGridView ikonGridView;
     private final ComboBox<Scope> scopeComboBox;
     private ScheduledFuture<?> future;
+    private IkonliPackTileView ikonliPackTileView;
 
     private enum Scope {
         PACKS, ICONS
