@@ -22,7 +22,7 @@ public class CellView<T> extends PaneBase {
 
         selectedProperty().addListener(it -> activeSelectedPseudoClass());
 
-        setOnMousePressed(event -> {
+        setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.isStillSincePress()) {
                 setSelected(!isSelected());
             }
