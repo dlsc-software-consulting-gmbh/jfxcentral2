@@ -186,6 +186,8 @@ public class JFXCentral2App extends Application {
             stage.close();
         });
 
+        parent.setOnMousePressed(evt -> routeNode.requestFocus());
+
         // scene
         Scene scene = new Scene(customStage, 1400, 800);
         scene.setFill(Color.web("#070B32"));
