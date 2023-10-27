@@ -7,15 +7,16 @@ import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.DevelopmentStatus;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral.data.model.Learn;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.News;
-import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
 import javafx.beans.property.ObjectProperty;
@@ -111,6 +112,8 @@ public class ModelObjectTool {
             return "/icons/" + pack.getId();
         } else if (modelObject instanceof Utility utility) {
             return "/utilities/" + utility.getId();
+        } else if (modelObject instanceof Learn learn) {
+            return "/learn_javafx/" + learn.getId();
         }
 
         return "";
@@ -151,6 +154,8 @@ public class ModelObjectTool {
             return "News";
         } else if (clazz == Utility.class) {
             return "Utilities";
+        } else if (clazz == Learn.class) {
+            return "Learn";
         }
 
         return "ModelObject";

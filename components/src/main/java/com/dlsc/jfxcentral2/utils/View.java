@@ -15,5 +15,13 @@ public enum View {
     DOWNLOADS,
     TIPS,
     ICONS,
-    UTILITIES
+    UTILITIES,
+    LEARN_JAVAFX,
+    LEARN_MOBILE,
+    LEARN_RASPBERRYPI;
+
+    @Override
+    public String toString() {
+        return name().toLowerCase();
+    }
 }

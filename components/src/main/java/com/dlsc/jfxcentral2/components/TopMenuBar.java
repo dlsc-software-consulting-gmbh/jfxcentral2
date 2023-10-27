@@ -2,11 +2,23 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SearchField;
 import com.dlsc.jfxcentral.data.DataRepository2;
-import com.dlsc.jfxcentral.data.model.*;
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
+import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
-import com.dlsc.jfxcentral2.utils.*;
-import com.gluonhq.attach.display.DisplayService;
-import com.jpro.webapi.WebAPI;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.ModelObjectTool;
+import com.dlsc.jfxcentral2.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -18,16 +30,17 @@ import javafx.css.Styleable;
 import javafx.css.StyleableObjectProperty;
 import javafx.css.StyleableProperty;
 import javafx.css.converter.EnumConverter;
-import javafx.geometry.Dimension2D;
 import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.control.skin.TextFieldSkin;
+import javafx.scene.control.Button;
+import javafx.scene.control.CustomMenuItem;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
 import one.jpro.platform.routing.LinkUtil;
-import one.jpro.platform.routing.View;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,7 +54,6 @@ import java.util.List;
 
 public class TopMenuBar extends PaneBase {
 
-    private static final Logger LOGGER = LogManager.getLogger(TopMenuBar.class);
     private static final Mode DEFAULT_MODE = Mode.DARK;
 
     private static final PseudoClass LIGHT_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("light");
@@ -207,6 +219,10 @@ public class TopMenuBar extends PaneBase {
             showcasesBtn.getStyleClass().add("showcases-button");
             LinkUtil.setLink(showcasesBtn, "/showcases");
 
+            MenuButton learnBtn = createMenuButton("Learn");
+            learnBtn.getStyleClass().add("learn-button");
+            fillLearnMenu(learnBtn);
+
             Button utilitiesBtn = new Button("Utilities");
             utilitiesBtn.setFocusTraversable(false);
             utilitiesBtn.setMinWidth(Region.USE_PREF_SIZE);
@@ -242,7 +258,7 @@ public class TopMenuBar extends PaneBase {
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
 
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, learnBtn);
             if (!OSUtil.isAndroidOrIOS()) {
                 contentBox.getChildren().add(utilitiesBtn);
             }
@@ -316,6 +332,20 @@ public class TopMenuBar extends PaneBase {
         }
 
         usedProperty().bind(blocking);
+    }
+
+    private void fillLearnMenu(MenuButton learnBtn) {
+        MenuItem fxMenuItem = createMenuItem("Learn JavaFX", "/learn_javafx", IkonUtil.learnJavaFX);
+        fxMenuItem.getStyleClass().add("learn-javafx-item");
+        learnBtn.getItems().add(fxMenuItem);
+
+        MenuItem mobileMenuItem = createMenuItem("Learn Mobile", "/learn_mobile", IkonUtil.learnMobile);
+        mobileMenuItem.getStyleClass().add("learn-mobile-item");
+        learnBtn.getItems().add(mobileMenuItem);
+
+        MenuItem raspberryPiMenuItem = createMenuItem("Learn Raspberry Pi", "/learn_raspberrypi", IkonUtil.learnRaspberryPi);
+        raspberryPiMenuItem.getStyleClass().add("learn-raspberrypi-item");
+        learnBtn.getItems().add(raspberryPiMenuItem);
     }
 
     private void fillResourcesMenu(MenuButton button) {
