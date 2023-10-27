@@ -96,13 +96,21 @@ public class HamburgerMenuView extends PaneBase {
         }
 
         HamburgerMenu showcases = new HamburgerMenu("Showcases", "/showcases");
+
+        HamburgerMenu learnMenu = new HamburgerMenu("Learn");
+        learnMenu.getItems().addAll(
+                new HamburgerMenuItem("Learn JavaFX", IkonUtil.learnJavaFX, "/learn-javafx"),
+                new HamburgerMenuItem("Learn Mobile", IkonUtil.learnMobile, "/learn-mobile"),
+                new HamburgerMenuItem("Learn Raspberry Pi", IkonUtil.learnRaspberryPi, "/learn-raspberrypi")
+        );
+
         HamburgerMenu utilities = new HamburgerMenu("Utilities", "/utilities");
         HamburgerMenu documentation = new HamburgerMenu("Documentation", "/documentation");
         HamburgerMenu downloads = new HamburgerMenu("Downloads", "/downloads");
 
         setMaxHeight(Region.USE_PREF_SIZE);
 
-        getMenus().addAll(resourcesMenu, communityMenu, showcases);
+        getMenus().addAll(resourcesMenu, communityMenu, showcases); // learnMenu);
         if (!OSUtil.isAndroidOrIOS()) {
             getMenus().add(utilities);
         }
@@ -162,7 +170,8 @@ public class HamburgerMenuView extends PaneBase {
                     submenuBox.getChildren().add(createMenuButton((HamburgerMenu) item, null));
                 } else {
                     Button itemButton = new Button();
-                    itemButton.getStyleClass().add("hamburger-item-button");
+                    String customStyleClass = item.getUrl().replace("/", "").replace("_", "-") + "-item";
+                    itemButton.getStyleClass().addAll("hamburger-item-button", customStyleClass);
                     initLabeled(item, itemButton);
                     submenuBox.getChildren().add(itemButton);
                 }

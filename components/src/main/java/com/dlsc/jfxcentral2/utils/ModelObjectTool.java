@@ -7,15 +7,18 @@ import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.DevelopmentStatus;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral.data.model.LearnJavaFX;
+import com.dlsc.jfxcentral.data.model.LearnMobile;
+import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.News;
-import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
 import javafx.beans.property.ObjectProperty;
@@ -111,6 +114,12 @@ public class ModelObjectTool {
             return "/icons/" + pack.getId();
         } else if (modelObject instanceof Utility utility) {
             return "/utilities/" + utility.getId();
+        } else if (modelObject instanceof LearnJavaFX learn) {
+            return "/learn-javafx/" + learn.getId();
+        } else if (modelObject instanceof LearnMobile learn) {
+            return "/learn-mobile/" + learn.getId();
+        } else if (modelObject instanceof LearnRaspberryPi learn) {
+            return "/learn-raspberrypi/" + learn.getId();
         }
 
         return "";
@@ -151,6 +160,12 @@ public class ModelObjectTool {
             return "News";
         } else if (clazz == Utility.class) {
             return "Utilities";
+        } else if (clazz == LearnJavaFX.class) {
+            return "Learn JavaFX";
+        } else if (clazz == LearnMobile.class) {
+            return "Learn Mobile";
+        } else if (clazz == LearnRaspberryPi.class) {
+            return "Learn Raspberry Pi";
         }
 
         return "ModelObject";

@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SkinBase;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -37,6 +38,7 @@ public class PaginationControl2Skin extends SkinBase<PaginationControl2> {
     public PaginationControl2Skin(PaginationControl2 control) {
         super(control);
         this.control = control;
+        control.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> control.requestFocus());
 
         contentPane = new BorderPane();
         contentPane.getStyleClass().add("content-pane");
