@@ -14,6 +14,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.effect.ColorInput;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Effect;
 import javafx.scene.effect.InnerShadow;
@@ -125,6 +126,14 @@ public class EffectFlowPane extends FlowPane {
                 })
                 .toList();
         addEffectButton.getItems().addAll(menuItems);
+
+        // Disable add effect button when the last effect is ColorInput;Because ColorInput doesn't support input method.
+        addEffectButton.disableProperty().bind(
+                Bindings.createBooleanBinding(
+                        () -> !effects.isEmpty() && effects.get(effects.size() - 1) instanceof ColorInput,
+                        effects
+                )
+        );
         return addEffectButton;
     }
 
