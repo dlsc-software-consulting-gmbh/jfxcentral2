@@ -511,6 +511,22 @@
     -fx-border-color: transparent;
 }
 
+.learn-button .context-menu .learn-raspberrypi-item * .ikonli-font-icon {
+    -fx-icon-color: -normal-text-icon-color;
+    -fx-icon-size: 22px;
+    -fx-translate-x: -2px;
+}
+
+.learn-button .context-menu .learn-raspberrypi-item > .label,
+.learn-button .context-menu .learn-raspberrypi-item > * > .label {
+    -fx-graphic-text-gap: 14px;
+}
+
+.learn-button .context-menu .learn-javafx-item > .label,
+.learn-button .context-menu .learn-javafx-item > * > .label {
+    -fx-graphic-text-gap: 17px;
+}
+
 /** -------------------------------
  * code-text-area (TextArea)
  */
@@ -3626,6 +3642,7 @@
     -fx-font-size: 13px;
     -fx-text-fill: -grey-60;
     -fx-padding: 0px 40px 10px 0px;
+    -fx-content-display: text-only;
 }
 
 .simple-tile-view .avatar-view,
@@ -3652,6 +3669,14 @@
 
 .simple-tile-view > .content-box {
     -fx-spacing: 15px;
+}
+
+.simple-tile-view:md > .content-box {
+    -fx-spacing: 10px;
+}
+
+.simple-tile-view:md .avatar-view {
+    -fx-avatar-size: 45px;
 }
 
 .simple-tile-view .detail-button {
@@ -3723,7 +3748,56 @@
 }
 
 /** ------------------------------------
- * utility-tile-view
+ * LearnTileView
+ */
+.learn-tile-view .title {
+    -fx-wrap-text: true;
+}
+
+.learn-tile-view:lg .title {
+    -fx-font-size: 18px;
+}
+
+.learn-tile-view:sm-md .title {
+    -fx-font-size: 17px;
+}
+
+.learn-tile-view .bottom-box {
+    -fx-border-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #e2e2e2 0.0%, #e2e2e2 0.6673%, #c2c2c275 47.3456%, #c4c4c400 100.0%);
+    -fx-border-width: 1px 0 0 0;
+    -fx-padding: 7px 0 0 0;
+}
+
+.learn-tile-view.browser .bottom-box {
+    -fx-border-color: -grey-10;
+}
+
+.learn-tile-view .linked-object-box {
+    -fx-alignment: center-right;
+}
+
+.learn-tile-view .bottom-box .avatar-view {
+    -fx-avatar-size: 36px;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 1px;
+    -fx-border-radius: 1000px;
+}
+
+.learn-tile-view .description {
+    -fx-content-display: left;
+    -fx-graphic-text-gap: 6px;
+    -fx-alignment: bottom-right;
+    -fx-text-alignment: right;
+    -fx-pref-width: 1000px;
+}
+
+.learn-tile-view .description .ikonli-font-icon {
+    -fx-icon-code: "far-calendar-alt";
+    -fx-icon-color: -grey-60;
+}
+
+/** ------------------------------------
+ * UtilityTileView
  */
 .utility-tile-view .linked-object-box .linked-badge {
     -fx-pref-width: 85px;
@@ -3755,6 +3829,19 @@
     -fx-background-color: -grey-60;
     -fx-text-fill: -white;
 }
+
+.utility-tile-view:md .top-box {
+    -fx-spacing: 0px;
+}
+
+.utility-tile-view:md .content-box {
+    -fx-spacing: 5px;
+}
+
+.utility-tile-view:md .avatar-view {
+    -fx-translate-y: 5px;
+}
+
 
 /** ------------------------------------
  * DocumentationTileView
@@ -8144,6 +8231,18 @@
     -fx-padding: 16px 10px;
 }
 
+.hamburger-menu-view > .content-box > .menus-box .hamburger-item-button.learn-javafx-item {
+    -fx-graphic-text-gap: 39px;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .hamburger-item-button.learn-raspberrypi-item {
+    -fx-graphic-text-gap: 33px;
+}
+
+.hamburger-menu-view > .content-box > .menus-box .hamburger-item-button.learn-raspberrypi-item .ikonli-font-icon {
+    -fx-translate-x: -3px;
+}
+
 .hamburger-menu-view > .content-box > .menus-box .hamburger-menu-button:hover,
 .hamburger-menu-view > .content-box > .menus-box .hamburger-item-button:hover {
     -fx-background-color: #e2e2e299;
@@ -8939,6 +9038,10 @@
     -fx-background-color: #01010102;
 }
 
+.file-handler-view.active {
+    -fx-background-color: #01010133;
+}
+
 .file-handler-view .inner-label {
     -fx-content-display: top;
     -fx-alignment: center;
@@ -9251,6 +9354,10 @@
     -fx-border-color: -grey-20;
     -fx-border-width: 1px;
     -fx-background-color: #e2e2e255;
+}
+
+.css-playground-view .file-handler-view.active {
+    -fx-background-color: #01010133;
 }
 
 .css-playground-view:md-lg .file-handler-view .inner-label {

@@ -6,6 +6,10 @@ import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral.data.model.Learn;
+import com.dlsc.jfxcentral.data.model.LearnJavaFX;
+import com.dlsc.jfxcentral.data.model.LearnMobile;
+import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
@@ -30,6 +34,8 @@ import org.kordamp.ikonli.dashicons.Dashicons;
 import org.kordamp.ikonli.evaicons.Evaicons;
 import org.kordamp.ikonli.fluentui.FluentUiFilledAL;
 import org.kordamp.ikonli.fluentui.FluentUiRegularAL;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.hawcons.HawconsStroke;
 import org.kordamp.ikonli.ionicons4.Ionicons4IOS;
 import org.kordamp.ikonli.lineawesome.LineAwesomeSolid;
@@ -41,9 +47,11 @@ import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignN;
 import org.kordamp.ikonli.remixicon.RemixiconAL;
 import org.kordamp.ikonli.runestroicons.Runestroicons;
+import org.kordamp.ikonli.simplelineicons.SimpleLineIcons;
 import org.kordamp.ikonli.subway.Subway;
 import org.kordamp.ikonli.themify.Themify;
 import org.kordamp.ikonli.unicons.UniconsLine;
+import org.kordamp.ikonli.whhg.WhhgMZ;
 import org.kordamp.ikonli.win10.Win10;
 
 public interface IkonUtil {
@@ -84,6 +92,10 @@ public interface IkonUtil {
     Ikon icons = MaterialDesign.MDI_EMOTICON;
     Ikon documentation = Codicons.BOOK;
     Ikon utility = FluentUiRegularAL.DOCUMENT_TOOLBOX_20;
+    Ikon learn = SimpleLineIcons.GRADUATION;
+    Ikon learnJavaFX = FontAwesomeBrands.JAVA;
+    Ikon learnMobile = FontAwesomeSolid.MOBILE_ALT;
+    Ikon learnRaspberryPi = WhhgMZ.RASPBERRYPI;
     Ikon news = MaterialDesignN.NEWSPAPER_VARIANT_OUTLINE;
     Ikon linkOfTheWeek = JFXCentralIcon.LINKS_OF_THE_WEEK;
 
@@ -162,8 +174,16 @@ public interface IkonUtil {
             return news;
         } else if (clazz == Documentation.class) {
             return documentation;
-        }  else if (clazz == Utility.class){
+        } else if (clazz == Utility.class) {
             return utility;
+        } else if (clazz == LearnJavaFX.class){
+          return learnJavaFX;
+        } else if (clazz == LearnMobile.class) {
+            return learnMobile;
+        } else if (clazz == LearnRaspberryPi.class) {
+            return learnRaspberryPi;
+        } else if (clazz == Learn.class) {
+            return learn;
         } else {
             return null;
         }

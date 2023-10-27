@@ -30,6 +30,7 @@ import one.jpro.platform.routing.LinkUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.Ikon;
+import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.Collections;
@@ -87,6 +88,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         descriptionLabel.setWrapText(true);
         descriptionLabel.setMaxHeight(Double.MAX_VALUE);
         descriptionLabel.setAlignment(Pos.TOP_LEFT);
+        descriptionLabel.setGraphic(new FontIcon(BootstrapIcons.CHAT_RIGHT_TEXT));
 
         VBox.setVgrow(descriptionLabel, Priority.ALWAYS);
 
@@ -112,7 +114,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
         getChildren().setAll(contentBox);
     }
 
-    private void setLinkForItem(Node target, ModelObject item) {
+    protected void setLinkForItem(Node target, ModelObject item) {
         if (item instanceof Documentation doc) {
             //The document link is external, and there's no detailed page.
             ExternalLinkUtil.setExternalLink(target, doc.getUrl());

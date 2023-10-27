@@ -32,6 +32,7 @@ import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import org.eclipse.jgit.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,8 +64,7 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
     public String description() {
         String text = getItem().getDescription();
 
-        // TODO: replace with StringUtils
-        if (text != null && !text.trim().equals("")) {
+        if (!StringUtils.isEmptyOrNull(text)) {
             return text;
         }
 
