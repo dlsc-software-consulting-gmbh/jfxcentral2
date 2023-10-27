@@ -11,7 +11,7 @@ public class LearnDetailHeader extends SimpleDetailHeader<Learn>  {
 
         String link = PageUtil.getViewOfObject(learn).toString();
         setShareUrl(link + "/" + learn.getId());
-        setShareText("Found this learn on @JFXCentral: " + learn.getName());
+        setShareText("Found this article on @JFXCentral: " + learn.getName());
         setShareTitle("Learn: " + learn.getName());
         setBackText("Learn");
         setBackUrl("/" + link);

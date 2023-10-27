@@ -1,6 +1,26 @@
 package com.dlsc.jfxcentral2.utils;
 
-import com.dlsc.jfxcentral.data.model.*;
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Documentation;
+import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral.data.model.Learn;
+import com.dlsc.jfxcentral.data.model.LearnJavaFX;
+import com.dlsc.jfxcentral.data.model.LearnMobile;
+import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
+import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.News;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Utility;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.antdesignicons.AntDesignIconsOutlined;

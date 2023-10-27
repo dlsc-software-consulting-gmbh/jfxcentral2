@@ -22,6 +22,10 @@ public enum View {
 
     @Override
     public String toString() {
-        return name().toLowerCase();
+        String name = name().toLowerCase();
+        if (this != REAL_WORLD) {
+            return name.replace("_", "-");
+        }
+        return name;
     }
 }

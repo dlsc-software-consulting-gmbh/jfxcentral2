@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 
 public class LearnOverviewBox extends OverviewBox<Learn> {
+
     public LearnOverviewBox(Learn learn) {
         super(learn);
         getStyleClass().add("learn-overview-box");
@@ -21,6 +22,5 @@ public class LearnOverviewBox extends OverviewBox<Learn> {
         } else {
             setMarkdown(DataRepository2.getInstance().getLearnRaspberryPiReadMe((LearnRaspberryPi) learn));
         }
-
     }
 }

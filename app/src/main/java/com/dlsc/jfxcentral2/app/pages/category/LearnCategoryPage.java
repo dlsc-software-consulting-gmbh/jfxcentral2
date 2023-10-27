@@ -33,6 +33,4 @@ public abstract class LearnCategoryPage extends CategoryPageBase<Learn> {
         return new LearnFilterView();
     }
 
-
-
 }

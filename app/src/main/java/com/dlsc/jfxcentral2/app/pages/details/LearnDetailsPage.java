@@ -36,5 +36,4 @@ public class LearnDetailsPage extends DetailsPageBase<Learn> {
         return wrapContent(learnDetailHeader, detailsContentPane);
     }
 
-
 }

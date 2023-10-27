@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Learn;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 
@@ -17,6 +18,9 @@ public class LearnTileView extends SimpleTileView<Learn> {
     public LearnTileView(Learn learn) {
         super(learn);
         getStyleClass().addAll("learn-tile-view", "tool-tile-view");
+        if (WebAPI.isBrowser()) {
+            getStyleClass().add("browser");
+        }
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(learn));
         saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(learn));
         setTitle(learn.getName());
@@ -37,11 +41,5 @@ public class LearnTileView extends SimpleTileView<Learn> {
                     developmentStatusBox.getChildren().add(avatarView);
                 }));
     }
-
-    //protected void setLinkForItem(Node target, ModelObject item) {
-    //    LOGGER.error("set link for item,URL = {}",ModelObjectTool.getModelLink(item));
-    //    LinkUtil.setLink(target, ModelObjectTool.getModelLink(item));
-    //
-    //}
 
 }

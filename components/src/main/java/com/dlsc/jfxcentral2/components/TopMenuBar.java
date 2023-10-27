@@ -42,8 +42,6 @@ import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
 import one.jpro.platform.routing.LinkUtil;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -335,15 +333,15 @@ public class TopMenuBar extends PaneBase {
     }
 
     private void fillLearnMenu(MenuButton learnBtn) {
-        MenuItem fxMenuItem = createMenuItem("Learn JavaFX", "/learn_javafx", IkonUtil.learnJavaFX);
+        MenuItem fxMenuItem = createMenuItem("Learn JavaFX", "/learn-javafx", IkonUtil.learnJavaFX);
         fxMenuItem.getStyleClass().add("learn-javafx-item");
         learnBtn.getItems().add(fxMenuItem);
 
-        MenuItem mobileMenuItem = createMenuItem("Learn Mobile", "/learn_mobile", IkonUtil.learnMobile);
+        MenuItem mobileMenuItem = createMenuItem("Learn Mobile", "/learn-mobile", IkonUtil.learnMobile);
         mobileMenuItem.getStyleClass().add("learn-mobile-item");
         learnBtn.getItems().add(mobileMenuItem);
 
-        MenuItem raspberryPiMenuItem = createMenuItem("Learn Raspberry Pi", "/learn_raspberrypi", IkonUtil.learnRaspberryPi);
+        MenuItem raspberryPiMenuItem = createMenuItem("Learn Raspberry Pi", "/learn-raspberrypi", IkonUtil.learnRaspberryPi);
         raspberryPiMenuItem.getStyleClass().add("learn-raspberrypi-item");
         learnBtn.getItems().add(raspberryPiMenuItem);
     }

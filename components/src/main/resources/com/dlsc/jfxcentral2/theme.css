@@ -3764,9 +3764,12 @@
 
 .learn-tile-view .bottom-box {
     -fx-border-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #e2e2e2 0.0%, #e2e2e2 0.6673%, #c2c2c275 47.3456%, #c4c4c400 100.0%);
-    /*-fx-border-color: -grey-10;*/
     -fx-border-width: 1px 0 0 0;
     -fx-padding: 7px 0 0 0;
+}
+
+.learn-tile-view.browser .bottom-box {
+    -fx-border-color: -grey-10;
 }
 
 .learn-tile-view .linked-object-box {
@@ -3794,7 +3797,7 @@
 }
 
 /** ------------------------------------
- * utility-tile-view
+ * UtilityTileView
  */
 .utility-tile-view .linked-object-box .linked-badge {
     -fx-pref-width: 85px;

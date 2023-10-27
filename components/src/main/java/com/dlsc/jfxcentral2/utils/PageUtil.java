@@ -22,7 +22,7 @@ import com.dlsc.jfxcentral.data.pull.PullRequest;
 public class PageUtil {
 
     public static String getLink(View view) {
-        return "/" + view.name().toLowerCase();
+        return "/" + view.toString().toLowerCase();
     }
 
     public static String getLink(ModelObject obj) {

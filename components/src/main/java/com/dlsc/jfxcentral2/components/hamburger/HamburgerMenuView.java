@@ -99,9 +99,9 @@ public class HamburgerMenuView extends PaneBase {
 
         HamburgerMenu learnMenu = new HamburgerMenu("Learn");
         learnMenu.getItems().addAll(
-                new HamburgerMenuItem("Learn JavaFX", IkonUtil.learnJavaFX, "/learn_javafx"),
-                new HamburgerMenuItem("Learn Mobile", IkonUtil.learnMobile, "/learn_mobile"),
-                new HamburgerMenuItem("Learn Raspberry Pi", IkonUtil.learnRaspberryPi, "/learn_raspberrypi")
+                new HamburgerMenuItem("Learn JavaFX", IkonUtil.learnJavaFX, "/learn-javafx"),
+                new HamburgerMenuItem("Learn Mobile", IkonUtil.learnMobile, "/learn-mobile"),
+                new HamburgerMenuItem("Learn Raspberry Pi", IkonUtil.learnRaspberryPi, "/learn-raspberrypi")
         );
 
         HamburgerMenu utilities = new HamburgerMenu("Utilities", "/utilities");

@@ -13,7 +13,6 @@ public class LearnJavaFXCategoryPage extends LearnCategoryPage {
         super(size);
     }
 
-
     @Override
     public String title() {
         return "JFXCentral - Learn JavaFX";
@@ -33,4 +32,5 @@ public class LearnJavaFXCategoryPage extends LearnCategoryPage {
     protected ObservableList<Learn> getCategoryItems() {
         return FXCollections.observableArrayList(DataRepository2.getInstance().getLearnJavaFX());
     }
+
 }

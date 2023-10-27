@@ -2,10 +2,65 @@ package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.gemsfx.util.StageManager;
 import com.dlsc.jfxcentral.data.DataRepository2;
-import com.dlsc.jfxcentral.data.model.*;
-import com.dlsc.jfxcentral2.app.pages.*;
-import com.dlsc.jfxcentral2.app.pages.category.*;
-import com.dlsc.jfxcentral2.app.pages.details.*;
+import com.dlsc.jfxcentral.data.model.Utility;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral.data.model.LearnJavaFX;
+import com.dlsc.jfxcentral.data.model.LearnMobile;
+import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.app.pages.CreditsPage;
+import com.dlsc.jfxcentral2.app.pages.ErrorPage;
+import com.dlsc.jfxcentral2.app.pages.LegalPage;
+import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
+import com.dlsc.jfxcentral2.app.pages.LoginPage;
+import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
+import com.dlsc.jfxcentral2.app.pages.RefreshPage;
+import com.dlsc.jfxcentral2.app.pages.StartPage;
+import com.dlsc.jfxcentral2.app.pages.TeamPage;
+import com.dlsc.jfxcentral2.app.pages.TopContentPage;
+import com.dlsc.jfxcentral2.app.pages.UserProfilePage;
+import com.dlsc.jfxcentral2.app.pages.category.BlogsCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.BooksCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.CompaniesCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.DocumentationCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.DownloadsCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.IconsCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.LearnJavaFXCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.LearnMobileCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.LearnRaspberryPiCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.LibrariesCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.PeopleCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.ShowcasesCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.TipCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.ToolsCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.TutorialsCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.UtilitiesCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.category.VideosCategoryPage;
+import com.dlsc.jfxcentral2.app.pages.details.BlogDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.BookDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.CompanyDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.DownloadDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.IconPackDetailPage;
+import com.dlsc.jfxcentral2.app.pages.details.LearnDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.LibraryDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.PersonDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.ShowcaseDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.TipDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.ToolDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.UtilityDetailsPage;
+import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.app.utils.LoggerOutputStream;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
@@ -27,7 +82,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import one.jpro.platform.routing.*;
+import one.jpro.platform.routing.Request;
+import one.jpro.platform.routing.Response;
+import one.jpro.platform.routing.Route;
+import one.jpro.platform.routing.RouteNode;
+import one.jpro.platform.routing.RouteUtils;
 import one.jpro.platform.routing.dev.DevFilter;
 import one.jpro.platform.routing.dev.StatisticsFilter;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
@@ -36,7 +95,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import simplefx.experimental.parts.FXFuture;
 
-import java.awt.Image;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -182,9 +240,9 @@ public class JFXCentral2App extends Application {
                 .and(createCategoryOrDetailRoute("/videos", Video.class, () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/icons", IkonliPack.class, () -> new IconsCategoryPage(size), id -> new IconPackDetailPage(size, id)))
                 .and(createCategoryOrDetailRoute("/utilities", Utility.class, () -> new UtilitiesCategoryPage(size), id -> new UtilityDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/learn_javafx", LearnJavaFX.class, () -> new LearnJavaFXCategoryPage(size), id -> new LearnDetailsPage(size, LearnJavaFX.class, id)))
-                .and(createCategoryOrDetailRoute("/learn_mobile", LearnMobile.class, () -> new LearnMobileCategoryPage(size), id -> new LearnDetailsPage(size, LearnMobile.class, id)))
-                .and(createCategoryOrDetailRoute("/learn_raspberrypi", LearnRaspberryPi.class, () -> new LearnRaspberryPiCategoryPage(size), id -> new LearnDetailsPage(size, LearnRaspberryPi.class, id)))
+                .and(createCategoryOrDetailRoute("/learn-javafx", LearnJavaFX.class, () -> new LearnJavaFXCategoryPage(size), id -> new LearnDetailsPage(size, LearnJavaFX.class, id)))
+                .and(createCategoryOrDetailRoute("/learn-mobile", LearnMobile.class, () -> new LearnMobileCategoryPage(size), id -> new LearnDetailsPage(size, LearnMobile.class, id)))
+                .and(createCategoryOrDetailRoute("/learn-raspberrypi", LearnRaspberryPi.class, () -> new LearnRaspberryPiCategoryPage(size), id -> new LearnDetailsPage(size, LearnRaspberryPi.class, id)))
                 .and(RouteUtils.get("/credits", r -> new CreditsPage(size)))
                 .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
                 .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
