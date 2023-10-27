@@ -164,7 +164,7 @@ public class FileHandlerView extends StackPane {
      * For browser only
      */
     private void initFileUploader(boolean multipleFiles) {
-        fileHandler = multipleFiles ? WebAPI.makeMultiFileUploadNodeStatic(this) : WebAPI.makeFileUploadNodeStatic(this);
+        fileHandler = WebAPI.makeFileUploadNodeStatic(this);
         Bindings.bindContent(fileHandler.supportedExtensions(), getSupportedExtensions());
         fileHandler.setSelectFileOnClick(true);
         fileHandler.setSelectFileOnDrop(true);
