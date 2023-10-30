@@ -1,0 +1,91 @@
+name: macOS
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Gluon's GraalVM
+        uses: gluonhq/setup-graalvm@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Developer ID Application certificate
+        uses: Apple-Actions/import-codesign-certs@v1
+        with:
+          keychain: ${{ github.run_id }}
+          keychain-password: ${{ github.run_id }}
+          p12-file-base64: ${{ secrets.GLUON_MACOS_CERTIFICATES_FILE_BASE64 }}
+          p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}          
+
+      - name: Make staging directory
+        run: mkdir staging
+
+      - name: Gluon Build and Package
+        id: outputfile
+        run: |
+          ./mvnw -Pdesktop,mac gluonfx:build gluonfx:package
+          echo ::set-output name=path::target/gluonfx/x86_64-darwin/HelloGluon-1.0.0.pkg
+
+      - name: Notarize Installer
+        uses: erwin1/xcode-notarizer@v1
+        with:
+          product-path: ${{ steps.outputfile.outputs.path }}
+          apple-id: ${{ secrets.NOTARIZATION_USERNAME }}
+          app-password: ${{ secrets.NOTARIZATION_PASSWORD }}
+          team-id: ${{ secrets.GLUON_MACSIGN_PREFIX }}
+
+      - name: Upload (pkg)
+        uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: ${{ steps.outputfile.outputs.path }}
+
+      - name: Provisioning Profile
+        id: provisioning
+        uses: Apple-Actions/download-provisioning-profiles@v1.0.1
+        with:
+          bundle-id: com.gluonhq.hello.HelloGluonApp
+          profile-type: 'MAC_APP_STORE'
+          issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
+
+      - name: Rename profiles
+        run: |
+          find /Users/runner/Library/MobileDevice -name '*.mobileprovision' -exec sh -c 'mv "$0" "${0%.mobileprovision}.provisionprofile"' {} \;
+
+      - name: 3rd Party Mac certificate
+        uses: Apple-Actions/import-codesign-certs@v1
+        with:
+          keychain: ${{ github.run_id }}
+          keychain-password: ${{ github.run_id }}
+          create-keychain: false
+          p12-file-base64: ${{ secrets.GLUON_MACOS_STORE_CERTIFICATES_FILE_BASE64 }}
+          p12-password: ${{ secrets.GLUON_MACOS_STORE_CERTIFICATES_PASSWORD }}
+
+      - name: Gluon Package Store
+        id: outputfilestore
+        run: |
+          ./mvnw -Pdesktop,macstore gluonfx:package
+          echo ::set-output name=path::target/gluonfx/x86_64-darwin/HelloGluon-1.0.0.pkg
+
+      - name: Upload (pkg store)
+        uses: actions/upload-artifact@v2
+        with:
+          name: PackageAppStore
+          path: ${{ steps.outputfilestore.outputs.path }}
+
+      - name: Upload App Store TestFlight
+        uses: Apple-Actions/upload-testflight-build@master
+        with:
+          app-path: ${{ steps.outputfilestore.outputs.path }}
+          app-type: osx
+          issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
