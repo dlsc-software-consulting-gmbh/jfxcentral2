@@ -33,14 +33,10 @@ public class LOGGER {
         System.out.println(msg);
     }
 
-    public static void warn(String msg, IOException ex) {
+    public static void warn(String msg, Exception ex) {
         System.out.println(msg);
         if (ex != null) {
             ex.printStackTrace();
         }
-    }
-
-    public static void warn(String msg, Exception ex) {
-        warn(msg, ex);
     }
 }

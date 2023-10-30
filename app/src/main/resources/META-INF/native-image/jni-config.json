@@ -18,6 +18,9 @@
   "name":"[Lsun.java2d.loops.GraphicsPrimitive;"
 },
 {
+  "name":"[[Ljava.lang.String;"
+},
+{
   "name":"com.apple.eawt._AppEventHandler",
   "methods":[{"name":"handleNativeNotification","parameterTypes":["int"] }]
 },
@@ -39,6 +42,25 @@
     {"name":"notifyWillHide","parameterTypes":[] }, 
     {"name":"notifyWillResignActive","parameterTypes":[] }, 
     {"name":"notifyWillUnhide","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.glass.ui.CommonDialogs$ExtensionFilter",
+  "methods":[
+    {"name":"extensionsToArray","parameterTypes":[] }, 
+    {"name":"getDescription","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.glass.ui.CommonDialogs$FileChooserResult",
+  "methods":[{"name":"<init>","parameterTypes":["java.util.List","com.sun.glass.ui.CommonDialogs$ExtensionFilter"] }]
+},
+{
+  "name":"com.sun.glass.ui.EventLoop",
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"enter","parameterTypes":[] }, 
+    {"name":"leave","parameterTypes":["java.lang.Object"] }
   ]
 },
 {
@@ -607,6 +629,10 @@
   ]
 },
 {
+  "name":"java.io.File",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+},
+{
   "name":"java.io.InputStream",
   "methods":[
     {"name":"read","parameterTypes":["byte[]","int","int"] }, 
@@ -646,6 +672,7 @@
 {
   "name":"java.lang.String",
   "methods":[
+    {"name":"<init>","parameterTypes":["byte[]","java.lang.String"] }, 
     {"name":"lastIndexOf","parameterTypes":["int"] }, 
     {"name":"substring","parameterTypes":["int"] }
   ]

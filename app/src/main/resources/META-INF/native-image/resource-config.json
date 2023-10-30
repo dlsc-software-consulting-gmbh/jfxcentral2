@@ -14,6 +14,9 @@
       "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.util.PropertySource\\E"
     }, 
     {
+      "pattern":"\\QMETA-INF/services/org.controlsfx.glyphfont.GlyphFont\\E"
+    }, 
+    {
       "pattern":"\\QMETA-INF/services/org.slf4j.spi.SLF4JServiceProvider\\E"
     }, 
     {
@@ -27,6 +30,9 @@
     }, 
     {
       "pattern":"\\Qcom/dlsc/jfxcentral2/components/headers/bg-lg.jpg\\E"
+    }, 
+    {
+      "pattern":"\\Qcom/dlsc/jfxcentral2/components/headers/bg-md.jpg\\E"
     }, 
     {
       "condition":{"typeReachable":"org.apache.log4j.helpers.Loader"},
@@ -65,6 +71,14 @@
         "", 
         "und"
       ]
+    }, 
+    {
+      "name":"com/sun/javafx/scene/control/skin/resources/controls-nt",
+      "locales":["und"]
+    }, 
+    {
+      "name":"controlsfx",
+      "locales":["und"]
     }, 
     {
       "name":"org.eclipse.jgit.internal.JGitText",
