@@ -17,16 +17,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.List;
 
 public class CommentItemView extends PaneBase {
-    private static final Logger LOGGER = LogManager.getLogger(CommentItemView.class);
 
     private static final String DELETED_PLACEHOLDER = "Comment Deleted";
     private final Label commentLabel;
@@ -63,7 +61,7 @@ public class CommentItemView extends PaneBase {
             if (comment != null && !comment.isDeleted()) {
                 comment.setDeleted(true);
                 commentLabel.setText(DELETED_PLACEHOLDER);
-                LOGGER.info("Delete comment: {}", comment.getId());
+                System.out.println(MessageFormat.format("Delete comment: {0}", comment.getId()));
             }
             event.consume();
         });
@@ -77,7 +75,7 @@ public class CommentItemView extends PaneBase {
         editButton.setOnAction(event -> {
             Comment comment = getComment();
             if (comment != null && !comment.isDeleted()) {
-                LOGGER.info("Edit comment: {}", comment.getId());
+                System.out.println(MessageFormat.format("Edit comment: {0}", comment.getId()));
             }
             event.consume();
         });

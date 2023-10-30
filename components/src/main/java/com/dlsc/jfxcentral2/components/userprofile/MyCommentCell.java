@@ -17,15 +17,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.text.MessageFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class MyCommentCell extends PaneBase {
-    private static final Logger LOGGER = LogManager.getLogger(MyCommentCell.class);
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private static final Image PERSON_AVATAR_IMAGE = new Image(Objects.requireNonNull(MyCommentCell.class.getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png")).toExternalForm());
 
@@ -88,7 +86,7 @@ public class MyCommentCell extends PaneBase {
                 comment.setContent(commentArea.getText());
                 commentLabel.setText(comment.getContent());
                 editState.set(false);
-                LOGGER.info("Save comment: {}", comment.getContent());
+                System.out.println(MessageFormat.format("Save comment: {0}", comment.getContent()));
             }
         });
 
@@ -106,7 +104,7 @@ public class MyCommentCell extends PaneBase {
                 comment.setDeleted(true);
                 commentLabel.setText("Comment Deleted");
                 buttonsBox.setVisible(false);
-                LOGGER.info("Delete comment: {}", comment.getId());
+                System.out.println(MessageFormat.format("Delete comment: {0}", comment.getId()));
             }
         });
 

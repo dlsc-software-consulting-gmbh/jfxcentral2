@@ -62,7 +62,6 @@ import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.UtilityDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
-import com.dlsc.jfxcentral2.app.utils.LoggerOutputStream;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
@@ -90,9 +89,6 @@ import one.jpro.platform.routing.RouteUtils;
 import one.jpro.platform.routing.dev.DevFilter;
 import one.jpro.platform.routing.dev.StatisticsFilter;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import simplefx.experimental.parts.FXFuture;
 
 import java.awt.*;
@@ -105,7 +101,6 @@ import java.util.function.Supplier;
 
 public class JFXCentral2App extends Application {
 
-    private static final Logger LOGGER = LogManager.getLogger(JFXCentral2App.class);
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
     private TrayIconManager trayIconManager;
@@ -118,7 +113,7 @@ public class JFXCentral2App extends Application {
 
     @Override
     public void start(Stage stage) {
-        if (!OSUtil.isAndroidOrIOS()) {
+        if (!OSUtil.isNative()) {
             // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
             BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
             bi.createGraphics();
@@ -126,10 +121,9 @@ public class JFXCentral2App extends Application {
 
         if (!WebAPI.isBrowser()) {
             System.setProperty("routing.scrollpane", PrettyScrollPane.class.getName());
+            System.setProperty("prism.lcdtext", "false");
 
-            if (!OSUtil.isAndroidOrIOS()) {
-                System.setProperty("prism.lcdtext", "false");
-
+            if (OSUtil.isAWTSupported()) {
                 if (Taskbar.isTaskbarSupported()) {
                     Taskbar taskbar = Taskbar.getTaskbar();
                     if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
@@ -143,7 +137,7 @@ public class JFXCentral2App extends Application {
 
         // set jpro.imagemanager.cache to ~/.jfxcentral/imagecache
         System.setProperty("jpro.imagemanager.cache", new File(new File(System.getProperty("user.home")), ".jfxcentral/imagecache").getAbsolutePath());
-        LOGGER.info("jpro.imagemanager.cache: " + System.getProperty("jpro.imagemanager.cache"));
+        System.out.println("jpro.imagemanager.cache: " + System.getProperty("jpro.imagemanager.cache"));
 
         stage.initStyle(StageStyle.UNDECORATED);
 
@@ -156,7 +150,7 @@ public class JFXCentral2App extends Application {
         routeNode.start(sessionManager);
 
         // tray icon
-        if (!WebAPI.isBrowser() && !OSUtil.isAndroidOrIOS() && SystemTray.isSupported()) {
+        if (!WebAPI.isBrowser() && OSUtil.isAWTSupported() && SystemTray.isSupported()) {
             RepositoryManager.repositoryUpdatedProperty().addListener(it -> {
                 if (trayIconManager == null) {
                     trayIconManager = new TrayIconManager(stage, sessionManager);
@@ -185,7 +179,7 @@ public class JFXCentral2App extends Application {
         // customs stage for decorations / the chrome
         CustomStage customStage = new CustomStage(stage, parent, sessionManager, size);
         customStage.setCloseHandler(() -> {
-            if (!OSUtil.isAndroidOrIOS()) {
+            if (!OSUtil.isNative()) {
                 if (SystemTray.isSupported() && trayIconManager != null) {
                     trayIconManager.hide();
                 }
@@ -302,7 +296,6 @@ public class JFXCentral2App extends Application {
 
     private void updateSizeProperty(Scene scene) {
         double sceneWidth = scene.getWidth();
-        System.out.println("scene width: " + sceneWidth);
         if (sceneWidth < 760) {
             size.set(Size.SMALL);
         } else if (sceneWidth <= 1320) {
@@ -313,11 +306,6 @@ public class JFXCentral2App extends Application {
     }
 
     public static void main(String[] args) {
-        Logger logger = LogManager.getLogger();
-        if (!OSUtil.isAndroidOrIOS()) {
-            System.setOut(new PrintStream(new LoggerOutputStream(logger, Level.INFO), true));
-            System.setErr(new PrintStream(new LoggerOutputStream(logger, Level.ERROR), true));
-        }
         launch(args);
     }
 }

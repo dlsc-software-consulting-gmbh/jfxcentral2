@@ -68,9 +68,6 @@ public class DetailHeader<T extends ModelObject> extends CategoryHeader {
         MenuButton menuButton = new MenuButton("SHARE", new FontIcon(JFXCentralIcon.SHARE));
         menuButton.setFocusTraversable(false);
         menuButton.getStyleClass().add("share-button");
-        if (!WebAPI.isBrowser() && !OSUtil.isAndroidOrIOS()) {
-            menuButton.getStyleClass().add("standalone");
-        }
         menuButton.getItems().addAll(customMenuItem);
 
         InvalidationListener updateShareButtonLinks = it -> updateShareButton(socialLinksView);

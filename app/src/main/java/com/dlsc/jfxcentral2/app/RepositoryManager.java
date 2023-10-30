@@ -1,13 +1,12 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.ProgressMonitor;
@@ -19,12 +18,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Locale;
 
 public class RepositoryManager {
 
-    private static final Logger LOGGER = LogManager.getLogger(RepositoryManager.class);
     private static final BooleanProperty repositoryUpdated = new SimpleBooleanProperty();
     private static final String GITHUB_HOST = "github.com";
     private static final String GITEE_HOST = "gitee.com";
@@ -47,10 +46,10 @@ public class RepositoryManager {
                 initialLoad(monitor);
                 repositoryUpdated.set(true);
             } catch (Exception e) {
-                LOGGER.error("failed to update the repository", e);
+                e.printStackTrace();
                 monitor.beginTask("Repository operation failed.\nRemoving application data.\nPlease relaunch.", -1);
                 File repositoryDirectory = getRepositoryDirectory();
-                LOGGER.info("repository clone / update failed, deleting it ...");
+                System.out.println("repository clone / update failed, deleting it ...");
                 if (repositoryDirectory.exists()) {
                     try {
                         FileUtils.forceDelete(repositoryDirectory);
@@ -87,7 +86,7 @@ public class RepositoryManager {
 
             if (isCountryEqualToChina()) {
                 repoUrl = shouldUseGiteeMirror() ? GITEE_REPOSITORY_URL : GITHUB_REPOSITORY_URL;
-                LOGGER.info("using {} as the repository URL.", repoUrl);
+                System.out.println(MessageFormat.format("using {0} as the repository URL.", repoUrl));
                 Platform.runLater(() -> {
                     monitor.beginTask("checking network...", 1);
                     monitor.endTask();

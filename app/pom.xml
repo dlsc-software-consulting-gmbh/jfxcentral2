@@ -33,6 +33,7 @@
     </properties>
 
     <dependencies>
+        <!--
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -42,6 +43,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
         </dependency>
+        -->
 
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -396,11 +398,13 @@
             <artifactId>ikonli-zondicons-pack</artifactId>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j2-impl</artifactId>
             <version>2.20.0</version>
         </dependency>
+        -->
 
     </dependencies>
 
@@ -452,6 +456,7 @@
                         <macAppStore>${mac.app.store}</macAppStore>
                         <bundleShortVersion>${bundle.short.version}</bundleShortVersion>
                         <bundleVersion>${bundle.version}</bundleVersion>
+                        <skipSigning>true</skipSigning>
                         <!-- simulatorDevice>iPhone 15 Pro Max</simulatorDevice -->
                         <!-- simulatorDevice>iPhone SE (3rd generation)</simulatorDevice -->
                         <!-- simulatorDevice>iPad Pro (12.9-inch) (6th generation)</simulatorDevice -->
@@ -551,7 +556,7 @@
             <id>android</id>
             <properties>
                 <gluonfx.target>android</gluonfx.target>
-                <app.identifier>com.gluonhq.samples.hellogluon</app.identifier>
+                <app.identifier>com.dlsc.jfxcentral</app.identifier>
                 <version.code>${env.GITHUB_RUN_NUMBER}</version.code>
                 <provided.keystore.path>${env.GLUON_ANDROID_KEYSTOREPATH}</provided.keystore.path>
                 <provided.keystore.password>${env.GLUON_ANDROID_KEYSTORE_PASSWORD}</provided.keystore.password>

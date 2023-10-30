@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral2.utilities.effectdesigner.effect.BlendBottomInput;
 import com.dlsc.jfxcentral2.utilities.effectdesigner.effect.BlendTopInput;
 import com.dlsc.jfxcentral2.utilities.effectdesigner.effect.LightingBumpInput;
 import com.dlsc.jfxcentral2.utilities.effectdesigner.effect.LightingContentInput;
+import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.dlsc.jfxcentral2.utils.NumberUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.scene.effect.Blend;
@@ -29,13 +30,10 @@ import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class EffectCodeGenerator {
-    private static final Logger LOGGER = LogManager.getLogger(EffectCodeGenerator.class);
 
     private EffectCodeGenerator() {
     }

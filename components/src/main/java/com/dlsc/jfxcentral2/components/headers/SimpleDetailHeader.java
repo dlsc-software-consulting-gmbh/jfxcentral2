@@ -25,16 +25,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import one.jpro.platform.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
+
+import java.text.MessageFormat;
 
 /**
  * AppDetailHeader or BookDetailHeader
  */
 public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
-    private static final Logger LOGGER = LogManager.getLogger(SimpleDetailHeader.class);
     private Button websiteButton;
 
     public SimpleDetailHeader(T model) {
@@ -92,9 +91,9 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         saveAndLikeButton.setSaveButtonSelected(SaveAndLikeUtil.isSaved(model));
         saveAndLikeButton.setLikeButtonSelected(SaveAndLikeUtil.isLiked(model));
         saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, nv) ->
-                LOGGER.info("{} Save: {}",model.getName(), nv? "YES" : "NO"));
+                System.out.println(MessageFormat.format("{0} Save: {1}",model.getName(), nv? "YES" : "NO")));
         saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, nv) ->
-                LOGGER.info("{} Like: {}",model.getName(), nv? "YES" : "NO"));
+                System.out.println(MessageFormat.format("{0} Like: {1}",model.getName(), nv? "YES" : "NO")));
 
         websiteButton = new Button();
         websiteButton.setFocusTraversable(false);

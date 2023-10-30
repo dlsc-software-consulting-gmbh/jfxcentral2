@@ -59,7 +59,7 @@ public class UtilitiesCategoryPage extends CategoryPageBase<Utility> {
 
     @Override
     protected ObservableList<Utility> getCategoryItems() {
-        if (OSUtil.isAndroidOrIOS()) {
+        if (OSUtil.isNative()) {
             return FXCollections.observableArrayList(DataRepository2.getInstance().getUtilities().stream().filter(Utility::isNativeSupported).toList());
         }
         return FXCollections.observableArrayList(DataRepository2.getInstance().getUtilities());

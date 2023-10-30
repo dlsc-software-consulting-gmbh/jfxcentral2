@@ -138,6 +138,21 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"com.dlsc.jfxcentral.data.model.LearnJavaFX",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.LearnMobile",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.LearnRaspberryPi",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"com.dlsc.jfxcentral.data.model.Library",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]

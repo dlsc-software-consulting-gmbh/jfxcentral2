@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utilities.paintpicker.impl.datamodel.Gradient;
 import com.dlsc.jfxcentral2.utilities.paintpicker.impl.datamodel.LinearGradientPOJO;
 import com.dlsc.jfxcentral2.utilities.paintpicker.impl.datamodel.StopPOJO;
+import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.beans.binding.Bindings;
@@ -18,8 +19,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,7 +31,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class GradientView extends VBox {
-    private static final Logger LOGGER = LogManager.getLogger(GradientView.class);
 
     public GradientView(ObjectProperty<Size> sizeObjectProperty, PaintPicker paintPicker) {
         getStyleClass().add("linear-gradient-view");

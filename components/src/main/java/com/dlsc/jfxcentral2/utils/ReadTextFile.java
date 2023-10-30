@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral2.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +9,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ReadTextFile {
-    private static final Logger LOGGER = LogManager.getLogger(ReadTextFile.class);
+
     private ReadTextFile() {
     }
 

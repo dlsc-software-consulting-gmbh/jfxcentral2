@@ -60,4 +60,16 @@ public class OSUtil {
         }
         return PlatformUtils.isIOS() || PlatformUtils.isAndroid();
     }
+
+    public static boolean isNative() {
+        return System.getProperty("org.graalvm.nativeimage.imagecode") != null;
+    }
+
+    public static boolean isAWTSupported() {
+        if (isAndroidOrIOS() || isNative()) {
+            return false;
+        }
+
+        return true;
+    }
 }

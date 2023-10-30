@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.utilities.effectdesigner.editor;
 
 import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -15,8 +16,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.antdesignicons.AntDesignIconsOutlined;
 import org.kordamp.ikonli.fontawesome.FontAwesome;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -26,7 +25,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.IntStream;
 
 public abstract class EffectEditor<T extends Effect> extends VBox {
-    private static final Logger LOGGER = LogManager.getLogger(EffectEditor.class);
+
     private final T effect;
 
     public EffectEditor(T effect, Runnable deleteAction) {

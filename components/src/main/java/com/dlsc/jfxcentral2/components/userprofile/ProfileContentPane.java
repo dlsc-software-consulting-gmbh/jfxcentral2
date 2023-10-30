@@ -16,14 +16,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.apache.commons.validator.routines.EmailValidator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.text.MessageFormat;
 import java.util.Objects;
 
 public class ProfileContentPane extends PaneBase {
-    private static final Logger LOGGER = LogManager.getLogger(ProfileContentPane.class);
     private static final Image PERSON_AVATAR_IMAGE = new Image(Objects.requireNonNull(ProfileContentPane.class.getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png")).toExternalForm());
     private PhotoView photoView;
     private EditTextField userNameField;
@@ -53,7 +51,7 @@ public class ProfileContentPane extends PaneBase {
             RegisteredUser user = getUser();
             if (user != null) {
                 user.setUserName(s);
-                LOGGER.info("saved user name: {}" , s);
+                System.out.println(MessageFormat.format("saved user name: {0}", s));
             }
         });
 
@@ -69,7 +67,7 @@ public class ProfileContentPane extends PaneBase {
             RegisteredUser user = getUser();
             if (user != null) {
                 user.setFullName(s);
-                LOGGER.info("saved full name: {}" , s);
+                System.out.println(MessageFormat.format("saved full name: {0}", s));
             }
         });
 
@@ -85,7 +83,7 @@ public class ProfileContentPane extends PaneBase {
             RegisteredUser user = getUser();
             if (user != null) {
                 user.setEmail(s);
-                LOGGER.info("saved email: {}" , s);
+                System.out.println(MessageFormat.format("saved email: {0}", s));
             }
         });
     }
@@ -117,7 +115,7 @@ public class ProfileContentPane extends PaneBase {
         clickHereLabel.setOnMousePressed(event -> {
             RegisteredUser user = getUser();
             if (user != null) {
-                LOGGER.info("delete account: {}" , user.getUserName());
+                System.out.println(MessageFormat.format("delete account: {0}", user.getUserName()));
             }
         });
 

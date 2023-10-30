@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.utilities.effectdesigner;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.JFXCentralUtil;
+import com.dlsc.jfxcentral2.utils.LOGGER;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -21,8 +22,6 @@ import javafx.scene.effect.InnerShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material2.Material2AL;
 import org.kordamp.ikonli.material2.Material2OutlinedMZ;
@@ -33,7 +32,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EffectFlowPane extends FlowPane {
-    private static final Logger LOGGER = LogManager.getLogger(EffectFlowPane.class);
     private static final ToggleGroup TOGGLE_GROUP = new ToggleGroup();
 
     public EffectFlowPane() {

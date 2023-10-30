@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral2.model.CreditModel;
 import com.dlsc.jfxcentral2.model.License;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.scene.control.Button;
@@ -15,8 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.LinkUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.BufferedReader;
@@ -30,7 +29,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CreditsView extends PaneBase {
-    private static final Logger LOGGER = LogManager.getLogger(CreditsView.class);
+
     public CreditsView() {
         getStyleClass().add("credits-view");
         VBox container = new VBox();

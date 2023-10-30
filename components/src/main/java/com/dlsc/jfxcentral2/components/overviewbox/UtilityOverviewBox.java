@@ -12,7 +12,6 @@ import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.carbonicons.CarbonIcons;
 import org.kordamp.ikonli.elusive.Elusive;
 import org.kordamp.ikonli.fileicons.FileIcons;
@@ -25,7 +24,6 @@ public class UtilityOverviewBox extends OverviewBox<Utility> {
 
     private Node toolPane;
     private Node readmeView;
-    private static final Logger LOGGER = org.apache.logging.log4j.LogManager.getLogger(UtilityOverviewBox.class);
 
     public UtilityOverviewBox(Utility model) {
         super(model);

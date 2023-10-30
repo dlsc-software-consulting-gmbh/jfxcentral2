@@ -17,8 +17,6 @@ import javafx.stage.FileChooser;
 import one.jpro.platform.routing.CopyUtil;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.IkonHandler;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -42,7 +40,6 @@ public class IkonDetailView extends DetailView<Ikon> {
     private static final String TEMP_DIR_PREFIX = "tempDir_";
     private static final String TEMP_DIR_SUFFIX = "_dir";
     private static final String SVG_EXTENSION = ".svg";
-    private static final Logger LOGGER = LogManager.getLogger(IkonDetailView.class);
     private static final float SVG_FONT_SIZE = 24;
 
     private enum SVGType {
@@ -103,7 +100,7 @@ public class IkonDetailView extends DetailView<Ikon> {
         addRow(flowPane, "Maven:", ikonInfo.mavenInfo());
         addRow(flowPane, "Gradle :", ikonInfo.gradleInfo());
 
-        if (!OSUtil.isAndroidOrIOS()) {
+        if (OSUtil.isAWTSupported()) {
             addRow(flowPane, "Path:", ikonInfo.path());
             addDownloadSvgRow(flowPane);
         }
@@ -123,7 +120,7 @@ public class IkonDetailView extends DetailView<Ikon> {
 
     private String extractorPathFromIcon(String iconLiteral) {
         // no AWT support on ios / android
-        if (!OSUtil.isAndroidOrIOS()) {
+        if (OSUtil.isAWTSupported()) {
             SVGType type = SVGType.FILL;
             SVGGraphics2D g2d = getSvgGraphics2D(type);
 

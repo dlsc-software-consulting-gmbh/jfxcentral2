@@ -3,10 +3,7 @@ package com.dlsc.jfxcentral2.utilities.pxemconverter;
 import com.dlsc.jfxcentral2.components.DoubleTextField;
 import com.dlsc.jfxcentral2.components.FileHandlerView;
 import com.dlsc.jfxcentral2.components.PaneBase;
-import com.dlsc.jfxcentral2.utils.FileUtil;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.NumberUtil;
-import com.dlsc.jfxcentral2.utils.WebAPIUtil;
+import com.dlsc.jfxcentral2.utils.*;
 import com.google.gson.Gson;
 import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
@@ -16,8 +13,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.controlsfx.control.ListSelectionView;
 import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
 import org.kordamp.ikonli.carbonicons.CarbonIcons;
@@ -35,13 +30,14 @@ import java.util.Collections;
 import java.util.Objects;
 
 public class Px2EmView extends PaneBase {
-    private static final Logger LOGGER = LogManager.getLogger(Px2EmView.class);
+
     private static final String CACHE_PATH = ".jfxcentral/csscache";
     private static final String TEMP_DIR_PREFIX = "tempDir_";
     private static final String TEMP_DIR_SUFFIX = "_css";
     private static final double MAX_FONT_SIZE = 200;
     private static final double MIN_FONT_SIZE = 5;
     private static final double DEFAULT_FONT_SIZE = 12;
+
     private File initDirectory;
     private File cssFile;
 
