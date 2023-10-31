@@ -2,18 +2,6 @@
   "resources":{
   "includes":[
     {
-      "pattern":"\\QMETA-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat\\E"
-    }, 
-    {
-      "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.core.util.ContextDataProvider\\E"
-    }, 
-    {
-      "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.spi.Provider\\E"
-    }, 
-    {
-      "pattern":"\\QMETA-INF/services/org.apache.logging.log4j.util.PropertySource\\E"
-    }, 
-    {
       "pattern":"\\QMETA-INF/services/org.controlsfx.glyphfont.GlyphFont\\E"
     }, 
     {
@@ -33,21 +21,6 @@
     }, 
     {
       "pattern":"\\Qcom/dlsc/jfxcentral2/components/headers/bg-md.jpg\\E"
-    }, 
-    {
-      "condition":{"typeReachable":"org.apache.log4j.helpers.Loader"},
-      "pattern":"\\Qlog4j.properties\\E"
-    }, 
-    {
-      "condition":{"typeReachable":"org.apache.log4j.helpers.Loader"},
-      "pattern":"\\Qlog4j.xml\\E"
-    }, 
-    {
-      "pattern":"\\Qlog4j2.xml\\E"
-    }, 
-    {
-      "condition":{"typeReachable":"org.apache.log4j.xml.Log4jEntityResolver"},
-      "pattern":"\\Qorg/apache/log4j/xml/log4j.dtd\\E"
     }, 
     {
       "pattern":"\\Qreference.conf\\E"

@@ -157,8 +157,11 @@ public class TopMenuBar extends PaneBase {
         search(repository.getDownloads(), pattern, results);
         search(repository.getTutorials(), pattern, results);
         search(repository.getTips(), pattern, results);
-        search(repository.getUtilities(), pattern, results);
         search(repository.getIkonliPacks(), pattern, results);
+
+        if (!OSUtil.isNative()) {
+            search(repository.getUtilities(), pattern, results);
+        }
 
         // TODO: uncomment once learning content can be shown
 //        search(repository.getLearnJavaFX(), pattern, results);
@@ -262,7 +265,7 @@ public class TopMenuBar extends PaneBase {
             searchField.setMinWidth(Region.USE_PREF_SIZE);
 
             contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, learnBtn);
-            if (!OSUtil.isAndroidOrIOS()) {
+            if (!OSUtil.isNative()) {
                 contentBox.getChildren().add(utilitiesBtn);
             }
 
