@@ -90,6 +90,7 @@ public class CssShowcaseViewSkin extends SkinBase<CssShowcaseView> {
     private CheckComboBox<CssShowcaseView.CssConfiguration> stylesheetsBox;
     private CheckBox retinaButton, rtlButton;
     private Button clearButton;
+    private Button removeButton;
     private TabPane contentTabs;
     private Pane contentGroup;
 
@@ -240,9 +241,17 @@ public class CssShowcaseViewSkin extends SkinBase<CssShowcaseView> {
         clearButton.getStyleClass().add("clear-button");
         clearButton.setOnAction(event -> stylesheetsBox.getCheckModel().clearChecks());
 
+        removeButton = new Button("Remove All");
+        removeButton.getStyleClass().add("remove-button");
+        removeButton.setOnAction(event -> {
+            stylesheetsBox.getCheckModel().clearChecks();
+            getSkinnable().getConfigurations().clear();
+        });
+
         ToolBar toolBar = new ToolBar(styleSheetLabel,
                 stylesheetsBox,
                 clearButton,
+                removeButton,
                 rtlButton,
                 retinaButton
         );

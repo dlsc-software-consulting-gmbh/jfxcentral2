@@ -77,6 +77,10 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
                     loadMoreButton.setDisable(true);
                 }
             });
+            // disable loadMoreButton if all items are loaded
+            if (contentBox.getChildren().size() -1 == items.size()) {
+                loadMoreButton.setDisable(true);
+            }
 
         } else {
             int columns = getColumns();

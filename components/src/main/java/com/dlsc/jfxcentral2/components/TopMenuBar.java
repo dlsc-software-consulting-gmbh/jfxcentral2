@@ -202,6 +202,9 @@ public class TopMenuBar extends PaneBase {
         searchField = createSearchField();
 
         if (isLarge()) {
+            if (!getStyleClass().contains("normal-page")) {
+                getStyleClass().add("normal-page");
+            }
             MenuButton resourcesBtn = createMenuButton("Resources");
             resourcesBtn.getStyleClass().add("resources-button");
 
@@ -271,6 +274,7 @@ public class TopMenuBar extends PaneBase {
 
             contentBox.getChildren().addAll(separatorRegion, loginBtn, searchField);
         } else {
+            getStyleClass().remove("normal-page");
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");
 
