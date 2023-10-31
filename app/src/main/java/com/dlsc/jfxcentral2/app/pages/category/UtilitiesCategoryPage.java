@@ -3,13 +3,12 @@ package com.dlsc.jfxcentral2.app.pages.category;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral2.app.pages.CategoryPageBase;
-import com.dlsc.jfxcentral2.components.filters.UtilitiesFilterView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.tiles.UtilityTileView;
+import com.dlsc.jfxcentral2.components.filters.UtilitiesFilterView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
+import com.dlsc.jfxcentral2.components.tiles.UtilityTileView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,10 +58,8 @@ public class UtilitiesCategoryPage extends CategoryPageBase<Utility> {
 
     @Override
     protected ObservableList<Utility> getCategoryItems() {
-        if (OSUtil.isNative()) {
-            return FXCollections.observableArrayList(DataRepository2.getInstance().getUtilities().stream().filter(Utility::isNativeSupported).toList());
-        }
-        return FXCollections.observableArrayList(DataRepository2.getInstance().getUtilities());
+        return FXCollections.observableArrayList(DataRepository2.getInstance().getUtilities())
+                .sorted((o1, o2) -> Boolean.compare(o2.isOnlineSupported(), o1.isOnlineSupported()));
     }
 
 }

@@ -6,6 +6,11 @@ import javafx.scene.effect.PerspectiveTransform;
 import java.util.List;
 
 public class PerspectiveTransformEditor extends EffectEditor<PerspectiveTransform> {
+    /**
+     * This value can be freely adjusted, but please be mindful that if the range is unreasonable,
+     * the affected area may be too large or too small.
+     */
+    private static final int MAX_VAL = 600;
 
     public PerspectiveTransformEditor(PerspectiveTransform effect, Runnable deleteAction) {
         super(effect, deleteAction);
@@ -14,14 +19,14 @@ public class PerspectiveTransformEditor extends EffectEditor<PerspectiveTransfor
     @Override
     protected List<EffectPropperty> createOptions(PerspectiveTransform effect) {
         return List.of(
-                EffectPropertyFactory.create("Llx", IkonUtil.llx, -10, 10, 0, effect.llxProperty()),
-                EffectPropertyFactory.create("Lly", IkonUtil.lly, -10, 10, 0, effect.llyProperty()),
-                EffectPropertyFactory.create("Lrx", IkonUtil.lrx, -10, 10, 0, effect.lrxProperty()),
-                EffectPropertyFactory.create("Lry", IkonUtil.lry, -10, 10, 0, effect.lryProperty()),
-                EffectPropertyFactory.create("Ulx", IkonUtil.ulx, -10, 10, 0, effect.ulxProperty()),
-                EffectPropertyFactory.create("Uly", IkonUtil.uly, -10, 10, 0, effect.ulyProperty()),
-                EffectPropertyFactory.create("Urx", IkonUtil.urx, -10, 10, 0, effect.urxProperty()),
-                EffectPropertyFactory.create("Ury", IkonUtil.ury, -10, 10, 0, effect.uryProperty()));
+                EffectPropertyFactory.create("Llx", IkonUtil.llx, -MAX_VAL, MAX_VAL, 0, effect.llxProperty()),
+                EffectPropertyFactory.create("Lly", IkonUtil.lly, -MAX_VAL, MAX_VAL, 0, effect.llyProperty()),
+                EffectPropertyFactory.create("Lrx", IkonUtil.lrx, -MAX_VAL, MAX_VAL, 0, effect.lrxProperty()),
+                EffectPropertyFactory.create("Lry", IkonUtil.lry, -MAX_VAL, MAX_VAL, 0, effect.lryProperty()),
+                EffectPropertyFactory.create("Ulx", IkonUtil.ulx, -MAX_VAL, MAX_VAL, 0, effect.ulxProperty()),
+                EffectPropertyFactory.create("Uly", IkonUtil.uly, -MAX_VAL, MAX_VAL, 0, effect.ulyProperty()),
+                EffectPropertyFactory.create("Urx", IkonUtil.urx, -MAX_VAL, MAX_VAL, 0, effect.urxProperty()),
+                EffectPropertyFactory.create("Ury", IkonUtil.ury, -MAX_VAL, MAX_VAL, 0, effect.uryProperty()));
     }
 
 }

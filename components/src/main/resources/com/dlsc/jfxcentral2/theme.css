@@ -110,13 +110,12 @@
 
     -mdfx-bq-color-border: #4488cc; /* the blockquote's border color */
     -mdfx-bq-color-background: #0000ff0c; /* the blockquote's background color */
-
-    -fx-focus-traversable: false;
 }
 
 .root .normal-page {
     -fx-font-family: "Spline Sans";
     -fx-font-size: 16px;
+    -fx-focus-traversable: false;
 }
 
 .notch-pane {
@@ -3814,7 +3813,7 @@
 }
 
 .utility-tile-view.completed .linked-object-box .linked-badge {
-    -fx-background-color: -dark-green;
+    -fx-background-color: -green;
 }
 
 .utility-tile-view.beta .linked-object-box .linked-badge {
@@ -3830,6 +3829,10 @@
     -fx-text-fill: -white;
 }
 
+.utility-tile-view .linked-object-box .linked-badge.client-only {
+    -fx-background-color: -dark-green;
+}
+
 .utility-tile-view:md .top-box {
     -fx-spacing: 0px;
 }
@@ -3841,7 +3844,6 @@
 .utility-tile-view:md .avatar-view {
     -fx-translate-y: 5px;
 }
-
 
 /** ------------------------------------
  * DocumentationTileView
@@ -6836,6 +6838,44 @@
     -fx-icon-size: 60px;
 }
 
+.utility-overview-box > .content-box > .body-box .client-only-box > .client-only-tips {
+    -fx-text-fill: -grey-60;
+    -fx-padding: 20px 0;
+    -fx-graphic-text-gap: 20px;
+    -fx-font-size: 32px;
+    -fx-font-family: "Spline Sans";
+}
+
+.utility-overview-box > .content-box > .body-box .client-only-box {
+    -fx-alignment: center;
+}
+
+.utility-overview-box > .content-box > .body-box .client-only-box > .client-only-tips .ikonli-font-icon {
+    -fx-icon-color: -grey-60;
+    -fx-icon-size: 70px;
+}
+
+.utility-overview-box:sm > .content-box > .body-box .client-only-box > .client-only-tips {
+    -fx-content-display: top;
+    -fx-text-alignment: center;
+}
+
+.utility-overview-box > .content-box > .body-box .client-only-box .download-button {
+    -fx-font-size: 20px;
+    -fx-content-display: right;
+    -fx-padding: 8px 115px;
+    -fx-graphic-text-gap: 15px;
+}
+
+.utility-overview-box > .content-box > .body-box .client-only-box .download-button .ikonli-font-icon {
+    -fx-icon-size: 22px;
+    -fx-icon-color: -grey-100;
+}
+
+.utility-overview-box:sm > .content-box > .body-box .client-only-box .download-button {
+    -fx-padding: 8px 55px;
+}
+
 /** ------------------------------------
  * LibraryCoordinatesBox
  */
@@ -9597,8 +9637,10 @@
 }
 
 .effect-designer-view .left-box .effect-preview-pane {
-    -fx-pref-width: 200px;
-    -fx-pref-height: 200px;
+    -fx-min-width: 200px;
+    -fx-min-height: 200px;
+    -fx-max-width: 200px;
+    -fx-max-height: 200px;
     -fx-background-color: -white;
     -fx-border-color: -grey-30;
     -fx-border-width: 1px;
@@ -9621,6 +9663,18 @@
     -fx-font-size: 25px;
     -fx-font-weight: bold;
     -fx-text-fill: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #fa00fc 0.0%, #03dbde 100.0%);
+}
+
+.effect-designer-view .left-box .hor-pane {
+    -fx-border-color: #104CECDD transparent;
+    -fx-border-style: dashed;
+    -fx-scale-x: 1.5;
+}
+
+.effect-designer-view .left-box .ver-pane {
+    -fx-border-color: transparent #E234FFDD;
+    -fx-border-style: dashed;
+    -fx-scale-y: 1.5;
 }
 
 .effect-designer-view > .flow-pane {

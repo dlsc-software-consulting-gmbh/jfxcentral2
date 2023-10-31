@@ -65,7 +65,10 @@ public class EffectFlowPane extends FlowPane {
                 setSelectedEffect(null);
                 return;
             }
-            setSelectedEffect(effects.get(TOGGLE_GROUP.getToggles().indexOf(nv)));
+            int index = TOGGLE_GROUP.getToggles().indexOf(nv);
+            if (index != -1) {
+                setSelectedEffect(effects.get(index));
+            }
         });
     }
 

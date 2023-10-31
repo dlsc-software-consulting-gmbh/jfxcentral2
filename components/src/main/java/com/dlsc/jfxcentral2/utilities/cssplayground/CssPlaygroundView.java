@@ -21,6 +21,9 @@ public class CssPlaygroundView extends PaneBase {
     public CssPlaygroundView() {
         getStyleClass().add("css-playground-view");
 
+        Label downloadTips = new Label("Works best in App; Install Locally");
+        downloadTips.getStyleClass().add("tips-label");
+
         FileHandlerView fileHandlerView = new FileHandlerView(true, true, true);
         fileHandlerView.getSupportedExtensions().add(".css");
         fileHandlerView.setText("Click or drop CSS files here");
