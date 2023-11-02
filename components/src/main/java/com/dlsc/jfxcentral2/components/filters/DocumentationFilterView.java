@@ -6,16 +6,23 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
-public class DocumentationFilterView extends SimpleModelObjectSearchFilterView<Documentation> {
+public class DocumentationFilterView extends SimpleSearchFilterView<Documentation> {
     private static List<FilterItem<Documentation>> typeFilterItems;
 
     public DocumentationFilterView() {
-        getStyleClass().addAll("tools-filter-view","doc-filter-view");
+        getStyleClass().addAll("simple-model-object-filter-view", "tools-filter-view", "doc-filter-view");
+
+        //Documentation are still displayed in alphabetical order.
+        setSortGroup(new SortGroup<>("ORDER", List.of(
+                new SortItem<>("From A to Z", Comparator.comparing((Documentation modelObject) -> modelObject.getName().toLowerCase())),
+                new SortItem<>("From Z to A", Comparator.comparing((Documentation modelObject) -> modelObject.getName().toLowerCase()).reversed()))
+        ));
 
         setSearchPromptText("Search for a Documentation");
 
@@ -38,6 +45,7 @@ public class DocumentationFilterView extends SimpleModelObjectSearchFilterView<D
             return attribute != null && StringUtils.containsIgnoreCase(attribute, item);
         };
     }
+
     private List<FilterItem<Documentation>> getVideoFilterItems(
             Function<Documentation, String> attrGetter,
             BiPredicate<Documentation, String> predicate) {
