@@ -18,9 +18,7 @@ public class VideosDetailsBox extends DetailsBoxBase<Video> {
         setTitle("VIDEOS");
         setIkon(IkonUtil.getModelIkon(Video.class));
         setMaxItemsPerPage(3);
-        if (!OSUtil.isNative()) {
-            setExtrasProvider(video -> VideoViewFactory.createVideoViewNode(video, true));
-        }
+        setExtrasProvider(video -> VideoViewFactory.createVideoViewNode(video, true));
     }
 
     @Override

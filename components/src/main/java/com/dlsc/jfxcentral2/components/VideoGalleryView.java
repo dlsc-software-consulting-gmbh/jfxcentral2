@@ -85,20 +85,10 @@ public class VideoGalleryView extends PaneBase {
                 videoTileView.sizeProperty().bind(pagination.sizeProperty());
                 //Play button action
                 videoTileView.getButton1().setOnAction(evt -> {
-                    if (OSUtil.isNative()) {
-                        BrowserService.create().ifPresent(service -> {
-                            try {
-                                service.launchExternalBrowser("https://www.youtube.com/watch?v=" + video.getId());
-                            } catch (IOException | URISyntaxException e) {
-                                throw new RuntimeException(e);
-                            }
-                        });
-                    } else {
-                        if (centerPlayBox.getChildren().size() > 1) {
-                            centerPlayBox.getChildren().remove(1);
-                        }
-                        centerPlayBox.getChildren().add(VideoViewFactory.createVideoViewNode(video, true));
+                    if (centerPlayBox.getChildren().size() > 1) {
+                        centerPlayBox.getChildren().remove(1);
                     }
+                    centerPlayBox.getChildren().add(VideoViewFactory.createVideoViewNode(video, true));
                 });
 
                 videosBox.getChildren().add(videoTileView);
