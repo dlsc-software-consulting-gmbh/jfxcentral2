@@ -61,5 +61,4 @@ public class UtilitiesCategoryPage extends CategoryPageBase<Utility> {
         return FXCollections.observableArrayList(DataRepository2.getInstance().getUtilities())
                 .sorted((o1, o2) -> Boolean.compare(o2.isOnlineSupported(), o1.isOnlineSupported()));
     }
-
 }

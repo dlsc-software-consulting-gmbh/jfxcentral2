@@ -117,7 +117,7 @@ public class UtilityOverviewBox extends OverviewBox<Utility> {
     }
 
     private Node createOnlyOnClientNode() {
-        Label label = new Label("This tool is client-only, not supported online.",
+        Label label = new Label("This tool is not supported when run inside a browser.",
                 new FontIcon(FluentUiRegularMZ.PHONE_LAPTOP_20));
         label.setWrapText(true);
         label.getStyleClass().add("client-only-tips");
@@ -131,5 +131,4 @@ public class UtilityOverviewBox extends OverviewBox<Utility> {
         box.getStyleClass().add("client-only-box");
         return box;
     }
-
 }

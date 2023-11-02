@@ -3799,7 +3799,7 @@
  * UtilityTileView
  */
 .utility-tile-view .linked-object-box .linked-badge {
-    -fx-pref-width: 85px;
+    -fx-padding: 4px 20px;
     -fx-alignment: center;
     -fx-text-fill: -white;
 }
