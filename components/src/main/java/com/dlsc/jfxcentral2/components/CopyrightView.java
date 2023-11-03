@@ -1,12 +1,11 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
-import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import one.jpro.platform.routing.LinkUtil;
 
 import java.time.Year;
 

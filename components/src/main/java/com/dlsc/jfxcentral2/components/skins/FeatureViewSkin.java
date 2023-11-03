@@ -1,12 +1,11 @@
 package com.dlsc.jfxcentral2.components.skins;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.FeatureView;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.Feature;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
-import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -74,7 +73,7 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
             bottomBox.getChildren().add(remarkLabel);
         }
 
-        VBox contentBox = NodeUtil.createVBox(topBox, imageView,new Spacer(Orientation.VERTICAL), bottomBox);
+        VBox contentBox = NodeUtil.createVBox(topBox, imageView,new Spacer(), bottomBox);
         VBox.setVgrow(descriptionLabel, Priority.ALWAYS);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);

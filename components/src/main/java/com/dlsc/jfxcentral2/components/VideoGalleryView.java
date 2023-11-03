@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.tiles.VideoGalleryTileView;
 import com.dlsc.jfxcentral2.utils.OSUtil;
@@ -10,7 +11,6 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -49,7 +49,7 @@ public class VideoGalleryView extends PaneBase {
         LinkUtil.setLink(button, "/videos");
 
         Pane pane = isSmall() ?
-                new VBox(title, new Spacer(Orientation.VERTICAL), button) :
+                new VBox(title, new Spacer(), button) :
                 new HBox(title, new Spacer(), button);
         pane.getStyleClass().add("title-box");
         contentPane.getChildren().add(pane);

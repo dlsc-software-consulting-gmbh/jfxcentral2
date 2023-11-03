@@ -101,6 +101,8 @@ public class FeaturesContainer extends PaneBase {
             return "Books";
         } else if (mo instanceof Tip) {
             return "Tips & Tricks";
+        } else if (mo instanceof Blog){
+            return "Blogs";
         }
 
         return null;
