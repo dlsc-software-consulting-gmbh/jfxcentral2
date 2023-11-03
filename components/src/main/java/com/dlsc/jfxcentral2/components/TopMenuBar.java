@@ -357,7 +357,8 @@ public class TopMenuBar extends PaneBase {
     }
 
     private Button createHomeButton() {
-        Button homeBtn = new Button("Home", new FontIcon(MaterialDesign.MDI_HOME));
+        Button homeBtn = new Button();
+        homeBtn.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
         homeBtn.getStyleClass().add("home-button");
         homeBtn.managedProperty().bind(homeBtn.visibleProperty());
         homeBtn.setFocusTraversable(false);
