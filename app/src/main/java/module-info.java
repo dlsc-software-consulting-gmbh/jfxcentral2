@@ -24,8 +24,6 @@ open module com.dlsc.jfxcentral2.app {
     requires one.jpro.platform.routing.dev;
 
     requires org.eclipse.jgit;
-    requires org.apache.logging.log4j;
-    requires org.apache.logging.log4j.core;
 
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;

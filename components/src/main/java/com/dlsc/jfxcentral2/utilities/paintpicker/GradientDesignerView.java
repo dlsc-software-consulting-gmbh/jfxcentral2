@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral2.utilities.paintpicker.impl.NamedColorsView;
 import com.dlsc.jfxcentral2.utilities.paintpicker.impl.PaintConvertUtil;
 import com.dlsc.jfxcentral2.utilities.paintpicker.impl.PaintPicker;
 import com.dlsc.jfxcentral2.utilities.paintpicker.impl.datamodel.NamedColor;
+import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.beans.binding.Bindings;
@@ -23,8 +24,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,15 +37,12 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class GradientDesignerView extends FlowPane {
-    private static final Logger LOGGER = LogManager.getLogger(GradientDesignerView.class);
     private final PaintPicker paintPicker;
 
     private final List<NamedColor> namedColors;
-    private final ObjectProperty<Size> sizeProperty;
 
     public GradientDesignerView(ObjectProperty<Size> sizeProperty) {
         getStyleClass().add("gradient-designer-view");
-        this.sizeProperty = sizeProperty;
 
         namedColors = loadNamedColors();
 

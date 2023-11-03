@@ -37,13 +37,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class HamburgerMenuView extends PaneBase {
-    private static final Logger LOGGER = LogManager.getLogger(HamburgerMenuView.class);
     private final VBox menusBox;
 
     public HamburgerMenuView(boolean mobile) {
@@ -111,7 +108,7 @@ public class HamburgerMenuView extends PaneBase {
         setMaxHeight(Region.USE_PREF_SIZE);
 
         getMenus().addAll(resourcesMenu, communityMenu, showcases); // learnMenu);
-        if (!OSUtil.isAndroidOrIOS()) {
+        if (!OSUtil.isNative()) {
             getMenus().add(utilities);
         }
 
@@ -221,7 +218,7 @@ public class HamburgerMenuView extends PaneBase {
         this.menus = menus;
     }
 
-    private final ObjectProperty<Runnable> onClose = new SimpleObjectProperty<>(this, "onClose", () -> LOGGER.info("on close callback not set"));
+    private final ObjectProperty<Runnable> onClose = new SimpleObjectProperty<>(this, "onClose", () -> System.out.println("on close callback not set"));
 
     public Runnable getOnClose() {
         return onClose.get();

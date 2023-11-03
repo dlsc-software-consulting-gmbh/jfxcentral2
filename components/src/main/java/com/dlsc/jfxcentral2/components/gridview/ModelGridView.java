@@ -60,7 +60,7 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
             }
             currentIndex = Math.min(initItemCount, items.size()) - 1;
 
-            Button loadMoreButton = new Button("Load More");
+            Button loadMoreButton = new Button("Load more");
             loadMoreButton.getStyleClass().addAll("blue-button", "load-more-button");
             loadMoreButton.setFocusTraversable(false);
             VBox.setMargin(loadMoreButton, new Insets(20, 0, 0, 0));
@@ -77,6 +77,10 @@ public class ModelGridView<T extends ModelObject> extends PaneBase {
                     loadMoreButton.setDisable(true);
                 }
             });
+            // disable loadMoreButton if all items are loaded
+            if (contentBox.getChildren().size() -1 == items.size()) {
+                loadMoreButton.setDisable(true);
+            }
 
         } else {
             int columns = getColumns();

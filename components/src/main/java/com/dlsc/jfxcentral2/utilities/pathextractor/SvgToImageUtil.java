@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.utilities.pathextractor;
 
+import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.github.weisj.jsvg.SVGDocument;
 import com.github.weisj.jsvg.attributes.ViewBox;
 import com.github.weisj.jsvg.geometry.size.FloatSize;
@@ -7,8 +8,6 @@ import com.github.weisj.jsvg.parser.SVGLoader;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,6 +18,7 @@ import java.net.URL;
 import java.util.Objects;
 
 public class SvgToImageUtil {
+
     public record ImageResult(Image image, int originalWidth, int originalHeight,File file) {
         @Override
         public boolean equals(Object o) {
@@ -33,8 +33,6 @@ public class SvgToImageUtil {
             return Objects.hash(file);
         }
     }
-
-    private static final Logger LOGGER = LogManager.getLogger(SvgToImageUtil.class);
 
     private SvgToImageUtil() {
     }

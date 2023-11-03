@@ -45,7 +45,7 @@ public class PaneBase extends StackPane {
             layoutBySize();
         });
 
-        if (OSUtil.isAndroidOrIOS()) {
+        if (OSUtil.isNative()) {
             getStyleClass().add("native");
         }
     }

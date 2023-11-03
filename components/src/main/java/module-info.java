@@ -20,7 +20,6 @@ open module com.dlsc.jfxcentral2.components {
     requires com.dlsc.gemsfx;
     requires one.jpro.platform.mdfx;
     requires org.apache.commons.lang3;
-    requires org.apache.logging.log4j;
     requires org.apache.commons.io;
 
     requires jpro.webapi;

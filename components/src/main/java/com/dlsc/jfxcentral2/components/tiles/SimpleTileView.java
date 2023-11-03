@@ -27,12 +27,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.LinkUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -43,7 +42,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @param <T>
  */
 public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
-    private static final Logger LOGGER = LogManager.getLogger(SimpleTileView.class);
     private final Button detailButton;
     protected HBox badgeBox = new HBox();
     protected SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
@@ -148,14 +146,14 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
             saveAndLikeButton.saveButtonSelectedProperty().addListener((ob, ov, saved) -> {
                 setSaveSelected(saved);
                 if (getData() != null) {
-                    LOGGER.info("{}: {}", getData().getName(), saved ? "SELECTED:" : "UNSELECTED:");
+                    System.out.println(MessageFormat.format("{0}: {1}", getData().getName(), saved ? "SELECTED:" : "UNSELECTED:"));
                 }
             });
 
             saveAndLikeButton.likeButtonSelectedProperty().addListener((ob, ov, liked) -> {
                 setLikeSelected(liked);
                 if (getData() != null) {
-                    LOGGER.info("{}: {}", getData().getName(), liked ? "LIKED:" : "UNLIKED:");
+                    System.out.println(MessageFormat.format("{0}: {1}", getData().getName(), liked ? "LIKED:" : "UNLIKED:"));
                 }
             });
 

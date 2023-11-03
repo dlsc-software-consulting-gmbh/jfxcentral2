@@ -21,8 +21,6 @@ import javafx.scene.effect.Reflection;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.effect.Shadow;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public enum EffectEnum {
     //BLEND("Blend", Blend.class),
@@ -47,7 +45,6 @@ public enum EffectEnum {
     SEPIA_TONE("SepiaTone", SepiaTone.class),
     SHADOW("Shadow", Shadow.class);
 
-    private static final Logger LOGGER = LogManager.getLogger(EffectEnum.class);
     private final String name;
     private final Class<? extends Effect> effectClass;
 

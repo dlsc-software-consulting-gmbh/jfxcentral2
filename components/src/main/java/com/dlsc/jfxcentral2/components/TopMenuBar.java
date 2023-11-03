@@ -157,8 +157,11 @@ public class TopMenuBar extends PaneBase {
         search(repository.getDownloads(), pattern, results);
         search(repository.getTutorials(), pattern, results);
         search(repository.getTips(), pattern, results);
-        search(repository.getUtilities(), pattern, results);
         search(repository.getIkonliPacks(), pattern, results);
+
+        if (!OSUtil.isNative()) {
+            search(repository.getUtilities(), pattern, results);
+        }
 
         // TODO: uncomment once learning content can be shown
 //        search(repository.getLearnJavaFX(), pattern, results);
@@ -202,6 +205,9 @@ public class TopMenuBar extends PaneBase {
         searchField = createSearchField();
 
         if (isLarge()) {
+            if (!getStyleClass().contains("normal-page")) {
+                getStyleClass().add("normal-page");
+            }
             MenuButton resourcesBtn = createMenuButton("Resources");
             resourcesBtn.getStyleClass().add("resources-button");
 
@@ -258,8 +264,8 @@ public class TopMenuBar extends PaneBase {
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
 
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, learnBtn);
-            if (!OSUtil.isAndroidOrIOS()) {
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), createHomeButton(), resourcesBtn, communityBtn, showcasesBtn, learnBtn);
+            if (!OSUtil.isNative()) {
                 contentBox.getChildren().add(utilitiesBtn);
             }
 
@@ -271,6 +277,7 @@ public class TopMenuBar extends PaneBase {
 
             contentBox.getChildren().addAll(separatorRegion, loginBtn, searchField);
         } else {
+            getStyleClass().remove("normal-page");
             Region logoutRegion = new Region();
             logoutRegion.getStyleClass().add("logout-region");
 
@@ -324,14 +331,39 @@ public class TopMenuBar extends PaneBase {
             separatorRegion.visibleProperty().bind(logOutBtn.visibleProperty());
             separatorRegion.managedProperty().bind(logOutBtn.managedProperty());
 
+            Button homeButton = createHomeButton();
+
             if (OSUtil.isAndroidOrIOS()) {
-                contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, separatorRegion, menuBtn);
+                contentBox.getChildren().setAll(logoWrapper, new Spacer(), homeButton, createSeparatorRegion(), logOutBtn, separatorRegion, menuBtn);
             } else {
-                contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, separatorRegion, stackPane, createSeparatorRegion(), menuBtn);
+                homeButton.visibleProperty().bind(Bindings.createBooleanBinding(() -> {
+                            if (isLarge() || isMedium()) {
+                                return true;
+                            } else {
+                                return !searchField.isVisible();
+                            }
+                        }, sizeProperty(), searchField.visibleProperty())
+                );
+
+                Region separator2 = createSeparatorRegion();
+                separator2.managedProperty().bind(homeButton.visibleProperty());
+                separator2.visibleProperty().bind(homeButton.visibleProperty());
+
+                contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, separatorRegion, homeButton, separator2, stackPane, createSeparatorRegion(), menuBtn);
             }
         }
 
         usedProperty().bind(blocking);
+    }
+
+    private Button createHomeButton() {
+        Button homeBtn = new Button();
+        homeBtn.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
+        homeBtn.getStyleClass().add("home-button");
+        homeBtn.managedProperty().bind(homeBtn.visibleProperty());
+        homeBtn.setFocusTraversable(false);
+        LinkUtil.setLink(homeBtn, "/");
+        return homeBtn;
     }
 
     private void fillLearnMenu(MenuButton learnBtn) {

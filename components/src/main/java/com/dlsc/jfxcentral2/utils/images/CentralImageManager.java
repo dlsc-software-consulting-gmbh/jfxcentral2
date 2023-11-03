@@ -16,8 +16,6 @@ import one.jpro.platform.image.manager.transformer.ImageTransformer;
 import one.jpro.platform.image.manager.transformer.ImageTransformerFitHeight;
 import one.jpro.platform.image.manager.transformer.ImageTransformerScaleToArea;
 import one.jpro.platform.image.manager.transformer.ImageTransformerWH;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +24,7 @@ import java.net.URL;
 import java.util.Objects;
 
 public class CentralImageManager {
-    private static final Logger LOGGER = LogManager.getLogger(CentralImageManager.class);
+
     private static final URL MISSING_IMAGE = com.dlsc.jfxcentral.data.ImageManager.class.getResource("missing-image.jpg");
 
     private static final ImageManager manager = ImageManager.getInstance();
@@ -43,7 +41,7 @@ public class CentralImageManager {
     }
 
     public static Image getPreviewImage(File file, boolean large) {
-        if (OSUtil.isAndroidOrIOS()) {
+        if (!OSUtil.isAWTSupported()) {
             return loadImage(file);
         }
 
@@ -55,7 +53,7 @@ public class CentralImageManager {
     }
 
     public static Image getRealWorldAppBannerImage2(RealWorldApp app) {
-        if (OSUtil.isAndroidOrIOS()) {
+        if (!OSUtil.isAWTSupported()) {
             return loadImage(realWorldAppBannerImageFile(app));
         }
 
@@ -70,7 +68,7 @@ public class CentralImageManager {
     }
 
     public static Image getDownloadImage(Download download) {
-        if (OSUtil.isAndroidOrIOS()) {
+        if (!OSUtil.isAWTSupported()) {
             return loadImage(com.dlsc.jfxcentral.data.ImageManager.getInstance().downloadBannerFile(download));
         }
 
@@ -82,7 +80,7 @@ public class CentralImageManager {
     }
 
     public static Image getBookCoverImage1(Book book) {
-        if (OSUtil.isAndroidOrIOS()) {
+        if (!OSUtil.isAWTSupported()) {
             return loadImage(bookCoverImageFile(book));
         }
 
@@ -93,7 +91,7 @@ public class CentralImageManager {
     }
 
     public static Image getBookCoverImage2(Book book) {
-        if (OSUtil.isAndroidOrIOS()) {
+        if (!OSUtil.isAWTSupported()) {
             return loadImage(bookCoverImageFile(book));
         }
 

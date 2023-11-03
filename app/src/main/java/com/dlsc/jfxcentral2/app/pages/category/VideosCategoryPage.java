@@ -51,7 +51,7 @@ public class VideosCategoryPage extends CategoryPageBase<Video> {
 
     @Override
     protected Callback<Video, Node> getDetailNodeProvider() {
-        if (OSUtil.isAndroidOrIOS()) {
+        if (OSUtil.isNative()) {
             return null;
         }
         return video -> VideoViewFactory.createVideoViewNode(video, true);

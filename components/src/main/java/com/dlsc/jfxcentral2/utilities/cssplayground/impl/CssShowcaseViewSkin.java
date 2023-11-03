@@ -57,8 +57,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Scale;
 import javafx.util.StringConverter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.controlsfx.control.CheckComboBox;
 
 import java.util.Map;
@@ -92,10 +90,10 @@ public class CssShowcaseViewSkin extends SkinBase<CssShowcaseView> {
     private CheckComboBox<CssShowcaseView.CssConfiguration> stylesheetsBox;
     private CheckBox retinaButton, rtlButton;
     private Button clearButton;
+    private Button removeButton;
     private TabPane contentTabs;
     private Pane contentGroup;
 
-    private static final Logger LOGGER = LogManager.getLogger(CssShowcaseViewSkin.class.getName());
     private ListChangeListener<CssShowcaseView.CssConfiguration> checkComboBoxListener;
     private ListChangeListener<CssShowcaseView.CssConfiguration> observableListListener;
 
@@ -243,9 +241,17 @@ public class CssShowcaseViewSkin extends SkinBase<CssShowcaseView> {
         clearButton.getStyleClass().add("clear-button");
         clearButton.setOnAction(event -> stylesheetsBox.getCheckModel().clearChecks());
 
+        removeButton = new Button("Remove All");
+        removeButton.getStyleClass().add("remove-button");
+        removeButton.setOnAction(event -> {
+            stylesheetsBox.getCheckModel().clearChecks();
+            getSkinnable().getConfigurations().clear();
+        });
+
         ToolBar toolBar = new ToolBar(styleSheetLabel,
                 stylesheetsBox,
                 clearButton,
+                removeButton,
                 rtlButton,
                 retinaButton
         );

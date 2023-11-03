@@ -32,8 +32,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +40,6 @@ import java.util.Objects;
 
 public class FeaturesContainer extends PaneBase {
 
-    private static final Logger LOGGER = LogManager.getLogger(FeaturesContainer.class);
     private static final PseudoClass VERTICAL_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("vertical");
 
     private static final PseudoClass HORIZONTAL_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("horizontal");
@@ -137,7 +134,7 @@ public class FeaturesContainer extends PaneBase {
             return Type.BOOK;
         } else {
             String errorMessage = "model object of type " + mo.getClass().getSimpleName() + " is not supported";
-            LOGGER.error(errorMessage);
+            System.err.println(errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
     }

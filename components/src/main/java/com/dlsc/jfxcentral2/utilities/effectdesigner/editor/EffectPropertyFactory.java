@@ -35,6 +35,13 @@ import org.kordamp.ikonli.jam.Jam;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class EffectPropertyFactory {
+    /**
+     * Light property, This value can be freely adjusted,
+     * but please be mindful that if the range is unreasonable,the affected area may be too large or too small.
+     */
+    private static final int LIGHT_PROPERTY_MAX_VALUE = 350;
+    private static final double IMAGE_INPUT_REQUESTED_SIZE = 200;
+
 
     public static <T extends Enum<T>> EffectPropperty create(String title, Ikon ikon, Class<T> enumClass, StringConverter<T> stringConverter, ObjectProperty<T> valueProperty) {
         ComboBox<T> comboBox = new ComboBox<>();
@@ -133,7 +140,8 @@ public class EffectPropertyFactory {
         fileHandlerView.getSupportedExtensions().addAll(".png", ".jpg", ".jpeg", ".gif");
         fileHandlerView.setText("Click or drop Image file here");
         fileHandlerView.setOnUploadedFile(file -> {
-            valueProperty.set(new Image(file.toURI().toString()));
+            Image image = new Image(file.toURI().toString(), IMAGE_INPUT_REQUESTED_SIZE, IMAGE_INPUT_REQUESTED_SIZE, true, true);
+            valueProperty.set(image);
         });
 
         VBox fileBox = new VBox(fileNameField, fileHandlerView);
@@ -248,15 +256,15 @@ public class EffectPropertyFactory {
         GridPane lightPane = new GridPane();
         lightPane.getStyleClass().add("light-pane");
 
-        Slider xSlider = createSlider(-10, 10, 0);
+        Slider xSlider = createSlider(-LIGHT_PROPERTY_MAX_VALUE, LIGHT_PROPERTY_MAX_VALUE, 0);
         xSlider.valueProperty().bindBidirectional(point.xProperty());
         createSliderWithLabel(xSlider, point.xProperty().map(value -> NumberUtil.trimTrailingZeros(value.doubleValue())), IkonUtil.x, "X", lightPane, 0);
 
-        Slider ySlider = createSlider(-10, 10, 0);
+        Slider ySlider = createSlider(-LIGHT_PROPERTY_MAX_VALUE, LIGHT_PROPERTY_MAX_VALUE, 0);
         createSliderWithLabel(ySlider, point.yProperty().map(value -> NumberUtil.trimTrailingZeros(value.doubleValue())), IkonUtil.y, "Y", lightPane, 1);
         ySlider.valueProperty().bindBidirectional(point.yProperty());
 
-        Slider zSlider = createSlider(-10, 10, 0);
+        Slider zSlider = createSlider(-LIGHT_PROPERTY_MAX_VALUE, LIGHT_PROPERTY_MAX_VALUE, 0);
         createSliderWithLabel(zSlider, point.zProperty().map(value -> NumberUtil.trimTrailingZeros(value.doubleValue())), IkonUtil.z, "Z", lightPane, 2);
         zSlider.valueProperty().bindBidirectional(point.zProperty());
 
@@ -292,27 +300,27 @@ public class EffectPropertyFactory {
         GridPane lightPane = new GridPane();
         lightPane.getStyleClass().add("light-pane");
 
-        Slider xSlider = createSlider(-10, 10, 0);
+        Slider xSlider = createSlider(-LIGHT_PROPERTY_MAX_VALUE, LIGHT_PROPERTY_MAX_VALUE, 0);
         createSliderWithLabel(xSlider, spot.xProperty().map(value -> NumberUtil.trimTrailingZeros(value.doubleValue())), IkonUtil.x, "X", lightPane, 0);
         xSlider.valueProperty().bindBidirectional(spot.xProperty());
 
-        Slider ySlider = createSlider(-10, 10, 0);
+        Slider ySlider = createSlider(-LIGHT_PROPERTY_MAX_VALUE, LIGHT_PROPERTY_MAX_VALUE, 0);
         ySlider.valueProperty().bindBidirectional(spot.yProperty());
         createSliderWithLabel(ySlider, spot.yProperty().map(value -> NumberUtil.trimTrailingZeros(value.doubleValue())), IkonUtil.y, "Y", lightPane, 1);
 
-        Slider zSlider = createSlider(-10, 10, 0);
+        Slider zSlider = createSlider(-LIGHT_PROPERTY_MAX_VALUE, LIGHT_PROPERTY_MAX_VALUE, 0);
         zSlider.valueProperty().bindBidirectional(spot.zProperty());
         createSliderWithLabel(zSlider, spot.zProperty().map(value -> NumberUtil.trimTrailingZeros(value.doubleValue())), IkonUtil.z, "Z", lightPane, 2);
 
-        Slider positionAtXSlider = createSlider(-10, 10, 0);
+        Slider positionAtXSlider = createSlider(-LIGHT_PROPERTY_MAX_VALUE, LIGHT_PROPERTY_MAX_VALUE, 0);
         createSliderWithLabel(positionAtXSlider, spot.pointsAtXProperty().map(value -> NumberUtil.trimTrailingZeros(value.doubleValue())), IkonUtil.x, "Points\nAt X", lightPane, 3);
         positionAtXSlider.valueProperty().bindBidirectional(spot.pointsAtXProperty());
 
-        Slider positionAtYSlider = createSlider(-10, 10, 0);
+        Slider positionAtYSlider = createSlider(-LIGHT_PROPERTY_MAX_VALUE, LIGHT_PROPERTY_MAX_VALUE, 0);
         createSliderWithLabel(positionAtYSlider, spot.pointsAtYProperty().map(value -> NumberUtil.trimTrailingZeros(value.doubleValue())), IkonUtil.x, "Points\nAt Y", lightPane, 4);
         positionAtYSlider.valueProperty().bindBidirectional(spot.pointsAtYProperty());
 
-        Slider positionAtZSlider = createSlider(-10, 10, 0);
+        Slider positionAtZSlider = createSlider(-LIGHT_PROPERTY_MAX_VALUE, LIGHT_PROPERTY_MAX_VALUE, 0);
         createSliderWithLabel(positionAtZSlider, spot.pointsAtZProperty().map(value -> NumberUtil.trimTrailingZeros(value.doubleValue())), IkonUtil.x, "Points\nAt Z", lightPane, 5);
         positionAtZSlider.valueProperty().bindBidirectional(spot.pointsAtZProperty());
 

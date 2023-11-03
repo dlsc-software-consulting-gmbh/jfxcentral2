@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.app;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
 import com.dustinredmond.fxtrayicon.FXTrayIcon;
@@ -10,8 +11,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -23,7 +22,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class TrayIconManager {
-    private static final Logger LOGGER = LogManager.getLogger(TrayIconManager.class);
+
     private final SessionManager sessionManager;
     private final Stage stage;
     private final FXTrayIcon trayIcon;
@@ -42,7 +41,7 @@ public class TrayIconManager {
                 assert url != null;
                 image = ImageIO.read(url);
             } catch (IOException ex) {
-                LOGGER.error("Failed to load the tray icon image: {}", url, ex);
+                ex.printStackTrace();
             }
             assert image != null;
 

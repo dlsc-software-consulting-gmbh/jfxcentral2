@@ -45,6 +45,7 @@ import javafx.scene.effect.Reflection;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.effect.Shadow;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -81,8 +82,24 @@ public class EffectDesignerView extends PaneBase {
             }
         });
 
-        VBox leftBox = new VBox(previewPane);
+        StackPane leftBox = new StackPane(previewPane);
         leftBox.getStyleClass().add("left-box");
+
+        Pane horBox = new Pane();
+        horBox.getStyleClass().add("hor-pane");
+        horBox.maxHeightProperty().bind(previewPane.heightProperty());
+        horBox.minHeightProperty().bind(previewPane.heightProperty());
+        horBox.maxWidthProperty().bind(previewPane.widthProperty());
+        horBox.minWidthProperty().bind(previewPane.widthProperty());
+
+        Pane verBox = new Pane();
+        verBox.getStyleClass().add("ver-pane");
+        verBox.maxWidthProperty().bind(previewPane.widthProperty());
+        verBox.minWidthProperty().bind(previewPane.widthProperty());
+        verBox.maxHeightProperty().bind(previewPane.heightProperty());
+        verBox.minHeightProperty().bind(previewPane.heightProperty());
+
+        leftBox.getChildren().addAll(horBox, verBox);
 
         VBox rightBox = new VBox(effectFlowPane, effectPaneWrapper);
         rightBox.getStyleClass().addAll("right-box", "with-non-effect");

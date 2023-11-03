@@ -29,7 +29,7 @@
         <javafx.version>22-ea+11</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2023.3.1</jpro.version>
+        <jpro.version>2023.3.2-M1</jpro.version>
         <jpro.platform.version>0.2.6</jpro.platform.version>
         <batik.version>1.16</batik.version>
         <attach.version>4.0.19</attach.version>
@@ -286,6 +286,8 @@
                 <type>zip</type>
             </dependency>
 
+            <!--
+
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
@@ -298,6 +300,8 @@
                 <version>2.20.0</version>
             </dependency>
 
+            -->
+
             <dependency>
                 <groupId>javax.measure</groupId>
                 <artifactId>unit-api</artifactId>
@@ -307,7 +311,7 @@
             <dependency>
                 <groupId>com.dlsc.jfxcentral</groupId>
                 <artifactId>model</artifactId>
-                <version>1.25.0</version>
+                <version>1.35.0</version>
             </dependency>
 
             <dependency>

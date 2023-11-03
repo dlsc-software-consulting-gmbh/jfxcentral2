@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral2.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,7 +16,7 @@ import java.io.IOException;
  * A utility tool used to extract paths from SVG files.
  */
 public class SVGPathExtractor {
-    private static final Logger LOGGER = LogManager.getLogger(SVGPathExtractor.class);
+
     public static final String EXTERNAL_GENERAL_ENTITIES = "http://xml.org/sax/features/external-general-entities";
     public static final String EXTERNAL_PARAMETER_ENTITIES = "http://xml.org/sax/features/external-parameter-entities";
 
