@@ -46,6 +46,20 @@
         -->
 
         <dependency>
+            <groupId>com.gluonhq.attachextended</groupId>
+            <artifactId>yt</artifactId>
+            <version>${attach.extended.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gluonhq.attachextended</groupId>
+            <artifactId>yt</artifactId>
+            <version>${attach.extended.version}</version>
+            <scope>runtime</scope>
+            <classifier>${attach.extended.classifier}</classifier>
+        </dependency>
+
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-swing</artifactId>
         </dependency>
@@ -446,7 +460,6 @@
                         <list>storage</list>
                         <list>browser</list>
                         <list>video</list>
-                        <list>extended</list>
                     </attachList>
                     <mainClass>${mainClassName}</mainClass>
                     <releaseConfiguration>
@@ -543,6 +556,7 @@
                 <gluonfx.target>ios</gluonfx.target>
                 <bundle.version>${env.GITHUB_RUN_NUMBER}</bundle.version>
                 <bundle.short.version>1.0</bundle.short.version>
+                <attach.extended.classifier>ios</attach.extended.classifier>
             </properties>
         </profile>
         <profile>
@@ -558,6 +572,7 @@
             <properties>
                 <gluonfx.target>android</gluonfx.target>
                 <app.identifier>com.dlsc.jfxcentral</app.identifier>
+                <attach.extended.classifier>android</attach.extended.classifier>
                 <version.code>${env.GITHUB_RUN_NUMBER}</version.code>
                 <provided.keystore.path>${env.GLUON_ANDROID_KEYSTOREPATH}</provided.keystore.path>
                 <provided.keystore.password>${env.GLUON_ANDROID_KEYSTORE_PASSWORD}</provided.keystore.password>

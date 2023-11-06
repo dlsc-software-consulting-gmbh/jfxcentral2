@@ -2,7 +2,6 @@
   <configuration default="false" name="JFXCentral2App" type="Application" factoryName="Application" nameIsGenerated="true">
     <option name="MAIN_CLASS_NAME" value="com.dlsc.jfxcentral2.app.JFXCentral2App" />
     <module name="app" />
-    <option name="VM_PARAMETERS" value="-Xmx1024m" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.dlsc.jfxcentral2.app.stage.*" />

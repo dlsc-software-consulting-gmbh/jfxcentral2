@@ -34,6 +34,8 @@
         <batik.version>1.16</batik.version>
         <attach.version>4.0.19</attach.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <attach.extended.version>4.0.15-SNAPSHOT</attach.extended.version>
+        <attach.extended.classifier>desktop</attach.extended.classifier>
     </properties>
 
     <repositories>
@@ -63,12 +65,6 @@
 
     <dependencyManagement>
         <dependencies>
-
-            <dependency>
-                <groupId>com.gluonhq.attachextended</groupId>
-                <artifactId>yt</artifactId>
-                <version>4.0.15-SNAPSHOT</version>
-            </dependency>
 
             <dependency>
                 <groupId>com.gluonhq.attach</groupId>
