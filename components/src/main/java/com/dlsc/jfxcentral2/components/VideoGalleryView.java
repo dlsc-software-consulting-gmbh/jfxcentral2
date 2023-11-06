@@ -88,10 +88,11 @@ public class VideoGalleryView extends PaneBase {
                 //Play button action
                 videoTileView.getButton1().setOnAction(evt -> {
                     if (OSUtil.isAndroidOrIOS()) {
-                        YTService.create().ifPresent(service -> {
+                        YTService.create().ifPresentOrElse(service -> {
+                            System.out.println(">>>>>>> YOUTUBE SERVICE CREATED");
                             service.setPosition(Pos.CENTER, 20, 20, 20, 20);
                             service.play(video.getId());
-                        });
+                        }, () -> System.err.println("no youtube service created"));
                     } else {
                         if (centerPlayBox.getChildren().size() > 1) {
                             centerPlayBox.getChildren().remove(1);
