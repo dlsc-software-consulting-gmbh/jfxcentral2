@@ -457,7 +457,7 @@
                         <macAppStore>${mac.app.store}</macAppStore>
                         <bundleShortVersion>${bundle.short.version}</bundleShortVersion>
                         <bundleVersion>${bundle.version}</bundleVersion>
-                        <skipSigning>true</skipSigning>
+                        <!-- skipSigning>true</skipSigning -->
                         <!-- simulatorDevice>iPhone 15 Pro Max</simulatorDevice -->
                         <!-- simulatorDevice>iPhone SE (3rd generation)</simulatorDevice -->
                         <!-- simulatorDevice>iPad Pro (12.9-inch) (6th generation)</simulatorDevice -->
