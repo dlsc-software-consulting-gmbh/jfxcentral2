@@ -249,20 +249,20 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-    "name":"com.dlsc.jfxcentral2.utilities.effectdesigner.effect.LightingBumpInput",
-    "methods":[
-      {"name":"<init>","parameterTypes":[] },
-      {"name":"getInput","parameterTypes":[] },
-      {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-    ]
+  "name":"com.dlsc.jfxcentral2.utilities.effectdesigner.effect.LightingBumpInput",
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"getInput","parameterTypes":[] }, 
+    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
+  ]
 },
 {
-    "name":"com.dlsc.jfxcentral2.utilities.effectdesigner.effect.LightingContentInput",
-    "methods":[
-      {"name":"<init>","parameterTypes":[] },
-      {"name":"getInput","parameterTypes":[] },
-      {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-    ]
+  "name":"com.dlsc.jfxcentral2.utilities.effectdesigner.effect.LightingContentInput",
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"getInput","parameterTypes":[] }, 
+    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
+  ]
 },
 {
   "name":"com.sun.crypto.provider.AESCipher$General",

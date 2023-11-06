@@ -20,6 +20,12 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.gluonhq.attachextended</groupId>
+            <artifactId>yt</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>display</artifactId>

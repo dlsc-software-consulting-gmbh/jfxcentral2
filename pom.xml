@@ -65,8 +65,8 @@
         <dependencies>
 
             <dependency>
-                <groupId>com.gluonhq.attach</groupId>
-                <artifactId>extended</artifactId>
+                <groupId>com.gluonhq.attachextended</groupId>
+                <artifactId>yt</artifactId>
                 <version>4.0.15-SNAPSHOT</version>
             </dependency>
 
