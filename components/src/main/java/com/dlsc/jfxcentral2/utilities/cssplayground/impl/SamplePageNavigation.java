@@ -31,7 +31,7 @@
  */
 package com.dlsc.jfxcentral2.utilities.cssplayground.impl;
 
-import com.dlsc.jfxcentral2.components.Spacer;
+import com.dlsc.gemsfx.Spacer;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
 import javafx.scene.control.ChoiceBox;
