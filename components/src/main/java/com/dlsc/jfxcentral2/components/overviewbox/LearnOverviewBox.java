@@ -13,13 +13,14 @@ public class LearnOverviewBox extends OverviewBox<Learn> {
         super(learn);
         getStyleClass().add("learn-overview-box");
 
-        setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + PageUtil.getLink(learn));
-
         if (learn instanceof LearnJavaFX temp) {
+            setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "learn/javafx/" + learn.getId());
             setMarkdown(DataRepository2.getInstance().getLearnJavaFXReadMe(temp));
         } else if (learn instanceof LearnMobile temp) {
+            setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "learn/mobile/" + learn.getId());
             setMarkdown(DataRepository2.getInstance().getLearnMobileReadMe(temp));
         } else {
+            setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "learn/raspberrypi/" + learn.getId());
             setMarkdown(DataRepository2.getInstance().getLearnRaspberryPiReadMe((LearnRaspberryPi) learn));
         }
     }
