@@ -496,11 +496,6 @@
     -fx-border-width: 0 0 0 5px;
 }
 
-.home-button .ikonli-font-icon {
-    -fx-icon-size: 32px;
-    -fx-icon-color: -white;
-}
-
 .resources-button .context-menu .menu-item:hover,
 .resources-button .context-menu .menu-item:focused {
     -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, -bright-blue 0.0%, -bright-blue 3.2%, #ffffff00 3.201%, #ffffff00 100.0%);
@@ -1974,8 +1969,21 @@
     -fx-pref-width: 130px;
 }
 
+.top-menu-bar .home-button .ikonli-font-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: -white;
+}
+
 .top-menu-bar:sm .home-button {
     -fx-content-display: graphic-only;
+}
+
+.top-menu-bar:sm .home-button .ikonli-font-icon {
+    -fx-icon-size: 28px;
+}
+
+.top-menu-bar:light .home-button .ikonli-font-icon {
+    -fx-icon-color: -grey-100;
 }
 
 /** -------------------------------
@@ -6998,12 +7006,10 @@
  */
 .downloads-box {
     -fx-background-color: -white;
-    -fx-min-width: 858px;
     -fx-pref-width: 858px;
 }
 
 .downloads-box:sm {
-    -fx-min-width: 415px;
     -fx-pref-width: 415px;
 }
 
