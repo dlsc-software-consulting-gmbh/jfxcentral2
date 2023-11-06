@@ -1,15 +1,14 @@
 package com.dlsc.jfxcentral2.components.skins;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.QuickLinkView;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.DateQuickLink;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
 import com.dlsc.jfxcentral2.model.SenaptQuickLink;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -69,7 +68,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             HBox bottomBox = new HBox(descriptionLabel, new Spacer(), dateLabel);
             bottomBox.getStyleClass().add("bottom-box");
 
-            VBox contentBox = new VBox(topBox, new Spacer(Orientation.VERTICAL), bottomBox);
+            VBox contentBox = new VBox(topBox, new Spacer(), bottomBox);
             contentBox.getStyleClass().add("content-box");
             getChildren().setAll(contentBox);
 
@@ -92,7 +91,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             descriptionLabel.getStyleClass().add("description-label");
             descriptionLabel.setWrapText(true);
 
-            VBox contentBox = new VBox(topBox, new Spacer(Orientation.VERTICAL), titleLabel, descriptionLabel);
+            VBox contentBox = new VBox(topBox, new Spacer(), titleLabel, descriptionLabel);
             contentBox.getStyleClass().add("content-box");
             getChildren().setAll(contentBox);
         } else if (quickLink instanceof ImageQuickLink temp) {

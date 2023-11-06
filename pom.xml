@@ -29,7 +29,7 @@
         <javafx.version>22-ea+11</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2023.3.1</jpro.version>
+        <jpro.version>2023.3.2-M1</jpro.version>
         <jpro.platform.version>0.2.6</jpro.platform.version>
         <batik.version>1.16</batik.version>
         <attach.version>4.0.19</attach.version>
@@ -63,6 +63,12 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.gluonhq.attach</groupId>
+                <artifactId>extended</artifactId>
+                <version>4.0.15-SNAPSHOT</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.gluonhq.attach</groupId>

@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.model.Badge;
 import com.dlsc.jfxcentral2.model.Comment;
@@ -110,14 +111,12 @@ public class CommentItemView extends PaneBase {
 
         dateLabel.visibleProperty().bind(Bindings.createBooleanBinding(() -> !isSmall() || !booleanBinding.get(), booleanBinding, sizeProperty()));
 
-        Spacer topSpacer = new Spacer();
-
         badgeBox = new HBox();
         badgeBox.getStyleClass().add("badge-box");
         badgeBox.managedProperty().bind(badgeBox.visibleProperty());
         badgeBox.visibleProperty().bind(Bindings.createBooleanBinding(() -> !isSmall() || !deleteButton.isVisible(), deleteButton.visibleProperty(), sizeProperty()));
 
-        HBox topBox = new HBox(nameLabel, badgeBox, topSpacer, dateLabel, deleteButton, editButton);
+        HBox topBox = new HBox(nameLabel, badgeBox, new Spacer(), dateLabel, deleteButton, editButton);
 
         topBox.getStyleClass().add("top-box");
 

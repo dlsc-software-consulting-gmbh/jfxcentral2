@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SearchField;
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
@@ -264,7 +265,7 @@ public class TopMenuBar extends PaneBase {
             searchField.setVisible(true);
             searchField.setMinWidth(Region.USE_PREF_SIZE);
 
-            contentBox.getChildren().setAll(logoWrapper, new Spacer(), resourcesBtn, communityBtn, showcasesBtn, learnBtn);
+            contentBox.getChildren().setAll(logoWrapper, new Spacer(), createHomeButton(), resourcesBtn, communityBtn, showcasesBtn, learnBtn);
             if (!OSUtil.isNative()) {
                 contentBox.getChildren().add(utilitiesBtn);
             }
@@ -331,14 +332,39 @@ public class TopMenuBar extends PaneBase {
             separatorRegion.visibleProperty().bind(logOutBtn.visibleProperty());
             separatorRegion.managedProperty().bind(logOutBtn.managedProperty());
 
+            Button homeButton = createHomeButton();
+
             if (OSUtil.isAndroidOrIOS()) {
-                contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, separatorRegion, menuBtn);
+                contentBox.getChildren().setAll(logoWrapper, new Spacer(), homeButton, createSeparatorRegion(), logOutBtn, separatorRegion, menuBtn);
             } else {
-                contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, separatorRegion, stackPane, createSeparatorRegion(), menuBtn);
+                homeButton.visibleProperty().bind(Bindings.createBooleanBinding(() -> {
+                            if (isLarge() || isMedium()) {
+                                return true;
+                            } else {
+                                return !searchField.isVisible();
+                            }
+                        }, sizeProperty(), searchField.visibleProperty())
+                );
+
+                Region separator2 = createSeparatorRegion();
+                separator2.managedProperty().bind(homeButton.visibleProperty());
+                separator2.visibleProperty().bind(homeButton.visibleProperty());
+
+                contentBox.getChildren().setAll(logoWrapper, new Spacer(), logOutBtn, separatorRegion, homeButton, separator2, stackPane, createSeparatorRegion(), menuBtn);
             }
         }
 
         usedProperty().bind(blocking);
+    }
+
+    private Button createHomeButton() {
+        Button homeBtn = new Button();
+        homeBtn.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
+        homeBtn.getStyleClass().add("home-button");
+        homeBtn.managedProperty().bind(homeBtn.visibleProperty());
+        homeBtn.setFocusTraversable(false);
+        LinkUtil.setLink(homeBtn, "/");
+        return homeBtn;
     }
 
     private void fillLearnMenu(MenuButton learnBtn) {

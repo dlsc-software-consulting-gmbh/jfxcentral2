@@ -496,6 +496,11 @@
     -fx-border-width: 0 0 0 5px;
 }
 
+.home-button .ikonli-font-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: -white;
+}
+
 .resources-button .context-menu .menu-item:hover,
 .resources-button .context-menu .menu-item:focused {
     -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, -bright-blue 0.0%, -bright-blue 3.2%, #ffffff00 3.201%, #ffffff00 100.0%);
@@ -1967,6 +1972,10 @@
 
 .top-menu-bar:sm .text-field {
     -fx-pref-width: 130px;
+}
+
+.top-menu-bar:sm .home-button {
+    -fx-content-display: graphic-only;
 }
 
 /** -------------------------------
@@ -3799,7 +3808,7 @@
  * UtilityTileView
  */
 .utility-tile-view .linked-object-box .linked-badge {
-    -fx-pref-width: 85px;
+    -fx-padding: 4px 20px;
     -fx-alignment: center;
     -fx-text-fill: -white;
 }

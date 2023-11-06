@@ -1,9 +1,9 @@
 package com.dlsc.jfxcentral2.components.filters;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.components.CustomSearchField;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;

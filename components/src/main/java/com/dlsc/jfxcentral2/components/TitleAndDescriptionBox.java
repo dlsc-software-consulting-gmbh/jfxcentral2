@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.gemsfx.Spacer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -24,7 +24,7 @@ public class TitleAndDescriptionBox extends PaneBase {
         description.visibleProperty().bind(description.textProperty().isNotEmpty());
         description.textProperty().bind(descriptionProperty());
 
-        getChildren().setAll(new VBox(title, new Spacer(Orientation.VERTICAL), description));
+        getChildren().setAll(new VBox(title, new Spacer(), description));
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title");
