@@ -115,11 +115,11 @@ public class ModelObjectTool {
         } else if (modelObject instanceof Utility utility) {
             return "/utilities/" + utility.getId();
         } else if (modelObject instanceof LearnJavaFX learn) {
-            return "/learn/javafx/" + learn.getId();
+            return "/learn-javafx/" + learn.getId();
         } else if (modelObject instanceof LearnMobile learn) {
-            return "/learn/mobile/" + learn.getId();
+            return "/learn-mobile/" + learn.getId();
         } else if (modelObject instanceof LearnRaspberryPi learn) {
-            return "/learn/raspberrypi/" + learn.getId();
+            return "/learn-raspberrypi/" + learn.getId();
         }
 
         return "";
