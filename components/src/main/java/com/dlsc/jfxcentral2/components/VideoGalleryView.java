@@ -6,11 +6,13 @@ import com.dlsc.jfxcentral2.components.tiles.VideoGalleryTileView;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import com.gluonhq.attach.browser.BrowserService;
+import com.gluonhq.attachextended.yt.YTService;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -85,13 +87,10 @@ public class VideoGalleryView extends PaneBase {
                 videoTileView.sizeProperty().bind(pagination.sizeProperty());
                 //Play button action
                 videoTileView.getButton1().setOnAction(evt -> {
-                    if (OSUtil.isNative()) {
-                        BrowserService.create().ifPresent(service -> {
-                            try {
-                                service.launchExternalBrowser("https://www.youtube.com/watch?v=" + video.getId());
-                            } catch (IOException | URISyntaxException e) {
-                                throw new RuntimeException(e);
-                            }
+                    if (OSUtil.isAndroidOrIOS()) {
+                        YTService.create().ifPresent(service -> {
+                            service.setPosition(Pos.CENTER, 20, 20, 20, 20);
+                            service.play(video.getId());
                         });
                     } else {
                         if (centerPlayBox.getChildren().size() > 1) {

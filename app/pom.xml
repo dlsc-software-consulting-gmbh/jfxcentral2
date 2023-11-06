@@ -446,6 +446,7 @@
                         <list>storage</list>
                         <list>browser</list>
                         <list>video</list>
+                        <list>extended</list>
                     </attachList>
                     <mainClass>${mainClassName}</mainClass>
                     <releaseConfiguration>
