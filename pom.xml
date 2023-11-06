@@ -66,6 +66,12 @@
 
             <dependency>
                 <groupId>com.gluonhq.attach</groupId>
+                <artifactId>extended</artifactId>
+                <version>4.0.15-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gluonhq.attach</groupId>
                 <artifactId>display</artifactId>
                 <version>${attach.version}</version>
             </dependency>
