@@ -41,7 +41,7 @@ public class ModelObjectTool {
         } else if (modelObject instanceof Download download) {
             return ImageManager.getInstance().downloadBannerFile(download);
         } else if (modelObject instanceof Library library) {
-            return ImageManager.getInstance().libraryFile(library);
+            return ImageManager.getInstance().libraryFile(library, library.getFeaturedImageName());
         } else if (modelObject instanceof Video video) {
             return null;
             //return ImageManager.getInstance().youTubeImageProperty(video);
@@ -74,7 +74,7 @@ public class ModelObjectTool {
 
         File file = getModelPreviewFile(modelObject, large);
         if (file != null && file.exists()) {
-            if(file.getName().endsWith("png")) {
+            if (file.getName().endsWith("png")) {
                 return new SimpleObjectProperty<>(new Image(file.toURI().toString()));
             } else {
                 return new SimpleObjectProperty<>(CentralImageManager.getPreviewImage(file, large));

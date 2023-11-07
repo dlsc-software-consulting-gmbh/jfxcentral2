@@ -138,6 +138,7 @@ public interface IkonUtil {
     Ikon fraction = CarbonIcons.REFLECT_VERTICAL;
     Ikon topOffset = AntDesignIconsOutlined.VERTICAL_ALIGN_TOP;
     Ikon font = Material2AL.FORMAT_SIZE;
+    Ikon code = BoxiconsRegular.CODE_ALT;
 
     static Ikon getModelIkon(ModelObject mo) {
         return getModelIkon(mo.getClass());

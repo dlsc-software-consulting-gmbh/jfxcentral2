@@ -164,10 +164,9 @@ public class TopMenuBar extends PaneBase {
             search(repository.getUtilities(), pattern, results);
         }
 
-        // TODO: uncomment once learning content can be shown
-//        search(repository.getLearnJavaFX(), pattern, results);
-//        search(repository.getLearnRaspberryPi(), pattern, results);
-//        search(repository.getLearnMobile(), pattern, results);
+        search(repository.getLearnJavaFX(), pattern, results);
+        search(repository.getLearnRaspberryPi(), pattern, results);
+        search(repository.getLearnMobile(), pattern, results);
 
         return results;
     }
@@ -226,8 +225,6 @@ public class TopMenuBar extends PaneBase {
 
             MenuButton learnBtn = createMenuButton("Learn");
             learnBtn.getStyleClass().add("learn-button");
-            learnBtn.setManaged(false);
-            learnBtn.setVisible(false);
             fillLearnMenu(learnBtn);
 
             Button utilitiesBtn = new Button("Utilities");

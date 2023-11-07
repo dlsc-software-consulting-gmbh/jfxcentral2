@@ -73,7 +73,7 @@ public class FeatureViewSkin extends ControlBaseSkin<FeatureView> {
             bottomBox.getChildren().add(remarkLabel);
         }
 
-        VBox contentBox = NodeUtil.createVBox(topBox, imageView,new Spacer(), bottomBox);
+        VBox contentBox = NodeUtil.createVBox(topBox, imageView, new Spacer(), bottomBox);
         VBox.setVgrow(descriptionLabel, Priority.ALWAYS);
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);

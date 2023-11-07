@@ -6437,6 +6437,29 @@
 }
 
 /** ------------------------------------
+ * LearnDetailsBox
+ */
+.learn-details-box > .content-box .model-icon {
+    -fx-icon-color: -grey-100;
+    -fx-icon-size: 36px;
+}
+
+.learn-details-box > .content-box .icon-wrapper {
+    -fx-pref-width: 36px;
+    -fx-pref-height: 36px;
+}
+
+.learn-details-box:sm > .content-box .model-icon {
+    -fx-icon-size: 30px;
+}
+
+.learn-details-box:sm > .content-box .icon-wrapper {
+    -fx-alignment: center-left;
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+}
+
+/** ------------------------------------
  * DetailsContentPane
  */
 .details-content-pane {

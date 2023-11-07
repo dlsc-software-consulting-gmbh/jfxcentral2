@@ -107,7 +107,7 @@ public class HamburgerMenuView extends PaneBase {
 
         setMaxHeight(Region.USE_PREF_SIZE);
 
-        getMenus().addAll(resourcesMenu, communityMenu, showcases); // learnMenu);
+        getMenus().addAll(resourcesMenu, communityMenu, showcases, learnMenu);
         if (!OSUtil.isNative()) {
             getMenus().add(utilities);
         }
