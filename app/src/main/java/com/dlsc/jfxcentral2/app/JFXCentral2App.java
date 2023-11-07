@@ -183,7 +183,7 @@ public class JFXCentral2App extends Application {
         StackPane wrapper = new StackPane(parent, videoPane);
 
         // customs stage for decorations / the chrome
-        CustomStage customStage = new CustomStage(stage, wrapper, sessionManager, size);
+        CustomStage customStage = new CustomStage(stage, parent, sessionManager, size);
         customStage.setCloseHandler(() -> {
             if (!OSUtil.isNative()) {
                 if (SystemTray.isSupported() && trayIconManager != null) {

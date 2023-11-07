@@ -6,7 +6,6 @@ import com.dlsc.jfxcentral2.components.tiles.VideoGalleryTileView;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import com.gluonhq.attach.browser.BrowserService;
-import com.gluonhq.attachextended.yt.YTService;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -119,15 +118,15 @@ public class VideoGalleryView extends PaneBase {
                         setOnCloseGlassPane(() -> {
                             setBlocking(false);
                             setOnCloseGlassPane(null);
-                            YTService.create().ifPresentOrElse(service -> {
-                                service.hide();
-                            }, () -> System.err.println("no youtube service created"));
+//                            YTService.create().ifPresentOrElse(service -> {
+//                                service.hide();
+//                            }, () -> System.err.println("no youtube service created"));
                         });
 
-                        YTService.create().ifPresentOrElse(service -> {
-                            service.setPosition(Pos.CENTER, 20, 20, 20, 20);
-                            service.play(video.getId());
-                        }, () -> System.err.println("no youtube service created"));
+//                        YTService.create().ifPresentOrElse(service -> {
+//                            service.setPosition(Pos.CENTER, 20, 20, 20, 20);
+//                            service.play(video.getId());
+//                        }, () -> System.err.println("no youtube service created"));
                     } else {
                         if (centerPlayBox.getChildren().size() > 1) {
                             centerPlayBox.getChildren().remove(1);
