@@ -2,11 +2,14 @@ package com.dlsc.jfxcentral2.utils;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.model.DateQuickLink;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
@@ -103,6 +106,12 @@ public class QuickLinksGenerator {
             return "Book";
         } else if (mo instanceof Tip) {
             return "Tip";
+        } else if (mo instanceof Tutorial) {
+            return "Tutorial";
+        } else if (mo instanceof Person) {
+            return "Person";
+        } else if (mo instanceof Download) {
+            return "Download";
         }
 
         return null;
