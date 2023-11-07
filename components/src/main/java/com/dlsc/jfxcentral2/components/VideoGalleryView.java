@@ -8,8 +8,7 @@ import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import com.gluonhq.attach.browser.BrowserService;
 import com.gluonhq.attachextended.yt.YTService;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -38,6 +37,34 @@ public class VideoGalleryView extends PaneBase {
 
         layoutBySize();
         videosProperty().addListener((ob, ov, nv) -> layoutBySize());
+    }
+
+    private final BooleanProperty blocking = new SimpleBooleanProperty(this, "blocking");
+
+    public boolean isBlocking() {
+        return blocking.get();
+    }
+
+    public BooleanProperty blockingProperty() {
+        return blocking;
+    }
+
+    public void setBlocking(boolean blocking) {
+        this.blocking.set(blocking);
+    }
+
+    private final ObjectProperty<Runnable> onCloseGlassPane = new SimpleObjectProperty<>(this, "onCloseGlassPane");
+
+    public Runnable getOnCloseGlassPane() {
+        return onCloseGlassPane.get();
+    }
+
+    public ObjectProperty<Runnable> onCloseGlassPaneProperty() {
+        return onCloseGlassPane;
+    }
+
+    public void setOnCloseGlassPane(Runnable onCloseGlasspane) {
+        this.onCloseGlassPane.set(onCloseGlasspane);
     }
 
     @Override
@@ -88,8 +115,16 @@ public class VideoGalleryView extends PaneBase {
                 //Play button action
                 videoTileView.getButton1().setOnAction(evt -> {
                     if (OSUtil.isAndroidOrIOS()) {
+                        setBlocking(true);
+                        setOnCloseGlassPane(() -> {
+                            setBlocking(false);
+                            setOnCloseGlassPane(null);
+                            YTService.create().ifPresentOrElse(service -> {
+                                service.hide();
+                            }, () -> System.err.println("no youtube service created"));
+                        });
+
                         YTService.create().ifPresentOrElse(service -> {
-                            System.out.println(">>>>>>> YOUTUBE SERVICE CREATED");
                             service.setPosition(Pos.CENTER, 20, 20, 20, 20);
                             service.play(video.getId());
                         }, () -> System.err.println("no youtube service created"));

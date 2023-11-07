@@ -5996,7 +5996,25 @@
  */
 .page-glass-pane {
     -fx-background-color: black;
-    -fx-opacity: 0.5;
+    -fx-opacity: 0.75;
+}
+
+.page-glass-pane > .close-button .ikonli-font-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: white;
+}
+
+/* ----------------------------------------------------------------------------
+ * VideoPane
+ */
+.video-pane {
+    -fx-background-color: red;
+    -fx-opacity: 0.9;
+}
+
+.video-pane > .close-button .ikonli-font-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: white;
 }
 
 /** ------------------------------------

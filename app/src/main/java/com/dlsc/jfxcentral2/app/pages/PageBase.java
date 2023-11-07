@@ -9,19 +9,21 @@ import com.dlsc.jfxcentral2.components.TopMenuBar;
 import com.dlsc.jfxcentral2.components.TopPane;
 import com.dlsc.jfxcentral2.components.hamburger.HamburgerMenuView;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.View;
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -111,6 +113,14 @@ public abstract class PageBase extends View {
             }
         });
 
+        Button closeGlassPaneButton = new Button();
+        closeGlassPaneButton.getStyleClass().add("close-button");
+        closeGlassPaneButton.setGraphic(new FontIcon(MaterialDesign.MDI_CLOSE_CIRCLE_OUTLINE));
+        closeGlassPaneButton.setOnAction(evt -> getOnCloseGlassPane().run());
+        closeGlassPaneButton.visibleProperty().bind(onCloseGlassPane.isNotNull());
+        StackPane.setAlignment(closeGlassPaneButton, Pos.TOP_RIGHT);
+        glassPane.getChildren().add(closeGlassPaneButton);
+
         if (menuMode.equals(Mode.LIGHT)) {
             // make sure the JFX logo can be fully seen (without this call it gets clipped)
             // the JFX logo uses scale-x / -y, hence it is bigger than its parent container
@@ -169,6 +179,20 @@ public abstract class PageBase extends View {
 
     public void setBlocking(boolean blocking) {
         this.blocking.set(blocking);
+    }
+
+    private final ObjectProperty<Runnable> onCloseGlassPane = new SimpleObjectProperty<>(this, "onCloseGlassPane");
+
+    public Runnable getOnCloseGlassPane() {
+        return onCloseGlassPane.get();
+    }
+
+    public ObjectProperty<Runnable> onCloseGlassPaneProperty() {
+        return onCloseGlassPane;
+    }
+
+    public void setOnCloseGlassPane(Runnable onCloseGlasspane) {
+        this.onCloseGlassPane.set(onCloseGlasspane);
     }
 
     private void updateStyleClassBasedOnSize(Node node) {
