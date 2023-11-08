@@ -6579,6 +6579,11 @@
     -fx-pref-height: 32px;
 }
 
+.pagination-box.top,
+.pagination-box.bottom {
+    -fx-padding: 0 0 5px 0;
+}
+
 .pagination-box .page-label {
     -fx-alignment: center;
     -fx-font-size: 16px;
@@ -6586,9 +6591,14 @@
     -fx-font-family: "Roboto Condensed";
 }
 
-.pagination-box > .button {
+.pagination-box.left > .button,
+.pagination-box.right > .button {
     -fx-content-display: graphic-only;
     -fx-background-color: transparent;
+}
+
+.pagination-box > .next-button {
+    -fx-content-display: right;
 }
 
 .pagination-box > .button .ikonli-font-icon {
