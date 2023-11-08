@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.app.utils;
 
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.VideoPlayer;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
@@ -13,7 +14,7 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class VideoPane extends StackPane {
 
-    public VideoPane(ObjectProperty<Size> size) {
+    public VideoPane(VideoPlayer player, ObjectProperty<Size> size) {
         this.size.bind(size);
 
         sizeProperty().addListener(it -> updateStyleClassBasedOnSize(this));
@@ -21,17 +22,12 @@ public class VideoPane extends StackPane {
         setMouseTransparent(false);
 
         getStyleClass().add("video-pane");
-        setOnMouseClicked(evt -> setVisible(false));
 
         Button closeGlassPaneButton = new Button();
         StackPane.setMargin(closeGlassPaneButton, new Insets(100, 20, 0, 0));
         closeGlassPaneButton.getStyleClass().add("close-button");
         closeGlassPaneButton.setGraphic(new FontIcon(MaterialDesign.MDI_CLOSE_CIRCLE_OUTLINE));
-        closeGlassPaneButton.visibleProperty().bind(onClose.isNotNull());
-        closeGlassPaneButton.setOnAction(evt -> {
-            getOnClose().run();
-            setOnClose(null);
-        });
+        closeGlassPaneButton.setOnAction(evt -> player.hideVideo());
 
         StackPane.setAlignment(closeGlassPaneButton, Pos.TOP_RIGHT);
         getChildren().add(closeGlassPaneButton);

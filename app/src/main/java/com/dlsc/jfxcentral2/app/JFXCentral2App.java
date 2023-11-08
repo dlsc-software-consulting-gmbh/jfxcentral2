@@ -68,11 +68,14 @@ import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
+import com.dlsc.jfxcentral2.utils.VideoPlayer;
 import com.gluonhq.attach.display.DisplayService;
+import com.gluonhq.attachextended.yt.YTService;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Priority;
@@ -99,7 +102,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public class JFXCentral2App extends Application {
+public class JFXCentral2App extends Application implements VideoPlayer {
 
     private final ObjectProperty<Size> size = new SimpleObjectProperty<>(Size.LARGE);
 
@@ -110,6 +113,8 @@ public class JFXCentral2App extends Application {
             Locale.setDefault(Locale.US);
         }
     }
+
+    private VideoPane videoPane;
 
     @Override
     public void start(Stage stage) {
@@ -175,15 +180,15 @@ public class JFXCentral2App extends Application {
             });
         }
 
-        VideoPane videoPane = new VideoPane(size);
-        videoPane.onCloseProperty().bind(onCloseVideoPaneProperty());
-        videoPane.visibleProperty().bind(onCloseVideoPaneProperty().isNotNull());
-        setOnCloseVideoPane(() -> {});
+        // video pane for native video playback
+        videoPane = new VideoPane(this, size);
+        videoPane.setVisible(false);
+        videoPane.setOnMouseClicked(evt -> hideVideo());
 
         StackPane wrapper = new StackPane(parent, videoPane);
 
         // customs stage for decorations / the chrome
-        CustomStage customStage = new CustomStage(stage, parent, sessionManager, size);
+        CustomStage customStage = new CustomStage(stage, wrapper, sessionManager, size);
         customStage.setCloseHandler(() -> {
             if (!OSUtil.isNative()) {
                 if (SystemTray.isSupported() && trayIconManager != null) {
@@ -216,25 +221,11 @@ public class JFXCentral2App extends Application {
         stage.show();
     }
 
-    private final ObjectProperty<Runnable> onCloseVideoPane = new SimpleObjectProperty<>(this, "onCloseVideoPane");
-
-    public Runnable getOnCloseVideoPane() {
-        return onCloseVideoPane.get();
-    }
-
-    public ObjectProperty<Runnable> onCloseVideoPaneProperty() {
-        return onCloseVideoPane;
-    }
-
-    public void setOnCloseVideoPane(Runnable onClose) {
-        this.onCloseVideoPane.set(onClose);
-    }
-
     public Route createRoute() {
         Route route = Route.empty()
                 .and(RouteUtils.get("/", r -> {
                     if (RepositoryManager.isRepositoryUpdated()) {
-                        return new StartPage(size);
+                        return new StartPage(this, size);
                     }
                     return new RefreshPage(size);
                 }))
@@ -327,5 +318,22 @@ public class JFXCentral2App extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void playVideo(Video video) {
+        if (video != null) {
+            videoPane.setVisible(true);
+            YTService.create().ifPresentOrElse(service -> {
+                service.setPosition(Pos.CENTER, 20, 20, 20, 20);
+                service.play(video.getId());
+            }, () -> System.err.println("no youtube service found"));
+        }
+    }
+
+    @Override
+    public void hideVideo() {
+        videoPane.setVisible(false);
+        YTService.create().ifPresentOrElse(YTService::hide, () -> System.err.println("no youtube service found"));
     }
 }

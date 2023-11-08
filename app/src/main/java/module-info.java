@@ -11,6 +11,7 @@ open module com.dlsc.jfxcentral2.app {
 
     requires org.apache.commons.io;
 
+    requires com.gluonhq.attachextended.yt;
     requires jfxcentral.data;
     requires fr.brouillard.oss.cssfx;
 

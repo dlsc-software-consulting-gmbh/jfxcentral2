@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.app.pages;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
+import com.dlsc.jfxcentral2.app.JFXCentral2App;
 import com.dlsc.jfxcentral2.components.HomePageTopView;
 import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.VideoGalleryView;
@@ -17,8 +18,11 @@ import java.util.List;
 
 public class StartPage extends PageBase {
 
-    public StartPage(ObjectProperty<Size> size) {
+    private final JFXCentral2App app;
+
+    public StartPage(JFXCentral2App app, ObjectProperty<Size> size) {
         super(size, Mode.DARK);
+        this.app = app;
     }
 
     @Override
@@ -54,7 +58,7 @@ public class StartPage extends PageBase {
         websiteChangesView.setManaged(!changes.isEmpty());
 
         // video gallery
-        VideoGalleryView videoGallery = new VideoGalleryView();
+        VideoGalleryView videoGallery = new VideoGalleryView(app);
         videoGallery.sizeProperty().bind(sizeProperty());
         videoGallery.getVideos().setAll(randomSubList(DataRepository2.getInstance().getVideos(), 12));
         videoGallery.blockingProperty().addListener(it -> setBlocking(videoGallery.isBlocking()));

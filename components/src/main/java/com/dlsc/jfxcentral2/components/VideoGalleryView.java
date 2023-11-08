@@ -4,8 +4,10 @@ import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.tiles.VideoGalleryTileView;
 import com.dlsc.jfxcentral2.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.VideoPlayer;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import com.gluonhq.attach.browser.BrowserService;
+import com.gluonhq.attachextended.yt.YTService;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -24,8 +26,11 @@ import java.net.URISyntaxException;
 public class VideoGalleryView extends PaneBase {
 
     private final VBox contentPane;
+    private final VideoPlayer videoPlayer;
 
-    public VideoGalleryView() {
+    public VideoGalleryView(VideoPlayer videoPlayer) {
+        this.videoPlayer = videoPlayer;
+
         getStyleClass().add("video-gallery-view");
 
         contentPane = new VBox();
@@ -114,19 +119,7 @@ public class VideoGalleryView extends PaneBase {
                 //Play button action
                 videoTileView.getButton1().setOnAction(evt -> {
                     if (OSUtil.isAndroidOrIOS()) {
-                        setBlocking(true);
-                        setOnCloseGlassPane(() -> {
-                            setBlocking(false);
-                            setOnCloseGlassPane(null);
-//                            YTService.create().ifPresentOrElse(service -> {
-//                                service.hide();
-//                            }, () -> System.err.println("no youtube service created"));
-                        });
-
-//                        YTService.create().ifPresentOrElse(service -> {
-//                            service.setPosition(Pos.CENTER, 20, 20, 20, 20);
-//                            service.play(video.getId());
-//                        }, () -> System.err.println("no youtube service created"));
+                        videoPlayer.playVideo(video);
                     } else {
                         if (centerPlayBox.getChildren().size() > 1) {
                             centerPlayBox.getChildren().remove(1);

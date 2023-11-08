@@ -21,7 +21,6 @@
 
     <dependencies>
 
-        <!--
         <dependency>
             <groupId>com.gluonhq.attachextended</groupId>
             <artifactId>yt</artifactId>
@@ -35,7 +34,6 @@
             <scope>runtime</scope>
             <classifier>${attach.extended.classifier}</classifier>
         </dependency>
-        -->
 
         <dependency>
             <groupId>com.gluonhq.attach</groupId>

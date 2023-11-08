@@ -17,7 +17,7 @@ public class HelloVideoGallery extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        videoGallery = new VideoGalleryView();
+        videoGallery = new VideoGalleryView(null);
         videoGallery.getVideos().setAll(createVideos());
         ScrollPane scrollPane = new ScrollPane(videoGallery);
         scrollPane.setFitToWidth(true);

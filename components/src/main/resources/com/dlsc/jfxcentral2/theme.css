@@ -6019,7 +6019,7 @@
  * VideoPane
  */
 .video-pane {
-    -fx-background-color: red;
+    -fx-background-color: black;
     -fx-opacity: 0.9;
 }
 
