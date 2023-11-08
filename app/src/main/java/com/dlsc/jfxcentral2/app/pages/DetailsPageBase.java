@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Learn;
 import com.dlsc.jfxcentral.data.model.LearnJavaFX;
@@ -32,6 +33,7 @@ import com.dlsc.jfxcentral2.components.detailsbox.TipsAndTricksDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.ToolsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.TutorialsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.VideosDetailsBox;
+import com.dlsc.jfxcentral2.components.detailsbox.DocumentationDetailsBox;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.ObjectProperty;
@@ -107,6 +109,7 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
         maybeAddBox(modelObject, RealWorldApp.class, AppsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Person.class, PersonsDetailsBox::new, boxes);
         maybeAddBox(modelObject, Company.class, CompaniesDetailsBox::new, boxes);
+        maybeAddBox(modelObject, Documentation.class, DocumentationDetailsBox::new, boxes);
 
         return boxes;
     }
@@ -118,6 +121,10 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
         }
 
         List<MO> linkedObjects = DataRepository2.getInstance().getLinkedObjects(modelObject, clazz);
+        if (clazz.equals(Documentation.class)) {
+            linkedObjects = (List<MO>) DataRepository2.getInstance().getDocumentation();
+        }
+
         if (!linkedObjects.isEmpty()) {
             DetailsBoxBase<MO> box = boxSupplier.get();
             box.getItems().setAll(linkedObjects);

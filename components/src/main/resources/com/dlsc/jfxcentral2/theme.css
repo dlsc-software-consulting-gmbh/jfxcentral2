@@ -3446,6 +3446,17 @@
 }
 
 /** ------------------------------------
+ * LearnDetailHeader
+ */
+.learn-detail-header .button-box .website-button {
+    -fx-font-size: 16px;
+}
+
+.learn-detail-header .button-box .website-button .ikonli-font-icon {
+    -fx-icon-size: 20px
+}
+
+/** ------------------------------------
  * AppDetailHeader
  */
 
@@ -6345,6 +6356,13 @@
     -fx-font-size: 13px;
 }
 
+/** ------------------------------------
+ * LibrariesDetailsBox
+ */
+.documentation-details-box:sm-md > .content-box .title-box > .title-label {
+    -fx-font-size: 20px;
+}
+
 /* ------------------------------------
  * BooksDetailsBox
  */
@@ -6549,7 +6567,11 @@
     -fx-spacing: 10px;
 }
 
-.lotw-details-content-pane > .content-box .pagination-box {
+.details-content-pane .menu-view.left-menu-view:vertical .item {
+    -fx-padding: 6px 50px 6px 16px;
+}
+
+.pagination-box {
     -fx-alignment: center;
     -fx-background-color: -white;
     -fx-border-color: -grey-10;
@@ -6557,28 +6579,28 @@
     -fx-pref-height: 32px;
 }
 
-.lotw-details-content-pane > .content-box .pagination-box .page-label {
+.pagination-box .page-label {
     -fx-alignment: center;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-font-family: "Roboto Condensed";
 }
 
-.lotw-details-content-pane > .content-box .pagination-box > .button {
+.pagination-box > .button {
     -fx-content-display: graphic-only;
     -fx-background-color: transparent;
 }
 
-.lotw-details-content-pane > .content-box .pagination-box > .button .ikonli-font-icon {
+.pagination-box > .button .ikonli-font-icon {
     -fx-icon-color: -bright-blue;
     -fx-icon-size: 25px;
 }
 
-.lotw-details-content-pane > .content-box .pagination-box > .button:hover .ikonli-font-icon {
+.pagination-box > .button:hover .ikonli-font-icon {
     -fx-icon-color: derive(-bright-blue, 15%);
 }
 
-.lotw-details-content-pane > .content-box .pagination-box > .button:hover:pressed .ikonli-font-icon {
+.pagination-box > .button:hover:pressed .ikonli-font-icon {
     -fx-icon-color: derive(-bright-blue, -15%);
 }
 
