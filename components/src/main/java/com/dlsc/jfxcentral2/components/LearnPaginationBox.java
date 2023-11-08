@@ -68,8 +68,10 @@ public class LearnPaginationBox extends HBox {
             Size size = sizeProperty.get();
             if (position == Position.LEFT || position == Position.RIGHT) {
                 return learnList.size() > 1 && size == Size.LARGE;
-            } else {
+            } else if (position == Position.TOP) {
                 return size != Size.LARGE;
+            } else {
+                return true;
             }
         }, sizeProperty));
     }
