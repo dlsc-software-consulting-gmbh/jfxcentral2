@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.app.pages.details;
 import com.dlsc.jfxcentral.data.model.Learn;
 import com.dlsc.jfxcentral2.app.pages.DetailsPageBase;
 import com.dlsc.jfxcentral2.components.DetailsContentPane;
+import com.dlsc.jfxcentral2.components.LearnPaginationBox;
 import com.dlsc.jfxcentral2.components.headers.LearnDetailHeader;
 import com.dlsc.jfxcentral2.components.overviewbox.LearnOverviewBox;
 import com.dlsc.jfxcentral2.model.Size;
@@ -29,9 +30,12 @@ public class LearnDetailsPage extends DetailsPageBase<Learn> {
 
         // details
         DetailsContentPane detailsContentPane = new DetailsContentPane();
+        detailsContentPane.getStyleClass().add("learn-details-content-pane");
         detailsContentPane.sizeProperty().bind(sizeProperty());
         detailsContentPane.getCenterNodes().add(learnOverviewBox);
         detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
+        LearnPaginationBox paginationBox = new LearnPaginationBox(learn, LearnPaginationBox.Position.LEFT, sizeProperty());
+        detailsContentPane.setLeftTopExtraNode(paginationBox);
 
         return wrapContent(learnDetailHeader, detailsContentPane);
     }

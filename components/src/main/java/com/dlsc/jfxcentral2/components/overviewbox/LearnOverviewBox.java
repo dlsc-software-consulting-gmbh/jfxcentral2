@@ -5,7 +5,8 @@ import com.dlsc.jfxcentral.data.model.Learn;
 import com.dlsc.jfxcentral.data.model.LearnJavaFX;
 import com.dlsc.jfxcentral.data.model.LearnMobile;
 import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
-import com.dlsc.jfxcentral2.utils.PageUtil;
+import com.dlsc.jfxcentral2.components.LearnPaginationBox;
+import javafx.scene.Node;
 
 public class LearnOverviewBox extends OverviewBox<Learn> {
 
@@ -24,4 +25,15 @@ public class LearnOverviewBox extends OverviewBox<Learn> {
             setMarkdown(DataRepository2.getInstance().getLearnRaspberryPiReadMe((LearnRaspberryPi) learn));
         }
     }
+
+    @Override
+    protected Node createTopNode() {
+        return new LearnPaginationBox(getModel(), LearnPaginationBox.Position.TOP, sizeProperty());
+    }
+
+    @Override
+    protected Node createBottomNode() {
+        return new LearnPaginationBox(getModel(), LearnPaginationBox.Position.BOTTOM, sizeProperty());
+    }
+
 }
