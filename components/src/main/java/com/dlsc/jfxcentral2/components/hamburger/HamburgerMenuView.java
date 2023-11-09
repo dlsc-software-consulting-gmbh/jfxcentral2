@@ -4,6 +4,8 @@ import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Documentation;
+import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
@@ -76,8 +78,13 @@ public class HamburgerMenuView extends PaneBase {
                 new HamburgerMenuItem("Blogs", IkonUtil.getModelIkon(Blog.class), "/blogs"),
                 new HamburgerMenuItem("Tips", IkonUtil.getModelIkon(Tip.class), "/tips"),
                 new HamburgerMenuItem("Tutorials", IkonUtil.getModelIkon(Tutorial.class), "/tutorials"),
-                new HamburgerMenuItem("Icons", IkonUtil.getModelIkon(IkonliPack.class), "/icons")
+                new HamburgerMenuItem("Icons", IkonUtil.getModelIkon(IkonliPack.class), "/icons"),
+                new HamburgerMenuItem("Documentation", IkonUtil.getModelIkon(Documentation.class), "/documentation")
         );
+
+        if (!mobile && !OSUtil.isAndroidOrIOS()) {
+            resourcesMenu.getItems().add(new HamburgerMenuItem("Downloads", IkonUtil.getModelIkon(Download.class), "/downloads"));
+        }
 
         HamburgerMenu communityMenu = new HamburgerMenu("Community");
         communityMenu.getItems().addAll(
@@ -102,20 +109,12 @@ public class HamburgerMenuView extends PaneBase {
         );
 
         HamburgerMenu utilities = new HamburgerMenu("Utilities", "/utilities");
-        HamburgerMenu documentation = new HamburgerMenu("Documentation", "/documentation");
-        HamburgerMenu downloads = new HamburgerMenu("Downloads", "/downloads");
 
         setMaxHeight(Region.USE_PREF_SIZE);
 
         getMenus().addAll(resourcesMenu, communityMenu, showcases, learnMenu);
         if (!OSUtil.isNative()) {
             getMenus().add(utilities);
-        }
-
-        getMenus().add(documentation);
-
-        if (!mobile && !OSUtil.isAndroidOrIOS()) {
-            getMenus().add(downloads);
         }
 
         refreshMenus();
