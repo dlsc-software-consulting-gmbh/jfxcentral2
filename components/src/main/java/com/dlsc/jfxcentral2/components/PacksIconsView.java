@@ -17,6 +17,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -33,7 +35,6 @@ import org.kordamp.ikonli.Ikon;
 
 import java.util.Comparator;
 import java.util.Set;
-import java.util.concurrent.*;
 
 public class PacksIconsView extends PaneBase {
 
@@ -44,17 +45,9 @@ public class PacksIconsView extends PaneBase {
     private final HBox sortComboBoxWrapper;
     private final HBox scopeComboBoxWrapper;
     private final StringProperty searchText = new SimpleStringProperty(this, "searchText", "");
-
-    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor(r -> {
-        Thread thread = new Thread(r);
-        thread.setName("Packs Search Thread");
-        thread.setDaemon(true);
-        return thread;
-    });
-
+    private final SearchService searchService = new SearchService();
     private final IkonGridView ikonGridView;
     private final ComboBox<Scope> scopeComboBox;
-    private ScheduledFuture<?> future;
 
     private enum Scope {
         PACKS, ICONS
@@ -71,18 +64,10 @@ public class PacksIconsView extends PaneBase {
         searchField = new CustomSearchField(true);
         searchField.getStyleClass().add("filter-search-field");
         searchField.setFocusTraversable(false);
-        searchField.textProperty().addListener((ob, ov, str) -> {
-            if (future != null) {
-                future.cancel(false);
-            }
-            future = executorService.schedule(() -> {
-                if (StringUtils.equalsIgnoreCase(str, searchField.getText())) {
-                    Platform.runLater(() -> searchText.set(str));
-                }
-            }, SEARCH_DELAY, TimeUnit.MILLISECONDS);
-        });
-
+        searchField.textProperty().addListener((ob, ov, str) -> searchService.restart());
         HBox.setHgrow(searchField, Priority.ALWAYS);
+
+        searchService.setOnSucceeded(evt -> searchText.set(searchField.getText()));
 
         scopeComboBox = initScopeComboBox();
         scopeComboBox.getStyleClass().addAll("scope-combo-box");
@@ -175,6 +160,23 @@ public class PacksIconsView extends PaneBase {
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
         updateUI();
+    }
+
+    private class SearchService extends Service<String> {
+
+        @Override
+        protected Task<String> createTask() {
+            return new Task<>() {
+                @Override
+                protected String call() throws Exception {
+                    Thread.sleep(SEARCH_DELAY);
+                    if (!isCancelled()) {
+                        return searchField.getText();
+                    }
+                    return null;
+                }
+            };
+        }
     }
 
     @Override
