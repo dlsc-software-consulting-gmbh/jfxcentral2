@@ -54,9 +54,6 @@ public class IconPreviewPane extends PaneBase {
             showIconsService = createShowIkonsService();
             showIconsService.start();
         } else {
-            if (showIconsService.isRunning()) {
-                showIconsService.cancel();
-            }
             showIconsService.restart();
         }
     }
