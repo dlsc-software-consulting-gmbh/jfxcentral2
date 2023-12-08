@@ -121,10 +121,6 @@ public abstract class DetailsPageBase<T extends ModelObject> extends PageBase {
         }
 
         List<MO> linkedObjects = DataRepository2.getInstance().getLinkedObjects(modelObject, clazz);
-        if (clazz.equals(Documentation.class)) {
-            linkedObjects = (List<MO>) DataRepository2.getInstance().getDocumentation();
-        }
-
         if (!linkedObjects.isEmpty()) {
             DetailsBoxBase<MO> box = boxSupplier.get();
             box.getItems().setAll(linkedObjects);
