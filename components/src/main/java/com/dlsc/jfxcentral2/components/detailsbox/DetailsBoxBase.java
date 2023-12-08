@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Download;
@@ -13,8 +14,11 @@ import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaginationControl2;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
-import com.dlsc.jfxcentral2.components.Spacer;
-import com.dlsc.jfxcentral2.utils.*;
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.ModelObjectTool;
+import com.dlsc.jfxcentral2.utils.PageUtil;
+import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;

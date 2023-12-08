@@ -5,6 +5,10 @@ import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral.data.model.Learn;
+import com.dlsc.jfxcentral.data.model.LearnJavaFX;
+import com.dlsc.jfxcentral.data.model.LearnMobile;
+import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.News;
@@ -14,8 +18,8 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
-import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.data.model.Utility;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -103,6 +107,8 @@ public class SearchResultCell extends ListCell<ModelObject> {
             return "Icon Pack";
         } else if (clazz.equals(Utility.class)) {
             return "Utility";
+        } else if (clazz.equals(LearnJavaFX.class) || clazz.equals(LearnMobile.class) || clazz.equals(LearnRaspberryPi.class)) {
+            return "Learn";
         } else {
             return "Item";
         }
@@ -125,6 +131,8 @@ public class SearchResultCell extends ListCell<ModelObject> {
             return "Download";
         } else if (item instanceof IkonliPack) {
             return item.getDescription();
+        } else if (item instanceof Learn) {
+            return StringUtils.replace(item.getClass().getSimpleName(), "Learn", "Learn ");
         } else {
             return item.getSummary();
         }

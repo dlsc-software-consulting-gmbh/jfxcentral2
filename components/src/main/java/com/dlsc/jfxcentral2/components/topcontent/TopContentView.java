@@ -1,12 +1,12 @@
 package com.dlsc.jfxcentral2.components.topcontent;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.StringUtil;

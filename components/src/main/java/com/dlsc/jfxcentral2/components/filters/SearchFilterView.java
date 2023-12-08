@@ -1,9 +1,9 @@
 package com.dlsc.jfxcentral2.components.filters;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.components.CustomSearchField;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -68,7 +68,7 @@ public class SearchFilterView<T> extends PaneBase {
      */
     private final StringProperty searchText = new SimpleStringProperty(this, "searchText", "");
 
-    private final ScheduledExecutorService executorService  = Executors.newSingleThreadScheduledExecutor(r -> {
+    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor(r -> {
         Thread thread = new Thread(r);
         thread.setName("Search Filter Thread");
         thread.setDaemon(true);
@@ -181,6 +181,7 @@ public class SearchFilterView<T> extends PaneBase {
 
         Spacer spacer = new Spacer();
         spacer.managedProperty().bind(spacer.visibleProperty());
+        spacer.visibleProperty().unbind();
 
         Pane filtersBox = initFiltersSortGroupBox();
         HBox.setHgrow(filtersBox, Priority.ALWAYS);

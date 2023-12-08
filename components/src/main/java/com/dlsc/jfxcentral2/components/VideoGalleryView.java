@@ -1,16 +1,16 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.tiles.VideoGalleryTileView;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import com.gluonhq.attach.browser.BrowserService;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -38,6 +38,34 @@ public class VideoGalleryView extends PaneBase {
         videosProperty().addListener((ob, ov, nv) -> layoutBySize());
     }
 
+    private final BooleanProperty blocking = new SimpleBooleanProperty(this, "blocking");
+
+    public boolean isBlocking() {
+        return blocking.get();
+    }
+
+    public BooleanProperty blockingProperty() {
+        return blocking;
+    }
+
+    public void setBlocking(boolean blocking) {
+        this.blocking.set(blocking);
+    }
+
+    private final ObjectProperty<Runnable> onCloseGlassPane = new SimpleObjectProperty<>(this, "onCloseGlassPane");
+
+    public Runnable getOnCloseGlassPane() {
+        return onCloseGlassPane.get();
+    }
+
+    public ObjectProperty<Runnable> onCloseGlassPaneProperty() {
+        return onCloseGlassPane;
+    }
+
+    public void setOnCloseGlassPane(Runnable onCloseGlasspane) {
+        this.onCloseGlassPane.set(onCloseGlasspane);
+    }
+
     @Override
     protected void layoutBySize() {
         contentPane.getChildren().clear();
@@ -49,7 +77,7 @@ public class VideoGalleryView extends PaneBase {
         LinkUtil.setLink(button, "/videos");
 
         Pane pane = isSmall() ?
-                new VBox(title, new Spacer(Orientation.VERTICAL), button) :
+                new VBox(title, new Spacer(), button) :
                 new HBox(title, new Spacer(), button);
         pane.getStyleClass().add("title-box");
         contentPane.getChildren().add(pane);
@@ -85,14 +113,20 @@ public class VideoGalleryView extends PaneBase {
                 videoTileView.sizeProperty().bind(pagination.sizeProperty());
                 //Play button action
                 videoTileView.getButton1().setOnAction(evt -> {
-                    if (OSUtil.isNative()) {
-                        BrowserService.create().ifPresent(service -> {
-                            try {
-                                service.launchExternalBrowser("https://www.youtube.com/watch?v=" + video.getId());
-                            } catch (IOException | URISyntaxException e) {
-                                throw new RuntimeException(e);
-                            }
+                    if (OSUtil.isAndroidOrIOS()) {
+                        setBlocking(true);
+                        setOnCloseGlassPane(() -> {
+                            setBlocking(false);
+                            setOnCloseGlassPane(null);
+//                            YTService.create().ifPresentOrElse(service -> {
+//                                service.hide();
+//                            }, () -> System.err.println("no youtube service created"));
                         });
+
+//                        YTService.create().ifPresentOrElse(service -> {
+//                            service.setPosition(Pos.CENTER, 20, 20, 20, 20);
+//                            service.play(video.getId());
+//                        }, () -> System.err.println("no youtube service created"));
                     } else {
                         if (centerPlayBox.getChildren().size() > 1) {
                             centerPlayBox.getChildren().remove(1);

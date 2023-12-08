@@ -63,6 +63,7 @@ import com.dlsc.jfxcentral2.app.pages.details.UtilityDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
+import com.dlsc.jfxcentral2.app.utils.VideoPane;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
@@ -94,7 +95,6 @@ import simplefx.experimental.parts.FXFuture;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.PrintStream;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -175,6 +175,12 @@ public class JFXCentral2App extends Application {
             });
         }
 
+        VideoPane videoPane = new VideoPane(size);
+        videoPane.onCloseProperty().bind(onCloseVideoPaneProperty());
+        videoPane.visibleProperty().bind(onCloseVideoPaneProperty().isNotNull());
+        setOnCloseVideoPane(() -> {});
+
+        StackPane wrapper = new StackPane(parent, videoPane);
 
         // customs stage for decorations / the chrome
         CustomStage customStage = new CustomStage(stage, parent, sessionManager, size);
@@ -194,7 +200,7 @@ public class JFXCentral2App extends Application {
         scene.setFill(Color.web("#070B32"));
         scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
         scene.getStylesheets().add(Objects.requireNonNull(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css")).toExternalForm());
-        scene.focusOwnerProperty().addListener(it -> System.out.println("focus owner: " + scene.getFocusOwner()));
+        // scene.focusOwnerProperty().addListener(it -> System.out.println("focus owner: " + scene.getFocusOwner()));
         updateSizeProperty(scene);
 
         stage.setScene(scene);
@@ -208,6 +214,20 @@ public class JFXCentral2App extends Application {
         }
 
         stage.show();
+    }
+
+    private final ObjectProperty<Runnable> onCloseVideoPane = new SimpleObjectProperty<>(this, "onCloseVideoPane");
+
+    public Runnable getOnCloseVideoPane() {
+        return onCloseVideoPane.get();
+    }
+
+    public ObjectProperty<Runnable> onCloseVideoPaneProperty() {
+        return onCloseVideoPane;
+    }
+
+    public void setOnCloseVideoPane(Runnable onClose) {
+        this.onCloseVideoPane.set(onClose);
     }
 
     public Route createRoute() {

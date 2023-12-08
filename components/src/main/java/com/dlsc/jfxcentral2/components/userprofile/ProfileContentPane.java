@@ -1,14 +1,13 @@
 package com.dlsc.jfxcentral2.components.userprofile;
 
 import com.dlsc.gemsfx.PhotoView;
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.components.EditTextField;
 import com.dlsc.jfxcentral2.components.PaneBase;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.model.RegisteredUser;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -129,7 +128,7 @@ public class ProfileContentPane extends PaneBase {
             VBox photoBox = new VBox(photoView, buttonsBox);
             photoBox.getStyleClass().add("photo-box");
 
-            VBox centerBox = new VBox(userNameField, fullNameField, emailField, new Spacer(Orientation.VERTICAL), bottomBox);
+            VBox centerBox = new VBox(userNameField, fullNameField, emailField, new Spacer(), bottomBox);
             centerBox.getStyleClass().add("center-box");
             HBox.setHgrow(centerBox, Priority.ALWAYS);
 
@@ -144,7 +143,7 @@ public class ProfileContentPane extends PaneBase {
             VBox photoBox = new VBox(photoView, buttonsBox);
             photoBox.getStyleClass().add("photo-box");
 
-            VBox contentBox = new VBox(photoBox, userNameField, fullNameField, emailField, new Spacer(Orientation.VERTICAL), bottomBox);
+            VBox contentBox = new VBox(photoBox, userNameField, fullNameField, emailField, new Spacer(), bottomBox);
             contentBox.getStyleClass().add("content-box");
 
             getChildren().setAll(contentBox);

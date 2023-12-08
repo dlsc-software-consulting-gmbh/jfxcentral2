@@ -1,10 +1,13 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SearchField;
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Documentation;
+import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
@@ -163,10 +166,9 @@ public class TopMenuBar extends PaneBase {
             search(repository.getUtilities(), pattern, results);
         }
 
-        // TODO: uncomment once learning content can be shown
-//        search(repository.getLearnJavaFX(), pattern, results);
-//        search(repository.getLearnRaspberryPi(), pattern, results);
-//        search(repository.getLearnMobile(), pattern, results);
+        search(repository.getLearnJavaFX(), pattern, results);
+        search(repository.getLearnRaspberryPi(), pattern, results);
+        search(repository.getLearnMobile(), pattern, results);
 
         return results;
     }
@@ -225,8 +227,6 @@ public class TopMenuBar extends PaneBase {
 
             MenuButton learnBtn = createMenuButton("Learn");
             learnBtn.getStyleClass().add("learn-button");
-            learnBtn.setManaged(false);
-            learnBtn.setVisible(false);
             fillLearnMenu(learnBtn);
 
             Button utilitiesBtn = new Button("Utilities");
@@ -234,20 +234,6 @@ public class TopMenuBar extends PaneBase {
             utilitiesBtn.setMinWidth(Region.USE_PREF_SIZE);
             utilitiesBtn.getStyleClass().add("online-tools-button");
             LinkUtil.setLink(utilitiesBtn, "/utilities");
-
-            Button documentationBtn = new Button("Documentation");
-            documentationBtn.setFocusTraversable(false);
-            documentationBtn.setMinWidth(Region.USE_PREF_SIZE);
-            documentationBtn.getStyleClass().add("docs-button");
-            LinkUtil.setLink(documentationBtn, "/documentation");
-
-            Button downloadsBtn = new Button("Downloads");
-            downloadsBtn.setFocusTraversable(false);
-            downloadsBtn.setMinWidth(Region.USE_PREF_SIZE);
-            downloadsBtn.getStyleClass().add("downloads-button");
-            downloadsBtn.setVisible(!mobile);
-            downloadsBtn.setManaged(!mobile);
-            LinkUtil.setLink(downloadsBtn, "/downloads");
 
             Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));
             loginBtn.setFocusTraversable(false);
@@ -267,12 +253,6 @@ public class TopMenuBar extends PaneBase {
             contentBox.getChildren().setAll(logoWrapper, new Spacer(), createHomeButton(), resourcesBtn, communityBtn, showcasesBtn, learnBtn);
             if (!OSUtil.isNative()) {
                 contentBox.getChildren().add(utilitiesBtn);
-            }
-
-            contentBox.getChildren().add(documentationBtn);
-
-            if (!OSUtil.isAndroidOrIOS()) {
-                contentBox.getChildren().add(downloadsBtn);
             }
 
             contentBox.getChildren().addAll(separatorRegion, loginBtn, searchField);
@@ -389,6 +369,10 @@ public class TopMenuBar extends PaneBase {
         button.getItems().add(createMenuItem("Tips", "/tips", IkonUtil.getModelIkon(Tip.class)));
         button.getItems().add(createMenuItem("Tutorials", "/tutorials", IkonUtil.getModelIkon(Tutorial.class)));
         button.getItems().add(createMenuItem("Icons", "/icons", IkonUtil.getModelIkon(IkonliPack.class)));
+        button.getItems().add(createMenuItem("Documentation", "/documentation", IkonUtil.getModelIkon(Documentation.class)));
+        if (!mobile && !OSUtil.isAndroidOrIOS()) {
+            button.getItems().add(createMenuItem("Downloads", "/downloads", IkonUtil.getModelIkon(Download.class)));
+        }
     }
 
     private void fillCommunityMenu(MenuButton button) {

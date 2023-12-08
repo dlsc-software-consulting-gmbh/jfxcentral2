@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.components.skins;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.components.EditTextField;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;

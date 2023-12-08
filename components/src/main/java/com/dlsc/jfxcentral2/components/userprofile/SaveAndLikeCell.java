@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral2.components.userprofile;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.SaveAndLikeModel;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;

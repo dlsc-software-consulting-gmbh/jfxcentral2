@@ -1,11 +1,11 @@
 package com.dlsc.jfxcentral2.components.detailsbox;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Coordinates;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.model.NameProvider;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;

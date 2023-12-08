@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
@@ -53,9 +54,6 @@ public class IconPreviewPane extends PaneBase {
             showIconsService = createShowIkonsService();
             showIconsService.start();
         } else {
-            if (showIconsService.isRunning()) {
-                showIconsService.cancel();
-            }
             showIconsService.restart();
         }
     }

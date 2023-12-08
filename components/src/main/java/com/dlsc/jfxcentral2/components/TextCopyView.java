@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;

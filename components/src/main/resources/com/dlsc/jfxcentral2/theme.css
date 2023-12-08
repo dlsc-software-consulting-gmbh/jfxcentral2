@@ -496,11 +496,6 @@
     -fx-border-width: 0 0 0 5px;
 }
 
-.home-button .ikonli-font-icon {
-    -fx-icon-size: 32px;
-    -fx-icon-color: -white;
-}
-
 .resources-button .context-menu .menu-item:hover,
 .resources-button .context-menu .menu-item:focused {
     -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, -bright-blue 0.0%, -bright-blue 3.2%, #ffffff00 3.201%, #ffffff00 100.0%);
@@ -1974,8 +1969,21 @@
     -fx-pref-width: 130px;
 }
 
+.top-menu-bar .home-button .ikonli-font-icon {
+    -fx-icon-size: 22px;
+    -fx-icon-color: -white;
+}
+
 .top-menu-bar:sm .home-button {
     -fx-content-display: graphic-only;
+}
+
+.top-menu-bar:sm .home-button .ikonli-font-icon {
+    -fx-icon-size: 28px;
+}
+
+.top-menu-bar:light .home-button .ikonli-font-icon {
+    -fx-icon-color: -grey-100;
 }
 
 /** -------------------------------
@@ -3435,6 +3443,17 @@
  */
 .utility-detail-header:sm > .content-pane .content-box > .name {
     -fx-font-size: 30px;
+}
+
+/** ------------------------------------
+ * LearnDetailHeader
+ */
+.learn-detail-header .button-box .website-button {
+    -fx-font-size: 16px;
+}
+
+.learn-detail-header .button-box .website-button .ikonli-font-icon {
+    -fx-icon-size: 20px
 }
 
 /** ------------------------------------
@@ -5988,7 +6007,25 @@
  */
 .page-glass-pane {
     -fx-background-color: black;
-    -fx-opacity: 0.5;
+    -fx-opacity: 0.75;
+}
+
+.page-glass-pane > .close-button .ikonli-font-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: white;
+}
+
+/* ----------------------------------------------------------------------------
+ * VideoPane
+ */
+.video-pane {
+    -fx-background-color: red;
+    -fx-opacity: 0.9;
+}
+
+.video-pane > .close-button .ikonli-font-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: white;
 }
 
 /** ------------------------------------
@@ -6319,6 +6356,13 @@
     -fx-font-size: 13px;
 }
 
+/** ------------------------------------
+ * LibrariesDetailsBox
+ */
+.documentation-details-box:sm-md > .content-box .title-box > .title-label {
+    -fx-font-size: 20px;
+}
+
 /* ------------------------------------
  * BooksDetailsBox
  */
@@ -6429,6 +6473,29 @@
 }
 
 /** ------------------------------------
+ * LearnDetailsBox
+ */
+.learn-details-box > .content-box .model-icon {
+    -fx-icon-color: -grey-100;
+    -fx-icon-size: 36px;
+}
+
+.learn-details-box > .content-box .icon-wrapper {
+    -fx-pref-width: 36px;
+    -fx-pref-height: 36px;
+}
+
+.learn-details-box:sm > .content-box .model-icon {
+    -fx-icon-size: 30px;
+}
+
+.learn-details-box:sm > .content-box .icon-wrapper {
+    -fx-alignment: center-left;
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+}
+
+/** ------------------------------------
  * DetailsContentPane
  */
 .details-content-pane {
@@ -6500,7 +6567,11 @@
     -fx-spacing: 10px;
 }
 
-.lotw-details-content-pane > .content-box .pagination-box {
+.details-content-pane .menu-view.left-menu-view:vertical .item {
+    -fx-padding: 6px 50px 6px 16px;
+}
+
+.pagination-box {
     -fx-alignment: center;
     -fx-background-color: -white;
     -fx-border-color: -grey-10;
@@ -6508,28 +6579,38 @@
     -fx-pref-height: 32px;
 }
 
-.lotw-details-content-pane > .content-box .pagination-box .page-label {
+.pagination-box.top,
+.pagination-box.bottom {
+    -fx-padding: 0 0 5px 0;
+}
+
+.pagination-box .page-label {
     -fx-alignment: center;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-font-family: "Roboto Condensed";
 }
 
-.lotw-details-content-pane > .content-box .pagination-box > .button {
+.pagination-box.left > .button,
+.pagination-box.right > .button {
     -fx-content-display: graphic-only;
     -fx-background-color: transparent;
 }
 
-.lotw-details-content-pane > .content-box .pagination-box > .button .ikonli-font-icon {
+.pagination-box > .next-button {
+    -fx-content-display: right;
+}
+
+.pagination-box > .button .ikonli-font-icon {
     -fx-icon-color: -bright-blue;
     -fx-icon-size: 25px;
 }
 
-.lotw-details-content-pane > .content-box .pagination-box > .button:hover .ikonli-font-icon {
+.pagination-box > .button:hover .ikonli-font-icon {
     -fx-icon-color: derive(-bright-blue, 15%);
 }
 
-.lotw-details-content-pane > .content-box .pagination-box > .button:hover:pressed .ikonli-font-icon {
+.pagination-box > .button:hover:pressed .ikonli-font-icon {
     -fx-icon-color: derive(-bright-blue, -15%);
 }
 
@@ -6998,12 +7079,10 @@
  */
 .downloads-box {
     -fx-background-color: -white;
-    -fx-min-width: 858px;
     -fx-pref-width: 858px;
 }
 
 .downloads-box:sm {
-    -fx-min-width: 415px;
     -fx-pref-width: 415px;
 }
 

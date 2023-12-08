@@ -42,6 +42,7 @@ public class DetailsContentPane extends PaneBase {
         detailBoxesContainer.managedProperty().bind(detailBoxesContainer.visibleProperty());
         detailBoxesContainer.visibleProperty().bind(Bindings.createBooleanBinding(() -> !detailBoxesContainer.getChildren().isEmpty(), detailBoxesContainer.getChildren()));
 
+        menuView.getStyleClass().add("left-menu-view");
         menuView.sizeProperty().bind(sizeProperty());
         menuView.orientationProperty().bind(Bindings.createObjectBinding(() -> getSize().equals(Size.LARGE) ? Orientation.VERTICAL : Orientation.HORIZONTAL, sizeProperty()));
 

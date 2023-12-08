@@ -1,9 +1,9 @@
 package com.dlsc.jfxcentral2.app.stage;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.OSUtil;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -165,106 +165,135 @@ public class CustomStage extends BorderPane {
                 double y = evt.getScreenY();
 
                 Window window = getScene().getWindow();
+                double windowWidth = window.getWidth();
+                double windowHeight = window.getHeight();
 
                 double deltaX = evt.getScreenX() - startX;
                 double deltaY = evt.getScreenY() - startY;
 
                 switch (getOperation()) {
-
-                    case NONE:
-                        break;
-                    case RESIZE_N:
-                        if (window.getHeight() - deltaY > MIN_STAGE_HEIGHT) {
+                    case NONE -> {
+                    }
+                    case RESIZE_N -> {
+                        if (windowHeight - deltaY > MIN_STAGE_HEIGHT) {
                             window.setY(y);
-                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, window.getHeight() - deltaY));
+                            window.setWidth(windowWidth);
+                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, windowHeight - deltaY));
                             startX = x;
                             startY = y;
                         }
                         evt.consume();
-                        break;
-                    case RESIZE_S:
-                        if (window.getHeight() + deltaY > MIN_STAGE_HEIGHT) {
-                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, window.getHeight() + deltaY));
+                    }
+                    case RESIZE_S -> {
+                        if (windowHeight + deltaY > MIN_STAGE_HEIGHT) {
+                            window.setWidth(windowWidth);
+                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, windowHeight + deltaY));
                             startX = x;
                             startY = y;
                         }
                         evt.consume();
-                        break;
-                    case RESIZE_W:
-                        if (window.getWidth() - deltaX > MIN_STAGE_WIDTH) {
+                    }
+                    case RESIZE_W -> {
+                        if (windowWidth - deltaX > MIN_STAGE_WIDTH) {
                             window.setX(x);
-                            window.setWidth(Math.max(MIN_STAGE_WIDTH, window.getWidth() - deltaX));
+                            window.setHeight(windowHeight);
+                            window.setWidth(Math.max(MIN_STAGE_WIDTH, windowWidth - deltaX));
                             startX = x;
                             startY = y;
                         }
                         evt.consume();
-                        break;
-                    case RESIZE_E:
-                        if (window.getWidth() + deltaX > MIN_STAGE_WIDTH) {
-                            window.setWidth(Math.max(MIN_STAGE_WIDTH, window.getWidth() + deltaX));
+                    }
+                    case RESIZE_E -> {
+                        if (windowWidth + deltaX > MIN_STAGE_WIDTH) {
+                            window.setHeight(windowHeight);
+                            window.setWidth(Math.max(MIN_STAGE_WIDTH, windowWidth + deltaX));
                             startX = x;
                             startY = y;
                         }
                         evt.consume();
-                        break;
-                    case RESIZE_NW:
-                        if (window.getWidth() - deltaX > MIN_STAGE_WIDTH) {
+                    }
+                    case RESIZE_NW -> {
+                        double updatedWidth = windowWidth;
+
+                        if (windowWidth - deltaX > MIN_STAGE_WIDTH) {
                             window.setX(x);
-                            window.setWidth(Math.max(MIN_STAGE_WIDTH, window.getWidth() - deltaX));
+                            updatedWidth = Math.max(MIN_STAGE_WIDTH, windowWidth - deltaX);
+                            window.setHeight(windowHeight);
+                            window.setWidth(updatedWidth);
                             startX = x;
                         }
-                        if (window.getHeight() - deltaY > MIN_STAGE_HEIGHT) {
+
+                        if (windowHeight - deltaY > MIN_STAGE_HEIGHT) {
                             window.setY(y);
-                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, window.getHeight() - deltaY));
+                            window.setWidth(updatedWidth);
+                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, windowHeight - deltaY));
                             startY = y;
                         }
+
                         evt.consume();
-                        break;
-                    case RESIZE_NE:
-                        if (window.getWidth() + deltaX > MIN_STAGE_WIDTH) {
-                            window.setWidth(Math.max(MIN_STAGE_WIDTH, window.getWidth() + deltaX));
+                    }
+                    case RESIZE_NE -> {
+                        double updatedWidth = windowWidth;
+
+                        if (windowWidth + deltaX > MIN_STAGE_WIDTH) {
+                            updatedWidth = Math.max(MIN_STAGE_WIDTH, windowWidth + deltaX);
+                            window.setHeight(windowHeight);
+                            window.setWidth(updatedWidth);
                             startX = x;
                         }
-                        if (window.getHeight() - deltaY > MIN_STAGE_HEIGHT) {
+
+                        if (windowHeight - deltaY > MIN_STAGE_HEIGHT) {
                             window.setY(y);
-                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, window.getHeight() - deltaY));
+                            window.setWidth(updatedWidth);
+                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, windowHeight - deltaY));
                             startY = y;
                         }
 
                         evt.consume();
-                        break;
-                    case RESIZE_SW:
-                        if (window.getWidth() - deltaX > MIN_STAGE_WIDTH) {
+                    }
+                    case RESIZE_SW -> {
+                        double updatedWidth = windowWidth;
+
+                        if (windowWidth - deltaX > MIN_STAGE_WIDTH) {
                             window.setX(x);
-                            window.setWidth(Math.max(MIN_STAGE_WIDTH, window.getWidth() - deltaX));
+                            updatedWidth = Math.max(MIN_STAGE_WIDTH, windowWidth - deltaX);
+                            window.setHeight(windowHeight);
+                            window.setWidth(updatedWidth);
                             startX = x;
                         }
-                        if (window.getHeight() + deltaY > MIN_STAGE_HEIGHT) {
-                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, window.getHeight() + deltaY));
+
+                        if (windowHeight + deltaY > MIN_STAGE_HEIGHT) {
+                            window.setWidth(updatedWidth);
+                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, windowHeight + deltaY));
                             startY = y;
                         }
 
                         evt.consume();
-                        break;
-                    case RESIZE_SE:
+                    }
+                    case RESIZE_SE -> {
+                        double updatedWidth = windowWidth;
 
-                        if (window.getWidth() + deltaX > MIN_STAGE_WIDTH) {
-                            window.setWidth(Math.max(MIN_STAGE_WIDTH, window.getWidth() + deltaX));
+                        if (windowWidth + deltaX > MIN_STAGE_WIDTH) {
+                            updatedWidth = Math.max(MIN_STAGE_WIDTH, windowWidth + deltaX);
+                            window.setHeight(windowHeight);
+                            window.setWidth(updatedWidth);
                             startX = x;
                         }
-                        if (window.getHeight() + deltaY > MIN_STAGE_HEIGHT) {
-                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, window.getHeight() + deltaY));
+
+                        if (windowHeight + deltaY > MIN_STAGE_HEIGHT) {
+                            window.setWidth(updatedWidth);
+                            window.setHeight(Math.max(MIN_STAGE_HEIGHT, windowHeight + deltaY));
                             startY = y;
                         }
 
                         evt.consume();
-                        break;
-                    case MOVE:
+                    }
+                    case MOVE -> {
                         getScene().getWindow().setX(getScene().getWindow().getX() + deltaX);
                         getScene().getWindow().setY(getScene().getWindow().getY() + deltaY);
                         startX = x;
                         startY = y;
-                        break;
+                    }
                 }
             });
         } else {

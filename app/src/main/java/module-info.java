@@ -85,6 +85,7 @@ open module com.dlsc.jfxcentral2.app {
     requires org.kordamp.ikonli.whhg;
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
+    requires com.gluonhq.attach.util;
 
     exports com.dlsc.jfxcentral2.app;
     exports com.dlsc.jfxcentral2.app.pages;

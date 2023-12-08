@@ -57,7 +57,8 @@ public class StartPage extends PageBase {
         VideoGalleryView videoGallery = new VideoGalleryView();
         videoGallery.sizeProperty().bind(sizeProperty());
         videoGallery.getVideos().setAll(randomSubList(DataRepository2.getInstance().getVideos(), 12));
-
+        videoGallery.blockingProperty().addListener(it -> setBlocking(videoGallery.isBlocking()));
+        videoGallery.onCloseGlassPaneProperty().addListener(it -> setOnCloseGlassPane(videoGallery.getOnCloseGlassPane()));
         return wrapContent(homePageTopView, weekLinksLiteView, websiteChangesView, videoGallery);
     }
 }

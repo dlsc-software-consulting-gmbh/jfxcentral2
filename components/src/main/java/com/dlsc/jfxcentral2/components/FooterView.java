@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import javafx.beans.property.ObjectProperty;

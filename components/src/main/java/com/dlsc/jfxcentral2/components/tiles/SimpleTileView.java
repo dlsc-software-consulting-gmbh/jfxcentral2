@@ -1,9 +1,14 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.Learn;
+import com.dlsc.jfxcentral.data.model.LearnJavaFX;
+import com.dlsc.jfxcentral.data.model.LearnMobile;
+import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
@@ -12,7 +17,6 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
-import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
@@ -178,8 +182,13 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
                 new LinkedObjectBadge("Downloads", IkonUtil.getModelIkon(Download.class), dataRepository.getLinkedObjects(data, Download.class).size()),
                 new LinkedObjectBadge("Tools", IkonUtil.getModelIkon(Tool.class), dataRepository.getLinkedObjects(data, Tool.class).size()),
                 new LinkedObjectBadge("Videos", IkonUtil.getModelIkon(Video.class), dataRepository.getLinkedObjects(data, Video.class).size()),
-                new LinkedObjectBadge("Tips", IkonUtil.getModelIkon(Tip.class), dataRepository.getLinkedObjects(data, Tip.class).size())
-        );
+                new LinkedObjectBadge("Tips", IkonUtil.getModelIkon(Tip.class), dataRepository.getLinkedObjects(data, Tip.class).size()),
+                new LinkedObjectBadge("Learn", IkonUtil.getModelIkon(Learn.class),
+                        dataRepository.getLinkedObjects(data, LearnJavaFX.class).size()
+                                + dataRepository.getLinkedObjects(data, LearnMobile.class).size()
+                                + dataRepository.getLinkedObjects(data, LearnRaspberryPi.class).size()
+
+                ));
 
         AtomicInteger index = new AtomicInteger(0);
         int maxSize = isLarge() ? 3 : 2;

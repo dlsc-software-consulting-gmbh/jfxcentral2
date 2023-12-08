@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.model.MarkdownTab;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -9,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -121,7 +121,7 @@ public class CustomMarkdownTabPane extends PaneBase {
 
                 Label titleLabel = new Label(tab.getTitle());
                 titleLabel.getStyleClass().add("title");
-                HBox tabGraphicBox = new HBox(titleLabel, new Spacer(Orientation.HORIZONTAL), tab.getGraphic());
+                HBox tabGraphicBox = new HBox(titleLabel, new Spacer(), tab.getGraphic());
                 tabGraphicBox.getStyleClass().add("tab-graphic-box");
                 toggleButton.setGraphic(tabGraphicBox);
                 toggleButton.setToggleGroup(group);

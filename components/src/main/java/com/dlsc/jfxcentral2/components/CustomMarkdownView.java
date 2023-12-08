@@ -10,15 +10,26 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import one.jpro.platform.routing.LinkUtil;
+import one.jpro.platform.mdfx.MarkdownView;
+import one.jpro.platform.mdfx.extensions.ImageExtension;
+import one.jpro.platform.mdfx.extensions.YoutubeExtension;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
 public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
 
+    static List<ImageExtension> extensions = MarkdownView.defaultExtensions();
+
+    static {
+        extensions.add(YoutubeExtension.create());
+    }
+
     public CustomMarkdownView() {
+        super("", extensions);
+
         getStyleClass().add("custom-markdown-view");
         getStylesheets().add(Objects.requireNonNull(CustomMarkdownView.class.getResource("markdown.css")).toExternalForm());
     }
@@ -42,7 +53,7 @@ public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
         this.onImageClick.set(onImageClick);
     }
 
-    private StringProperty baseURL = new SimpleStringProperty(this, "baseURL");
+    private final StringProperty baseURL = new SimpleStringProperty(this, "baseURL");
 
     public String getBaseURL() {
         return baseURL.get();
@@ -65,18 +76,22 @@ public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
 
     @Override
     public Node generateImage(String url) {
+        if (url.startsWith("youtube")) {
+            return super.generateImage(url);
+        }
+
         if (url.startsWith("http")) {
             Node node = super.generateImage(url);
-            configureImage(node);
+            configureNodeIfImageView(node);
             return node;
         }
 
         Node node = super.generateImage(getBaseURL() + "/" + url);
-        configureImage(node);
+        configureNodeIfImageView(node);
         return node;
     }
 
-    private void configureImage(Node node) {
+    private void configureNodeIfImageView(Node node) {
         if (node instanceof ImageView imageView) {
             imageView.fitWidthProperty().bind(widthProperty());
             imageView.setPreserveRatio(true);
