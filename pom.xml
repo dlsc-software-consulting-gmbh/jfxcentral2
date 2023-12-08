@@ -29,8 +29,8 @@
         <javafx.version>22-ea+11</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2023.3.2-M1</jpro.version>
-        <jpro.platform.version>0.2.6</jpro.platform.version>
+        <jpro.version>2023.3.2</jpro.version>
+        <jpro.platform.version>0.2.7</jpro.platform.version>
         <batik.version>1.16</batik.version>
         <attach.version>4.0.19</attach.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -195,7 +195,7 @@
             <dependency>
                 <groupId>SANDEC</groupId>
                 <artifactId>simplefx_2.12</artifactId>
-                <version>3.2.25</version>
+                <version>3.2.27</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.openjfx</groupId>
@@ -237,13 +237,13 @@
             <dependency>
                 <groupId>org.scala-lang</groupId>
                 <artifactId>scala-library</artifactId>
-                <version>2.12.12</version>
+                <version>2.12.18</version>
             </dependency>
 
             <dependency>
                 <groupId>org.scala-lang</groupId>
                 <artifactId>scala-reflect</artifactId>
-                <version>2.12.12</version>
+                <version>2.12.18</version>
             </dependency>
 
             <dependency>
