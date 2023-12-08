@@ -53,7 +53,7 @@ public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
         this.onImageClick.set(onImageClick);
     }
 
-    private StringProperty baseURL = new SimpleStringProperty(this, "baseURL");
+    private final StringProperty baseURL = new SimpleStringProperty(this, "baseURL");
 
     public String getBaseURL() {
         return baseURL.get();

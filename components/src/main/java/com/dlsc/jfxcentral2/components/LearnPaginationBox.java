@@ -38,7 +38,7 @@ public class LearnPaginationBox extends HBox {
         Button previousButton = new Button();
         previousButton.getStyleClass().addAll("prev-button", "fill-button");
         previousButton.setGraphic(new FontIcon(BootstrapIcons.ARROW_LEFT_CIRCLE_FILL));
-        previousButton.textProperty().bind(sizeProperty.map(size -> size==Size.SMALL ? "  Prev  " : "Previous"));
+        previousButton.textProperty().bind(sizeProperty.map(size -> size==Size.SMALL ? "Prev" : "Previous"));
         previousButton.setMouseTransparent(false);
         if (learnList.indexOf(learn) == 0) {
             previousButton.setDisable(true);
@@ -52,7 +52,7 @@ public class LearnPaginationBox extends HBox {
         pageLabel.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(pageLabel, Priority.ALWAYS);
 
-        Button nextButton = new Button("  Next  ");
+        Button nextButton = new Button("Next");
         nextButton.getStyleClass().addAll("next-button", "fill-button");
         nextButton.setMouseTransparent(false);
         nextButton.setGraphic(new FontIcon(BootstrapIcons.ARROW_RIGHT_CIRCLE_FILL));
