@@ -6,6 +6,7 @@ import com.jpro.webapi.WebAPI;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
+import javafx.concurrent.Worker;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -14,6 +15,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -44,11 +46,12 @@ public class VideoViewFactory {
                 bindWidthAndHeight(webView, parent);
             }
         });
-        webView.getEngine().load("https://www.youtube.com/embed/" + video.getId());
-
+        WebEngine webEngine = webView.getEngine();
+        webEngine.load("https://www.youtube.com/embed/" + video.getId());
+        removeSpinner(webEngine);
         webView.sceneProperty().addListener(it -> {
             if (webView.getScene() == null) {
-                webView.getEngine().loadContent("empty");
+                webEngine.loadContent("empty");
             }
         });
 
@@ -71,7 +74,7 @@ public class VideoViewFactory {
 
         Button closeButton = new Button();
         closeButton.setFocusTraversable(false);
-        closeButton.getStyleClass().addAll("close-button","blue-button");
+        closeButton.getStyleClass().addAll("close-button", "blue-button");
         closeButton.setGraphic(new FontIcon(IkonUtil.close));
         closeButton.setOnAction(event -> {
             Pane parent = (Pane) webViewWrapper.getParent();
@@ -82,9 +85,10 @@ public class VideoViewFactory {
         });
 
         StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
-        StackPane.setMargin(closeButton,new Insets(5,5,0,0));
+        StackPane.setMargin(closeButton, new Insets(5, 5, 0, 0));
 
         webViewWrapper.getChildren().addAll(webView, closeButton);
+        webViewWrapper.setFocusTraversable(false);
         return webViewWrapper;
     }
 
@@ -113,4 +117,23 @@ public class VideoViewFactory {
         htmlView.maxWidthProperty().bind(widthBinding);
         htmlView.maxHeightProperty().bind(widthBinding.divide(16).multiply(9));
     }
+
+    /**
+     * Removes the spinner from the WebView.
+     * This workaround, suggested by @José Pereda, addresses a bug in JavaFX WebView version 21.0.1(WebKit 616.1) and later
+     */
+    private static void removeSpinner(WebEngine webEngine) {
+        webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
+            if (newState == Worker.State.SUCCEEDED) {
+                webEngine.executeScript("""
+                        const spinner = document.querySelector('.ytp-spinner');
+                        if (spinner) {
+                            spinner.remove();
+                        }
+                        """
+                );
+            }
+        });
+    }
+
 }
