@@ -9,7 +9,6 @@ import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.components.tiles.VideoTileView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
@@ -42,6 +41,11 @@ public class VideosCategoryPage extends CategoryPageBase<Video> {
     @Override
     protected Ikon getCategoryIkon() {
         return IkonUtil.getModelIkon(Video.class);
+    }
+
+    @Override
+    protected String getCategoryDescription() {
+        return "Browse JavaFX videos featuring conference talks, application demos, and tutorials, offering insights for all levels of JavaFX expertise.";
     }
 
     @Override

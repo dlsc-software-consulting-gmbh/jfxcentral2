@@ -44,6 +44,11 @@ public class DownloadsCategoryPage extends CategoryPageBase<Download> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Find downloadable resources for JavaFX development, including game demo apps, development tools, and more.";
+    }
+
+    @Override
     protected Callback<Download, TileViewBase<Download>> getTileViewProvider() {
         return download -> {
             DownloadTileView tileView = new DownloadTileView(download);

@@ -42,6 +42,11 @@ public class BlogsCategoryPage extends CategoryPageBase<Blog> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Visit our blog section for articles from JavaFX experts, featuring practical tips, cutting-edge insights, and more from the world of JavaFX.";
+    }
+
+    @Override
     protected Callback<Blog, TileViewBase<Blog>> getTileViewProvider() {
         return BlogTileView::new;
     }

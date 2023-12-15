@@ -18,6 +18,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -43,26 +44,38 @@ public class CategoryHeader extends PaneBase {
         FontIcon fontIcon = new FontIcon();
         fontIcon.iconCodeProperty().bind(ikonProperty());
 
-        Label label = new Label();
-        label.textProperty().bind(titleProperty());
-        label.setGraphic(fontIcon);
-        label.getStyleClass().add("header-title");
-        label.managedProperty().bind(label.visibleProperty());
-        label.visibleProperty().bind(titleProperty().isNotEmpty().or(ikonProperty().isNotNull()));
+        Label titleLabel = new Label();
+        titleLabel.textProperty().bind(titleProperty());
+        titleLabel.setGraphic(fontIcon);
+        titleLabel.getStyleClass().add("header-title");
+        titleLabel.managedProperty().bind(titleLabel.visibleProperty());
+        titleLabel.visibleProperty().bind(titleProperty().isNotEmpty().or(ikonProperty().isNotNull()));
+
+        Label descriptionLabel = new Label();
+        descriptionLabel.getStyleClass().add("header-description");
+        descriptionLabel.setWrapText(true);
+        descriptionLabel.textProperty().bind(descriptionProperty());
+        descriptionLabel.managedProperty().bind(descriptionLabel.visibleProperty());
+        descriptionLabel.visibleProperty().bind(descriptionProperty().isNotEmpty());
+
+        VBox defaultContent = new VBox(titleLabel, descriptionLabel);
+        defaultContent.getStyleClass().add("default-content");
+        defaultContent.managedProperty().bind(defaultContent.visibleProperty());
+        defaultContent.visibleProperty().bind(titleLabel.visibleProperty().or(descriptionLabel.visibleProperty()));
 
         Region overlay = new Region();
         overlay.getStyleClass().add("overlay");
 
-        getChildren().setAll(overlay, label);
+        getChildren().setAll(overlay, defaultContent);
 
         activateModePseudoClass();
         modeProperty().addListener(it -> activateModePseudoClass());
         /*
-         * Only one label and content can be displayed. If the content is not empty, the content will be displayed,
-         * otherwise the label will be displayed
+         * Only one defaultContent and content can be displayed. If the content is not empty, the content will be displayed,
+         * otherwise the defaultContent will be displayed
          */
-        contentProperty().addListener((ob, ov, nv) -> getChildren().setAll(overlay, Objects.requireNonNullElse(getContent(), label)));
-        sizeProperty().addListener((ob, ov, nv) -> getChildren().setAll(overlay, Objects.requireNonNullElse(getContent(), label)));
+        contentProperty().addListener((ob, ov, nv) -> getChildren().setAll(overlay, Objects.requireNonNullElse(getContent(), defaultContent)));
+        sizeProperty().addListener((ob, ov, nv) -> getChildren().setAll(overlay, Objects.requireNonNullElse(getContent(), defaultContent)));
 
 
         if (!WebAPI.isBrowser()) {
@@ -186,5 +199,19 @@ public class CategoryHeader extends PaneBase {
 
     public void setMode(Mode mode) {
         this.mode.set(mode);
+    }
+
+    private final StringProperty description = new SimpleStringProperty(this, "description");
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
     }
 }

@@ -42,6 +42,11 @@ public class TipCategoryPage extends CategoryPageBase<Tip> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Discover practical JavaFX tips in this section, featuring articles that share real-world techniques and tricks for effective JavaFX development.";
+    }
+
+    @Override
     protected Callback<Tip, TileViewBase<Tip>> getTileViewProvider() {
         return TipsAndTricksTileView::new;
     }

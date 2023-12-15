@@ -31,6 +31,7 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(getCategoryTitle());
         header.setIkon(getCategoryIkon());
+        header.setDescription(getCategoryDescription());
 
         // filter
         SearchFilterView<T> filterView = createSearchFilterView();
@@ -67,6 +68,10 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         contentPane.getNodes().addAll(filterView, stripView);
 
         return wrapContent(header, contentPane);
+    }
+
+    protected  String getCategoryDescription(){
+        return null;
     }
 
     protected int getNumberOfGridViewColumns() {

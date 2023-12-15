@@ -42,6 +42,11 @@ public class CompaniesCategoryPage extends CategoryPageBase<Company> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Explore companies in JavaFX, especially those with significant influence and contributions to the JavaFX community, shaping and advancing the ecosystem.";
+    }
+
+    @Override
     protected Callback<Company, TileViewBase<Company>> getTileViewProvider() {
         return CompanyTileView::new;
     }

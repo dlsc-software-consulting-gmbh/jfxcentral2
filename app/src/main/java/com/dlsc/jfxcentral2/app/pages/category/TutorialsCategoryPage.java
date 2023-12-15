@@ -32,6 +32,11 @@ public class TutorialsCategoryPage extends CategoryPageBase<Tutorial> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Browse tutorials ranging from JavaFX basics to advanced application and game development.";
+    }
+
+    @Override
     protected String getCategoryTitle() {
         return "Tutorials";
     }
