@@ -42,6 +42,11 @@ public class ShowcasesCategoryPage extends CategoryPageBase<RealWorldApp> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Explore real-world JavaFX applications, notable for their professional functionality and aesthetically pleasing UI, demonstrating the practical versatility of JavaFX.";
+    }
+
+    @Override
     protected Callback<RealWorldApp, TileViewBase<RealWorldApp>> getTileViewProvider() {
         return AppTileView::new;
     }

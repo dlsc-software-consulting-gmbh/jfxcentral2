@@ -30,6 +30,11 @@ public class LearnRaspberryPiCategoryPage extends LearnCategoryPage {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Explore tutorials focused on using JavaFX in Raspberry Pi development, providing guidance for creating JavaFX applications on this versatile platform.";
+    }
+
+    @Override
     protected ObservableList<Learn> getCategoryItems() {
         return FXCollections.observableArrayList(DataRepository2.getInstance().getLearnRaspberryPi());
     }

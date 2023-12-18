@@ -3024,8 +3024,47 @@
     -fx-max-height: 240px;
 }
 
+.category-header .default-content {
+    -fx-alignment: center;
+}
+
+.category-header:lg .default-content {
+    -fx-max-width: 1300px;
+    -fx-spacing: 30px;
+    -fx-padding: 0 30px;
+}
+
+.category-header:md .default-content {
+    -fx-spacing: 20px;
+    -fx-padding: 0 50px;
+}
+
+.category-header:sm .default-content {
+    -fx-spacing: 10px;
+    -fx-padding: 0 30px;
+}
+
 .category-header .header-title {
     -fx-text-fill: -white;
+}
+
+.category-header > .default-content > .header-description {
+    -fx-text-fill: -grey-20;
+}
+
+.category-header:lg > .default-content > .header-description {
+    -fx-font-size: 20px;
+    -fx-max-height: 82px;
+}
+
+.category-header:md > .default-content > .header-description {
+    -fx-font-size: 18px;
+    -fx-max-height: 80px;
+}
+
+.category-header:sm > .default-content > .header-description {
+    -fx-font-size: 14px;
+    -fx-max-height: 55px;
 }
 
 .category-header .header-title > .ikonli-font-icon {
@@ -6592,7 +6631,8 @@
 }
 
 .pagination-box.left > .button,
-.pagination-box.right > .button {
+.pagination-box.right > .button,
+.lotw-details-content-pane .pagination-box > .button {
     -fx-content-display: graphic-only;
     -fx-background-color: transparent;
 }

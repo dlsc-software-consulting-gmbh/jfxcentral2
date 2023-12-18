@@ -42,6 +42,11 @@ public class DocumentationCategoryPage extends CategoryPageBase<Documentation> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Access comprehensive resources including JavaFX API documentation, plugin guides, CSS references, and default style sheets.";
+    }
+
+    @Override
     protected int getNumberOfGridViewRows() {
         return 5;
     }

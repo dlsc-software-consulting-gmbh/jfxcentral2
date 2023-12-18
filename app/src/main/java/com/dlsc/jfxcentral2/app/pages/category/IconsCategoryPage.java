@@ -6,7 +6,7 @@ import com.dlsc.jfxcentral2.components.FeaturesContainer;
 import com.dlsc.jfxcentral2.components.PacksIconsView;
 import com.dlsc.jfxcentral2.components.StripView;
 import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.headers.PacksIconsHeader;
+import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -60,7 +60,10 @@ public class IconsCategoryPage extends CategoryPageBase<IkonliPack> {
     @Override
     public Node content() {
         // header
-        PacksIconsHeader header = new PacksIconsHeader();
+        CategoryHeader header = new CategoryHeader();
+        header.setTitle("Icons");
+        header.setIkon(IkonUtil.icons);
+        header.setDescription("Explore thousands of icons from the Ikonli project, searchable by icon name or library.");
         header.sizeProperty().bind(sizeProperty());
 
         PacksIconsView packsIconsView = new PacksIconsView();
