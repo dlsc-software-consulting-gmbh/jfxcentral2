@@ -42,6 +42,15 @@ public class LibrariesCategoryPage extends CategoryPageBase<Library> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return """
+                Explore our curated selection of JavaFX third-party libraries. This page presents \
+                a diverse range of tools including components, game engines, styles, 3D graphics, \
+                and frameworks, ideal for expanding the capabilities of your JavaFX projects.
+                """;
+    }
+
+    @Override
     protected int getNumberOfGridViewRows() {
         return 5;
     }

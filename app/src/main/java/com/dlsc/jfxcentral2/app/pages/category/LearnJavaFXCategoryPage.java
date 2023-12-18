@@ -29,6 +29,11 @@ public class LearnJavaFXCategoryPage extends LearnCategoryPage {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Explore JavaFX tutorials, ranging from basic usage to practical techniques, continuously updated to enrich your learning journey.";
+    }
+
+    @Override
     protected ObservableList<Learn> getCategoryItems() {
         return FXCollections.observableArrayList(DataRepository2.getInstance().getLearnJavaFX());
     }

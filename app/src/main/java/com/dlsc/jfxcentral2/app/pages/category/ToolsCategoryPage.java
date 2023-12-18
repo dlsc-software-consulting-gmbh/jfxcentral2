@@ -42,6 +42,11 @@ public class ToolsCategoryPage extends CategoryPageBase<Tool> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Delve into our selection of JavaFX tools, including plugins, layout and CSS tools, testing, packaging, and more.";
+    }
+
+    @Override
     protected int getNumberOfGridViewRows() {
         return 5;
     }

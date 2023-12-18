@@ -30,6 +30,11 @@ public class LearnMobileCategoryPage extends LearnCategoryPage {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Discover tutorials and guides on developing with JavaFX in the mobile domain, offering insights and techniques for mobile application development.";
+    }
+
+    @Override
     protected ObservableList<Learn> getCategoryItems() {
         return FXCollections.observableArrayList(DataRepository2.getInstance().getLearnMobile());
     }

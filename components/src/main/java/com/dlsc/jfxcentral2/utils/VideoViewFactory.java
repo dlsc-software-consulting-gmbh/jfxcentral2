@@ -48,7 +48,6 @@ public class VideoViewFactory {
         });
         WebEngine webEngine = webView.getEngine();
         webEngine.load("https://www.youtube.com/embed/" + video.getId());
-        removeSpinner(webEngine);
         webView.sceneProperty().addListener(it -> {
             if (webView.getScene() == null) {
                 webEngine.loadContent("empty");
@@ -117,23 +116,4 @@ public class VideoViewFactory {
         htmlView.maxWidthProperty().bind(widthBinding);
         htmlView.maxHeightProperty().bind(widthBinding.divide(16).multiply(9));
     }
-
-    /**
-     * Removes the spinner from the WebView.
-     * This workaround, suggested by @José Pereda, addresses a bug in JavaFX WebView version 21.0.1(WebKit 616.1) and later
-     */
-    private static void removeSpinner(WebEngine webEngine) {
-        webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
-            if (newState == Worker.State.SUCCEEDED) {
-                webEngine.executeScript("""
-                        const spinner = document.querySelector('.ytp-spinner');
-                        if (spinner) {
-                            spinner.remove();
-                        }
-                        """
-                );
-            }
-        });
-    }
-
 }

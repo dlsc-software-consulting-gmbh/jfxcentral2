@@ -42,6 +42,14 @@ public class UtilitiesCategoryPage extends CategoryPageBase<Utility> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return """
+                Access a suite of ready-to-use JavaFX development tools directly on this page. Explore \
+                functionalities like SVG processing, gradient adjustment, effect generation, and style customization and more.
+                """;
+    }
+
+    @Override
     protected int getNumberOfGridViewRows() {
         return 5;
     }

@@ -38,6 +38,11 @@ public class PeopleCategoryPage extends CategoryPageBase<Person> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return "Meet influential JavaFX experts, columnists, and notable figures who have significantly contributed to the field, including Java champions.";
+    }
+
+    @Override
     protected CategoryHeader createCategoryHeader() {
         CategoryHeader header = super.createCategoryHeader();
         header.setBackgroundImage(BANNER_IMAGE);

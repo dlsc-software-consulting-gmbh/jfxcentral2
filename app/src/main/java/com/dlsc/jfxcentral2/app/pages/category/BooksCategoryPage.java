@@ -42,6 +42,14 @@ public class BooksCategoryPage extends CategoryPageBase<Book> {
     }
 
     @Override
+    protected String getCategoryDescription() {
+        return """
+                Explore our JavaFX book selection, offering everything from beginner guides to advanced tutorials, \
+                including game development and specific use-cases like JavaFX for Raspberry Pi.
+                """;
+    }
+
+    @Override
     protected Callback<Book, TileViewBase<Book>> getTileViewProvider() {
         return BookTileView::new;
     }
