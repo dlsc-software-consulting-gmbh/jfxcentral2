@@ -3050,6 +3050,7 @@
 
 .category-header > .default-content > .header-description {
     -fx-text-fill: -grey-20;
+    -fx-text-alignment: center;
 }
 
 .category-header:lg > .default-content > .header-description {
