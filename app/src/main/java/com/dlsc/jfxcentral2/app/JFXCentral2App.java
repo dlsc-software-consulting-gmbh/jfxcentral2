@@ -82,11 +82,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import one.jpro.platform.routing.Request;
-import one.jpro.platform.routing.Response;
-import one.jpro.platform.routing.Route;
-import one.jpro.platform.routing.RouteNode;
-import one.jpro.platform.routing.RouteUtils;
+import one.jpro.platform.routing.*;
 import one.jpro.platform.routing.dev.DevFilter;
 import one.jpro.platform.routing.dev.StatisticsFilter;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
@@ -232,14 +228,14 @@ public class JFXCentral2App extends Application {
 
     public Route createRoute() {
         Route route = Route.empty()
-                .and(RouteUtils.get("/", r -> {
+                .and(Route.get("/", r -> {
                     if (RepositoryManager.isRepositoryUpdated()) {
-                        return new StartPage(size);
+                        return Response.view(new StartPage(size));
                     }
-                    return new RefreshPage(size);
+                    return Response.view(new RefreshPage(size));
                 }))
-                .and(RouteUtils.redirect("/home", "/"))
-                .and(RouteUtils.redirect("/index", "/"))
+                .and(Route.redirect("/home", "/"))
+                .and(Route.redirect("/index", "/"))
                 .and(createCategoryOrDetailRoute("/blogs", Blog.class, () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/books", Book.class, () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/companies", Company.class, () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
@@ -257,30 +253,30 @@ public class JFXCentral2App extends Application {
                 .and(createCategoryOrDetailRoute("/learn-javafx", LearnJavaFX.class, () -> new LearnJavaFXCategoryPage(size), id -> new LearnDetailsPage(size, LearnJavaFX.class, id)))
                 .and(createCategoryOrDetailRoute("/learn-mobile", LearnMobile.class, () -> new LearnMobileCategoryPage(size), id -> new LearnDetailsPage(size, LearnMobile.class, id)))
                 .and(createCategoryOrDetailRoute("/learn-raspberrypi", LearnRaspberryPi.class, () -> new LearnRaspberryPiCategoryPage(size), id -> new LearnDetailsPage(size, LearnRaspberryPi.class, id)))
-                .and(RouteUtils.get("/credits", r -> new CreditsPage(size)))
-                .and(RouteUtils.get("/legal", r -> new LegalPage(size, LegalPage.Section.TERMS)))
-                .and(RouteUtils.get("/legal/terms", r -> new LegalPage(size, LegalPage.Section.TERMS)))
-                .and(RouteUtils.get("/legal/cookies", r -> new LegalPage(size, LegalPage.Section.COOKIES)))
-                .and(RouteUtils.get("/legal/privacy", r -> new LegalPage(size, LegalPage.Section.PRIVACY)))
-                .and(RouteUtils.get("/links", r -> new LinksOfTheWeekPage(size)))
-                .and(RouteUtils.get("/links/rss", r -> new LinksOfTheWeekPage(size))) // TODO: how to return raw data?
-                .and(RouteUtils.get("/team", r -> new TeamPage(size)))
-                .and(RouteUtils.get("/openjfx", r -> new OpenJFXPage(size)))
-                .and(RouteUtils.get("/documentation", r -> new DocumentationCategoryPage(size)))
-                .and(RouteUtils.get("/refresh", r -> {
+                .and(Route.get("/credits", r -> Response.view(new CreditsPage(size))))
+                .and(Route.get("/legal", r -> Response.view(new LegalPage(size, LegalPage.Section.TERMS))))
+                .and(Route.get("/legal/terms", r -> Response.view(new LegalPage(size, LegalPage.Section.TERMS))))
+                .and(Route.get("/legal/cookies", r -> Response.view(new LegalPage(size, LegalPage.Section.COOKIES))))
+                .and(Route.get("/legal/privacy", r -> Response.view(new LegalPage(size, LegalPage.Section.PRIVACY))))
+                .and(Route.get("/links", r -> Response.view(new LinksOfTheWeekPage(size))))
+                .and(Route.get("/links/rss", r -> Response.view(new LinksOfTheWeekPage(size)))) // TODO: how to return raw data?
+                .and(Route.get("/team", r -> Response.view(new TeamPage(size))))
+                .and(Route.get("/openjfx", r -> Response.view(new OpenJFXPage(size))))
+                .and(Route.get("/documentation", r -> Response.view(new DocumentationCategoryPage(size))))
+                .and(Route.get("/refresh", r -> {
                     RepositoryManager.prepareForRefresh();
-                    return new RefreshPage(size);
+                    return Response.view(new RefreshPage(size));
                 }));
 
         // the following routes are only needed when we support user login
 
         if (SocialUtil.isSocialFeaturesEnabled()) {
-            route = route.and(RouteUtils.get("/login", r -> new LoginPage(size)))
-                    .and(RouteUtils.get("/top", r -> new TopContentPage(size)))
-                    .and(RouteUtils.get("/profile", r -> new UserProfilePage(size)));
+            route = route.and(Route.get("/login", r -> Response.view(new LoginPage(size))))
+                    .and(Route.get("/top", r -> Response.view(new TopContentPage(size))))
+                    .and(Route.get("/profile", r -> Response.view(new UserProfilePage(size))));
         }
 
-        route = route.and(r -> FXFuture.unit(new ErrorPage(size, r)));
+        route = route.and(r -> Response.view(new ErrorPage(size, r)));
 
         if (Boolean.getBoolean("develop")) {
             route = route.filter(DevFilter.create());
@@ -290,28 +286,28 @@ public class JFXCentral2App extends Application {
         return route;
     }
 
-    private Route createCategoryOrDetailRoute(String path, Class<? extends ModelObject> clazz, Supplier<Response> masterResponse, Callback<String, Response> detailedResponse) {
+    private Route createCategoryOrDetailRoute(String path, Class<? extends ModelObject> clazz, Supplier<View> masterResponse, Callback<String, View> detailedResponse) {
         return r -> {
-            if (r.path().startsWith(path)) {
-                return FXFuture.apply(() -> createResponse(r, clazz, masterResponse, detailedResponse));
+            if (r.getPath().startsWith(path)) {
+                createResponse(r, clazz, masterResponse, detailedResponse);
             }
 
             return null;
         };
     }
 
-    private Response createResponse(Request request, Class<? extends ModelObject> clazz, Supplier<Response> categoryResponse, Callback<String, Response> detailedResponse) {
-        int index = request.path().lastIndexOf("/");
+    private Response createResponse(Request request, Class<? extends ModelObject> clazz, Supplier<View> categoryResponse, Callback<String, View> detailedResponse) {
+        int index = request.getPath().lastIndexOf("/");
         if (index > 0) {
-            String id = request.path().substring(index + 1).trim();
+            String id = request.getPath().substring(index + 1).trim();
             if (!DataRepository2.getInstance().isValidId(clazz, id)) {
-                return new ErrorPage(size, request);
+                return Response.view(new ErrorPage(size, request));
             }
 
-            return detailedResponse.call(id);
+            return Response.view(detailedResponse.call(id));
         }
 
-        return categoryResponse.get();
+        return Response.view(categoryResponse.get());
     }
 
     private void updateSizeProperty(Scene scene) {
