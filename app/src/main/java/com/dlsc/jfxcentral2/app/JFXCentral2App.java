@@ -19,6 +19,7 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.app.filters.FooterFilter;
 import com.dlsc.jfxcentral2.app.pages.CreditsPage;
 import com.dlsc.jfxcentral2.app.pages.ErrorPage;
 import com.dlsc.jfxcentral2.app.pages.LegalPage;
@@ -91,6 +92,7 @@ import simplefx.experimental.parts.FXFuture;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.time.Duration;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -231,8 +233,9 @@ public class JFXCentral2App extends Application {
                 .and(Route.get("/", r -> {
                     if (RepositoryManager.isRepositoryUpdated()) {
                         return Response.view(new StartPage(size));
+                    } else {
+                        return Response.redirect("/refresh");
                     }
-                    return Response.view(new RefreshPage(size));
                 }))
                 .and(Route.redirect("/home", "/"))
                 .and(Route.redirect("/index", "/"))
@@ -263,6 +266,7 @@ public class JFXCentral2App extends Application {
                 .and(Route.get("/team", r -> Response.view(new TeamPage(size))))
                 .and(Route.get("/openjfx", r -> Response.view(new OpenJFXPage(size))))
                 .and(Route.get("/documentation", r -> Response.view(new DocumentationCategoryPage(size))))
+                .filter(FooterFilter.create(size))
                 .and(Route.get("/refresh", r -> {
                     RepositoryManager.prepareForRefresh();
                     return Response.view(new RefreshPage(size));
@@ -289,10 +293,9 @@ public class JFXCentral2App extends Application {
     private Route createCategoryOrDetailRoute(String path, Class<? extends ModelObject> clazz, Supplier<View> masterResponse, Callback<String, View> detailedResponse) {
         return r -> {
             if (r.getPath().startsWith(path)) {
-                createResponse(r, clazz, masterResponse, detailedResponse);
+                return createResponse(r, clazz, masterResponse, detailedResponse);
             }
-
-            return null;
+            return Response.empty();
         };
     }
 
