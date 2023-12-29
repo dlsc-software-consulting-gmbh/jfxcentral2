@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.View;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
+import one.jpro.platform.routing.performance.IncrementalLoading;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,18 +69,6 @@ public abstract class PageBase extends View {
             topMenuBar.getStyleClass().add("start-page");
         }
 
-        // footer
-        FooterView footerView = new FooterView();
-        footerView.sizeProperty().bind(sizeProperty());
-
-        // sponsors
-        SponsorsView sponsorsView = new SponsorsView();
-        sponsorsView.sizeProperty().bind(sizeProperty());
-
-        // copyright
-        CopyrightView copyrightView = new CopyrightView();
-        copyrightView.sizeProperty().bind(sizeProperty());
-
         // hamburger menu
         HamburgerMenuView hamburgerMenuView = new HamburgerMenuView(isMobile());
         hamburgerMenuView.sizeProperty().bind(sizeProperty());
@@ -88,6 +77,10 @@ public abstract class PageBase extends View {
         hamburgerMenuView.setOnClose(() -> setShowHamburgerMenu(false));
 
         StackPane.setAlignment(hamburgerMenuView, Pos.TOP_CENTER);
+
+        for(Node node : content) {
+            IncrementalLoading.loadNode(node);
+        }
 
         VBox uiBox = new VBox(content);
         VBox.setVgrow(uiBox, Priority.ALWAYS);
@@ -102,7 +95,7 @@ public abstract class PageBase extends View {
 
         StackPane.setAlignment(vbox, Pos.TOP_CENTER);
 
-        vbox.getChildren().addAll(topStackPane, sponsorsView, footerView, copyrightView);
+        vbox.getChildren().addAll(topStackPane);
 
         StackPane glassPane = new StackPane();
         glassPane.getStyleClass().add("page-glass-pane");

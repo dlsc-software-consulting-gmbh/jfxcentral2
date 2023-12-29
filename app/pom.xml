@@ -446,6 +446,9 @@
                 <version>${javafx.plugin.version}</version>
                 <configuration>
                     <mainClass>${mainClassName}</mainClass>
+                    <options>
+                        <!--<option>-Ddevelop=true</option>-->
+                    </options>
                 </configuration>
             </plugin>
 
@@ -498,6 +501,7 @@
                     <releaseName>jfxcentral</releaseName>
                     <localJVMArgs>-Ddevelop=false</localJVMArgs>
                     <port>8088</port>
+                    <javafxVersion>20</javafxVersion>
                 </configuration>
             </plugin>
 
