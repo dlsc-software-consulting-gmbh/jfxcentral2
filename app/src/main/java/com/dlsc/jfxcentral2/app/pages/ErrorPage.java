@@ -32,7 +32,7 @@ public class ErrorPage extends PageBase {
     public Node content() {
         // error view
         ErrorView errorView = new ErrorView();
-        errorView.setMessage("Page not found: " + request.path());
+        errorView.setMessage("Page not found: " + request.getPath());
         errorView.sizeProperty().bind(sizeProperty());
 
         // strip view for pull requests and features
