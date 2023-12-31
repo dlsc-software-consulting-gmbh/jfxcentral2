@@ -96,6 +96,7 @@ import java.time.Duration;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Supplier;
+import one.jpro.platform.freezedetector.FreezeDetector;
 
 public class JFXCentral2App extends Application {
 
@@ -108,6 +109,8 @@ public class JFXCentral2App extends Application {
             Locale.setDefault(Locale.US);
         }
     }
+
+    private static boolean freezeDetectorStarted = false;
 
     @Override
     public void start(Stage stage) {
@@ -286,6 +289,10 @@ public class JFXCentral2App extends Application {
             route = route.filter(DevFilter.create());
             route = route.filter(StatisticsFilter.create());
         }
+        //if (!freezeDetectorStarted) {
+        //    new FreezeDetector(Duration.ofMillis(100));
+        //    freezeDetectorStarted = true;
+        //}
 
         return route;
     }
