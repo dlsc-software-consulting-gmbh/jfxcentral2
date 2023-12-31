@@ -22,6 +22,7 @@ open module com.dlsc.jfxcentral2.app {
 
     requires one.jpro.platform.routing.core;
     requires one.jpro.platform.routing.dev;
+    requires one.jpro.platform.freezedetector;
 
     requires org.eclipse.jgit;
 
