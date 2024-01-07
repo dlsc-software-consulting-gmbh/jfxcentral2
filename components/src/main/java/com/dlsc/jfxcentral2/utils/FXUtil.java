@@ -14,5 +14,4 @@ public class FXUtil {
         content.putString(text);
         clipboard.setContent(content);
     }
-
 }

@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.utils;
 
 public class NumberUtil {
+
     private NumberUtil() {
     }
 
