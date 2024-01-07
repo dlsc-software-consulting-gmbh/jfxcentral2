@@ -24,7 +24,7 @@ public class NumberUtilTest {
         actual = NumberUtil.trimTrailingZeros(5.7500);
         assertEquals(expected, actual, "Expected: " + expected + ", but got: " + actual);
 
-        expected = "0.30";
+        expected = "0.3";
         actual = NumberUtil.trimTrailingZeros(0.30000);
         assertEquals(expected, actual, "Expected: " + expected + ", but got: " + actual);
     }
@@ -36,15 +36,15 @@ public class NumberUtilTest {
     @Test
     public void testTrimTrailingZerosWithDecimalPlaces() {
         
-        String expected = "5";
-        String actual = NumberUtil.trimTrailingZeros(5.00, 2);
+        String expected = "6";
+        String actual = NumberUtil.trimTrailingZeros(5.998, 2);
         assertEquals(expected, actual, "Expected: " + expected + ", but got: " + actual);
 
         expected = "5.75";
         actual = NumberUtil.trimTrailingZeros(5.750, 2);
         assertEquals(expected, actual, "Expected: " + expected + ", but got: " + actual);
 
-        expected = "0.30";
+        expected = "0.3";
         actual = NumberUtil.trimTrailingZeros(0.30000, 2);
         assertEquals(expected, actual, "Expected: " + expected + ", but got: " + actual);
     }
@@ -56,16 +56,16 @@ public class NumberUtilTest {
     @Test
     public void testTrimTrailingZerosWithDecimalPlacesAndKeepDecimal() {
 
-        String expected = "5.00";
-        String actual = NumberUtil.trimTrailingZeros(5.00, true, 2);
+        String expected = "6.0";
+        String actual = NumberUtil.trimTrailingZeros(5.998, true, 2);
         assertEquals(expected, actual, "Expected: " + expected + ", but got: " + actual);
 
-        expected = "5.50";
+        expected = "5.5";
         actual = NumberUtil.trimTrailingZeros(5.500, true, 2);
         assertEquals(expected, actual, "Expected: " + expected + ", but got: " + actual);
 
-        expected = "0.30";
-        actual = NumberUtil.trimTrailingZeros(0.30000, true, 2);
+        expected = "0.3";
+        actual = NumberUtil.trimTrailingZeros(0.300002, true, 2);
         assertEquals(expected, actual, "Expected: " + expected + ", but got: " + actual);
     }
 
