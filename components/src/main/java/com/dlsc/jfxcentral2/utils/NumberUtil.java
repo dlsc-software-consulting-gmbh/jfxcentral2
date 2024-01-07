@@ -13,31 +13,34 @@ public class NumberUtil {
         return trimTrailingZeros(value, false, decimalPlaces);
     }
 
-
     /**
-     * Simplifies a double value by trimming trailing zeros and, if desired, the decimal point.
+     * Formats a double value and removes unnecessary trailing zeros based on specified conditions.
      *
-     * @param value         The double value to be simplified.
-     * @param keepDecimal   If set to true, the decimal point is retained even if the number is an integer;
-     *                      if set to false, the decimal point is removed for integer values.
-     * @param decimalPlaces The number of decimal places to keep. The double value is rounded to this many decimal places.
-     * @return              A string representation of the simplified double value.
+     * @param value         The double value to be formatted.
+     * @param keepDecimal   Determines if a decimal point and zero should be retained for integer results.
+     *                      If true, even integer results will have ".0" appended.
+     *                      For example, with value = 5 and keepDecimal = true, the output will be "5.0".
+     *                      If false, results like "5.0" will be converted to "5", removing ".0".
+     * @param decimalPlaces The maximum number of decimal places to retain.
+     *                      The method rounds the number to this many decimal places.
+     *                      For instance, if value = 5.1234 and decimalPlaces = 2, the output will be "5.12".
+     * @return              A string representation of the formatted number.
+     *                      The primary purpose of this method is to eliminate meaningless trailing zeros
+     *                      in decimal numbers, making the display more concise.
      */
     public static String trimTrailingZeros(double value, boolean keepDecimal, int decimalPlaces) {
         String formatStr = "%." + decimalPlaces + "f";
         String formatted = String.format(formatStr, value);
 
-        if (keepDecimal) {
-            return formatted.replaceAll("\\.?0*$", "");
+        long intValue = (long) value;
+        if (value == intValue) {
+            return keepDecimal ? String.format("%.1f", value) : String.valueOf(intValue);
         } else {
-            long intValue = (long) value;
-            if (value == intValue) {
-                return String.valueOf(intValue);
-            } else {
-                return formatted.replaceAll("\\.?0*$", "");
-            }
+            String str = formatted.replaceAll("\\.?0*$", "");
+            return keepDecimal && !str.contains(".") ? str + ".0" : str;
         }
     }
+
 
     /**
      * Clamps a value between a minimum and maximum value.
@@ -50,6 +53,5 @@ public class NumberUtil {
     public static double clamp(double value, double min, double max) {
         return Math.max(min, Math.min(max, value));
     }
-
 
 }
