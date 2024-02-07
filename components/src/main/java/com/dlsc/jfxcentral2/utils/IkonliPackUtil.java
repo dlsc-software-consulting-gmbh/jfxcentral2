@@ -89,6 +89,10 @@ public class IkonliPackUtil {
 
     public String getMavenDependency(Ikon ikon) {
         IkonliPack ikonliPack = getIkonData(ikon).getIkonliPack();
+        if (ikonliPack == null) {
+            return "No dependency found.";
+        }
+
         Dependency dependency = ikonliPack.getInstalling().getMaven().getDependency();
         String line = System.lineSeparator();
         return "<dependency>" + line +
@@ -99,7 +103,12 @@ public class IkonliPackUtil {
     }
 
     public String getGradleDependency(Ikon ikon) {
-        return getIkonData(ikon).getIkonliPack().getInstalling().getGradle();
+        IkonliPack ikonliPack = getIkonData(ikon).getIkonliPack();
+        if (ikonliPack == null) {
+            return "No dependency found.";
+        }
+
+        return ikonliPack.getInstalling().getGradle();
     }
 
     /**
