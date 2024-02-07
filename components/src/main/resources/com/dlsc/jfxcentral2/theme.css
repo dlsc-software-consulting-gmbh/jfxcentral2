@@ -3478,6 +3478,104 @@
     -fx-background-color: rgba(0, 0, 0, .5);
 }
 
+
+/** ------------------------------------
+ * SingleIconDetailHeader
+ */
+.single-icon-detail-header.detail-header:lg,
+.single-icon-detail-header.detail-header:md {
+    -fx-min-height: 320px;
+    -fx-pref-height: 320px;
+    -fx-max-height: 320px;
+}
+
+.single-icon-detail-header.detail-header:sm {
+    -fx-min-height: 350px;
+    -fx-pref-height: 350px;
+    -fx-max-height: 350px;
+}
+
+.single-icon-detail-header:lg > .content-pane > .content-box {
+    -fx-alignment: center;
+    -fx-pref-width: 635px;
+    -fx-max-width: 635px;
+    -fx-min-width: 635px;
+    -fx-max-height: 202px;
+    -fx-spacing: 15px;
+    -fx-padding: 35px 0 0 0;
+}
+
+.single-icon-detail-header:md > .content-pane .content-box {
+    -fx-alignment: center;
+    -fx-pref-width: 490px;
+    -fx-max-width: 490px;
+    -fx-min-width: 490px;
+    -fx-max-height: 200px;
+    -fx-spacing: 15px;
+    -fx-padding: 30px 0 0 0;
+}
+
+.single-icon-detail-header:sm > .content-pane .content-box {
+    -fx-alignment: center;
+    -fx-min-width: 255px;
+    -fx-pref-width: 255px;
+    -fx-max-width: 255px;
+    -fx-max-height: 220px;
+    -fx-spacing: 15px;
+    -fx-padding: 50px 0 0 0;
+}
+
+.single-icon-detail-header:lg > .content-pane .content-box > .name {
+    -fx-font-size: 32px;
+    -fx-text-fill: -white;
+    -fx-graphic-text-gap: 20px;
+}
+
+.single-icon-detail-header:md > .content-pane .content-box > .name {
+    -fx-font-size: 27px;
+    -fx-text-fill: -white;
+    -fx-graphic-text-gap: 20px;
+}
+
+.single-icon-detail-header:md-lg > .content-pane .content-box > .description {
+    -fx-font-size: 18px;
+    -fx-padding: 10px 0;
+}
+
+.single-icon-detail-header:sm > .content-pane .content-box > .name {
+    -fx-text-fill: -white;
+    -fx-font-size: 25px;
+    -fx-graphic-text-gap: 10px;
+}
+
+.single-icon-detail-header:sm > .content-pane .content-box > .description {
+    -fx-font-size: 15px;
+}
+
+.single-icon-detail-header > .content-pane .content-box > .name {
+    -fx-text-alignment: center;
+}
+
+.single-icon-detail-header > .content-pane .content-box > .name .ikonli-font-icon {
+    -fx-icon-color: -white;
+}
+
+.single-icon-detail-header > .content-pane .content-box > .description {
+    -fx-text-fill: -grey-20;
+    -fx-text-alignment: center;
+}
+
+.single-icon-detail-header > .content-pane .content-box .button-box {
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+    -fx-padding: 20px 0 0 0;
+}
+
+.single-icon-detail-header > .content-pane .content-box .button-box .region-separator {
+    -fx-background-color: -white-a20;
+    -fx-pref-width: 1px;
+}
+
 /** ------------------------------------
  * UtilityDetailHeader
  */
@@ -8148,24 +8246,29 @@
 }
 
 .ikon-detail-view .ikon-preview-wrapper {
-    -fx-alignment: center-right;
+    -fx-alignment: center;
     -fx-max-width: 120px;
+    -fx-spacing: 10px;
 }
 
-.ikon-detail-view .ikon-preview-wrapper .ikonli-font-icon {
+.ikon-detail-view .ikon-preview-wrapper > .ikonli-font-icon {
     -fx-icon-size: 65px;
     -fx-icon-color: -bright-blue;
 }
 
-.ikon-detail-view:md .ikon-preview-wrapper .ikonli-font-icon {
+.ikon-detail-view:md .ikon-preview-wrapper > .ikonli-font-icon {
     -fx-icon-size: 50px;
 }
 
-.ikon-detail-view:sm .ikon-preview-wrapper .ikonli-font-icon {
+.ikon-detail-view:sm .ikon-preview-wrapper > .ikonli-font-icon {
     -fx-icon-size: 48px;
 }
 
-.ikon-detail-view.payment-font-detail-view:sm .ikon-preview-wrapper .ikonli-font-icon {
+.ikon-detail-view:sm .ikon-preview-wrapper .button {
+    -fx-font-size: 13px;
+}
+
+.ikon-detail-view.payment-font-detail-view:sm .ikon-preview-wrapper > .ikonli-font-icon {
     -fx-icon-size: 20px;
 }
 
@@ -10185,4 +10288,40 @@
     -fx-text-fill: -grey-30;
     -fx-font-family: "JetBrains Mono Medium";
     -fx-padding: 0 0 0 35px;
+}
+
+/** ----------------------------------------------------------------------------
+ * SingleIconPage
+ */
+.single-icon-content-wrapper {
+    -fx-padding: 50px 30px;
+    -fx-background-color: -white;
+}
+
+.single-icon-content-wrapper:sm {
+    -fx-padding: 30px 10px;
+    -fx-background-color: -white;
+}
+
+.single-icon-content-wrapper .ikon-detail-view:lg {
+    -fx-max-width: 1080px;
+    -fx-padding: 30px 0px
+}
+
+.single-icon-content-wrapper .ikon-detail-view:md {
+    -fx-max-width: 709px;
+    -fx-padding: 20px 0px
+}
+
+.single-icon-content-wrapper .ikon-detail-view:sm {
+    -fx-padding: 10px 0px
+}
+
+.single-icon-features-wrapper {
+    -fx-padding: 50px 0px;
+    -fx-background-color: -background;
+}
+
+.single-icon-features-wrapper:sm {
+    -fx-padding: 30px 0px;
 }

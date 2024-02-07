@@ -10,6 +10,7 @@ open module com.dlsc.jfxcentral2.app {
     requires com.gluonhq.attach.statusbar;
 
     requires org.apache.commons.io;
+    requires org.apache.commons.lang3;
 
     requires jfxcentral.data;
     requires fr.brouillard.oss.cssfx;
@@ -92,4 +93,5 @@ open module com.dlsc.jfxcentral2.app {
     exports com.dlsc.jfxcentral2.app.pages;
     exports com.dlsc.jfxcentral2.app.stage;
     exports com.dlsc.jfxcentral2.app.service;
+    exports com.dlsc.jfxcentral2.app.pages.details;
 }

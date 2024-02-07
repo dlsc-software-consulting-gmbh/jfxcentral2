@@ -1,9 +1,15 @@
 package com.dlsc.jfxcentral2.components.gridview;
 
-import com.dlsc.jfxcentral2.utils.*;
+import com.dlsc.jfxcentral2.model.IconInfo;
+import com.dlsc.jfxcentral2.model.IconInfoBuilder;
+import com.dlsc.jfxcentral2.utils.FileUtil;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.LOGGER;
+import com.dlsc.jfxcentral2.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.SVGPathExtractor;
+import com.dlsc.jfxcentral2.utils.WebAPIUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.collections.FXCollections;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -12,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import one.jpro.platform.routing.CopyUtil;
 import org.apache.batik.dom.GenericDOMImplementation;
@@ -47,32 +53,31 @@ public class IkonDetailView extends DetailView<Ikon> {
         OUTLINE
     }
 
-    private record IkonInfo(String iconLiteral, String cssCode, String javaCode, String unicode, String mavenInfo,
-                            String gradleInfo, String path) {
+    IconInfo iconInfo;
+
+    public IkonDetailView(Ikon ikon) {
+        this(new IconInfoBuilder(ikon).build());
     }
 
-    private final IkonInfo ikonInfo;
-
-    public IkonDetailView(Ikon item) {
-        super(item);
+    public IkonDetailView(IconInfo iconInfo) {
+        super(iconInfo.getIkon());
+        this.iconInfo = iconInfo;
 
         getStyleClass().add("ikon-detail-view");
 
-        if (item.getClass().getSimpleName().equals("PaymentFont")) {
+        if (iconInfo.getClass().getSimpleName().equals("PaymentFont")) {
             getStyleClass().add("payment-font-detail-view");
         }
 
-        FontIcon fontIcon = new FontIcon(item);
-        ikonInfo = new IkonInfo(item.getDescription(),
-                "-fx-icon-code: \"" + item.getDescription() + "\";",
-                item.getClass().getSimpleName() + "." + fontIcon.getIconCode(),
-                "\\u" + Integer.toHexString(item.getCode()),
-                IkonliPackUtil.getInstance().getMavenDependency(item),
-                IkonliPackUtil.getInstance().getGradleDependency(item),
-                extractorPathFromIcon(item.getDescription()));
+        FontIcon fontIcon = new FontIcon(iconInfo.getIkon());
+        iconInfo.setPath(extractorPathFromIcon(iconInfo.getDescription()));
 
-        StackPane previewPane = new StackPane();
-        previewPane.getChildren().setAll(fontIcon);
+        Button shareButton = new Button("Copy Link");
+        shareButton.getStyleClass().addAll("fill-button", "share-icon-button");
+        String shareContent = "https://www.jfx-central.com/icons/" + iconInfo.getIkonliPackId() + "/" + iconInfo.getDescription();
+        CopyUtil.setCopyOnClick(shareButton, shareContent);
+
+        VBox previewPane = new VBox(fontIcon, shareButton);
         previewPane.getStyleClass().add("ikon-preview-wrapper");
         HBox.setHgrow(previewPane, Priority.ALWAYS);
 
@@ -93,15 +98,15 @@ public class IkonDetailView extends DetailView<Ikon> {
         flowPane.getStyleClass().add("ikon-info-grid-pane");
         HBox.setHgrow(flowPane, Priority.ALWAYS);
 
-        addRow(flowPane, "Icon Literal:", ikonInfo.iconLiteral());
-        addRow(flowPane, "CSS Code:", ikonInfo.cssCode());
-        addRow(flowPane, "Java Code:", ikonInfo.javaCode());
-        addRow(flowPane, "Unicode:", ikonInfo.unicode());
-        addRow(flowPane, "Maven:", ikonInfo.mavenInfo());
-        addRow(flowPane, "Gradle :", ikonInfo.gradleInfo());
+        addRow(flowPane, "Icon Literal:", iconInfo.getIconLiteral());
+        addRow(flowPane, "CSS Code:", iconInfo.getCssCode());
+        addRow(flowPane, "Java Code:", iconInfo.getJavaCode());
+        addRow(flowPane, "Unicode:", iconInfo.getUnicode());
+        addRow(flowPane, "Maven:", iconInfo.getMavenInfo());
+        addRow(flowPane, "Gradle :", iconInfo.getGradleInfo());
 
         if (OSUtil.isAWTSupported()) {
-            addRow(flowPane, "Path:", ikonInfo.path());
+            addRow(flowPane, "Path:", iconInfo.getPath());
             addDownloadSvgRow(flowPane);
         }
 
@@ -175,7 +180,7 @@ public class IkonDetailView extends DetailView<Ikon> {
 
     private void webDownloadFile(SVGGraphics2D g2d, SVGType type) {
         File cacheDir = getCacheDirectory();
-        File tempFile = createSvgTempFile(g2d, cacheDir, type, ikonInfo.iconLiteral());
+        File tempFile = createSvgTempFile(g2d, cacheDir, type, iconInfo.getIconLiteral());
         g2d.dispose();
         try {
             /*
@@ -231,7 +236,7 @@ public class IkonDetailView extends DetailView<Ikon> {
     private void desktopDownloadFile(SVGGraphics2D g2d, SVGType type) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save File");
-        fileChooser.setInitialFileName(ikonInfo.iconLiteral + "-" + type.toString().toLowerCase() + SVG_EXTENSION);
+        fileChooser.setInitialFileName(iconInfo.getIconLiteral() + "-" + type.toString().toLowerCase() + SVG_EXTENSION);
         if (initDirectory != null) {
             fileChooser.setInitialDirectory(initDirectory);
         }

@@ -2,8 +2,6 @@ package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.gemsfx.util.StageManager;
 import com.dlsc.jfxcentral.data.DataRepository2;
-import com.dlsc.jfxcentral.data.model.Utility;
-import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
@@ -16,8 +14,10 @@ import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.data.model.Utility;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.app.filters.FooterFilter;
 import com.dlsc.jfxcentral2.app.pages.CreditsPage;
@@ -27,6 +27,7 @@ import com.dlsc.jfxcentral2.app.pages.LinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.app.pages.LoginPage;
 import com.dlsc.jfxcentral2.app.pages.OpenJFXPage;
 import com.dlsc.jfxcentral2.app.pages.RefreshPage;
+import com.dlsc.jfxcentral2.app.pages.SingleIconPage;
 import com.dlsc.jfxcentral2.app.pages.StartPage;
 import com.dlsc.jfxcentral2.app.pages.TeamPage;
 import com.dlsc.jfxcentral2.app.pages.TopContentPage;
@@ -65,7 +66,10 @@ import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
 import com.dlsc.jfxcentral2.app.utils.VideoPane;
+import com.dlsc.jfxcentral2.model.IconInfo;
+import com.dlsc.jfxcentral2.model.IconInfoBuilder;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
@@ -83,20 +87,22 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import one.jpro.platform.routing.*;
+import one.jpro.platform.routing.Request;
+import one.jpro.platform.routing.Response;
+import one.jpro.platform.routing.Route;
+import one.jpro.platform.routing.RouteNode;
+import one.jpro.platform.routing.View;
 import one.jpro.platform.routing.dev.DevFilter;
 import one.jpro.platform.routing.dev.StatisticsFilter;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
-import simplefx.experimental.parts.FXFuture;
+import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.time.Duration;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Supplier;
-import one.jpro.platform.freezedetector.FreezeDetector;
 
 public class JFXCentral2App extends Application {
 
@@ -179,7 +185,8 @@ public class JFXCentral2App extends Application {
         VideoPane videoPane = new VideoPane(size);
         videoPane.onCloseProperty().bind(onCloseVideoPaneProperty());
         videoPane.visibleProperty().bind(onCloseVideoPaneProperty().isNotNull());
-        setOnCloseVideoPane(() -> {});
+        setOnCloseVideoPane(() -> {
+        });
 
         StackPane wrapper = new StackPane(parent, videoPane);
 
@@ -254,11 +261,11 @@ public class JFXCentral2App extends Application {
                 .and(createCategoryOrDetailRoute("/tools", Tool.class, () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/tutorials", Tutorial.class, () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute("/videos", Video.class, () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/icons", IkonliPack.class, () -> new IconsCategoryPage(size), id -> new IconPackDetailPage(size, id)))
                 .and(createCategoryOrDetailRoute("/utilities", Utility.class, () -> new UtilitiesCategoryPage(size), id -> new UtilityDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute("/learn-javafx", LearnJavaFX.class, () -> new LearnJavaFXCategoryPage(size), id -> new LearnDetailsPage(size, LearnJavaFX.class, id)))
                 .and(createCategoryOrDetailRoute("/learn-mobile", LearnMobile.class, () -> new LearnMobileCategoryPage(size), id -> new LearnDetailsPage(size, LearnMobile.class, id)))
                 .and(createCategoryOrDetailRoute("/learn-raspberrypi", LearnRaspberryPi.class, () -> new LearnRaspberryPiCategoryPage(size), id -> new LearnDetailsPage(size, LearnRaspberryPi.class, id)))
+                .and(createIconPackOrDetailRoute("/icons"))
                 .and(Route.get("/credits", r -> Response.view(new CreditsPage(size))))
                 .and(Route.get("/legal", r -> Response.view(new LegalPage(size, LegalPage.Section.TERMS))))
                 .and(Route.get("/legal/terms", r -> Response.view(new LegalPage(size, LegalPage.Section.TERMS))))
@@ -318,6 +325,38 @@ public class JFXCentral2App extends Application {
         }
 
         return Response.view(categoryResponse.get());
+    }
+
+    /**
+     * Creates a route that handles the icon pack and icon detail pages.
+     * /icons -> IconsCategoryPage
+     * /icons/{ikonPackId} -> IconPackDetailPage
+     * /icons/{ikonliPackId}/{iconDescription} -> SingleIconPage
+     */
+    private Route createIconPackOrDetailRoute(String path) {
+        return r -> {
+            String requestPath = r.getPath();
+            if (!requestPath.startsWith(path)) {
+                return Response.empty();
+            }
+            String[] parts = StringUtils.split(requestPath, '/');
+            // Route to IconsCategoryPage or IconPackDetailPage: /icons or /icons/{ikonPackId}
+            if (parts.length < 3) {
+                return createResponse(r, IkonliPack.class, () -> new IconsCategoryPage(size), id -> new IconPackDetailPage(size, id));
+            }
+
+            //  Route to SingleIconPage: /icons/{ikonliPackId}/{iconDescription}
+            String ikonliPackId = parts[1];
+            String iconDescription = parts[2];
+
+            return DataRepository2.getInstance().getIkonliPackById(ikonliPackId)
+                    .flatMap(ikonliPack -> IkonliPackUtil.getInstance().getIkon(ikonliPack, iconDescription)
+                            .map(ikon -> {
+                                IconInfo iconInfo = new IconInfoBuilder(ikon, ikonliPack.getName(), ikonliPackId).build();
+                                return Response.view(new SingleIconPage(size, iconInfo));
+                            }))
+                    .orElseGet(() -> Response.view(new ErrorPage(size, r)));
+        };
     }
 
     private void updateSizeProperty(Scene scene) {
