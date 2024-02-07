@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.model.IkonData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.IkonProvider;
 
@@ -13,6 +14,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.TreeSet;
@@ -84,6 +86,7 @@ public class IkonliPackUtil {
         }
         return list;
     }
+
     public String getMavenDependency(Ikon ikon) {
         IkonliPack ikonliPack = getIkonData(ikon).getIkonliPack();
         Dependency dependency = ikonliPack.getInstalling().getMaven().getDependency();
@@ -98,4 +101,24 @@ public class IkonliPackUtil {
     public String getGradleDependency(Ikon ikon) {
         return getIkonData(ikon).getIkonliPack().getInstalling().getGradle();
     }
+
+    /**
+     * Find a specific Ikon by its description.
+     *
+     * @param iconPack    the pack to search in
+     * @param description the description to search for
+     * @return optional containing the Ikon if found
+     */
+    public Optional<Ikon> getIkon(IkonliPack iconPack, String description) {
+        IkonData ikonData = getIkonData(iconPack.getName());
+        IkonProvider ikonProvider = ikonData.getIkonProvider();
+        Set<Ikon> enumSet = EnumSet.allOf(ikonProvider.getIkon());
+        for (Ikon ikon : enumSet) {
+            if (StringUtils.equals(ikon.getDescription(), description)) {
+                return Optional.of(ikon);
+            }
+        }
+        return Optional.empty();
+    }
+
 }
