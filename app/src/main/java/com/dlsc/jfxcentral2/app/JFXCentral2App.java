@@ -228,7 +228,7 @@ public class JFXCentral2App extends Application {
             desktop.setOpenURIHandler(e -> Platform.runLater(() -> {
                 ((Stage) scene.getWindow()).toFront();
                 String uri = e.getURI().toString();
-                String url = StringUtils.substringAfter(uri, "//");
+                String url = StringUtils.substringAfter(uri, "/");
                 LinkUtil.gotoPage(sessionManager, url);
             }));
         } else {
