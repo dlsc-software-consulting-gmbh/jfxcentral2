@@ -42,7 +42,6 @@ public class IconInfoBuilder {
 
         // set the icon description
         String description = ikon.getDescription();
-        iconInfo.setDescription(description);
         iconInfo.setIconLiteral(description);
         iconInfo.setCssCode("-fx-icon-code: \"" + description + "\";");
         iconInfo.setJavaCode(ikon.getClass().getSimpleName() + "." + new FontIcon(ikon).getIconCode());

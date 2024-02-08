@@ -18,9 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import one.jpro.platform.routing.CopyUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.kordamp.ikonli.Ikon;
@@ -53,15 +55,17 @@ public class IkonDetailView extends DetailView<Ikon> {
         OUTLINE
     }
 
-    IconInfo iconInfo;
+    private final IconInfo iconInfo;
+    private final boolean isShareable;
 
-    public IkonDetailView(Ikon ikon) {
-        this(new IconInfoBuilder(ikon).build());
+    public IkonDetailView(Ikon ikon, boolean isShareable) {
+        this(new IconInfoBuilder(ikon).build(), isShareable);
     }
 
-    public IkonDetailView(IconInfo iconInfo) {
+    public IkonDetailView(IconInfo iconInfo, boolean isShareable) {
         super(iconInfo.getIkon());
         this.iconInfo = iconInfo;
+        this.isShareable = isShareable;
 
         getStyleClass().add("ikon-detail-view");
 
@@ -70,16 +74,15 @@ public class IkonDetailView extends DetailView<Ikon> {
         }
 
         FontIcon fontIcon = new FontIcon(iconInfo.getIkon());
-        iconInfo.setPath(extractorPathFromIcon(iconInfo.getDescription()));
+        iconInfo.setPath(extractorPathFromIcon(iconInfo.getIconLiteral()));
 
-        Button shareButton = new Button("Copy Link");
-        shareButton.getStyleClass().addAll("fill-button", "share-icon-button");
-        String shareContent = "https://www.jfx-central.com/icons/" + iconInfo.getIkonliPackId() + "/" + iconInfo.getDescription();
-        CopyUtil.setCopyOnClick(shareButton, shareContent);
+        VBox ikonPreview = new VBox(fontIcon, createBottomNode(iconInfo));
+        ikonPreview.getStyleClass().add("ikon-preview");
+        ikonPreview.setMaxWidth(Region.USE_PREF_SIZE);
 
-        VBox previewPane = new VBox(fontIcon, shareButton);
-        previewPane.getStyleClass().add("ikon-preview-wrapper");
-        HBox.setHgrow(previewPane, Priority.ALWAYS);
+        VBox previewPaneWrapper = new VBox(ikonPreview);
+        previewPaneWrapper.getStyleClass().add("ikon-preview-wrapper");
+        HBox.setHgrow(previewPaneWrapper, Priority.ALWAYS);
 
         Node infoNode = createInfoNode();
         HBox.setHgrow(infoNode, Priority.ALWAYS);
@@ -87,10 +90,41 @@ public class IkonDetailView extends DetailView<Ikon> {
         if (OSUtil.isAndroidOrIOS()) {
             detailContent.getChildren().setAll(infoNode);
         } else {
-            detailContent.getChildren().setAll(previewPane, infoNode);
+            detailContent.getChildren().setAll(previewPaneWrapper, infoNode);
         }
         detailContent.getStyleClass().add("detail-content");
         getChildren().setAll(detailContent);
+    }
+
+    private Node createBottomNode(IconInfo iconInfo) {
+        String iconUrl = "/icons/" + iconInfo.getIkonliPackId() + "/" + iconInfo.getIconLiteral();
+
+        Button button = new Button(isShareable ? "Web URL" : "Details");
+        button.getStyleClass().addAll("fill-button");
+        button.setFocusTraversable(false);
+        if (isShareable) {
+            String shareContent = "https://www.jfx-central.com" + iconUrl;
+            CopyUtil.setCopyOnClick(button, shareContent);
+        } else {
+            LinkUtil.setLink(button, iconUrl);
+            return button;
+        }
+        button.setMaxWidth(Double.MAX_VALUE);
+        button.setGraphic(new FontIcon(IkonUtil.copy));
+
+        //Special Protocol Link
+        Button linkButton = new Button("App Link");
+        linkButton.setFocusTraversable(false);
+        linkButton.setGraphic(new FontIcon(IkonUtil.copy));
+        linkButton.getStyleClass().addAll("fill-button");
+        // read the url schemes from the system properties
+        String urlSchemes = System.getProperty("url.schemes", "jfxcentral");
+        String  specialProtocolLink = urlSchemes + ":/" + iconUrl;
+        CopyUtil.setCopyOnClick(linkButton, specialProtocolLink);
+
+        VBox bottomBox = new VBox(button, linkButton);
+        bottomBox.getStyleClass().add("bottom-box");
+        return bottomBox;
     }
 
     private FlowPane createInfoNode() {

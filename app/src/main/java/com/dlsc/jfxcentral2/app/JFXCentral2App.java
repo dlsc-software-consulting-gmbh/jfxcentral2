@@ -76,6 +76,7 @@ import com.dlsc.jfxcentral2.utils.SocialUtil;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Parent;
@@ -87,6 +88,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import one.jpro.platform.routing.LinkUtil;
 import one.jpro.platform.routing.Request;
 import one.jpro.platform.routing.Response;
 import one.jpro.platform.routing.Route;
@@ -221,6 +223,18 @@ public class JFXCentral2App extends Application {
             stage.setOnCloseRequest(evt -> System.exit(0));
         }
 
+        Desktop desktop = Desktop.getDesktop();
+        if (desktop != null && desktop.isSupported(Desktop.Action.APP_OPEN_URI)) {
+            desktop.setOpenURIHandler(e -> Platform.runLater(() -> {
+                ((Stage) scene.getWindow()).toFront();
+                String uri = e.getURI().toString();
+                String url = StringUtils.substringAfter(uri, "//");
+                LinkUtil.gotoPage(sessionManager, url);
+            }));
+        } else {
+            System.out.println("Does not support opening the custom schema URIs");
+        }
+
         stage.show();
     }
 
@@ -353,7 +367,7 @@ public class JFXCentral2App extends Application {
                     .flatMap(ikonliPack -> IkonliPackUtil.getInstance().getIkon(ikonliPack, iconDescription)
                             .map(ikon -> {
                                 IconInfo iconInfo = new IconInfoBuilder(ikon, ikonliPack.getName(), ikonliPackId).build();
-                                return Response.view(new SingleIconPage(size, iconInfo));
+                                return Response.view(new SingleIconPage(size, iconInfo, true));
                             }))
                     .orElseGet(() -> Response.view(new ErrorPage(size, r)));
         };

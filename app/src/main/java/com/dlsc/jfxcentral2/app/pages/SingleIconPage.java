@@ -13,10 +13,12 @@ import javafx.scene.Node;
 public class SingleIconPage extends PageBase {
 
     private final IconInfo iconInfo;
+    private final boolean isShareable;
 
-    public SingleIconPage(ObjectProperty<Size> size, IconInfo iconInfo) {
+    public SingleIconPage(ObjectProperty<Size> size, IconInfo iconInfo, boolean isShareable) {
         super(size, Mode.DARK);
         this.iconInfo = iconInfo;
+        this.isShareable = isShareable;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class SingleIconPage extends PageBase {
         header.sizeProperty().bind(sizeProperty());
 
         // content
-        IkonDetailView ikonDetailView = new IkonDetailView(iconInfo);
+        IkonDetailView ikonDetailView = new IkonDetailView(iconInfo, isShareable);
         ikonDetailView.sizeProperty().bind(sizeProperty());
 
         PaneBase contentWrapper = new PaneBase();

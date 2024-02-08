@@ -13,7 +13,6 @@ public class IconInfo {
     private String mavenInfo;
     private String gradleInfo;
     private String path;
-    private String description;
 
     public IconInfo() {
     }
@@ -96,14 +95,6 @@ public class IconInfo {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
 }
