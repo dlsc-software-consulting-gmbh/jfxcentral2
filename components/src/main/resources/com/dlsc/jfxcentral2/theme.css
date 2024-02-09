@@ -8246,29 +8246,44 @@
 }
 
 .ikon-detail-view .ikon-preview-wrapper {
-    -fx-alignment: center;
+    -fx-alignment: center-right;
     -fx-max-width: 120px;
     -fx-spacing: 10px;
 }
 
-.ikon-detail-view .ikon-preview-wrapper > .ikonli-font-icon {
+.ikon-detail-view .ikon-preview .bottom-box {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+}
+
+.ikon-detail-view:md-lg .ikon-preview .bottom-box {
+    -fx-alignment: center;
+    -fx-font-size: 13px;
+}
+
+.ikon-detail-view .ikon-preview {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+}
+
+.ikon-detail-view .ikon-preview > .ikonli-font-icon {
     -fx-icon-size: 65px;
     -fx-icon-color: -bright-blue;
 }
 
-.ikon-detail-view:md .ikon-preview-wrapper > .ikonli-font-icon {
+.ikon-detail-view:md .ikon-preview > .ikonli-font-icon {
     -fx-icon-size: 50px;
 }
 
-.ikon-detail-view:sm .ikon-preview-wrapper > .ikonli-font-icon {
+.ikon-detail-view:sm .ikon-preview > .ikonli-font-icon {
     -fx-icon-size: 48px;
 }
 
-.ikon-detail-view:sm .ikon-preview-wrapper .button {
+.ikon-detail-view:sm .ikon-preview .button {
     -fx-font-size: 13px;
 }
 
-.ikon-detail-view.payment-font-detail-view:sm .ikon-preview-wrapper > .ikonli-font-icon {
+.ikon-detail-view.payment-font-detail-view:sm .ikon-preview > .ikonli-font-icon {
     -fx-icon-size: 20px;
 }
 

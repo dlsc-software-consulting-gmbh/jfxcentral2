@@ -18,7 +18,7 @@ public class SingleIconDetailHeader extends DetailHeaderBase {
         String ikonliPackId = iconInfo.getIkonliPackId();
         String ikonliPackName = iconInfo.getIkonliPackName();
 
-        setTitle(iconName);
+        setTitle(iconName.replace("_", " "));
         setIkon(icon);
         setCenter(createCenterNode(iconName, ikonliPackName));
 
