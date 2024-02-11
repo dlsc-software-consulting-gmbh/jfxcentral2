@@ -17,6 +17,10 @@ public enum Size {
      */
     LARGE;
 
+    Size() {
+        // constructor
+    }
+
     public boolean isSmall() {
         return this == SMALL;
     }

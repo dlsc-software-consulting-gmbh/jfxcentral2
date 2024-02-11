@@ -1,9 +1,15 @@
 package com.dlsc.jfxcentral2.components.gridview;
 
-import com.dlsc.jfxcentral2.utils.*;
+import com.dlsc.jfxcentral2.model.IconInfo;
+import com.dlsc.jfxcentral2.model.IconInfoBuilder;
+import com.dlsc.jfxcentral2.utils.FileUtil;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.LOGGER;
+import com.dlsc.jfxcentral2.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.SVGPathExtractor;
+import com.dlsc.jfxcentral2.utils.WebAPIUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.collections.FXCollections;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -12,9 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import one.jpro.platform.routing.CopyUtil;
+import one.jpro.platform.routing.LinkUtil;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.kordamp.ikonli.Ikon;
@@ -42,39 +50,37 @@ public class IkonDetailView extends DetailView<Ikon> {
     private static final String SVG_EXTENSION = ".svg";
     private static final float SVG_FONT_SIZE = 24;
 
-    private enum SVGType {
+    public enum SVGType {
         FILL,
         OUTLINE
     }
 
-    private record IkonInfo(String iconLiteral, String cssCode, String javaCode, String unicode, String mavenInfo,
-                            String gradleInfo, String path) {
+    private final IconInfo iconInfo;
+
+    public IkonDetailView(Ikon ikon) {
+        this(new IconInfoBuilder(ikon).build());
     }
 
-    private final IkonInfo ikonInfo;
-
-    public IkonDetailView(Ikon item) {
-        super(item);
+    public IkonDetailView(IconInfo iconInfo) {
+        super(iconInfo.getIkon());
+        this.iconInfo = iconInfo;
 
         getStyleClass().add("ikon-detail-view");
 
-        if (item.getClass().getSimpleName().equals("PaymentFont")) {
+        if (iconInfo.getClass().getSimpleName().equals("PaymentFont")) {
             getStyleClass().add("payment-font-detail-view");
         }
 
-        FontIcon fontIcon = new FontIcon(item);
-        ikonInfo = new IkonInfo(item.getDescription(),
-                "-fx-icon-code: \"" + item.getDescription() + "\";",
-                item.getClass().getSimpleName() + "." + fontIcon.getIconCode(),
-                "\\u" + Integer.toHexString(item.getCode()),
-                IkonliPackUtil.getInstance().getMavenDependency(item),
-                IkonliPackUtil.getInstance().getGradleDependency(item),
-                extractorPathFromIcon(item.getDescription()));
+        FontIcon fontIcon = new FontIcon(iconInfo.getIkon());
+        iconInfo.setPath(extractorPathFromIcon(iconInfo.getIconLiteral()));
 
-        StackPane previewPane = new StackPane();
-        previewPane.getChildren().setAll(fontIcon);
-        previewPane.getStyleClass().add("ikon-preview-wrapper");
-        HBox.setHgrow(previewPane, Priority.ALWAYS);
+        VBox ikonPreview = new VBox(fontIcon, createIconBottomNode());
+        ikonPreview.getStyleClass().add("ikon-preview");
+        ikonPreview.setMaxWidth(Region.USE_PREF_SIZE);
+
+        VBox previewPaneWrapper = new VBox(ikonPreview);
+        previewPaneWrapper.getStyleClass().add("ikon-preview-wrapper");
+        HBox.setHgrow(previewPaneWrapper, Priority.ALWAYS);
 
         Node infoNode = createInfoNode();
         HBox.setHgrow(infoNode, Priority.ALWAYS);
@@ -82,34 +88,43 @@ public class IkonDetailView extends DetailView<Ikon> {
         if (OSUtil.isAndroidOrIOS()) {
             detailContent.getChildren().setAll(infoNode);
         } else {
-            detailContent.getChildren().setAll(previewPane, infoNode);
+            detailContent.getChildren().setAll(previewPaneWrapper, infoNode);
         }
         detailContent.getStyleClass().add("detail-content");
         getChildren().setAll(detailContent);
     }
 
-    private FlowPane createInfoNode() {
+    protected Node createIconBottomNode() {
+        String iconUrl = "/icons/" + iconInfo.getIkonliPackId() + "/" + iconInfo.getIconLiteral();
+
+        Button button = new Button("Details");
+        button.getStyleClass().addAll("fill-button");
+        button.setFocusTraversable(false);
+        LinkUtil.setLink(button, iconUrl);
+        return button;
+    }
+
+    protected Node createInfoNode() {
         FlowPane flowPane = new FlowPane();
         flowPane.getStyleClass().add("ikon-info-grid-pane");
         HBox.setHgrow(flowPane, Priority.ALWAYS);
 
-        addRow(flowPane, "Icon Literal:", ikonInfo.iconLiteral());
-        addRow(flowPane, "CSS Code:", ikonInfo.cssCode());
-        addRow(flowPane, "Java Code:", ikonInfo.javaCode());
-        addRow(flowPane, "Unicode:", ikonInfo.unicode());
-        addRow(flowPane, "Maven:", ikonInfo.mavenInfo());
-        addRow(flowPane, "Gradle :", ikonInfo.gradleInfo());
+        addRow(flowPane, "Icon Literal:", iconInfo.getIconLiteral());
+        addRow(flowPane, "CSS Code:", iconInfo.getCssCode());
+        addRow(flowPane, "Java Code:", iconInfo.getJavaCode());
+        addRow(flowPane, "Unicode:", iconInfo.getUnicode());
+        addRow(flowPane, "Maven:", iconInfo.getMavenInfo());
+        addRow(flowPane, "Gradle :", iconInfo.getGradleInfo());
 
         if (OSUtil.isAWTSupported()) {
-            addRow(flowPane, "Path:", ikonInfo.path());
+            addRow(flowPane, "Path:", iconInfo.getPath());
             addDownloadSvgRow(flowPane);
         }
 
         return flowPane;
     }
 
-    private void downloadSVGHandler(ComboBox<SVGType> svgComboBox) {
-        SVGType type = svgComboBox.getSelectionModel().getSelectedItem();
+    protected void downloadSVGHandler(SVGType type) {
         SVGGraphics2D g2d = getSvgGraphics2D(type);
         if (WebAPI.isBrowser()) {
             webDownloadFile(g2d, type);
@@ -175,7 +190,7 @@ public class IkonDetailView extends DetailView<Ikon> {
 
     private void webDownloadFile(SVGGraphics2D g2d, SVGType type) {
         File cacheDir = getCacheDirectory();
-        File tempFile = createSvgTempFile(g2d, cacheDir, type, ikonInfo.iconLiteral());
+        File tempFile = createSvgTempFile(g2d, cacheDir, type, iconInfo.getIconLiteral());
         g2d.dispose();
         try {
             /*
@@ -231,7 +246,7 @@ public class IkonDetailView extends DetailView<Ikon> {
     private void desktopDownloadFile(SVGGraphics2D g2d, SVGType type) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save File");
-        fileChooser.setInitialFileName(ikonInfo.iconLiteral + "-" + type.toString().toLowerCase() + SVG_EXTENSION);
+        fileChooser.setInitialFileName(iconInfo.getIconLiteral() + "-" + type.toString().toLowerCase() + SVG_EXTENSION);
         if (initDirectory != null) {
             fileChooser.setInitialDirectory(initDirectory);
         }
@@ -289,11 +304,16 @@ public class IkonDetailView extends DetailView<Ikon> {
         button.setFocusTraversable(false);
         button.getStyleClass().addAll("fill-button", "copy-button");
         button.setGraphic(new FontIcon(IkonUtil.download));
-        button.setOnAction(event -> downloadSVGHandler(svgTypeComboBox));
+        SVGType svgType = svgTypeComboBox.getSelectionModel().getSelectedItem();
+        button.setOnAction(event -> downloadSVGHandler(svgType));
 
         HBox box = new HBox(titleLabel, svgTypeComboBox, button);
         box.getStyleClass().add("row-box");
         flowPane.getChildren().add(box);
+    }
+
+    protected IconInfo getIconInfo() {
+        return iconInfo;
     }
 
 }

@@ -89,8 +89,7 @@
 .custom-stage .title-bar.mac .control-button {
     -color1: rgba(255,255,255, .2);
     -fx-background-color: -color1;
-    -fx-background-insets: 0px
-;
+    -fx-background-insets: 0px;
     -fx-background-radius: 1000px;
     -size: 12px;
     -fx-pref-width: -size;
