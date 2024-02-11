@@ -50,22 +50,20 @@ public class IkonDetailView extends DetailView<Ikon> {
     private static final String SVG_EXTENSION = ".svg";
     private static final float SVG_FONT_SIZE = 24;
 
-    private enum SVGType {
+    public enum SVGType {
         FILL,
         OUTLINE
     }
 
     private final IconInfo iconInfo;
-    private final boolean isShareable;
 
-    public IkonDetailView(Ikon ikon, boolean isShareable) {
-        this(new IconInfoBuilder(ikon).build(), isShareable);
+    public IkonDetailView(Ikon ikon) {
+        this(new IconInfoBuilder(ikon).build());
     }
 
-    public IkonDetailView(IconInfo iconInfo, boolean isShareable) {
+    public IkonDetailView(IconInfo iconInfo) {
         super(iconInfo.getIkon());
         this.iconInfo = iconInfo;
-        this.isShareable = isShareable;
 
         getStyleClass().add("ikon-detail-view");
 
@@ -76,7 +74,7 @@ public class IkonDetailView extends DetailView<Ikon> {
         FontIcon fontIcon = new FontIcon(iconInfo.getIkon());
         iconInfo.setPath(extractorPathFromIcon(iconInfo.getIconLiteral()));
 
-        VBox ikonPreview = new VBox(fontIcon, createBottomNode(iconInfo));
+        VBox ikonPreview = new VBox(fontIcon, createIconBottomNode());
         ikonPreview.getStyleClass().add("ikon-preview");
         ikonPreview.setMaxWidth(Region.USE_PREF_SIZE);
 
@@ -96,38 +94,17 @@ public class IkonDetailView extends DetailView<Ikon> {
         getChildren().setAll(detailContent);
     }
 
-    private Node createBottomNode(IconInfo iconInfo) {
+    protected Node createIconBottomNode() {
         String iconUrl = "/icons/" + iconInfo.getIkonliPackId() + "/" + iconInfo.getIconLiteral();
 
-        Button button = new Button(isShareable ? "Web URL" : "Details");
+        Button button = new Button("Details");
         button.getStyleClass().addAll("fill-button");
         button.setFocusTraversable(false);
-        if (isShareable) {
-            String shareContent = "https://www.jfx-central.com" + iconUrl;
-            CopyUtil.setCopyOnClick(button, shareContent);
-        } else {
-            LinkUtil.setLink(button, iconUrl);
-            return button;
-        }
-        button.setMaxWidth(Double.MAX_VALUE);
-        button.setGraphic(new FontIcon(IkonUtil.copy));
-
-        //Special Protocol Link
-        Button linkButton = new Button("App Link");
-        linkButton.setFocusTraversable(false);
-        linkButton.setGraphic(new FontIcon(IkonUtil.copy));
-        linkButton.getStyleClass().addAll("fill-button");
-        // read the url schemes from the system properties
-        String urlSchemes = System.getProperty("url.schemes", "jfxcentral");
-        String  specialProtocolLink = urlSchemes + ":/" + iconUrl;
-        CopyUtil.setCopyOnClick(linkButton, specialProtocolLink);
-
-        VBox bottomBox = new VBox(button, linkButton);
-        bottomBox.getStyleClass().add("bottom-box");
-        return bottomBox;
+        LinkUtil.setLink(button, iconUrl);
+        return button;
     }
 
-    private FlowPane createInfoNode() {
+    protected Node createInfoNode() {
         FlowPane flowPane = new FlowPane();
         flowPane.getStyleClass().add("ikon-info-grid-pane");
         HBox.setHgrow(flowPane, Priority.ALWAYS);
@@ -147,8 +124,7 @@ public class IkonDetailView extends DetailView<Ikon> {
         return flowPane;
     }
 
-    private void downloadSVGHandler(ComboBox<SVGType> svgComboBox) {
-        SVGType type = svgComboBox.getSelectionModel().getSelectedItem();
+    protected void downloadSVGHandler(SVGType type) {
         SVGGraphics2D g2d = getSvgGraphics2D(type);
         if (WebAPI.isBrowser()) {
             webDownloadFile(g2d, type);
@@ -328,11 +304,16 @@ public class IkonDetailView extends DetailView<Ikon> {
         button.setFocusTraversable(false);
         button.getStyleClass().addAll("fill-button", "copy-button");
         button.setGraphic(new FontIcon(IkonUtil.download));
-        button.setOnAction(event -> downloadSVGHandler(svgTypeComboBox));
+        SVGType svgType = svgTypeComboBox.getSelectionModel().getSelectedItem();
+        button.setOnAction(event -> downloadSVGHandler(svgType));
 
         HBox box = new HBox(titleLabel, svgTypeComboBox, button);
         box.getStyleClass().add("row-box");
         flowPane.getChildren().add(box);
+    }
+
+    protected IconInfo getIconInfo() {
+        return iconInfo;
     }
 
 }

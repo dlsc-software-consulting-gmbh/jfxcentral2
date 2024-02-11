@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.app.pages;
 import com.dlsc.jfxcentral2.components.FeaturesContainer;
 import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.PaneBase;
+import com.dlsc.jfxcentral2.components.gridview.IkonDetailExtraView;
 import com.dlsc.jfxcentral2.components.gridview.IkonDetailView;
 import com.dlsc.jfxcentral2.components.headers.SingleIconDetailHeader;
 import com.dlsc.jfxcentral2.model.IconInfo;
@@ -38,7 +39,7 @@ public class SingleIconPage extends PageBase {
         header.sizeProperty().bind(sizeProperty());
 
         // content
-        IkonDetailView ikonDetailView = new IkonDetailView(iconInfo, isShareable);
+        IkonDetailView ikonDetailView = new IkonDetailExtraView(iconInfo);
         ikonDetailView.sizeProperty().bind(sizeProperty());
 
         PaneBase contentWrapper = new PaneBase();
