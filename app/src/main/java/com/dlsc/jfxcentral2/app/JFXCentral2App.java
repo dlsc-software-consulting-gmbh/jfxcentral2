@@ -223,16 +223,9 @@ public class JFXCentral2App extends Application {
             stage.setOnCloseRequest(evt -> System.exit(0));
         }
 
-        Desktop desktop = Desktop.getDesktop();
-        if (desktop != null && desktop.isSupported(Desktop.Action.APP_OPEN_URI)) {
-            desktop.setOpenURIHandler(e -> Platform.runLater(() -> {
-                ((Stage) scene.getWindow()).toFront();
-                String uri = e.getURI().toString();
-                String url = StringUtils.substringAfter(uri, "/");
-                LinkUtil.gotoPage(sessionManager, url);
-            }));
-        } else {
-            System.out.println("Does not support opening the custom schema URIs");
+        // add client URL handler
+        if (OSUtil.isAWTSupported()) {
+            addClientUrlHandler(scene, sessionManager);
         }
 
         stage.show();
@@ -381,6 +374,24 @@ public class JFXCentral2App extends Application {
             size.set(Size.MEDIUM);
         } else {
             size.set(Size.LARGE);
+        }
+    }
+
+
+    /**
+     * Adds a handler for processing client URLs.
+     */
+    public void addClientUrlHandler(Scene scene, SessionManager sessionManager) {
+        Desktop desktop = Desktop.getDesktop();
+        if (desktop != null && desktop.isSupported(Desktop.Action.APP_OPEN_URI)) {
+            desktop.setOpenURIHandler(e -> Platform.runLater(() -> {
+                ((Stage) scene.getWindow()).toFront();
+                String uri = e.getURI().toString();
+                String url = StringUtils.substringAfter(uri, "/");
+                LinkUtil.gotoPage(sessionManager, url);
+            }));
+        } else {
+            System.out.println("Does not support opening the custom schema URIs");
         }
     }
 
