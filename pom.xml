@@ -27,7 +27,7 @@
     <properties>
         <java.version>17</java.version>
         <!-- Version 20 because of performance -->
-        <javafx.version>20.0.2</javafx.version>
+        <javafx.version>21.0.2-sandec</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
         <jpro.version>2023.3.3</jpro.version>
