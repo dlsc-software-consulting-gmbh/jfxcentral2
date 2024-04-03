@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.gemsfx.util.StageManager;
 import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.RSSManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
@@ -279,10 +280,10 @@ public class JFXCentral2App extends Application {
                 .and(Route.get("/legal/cookies", r -> Response.view(new LegalPage(size, LegalPage.Section.COOKIES))))
                 .and(Route.get("/legal/privacy", r -> Response.view(new LegalPage(size, LegalPage.Section.PRIVACY))))
                 .and(Route.get("/links", r -> Response.view(new LinksOfTheWeekPage(size))))
-                .and(Route.get("/links/rss", r -> Response.view(new LinksOfTheWeekPage(size)))) // TODO: how to return raw data?
                 .and(Route.get("/team", r -> Response.view(new TeamPage(size))))
                 .and(Route.get("/openjfx", r -> Response.view(new OpenJFXPage(size))))
                 .and(Route.get("/documentation", r -> Response.view(new DocumentationCategoryPage(size))))
+                .and(Route.get("/rss/links", r -> Response.view(RSSManager.createRSS())))
                 .filter(FooterFilter.create(size))
                 .and(Route.get("/refresh", r -> {
                     RepositoryManager.prepareForRefresh();
