@@ -86,6 +86,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
@@ -283,7 +284,7 @@ public class JFXCentral2App extends Application {
                 .and(Route.get("/team", r -> Response.view(new TeamPage(size))))
                 .and(Route.get("/openjfx", r -> Response.view(new OpenJFXPage(size))))
                 .and(Route.get("/documentation", r -> Response.view(new DocumentationCategoryPage(size))))
-                .and(Route.get("/rss/links", r -> Response.view(RSSManager.createRSS())))
+                .and(Route.get("/rss/links", r -> Response.view(View.fromNode(new Text(RSSManager.createRSS())))))
                 .filter(FooterFilter.create(size))
                 .and(Route.get("/refresh", r -> {
                     RepositoryManager.prepareForRefresh();
