@@ -512,7 +512,7 @@
                     <releaseName>jfxcentral</releaseName>
                     <localJVMArgs>-Ddevelop=false</localJVMArgs>
                     <port>8088</port>
-                    <javafxVersion>20</javafxVersion>
+                    <javafxVersion>22</javafxVersion>
                 </configuration>
             </plugin>
 

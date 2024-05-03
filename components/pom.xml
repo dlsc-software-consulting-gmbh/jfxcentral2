@@ -447,5 +447,10 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>one.jpro.platform</groupId>
+            <artifactId>jpro-internal-util</artifactId>
+            <version>0.2.17</version>
+        </dependency>
     </dependencies>
 </project>

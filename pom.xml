@@ -30,8 +30,8 @@
         <javafx.version>20.0.2</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2023.3.3</jpro.version>
-        <jpro.platform.version>0.2.10</jpro.platform.version>
+        <jpro.version>2024.1.1-M3</jpro.version>
+        <jpro.platform.version>0.2.17</jpro.platform.version>
         <batik.version>1.16</batik.version>
         <attach.version>4.0.19</attach.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -196,7 +196,7 @@
             <dependency>
                 <groupId>SANDEC</groupId>
                 <artifactId>simplefx_2.12</artifactId>
-                <version>3.2.28</version>
+                <version>3.2.32</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.openjfx</groupId>
@@ -267,7 +267,7 @@
             <dependency>
                 <groupId>org.json</groupId>
                 <artifactId>json</artifactId>
-                <version>20231013</version>
+                <version>20240303</version>
             </dependency>
             <dependency>
                 <groupId>commons-logging</groupId>
@@ -324,6 +324,18 @@
             </dependency>
 
             <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.16.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>24.1.0</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>2.10.1</version>
@@ -332,13 +344,13 @@
             <dependency>
                 <groupId>org.eclipse.jgit</groupId>
                 <artifactId>org.eclipse.jgit</artifactId>
-                <version>6.6.1.202309021850-r</version>
+                <version>6.9.0.202403050737-r</version>
             </dependency>
 
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>2.0.9</version>
+                <version>2.0.12</version>
             </dependency>
 
             <dependency>
