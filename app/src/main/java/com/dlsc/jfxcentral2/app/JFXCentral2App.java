@@ -279,7 +279,6 @@ public class JFXCentral2App extends Application {
                 .and(Route.get("/legal/cookies", r -> Response.view(new LegalPage(size, LegalPage.Section.COOKIES))))
                 .and(Route.get("/legal/privacy", r -> Response.view(new LegalPage(size, LegalPage.Section.PRIVACY))))
                 .and(Route.get("/links", r -> Response.view(new LinksOfTheWeekPage(size))))
-                .and(Route.get("/links/rss", r -> Response.view(new LinksOfTheWeekPage(size)))) // TODO: how to return raw data?
                 .and(Route.get("/team", r -> Response.view(new TeamPage(size))))
                 .and(Route.get("/openjfx", r -> Response.view(new OpenJFXPage(size))))
                 .and(Route.get("/documentation", r -> Response.view(new DocumentationCategoryPage(size))))
