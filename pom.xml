@@ -326,7 +326,7 @@
             <dependency>
                 <groupId>com.dlsc.jfxcentral</groupId>
                 <artifactId>model</artifactId>
-                <version>1.36.0</version>
+                <version>1.37.0</version>
             </dependency>
 
             <dependency>
