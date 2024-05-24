@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.utils;
 
-import one.jpro.platform.internal.openlink.util.PlatformUtils;
+import one.jpro.platform.internal.util.PlatformUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class OSUtil {
