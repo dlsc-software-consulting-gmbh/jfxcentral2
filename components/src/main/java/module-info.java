@@ -95,7 +95,6 @@ open module com.dlsc.jfxcentral2.components {
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
     requires com.rometools.rome;
-    requires one.jpro.platform.internal.util;
     // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.components;
