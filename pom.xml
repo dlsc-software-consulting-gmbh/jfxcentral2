@@ -30,8 +30,8 @@
         <javafx.version>20.0.2</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2023.3.3</jpro.version>
-        <jpro.platform.version>0.2.10</jpro.platform.version>
+        <jpro.version>2024.2.0</jpro.version>
+        <jpro.platform.version>0.3.1</jpro.platform.version>
         <batik.version>1.16</batik.version>
         <attach.version>4.0.19</attach.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -314,7 +314,7 @@
             <dependency>
                 <groupId>com.dlsc.jfxcentral</groupId>
                 <artifactId>model</artifactId>
-                <version>1.36.0</version>
+                <version>1.37.0</version>
             </dependency>
 
             <dependency>
