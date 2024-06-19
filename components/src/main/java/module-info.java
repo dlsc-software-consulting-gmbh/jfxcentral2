@@ -32,6 +32,7 @@ open module com.dlsc.jfxcentral2.components {
     requires com.google.gson;
 
     requires one.jpro.platform.image.manager;
+    requires one.jpro.platform.internal.util;
 
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;

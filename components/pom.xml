@@ -196,6 +196,11 @@
             <artifactId>jpro-routing-core</artifactId>
             <version>${jpro.platform.version}</version>
         </dependency>
+        <dependency>
+            <groupId>one.jpro.platform</groupId>
+            <artifactId>jpro-internal-util</artifactId>
+            <version>${jpro.platform.version}</version>
+        </dependency>
 
         <!--    ** Icon pack dependencies START **  -->
         <dependency>
@@ -446,6 +451,11 @@
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>one.jpro.platform</groupId>
+            <artifactId>jpro-internal-util</artifactId>
+            <version>${jpro.platform.version}</version>
         </dependency>
     </dependencies>
 </project>
