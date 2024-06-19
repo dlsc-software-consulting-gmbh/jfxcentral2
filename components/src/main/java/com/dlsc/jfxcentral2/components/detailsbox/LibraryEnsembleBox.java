@@ -35,7 +35,7 @@ public class LibraryEnsembleBox extends PaneBase {
 
         HBox.setHgrow(markdownView, Priority.ALWAYS);
 
-        String url = "https://www.jfx-ensemble.com/?page=project/" + URLEncoder.encode(library.getName(), StandardCharsets.UTF_8);
+        String url = "https://www.jfx-ensemble.com/project/" + URLEncoder.encode(library.getName(), StandardCharsets.UTF_8);
         markdownView.setMdString("Online demos are available for this library on the JFX-Ensemble website. These demos can be [run in the browser](" + url + ") via JPro (free for open source projects).");
         ExternalLinkUtil.setExternalLink(markdownView, url, library.getName());
         ExternalLinkUtil.setExternalLink(imageView, url, library.getName());
