@@ -1,0 +1,26 @@
+.bottom-bar {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+    -fx-background-color: -white;
+    -fx-padding: 0 0 15px 0;
+}
+
+.bottom-bar .toggle-button {
+    -fx-content-display: top;
+    -fx-background-color: -white;
+    -fx-text-fill: -grey-100;
+    -fx-padding: 2px;
+}
+
+.bottom-bar .toggle-button .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-icon-color: -grey-100;
+}
+
+.bottom-bar .toggle-button:selected {
+    -fx-text-fill: -bright-blue;
+}
+
+.bottom-bar .toggle-button:selected .ikonli-font-icon {
+    -fx-icon-color: -bright-blue;
+}

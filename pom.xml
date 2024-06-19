@@ -22,6 +22,7 @@
         <module>sampler</module>
         <module>app</module>
         <module>iconfont</module>
+        <module>mobile</module>
     </modules>
 
     <properties>
@@ -120,6 +121,13 @@
                 <artifactId>components</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.dlsc.jfxcentral2</groupId>
+                <artifactId>mobile</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.dlsc.jfxcentral2</groupId>

@@ -1,35 +1,42 @@
-open module com.dlsc.jfxcentral2.app {
+import org.kordamp.ikonli.IkonProvider;
 
+open module com.dlsc.jfxcentral2.mobile {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
     requires javafx.swing;
+    requires batik.dom;
+    requires batik.svggen;
+    requires com.github.weisj.jsvg;
 
-    requires com.gluonhq.attach.display;
-    requires com.gluonhq.attach.browser;
-    requires com.gluonhq.attach.statusbar;
-
-    requires org.apache.commons.io;
-    requires org.apache.commons.lang3;
-
-    requires jfxcentral.data;
     requires fr.brouillard.oss.cssfx;
 
-    requires com.dlsc.jfxcentral2.iconfont;
-    requires com.dlsc.jfxcentral2.components;
+    requires com.gluonhq.attach.browser;
+    requires com.gluonhq.attach.display;
+    requires com.gluonhq.attach.video;
+//    requires com.gluonhq.attachextended.yt;
+
+    requires jfxcentral.data;
+    requires org.controlsfx.controls;
+    requires net.synedra.validatorfx;
     requires com.dlsc.gemsfx;
+    requires one.jpro.platform.mdfx;
+    requires org.apache.commons.lang3;
+    requires org.apache.commons.io;
 
-    requires com.dustinredmond.fxtrayicon;
-
+    requires jpro.webapi;
     requires one.jpro.platform.routing.core;
-    requires one.jpro.platform.routing.dev;
-    requires one.jpro.platform.freezedetector;
+    requires java.desktop;
+    requires commons.validator;
+    requires com.dlsc.jfxcentral2.iconfont;
+    requires com.google.gson;
 
-    requires org.eclipse.jgit;
+    requires one.jpro.platform.image.manager;
+    requires one.jpro.platform.internal.util;
 
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;
-
+    // ikonli icon packs START
     requires org.kordamp.ikonli.antdesignicons;
     requires org.kordamp.ikonli.bootstrapicons;
     requires org.kordamp.ikonli.boxicons;
@@ -87,12 +94,11 @@ open module com.dlsc.jfxcentral2.app {
     requires org.kordamp.ikonli.whhg;
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
-    requires com.gluonhq.attach.util;
-    requires com.dlsc.jfxcentral2.mobile;
+    requires com.rometools.rome;
+    requires com.dlsc.jfxcentral2.components;
+    // ikonli icon packs END
 
-    exports com.dlsc.jfxcentral2.app;
-    exports com.dlsc.jfxcentral2.app.pages;
-    exports com.dlsc.jfxcentral2.app.stage;
-    exports com.dlsc.jfxcentral2.app.service;
-    exports com.dlsc.jfxcentral2.app.pages.details;
+    exports com.dlsc.jfxcentral2.mobile;
+
+    uses IkonProvider;
 }

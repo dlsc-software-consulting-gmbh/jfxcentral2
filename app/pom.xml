@@ -424,6 +424,10 @@
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-zondicons-pack</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.dlsc.jfxcentral2</groupId>
+            <artifactId>mobile</artifactId>
+        </dependency>
 
         <!--
         <dependency>

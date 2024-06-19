@@ -27,6 +27,11 @@
 
 		<dependency>
 			<groupId>com.dlsc.jfxcentral2</groupId>
+			<artifactId>mobile</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dlsc.jfxcentral2</groupId>
 			<artifactId>iconfont</artifactId>
 		</dependency>
 
