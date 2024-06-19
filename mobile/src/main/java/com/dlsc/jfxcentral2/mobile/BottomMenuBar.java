@@ -11,10 +11,10 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.Optional;
 
-public class BottomBar extends HBox {
+public class BottomMenuBar extends HBox {
 
-    public BottomBar() {
-        getStyleClass().add("bottom-bar");
+    public BottomMenuBar() {
+        getStyleClass().add("bottom-menu-bar");
 
         CustomToggleButton homeButton = new CustomToggleButton("Home", new FontIcon(MaterialDesign.MDI_HOME));
         homeButton.setOnAction(e -> Optional.ofNullable(getOnHomeAction()).ifPresent(Runnable::run));
@@ -25,7 +25,7 @@ public class BottomBar extends HBox {
         CustomToggleButton videosButton = new CustomToggleButton("Videos", new FontIcon(MaterialDesign.MDI_VIDEO));
         videosButton.setOnAction(e -> Optional.ofNullable(getOnVideosAction()).ifPresent(Runnable::run));
 
-        CustomToggleButton libraryButton = new CustomToggleButton("Library", new FontIcon(MaterialDesign.MDI_BOOKMARK));
+        CustomToggleButton libraryButton = new CustomToggleButton("Libraries", new FontIcon(MaterialDesign.MDI_BOOKMARK));
         libraryButton.setOnAction(e -> Optional.ofNullable(getOnLibraryAction()).ifPresent(Runnable::run));
 
         getChildren().addAll(homeButton, newsButton, videosButton, libraryButton);
