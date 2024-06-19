@@ -16,16 +16,20 @@ public class BottomMenuBar extends HBox {
     public BottomMenuBar() {
         getStyleClass().add("bottom-menu-bar");
 
-        CustomToggleButton homeButton = new CustomToggleButton("Home", new FontIcon(MaterialDesign.MDI_HOME));
+        CustomToggleButton homeButton = new CustomToggleButton();
+        homeButton.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
         homeButton.setOnAction(e -> Optional.ofNullable(getOnHomeAction()).ifPresent(Runnable::run));
 
-        CustomToggleButton newsButton = new CustomToggleButton("News", new FontIcon(MaterialDesign.MDI_NEWSPAPER));
+        CustomToggleButton newsButton = new CustomToggleButton();
+        newsButton.setGraphic(new FontIcon(MaterialDesign.MDI_NEWSPAPER));
         newsButton.setOnAction(e -> Optional.ofNullable(getOnNewsAction()).ifPresent(Runnable::run));
 
-        CustomToggleButton videosButton = new CustomToggleButton("Videos", new FontIcon(MaterialDesign.MDI_VIDEO));
+        CustomToggleButton videosButton = new CustomToggleButton();
+        videosButton.setGraphic(new FontIcon(MaterialDesign.MDI_VIDEO));
         videosButton.setOnAction(e -> Optional.ofNullable(getOnVideosAction()).ifPresent(Runnable::run));
 
-        CustomToggleButton libraryButton = new CustomToggleButton("Libraries", new FontIcon(MaterialDesign.MDI_BOOKMARK));
+        CustomToggleButton libraryButton = new CustomToggleButton();
+        libraryButton.setGraphic(new FontIcon(MaterialDesign.MDI_BOOKMARK));
         libraryButton.setOnAction(e -> Optional.ofNullable(getOnLibraryAction()).ifPresent(Runnable::run));
 
         getChildren().addAll(homeButton, newsButton, videosButton, libraryButton);
