@@ -1,6 +1,13 @@
 package com.dlsc.jfxcentral2.mobile;
 
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
+import com.dlsc.jfxcentral2.components.SizeSupport;
+import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.ToggleGroup;
@@ -13,6 +20,8 @@ import java.util.Optional;
 
 public class BottomMenuBar extends HBox {
 
+    private final SizeSupport sizeSupport = new SizeSupport(this);
+
     public BottomMenuBar() {
         getStyleClass().add("bottom-menu-bar");
 
@@ -21,26 +30,45 @@ public class BottomMenuBar extends HBox {
         homeButton.setOnAction(e -> Optional.ofNullable(getOnHomeAction()).ifPresent(Runnable::run));
 
         CustomToggleButton newsButton = new CustomToggleButton();
-        newsButton.setGraphic(new FontIcon(MaterialDesign.MDI_NEWSPAPER));
+        newsButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(LinksOfTheWeek.class)));
         newsButton.setOnAction(e -> Optional.ofNullable(getOnNewsAction()).ifPresent(Runnable::run));
 
         CustomToggleButton videosButton = new CustomToggleButton();
-        videosButton.setGraphic(new FontIcon(MaterialDesign.MDI_VIDEO));
+        videosButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Video.class)));
         videosButton.setOnAction(e -> Optional.ofNullable(getOnVideosAction()).ifPresent(Runnable::run));
 
+        CustomToggleButton showCaseButton = new CustomToggleButton();
+        showCaseButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(RealWorldApp.class)));
+        showCaseButton.setOnAction(e -> Optional.ofNullable(getOnShowCaseAction()).ifPresent(Runnable::run));
+
+        // library button is not visible in small size.
         CustomToggleButton libraryButton = new CustomToggleButton();
-        libraryButton.setGraphic(new FontIcon(MaterialDesign.MDI_BOOKMARK));
+        libraryButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Library.class)));
+        libraryButton.managedProperty().bind(libraryButton.visibleProperty());
+        libraryButton.visibleProperty().bind(sizeProperty().isNotEqualTo(Size.SMALL));
         libraryButton.setOnAction(e -> Optional.ofNullable(getOnLibraryAction()).ifPresent(Runnable::run));
 
-        getChildren().addAll(homeButton, newsButton, videosButton, libraryButton);
+        getChildren().addAll(homeButton, newsButton, videosButton, showCaseButton, libraryButton);
 
         ToggleGroup toggleGroup = new ToggleGroup();
-        toggleGroup.getToggles().addAll(homeButton, newsButton, videosButton, libraryButton);
+        toggleGroup.getToggles().addAll(homeButton, newsButton, videosButton, showCaseButton, libraryButton);
 
         setMaxHeight(Region.USE_PREF_SIZE);
 
         // select home button by default
         homeButton.fire();
+    }
+
+    public final ObjectProperty<Size> sizeProperty() {
+        return sizeSupport.sizeProperty();
+    }
+
+    public final void setSize(Size size) {
+        sizeSupport.setSize(size);
+    }
+
+    public final Size getSize() {
+        return sizeSupport.getSize();
     }
 
     private final ObjectProperty<Runnable> onHomeAction = new SimpleObjectProperty<>(this, "onHomeAction");
@@ -97,6 +125,20 @@ public class BottomMenuBar extends HBox {
 
     public final void setOnLibraryAction(Runnable value) {
         onLibraryAction.set(value);
+    }
+
+    public final ObjectProperty<Runnable> onShowCaseAction = new SimpleObjectProperty<>(this, "onShowCaseAction");
+
+    public final ObjectProperty<Runnable> onShowCaseActionProperty() {
+        return onShowCaseAction;
+    }
+
+    public final Runnable getOnShowCaseAction() {
+        return onShowCaseAction.get();
+    }
+
+    public final void setOnShowCaseAction(Runnable value) {
+        onShowCaseAction.set(value);
     }
 
 }
