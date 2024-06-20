@@ -1,0 +1,53 @@
+/** ----------------------------------
+ * BottomMenuBar
+ */
+.bottom-menu-bar {
+    -fx-alignment: top-center;
+    -fx-background-color: -white;
+    -fx-padding: 5px 0 10px 0;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 1 0 0 0;
+}
+
+.bottom-menu-bar:sm {
+    -fx-spacing: 55px;
+    -fx-max-width: -sm-width;
+}
+
+.bottom-menu-bar:md {
+    -fx-spacing: 65px;
+    -fx-max-width: -md-width;
+}
+
+.bottom-menu-bar:lg {
+    -fx-spacing: 80px;
+    -fx-max-width: -lg-width;
+}
+
+.bottom-menu-bar .toggle-button {
+    -fx-content-display: graphic-only;
+    -fx-background-color: -white;
+    -fx-text-fill: -grey-100;
+    -fx-padding: 2px;
+}
+
+.bottom-menu-bar .toggle-button .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-icon-color: -grey-100;
+}
+
+.bottom-menu-bar:md .toggle-button .ikonli-font-icon {
+    -fx-icon-size: 26px;
+}
+
+.bottom-menu-bar:lg .toggle-button .ikonli-font-icon {
+    -fx-icon-size: 28px;
+}
+
+.bottom-menu-bar .toggle-button:selected {
+    -fx-text-fill: -bright-blue;
+}
+
+.bottom-menu-bar .toggle-button:selected .ikonli-font-icon {
+    -fx-icon-color: -bright-blue;
+}

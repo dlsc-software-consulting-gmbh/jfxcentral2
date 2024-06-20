@@ -66,6 +66,7 @@ import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.app.utils.PrettyScrollPane;
 import com.dlsc.jfxcentral2.app.utils.VideoPane;
+import com.dlsc.jfxcentral2.mobile.BottomMenuBar;
 import com.dlsc.jfxcentral2.model.IconInfo;
 import com.dlsc.jfxcentral2.model.IconInfoBuilder;
 import com.dlsc.jfxcentral2.model.Size;
@@ -99,7 +100,11 @@ import one.jpro.platform.routing.dev.StatisticsFilter;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.apache.commons.lang3.StringUtils;
 
-import java.awt.*;
+import java.awt.Desktop;
+import java.awt.Image;
+import java.awt.SystemTray;
+import java.awt.Taskbar;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Locale;
@@ -210,6 +215,7 @@ public class JFXCentral2App extends Application {
         scene.setFill(Color.web("#070B32"));
         scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
         scene.getStylesheets().add(Objects.requireNonNull(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(BottomMenuBar.class.getResource("/com/dlsc/jfxcentral2/mobile/mobile.css")).toExternalForm());
         // scene.focusOwnerProperty().addListener(it -> System.out.println("focus owner: " + scene.getFocusOwner()));
         updateSizeProperty(scene);
 
