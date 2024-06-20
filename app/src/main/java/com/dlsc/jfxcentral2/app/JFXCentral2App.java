@@ -73,6 +73,7 @@ import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
@@ -262,34 +263,34 @@ public class JFXCentral2App extends Application {
                 }))
                 .and(Route.redirect("/home", "/"))
                 .and(Route.redirect("/index", "/"))
-                .and(createCategoryOrDetailRoute("/blogs", Blog.class, () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/books", Book.class, () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/companies", Company.class, () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/downloads", Download.class, () -> new DownloadsCategoryPage(size), id -> new DownloadDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/libraries", Library.class, () -> new LibrariesCategoryPage(size), id -> new LibraryDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/people", Person.class, () -> new PeopleCategoryPage(size), id -> new PersonDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/real_world", RealWorldApp.class, () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // legacy routing for real world apps / showcases
-                .and(createCategoryOrDetailRoute("/showcases", RealWorldApp.class, () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/tips", Tip.class, () -> new TipCategoryPage(size), id -> new TipDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/tools", Tool.class, () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/tutorials", Tutorial.class, () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute("/videos", Video.class, () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/utilities", Utility.class, () -> new UtilitiesCategoryPage(size), id -> new UtilityDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute("/learn-javafx", LearnJavaFX.class, () -> new LearnJavaFXCategoryPage(size), id -> new LearnDetailsPage(size, LearnJavaFX.class, id)))
-                .and(createCategoryOrDetailRoute("/learn-mobile", LearnMobile.class, () -> new LearnMobileCategoryPage(size), id -> new LearnDetailsPage(size, LearnMobile.class, id)))
-                .and(createCategoryOrDetailRoute("/learn-raspberrypi", LearnRaspberryPi.class, () -> new LearnRaspberryPiCategoryPage(size), id -> new LearnDetailsPage(size, LearnRaspberryPi.class, id)))
-                .and(createIconPackOrDetailRoute("/icons"))
-                .and(Route.get("/credits", r -> Response.view(new CreditsPage(size))))
-                .and(Route.get("/legal", r -> Response.view(new LegalPage(size, LegalPage.Section.TERMS))))
-                .and(Route.get("/legal/terms", r -> Response.view(new LegalPage(size, LegalPage.Section.TERMS))))
-                .and(Route.get("/legal/cookies", r -> Response.view(new LegalPage(size, LegalPage.Section.COOKIES))))
-                .and(Route.get("/legal/privacy", r -> Response.view(new LegalPage(size, LegalPage.Section.PRIVACY))))
-                .and(Route.get("/links", r -> Response.view(new LinksOfTheWeekPage(size))))
-                .and(Route.get("/team", r -> Response.view(new TeamPage(size))))
-                .and(Route.get("/openjfx", r -> Response.view(new OpenJFXPage(size))))
-                .and(Route.get("/documentation", r -> Response.view(new DocumentationCategoryPage(size))))
+                .and(createCategoryOrDetailRoute(PagePath.BLOGS, Blog.class, () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.BOOKS, Book.class, () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.COMPANIES, Company.class, () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.DOWNLOADS, Download.class, () -> new DownloadsCategoryPage(size), id -> new DownloadDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.LIBRARIES, Library.class, () -> new LibrariesCategoryPage(size), id -> new LibraryDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.PEOPLE, Person.class, () -> new PeopleCategoryPage(size), id -> new PersonDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.REAL_WORLD, RealWorldApp.class, () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // legacy routing for real world apps / showcases
+                .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.TIPS, Tip.class, () -> new TipCategoryPage(size), id -> new TipDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.TOOLS, Tool.class, () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.TUTORIALS, Tutorial.class, () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.VIDEOS, Video.class, () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.UTILITIES, Utility.class, () -> new UtilitiesCategoryPage(size), id -> new UtilityDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.LEARN_JAVAFX, LearnJavaFX.class, () -> new LearnJavaFXCategoryPage(size), id -> new LearnDetailsPage(size, LearnJavaFX.class, id)))
+                .and(createCategoryOrDetailRoute(PagePath.LEARN_MOBILE, LearnMobile.class, () -> new LearnMobileCategoryPage(size), id -> new LearnDetailsPage(size, LearnMobile.class, id)))
+                .and(createCategoryOrDetailRoute(PagePath.LEARN_RASPBERRYPI, LearnRaspberryPi.class, () -> new LearnRaspberryPiCategoryPage(size), id -> new LearnDetailsPage(size, LearnRaspberryPi.class, id)))
+                .and(createIconPackOrDetailRoute(PagePath.ICONS))
+                .and(Route.get(PagePath.CREDITS, r -> Response.view(new CreditsPage(size))))
+                .and(Route.get(PagePath.LEGAL, r -> Response.view(new LegalPage(size, LegalPage.Section.TERMS))))
+                .and(Route.get(PagePath.LEGAL_TERMS, r -> Response.view(new LegalPage(size, LegalPage.Section.TERMS))))
+                .and(Route.get(PagePath.LEGAL_COOKIES, r -> Response.view(new LegalPage(size, LegalPage.Section.COOKIES))))
+                .and(Route.get(PagePath.LEGAL_PRIVACY, r -> Response.view(new LegalPage(size, LegalPage.Section.PRIVACY))))
+                .and(Route.get(PagePath.LINKS, r -> Response.view(new LinksOfTheWeekPage(size))))
+                .and(Route.get(PagePath.TEAM, r -> Response.view(new TeamPage(size))))
+                .and(Route.get(PagePath.OPENJFX, r -> Response.view(new OpenJFXPage(size))))
+                .and(Route.get(PagePath.DOCUMENTATION, r -> Response.view(new DocumentationCategoryPage(size))))
                 .filter(FooterFilter.create(size))
-                .and(Route.get("/refresh", r -> {
+                .and(Route.get(PagePath.REFRESH, r -> {
                     RepositoryManager.prepareForRefresh();
                     return Response.view(new RefreshPage(size));
                 }));
@@ -297,9 +298,9 @@ public class JFXCentral2App extends Application {
         // the following routes are only needed when we support user login
 
         if (SocialUtil.isSocialFeaturesEnabled()) {
-            route = route.and(Route.get("/login", r -> Response.view(new LoginPage(size))))
-                    .and(Route.get("/top", r -> Response.view(new TopContentPage(size))))
-                    .and(Route.get("/profile", r -> Response.view(new UserProfilePage(size))));
+            route = route.and(Route.get(PagePath.LOGIN, r -> Response.view(new LoginPage(size))))
+                    .and(Route.get(PagePath.TOP, r -> Response.view(new TopContentPage(size))))
+                    .and(Route.get(PagePath.PROFILE, r -> Response.view(new UserProfilePage(size))));
         }
 
         route = route.and(r -> Response.view(new ErrorPage(size, r)));
@@ -308,7 +309,7 @@ public class JFXCentral2App extends Application {
             route = route.filter(DevFilter.create());
             route = route.filter(StatisticsFilter.create());
         }
-        //if (!freezeDetectorStarted) {
+        // if (!freezeDetectorStarted) {
         //    new FreezeDetector(Duration.ofMillis(100));
         //    freezeDetectorStarted = true;
         //}

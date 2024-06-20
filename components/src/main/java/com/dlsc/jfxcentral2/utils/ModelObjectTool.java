@@ -44,7 +44,7 @@ public class ModelObjectTool {
             return ImageManager.getInstance().libraryFile(library, library.getFeaturedImageName());
         } else if (modelObject instanceof Video video) {
             return null;
-            //return ImageManager.getInstance().youTubeImageProperty(video);
+            // return ImageManager.getInstance().youTubeImageProperty(video);
         } else if (modelObject instanceof Book book) {
             return ImageManager.getInstance().bookCoverFile(book);
         } else if (modelObject instanceof Tip tip) {
@@ -86,40 +86,80 @@ public class ModelObjectTool {
 
     public static String getModelLink(ModelObject modelObject) {
         if (modelObject instanceof Tool tool) {
-            return "/tools/" + tool.getId();
+            return PagePath.TOOLS + "/" + tool.getId();
         } else if (modelObject instanceof Blog blog) {
-            return "/blogs/" + blog.getId();
+            return PagePath.BLOGS + "/" + blog.getId();
         } else if (modelObject instanceof Download download) {
-            return "/downloads/" + download.getId();
+            return PagePath.DOWNLOADS + "/" + download.getId();
         } else if (modelObject instanceof Library library) {
-            return "/libraries/" + library.getId();
+            return PagePath.LIBRARIES + "/" + library.getId();
         } else if (modelObject instanceof Video video) {
-            return "/videos/" + video.getId();
+            return PagePath.VIDEOS + "/" + video.getId();
         } else if (modelObject instanceof Book book) {
-            return "/books/" + book.getId();
+            return PagePath.BOOKS + "/" + book.getId();
         } else if (modelObject instanceof Tip tip) {
-            return "/tips/" + tip.getId();
+            return PagePath.TIPS + "/" + tip.getId();
         } else if (modelObject instanceof Company company) {
-            return "/companies/" + company.getId();
+            return PagePath.COMPANIES + "/" + company.getId();
         } else if (modelObject instanceof Person person) {
-            return "/people/" + person.getId();
+            return PagePath.PEOPLE + "/" + person.getId();
         } else if (modelObject instanceof Tutorial tutorial) {
-            return "/tutorials/" + tutorial.getId();
+            return PagePath.TUTORIALS + "/" + tutorial.getId();
         } else if (modelObject instanceof RealWorldApp app) {
-            return "/showcases/" + app.getId();
+            return PagePath.SHOWCASES + "/" + app.getId();
         } else if (modelObject instanceof News news) {
             // There is currently no news page
-            return "/news/" + news.getId();
+            return PagePath.NEWS + "/" + news.getId();
         } else if (modelObject instanceof IkonliPack pack) {
-            return "/icons/" + pack.getId();
+            return PagePath.ICONS + "/" + pack.getId();
         } else if (modelObject instanceof Utility utility) {
-            return "/utilities/" + utility.getId();
+            return PagePath.UTILITIES + "/" + utility.getId();
         } else if (modelObject instanceof LearnJavaFX learn) {
-            return "/learn-javafx/" + learn.getId();
+            return PagePath.LEARN_JAVAFX + "/" + learn.getId();
         } else if (modelObject instanceof LearnMobile learn) {
-            return "/learn-mobile/" + learn.getId();
+            return PagePath.LEARN_MOBILE + "/" + learn.getId();
         } else if (modelObject instanceof LearnRaspberryPi learn) {
-            return "/learn-raspberrypi/" + learn.getId();
+            return PagePath.LEARN_RASPBERRYPI + "/" + learn.getId();
+        }
+
+        return "";
+    }
+
+    public static String getCategoryLink(Class<? extends ModelObject> clazz) {
+        if (clazz == Blog.class) {
+            return PagePath.BLOGS;
+        } else if (clazz == Book.class) {
+            return PagePath.BOOKS;
+        } else if (clazz == Company.class) {
+            return PagePath.COMPANIES;
+        } else if (clazz == Download.class) {
+            return PagePath.DOWNLOADS;
+        } else if (clazz == Library.class) {
+            return PagePath.LIBRARIES;
+        } else if (clazz == Person.class) {
+            return PagePath.PEOPLE;
+        } else if (clazz == RealWorldApp.class) {
+            return PagePath.SHOWCASES;
+        } else if (clazz == Tip.class) {
+            return PagePath.TIPS;
+        } else if (clazz == Tool.class) {
+            return PagePath.TOOLS;
+        } else if (clazz == Tutorial.class) {
+            return PagePath.TUTORIALS;
+        } else if (clazz == Video.class) {
+            return PagePath.VIDEOS;
+        } else if (clazz == Utility.class) {
+            return PagePath.UTILITIES;
+        } else if (clazz == LearnJavaFX.class) {
+            return PagePath.LEARN_JAVAFX;
+        } else if (clazz == LearnMobile.class) {
+            return PagePath.LEARN_MOBILE;
+        } else if (clazz == LearnRaspberryPi.class) {
+            return PagePath.LEARN_RASPBERRYPI;
+        } else if (clazz == IkonliPack.class) {
+            return PagePath.ICONS;
+        } else if (clazz == News.class) {
+            return PagePath.NEWS;
         }
 
         return "";

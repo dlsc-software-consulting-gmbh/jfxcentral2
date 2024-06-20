@@ -4,22 +4,23 @@ import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.tiles.VideoGalleryTileView;
 import com.dlsc.jfxcentral2.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
-import com.gluonhq.attach.browser.BrowserService;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.LinkUtil;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class VideoGalleryView extends PaneBase {
 
@@ -74,7 +75,7 @@ public class VideoGalleryView extends PaneBase {
 
         Button button = new Button("VIEW ALL VIDEOS");
         button.getStyleClass().add("view-all");
-        LinkUtil.setLink(button, "/videos");
+        LinkUtil.setLink(button, PagePath.VIDEOS);
 
         Pane pane = isSmall() ?
                 new VBox(title, new Spacer(), button) :

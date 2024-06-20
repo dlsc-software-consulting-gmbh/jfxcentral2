@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.scene.image.Image;
 
 import java.util.Objects;
@@ -20,6 +21,6 @@ public class TutorialDetailHeader extends SimpleDetailHeader<Tutorial>  {
         setShareText("Found this tutorial on @JFXCentral: " + tutorial.getName());
         setShareTitle("Tutorial: " + tutorial.getName());
         setBackText("ALL TUTORIALS");
-        setBackUrl("/tutorials");
+        setBackUrl(PagePath.TUTORIALS);
     }
 }

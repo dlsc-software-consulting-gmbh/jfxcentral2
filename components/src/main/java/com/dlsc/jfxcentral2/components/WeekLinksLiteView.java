@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -38,7 +39,7 @@ public class WeekLinksLiteView extends PaneBase {
         viewAllButton = new Button("VIEW ALL LINKS OF THE WEEK");
         viewAllButton.getStyleClass().add("view-all-button");
         viewAllButton.setFocusTraversable(false);
-        LinkUtil.setLink(viewAllButton, "/links");
+        LinkUtil.setLink(viewAllButton, PagePath.LINKS);
 
         markdownView = new CustomMarkdownView();
         markdownView.getStyleClass().add("md-view");

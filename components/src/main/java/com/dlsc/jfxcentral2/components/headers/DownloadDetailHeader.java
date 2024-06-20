@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral2.utils.PagePath;
 
 public class DownloadDetailHeader extends SimpleDetailHeader<Download>  {
 
@@ -14,6 +15,6 @@ public class DownloadDetailHeader extends SimpleDetailHeader<Download>  {
         setShareText("Found this download on @JFXCentral: " + download.getName());
         setShareTitle("Download: " + download.getName());
         setBackText("ALL DOWNLOADS");
-        setBackUrl("/downloads");
+        setBackUrl(PagePath.DOWNLOADS);
     }
 }

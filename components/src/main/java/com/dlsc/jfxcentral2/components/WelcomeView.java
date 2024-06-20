@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -101,7 +102,7 @@ public class WelcomeView extends PaneBase {
         openJFXProjectButton = new Button("OpenJFX Project", openjfxRegion);
         openJFXProjectButton.getStyleClass().addAll("fill-button", "openjfx-button");
         openJFXProjectButton.setFocusTraversable(false);
-        LinkUtil.setLink(openJFXProjectButton, "/openjfx");
+        LinkUtil.setLink(openJFXProjectButton, PagePath.OPENJFX);
         setMinHeight(Region.USE_PREF_SIZE);
 
         if (!WebAPI.isBrowser()) {

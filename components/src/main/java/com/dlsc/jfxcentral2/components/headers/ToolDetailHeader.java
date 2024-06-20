@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import org.apache.commons.lang3.StringUtils;
 
 public class ToolDetailHeader extends SimpleDetailHeader<Tool>  {
@@ -19,6 +20,6 @@ public class ToolDetailHeader extends SimpleDetailHeader<Tool>  {
         setShareText("Found this tool on @JFXCentral: " + tool.getName());
         setShareTitle("Tool: " + tool.getName());
         setBackText("ALL TOOLS");
-        setBackUrl("/tools");
+        setBackUrl(PagePath.TOOLS);
     }
 }
