@@ -4,31 +4,16 @@
 .bottom-menu-bar {
     -fx-alignment: top-center;
     -fx-background-color: -white;
-    -fx-padding: 5px 0 10px 0;
+    -fx-padding: 5px 0 0 0;
     -fx-border-color: -grey-10;
     -fx-border-width: 1 0 0 0;
-}
-
-.bottom-menu-bar:sm {
-    -fx-spacing: 55px;
-    -fx-max-width: -sm-width;
-}
-
-.bottom-menu-bar:md {
-    -fx-spacing: 65px;
-    -fx-max-width: -md-width;
-}
-
-.bottom-menu-bar:lg {
-    -fx-spacing: 80px;
-    -fx-max-width: -lg-width;
 }
 
 .bottom-menu-bar .toggle-button {
     -fx-content-display: graphic-only;
     -fx-background-color: -white;
     -fx-text-fill: -grey-100;
-    -fx-padding: 2px;
+    -fx-padding: 0 0 5px 0;
 }
 
 .bottom-menu-bar .toggle-button .ikonli-font-icon {
@@ -36,12 +21,8 @@
     -fx-icon-color: -grey-100;
 }
 
-.bottom-menu-bar:md .toggle-button .ikonli-font-icon {
+.bottom-menu-bar:md-lg .toggle-button .ikonli-font-icon {
     -fx-icon-size: 26px;
-}
-
-.bottom-menu-bar:lg .toggle-button .ikonli-font-icon {
-    -fx-icon-size: 28px;
 }
 
 .bottom-menu-bar .toggle-button:selected {
@@ -50,4 +31,74 @@
 
 .bottom-menu-bar .toggle-button:selected .ikonli-font-icon {
     -fx-icon-color: -bright-blue;
+}
+
+/** ----------------------------------
+ * CategoryView
+ */
+.category-view {
+    -fx-background-color: -white;
+    -fx-padding: 5px 2px;
+    -fx-border-color: -grey-10;
+    -fx-vgap: 12px;
+}
+
+.category-view .button {
+    -fx-content-display: top;
+    -fx-background-color: transparent;
+    -fx-font-size: 12px;
+    -fx-icon-color: -grey-100;
+    -fx-padding: 0 5px;
+}
+
+.category-view:md .button {
+    -fx-font-size: 13px;
+}
+
+.category-view:lg .button {
+    -fx-font-size: 15px;
+}
+
+.category-view .button .ikonli-font-icon {
+    -fx-icon-size: 20px;
+}
+
+.category-view:md .button .ikonli-font-icon {
+    -fx-icon-size: 25px;
+}
+
+.category-view:lg .button .ikonli-font-icon {
+    -fx-icon-size: 28px;
+}
+
+.category-view .tools-button .ikonli-font-icon {
+    -fx-icon-color: #237fb0;
+}
+
+.category-view .videos-button .ikonli-font-icon {
+    -fx-icon-color: #FF5733;
+}
+
+.category-view .books-button .ikonli-font-icon {
+    -fx-icon-color: #3357FF;
+}
+
+.category-view .tutorials-button .ikonli-font-icon {
+    -fx-icon-color: #FF33A8;
+}
+
+.category-view .tips-button .ikonli-font-icon {
+    -fx-icon-color: #FFBD33;
+}
+
+.category-view .blog-button .ikonli-font-icon {
+    -fx-icon-color: #8D33FF;
+}
+
+.category-view .docs-button .ikonli-font-icon {
+    -fx-icon-color: #31a18c;
+}
+
+.category-view .companies-button .ikonli-font-icon {
+    -fx-icon-color: #FF5733;
 }

@@ -12,6 +12,7 @@ import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -26,31 +27,38 @@ public class BottomMenuBar extends HBox {
 
         CustomToggleButton homeButton = new CustomToggleButton();
         homeButton.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
+        homeButton.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(homeButton, Priority.ALWAYS);
         LinkUtil.setLink(homeButton, PagePath.HOME);
 
         CustomToggleButton linksWeekButton = new CustomToggleButton();
         linksWeekButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(LinksOfTheWeek.class)));
+        linksWeekButton.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(linksWeekButton, Priority.ALWAYS);
         LinkUtil.setLink(linksWeekButton, PagePath.LINKS);
 
         CustomToggleButton showCaseButton = new CustomToggleButton();
         showCaseButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(RealWorldApp.class)));
+        showCaseButton.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(showCaseButton, Priority.ALWAYS);
         LinkUtil.setLink(showCaseButton, PagePath.SHOWCASES);
 
         CustomToggleButton libraryButton = new CustomToggleButton();
         libraryButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Library.class)));
+        libraryButton.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(libraryButton, Priority.ALWAYS);
         LinkUtil.setLink(libraryButton, PagePath.LIBRARIES);
 
-        // people category is hidden when size is small
         CustomToggleButton peopleButton = new CustomToggleButton();
         peopleButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Person.class)));
-        peopleButton.managedProperty().bind(peopleButton.visibleProperty());
-        peopleButton.visibleProperty().bind(sizeProperty().isNotEqualTo(Size.SMALL));
+        peopleButton.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(peopleButton, Priority.ALWAYS);
         LinkUtil.setLink(peopleButton, PagePath.PEOPLE);
 
-        getChildren().addAll(homeButton, linksWeekButton, showCaseButton, libraryButton);
+        getChildren().addAll(homeButton, linksWeekButton, showCaseButton, libraryButton, peopleButton);
 
         ToggleGroup toggleGroup = new ToggleGroup();
-        toggleGroup.getToggles().addAll(homeButton, linksWeekButton, showCaseButton, libraryButton);
+        toggleGroup.getToggles().addAll(homeButton, linksWeekButton, showCaseButton, libraryButton, peopleButton);
 
         setMaxHeight(Region.USE_PREF_SIZE);
 
