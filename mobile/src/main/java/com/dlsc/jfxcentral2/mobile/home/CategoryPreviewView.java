@@ -15,6 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.PseudoClass;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -160,6 +161,7 @@ public class CategoryPreviewView extends VBox {
     private static class CategoryCell extends HBox {
 
         private static final String DEFAULT_STYLE_CLASS = "category-cell";
+        private static final PseudoClass SOCIAL_FEATURES_ENABLED = PseudoClass.getPseudoClass("social-enabled");
 
         public CategoryCell() {
             getStyleClass().add(DEFAULT_STYLE_CLASS);
@@ -201,6 +203,8 @@ public class CategoryPreviewView extends VBox {
             footer.managedProperty().bind(footer.visibleProperty());
             // TODO
             // footer.setVisible(SocialUtil.isSocialFeaturesEnabled());
+            // pseudoClassStateChanged(SOCIAL_FEATURES_ENABLED, footer.isVisible());
+            // footer.visibleProperty().addListener(it-> pseudoClassStateChanged(SOCIAL_FEATURES_ENABLED, footer.isVisible()));
 
             VBox cellContent = new VBox(titleLabel, descriptionLabel, footer);
             cellContent.getStyleClass().add("cell-content");
