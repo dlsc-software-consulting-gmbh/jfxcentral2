@@ -39,7 +39,6 @@
 .category-view {
     -fx-background-color: -white;
     -fx-padding: 5px 2px;
-    -fx-border-color: -grey-10;
     -fx-vgap: 12px;
 }
 
@@ -339,4 +338,15 @@
 }
 
 
+/** ----------------------------------
+ * MobileHomePage
+ */
+.mobile-home-page {
+    -fx-background-color: -white;
+    -fx-padding: 40px 15px 15px 15px;
+    -fx-spacing: 30px;
+}
 
+.mobile-home-page .search-text-field {
+    -fx-padding: 8px;
+}
