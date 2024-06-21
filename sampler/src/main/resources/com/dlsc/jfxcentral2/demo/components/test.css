@@ -139,3 +139,8 @@
 .double-text-field-container .value-label {
     -fx-text-fill: -grey-30;
 }
+
+.white-bg {
+    -fx-background-color: white;
+    -fx-padding: 10px;
+}

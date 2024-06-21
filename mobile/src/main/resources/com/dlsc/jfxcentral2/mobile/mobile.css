@@ -102,3 +102,91 @@
 .category-view .companies-button .ikonli-font-icon {
     -fx-icon-color: #FF5733;
 }
+
+/** ----------------------------------
+ * CategoryAdvancedView
+ */
+.category-tile-view {
+    -fx-background-color: -white;
+    -fx-padding: 5px 2px;
+    -fx-vgap: 20px;
+    -fx-hgap: 15px;
+}
+
+.category-tile-view .category-tile {
+    -fx-background-color: -white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 12, 0, 0, 0);
+    -fx-padding: 20px 20px 15px 20px;
+}
+
+.category-tile-view .category-tile-0  > .graphic-wrapper .ikonli-font-icon {
+    -fx-icon-color: #3d3dd7;
+}
+
+.category-tile-view .category-tile-1  > .graphic-wrapper .ikonli-font-icon {
+    -fx-icon-color: -red;
+}
+
+.category-tile-view .category-tile-2  > .graphic-wrapper .ikonli-font-icon {
+    -fx-icon-color: -blue;
+}
+
+.category-tile-view .category-tile-3  > .graphic-wrapper .ikonli-font-icon {
+    -fx-icon-color: -green;
+}
+
+.category-tile-view .category-tile-4  > .graphic-wrapper .ikonli-font-icon {
+    -fx-icon-color: -dark-green;
+}
+
+.category-tile-view .category-tile-5  > .graphic-wrapper .ikonli-font-icon {
+    -fx-icon-color: -purple;
+}
+
+.category-tile-view .category-tile-6  > .graphic-wrapper .ikonli-font-icon {
+    -fx-icon-color: -orange;
+}
+
+.category-tile-view .category-tile-7  > .graphic-wrapper .ikonli-font-icon {
+    -fx-icon-color: #237fb0;
+}
+
+.category-tile-view .category-tile .title {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-text-fill: -grey-100;
+    -fx-padding: 20px 0 10px 0;
+}
+
+.category-tile-view .category-tile .description {
+    -fx-font-family: "Roboto Condensed";
+    -fx-text-fill: -grey-60;
+}
+
+.category-tile-view:sm .category-tile .description {
+    -fx-font-size: 14px;
+}
+
+.category-tile-view:md .category-tile .description {
+    -fx-font-size: 15px;
+}
+
+.category-tile-view:lg .category-tile .description {
+    -fx-font-size: 16px;
+}
+
+.category-tile-view .category-tile > .graphic-wrapper {
+    -fx-max-width: 48px;
+    -fx-max-height: 48px;
+}
+
+.category-tile-view .category-tile > .graphic-wrapper .ikonli-font-icon {
+    -fx-icon-size: 48px;
+}
+
+
+
+
+
