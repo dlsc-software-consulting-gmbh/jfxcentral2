@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Utility;
+import com.dlsc.jfxcentral2.utils.PagePath;
 
 public class UtilityDetailHeader extends SimpleDetailHeader<Utility>  {
 
@@ -18,6 +19,6 @@ public class UtilityDetailHeader extends SimpleDetailHeader<Utility>  {
         setShareText("Found this utility on @JFXCentral: " + utility.getName());
         setShareTitle("Utility: " + utility.getName());
         setBackText("UTILITIES");
-        setBackUrl("/utilities");
+        setBackUrl(PagePath.UTILITIES);
     }
 }

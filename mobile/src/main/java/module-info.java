@@ -98,6 +98,7 @@ open module com.dlsc.jfxcentral2.mobile {
     requires com.dlsc.jfxcentral2.components;
     // ikonli icon packs END
 
+    exports com.dlsc.jfxcentral2.mobile.home;
     exports com.dlsc.jfxcentral2.mobile;
 
     uses IkonProvider;

@@ -2,30 +2,29 @@ package com.dlsc.jfxcentral2.demo.mobile;
 
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.mobile.BottomMenuBar;
+import com.dlsc.jfxcentral2.mobile.home.CategoryView;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
-public class HelloBottomMenuBar extends JFXCentralSampleBase {
+public class HelloCategoryView extends JFXCentralSampleBase {
 
-    private BottomMenuBar bottomMenuBar;
+    private final CategoryView categoryView = new CategoryView();
 
     @Override
     protected Region createControl() {
-        bottomMenuBar = new BottomMenuBar();
-        return new StackPane(bottomMenuBar);
+        return new StackPane(categoryView);
     }
 
     @Override
     public Node getControlPanel() {
         SizeComboBox sizeComboBox = new SizeComboBox();
-        bottomMenuBar.sizeProperty().bind(sizeComboBox.sizeProperty());
+        categoryView.sizeProperty().bind(sizeComboBox.sizeProperty());
         return sizeComboBox;
     }
 
     @Override
     public String getSampleName() {
-        return "BottomMenuBar";
+        return "CategoryView";
     }
 }

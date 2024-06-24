@@ -3,9 +3,13 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,11 +17,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import one.jpro.platform.routing.LinkUtil;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class WeekLinksLiteView extends PaneBase {
+
+    private static final PseudoClass MOBILE_PSEUDO = PseudoClass.getPseudoClass("mobile");
 
     private final VBox contentBox;
     private final CustomMarkdownView markdownView;
@@ -28,6 +35,10 @@ public class WeekLinksLiteView extends PaneBase {
 
     public WeekLinksLiteView() {
         getStyleClass().add("week-links-lite-view");
+
+        pseudoClassStateChanged(MOBILE_PSEUDO, isRunOnMobile());
+        runOnMobileProperty().addListener(it -> pseudoClassStateChanged(MOBILE_PSEUDO, isRunOnMobile()));
+
         title = new Label("Links of the week");
         title.getStyleClass().add("title");
 
@@ -35,10 +46,12 @@ public class WeekLinksLiteView extends PaneBase {
         subtitle.setWrapText(true);
         subtitle.getStyleClass().add("subtitle");
 
-        viewAllButton = new Button("VIEW ALL LINKS OF THE WEEK");
+        viewAllButton = new Button();
         viewAllButton.getStyleClass().add("view-all-button");
+        viewAllButton.textProperty().bind(runOnMobileProperty().map(it -> it ? "More" : "VIEW ALL LINKS OF THE WEEK"));
+        viewAllButton.graphicProperty().bind(runOnMobileProperty().map(it -> it ? new FontIcon("mdi-chevron-right") : null));
         viewAllButton.setFocusTraversable(false);
-        LinkUtil.setLink(viewAllButton, "/links");
+        LinkUtil.setLink(viewAllButton, PagePath.LINKS);
 
         markdownView = new CustomMarkdownView();
         markdownView.getStyleClass().add("md-view");
@@ -72,15 +85,15 @@ public class WeekLinksLiteView extends PaneBase {
         if (topBox != null) {
             contentBox.getChildren().clear();
         }
-        if (isSmall()) {
+        if (isSmall() && !isRunOnMobile()) {
             topBox = new VBox(title, subtitle, viewAllButton);
-            ((VBox)topBox).setAlignment(Pos.CENTER);
+            ((VBox) topBox).setAlignment(Pos.CENTER);
         } else {
             VBox titleBox = new VBox(title, subtitle);
             titleBox.getStyleClass().add("title-box");
             titleBox.setAlignment(Pos.CENTER_LEFT);
-            topBox = new HBox(titleBox,new Spacer(), viewAllButton);
-            ((HBox)topBox).setAlignment(Pos.CENTER);
+            topBox = new HBox(titleBox, new Spacer(), viewAllButton);
+            ((HBox) topBox).setAlignment(Pos.CENTER);
         }
         topBox.getStyleClass().add("top-box");
 
@@ -101,4 +114,19 @@ public class WeekLinksLiteView extends PaneBase {
     public void setLinksOfTheWeek(LinksOfTheWeek linksOfTheWeek) {
         this.linksOfTheWeek.set(linksOfTheWeek);
     }
+
+    private final BooleanProperty runOnMobile = new SimpleBooleanProperty(this, "runOnMobile", false);
+
+    public boolean isRunOnMobile() {
+        return runOnMobile.get();
+    }
+
+    public BooleanProperty runOnMobileProperty() {
+        return runOnMobile;
+    }
+
+    public void setRunOnMobile(boolean runOnMobile) {
+        this.runOnMobile.set(runOnMobile);
+    }
+
 }

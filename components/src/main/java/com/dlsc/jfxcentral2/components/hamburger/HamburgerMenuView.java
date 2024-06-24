@@ -19,6 +19,7 @@ import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -48,7 +49,7 @@ public class HamburgerMenuView extends PaneBase {
     public HamburgerMenuView(boolean mobile) {
         getStyleClass().add("hamburger-menu-view");
 
-        //top header
+        // top header
         CustomImageView imageView = new CustomImageView();
         imageView.getStyleClass().addAll("jfx-central-logo", "black");
 
@@ -71,44 +72,44 @@ public class HamburgerMenuView extends PaneBase {
 
         HamburgerMenu resourcesMenu = new HamburgerMenu("Resources");
         resourcesMenu.getItems().addAll(
-                new HamburgerMenuItem("Libraries", IkonUtil.getModelIkon(Library.class), "/libraries"),
-                new HamburgerMenuItem("Tools", IkonUtil.getModelIkon(Tool.class), "/tools"),
-                new HamburgerMenuItem("Videos", IkonUtil.getModelIkon(Video.class), "/videos"),
-                new HamburgerMenuItem("Books", IkonUtil.getModelIkon(Book.class), "/books"),
-                new HamburgerMenuItem("Blogs", IkonUtil.getModelIkon(Blog.class), "/blogs"),
-                new HamburgerMenuItem("Tips", IkonUtil.getModelIkon(Tip.class), "/tips"),
-                new HamburgerMenuItem("Tutorials", IkonUtil.getModelIkon(Tutorial.class), "/tutorials"),
-                new HamburgerMenuItem("Icons", IkonUtil.getModelIkon(IkonliPack.class), "/icons"),
-                new HamburgerMenuItem("Documentation", IkonUtil.getModelIkon(Documentation.class), "/documentation")
+                new HamburgerMenuItem("Libraries", IkonUtil.getModelIkon(Library.class), PagePath.LIBRARIES),
+                new HamburgerMenuItem("Tools", IkonUtil.getModelIkon(Tool.class), PagePath.TOOLS),
+                new HamburgerMenuItem("Videos", IkonUtil.getModelIkon(Video.class), PagePath.VIDEOS),
+                new HamburgerMenuItem("Books", IkonUtil.getModelIkon(Book.class), PagePath.BOOKS),
+                new HamburgerMenuItem("Blogs", IkonUtil.getModelIkon(Blog.class), PagePath.BLOGS),
+                new HamburgerMenuItem("Tips", IkonUtil.getModelIkon(Tip.class), PagePath.TIPS),
+                new HamburgerMenuItem("Tutorials", IkonUtil.getModelIkon(Tutorial.class), PagePath.TUTORIALS),
+                new HamburgerMenuItem("Icons", IkonUtil.getModelIkon(IkonliPack.class), PagePath.ICONS),
+                new HamburgerMenuItem("Documentation", IkonUtil.getModelIkon(Documentation.class), PagePath.DOCUMENTATION)
         );
 
         if (!mobile && !OSUtil.isAndroidOrIOS()) {
-            resourcesMenu.getItems().add(new HamburgerMenuItem("Downloads", IkonUtil.getModelIkon(Download.class), "/downloads"));
+            resourcesMenu.getItems().add(new HamburgerMenuItem("Downloads", IkonUtil.getModelIkon(Download.class), PagePath.DOWNLOADS));
         }
 
         HamburgerMenu communityMenu = new HamburgerMenu("Community");
         communityMenu.getItems().addAll(
-                new HamburgerMenuItem("People", IkonUtil.getModelIkon(Person.class), "/people"),
-                new HamburgerMenuItem("Companies", IkonUtil.getModelIkon(Company.class), "/companies"),
-                new HamburgerMenuItem("OpenJFX", MaterialDesign.MDI_GITHUB_BOX, "/openjfx"),
-                new HamburgerMenuItem("Links of the Week", IkonUtil.getModelIkon(LinksOfTheWeek.class), "/links"),
-                new HamburgerMenuItem("Meet the Team", JFXCentralIcon.TEAM, "/team")
+                new HamburgerMenuItem("People", IkonUtil.getModelIkon(Person.class), PagePath.PEOPLE),
+                new HamburgerMenuItem("Companies", IkonUtil.getModelIkon(Company.class), PagePath.COMPANIES),
+                new HamburgerMenuItem("OpenJFX", MaterialDesign.MDI_GITHUB_BOX, PagePath.OPENJFX),
+                new HamburgerMenuItem("Links of the Week", IkonUtil.getModelIkon(LinksOfTheWeek.class), PagePath.LINKS),
+                new HamburgerMenuItem("Meet the Team", JFXCentralIcon.TEAM, PagePath.TEAM)
         );
 
         if (SocialUtil.isSocialFeaturesEnabled()) {
-            communityMenu.getItems().add(new HamburgerMenuItem("Top Content", JFXCentralIcon.TOP_CONTENT, "/top"));
+            communityMenu.getItems().add(new HamburgerMenuItem("Top Content", JFXCentralIcon.TOP_CONTENT, PagePath.TOP));
         }
 
-        HamburgerMenu showcases = new HamburgerMenu("Showcases", "/showcases");
+        HamburgerMenu showcases = new HamburgerMenu("Showcases", PagePath.SHOWCASES);
 
         HamburgerMenu learnMenu = new HamburgerMenu("Learn");
         learnMenu.getItems().addAll(
-                new HamburgerMenuItem("Learn JavaFX", IkonUtil.learnJavaFX, "/learn-javafx"),
-                new HamburgerMenuItem("Learn Mobile", IkonUtil.learnMobile, "/learn-mobile"),
-                new HamburgerMenuItem("Learn Raspberry Pi", IkonUtil.learnRaspberryPi, "/learn-raspberrypi")
+                new HamburgerMenuItem("Learn JavaFX", IkonUtil.learnJavaFX, PagePath.LEARN_JAVAFX),
+                new HamburgerMenuItem("Learn Mobile", IkonUtil.learnMobile, PagePath.LEARN_MOBILE),
+                new HamburgerMenuItem("Learn Raspberry Pi", IkonUtil.learnRaspberryPi, PagePath.LEARN_RASPBERRYPI)
         );
 
-        HamburgerMenu utilities = new HamburgerMenu("Utilities", "/utilities");
+        HamburgerMenu utilities = new HamburgerMenu("Utilities", PagePath.UTILITIES);
 
         setMaxHeight(Region.USE_PREF_SIZE);
 

@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.scene.image.Image;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +30,6 @@ public class BookDetailHeader extends SimpleDetailHeader<Book> {
         setShareText("Found this book on @JFXCentral: " + book.getName() + " - " + book.getSubtitle());
         setShareTitle("JavaFX book: " + book.getName());
         setBackText("ALL BOOKS");
-        setBackUrl("/books");
+        setBackUrl(PagePath.BOOKS);
     }
 }

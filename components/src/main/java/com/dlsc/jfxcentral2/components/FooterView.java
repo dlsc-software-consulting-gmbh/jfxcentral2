@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.HPos;
@@ -75,10 +76,10 @@ public class FooterView extends PaneBase {
         Hyperlink privacyPolicyLink = new Hyperlink("Privacy policy");
         Hyperlink creditsLink = new Hyperlink("Credits");
 
-        LinkUtil.setLink(tcLink, "/legal/terms");
-        LinkUtil.setLink(cookiesLink, "/legal/cookies");
-        LinkUtil.setLink(privacyPolicyLink, "/legal/privacy");
-        LinkUtil.setLink(creditsLink, "/credits");
+        LinkUtil.setLink(tcLink, PagePath.LEGAL_TERMS);
+        LinkUtil.setLink(cookiesLink, PagePath.LEGAL_COOKIES);
+        LinkUtil.setLink(privacyPolicyLink, PagePath.LEGAL_PRIVACY);
+        LinkUtil.setLink(creditsLink, PagePath.CREDITS);
 
         return new LineNumberPane(new Label("Legal info"), null, tcLink, cookiesLink, privacyPolicyLink, creditsLink);
     }

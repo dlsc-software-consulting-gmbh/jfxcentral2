@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral2.utils.PagePath;
 
 public class ShowcaseDetailHeader extends SimpleDetailHeader<RealWorldApp>  {
 
@@ -16,6 +17,6 @@ public class ShowcaseDetailHeader extends SimpleDetailHeader<RealWorldApp>  {
         setShareText("Found this application on @JFXCentral: " + app.getName());
         setShareTitle("Application: " + app.getName());
         setBackText("ALL SHOWCASES");
-        setBackUrl("/showcases");
+        setBackUrl(PagePath.SHOWCASES);
     }
 }
