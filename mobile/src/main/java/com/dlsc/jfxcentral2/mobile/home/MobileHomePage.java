@@ -9,7 +9,6 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral2.components.SizeSupport;
-import com.dlsc.jfxcentral2.components.WeekLinksLiteView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.PagePath;
@@ -35,10 +34,9 @@ public class MobileHomePage extends VBox {
 
         List<LinksOfTheWeek> linksOfTheWeek = DataRepository2.getInstance().getLinksOfTheWeek();
 
-        WeekLinksLiteView weekLinksLiteView = new WeekLinksLiteView();
-        weekLinksLiteView.setRunOnMobile(true);
-        weekLinksLiteView.sizeProperty().bind(sizeProperty());
-        weekLinksLiteView.setLinksOfTheWeek(linksOfTheWeek.get(linksOfTheWeek.size() - 1));
+        WeekLinksView weekLinksView = new WeekLinksView();
+        weekLinksView.sizeProperty().bind(sizeProperty());
+        weekLinksView.setLinksOfTheWeek(linksOfTheWeek.get(linksOfTheWeek.size() - 1));
 
         CategoryPreviewView showCasePreviewView = createShowCasePreviewView();
         showCasePreviewView.sizeProperty().bind(sizeProperty());
@@ -52,7 +50,7 @@ public class MobileHomePage extends VBox {
         CategoryView categoryView = new CategoryView();
         categoryView.sizeProperty().bind(sizeProperty());
 
-        getChildren().addAll(searchTextField, categoryView, categoryAdvancedView, weekLinksLiteView, showCasePreviewView, tipsPreviewView, peoplePreviewView);
+        getChildren().addAll(searchTextField, categoryView, categoryAdvancedView, weekLinksView, showCasePreviewView, tipsPreviewView, peoplePreviewView);
     }
 
     // Size support

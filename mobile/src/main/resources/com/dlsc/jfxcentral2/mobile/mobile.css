@@ -337,6 +337,86 @@
     -fx-icon-color: -grey-30;
 }
 
+/** ------------------------------------
+ * WeekLinksLiteView
+ **/
+.week-links-view {
+    -fx-background-color: -white;
+    -fx-spacing: 10px;
+}
+
+.week-links-view:lg {
+    -fx-spacing: 15px;
+}
+
+.week-links-view .label {
+    -fx-text-fill: -grey-100;
+}
+
+.week-links-view .title-box {
+    -fx-spacing: 10px;
+}
+
+.week-links-view .view-all-button {
+    -fx-text-fill: -grey-60;
+    -fx-background-color: -white-a20;
+    -fx-background-radius: 30px;
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 16px;
+    -fx-content-display: right;
+}
+
+.week-links-view .view-all-button .ikonli-font-icon {
+    -fx-icon-color: -grey-60;
+    -fx-icon-size: 22px;
+}
+
+.week-links-view:lg .title {
+    -fx-font-size: 24px;
+}
+
+.week-links-view .subtitle {
+    -fx-text-fill: -grey-60;
+}
+
+.week-links-view:lg .subtitle {
+    -fx-font-size: 16px;
+}
+
+.week-links-view:md .title {
+    -fx-font-size: 20px;
+}
+
+.week-links-view:sm-md > .content-box .subtitle {
+    -fx-font-size: 14px;
+}
+
+.week-links-view:sm .title {
+    -fx-font-size: 18px;
+}
+
+.week-links-view:sm .subtitle {
+    -fx-text-alignment: center;
+    -fx-padding: 0 0 5px 0;
+}
+
+.week-links-view .md-view {
+    -fx-background-radius: 12px;
+    -fx-background-color: #fefefe;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 15, 0, 0, 0);
+}
+
+.week-links-view:md-lg .md-view {
+    -fx-padding: 10px 15px;
+}
+
+.week-links-view:sm .md-view {
+    -fx-padding: 5px 10px;
+}
+
+.week-links-view .md-view .markdown-listitem-dot {
+    -fx-text-fill: -mdfx-font-color;
+}
 
 /** ----------------------------------
  * MobileHomePage
