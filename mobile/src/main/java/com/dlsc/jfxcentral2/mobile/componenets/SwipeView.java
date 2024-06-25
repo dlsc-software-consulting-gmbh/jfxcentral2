@@ -107,7 +107,7 @@ public class SwipeView extends Control {
      * The ratio of the scene width (or height) that must be swiped to trigger a page switch.
      * If the swipe distance exceeds this ratio, the view will automatically switch to the next or previous page.
      */
-    private static final double DEFAULT_PAGE_SWITCH_RATIO = 0.15;
+    private static final double DEFAULT_PAGE_SWITCH_MIN_RATIO = 0.05;
 
     public SwipeView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
@@ -272,13 +272,13 @@ public class SwipeView extends Control {
      */
     public final DoubleProperty pageSwitchMinRatioProperty() {
         if (pageSwitchMinRatio == null) {
-            pageSwitchMinRatio = new SimpleDoubleProperty(this, "pageSwitchMinRatio", DEFAULT_PAGE_SWITCH_RATIO);
+            pageSwitchMinRatio = new SimpleDoubleProperty(this, "pageSwitchMinRatio", DEFAULT_PAGE_SWITCH_MIN_RATIO);
         }
         return pageSwitchMinRatio;
     }
 
     public final double getPageSwitchMinRatio() {
-        return pageSwitchMinRatio == null ? DEFAULT_PAGE_SWITCH_RATIO : pageSwitchMinRatio.get();
+        return pageSwitchMinRatio == null ? DEFAULT_PAGE_SWITCH_MIN_RATIO : pageSwitchMinRatio.get();
     }
 
     public final void setPageSwitchMinRatio(double value) {

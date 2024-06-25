@@ -72,7 +72,6 @@ public class HelloSwipeView extends JFXCentralSampleBase {
 
         ComboBox<Number> currentIndexComboBox = new ComboBox<>();
         currentIndexComboBox.getItems().addAll(0, 1, 2, 3, 4);
-        // currentIndexComboBox.valueProperty().addListener((obs, ov, nv) -> swipeView.setCurrentIndex(nv));
         swipeView.currentIndexProperty().bindBidirectional(currentIndexComboBox.valueProperty());
 
         return createSimpleControlPanel(
