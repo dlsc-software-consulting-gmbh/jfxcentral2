@@ -100,6 +100,8 @@ open module com.dlsc.jfxcentral2.mobile {
 
     exports com.dlsc.jfxcentral2.mobile.home;
     exports com.dlsc.jfxcentral2.mobile;
+    exports com.dlsc.jfxcentral2.mobile.componenets;
+    exports com.dlsc.jfxcentral2.mobile.skin;
 
     uses IkonProvider;
 }

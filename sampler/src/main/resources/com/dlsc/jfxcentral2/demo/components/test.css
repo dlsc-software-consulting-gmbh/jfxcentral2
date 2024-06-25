@@ -144,3 +144,24 @@
     -fx-background-color: white;
     -fx-padding: 10px;
 }
+
+.simple-control-pane {
+    -fx-spacing: 15px;
+}
+
+.simple-control-cell {
+    -fx-padding: 5px;
+}
+
+.simple-control-cell.with-border {
+    -fx-background-color: #f4f4f4;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.simple-control-cell > .control-cell-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #183962;
+}
