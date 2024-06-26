@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.demo.mobile;
 
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.mobile.componenets.SwipeView;
+import com.dlsc.jfxcentral2.mobile.componenets.PageView;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -16,17 +16,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
-public class HelloSwipeView extends JFXCentralSampleBase {
+public class HelloPageView extends JFXCentralSampleBase {
 
     private static final String[] WEB_COLORS = new String[]{"#8D33FF", "#9c27b0", "#3f51b5", "#2196f3", "#009688"};
 
-    private SwipeView swipeView;
+    private PageView pageView;
 
     @Override
     protected Region createControl() {
-        swipeView = new SwipeView();
-        swipeView.setPageCount(5);
-        swipeView.setPageFactory(index -> {
+        pageView = new PageView();
+        pageView.setPageCount(5);
+        pageView.setPageFactory(index -> {
             Label text = new Label(String.valueOf(index + 1));
             text.setAlignment(Pos.CENTER);
             text.setFont(Font.font(60));
@@ -40,39 +40,39 @@ public class HelloSwipeView extends JFXCentralSampleBase {
 
         // MarkdownView markdownView = new MarkdownView();
         // markdownView.setMdString("""
-        //         ### SwipeView Usage
-        //         > For horizontal swiping, the usage of SwipeView is as follows:
+        //         ### PageView Usage
+        //         > For horizontal swiping, the usage of PageView is as follows:
         //         1. `<<<<<` Drag from right to left will switch to the previous page.
         //         2. `>>>>>` Drag from left to right will switch to the next page.
         //         3. If the current page is the first page, releasing after swiping right will automatically return to the first page.
         //         4. If the current page is the last page, releasing after swiping left will automatically return to the last page.
         //         """);
 
-        return swipeView;
+        return pageView;
     }
 
     @Override
     public Node getControlPanel() {
         Spinner<Integer> switchDurationSpinner = new Spinner<>(50, 350, 200, 50);
-        swipeView.switchPageDurationProperty().bind(Bindings.createObjectBinding(() -> new Duration(switchDurationSpinner.getValue()), switchDurationSpinner.valueProperty()));
+        pageView.switchPageDurationProperty().bind(Bindings.createObjectBinding(() -> new Duration(switchDurationSpinner.getValue()), switchDurationSpinner.valueProperty()));
 
         Spinner<Integer> revertDurationSpinner = new Spinner<>(50, 350, 150, 50);
-        swipeView.revertPageDurationProperty().bind(Bindings.createObjectBinding(() -> new Duration(revertDurationSpinner.getValue()), revertDurationSpinner.valueProperty()));
+        pageView.revertPageDurationProperty().bind(Bindings.createObjectBinding(() -> new Duration(revertDurationSpinner.getValue()), revertDurationSpinner.valueProperty()));
 
-        Slider thresholdSlider = new Slider(0, 1, swipeView.getPageSwitchMinRatio());
-        swipeView.pageSwitchMinRatioProperty().bind(thresholdSlider.valueProperty());
+        Slider thresholdSlider = new Slider(0, 1, pageView.getPageSwitchMinRatio());
+        pageView.pageSwitchMinRatioProperty().bind(thresholdSlider.valueProperty());
 
-        Slider edgeThresholdSlider = new Slider(0, 1, swipeView.getEdgeSwipeMaxRatio());
-        swipeView.edgeSwipeMaxRatioProperty().bind(edgeThresholdSlider.valueProperty());
+        Slider edgeThresholdSlider = new Slider(0, 1, pageView.getEdgeSwipeMaxRatio());
+        pageView.edgeSwipeMaxRatioProperty().bind(edgeThresholdSlider.valueProperty());
 
         ComboBox<Orientation> swipeDirectionComboBox = new ComboBox<>();
         swipeDirectionComboBox.getItems().addAll(Orientation.HORIZONTAL, Orientation.VERTICAL);
         swipeDirectionComboBox.setValue(Orientation.HORIZONTAL);
-        swipeView.swipeOrientationProperty().bind(swipeDirectionComboBox.valueProperty());
+        pageView.swipeOrientationProperty().bind(swipeDirectionComboBox.valueProperty());
 
         ComboBox<Number> currentIndexComboBox = new ComboBox<>();
         currentIndexComboBox.getItems().addAll(0, 1, 2, 3, 4);
-        swipeView.currentIndexProperty().bindBidirectional(currentIndexComboBox.valueProperty());
+        pageView.currentPageIndexProperty().bindBidirectional(currentIndexComboBox.valueProperty());
 
         return createSimpleControlPanel(
                 createControlCell("Switch Duration", switchDurationSpinner),
@@ -86,7 +86,7 @@ public class HelloSwipeView extends JFXCentralSampleBase {
 
     @Override
     public String getSampleName() {
-        return "SwipeView";
+        return "PageView";
     }
 
 }

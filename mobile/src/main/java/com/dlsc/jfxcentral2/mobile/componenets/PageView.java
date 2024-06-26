@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.mobile.componenets;
 
-import com.dlsc.jfxcentral2.mobile.skin.SwipeViewSkin;
+import com.dlsc.jfxcentral2.mobile.skin.PageViewSkin;
 import javafx.animation.Interpolator;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -26,39 +26,37 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The SwipeView class is a custom JavaFX control that allows users to swipe between multiple pages.
+ * The PageView class is a custom JavaFX control designed to simulate mobile-like gesture-based page swiping.
  * <p>
- * It extends the Control class and provides properties and methods to customize the swipe behavior and appearance.
+ * It allows users to swipe horizontally or vertically between multiple pages, mimicking the behavior of mobile apps.
  * <p>
- * The SwipeView control uses a page factory to generate the content of each page. The page factory is a Callback that
- * takes an Integer (representing the index of the page) and returns a Node that is displayed as the content of the page.
+ * PageView uses a page factory to generate the content of each page. The page factory is a Callback that takes an
+ * Integer (representing the index of the page) and returns a Node that is displayed as the content of the page.
  * <p>
- * The SwipeView control supports horizontal and vertical swipe orientations. The swipe orientation can be set using
- * the swipeOrientation property.
+ * PageView provides properties to customize the swipe behavior:
+ * <ul>
+ * <li>swipeOrientation: Sets the swipe direction (horizontal or vertical).</li>
+ * <li>switchPageDuration: Specifies the duration of the page switch animation.</li>
+ * <li>switchPageInterpolator: Defines the interpolator for the page switch animation.</li>
+ * <li>revertPageDuration: Specifies the duration of the revert animation if the swipe is not enough to switch pages.</li>
+ * <li>edgeSwipeMaxRatio: Controls the maximum swipe allowed at the edges when there are no adjacent pages.</li>
+ * <li>pageSwitchMinRatio: Sets the minimum swipe distance required to switch pages.</li>
+ * </ul>
  * <p>
- * The SwipeView control provides properties to control the behavior of page switching. The switchPageDuration property
- * specifies the duration of the page switch animation. The switchPageInterpolator property specifies the interpolator
- * used for the page switch animation. The revertPageDuration property specifies the duration of the animation to
- * revert back to the current page when a swipe is not enough to switch to the next or previous page.
+ * PageView supports CSS styling with the default style class "page-view".
  * <p>
- * The SwipeView control also provides properties to control the maximum edge swipe ratio and the page switch threshold ratio.
- * The edgeSwipeMaxRatio determines the maximum amount of swiping allowed when there is no previous or next page.
- * The pageSwitchMinRatio determines the ratio of the scene width (or height) that must be swiped to trigger a page switch.
- * If the swipe distance exceeds this ratio, the view will automatically switch to the next or previous page.
- * <p>
- * The SwipeView control provides properties to get and set the current index and the page count. The currentIndexProperty
- * and currentIndex properties are used to get and set the current index. The pageCountProperty and pageCount properties are used
- * to get and set the page count.
- * <p>
- * The SwipeView control also provides methods to get and set the page factory, swipe orientation, edge swipe max ratio,
- * page switch min ratio, switch page duration, switch page interpolator, and revert page duration.
- * <p>
- * The SwipeView control supports CSS styling. The default style class for the SwipeView control is "swipe-view".
- * The switchPageDuration property and revertPageDuration property can also be styled using CSS.
+ * Example usage:
+ * <pre>
+ * {@code
+ * PageView pageView = new PageView();
+ * pageView.setPageFactory(index -> new Label("Page " + (index + 1)));
+ * pageView.setPageCount(5);
+ * }
+ * </pre>
  */
-public class SwipeView extends Control {
+public class PageView extends Control {
 
-    private static final String DEFAULT_STYLE_CLASS = "swipe-view";
+    private static final String DEFAULT_STYLE_CLASS = "page-view";
 
     /**
      * The default supported swipe orientation.
@@ -109,26 +107,26 @@ public class SwipeView extends Control {
      */
     private static final double DEFAULT_PAGE_SWITCH_MIN_RATIO = 0.05;
 
-    public SwipeView() {
+    public PageView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
     }
 
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new SwipeViewSkin(this);
+        return new PageViewSkin(this);
     }
 
     // current index
 
-    private final IntegerProperty currentIndex = new SimpleIntegerProperty(this, "currentIndex", 0) {
+    private final IntegerProperty currentPageIndex = new SimpleIntegerProperty(this, "currentPageIndex", 0) {
 
         @Override
         protected void invalidated() {
-            if (!currentIndex.isBound()) {
-                if (getCurrentIndex() < 0) {
-                    setCurrentIndex(0);
-                } else if (getCurrentIndex() > getPageCount() - 1) {
-                    setCurrentIndex(getPageCount() - 1);
+            if (!currentPageIndex.isBound()) {
+                if (getCurrentPageIndex() < 0) {
+                    setCurrentPageIndex(0);
+                } else if (getCurrentPageIndex() > getPageCount() - 1) {
+                    setCurrentPageIndex(getPageCount() - 1);
                 }
             }
         }
@@ -144,16 +142,16 @@ public class SwipeView extends Control {
      *
      * @return the current index property
      */
-    public final IntegerProperty currentIndexProperty() {
-        return currentIndex;
+    public final IntegerProperty currentPageIndexProperty() {
+        return currentPageIndex;
     }
 
-    public final int getCurrentIndex() {
-        return currentIndex == null ? 0 : currentIndex.get();
+    public final int getCurrentPageIndex() {
+        return currentPageIndex == null ? 0 : currentPageIndex.get();
     }
 
-    public final void setCurrentIndex(int index) {
-        currentIndexProperty().set(index);
+    public final void setCurrentPageIndex(int index) {
+        currentPageIndexProperty().set(index);
     }
 
     // page count
@@ -174,8 +172,8 @@ public class SwipeView extends Control {
 
 
     /**
-     * Retrieves the pageCount property of the SwipeView.
-     * This property represents the number of pages in the SwipeView.
+     * Retrieves the pageCount property of the PageView.
+     * This property represents the number of pages in the PageView.
      *
      * @return The IntegerProperty containing the pageCount value.
      */
@@ -196,8 +194,8 @@ public class SwipeView extends Control {
     private final ObjectProperty<Callback<Integer, Node>> pageFactory = new SimpleObjectProperty<>(this, "pageFactory");
 
     /**
-     * Returns the property that represents the page factory of the SwipeView.
-     * The page factory is used to generate the Node objects for each page in the SwipeView.
+     * Returns the property that represents the page factory of the PageView.
+     * The page factory is used to generate the Node objects for each page in the PageView.
      *
      * @return the page factory property
      */
@@ -218,7 +216,7 @@ public class SwipeView extends Control {
     private final ObjectProperty<Orientation> swipeOrientation = new SimpleObjectProperty<>(this, "swipeOrientation", DEFAULT_SWIPE_ORIENTATION);
 
     /**
-     * Returns the property that represents the swipe orientation of the SwipeView.
+     * Returns the property that represents the swipe orientation of the PageView.
      * The swipe orientation determines the direction in which the user can swipe to switch between pages.
      *
      * @return the swipe orientation property
@@ -240,7 +238,7 @@ public class SwipeView extends Control {
     private DoubleProperty edgeSwipeMaxRatio;
 
     /**
-     * Returns the property that represents the maximum edge swipe ratio of the SwipeView.
+     * Returns the property that represents the maximum edge swipe ratio of the PageView.
      * The edge swipe max ratio determines the maximum amount of swiping allowed when there is no previous or next page.
      *
      * @return the edge swipe max ratio property
@@ -265,7 +263,7 @@ public class SwipeView extends Control {
     private DoubleProperty pageSwitchMinRatio;
 
     /**
-     * Returns the property that represents the page switch min ratio of the SwipeView.
+     * Returns the property that represents the page switch min ratio of the PageView.
      * The page switch min ratio determines the ratio of the scene width (or height) that must be swiped to trigger a page switch.
      *
      * @return the page switch min ratio property
@@ -299,7 +297,7 @@ public class SwipeView extends Control {
             switchPageDuration = new StyleableObjectProperty<>(DEFAULT_SWITCH_PAGE_DURATION) {
                 @Override
                 public Object getBean() {
-                    return SwipeView.this;
+                    return PageView.this;
                 }
 
                 @Override
@@ -362,7 +360,7 @@ public class SwipeView extends Control {
             revertPageDuration = new StyleableObjectProperty<>(DEFAULT_REVERT_PAGE_DURATION) {
                 @Override
                 public Object getBean() {
-                    return SwipeView.this;
+                    return PageView.this;
                 }
 
                 @Override
@@ -412,26 +410,26 @@ public class SwipeView extends Control {
     }
 
     private static class StyleableProperties {
-        private static final CssMetaData<SwipeView, Duration> SWITCH_PAGE_DURATION = new CssMetaData<>("-fx-switch-page-duration", StyleConverter.getDurationConverter(), DEFAULT_SWITCH_PAGE_DURATION) {
+        private static final CssMetaData<PageView, Duration> SWITCH_PAGE_DURATION = new CssMetaData<>("-fx-switch-page-duration", StyleConverter.getDurationConverter(), DEFAULT_SWITCH_PAGE_DURATION) {
             @Override
-            public boolean isSettable(SwipeView node) {
+            public boolean isSettable(PageView node) {
                 return node.switchPageDuration == null || !node.switchPageDuration.isBound();
             }
 
             @Override
-            public StyleableProperty<Duration> getStyleableProperty(SwipeView node) {
+            public StyleableProperty<Duration> getStyleableProperty(PageView node) {
                 return (StyleableProperty<Duration>) node.switchPageDurationProperty();
             }
         };
 
-        private static final CssMetaData<SwipeView, Duration> REVERT_PAGE_DURATION = new CssMetaData<>("-fx-revert-page-duration", StyleConverter.getDurationConverter(), DEFAULT_REVERT_PAGE_DURATION) {
+        private static final CssMetaData<PageView, Duration> REVERT_PAGE_DURATION = new CssMetaData<>("-fx-revert-page-duration", StyleConverter.getDurationConverter(), DEFAULT_REVERT_PAGE_DURATION) {
             @Override
-            public boolean isSettable(SwipeView node) {
+            public boolean isSettable(PageView node) {
                 return node.revertPageDuration == null || !node.revertPageDuration.isBound();
             }
 
             @Override
-            public StyleableProperty<Duration> getStyleableProperty(SwipeView node) {
+            public StyleableProperty<Duration> getStyleableProperty(PageView node) {
                 return (StyleableProperty<Duration>) node.revertPageDurationProperty();
             }
         };
@@ -446,7 +444,7 @@ public class SwipeView extends Control {
     }
 
     public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
-        return SwipeView.StyleableProperties.STYLEABLES;
+        return PageView.StyleableProperties.STYLEABLES;
     }
 
     @Override
