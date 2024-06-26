@@ -410,7 +410,7 @@ public class PageView extends Control {
     }
 
     private static class StyleableProperties {
-        private static final CssMetaData<PageView, Duration> SWITCH_PAGE_DURATION = new CssMetaData<>("-fx-switch-page-duration", StyleConverter.getDurationConverter(), DEFAULT_SWITCH_PAGE_DURATION) {
+        private static final CssMetaData<PageView, Duration> SWITCH_PAGE_DURATION = new CssMetaData<>("-fx-switch-duration", StyleConverter.getDurationConverter(), DEFAULT_SWITCH_PAGE_DURATION) {
             @Override
             public boolean isSettable(PageView node) {
                 return node.switchPageDuration == null || !node.switchPageDuration.isBound();
@@ -422,7 +422,7 @@ public class PageView extends Control {
             }
         };
 
-        private static final CssMetaData<PageView, Duration> REVERT_PAGE_DURATION = new CssMetaData<>("-fx-revert-page-duration", StyleConverter.getDurationConverter(), DEFAULT_REVERT_PAGE_DURATION) {
+        private static final CssMetaData<PageView, Duration> REVERT_PAGE_DURATION = new CssMetaData<>("-fx-revert-duration", StyleConverter.getDurationConverter(), DEFAULT_REVERT_PAGE_DURATION) {
             @Override
             public boolean isSettable(PageView node) {
                 return node.revertPageDuration == null || !node.revertPageDuration.isBound();
