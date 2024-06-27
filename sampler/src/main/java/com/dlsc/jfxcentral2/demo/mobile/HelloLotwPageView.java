@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral2.demo.mobile;
 
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.mobile.LotwPageView;
+import com.dlsc.jfxcentral2.mobile.pages.MobileLinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -10,12 +10,12 @@ import javafx.scene.layout.Region;
 
 public class HelloLotwPageView extends JFXCentralSampleBase {
 
-    private LotwPageView lotwPageView;
+    private MobileLinksOfTheWeekPage mobileLinksOfTheWeekPage;
 
     @Override
     protected Region createControl() {
-        lotwPageView = new LotwPageView();
-        ScrollPane scrollPane = new ScrollPane(lotwPageView);
+        mobileLinksOfTheWeekPage = new MobileLinksOfTheWeekPage();
+        ScrollPane scrollPane = new ScrollPane(mobileLinksOfTheWeekPage);
         scrollPane.setFitToWidth(true);
         return scrollPane;
     }
@@ -23,7 +23,7 @@ public class HelloLotwPageView extends JFXCentralSampleBase {
     @Override
     public Node getControlPanel() {
         SizeComboBox sizeComboBox = new SizeComboBox(Size.MEDIUM);
-        lotwPageView.sizeProperty().bind(sizeComboBox.sizeProperty());
+        mobileLinksOfTheWeekPage.sizeProperty().bind(sizeComboBox.sizeProperty());
 
         return sizeComboBox;
     }

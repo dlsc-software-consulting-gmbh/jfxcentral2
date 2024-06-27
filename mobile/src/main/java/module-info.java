@@ -99,9 +99,11 @@ open module com.dlsc.jfxcentral2.mobile {
     // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.mobile.home;
-    exports com.dlsc.jfxcentral2.mobile;
     exports com.dlsc.jfxcentral2.mobile.componenets;
     exports com.dlsc.jfxcentral2.mobile.skin;
+    exports com.dlsc.jfxcentral2.mobile.events;
+    exports com.dlsc.jfxcentral2.mobile.util;
+    exports com.dlsc.jfxcentral2.mobile.pages;
 
     uses IkonProvider;
 }

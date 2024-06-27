@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="JFXCentral2MobileApp" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.dlsc.jfxcentral2.app.JFXCentral2MobileApp" />
+    <module name="app" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.dlsc.jfxcentral2.app.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

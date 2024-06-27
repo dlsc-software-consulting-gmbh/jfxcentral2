@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral2.demo.mobile;
 
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.mobile.BottomMenuBar;
+import com.dlsc.jfxcentral2.mobile.componenets.BottomMenuBar;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;

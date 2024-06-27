@@ -5,7 +5,9 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
+import com.dlsc.jfxcentral2.mobile.util.MobileLinkUtil;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -43,10 +45,7 @@ public class WeekLinksView extends VBox {
         viewAllButton.setText("More");
         viewAllButton.setGraphic(new FontIcon("mdi-chevron-right"));
         viewAllButton.setFocusTraversable(false);
-        viewAllButton.setOnAction(evt -> {
-            // TODO
-            System.out.println("View all links of the week");
-        });
+        viewAllButton.setOnAction(evt -> MobileLinkUtil.getToPage(PagePath.LINKS));
 
         HBox topBox = new HBox(titleBox, new Spacer(), viewAllButton);
         topBox.setAlignment(Pos.CENTER);

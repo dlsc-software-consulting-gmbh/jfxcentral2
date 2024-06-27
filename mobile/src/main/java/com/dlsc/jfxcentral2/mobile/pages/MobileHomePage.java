@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.mobile.home;
+package com.dlsc.jfxcentral2.mobile.pages;
 
 import com.dlsc.gemsfx.SearchTextField;
 import com.dlsc.jfxcentral.data.DataRepository2;
@@ -9,6 +9,10 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral2.components.SizeSupport;
+import com.dlsc.jfxcentral2.mobile.home.CategoryAdvancedView;
+import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
+import com.dlsc.jfxcentral2.mobile.home.CategoryView;
+import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.PagePath;
@@ -22,6 +26,11 @@ import java.util.List;
 public class MobileHomePage extends VBox {
 
     private final SizeSupport sizeSupport = new SizeSupport(this);
+
+    public MobileHomePage(ObjectProperty<Size> size) {
+        this();
+        sizeProperty().bind(size);
+    }
 
     public MobileHomePage() {
         getStyleClass().add("mobile-home-page");
