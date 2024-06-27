@@ -254,15 +254,15 @@
 }
 
 .category-preview-view > .content > .category-cell .avatar-view {
-    -fx-avatar-size: 90px;
+    -fx-avatar-size: 100px;
 }
 
 .category-preview-view:md > .content > .category-cell .avatar-view {
-    -fx-avatar-size: 95px;
+    -fx-avatar-size: 115px;
 }
 
 .category-preview-view:lg > .content > .category-cell .avatar-view {
-    -fx-avatar-size: 100px;
+    -fx-avatar-size: 125px;
 }
 
 .category-preview-view > .content > .category-cell .cell-content {

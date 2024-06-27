@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.mobile;
+package com.dlsc.jfxcentral2.mobile.pages;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
@@ -21,10 +21,10 @@ import org.kordamp.ikonli.material2.Material2RoundAL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Collections;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
 
-public class LotwPageView extends VBox {
+public class MobileLinksOfTheWeekPage extends VBox {
 
     private static final String DEFAULT_STYLE_CLASS = "lotw-page-view";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
@@ -32,22 +32,26 @@ public class LotwPageView extends VBox {
     private final SizeSupport sizeSupport = new SizeSupport(this);
     private final LinksContentView[] cachedContentAry = new LinksContentView[3];
 
-    public LotwPageView() {
+    public MobileLinksOfTheWeekPage(ObjectProperty<Size> size) {
+        this();
+        sizeProperty().bind(size);
+    }
+
+    public MobileLinksOfTheWeekPage() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
         // top header
         LinksOfTheWeekHeader header = new LinksOfTheWeekHeader();
         header.sizeProperty().bind(sizeProperty());
 
-        // center content
-        List<LinksOfTheWeek> linksOfTheWeek = DataRepository2.getInstance().getLinksOfTheWeek();
-        // Reverse the list to show the latest links first
-        Collections.reverse(linksOfTheWeek);
+        // sort by date
+        ArrayList<LinksOfTheWeek> sortedLinks = new ArrayList<>(DataRepository2.getInstance().getLinksOfTheWeek());
+        sortedLinks.sort(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed());
 
         PageView pageView = new PageView();
-        pageView.setPageCount(linksOfTheWeek.size());
+        pageView.setPageCount(sortedLinks.size());
         pageView.setPageFactory(index -> {
-            LinksOfTheWeek weakLinks = linksOfTheWeek.get(index);
+            LinksOfTheWeek weakLinks = sortedLinks.get(index);
 
             LinksContentView contentView = getLinksContentView(index);
             contentView.setDate(weakLinks.getCreatedOn());

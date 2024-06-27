@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral2.demo.mobile;
 
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.mobile.home.MobileHomePage;
+import com.dlsc.jfxcentral2.mobile.pages.MobileHomePage;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;

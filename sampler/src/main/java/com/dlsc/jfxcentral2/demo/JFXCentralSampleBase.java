@@ -5,7 +5,7 @@
  */
 package com.dlsc.jfxcentral2.demo;
 
-import com.dlsc.jfxcentral2.mobile.BottomMenuBar;
+import com.dlsc.jfxcentral2.mobile.componenets.BottomMenuBar;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import fr.brouillard.oss.cssfx.CSSFX;
 import fxsampler.SampleBase;

@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.app.utils;
+package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.animation.FadeTransition;
