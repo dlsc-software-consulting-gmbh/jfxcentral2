@@ -8,9 +8,7 @@ import com.dlsc.jfxcentral2.components.headers.LinksOfTheWeekHeader;
 import com.dlsc.jfxcentral2.mobile.componenets.PageView;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -54,23 +52,7 @@ public class LotwPageView extends VBox {
             LinksContentView contentView = getLinksContentView(index);
             contentView.setDate(weakLinks.getCreatedOn());
             contentView.setContent(DataRepository2.getInstance().getLinksOfTheWeekReadMe(weakLinks));
-            if (index == 0) {
-                contentView.setShowAll(true);
-            }
             return contentView;
-        });
-
-        pageView.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
-            int newIndex = newValue.intValue();
-            int aryIndex = newIndex % cachedContentAry.length;
-
-            for (int i = 0; i < cachedContentAry.length; i++) {
-                LinksContentView mdView = cachedContentAry[i];
-                if (mdView == null) {
-                    continue;
-                }
-                mdView.setShowAll(i == aryIndex);
-            }
         });
 
         getChildren().addAll(header, pageView);
@@ -116,33 +98,10 @@ public class LotwPageView extends VBox {
             }, date));
 
             CustomMarkdownView markdownView = new CustomMarkdownView();
-            markdownView.mdStringProperty().bind(Bindings.createStringBinding(() -> {
-                String content = getContent();
-                if (content == null) {
-                    return "";
-                }
-                if (isShowAll()) {
-                    return content;
-                }
-                return content.length() > 3000 ? content.substring(0, 3000) : content;
-            }, content, showAll));
+            markdownView.mdStringProperty().bind(contentProperty());
             // markdownView.setPrefHeight(markdownView.getWidth());
 
             getChildren().addAll(dateLabelContainer, markdownView);
-        }
-
-        private final BooleanProperty showAll = new SimpleBooleanProperty(this, "showAll");
-
-        public final boolean isShowAll() {
-            return showAll.get();
-        }
-
-        public final BooleanProperty showAllProperty() {
-            return showAll;
-        }
-
-        public final void setShowAll(boolean showAll) {
-            this.showAll.set(showAll);
         }
 
         // create on date
