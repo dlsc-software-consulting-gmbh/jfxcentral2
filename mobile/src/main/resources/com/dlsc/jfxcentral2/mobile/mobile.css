@@ -430,3 +430,73 @@
 .mobile-home-page .search-text-field {
     -fx-padding: 8px;
 }
+
+/** ----------------------------------
+ * LotwPageView
+ */
+.lotw-page-view {
+    -fx-background-color: -white;
+}
+
+.lotw-page-view:sm .links-of-the-week-header:sm {
+    -fx-min-height: 170px;
+    -fx-pref-height: 170px;
+    -fx-max-height: 170px;
+}
+
+.lotw-page-view:md .links-of-the-week-header:md {
+    -fx-min-height: 240px;
+    -fx-pref-height: 240px;
+    -fx-max-height: 240px;
+}
+
+.lotw-page-view:lg .links-of-the-week-header:lg {
+    -fx-min-height: 260px;
+    -fx-pref-height: 260px;
+    -fx-max-height: 260px;
+}
+
+.lotw-page-view:sm .links-of-the-week-header:sm .header-title {
+    -fx-font-size: 25px;
+    -fx-graphic-text-gap: 10px;
+}
+
+.lotw-page-view:sm .links-of-the-week-header:sm .header-title .ikonli-font-icon {
+    -fx-icon-size: 28px;
+}
+
+.lotw-page-view .date-label-container {
+    -fx-font-size: 16px;
+    -fx-background-color: -bright-blue;
+}
+
+.lotw-page-view .date-label-container .label {
+    -fx-text-fill: -white;
+    -fx-graphic-text-gap: 10px;
+    -fx-padding: 5px 0;
+}
+
+.lotw-page-view .date-label-container .ikonli-font-icon {
+    -fx-icon-color: -white;
+}
+
+.lotw-page-view .links-content-view {
+    -fx-spacing: 0px;
+    -fx-padding: 10px;
+    -fx-background-color: -white;
+    -fx-background-insets: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 12, 0, 0, 0);
+}
+
+.lotw-page-view .links-content-view .custom-markdown-view {
+    -fx-padding: 0 10px;
+}
+
+.lotw-page-view .links-content-view .date-label-container .ikonli-font-icon {
+    -fx-icon-size: 20px;
+}
+
+.lotw-page-view .links-content-view .date-label-container .date-label {
+    -fx-text-fill: -grey-100;
+}
+
