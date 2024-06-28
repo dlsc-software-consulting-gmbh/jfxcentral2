@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.mobile.events;
+package com.dlsc.jfxcentral2.events;
 
 import javafx.scene.Node;
 

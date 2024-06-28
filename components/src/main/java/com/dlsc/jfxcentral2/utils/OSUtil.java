@@ -65,6 +65,10 @@ public class OSUtil {
         return System.getProperty("org.graalvm.nativeimage.imagecode") != null;
     }
 
+    public static boolean runningOnMobile() {
+        return Boolean.getBoolean("run.on.mobile");
+    }
+
     public static boolean isAWTSupported() {
         if (isAndroidOrIOS() || isNative()) {
             return false;

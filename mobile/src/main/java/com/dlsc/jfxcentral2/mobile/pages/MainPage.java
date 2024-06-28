@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.mobile.pages;
 
 import com.dlsc.jfxcentral2.components.SizeSupport;
-import com.dlsc.jfxcentral2.mobile.componenets.MainPageSkin;
+import com.dlsc.jfxcentral2.mobile.skin.MainPageSkin;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.Control;

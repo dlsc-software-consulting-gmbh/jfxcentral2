@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.components.FlipView;
 import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
+import com.dlsc.jfxcentral2.utils.PlatformLinkUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.binding.Bindings;
@@ -44,7 +45,6 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.text.MessageFormat;
@@ -231,7 +231,7 @@ public class TileView<T extends ModelObject> extends TileViewBase<T> {
         VBox.setVgrow(centerBox, Priority.ALWAYS);
 
         Node frontTop = createFrontTop();
-        LinkUtil.setLink(frontTop, PageUtil.getLink(getData()));
+        PlatformLinkUtil.setLink(frontTop, PageUtil.getLink(getData()));
 
         VBox frontBox = new VBox(frontTop, centerBox);
         frontBox.getStyleClass().add("front-box");

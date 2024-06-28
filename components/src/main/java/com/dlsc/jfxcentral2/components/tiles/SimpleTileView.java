@@ -20,6 +20,7 @@ import com.dlsc.jfxcentral2.components.SaveAndLikeButton;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
+import com.dlsc.jfxcentral2.utils.PlatformLinkUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -30,7 +31,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -121,7 +121,7 @@ public class SimpleTileView<T extends ModelObject> extends TileViewBase<T> {
             //The document link is external, and there's no detailed page.
             ExternalLinkUtil.setExternalLink(target, doc.getUrl());
         } else {
-            LinkUtil.setLink(target, PageUtil.getLink(item));
+            PlatformLinkUtil.setLink(target, PageUtil.getLink(item));
         }
     }
 

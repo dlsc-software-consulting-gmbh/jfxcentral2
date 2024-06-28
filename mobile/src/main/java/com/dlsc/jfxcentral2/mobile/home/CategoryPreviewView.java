@@ -4,6 +4,7 @@ import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PlatformLinkUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -22,7 +23,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class CategoryPreviewView extends VBox {
@@ -64,7 +64,7 @@ public class CategoryPreviewView extends VBox {
                     cell.imageProperty().bind(item.imageProperty());
                 }
 
-                LinkUtil.setLink(cell, item.url());
+                PlatformLinkUtil.setLink(cell, item.url());
 
 
                 content.getChildren().add(cell);
@@ -124,7 +124,7 @@ public class CategoryPreviewView extends VBox {
     private final StringProperty showAllUrl = new SimpleStringProperty(this, "showAllUrl") {
         @Override
         protected void invalidated() {
-            LinkUtil.setLink(moreButton, getShowAllUrl());
+            PlatformLinkUtil.setLink(moreButton, getShowAllUrl());
         }
     };
 

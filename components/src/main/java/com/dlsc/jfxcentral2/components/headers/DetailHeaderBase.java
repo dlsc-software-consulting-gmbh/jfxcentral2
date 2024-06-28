@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components.headers;
 import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.components.SocialLinksView;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.utils.PlatformLinkUtil;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -14,7 +15,6 @@ import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import one.jpro.platform.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
@@ -42,7 +42,7 @@ public class DetailHeaderBase extends CategoryHeader {
         backButton.textProperty().bind(backTextProperty());
         backButton.setGraphic(new FontIcon(Material.ARROW_BACK_IOS));
         backButton.getStyleClass().addAll("back-button");
-        backUrlProperty().addListener(it -> LinkUtil.setLink(backButton, getBackUrl()));
+        backUrlProperty().addListener(it -> PlatformLinkUtil.setLink(backButton, getBackUrl()));
 
         SocialLinksView socialLinksView = new SocialLinksView(false);
 
