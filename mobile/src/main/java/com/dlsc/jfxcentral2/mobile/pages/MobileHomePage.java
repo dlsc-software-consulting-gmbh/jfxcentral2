@@ -11,7 +11,6 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.mobile.home.CategoryAdvancedView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
-import com.dlsc.jfxcentral2.mobile.home.CategoryView;
 import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
@@ -56,10 +55,7 @@ public class MobileHomePage extends VBox {
         CategoryPreviewView peoplePreviewView = createPeoplePreviewView();
         peoplePreviewView.sizeProperty().bind(sizeProperty());
 
-        CategoryView categoryView = new CategoryView();
-        categoryView.sizeProperty().bind(sizeProperty());
-
-        getChildren().addAll(searchTextField, categoryView, categoryAdvancedView, weekLinksView, showCasePreviewView, tipsPreviewView, peoplePreviewView);
+        getChildren().addAll(searchTextField, categoryAdvancedView, weekLinksView, showCasePreviewView, tipsPreviewView, peoplePreviewView);
     }
 
     // Size support

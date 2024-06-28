@@ -6,13 +6,13 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.components.SizeSupport;
-import com.dlsc.jfxcentral2.mobile.events.MobileLinkEvent;
-import com.dlsc.jfxcentral2.mobile.util.Subscribe;
-import com.dlsc.jfxcentral2.mobile.util.EventBusUtil;
-import com.dlsc.jfxcentral2.mobile.util.MobileLinkUtil;
+import com.dlsc.jfxcentral2.events.MobileLinkEvent;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.EventBusUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
+import com.dlsc.jfxcentral2.utils.Subscribe;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
@@ -41,28 +41,28 @@ public class BottomMenuBar extends HBox {
         linksWeekButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(LinksOfTheWeek.class)));
         linksWeekButton.setMaxWidth(Double.MAX_VALUE);
         linksWeekButton.setUserData(PagePath.LINKS);
-        linksWeekButton.setOnAction(evt -> MobileLinkUtil.getToPage(PagePath.LINKS));
+        MobileLinkUtil.setLink(linksWeekButton, PagePath.LINKS);
         HBox.setHgrow(linksWeekButton, Priority.ALWAYS);
 
         CustomToggleButton showCaseButton = new CustomToggleButton();
         showCaseButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(RealWorldApp.class)));
         showCaseButton.setMaxWidth(Double.MAX_VALUE);
         showCaseButton.setUserData(PagePath.SHOWCASES);
-        showCaseButton.setOnAction(evt -> MobileLinkUtil.getToPage(PagePath.SHOWCASES));
+        MobileLinkUtil.setLink(showCaseButton, PagePath.SHOWCASES);
         HBox.setHgrow(showCaseButton, Priority.ALWAYS);
 
         CustomToggleButton libraryButton = new CustomToggleButton();
         libraryButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Library.class)));
         libraryButton.setMaxWidth(Double.MAX_VALUE);
         libraryButton.setUserData(PagePath.LIBRARIES);
-        libraryButton.setOnAction(evt -> MobileLinkUtil.getToPage(PagePath.LIBRARIES));
+        MobileLinkUtil.setLink(libraryButton, PagePath.LIBRARIES);
         HBox.setHgrow(libraryButton, Priority.ALWAYS);
 
         CustomToggleButton peopleButton = new CustomToggleButton();
         peopleButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Person.class)));
         peopleButton.setMaxWidth(Double.MAX_VALUE);
         peopleButton.setUserData(PagePath.PEOPLE);
-        peopleButton.setOnAction(evt -> MobileLinkUtil.getToPage(PagePath.PEOPLE));
+        MobileLinkUtil.setLink(peopleButton, PagePath.PEOPLE);
         HBox.setHgrow(peopleButton, Priority.ALWAYS);
 
         getChildren().addAll(homeButton, linksWeekButton, showCaseButton, libraryButton, peopleButton);

@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.mobile.util;
+package com.dlsc.jfxcentral2.utils;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

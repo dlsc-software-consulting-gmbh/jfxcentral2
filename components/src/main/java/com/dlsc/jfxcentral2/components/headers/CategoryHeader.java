@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.PaneBase;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -78,7 +79,7 @@ public class CategoryHeader extends PaneBase {
         sizeProperty().addListener((ob, ov, nv) -> getChildren().setAll(overlay, Objects.requireNonNullElse(getContent(), defaultContent)));
 
 
-        if (!WebAPI.isBrowser()) {
+        if (!WebAPI.isBrowser() && !OSUtil.runningOnMobile()) {
             setOnMousePressed(event -> {
                 xOffset = getScene().getWindow().getX() - event.getScreenX();
                 yOffset = getScene().getWindow().getY() - event.getScreenY();

@@ -11,6 +11,7 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -35,7 +36,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
@@ -124,7 +124,7 @@ public class CategoryAdvancedView extends GridPane {
                 tile.setDescription(category.description());
                 tile.setGraphic(category.graphic());
                 // set link
-                LinkUtil.setLink(tile, category.url());
+                MobileLinkUtil.setLink(tile, category.url());
 
                 add(tile, col, row);
                 col++;

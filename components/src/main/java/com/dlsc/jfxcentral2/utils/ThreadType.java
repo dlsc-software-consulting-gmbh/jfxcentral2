@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.mobile.util;
+package com.dlsc.jfxcentral2.utils;
 
 /**
  * Enumeration of possible execution threads for handling events.

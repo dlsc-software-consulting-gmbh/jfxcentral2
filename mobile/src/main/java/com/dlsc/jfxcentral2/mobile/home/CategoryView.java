@@ -12,6 +12,7 @@ import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
+import com.dlsc.jfxcentral2.utils.PlatformLinkUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -20,7 +21,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
-import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class CategoryView extends GridPane {
@@ -34,35 +34,35 @@ public class CategoryView extends GridPane {
 
         Button toolsButton = new Button("Tools", new FontIcon(IkonUtil.getModelIkon(Tool.class)));
         toolsButton.getStyleClass().add("tools-button");
-        LinkUtil.setLink(toolsButton, PagePath.TOOLS);
+        PlatformLinkUtil.setLink(toolsButton, PagePath.TOOLS);
 
         Button videosButton = new Button("Videos", new FontIcon(IkonUtil.getModelIkon(Video.class)));
         videosButton.getStyleClass().add("videos-button");
-        LinkUtil.setLink(videosButton, PagePath.VIDEOS);
+        PlatformLinkUtil.setLink(videosButton, PagePath.VIDEOS);
 
         Button booksButton = new Button("Books", new FontIcon(IkonUtil.getModelIkon(Book.class)));
         booksButton.getStyleClass().add("books-button");
-        LinkUtil.setLink(booksButton, PagePath.BOOKS);
+        PlatformLinkUtil.setLink(booksButton, PagePath.BOOKS);
 
         Button tutorialsButton = new Button("Tutorials", new FontIcon(IkonUtil.getModelIkon(Tutorial.class)));
         tutorialsButton.getStyleClass().add("tutorials-button");
-        LinkUtil.setLink(tutorialsButton, PagePath.TUTORIALS);
+        PlatformLinkUtil.setLink(tutorialsButton, PagePath.TUTORIALS);
 
         Button tipsButton = new Button("Tips", new FontIcon(IkonUtil.getModelIkon(Tip.class)));
         tipsButton.getStyleClass().add("tips-button");
-        LinkUtil.setLink(tipsButton, PagePath.TIPS);
+        PlatformLinkUtil.setLink(tipsButton, PagePath.TIPS);
 
         Button blogButton = new Button("Blog", new FontIcon(IkonUtil.getModelIkon(Blog.class)));
         blogButton.getStyleClass().add("blog-button");
-        LinkUtil.setLink(blogButton, PagePath.BLOGS);
+        PlatformLinkUtil.setLink(blogButton, PagePath.BLOGS);
 
         Button docButton = new Button("Doc", new FontIcon(IkonUtil.getModelIkon(Documentation.class)));
         docButton.getStyleClass().add("docs-button");
-        LinkUtil.setLink(docButton, PagePath.DOCUMENTATION);
+        PlatformLinkUtil.setLink(docButton, PagePath.DOCUMENTATION);
 
         Button companiesButton = new Button("Companies", new FontIcon(IkonUtil.getModelIkon(Company.class)));
         companiesButton.getStyleClass().add("companies-button");
-        LinkUtil.setLink(companiesButton, PagePath.COMPANIES);
+        PlatformLinkUtil.setLink(companiesButton, PagePath.COMPANIES);
 
         // Add the buttons to the grid pane
         addRow(0, toolsButton, videosButton, booksButton, tutorialsButton);
