@@ -2,8 +2,6 @@ package com.dlsc.jfxcentral2.mobile.pages.category;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
-import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
-import com.dlsc.jfxcentral2.components.filters.ShowcaseFilterView;
 import com.dlsc.jfxcentral2.components.tiles.AppTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
@@ -31,18 +29,13 @@ public class MobileShowcasesCategoryPage extends MobileCategoryPageBase<RealWorl
     }
 
     @Override
-    protected String getCategoryDescription() {
-        return "Explore real-world JavaFX applications, notable for their professional functionality and aesthetically pleasing UI, demonstrating the practical versatility of JavaFX.";
-    }
-
-    @Override
     protected Callback<RealWorldApp, TileViewBase<RealWorldApp>> getTileViewProvider() {
         return AppTileView::new;
     }
 
     @Override
-    protected SearchFilterView<RealWorldApp> createSearchFilterView() {
-        return new ShowcaseFilterView();
+    protected String getSearchPrompText() {
+        return "Search for an application";
     }
 
     @Override

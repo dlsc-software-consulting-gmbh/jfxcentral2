@@ -11,11 +11,14 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.mobile.home.CategoryAdvancedView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
+import com.dlsc.jfxcentral2.mobile.home.CategoryView;
+import com.dlsc.jfxcentral2.mobile.home.HomePageHeader;
 import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -34,8 +37,12 @@ public class MobileHomePage extends VBox {
     public MobileHomePage() {
         getStyleClass().add("mobile-home-page");
 
+        HomePageHeader header = new HomePageHeader();
+        header.sizeProperty().bind(sizeProperty());
+
         SearchTextField searchTextField = new SearchTextField(true);
-        searchTextField.setPromptText("Search ...");
+        searchTextField.setRight(new Label("Search"));
+        searchTextField.setPromptText("Search for anything...");
 
         CategoryAdvancedView categoryAdvancedView = new CategoryAdvancedView();
         categoryAdvancedView.sizeProperty().bind(sizeProperty());
@@ -55,7 +62,13 @@ public class MobileHomePage extends VBox {
         CategoryPreviewView peoplePreviewView = createPeoplePreviewView();
         peoplePreviewView.sizeProperty().bind(sizeProperty());
 
-        getChildren().addAll(searchTextField, categoryAdvancedView, weekLinksView, showCasePreviewView, tipsPreviewView, peoplePreviewView);
+        CategoryView categoryView = new CategoryView();
+        categoryView.sizeProperty().bind(sizeProperty());
+
+        VBox content = new VBox(searchTextField, categoryAdvancedView, weekLinksView, showCasePreviewView, tipsPreviewView, peoplePreviewView);
+        content.getStyleClass().add("content-box");
+
+        getChildren().addAll(header, content);
     }
 
     // Size support

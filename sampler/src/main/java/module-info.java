@@ -7,6 +7,7 @@ open module com.dlsc.jfxcentral.sampler {
     requires javafx.web;
 
     requires fr.brouillard.oss.cssfx;
+    requires org.scenicview.scenicview;
 
     requires jfxcentral.data;
 
