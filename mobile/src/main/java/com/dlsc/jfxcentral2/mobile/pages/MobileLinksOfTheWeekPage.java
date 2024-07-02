@@ -3,16 +3,19 @@ package com.dlsc.jfxcentral2.mobile.pages;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
+import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.SizeSupport;
-import com.dlsc.jfxcentral2.components.headers.LinksOfTheWeekHeader;
+import com.dlsc.jfxcentral2.mobile.componenets.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.mobile.componenets.PageView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -41,8 +44,9 @@ public class MobileLinksOfTheWeekPage extends VBox {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
         // top header
-        LinksOfTheWeekHeader header = new LinksOfTheWeekHeader();
-        header.sizeProperty().bind(sizeProperty());
+        MobileCategoryHeader header = new MobileCategoryHeader();
+        header.setTitle("Links of the Week");
+        header.setIcon(IkonUtil.getModelIkon(LinksOfTheWeek.class));
 
         // sort by date
         ArrayList<LinksOfTheWeek> sortedLinks = new ArrayList<>(DataRepository2.getInstance().getLinksOfTheWeek());
@@ -59,7 +63,11 @@ public class MobileLinksOfTheWeekPage extends VBox {
             return contentView;
         });
 
-        getChildren().addAll(header, pageView);
+        PrettyScrollPane scrollPane = new PrettyScrollPane(pageView);
+        scrollPane.getStyleClass().add("mobile");
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
+
+        getChildren().addAll(header, scrollPane);
     }
 
     private LinksContentView getLinksContentView(int currentPageIndex) {

@@ -67,42 +67,42 @@ public class CategoryAdvancedView extends GridPane {
     private void addCategoriesToView() {
         getCategories().setAll(List.of(
                 new Category("Tools",
-                        "Delve into our selection of JavaFX tools, including plugins, layout and CSS tools, testing, packaging, and more.",
+                        "Explore JavaFX tools including plugins, layout, CSS tools, testing, and packaging.",
                         new FontIcon(IkonUtil.getModelIkon(Tool.class)),
                         PagePath.TOOLS),
 
                 new Category("Videos",
-                        "Browse JavaFX videos featuring conference talks, application demos, and tutorials, offering insights for all levels of JavaFX expertise.",
+                        "Watch JavaFX videos, conference talks, demos, and tutorials for all expertise levels.",
                         new FontIcon(IkonUtil.getModelIkon(Video.class)),
                         PagePath.VIDEOS),
 
                 new Category("Books",
-                        "Explore our JavaFX book selection, offering everything from beginner guides to advanced tutorials, including game development.",
+                        "Discover JavaFX books, from beginner guides to advanced tutorials and game development.",
                         new FontIcon(IkonUtil.getModelIkon(Book.class)),
                         PagePath.BOOKS),
 
                 new Category("Tutorials",
-                        "Browse tutorials ranging from JavaFX basics to advanced application and game development. Learn from experts and community members.",
+                        "Learn JavaFX from basics to advanced topics with tutorials from experts and community.",
                         new FontIcon(IkonUtil.getModelIkon(Tutorial.class)),
                         PagePath.TUTORIALS),
 
                 new Category("Tips",
-                        "Discover practical JavaFX tips in this section, featuring articles that share real-world techniques and tricks for effective JavaFX development.",
+                        "Find practical JavaFX tips and real-world techniques for effective development.",
                         new FontIcon(IkonUtil.getModelIkon(Tip.class)),
                         PagePath.TIPS),
 
                 new Category("Blog",
-                        "Visit our blog section for articles from JavaFX experts, featuring practical tips, cutting-edge insights, and more from the world of JavaFX.",
+                        "Read blog articles by JavaFX experts, featuring tips, insights, and more.",
                         new FontIcon(IkonUtil.getModelIkon(Blog.class)),
                         PagePath.BLOGS),
 
                 new Category("Documentation",
-                        "Access comprehensive resources including JavaFX API documentation, plugin guides, CSS references, and default style sheets.",
+                        "Access JavaFX API documentation, plugin guides, CSS references, and style sheets.",
                         new FontIcon(IkonUtil.getModelIkon(Documentation.class)),
                         PagePath.DOCUMENTATION),
 
                 new Category("Companies",
-                        "Explore companies in JavaFX, especially those with significant influence and contributions to the JavaFX community, shaping and advancing the ecosystem.",
+                        "Learn about companies contributing to JavaFX and shaping its ecosystem.",
                         new FontIcon(IkonUtil.getModelIkon(Company.class)),
                         PagePath.COMPANIES)
         ));

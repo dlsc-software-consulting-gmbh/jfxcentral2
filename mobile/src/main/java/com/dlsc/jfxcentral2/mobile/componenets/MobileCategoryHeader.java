@@ -10,12 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.fontawesome.FontAwesome;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class MobileCategoryHeader extends VBox {
+public class MobileCategoryHeader extends StackPane {
 
     private static final String DEFAULT_STYLE_CLASS = "mobile-category-header";
     private final SizeSupport sizeSupport = new SizeSupport(this);

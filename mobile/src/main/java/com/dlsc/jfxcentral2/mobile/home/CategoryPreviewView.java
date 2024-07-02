@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.PlatformLinkUtil;
+import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -201,10 +202,9 @@ public class CategoryPreviewView extends VBox {
             HBox footer = new HBox(likesLabel, savesLabel, viewsLabel);
             footer.getStyleClass().add("footer");
             footer.managedProperty().bind(footer.visibleProperty());
-            // TODO
-            // footer.setVisible(SocialUtil.isSocialFeaturesEnabled());
-            // pseudoClassStateChanged(SOCIAL_FEATURES_ENABLED, footer.isVisible());
-            // footer.visibleProperty().addListener(it-> pseudoClassStateChanged(SOCIAL_FEATURES_ENABLED, footer.isVisible()));
+            footer.setVisible(SocialUtil.isSocialFeaturesEnabled());
+            pseudoClassStateChanged(SOCIAL_FEATURES_ENABLED, footer.isVisible());
+            footer.visibleProperty().addListener(it-> pseudoClassStateChanged(SOCIAL_FEATURES_ENABLED, footer.isVisible()));
 
             VBox cellContent = new VBox(titleLabel, descriptionLabel, footer);
             cellContent.getStyleClass().add("cell-content");
