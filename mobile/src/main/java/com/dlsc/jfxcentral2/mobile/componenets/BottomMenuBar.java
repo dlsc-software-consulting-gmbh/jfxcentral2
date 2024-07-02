@@ -93,7 +93,10 @@ public class BottomMenuBar extends HBox {
         toggleGroup.getToggles().stream()
                 .filter(toggle -> toggle.getUserData().equals(linkEvent.link()))
                 .findFirst()
-                .ifPresent(toggle -> toggle.setSelected(true));
+                .ifPresentOrElse(
+                        toggle -> toggle.setSelected(true),
+                        () -> toggleGroup.selectToggle(null)
+                );
     }
 
 }

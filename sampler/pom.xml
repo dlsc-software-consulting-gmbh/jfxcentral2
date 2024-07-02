@@ -51,6 +51,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>net.raumzeitfalle.fx</groupId>
+			<artifactId>scenic-view</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>
 			<artifactId>ikonli-core</artifactId>
 		</dependency>

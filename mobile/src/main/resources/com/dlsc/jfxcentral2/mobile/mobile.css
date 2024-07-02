@@ -423,12 +423,71 @@
  */
 .mobile-home-page {
     -fx-background-color: -white;
-    -fx-padding: 40px 15px 15px 15px;
+}
+
+.mobile-home-page > .content-box {
+    -fx-padding: 0px 15px 15px 15px;
     -fx-spacing: 30px;
 }
 
-.mobile-home-page .search-text-field {
+.mobile-home-page > .content-box > .search-text-field {
     -fx-padding: 8px;
+}
+
+.mobile-home-page > .content-box > .search-text-field .label {
+    -fx-text-fill: -bright-blue;
+    -fx-padding: 0 5px 0 10px;
+    -fx-border-color: -light-blue;
+    -fx-border-width: 0 0 0 2px;
+}
+
+.home-page-header {
+    -fx-alignment: center;
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(247, 249, 255, 1) 0%, rgba(247, 249, 255, 0) 100%);
+}
+
+.home-page-header:sm {
+    -fx-spacing: 20px;
+    -fx-padding: 20px 0;
+}
+
+.home-page-header:md-lg {
+    -fx-spacing: 10px;
+    -fx-padding: 30px 0;
+}
+
+.home-page-header:md-lg .label1 {
+    -fx-padding: 0 0 0 20px;
+}
+
+.home-page-header:sm .jfxcentral-logo {
+    -fx-fit-width: 86px;
+}
+
+.home-page-header:md-lg .jfxcentral-logo {
+    -fx-fit-width: 100px;
+}
+
+.home-page-header .right-side {
+    -fx-spacing: 4px;
+}
+
+.home-page-header .fx-logo {
+    -fx-fit-width: 88px;
+    -fx-fit-height: 30px;
+}
+
+.home-page-header:sm .label {
+    -fx-font-size: 20px;
+}
+
+.home-page-header:md-lg .label {
+    -fx-font-size: 35px;
+}
+
+.home-page-header .row2 {
+    -fx-alignment: center-left;
+    -fx-spacing: 4px;
 }
 
 /** ----------------------------------
@@ -500,3 +559,42 @@
     -fx-text-fill: -grey-100;
 }
 
+/** ----------------------------------
+ * SearchTextView
+ */
+.search-text-view {
+    -fx-padding: 0 20px;
+}
+
+.search-text-view .search-text-field {
+    -fx-padding: 8px;
+}
+
+/** ----------------------------------
+ * MobileCategoryHeader
+ */
+.mobile-category-header {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(247, 249, 255, 1) 0%, rgba(247, 249, 255, 0) 100%);
+    -fx-alignment: center;
+}
+
+.mobile-category-header > .top-box .button {
+    -fx-background-color: transparent;
+    -fx-padding: 5px 10px;
+}
+
+.mobile-category-header > .top-box .button .ikonli-font-icon {
+    -fx-icon-size: 25px;
+    -fx-icon-color: -grey-100;
+}
+
+.mobile-category-header .category-title {
+    -fx-graphic-text-gap: 15px;
+    -fx-font-size: 25px;
+    -fx-font-family: "Spline Sans SemiBold";
+    -fx-padding: 0 0 20px 0;
+}
+
+.mobile-category-header .category-title .ikonli-font-icon {
+    -fx-icon-size: 35px;
+}

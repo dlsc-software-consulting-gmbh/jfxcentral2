@@ -105,6 +105,18 @@
             </dependency>
 
             <dependency>
+                <groupId>net.raumzeitfalle.fx</groupId>
+                <artifactId>scenic-view</artifactId>
+                <version>11.0.2</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
                 <groupId>com.dustinredmond.fxtrayicon</groupId>
                 <artifactId>FXTrayIcon</artifactId>
                 <version>4.0.1</version>

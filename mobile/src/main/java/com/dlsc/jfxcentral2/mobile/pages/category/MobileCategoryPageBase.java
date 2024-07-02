@@ -4,10 +4,10 @@ import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.CategoryContentPane;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.components.StripView;
-import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
-import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
+import com.dlsc.jfxcentral2.mobile.componenets.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.componenets.SearchTextView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.BooleanProperty;
@@ -20,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 
 import java.util.List;
@@ -35,25 +36,31 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox
 
     public List<Node> content() {
         // header
-        CategoryHeader header = createCategoryHeader();
+        MobileCategoryHeader header = createCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(getCategoryTitle());
-        header.setIkon(getCategoryIkon());
-        header.setDescription(getCategoryDescription());
+        header.setIcon(getCategoryIkon());
 
         // filter
-        SearchFilterView<T> filterView = createSearchFilterView();
-        filterView.sizeProperty().bind(sizeProperty());
-        blockingProperty().bind(filterView.blockingProperty());
+        SearchTextView searchTextField = new SearchTextView();
+        searchTextField.setPromptText(getSearchPrompText());
+        blockingProperty().bind(searchTextField.blockingProperty());
 
         // data
         ObservableList<T> itemsList = getCategoryItems();
 
         FilteredList<T> filteredList = new FilteredList<>(itemsList);
-        filteredList.predicateProperty().bind(filterView.predicateProperty());
+        searchTextField.searchTextProperty().addListener((obs, oldText, newText) -> {
+            String searchText = searchTextField.searchTextProperty().getValueSafe().toLowerCase().trim();
+            if (StringUtils.isBlank(searchText)) {
+                filteredList.setPredicate(null);
+            } else {
+                filteredList.setPredicate(item -> StringUtils.containsIgnoreCase(item.getName(), searchText)
+                        || StringUtils.containsIgnoreCase(item.getDescription(), searchText));
+            }
+        });
 
         SortedList<T> sortedList = new SortedList<>(filteredList);
-        sortedList.comparatorProperty().bind(filterView.comparatorProperty());
 
         // grid view
         ModelGridView<T> gridView = createGridView();
@@ -73,7 +80,7 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox
         // details
         CategoryContentPane contentPane = createCategoryContentPane();
         contentPane.sizeProperty().bind(sizeProperty());
-        contentPane.getNodes().addAll(filterView, stripView);
+        contentPane.getNodes().addAll(searchTextField, stripView);
 
         VBox.setVgrow(contentPane, Priority.ALWAYS);
         return List.of(header, contentPane);
@@ -88,7 +95,7 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox
     }
 
     protected int getNumberOfGridViewRows() {
-        return 3;
+        return 5;
     }
 
     protected abstract String getCategoryTitle();
@@ -103,15 +110,17 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox
         return null;
     }
 
-    protected CategoryHeader createCategoryHeader() {
-        return new CategoryHeader();
+    protected MobileCategoryHeader createCategoryHeader() {
+        return new MobileCategoryHeader();
     }
 
     protected CategoryContentPane createCategoryContentPane(Node... nodes) {
         return new CategoryContentPane(nodes);
     }
 
-    protected abstract SearchFilterView<T> createSearchFilterView();
+    protected String getSearchPrompText() {
+        return "Search...";
+    }
 
     protected ModelGridView<T> createGridView() {
         return new ModelGridView<>();

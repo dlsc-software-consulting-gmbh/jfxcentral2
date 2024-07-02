@@ -107,6 +107,11 @@
         </dependency>
 
         <dependency>
+            <groupId>net.raumzeitfalle.fx</groupId>
+            <artifactId>scenic-view</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.weisj</groupId>
             <artifactId>jsvg</artifactId>
         </dependency>

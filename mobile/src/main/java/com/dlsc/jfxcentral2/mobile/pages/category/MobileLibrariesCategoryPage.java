@@ -2,8 +2,6 @@ package com.dlsc.jfxcentral2.mobile.pages.category;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral2.components.filters.LibrariesFilterView;
-import com.dlsc.jfxcentral2.components.filters.SearchFilterView;
 import com.dlsc.jfxcentral2.components.tiles.LibraryTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
@@ -32,27 +30,13 @@ public class MobileLibrariesCategoryPage extends MobileCategoryPageBase<Library>
     }
 
     @Override
-    protected String getCategoryDescription() {
-        return """
-                Explore our curated selection of JavaFX third-party libraries. This page presents \
-                a diverse range of tools including components, game engines, styles, 3D graphics, \
-                and frameworks, ideal for expanding the capabilities of your JavaFX projects.
-                """;
-    }
-
-    @Override
-    protected int getNumberOfGridViewRows() {
-        return 5;
-    }
-
-    @Override
     protected Callback<Library, TileViewBase<Library>> getTileViewProvider() {
         return LibraryTileView::new;
     }
 
     @Override
-    protected SearchFilterView<Library> createSearchFilterView() {
-        return new LibrariesFilterView();
+    protected String getSearchPrompText() {
+        return "Search for a library";
     }
 
     @Override
