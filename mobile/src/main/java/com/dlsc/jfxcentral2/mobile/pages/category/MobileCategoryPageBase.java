@@ -16,9 +16,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox {
 
@@ -40,11 +42,18 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox
         ModelListView<T> listView = new ModelListView<>();
         listView.getItemsList().setAll(getCategoryItems());
         listView.promptTextProperty().set(getSearchPromptText());
+        listView.setFilter(getFilter());
         listView.setMaxHeight(Double.MAX_VALUE);
         listView.setCellFactory(cellFactory());
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         return List.of(header, listView);
+    }
+
+    protected Callback<String, Predicate<T>> getFilter(){
+        return text -> model -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(model.getName(), text)
+                || StringUtils.containsIgnoreCase(model.getDescription(), text);
     }
 
     protected Callback<ListView<T>, ListCell<T>> cellFactory() {

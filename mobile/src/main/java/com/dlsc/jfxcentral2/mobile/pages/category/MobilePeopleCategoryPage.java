@@ -13,7 +13,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.util.Callback;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
+
+import java.util.function.Predicate;
 
 public class MobilePeopleCategoryPage extends MobileCategoryPageBase<Person> {
 
@@ -35,6 +38,14 @@ public class MobilePeopleCategoryPage extends MobileCategoryPageBase<Person> {
                 return DataRepository2.getInstance().getPersonReadMe(person);
             }
         };
+    }
+
+    @Override
+    protected Callback<String, Predicate<Person>> getFilter() {
+        return text -> person -> StringUtils.isBlank(text)
+                || StringUtils.containsIgnoreCase(person.getName(), text)
+                || StringUtils.containsIgnoreCase(DataRepository2.getInstance().getPersonReadMe(person), text)
+                || StringUtils.containsIgnoreCase(person.getDescription(), text);
     }
 
     @Override

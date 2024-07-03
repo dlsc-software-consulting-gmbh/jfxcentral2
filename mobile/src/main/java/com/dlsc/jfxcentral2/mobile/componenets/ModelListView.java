@@ -25,9 +25,9 @@ import java.util.function.Predicate;
 public class ModelListView<T extends ModelObject> extends VBox {
 
     private static final String DEFAULT_STYLE_CLASS = "model-list-view";
-    private final Callback<String, Predicate<T>> defaultFilter = text -> tip -> StringUtils.isBlank(text)
-            || StringUtils.containsIgnoreCase(tip.getName(), text)
-            || StringUtils.containsIgnoreCase(tip.getDescription(), text);
+    private final Callback<String, Predicate<T>> defaultFilter = text -> model -> StringUtils.isBlank(text)
+            || StringUtils.containsIgnoreCase(model.getName(), text)
+            || StringUtils.containsIgnoreCase(model.getDescription(), text);
 
     public ModelListView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
