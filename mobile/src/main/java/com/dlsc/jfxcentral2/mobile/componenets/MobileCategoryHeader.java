@@ -1,13 +1,16 @@
 package com.dlsc.jfxcentral2.mobile.componenets;
 
+import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -26,7 +29,7 @@ public class MobileCategoryHeader extends StackPane {
         Button backButton = new Button();
         backButton.getStyleClass().add("back-button");
         backButton.setGraphic(new FontIcon(FontAwesome.ANGLE_LEFT));
-        MobileLinkUtil.setLink(backButton, PagePath.HOME);
+        MobileLinkUtil.setLink(backButton, goBackLink());
 
         HBox topBox = new HBox(backButton);
         topBox.getStyleClass().add("top-box");
@@ -34,12 +37,23 @@ public class MobileCategoryHeader extends StackPane {
         Label categoryTitle = new Label();
         categoryTitle.getStyleClass().add("category-title");
         categoryTitle.textProperty().bind(titleProperty());
-        FontIcon categoryIcon = new FontIcon();
-        categoryIcon.iconCodeProperty().bind(iconProperty());
-        categoryTitle.setGraphic(categoryIcon);
+        categoryTitle.graphicProperty().bind(Bindings.createObjectBinding(() -> {
+            Ikon icon = getIcon();
+            Image image = getPreviewImage();
+            if (image != null) {
+                return new AvatarView(image);
+            } else if (icon != null) {
+                return new FontIcon(icon);
+            }
+            return null;
+        }, iconProperty(), previewImageProperty()));
 
-        getChildren().addAll(topBox, categoryTitle);
+        getChildren().addAll(categoryTitle, topBox);
         setMaxHeight(Region.USE_PREF_SIZE);
+    }
+
+    protected String goBackLink() {
+        return PagePath.HOME;
     }
 
     // size support
@@ -86,6 +100,22 @@ public class MobileCategoryHeader extends StackPane {
 
     public final void setTitle(String title) {
         titleProperty().set(title);
+    }
+
+    // preview image
+
+    private final ObjectProperty<Image> previewImage = new SimpleObjectProperty<>(this, "previewImage");
+
+    public final ObjectProperty<Image> previewImageProperty() {
+        return previewImage;
+    }
+
+    public final Image getPreviewImage() {
+        return previewImage.get();
+    }
+
+    public final void setPreviewImage(Image previewImage) {
+        previewImageProperty().set(previewImage);
     }
 
 }

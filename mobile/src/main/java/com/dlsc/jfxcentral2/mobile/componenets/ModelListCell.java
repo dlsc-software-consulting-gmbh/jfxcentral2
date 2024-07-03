@@ -26,6 +26,8 @@ public class ModelListCell<T extends ModelObject> extends ListCell<T> {
 
         imageView = new AvatarView();
         imageView.setMouseTransparent(true);
+        imageView.managedProperty().bind(imageView.visibleProperty());
+        imageView.visibleProperty().bind(imageView.imageProperty().isNotNull());
 
         titleLabel = new Label();
         titleLabel.getStyleClass().add("title-label");

@@ -1,11 +1,15 @@
 package com.dlsc.jfxcentral2.mobile.pages.details;
 
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
-import com.dlsc.jfxcentral2.components.headers.ShowcaseDetailHeader;
+import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.ShowcaseOverviewBox;
+import com.dlsc.jfxcentral2.mobile.componenets.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
+import javafx.scene.layout.StackPane;
 
 import java.util.List;
 
@@ -20,13 +24,22 @@ public class MobileShowcaseMobileDetailsPage extends MobileDetailsPageBase<RealW
         RealWorldApp app = getItem();
 
         // header
-        ShowcaseDetailHeader showcaseDetailHeader = new ShowcaseDetailHeader(app);
-        showcaseDetailHeader.sizeProperty().bind(sizeProperty());
+        MobileCategoryHeader header = new MobileCategoryHeader(){
+            @Override
+            protected String goBackLink() {
+                return PagePath.SHOWCASES;
+            }
+        };
+        header.previewImageProperty().bind(ImageManager.getInstance().realWorldAppBannerImageProperty(app));
+        header.sizeProperty().bind(sizeProperty());
+        header.setTitle(app.getName());
 
         // overview box
         ShowcaseOverviewBox appOverviewBox = new ShowcaseOverviewBox(app);
         appOverviewBox.sizeProperty().bind(sizeProperty());
+        PrettyScrollPane scrollPane = new PrettyScrollPane(new StackPane(appOverviewBox));
+        scrollPane.getStyleClass().add("mobile");
 
-        return List.of(showcaseDetailHeader, appOverviewBox);
+        return List.of(header, scrollPane);
     }
 }

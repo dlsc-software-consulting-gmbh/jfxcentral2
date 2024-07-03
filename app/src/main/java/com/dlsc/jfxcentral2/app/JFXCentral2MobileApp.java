@@ -103,7 +103,7 @@ public class JFXCentral2MobileApp extends Application {
 
         // add notch pane
         StackPane notchPane = new StackPane();
-        notchPane.getStyleClass().add("notch-pane");
+        notchPane.getStyleClass().addAll("notch-pane", "mobile");
         VBox.setVgrow(mainPage, Priority.ALWAYS);
         VBox parent = new VBox(notchPane, mainPage);
         if (developToolBar != null) {

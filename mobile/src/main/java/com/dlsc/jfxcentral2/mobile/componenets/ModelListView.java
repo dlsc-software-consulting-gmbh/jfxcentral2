@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Priority;
@@ -18,6 +19,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
+import org.kordamp.ikonli.fluentui.FluentUiRegularMZ;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.Comparator;
 import java.util.function.Predicate;
@@ -44,7 +47,11 @@ public class ModelListView<T extends ModelObject> extends VBox {
         sortedList.comparatorProperty().bind(comparatorProperty());
 
         ListView<T> listView = new ListView<>(sortedList);
+        listView.getStyleClass().add("mobile");
         listView.cellFactoryProperty().bind(cellFactoryProperty());
+        Label placeHolderLabel = new Label("No items found.", new FontIcon(FluentUiRegularMZ.SEARCH_INFO_24));
+        placeHolderLabel.getStyleClass().add("placeholder-label");
+        listView.setPlaceholder(placeHolderLabel);
         listView.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(listView, Priority.ALWAYS);
 

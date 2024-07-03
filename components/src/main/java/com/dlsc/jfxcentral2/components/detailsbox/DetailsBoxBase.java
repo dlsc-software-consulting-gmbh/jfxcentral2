@@ -18,6 +18,7 @@ import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.PageUtil;
+import com.dlsc.jfxcentral2.utils.PlatformLinkUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -42,7 +43,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-import one.jpro.platform.routing.LinkUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -352,7 +352,7 @@ public abstract class DetailsBoxBase<T extends ModelObject> extends PaneBase {
             if (StringUtils.isNotBlank(url)) {
                 detailsButton.setVisible(true);
                 detailsButton.setManaged(true);
-                LinkUtil.setLink(detailsButton, url);
+                PlatformLinkUtil.setLink(detailsButton, url);
             }
         }
     }
