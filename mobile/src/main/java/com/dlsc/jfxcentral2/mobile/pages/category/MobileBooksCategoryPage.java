@@ -2,13 +2,16 @@ package com.dlsc.jfxcentral2.mobile.pages.category;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral2.components.tiles.BookTileView;
-import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
+import com.dlsc.jfxcentral2.mobile.componenets.ModelListCell;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.images.CentralImageManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
@@ -16,6 +19,16 @@ public class MobileBooksCategoryPage extends MobileCategoryPageBase<Book> {
 
     public MobileBooksCategoryPage(ObjectProperty<Size> size) {
         super(size);
+    }
+
+    @Override
+    protected Callback<ListView<Book>, ListCell<Book>> cellFactory() {
+        return param -> new ModelListCell<>() {
+            @Override
+            protected void handleImage(Book item, ObjectProperty<Image> imageProperty) {
+                imageProperty.set(CentralImageManager.getBookCoverImage1(item));
+            }
+        };
     }
 
     @Override
@@ -29,12 +42,7 @@ public class MobileBooksCategoryPage extends MobileCategoryPageBase<Book> {
     }
 
     @Override
-    protected Callback<Book, TileViewBase<Book>> getTileViewProvider() {
-        return BookTileView::new;
-    }
-
-    @Override
-    protected String getSearchPrompText() {
+    protected String getSearchPromptText() {
         return "Search for a book";
     }
 

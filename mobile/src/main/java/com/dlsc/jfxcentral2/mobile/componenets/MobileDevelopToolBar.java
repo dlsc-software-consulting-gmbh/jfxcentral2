@@ -25,7 +25,7 @@ public class MobileDevelopToolBar extends VBox {
 
     private final TextField pathField;
 
-    private enum WidthType {
+    public enum WidthType {
         LARGE(1440),
         MEDIUM(768),
         SMALL(375);
@@ -43,6 +43,7 @@ public class MobileDevelopToolBar extends VBox {
 
     public MobileDevelopToolBar(MobileRouter router) {
         getStyleClass().add("mobile-develop-tool-bar");
+        setStyle("-fx-font-size: 12px");
 
         pathField = new TextField(PagePath.HOME);
         pathField.setOnAction(evt -> {
@@ -63,7 +64,7 @@ public class MobileDevelopToolBar extends VBox {
         Label countLabel = new Label();
         Label visibleCountLabel = new Label();
 
-        HBox row1 = new HBox(8, pathField, loadTimeLabel, countLabel, visibleCountLabel);
+        HBox row1 = new HBox(5, pathField, loadTimeLabel, countLabel, visibleCountLabel);
         HBox.setHgrow(pathField, Priority.ALWAYS);
 
         Label widthLabel = new Label();
@@ -111,7 +112,7 @@ public class MobileDevelopToolBar extends VBox {
         row2.setAlignment(Pos.CENTER_RIGHT);
 
         getChildren().addAll(row1, row2);
-        setSpacing(8);
+        setSpacing(5);
         setAlignment(Pos.CENTER_LEFT);
         setPadding(new Insets(3));
 

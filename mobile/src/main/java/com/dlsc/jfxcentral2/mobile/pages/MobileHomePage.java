@@ -3,15 +3,18 @@ package com.dlsc.jfxcentral2.mobile.pages;
 import com.dlsc.gemsfx.SearchTextField;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.mobile.home.CategoryAdvancedView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
-import com.dlsc.jfxcentral2.mobile.home.CategoryView;
 import com.dlsc.jfxcentral2.mobile.home.HomePageHeader;
 import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
 import com.dlsc.jfxcentral2.model.Size;
@@ -19,6 +22,8 @@ import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -43,6 +48,8 @@ public class MobileHomePage extends VBox {
         SearchTextField searchTextField = new SearchTextField(true);
         searchTextField.setRight(new Label("Search"));
         searchTextField.setPromptText("Search for anything...");
+        StackPane searchWrapper = new StackPane(searchTextField);
+        searchWrapper.getStyleClass().add("search-wrapper");
 
         CategoryAdvancedView categoryAdvancedView = new CategoryAdvancedView();
         categoryAdvancedView.sizeProperty().bind(sizeProperty());
@@ -62,13 +69,101 @@ public class MobileHomePage extends VBox {
         CategoryPreviewView peoplePreviewView = createPeoplePreviewView();
         peoplePreviewView.sizeProperty().bind(sizeProperty());
 
-        CategoryView categoryView = new CategoryView();
-        categoryView.sizeProperty().bind(sizeProperty());
+        CategoryPreviewView booksPreviewView = createBooksPreviewView();
+        booksPreviewView.sizeProperty().bind(sizeProperty());
 
-        VBox content = new VBox(searchTextField, categoryAdvancedView, weekLinksView, showCasePreviewView, tipsPreviewView, peoplePreviewView);
+        CategoryPreviewView libraryPreviewView = createLibraryPreviewView();
+        libraryPreviewView.sizeProperty().bind(sizeProperty());
+
+        CategoryPreviewView blogPreviewView = createBlogPreviewView();
+        blogPreviewView.sizeProperty().bind(sizeProperty());
+
+        VBox content = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, blogPreviewView, tipsPreviewView);
         content.getStyleClass().add("content-box");
 
-        getChildren().addAll(header, content);
+        PrettyScrollPane scrollPane = new PrettyScrollPane(content);
+        scrollPane.getStyleClass().add("mobile");
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
+
+        getChildren().addAll(header, searchWrapper, scrollPane);
+    }
+
+    private CategoryPreviewView createBlogPreviewView() {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Blog");
+        view.setShowAllUrl(PagePath.BLOGS);
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        List<Blog> blogs = DataRepository2.getInstance().getBlogs();
+
+        List<Blog> randomBlogs = getRandomSample(blogs, 2);
+        for (Blog blog : randomBlogs) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    blog.getName(),
+                    blog.getSummary(),
+                    ImageManager.getInstance().blogIconImageProperty(blog),
+                    ModelObjectTool.getModelLink(blog),
+                    123,
+                    57,
+                    2048
+
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    private CategoryPreviewView createLibraryPreviewView() {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Libraries");
+        view.setShowAllUrl(PagePath.LIBRARIES);
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        List<Library> books = DataRepository2.getInstance().getLibraries();
+
+        List<Library> randomBooks = getRandomSample(books, 3);
+        for (Library library : randomBooks) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    library.getName(),
+                    library.getSummary(),
+                    ImageManager.getInstance().libraryFeaturedImageProperty(library),
+                    ModelObjectTool.getModelLink(library),
+                    123,
+                    57,
+                    2048
+
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    private CategoryPreviewView createBooksPreviewView() {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Books");
+        view.setShowAllUrl(PagePath.BOOKS);
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        List<Book> books = DataRepository2.getInstance().getBooks();
+
+        List<Book> randomBooks = getRandomSample(books, 2);
+        for (Book book : randomBooks) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    book.getName(),
+                    book.getSummary(),
+                    ImageManager.getInstance().bookCoverImageProperty(book),
+                    ModelObjectTool.getModelLink(book),
+                    123,
+                    57,
+                    2048
+
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
     }
 
     // Size support
@@ -92,7 +187,7 @@ public class MobileHomePage extends VBox {
         List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
         List<RealWorldApp> apps = DataRepository2.getInstance().getRealWorldApps();
 
-        List<RealWorldApp> randomApps = getRandomSample(apps, 2);
+        List<RealWorldApp> randomApps = getRandomSample(apps, 3);
         for (RealWorldApp app : randomApps) {
             CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
                     app.getName(),
@@ -118,7 +213,7 @@ public class MobileHomePage extends VBox {
         List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
         List<Person> people = DataRepository2.getInstance().getPeople();
 
-        List<Person> randomPeople = getRandomSample(people, 2);
+        List<Person> randomPeople = getRandomSample(people, 3);
         for (Person person : randomPeople) {
             CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
                     person.getName(),
@@ -169,7 +264,7 @@ public class MobileHomePage extends VBox {
         }
 
         List<T> copy = new ArrayList<>(list);
-        Collections.shuffle(copy.subList(0, sampleSize + 1));
+        Collections.shuffle(copy);
         return copy.subList(0, sampleSize);
     }
 

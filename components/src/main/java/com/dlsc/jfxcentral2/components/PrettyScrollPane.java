@@ -9,6 +9,11 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.css.CssMetaData;
+import javafx.css.StyleConverter;
+import javafx.css.Styleable;
+import javafx.css.StyleableBooleanProperty;
+import javafx.css.StyleableProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
@@ -21,6 +26,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class PrettyScrollPane extends ScrollPane {
@@ -40,7 +48,22 @@ public class PrettyScrollPane extends ScrollPane {
         init();
     }
 
-    private final BooleanProperty showScrollToTopButton = new SimpleBooleanProperty(this, "showScrollToTopButton", true);
+    private final BooleanProperty showScrollToTopButton = new StyleableBooleanProperty(true) {
+        @Override
+        public Object getBean() {
+            return this;
+        }
+
+        @Override
+        public String getName() {
+            return "showScrollToTopButton";
+        }
+
+        @Override
+        public CssMetaData<? extends Styleable, Boolean> getCssMetaData() {
+            return null;
+        }
+    };
 
     public final boolean isShowScrollToTopButton() {
         return showScrollToTopButton.get();
@@ -324,4 +347,37 @@ public class PrettyScrollPane extends ScrollPane {
             return 0;
         }
     }
+
+    private static class StyleableProperties {
+
+        private static final CssMetaData<PrettyScrollPane, Boolean> SHOW_SCROLL_TO_TOP_BUTTON = new CssMetaData<>("-fx-show-scroll-to-top-button", StyleConverter.getBooleanConverter(), true) {
+            @Override
+            public boolean isSettable(PrettyScrollPane node) {
+                return !node.showScrollToTopButton.isBound();
+            }
+
+            @Override
+            public StyleableProperty<Boolean> getStyleableProperty(PrettyScrollPane node) {
+                return (StyleableProperty<Boolean>) node.showScrollToTopButton;
+            }
+        };
+
+        private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
+
+        static {
+            List<CssMetaData<? extends Styleable, ?>> styleables = new ArrayList<>(ScrollPane.getClassCssMetaData());
+            Collections.addAll(styleables, SHOW_SCROLL_TO_TOP_BUTTON);
+            STYLEABLES = Collections.unmodifiableList(styleables);
+        }
+    }
+
+    @Override
+    public List<CssMetaData<? extends Styleable, ?>> getControlCssMetaData() {
+        return getClassCssMetaData();
+    }
+
+    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
+        return StyleableProperties.STYLEABLES;
+    }
+
 }

@@ -117,6 +117,7 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.utilities.paintpicker.impl;
     exports com.dlsc.jfxcentral2.utilities.paintpicker.impl.datamodel;
     exports com.dlsc.jfxcentral2.utilities.effectdesigner.effect;
+    exports com.dlsc.jfxcentral2.utils.images;
 
     uses IkonProvider;
 }
