@@ -29,6 +29,8 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox
     public MobileCategoryPageBase(ObjectProperty<Size> size) {
         sizeProperty().bind(size);
         getChildren().setAll(content());
+        // swipe right to go back to home
+        // setOnSwipeRight(evt-> MobileLinkUtil.getToPage(PagePath.HOME));
     }
 
     public List<Node> content() {

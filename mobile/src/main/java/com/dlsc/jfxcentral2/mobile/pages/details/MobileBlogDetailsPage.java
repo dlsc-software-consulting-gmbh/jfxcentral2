@@ -1,12 +1,15 @@
 package com.dlsc.jfxcentral2.mobile.pages.details;
 
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
-import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.headers.BlogDetailHeader;
-import com.dlsc.jfxcentral2.components.overviewbox.BlogOverviewBox;
+import com.dlsc.jfxcentral2.mobile.componenets.MobileBlogOverviewBox;
+import com.dlsc.jfxcentral2.mobile.componenets.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 
@@ -21,18 +24,22 @@ public class MobileBlogDetailsPage extends MobileDetailsPageBase<Blog> {
         Blog blog = getItem();
 
         // header
-        BlogDetailHeader header = new BlogDetailHeader(blog);
+        MobileCategoryHeader header = new MobileCategoryHeader(){
+            @Override
+            protected String goBackLink() {
+                return PagePath.BLOGS;
+            }
+        };
+        header.previewImageProperty().bind(ImageManager.getInstance().blogIconImageProperty(blog));
         header.sizeProperty().bind(sizeProperty());
+        header.setTitle(blog.getName());
 
         // overview
-        BlogOverviewBox blogOverviewBox = new BlogOverviewBox(blog);
+        MobileBlogOverviewBox blogOverviewBox = new MobileBlogOverviewBox(blog);
         blogOverviewBox.sizeProperty().bind(sizeProperty());
+        blogOverviewBox.setMaxHeight(Double.MAX_VALUE);
+        VBox.setVgrow(blogOverviewBox, Priority.ALWAYS);
 
-        // details
-        DetailsContentPane detailsContentPane = createContentPane();
-        detailsContentPane.getCenterNodes().add(blogOverviewBox);
-        detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
-
-        return List.of(header, detailsContentPane);
+        return List.of(header, blogOverviewBox);
     }
 }

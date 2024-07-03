@@ -1,13 +1,19 @@
 package com.dlsc.jfxcentral2.mobile.pages.details;
 
 import com.dlsc.jfxcentral.data.model.Learn;
-import com.dlsc.jfxcentral2.components.DetailsContentPane;
-import com.dlsc.jfxcentral2.components.LearnPaginationBox;
-import com.dlsc.jfxcentral2.components.headers.LearnDetailHeader;
+import com.dlsc.jfxcentral.data.model.LearnJavaFX;
+import com.dlsc.jfxcentral.data.model.LearnMobile;
+import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
+import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.LearnOverviewBox;
+import com.dlsc.jfxcentral2.mobile.componenets.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 
@@ -22,23 +28,33 @@ public class MobileLearnDetailsPage extends MobileDetailsPageBase<Learn> {
         Learn learn = getItem();
 
         // header
-        LearnDetailHeader learnDetailHeader = new LearnDetailHeader(learn);
-        learnDetailHeader.sizeProperty().bind(sizeProperty());
+        MobileCategoryHeader header = new MobileCategoryHeader() {
+            @Override
+            protected String goBackLink() {
+                Class<? extends Learn> modelClazz = getModelClazz();
+                if (modelClazz == LearnJavaFX.class) {
+                    return PagePath.LEARN_JAVAFX;
+                } else if (modelClazz == LearnRaspberryPi.class) {
+                    return PagePath.LEARN_RASPBERRYPI;
+                } else if (modelClazz == LearnMobile.class) {
+                    return PagePath.LEARN_MOBILE;
+                }
+                return PagePath.HOME;
+            }
+        };
+        header.sizeProperty().bind(sizeProperty());
+        header.setTitle(learn.getName());
 
         // overview box
         LearnOverviewBox learnOverviewBox = new LearnOverviewBox(learn);
         learnOverviewBox.sizeProperty().bind(sizeProperty());
 
-        // details
-        DetailsContentPane detailsContentPane = new DetailsContentPane();
-        detailsContentPane.getStyleClass().add("learn-details-content-pane");
-        detailsContentPane.sizeProperty().bind(sizeProperty());
-        detailsContentPane.getCenterNodes().add(learnOverviewBox);
-        detailsContentPane.getDetailBoxes().setAll(createDetailBoxes());
-        LearnPaginationBox paginationBox = new LearnPaginationBox(learn, LearnPaginationBox.Position.LEFT, sizeProperty());
-        detailsContentPane.setLeftTopExtraNode(paginationBox);
+        PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(learnOverviewBox));
+        detailsContentPane.getStyleClass().add("mobile");
+        detailsContentPane.setMaxHeight(Double.MAX_VALUE);
+        VBox.setVgrow(detailsContentPane, Priority.ALWAYS);
 
-        return List.of(learnDetailHeader, detailsContentPane);
+        return List.of(header, detailsContentPane);
     }
 
 }

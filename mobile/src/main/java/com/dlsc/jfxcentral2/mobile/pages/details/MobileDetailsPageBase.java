@@ -17,7 +17,6 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
-import com.dlsc.jfxcentral2.components.DetailsContentPane;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.components.detailsbox.AppsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.BlogsDetailsBox;
@@ -46,11 +45,19 @@ public abstract class MobileDetailsPageBase<T extends ModelObject> extends VBox 
     private final SizeSupport sizeSupport = new SizeSupport(this);
 
     private T item;
+    private final Class<? extends T> clazz;
 
     public MobileDetailsPageBase(ObjectProperty<Size> size, Class<? extends T> clazz, String itemId) {
+        this.clazz = clazz;
+
         sizeProperty().bind(size);
         setItem(DataRepository2.getInstance().getByID(clazz, itemId));
         getChildren().addAll(content());
+        getStyleClass().add("mobile-details-page");
+    }
+
+    public Class<? extends T> getModelClazz() {
+        return clazz;
     }
 
     public final ObjectProperty<Size> sizeProperty() {
@@ -74,12 +81,6 @@ public abstract class MobileDetailsPageBase<T extends ModelObject> extends VBox 
     }
 
     public abstract List<Node> content();
-
-    protected DetailsContentPane createContentPane() {
-        DetailsContentPane detailsContentPane = new DetailsContentPane();
-        detailsContentPane.sizeProperty().bind(sizeProperty());
-        return detailsContentPane;
-    }
 
     protected List<DetailsBoxBase<?>> createDetailBoxes() {
         ModelObject modelObject = getItem();

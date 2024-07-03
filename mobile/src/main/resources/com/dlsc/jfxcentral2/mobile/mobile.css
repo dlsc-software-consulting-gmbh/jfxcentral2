@@ -1,4 +1,11 @@
 /** ----------------------------------
+ * notch-pane
+ */
+.notch-pane.mobile {
+    -fx-background-color: #F7F9FFFF;
+}
+
+/** ----------------------------------
  *PrettyScrollPane
  */
 .pretty-scroll-pane.mobile {
@@ -643,6 +650,122 @@
 .mobile-category-header .category-title .ikonli-font-icon {
     -fx-icon-size: 25px;
 }
+.mobile-category-header .category-title {
+    -fx-padding: 12px 20px;
+}
+
+.mobile-category-header .category-title .avatar-view {
+    -fx-avatar-size: 25px;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+/** ----------------------------------
+ * ListView (Mobile)
+ */
+.list-view.mobile {
+    -fx-background-color: -white;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.list-view.mobile:focused {
+    -fx-background-color: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.list-view.mobile .scroll-bar:vertical,
+.list-view.mobile .scroll-bar:vertical:focused {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.list-view.mobile .scroll-bar:vertical > .thumb {
+    -fx-scale-x: 0.7;
+}
+
+.list-view.mobile .scroll-bar:vertical > .thumb {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4px;
+}
+
+.list-view.mobile:hover .scroll-bar:vertical > .thumb {
+    -fx-background-color: #bbb;
+}
+
+.list-view.mobile .scroll-bar:vertical > .thumb:hover,
+.list-view.mobile .scroll-bar:vertical > .thumb:pressed {
+    -fx-background-color: -grey-60;
+}
+
+.list-view.mobile .scroll-bar:vertical > .track,
+.list-view.mobile .scroll-bar:vertical > .track-background {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0 0 1px 0;
+    -fx-background-radius: 0;
+}
+
+.list-view.mobile .scroll-bar > .increment-button,
+.list-view.mobile .scroll-bar > .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.list-view.mobile .scroll-bar:vertical > .increment-button > .increment-arrow,
+.list-view.mobile .scroll-bar:vertical > .decrement-button > .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-shape: null;
+}
+
+.list-view.mobile .list-cell:odd {
+    -fx-background-color: -white;
+}
+
+.list-view.mobile .list-cell:pressed {
+    -fx-background-color: -grey-10;
+}
+
+.list-view.mobile .list-cell:empty {
+    -fx-background-color: -white;
+    -fx-border-color: transparent;
+}
+
+.list-view.mobile .list-cell {
+    -fx-background-color: -white;
+}
+
+/** ----------------------------------
+ * mobile-details-page
+ */
+.mobile-details-page {
+    -fx-alignment: top-center;
+    -fx-spacing: 15px;
+}
+
+.mobile-details-page .overview-box .content-box {
+    -fx-alignment: top-center;
+}
+
+.mobile-details-page .company-overview-box .body-box .image-wrapper {
+    -fx-background-color: null;
+    -fx-border-color: -grey-10;
+}
+
+.mobile-details-page .company-overview-box .body-box .image-wrapper {
+    -fx-min-height: 130px;
+    -fx-pref-height: 130px;
+    -fx-max-height: 130px;
+}
+
+.mobile-details-page .company-overview-box .body-box .image-wrapper .preview-image {
+    -fx-fit-width: 300px;
+    -fx-fit-height: 100px;
+}
 
 /** ----------------------------------
  * MobileListView
@@ -657,63 +780,17 @@
     -fx-padding: 8px;
 }
 
-.model-list-view .list-view {
-    -fx-background-color: null;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
+.model-list-view .list-view .placeholder-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: -grey-60;
+    -fx-font-family: "Spline Sans Medium";
+    -fx-content-display: top;
+    -fx-graphic-text-gap: 15px;
 }
 
-.model-list-view .list-view:focused {
-    -fx-background-color: null;
-    -fx-background-insets: 0;
-    -fx-background-radius: 0;
-    -fx-padding: 0;
-}
-
-.model-list-view .scroll-bar:vertical,
-.model-list-view .scroll-bar:vertical:focused {
-    -fx-background-color: transparent;
-    -fx-background-insets: 0;
-}
-
-.model-list-view .scroll-bar:vertical > .thumb {
-    -fx-scale-x: 0.7;
-}
-
-.model-list-view .list-view .scroll-bar:vertical > .thumb {
-    -fx-background-color: transparent;
-    -fx-background-insets: 0;
-    -fx-background-radius: 4px;
-}
-
-.model-list-view .list-view:hover .scroll-bar:vertical > .thumb {
-    -fx-background-color: #bbb;
-}
-
-.model-list-view .list-view .scroll-bar:vertical > .thumb:hover,
-.model-list-view .list-view .scroll-bar:vertical > .thumb:pressed {
-    -fx-background-color: -grey-60;
-}
-
-.model-list-view .scroll-bar:vertical > .track,
-.model-list-view .scroll-bar:vertical > .track-background {
-    -fx-background-color: transparent;
-    -fx-background-insets: 0 0 1px 0;
-    -fx-background-radius: 0;
-}
-
-.model-list-view .scroll-bar > .increment-button,
-.model-list-view .scroll-bar > .decrement-button {
-    -fx-background-color: transparent;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-}
-
-.model-list-view .scroll-bar:vertical > .increment-button > .increment-arrow,
-.model-list-view .scroll-bar:vertical > .decrement-button > .decrement-arrow {
-    -fx-background-color: transparent;
-    -fx-background-insets: 0;
-    -fx-shape: null;
+.model-list-view .list-view .placeholder-label .ikonli-font-icon {
+    -fx-icon-size: 35px;
+    -fx-icon-color: -grey-60;
 }
 
 .model-list-view .list-view .model-list-cell {
@@ -723,19 +800,6 @@
     -fx-border-color: -grey-10;
     -fx-border-width: 0 0 0.5px 0;
     -fx-background-color: -white;
-}
-
-.model-list-view .list-view .model-list-cell:odd {
-    -fx-background-color: -white;
-}
-
-.model-list-view .list-view .model-list-cell:pressed {
-    -fx-background-color: -grey-10;
-}
-
-.model-list-view .list-view .model-list-cell:empty {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
 }
 
 .model-list-view .list-view .model-list-cell > .container {
@@ -766,4 +830,32 @@
 
 .rounded-preview-page .list-view .model-list-cell .avatar-view {
     -fx-avatar-type: CIRCLE;
+}
+
+/** ----------------------------------
+ * MobileBlogOverviewBox
+ */
+.mobile-blog-overview-box .list-view .post-view-cell {
+    -fx-padding: 10px 20px 10px 10px;
+    -fx-background-color: -white;
+}
+
+.mobile-blog-overview-box .list-view .post-view-cell .content-box {
+    -fx-alignment: center-left;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 0 0 0.5px 0;
+    -fx-border-insets: 0 0 -10 0;
+    -fx-spacing: 10px;
+}
+
+.mobile-blog-overview-box .list-view .post-view-cell .time-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: -grey-60;
+}
+
+.mobile-blog-overview-box .list-view .post-view-cell .title-label {
+    -fx-font-size: 15px;
+    -fx-text-fill: -grey-100;
+    -fx-pref-height: 40px;
+    -fx-alignment: center-left;
 }
