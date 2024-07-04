@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.demo;
 
 import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral2.mobile.componenets.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.layout.Region;
 

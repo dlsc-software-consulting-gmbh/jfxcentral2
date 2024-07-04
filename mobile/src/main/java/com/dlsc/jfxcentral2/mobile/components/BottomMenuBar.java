@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.mobile.componenets;
+package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
@@ -73,7 +73,7 @@ public class BottomMenuBar extends HBox {
         setMaxHeight(Region.USE_PREF_SIZE);
 
         // select home button by default
-        homeButton.fire();
+        // homeButton.fire();
     }
 
     public final ObjectProperty<Size> sizeProperty() {

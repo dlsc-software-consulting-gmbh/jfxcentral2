@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.mobile.componenets;
+package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.jfxcentral2.mobile.skin.PageViewSkin;
 import javafx.animation.Interpolator;
@@ -450,6 +450,20 @@ public class PageView extends Control {
     @Override
     public List<CssMetaData<? extends Styleable, ?>> getControlCssMetaData() {
         return getClassCssMetaData();
+    }
+
+    public void gotoNextPage() {
+        Skin<?> skin = getSkin();
+        if (skin instanceof PageViewSkin viewSkin) {
+            viewSkin.gotoNextPage();
+        }
+    }
+
+    public void gotoPreviousPage() {
+        Skin<?> skin = getSkin();
+        if (skin instanceof PageViewSkin viewSkin) {
+            viewSkin.gotoPreviousPage();
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.mobile.componenets;
+package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Blog;

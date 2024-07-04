@@ -1,15 +1,17 @@
 package com.dlsc.jfxcentral2.demo.mobile;
 
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
-import com.dlsc.jfxcentral2.mobile.componenets.PageView;
+import com.dlsc.jfxcentral2.mobile.components.PageView;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -34,7 +36,7 @@ public class HelloPageView extends JFXCentralSampleBase {
             text.setPrefSize(80, 80);
             text.setStyle("-fx-background-color: lightgrey; -fx-background-radius: 50%;");
             StackPane pane = new StackPane(text);
-            pane.setStyle("-fx-background-color: " + WEB_COLORS[index% WEB_COLORS.length] + ";");
+            pane.setStyle("-fx-background-color: " + WEB_COLORS[index % WEB_COLORS.length] + ";");
             return pane;
         });
 
@@ -74,13 +76,22 @@ public class HelloPageView extends JFXCentralSampleBase {
         currentIndexComboBox.getItems().addAll(0, 1, 2, 3, 4);
         pageView.currentPageIndexProperty().bindBidirectional(currentIndexComboBox.valueProperty());
 
+        Button nextPageButton = new Button(">");
+        nextPageButton.setOnAction(e -> pageView.gotoNextPage());
+
+        Button prevPageButton = new Button("<");
+        prevPageButton.setOnAction(e -> pageView.gotoPreviousPage());
+
+        HBox buttonBox = new HBox(prevPageButton, nextPageButton);
+
         return createSimpleControlPanel(
                 createControlCell("Switch Duration", switchDurationSpinner),
                 createControlCell("Revert Duration", revertDurationSpinner),
                 createControlCell("Switch Threshold", thresholdSlider),
                 createControlCell("Edge Threshold", edgeThresholdSlider),
                 createControlCell("Swipe Direction", swipeDirectionComboBox),
-                createControlCell("Change Page Index", currentIndexComboBox)
+                createControlCell("Change Page Index", currentIndexComboBox),
+                createControlCell("Navigation", buttonBox)
         );
     }
 

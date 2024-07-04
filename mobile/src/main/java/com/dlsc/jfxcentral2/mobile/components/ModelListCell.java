@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.mobile.componenets;
+package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.AvatarView;

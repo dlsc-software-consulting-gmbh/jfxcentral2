@@ -89,6 +89,7 @@ open module com.dlsc.jfxcentral2.app {
     requires org.kordamp.ikonli.zondicons;
     requires com.gluonhq.attach.util;
     requires com.dlsc.jfxcentral2.mobile;
+    requires jpro.utils.treeshowing;
 
     exports com.dlsc.jfxcentral2.app;
     exports com.dlsc.jfxcentral2.app.pages;

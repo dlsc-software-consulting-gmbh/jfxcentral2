@@ -15,8 +15,10 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
-import com.dlsc.jfxcentral2.mobile.componenets.BottomMenuBar;
-import com.dlsc.jfxcentral2.mobile.componenets.MobileDevelopToolBar;
+import com.dlsc.jfxcentral2.app.pages.MobileRefreshPage;
+import com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent;
+import com.dlsc.jfxcentral2.mobile.components.BottomMenuBar;
+import com.dlsc.jfxcentral2.mobile.components.MobileDevelopToolBar;
 import com.dlsc.jfxcentral2.mobile.pages.MainPage;
 import com.dlsc.jfxcentral2.mobile.pages.MobileHomePage;
 import com.dlsc.jfxcentral2.mobile.pages.MobileLinksOfTheWeekPage;
@@ -45,10 +47,13 @@ import com.dlsc.jfxcentral2.mobile.pages.details.MobileToolDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileTutorialDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileVideoDetailsPage;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.EventBusUtil;
+import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.MobileRoute;
 import com.dlsc.jfxcentral2.utils.MobileRouter;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
+import com.dlsc.jfxcentral2.utils.Subscribe;
 import com.gluonhq.attach.display.DisplayService;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
@@ -81,9 +86,12 @@ public class JFXCentral2MobileApp extends Application {
     }
 
     private MobileDevelopToolBar developToolBar;
+    private StackPane notchPane;
 
     @Override
     public void start(Stage stage) {
+        EventBusUtil.register(this);
+
         System.setProperty("prism.lcdtext", "false");
 
         // set jpro.imagemanager.cache to ~/.jfxcentral/imagecache
@@ -102,7 +110,7 @@ public class JFXCentral2MobileApp extends Application {
         mainPage.sizeProperty().bind(size);
 
         // add notch pane
-        StackPane notchPane = new StackPane();
+        notchPane = new StackPane();
         notchPane.getStyleClass().addAll("notch-pane", "mobile");
         VBox.setVgrow(mainPage, Priority.ALWAYS);
         VBox parent = new VBox(notchPane, mainPage);
@@ -131,6 +139,15 @@ public class JFXCentral2MobileApp extends Application {
         // Mike Hearn explicitly requested to use this approach to exit the app
         stage.setOnCloseRequest(evt -> System.exit(0));
         stage.show();
+
+        // Go to home page
+        MobileLinkUtil.getToPage(PagePath.HOME);
+    }
+
+    @Subscribe
+    public void onRepositoryUpdated(RepositoryUpdatedEvent event) {
+        notchPane.setVisible(event.isUpdated());
+        notchPane.setManaged(event.isUpdated());
     }
 
     private void updateSizeProperty(Scene scene) {
@@ -146,7 +163,16 @@ public class JFXCentral2MobileApp extends Application {
 
     private MobileRouter createMobileRouter() {
         return MobileRouter.getInstance()
-                .and(MobileRoute.get(PagePath.HOME, r -> new MobileHomePage(size)))
+                .and(MobileRoute.get(PagePath.HOME, r -> {
+                    boolean repositoryUpdated = RepositoryManager.isRepositoryUpdated();
+                    EventBusUtil.post(new RepositoryUpdatedEvent(repositoryUpdated));
+                    if (repositoryUpdated) {
+                        return new MobileHomePage(size);
+                    } else {
+                        return new MobileRefreshPage(size);
+                    }
+                }))
+                .and(MobileRoute.get(PagePath.REFRESH, r -> new MobileRefreshPage(size)))
                 .and(MobileRoute.redirect("/index", PagePath.HOME))
                 .and(MobileRoute.redirect("/home", PagePath.HOME))
                 .and(MobileRoute.get(PagePath.LINKS, r -> new MobileLinksOfTheWeekPage(size)))

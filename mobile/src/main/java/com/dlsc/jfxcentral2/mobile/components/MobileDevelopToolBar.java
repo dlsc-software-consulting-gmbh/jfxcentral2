@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral2.mobile.componenets;
+package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.MobileRouter;
@@ -67,26 +67,23 @@ public class MobileDevelopToolBar extends VBox {
         HBox row1 = new HBox(5, pathField, loadTimeLabel, countLabel, visibleCountLabel);
         HBox.setHgrow(pathField, Priority.ALWAYS);
 
-        Label widthLabel = new Label();
-        Label heightLabel = new Label();
+        Label sizeLabel = new Label();
         sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null) {
-                widthLabel.textProperty().bind(newScene.widthProperty().asString("Width: %.0f"));
-                heightLabel.textProperty().bind(newScene.heightProperty().asString("Height: %.0f"));
+                sizeLabel.textProperty().bind(newScene.widthProperty().asString("%.0f")
+                        .concat(" x ").concat(newScene.heightProperty().asString("%.0f")));
                 newScene.focusOwnerProperty().addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         System.out.println("Focused component: " + newValue.getClass().getSimpleName());
                     }
                 });
             } else {
-                widthLabel.textProperty().unbind();
-                heightLabel.textProperty().unbind();
-                widthLabel.setText("");
-                heightLabel.setText("");
+                sizeLabel.textProperty().unbind();
+                sizeLabel.setText("");
             }
         });
 
-        Label limitWidthLabel = new Label("Limit Width: ");
+        Label limitWidthLabel = new Label("Choose Width: ");
         ComboBox<WidthType> sizeComboBox = new ComboBox<>(FXCollections.observableArrayList(WidthType.values()));
         sizeComboBox.setValue(WidthType.SMALL);
         HBox sizeBox = new HBox(limitWidthLabel, sizeComboBox);
@@ -108,7 +105,7 @@ public class MobileDevelopToolBar extends VBox {
             }
         });
 
-        HBox row2 = new HBox(5, widthLabel, heightLabel, sizeBox, scenicViewButton);
+        HBox row2 = new HBox(5, sizeLabel, sizeBox, scenicViewButton);
         row2.setAlignment(Pos.CENTER_RIGHT);
 
         getChildren().addAll(row1, row2);
