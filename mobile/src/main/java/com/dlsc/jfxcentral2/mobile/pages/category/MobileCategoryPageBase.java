@@ -2,9 +2,9 @@ package com.dlsc.jfxcentral2.mobile.pages.category;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.SizeSupport;
-import com.dlsc.jfxcentral2.mobile.componenets.MobileCategoryHeader;
-import com.dlsc.jfxcentral2.mobile.componenets.ModelListCell;
-import com.dlsc.jfxcentral2.mobile.componenets.ModelListView;
+import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.ModelListCell;
+import com.dlsc.jfxcentral2.mobile.components.ModelListView;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;

@@ -6,7 +6,7 @@ import com.dlsc.jfxcentral.data.model.LearnMobile;
 import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.LearnOverviewBox;
-import com.dlsc.jfxcentral2.mobile.componenets.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;

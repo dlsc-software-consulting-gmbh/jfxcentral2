@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.LibraryOverviewBox;
-import com.dlsc.jfxcentral2.mobile.componenets.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;

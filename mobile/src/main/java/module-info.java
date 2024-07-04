@@ -97,10 +97,11 @@ open module com.dlsc.jfxcentral2.mobile {
     requires org.kordamp.ikonli.zondicons;
     requires com.rometools.rome;
     requires com.dlsc.jfxcentral2.components;
+    requires jpro.utils.treeshowing;
     // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.mobile.home;
-    exports com.dlsc.jfxcentral2.mobile.componenets;
+    exports com.dlsc.jfxcentral2.mobile.components;
     exports com.dlsc.jfxcentral2.mobile.skin;
     exports com.dlsc.jfxcentral2.mobile.pages;
     exports com.dlsc.jfxcentral2.mobile.pages.category;

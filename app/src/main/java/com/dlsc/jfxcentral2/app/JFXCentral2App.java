@@ -66,7 +66,7 @@ import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
 import com.dlsc.jfxcentral2.app.utils.VideoPane;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
-import com.dlsc.jfxcentral2.mobile.componenets.BottomMenuBar;
+import com.dlsc.jfxcentral2.mobile.components.BottomMenuBar;
 import com.dlsc.jfxcentral2.model.IconInfo;
 import com.dlsc.jfxcentral2.model.IconInfoBuilder;
 import com.dlsc.jfxcentral2.model.Size;

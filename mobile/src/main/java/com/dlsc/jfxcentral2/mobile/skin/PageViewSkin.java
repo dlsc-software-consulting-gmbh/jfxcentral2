@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.mobile.skin;
 
-import com.dlsc.jfxcentral2.mobile.componenets.PageView;
+import com.dlsc.jfxcentral2.mobile.components.PageView;
 import com.dlsc.jfxcentral2.utils.NumberUtil;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
@@ -384,4 +384,19 @@ public class PageViewSkin extends SkinBase<PageView> {
         }
     }
 
+    public void gotoNextPage() {
+        PageView control = getSkinnable();
+        int currentIndex = control.getCurrentPageIndex();
+        if (currentIndex < control.getPageCount() - 1) {
+            animateSwitchToPage(currentIndex + 1, isSwipeHorizontal() ? control.getWidth() : control.getHeight(), isSwipeHorizontal());
+        }
+    }
+
+    public void gotoPreviousPage() {
+        PageView control = getSkinnable();
+        int currentIndex = control.getCurrentPageIndex();
+        if (currentIndex > 0) {
+            animateSwitchToPage(currentIndex - 1, isSwipeHorizontal() ? control.getWidth() : control.getHeight(), isSwipeHorizontal());
+        }
+    }
 }

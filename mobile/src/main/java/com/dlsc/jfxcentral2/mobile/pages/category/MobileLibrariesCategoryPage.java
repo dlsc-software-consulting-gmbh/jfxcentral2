@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.mobile.pages.category;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral2.mobile.componenets.ModelListCell;
+import com.dlsc.jfxcentral2.mobile.components.ModelListCell;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;

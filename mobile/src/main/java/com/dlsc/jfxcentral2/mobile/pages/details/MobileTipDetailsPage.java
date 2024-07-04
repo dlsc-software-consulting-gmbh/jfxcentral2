@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.TipOverviewBox;
-import com.dlsc.jfxcentral2.mobile.componenets.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
