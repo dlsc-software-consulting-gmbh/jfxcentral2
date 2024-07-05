@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.app.pages;
 
-import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral2.app.RepositoryManager;
+import com.dlsc.jfxcentral2.app.utils.RepositoryUpdater;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.mobile.components.WelcomePageView;
 import com.dlsc.jfxcentral2.model.Size;
@@ -11,18 +11,13 @@ import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.WeakInvalidationListener;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
-import org.eclipse.jgit.lib.ProgressMonitor;
 
 public class MobileRefreshPage extends StackPane {
 
@@ -39,6 +34,7 @@ public class MobileRefreshPage extends StackPane {
     };
 
     private final WeakInvalidationListener weakInvalidationListener = new WeakInvalidationListener(invalidationListener);
+    private final RepositoryUpdater repositoryUpdater = new RepositoryUpdater();
 
     public MobileRefreshPage(ObjectProperty<Size> size) {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
@@ -59,16 +55,16 @@ public class MobileRefreshPage extends StackPane {
         loadLabel.setVisible(false);
         loadLabel.setTextAlignment(TextAlignment.CENTER);
         loadLabel.textProperty().bind(Bindings.createStringBinding(() -> {
-            if (loadMessage.get().toLowerCase().startsWith("pull")) {
+            if (repositoryUpdater.getLoadMessage().toLowerCase().startsWith("pull")) {
                 return "Checking for updates ...";
             }
 
-            if (loadPercentage.get() == -1) {
-                return loadMessage.get();
+            if (repositoryUpdater.getLoadPercentage() == -1) {
+                return repositoryUpdater.getLoadMessage();
             }
 
-            return loadMessage.get() + " " + loadPercentage.get() + "%";
-        }, loadMessage, loadPercentage));
+            return repositoryUpdater.getLoadMessage() + " " + repositoryUpdater.getLoadPercentage() + "%";
+        }, repositoryUpdater.loadMessageProperty(), repositoryUpdater.loadPercentageProperty()));
 
         // bottom part
         Button startButton = new Button("Get Started");
@@ -80,7 +76,7 @@ public class MobileRefreshPage extends StackPane {
             startButton.setManaged(false);
             loadLabel.setVisible(true);
             loadLabel.setManaged(true);
-            performUpdate(false);
+            repositoryUpdater.performUpdate(false);
         });
 
         Label welcomeLabel = new Label("Welcome to JFXCentral");
@@ -105,78 +101,8 @@ public class MobileRefreshPage extends StackPane {
         getChildren().add(content);
 
         if (!RepositoryManager.isFirstTimeSetup()) {
-            performUpdate(true);
+            repositoryUpdater.performUpdate(true);
         }
     }
 
-    private final IntegerProperty loadPercentage = new SimpleIntegerProperty(this, "loadPercentage", 0);
-
-    private final StringProperty loadMessage = new SimpleStringProperty(this, "loadMessage", "");
-
-    /*
-     * The "refresh" parameter states whether the update is called due to the first setup of the
-     * data repository or because of a call to the refresh page.
-     */
-    private void performUpdate(boolean refresh) {
-        Thread thread = new Thread(() -> RepositoryManager.updateRepository(new ProgressMonitor() {
-
-            double total;
-            double acc;
-
-            @Override
-            public void showDuration(boolean b) {
-            }
-
-            @Override
-            public void start(int i) {
-            }
-
-            @Override
-            public void beginTask(String taskName, int totalWork) {
-                // clean up some messy message we get
-                final String name = taskName.replace("remote: ", "");
-
-                if (totalWork == -1) {
-                    Platform.runLater(() -> {
-                        loadMessage.set(name);
-                        loadPercentage.set(-1);
-                    });
-                } else {
-                    Platform.runLater(() -> {
-                        loadMessage.set(name);
-                        loadPercentage.set(0);
-                    });
-                    acc = 0;
-                    total = totalWork;
-                }
-            }
-
-            @Override
-            public void update(int completed) {
-                if (total != ProgressMonitor.UNKNOWN) {
-                    acc += completed;
-                    int p = (int) ((acc / total) * 100);
-                    Platform.runLater(() -> loadPercentage.set(p));
-                } else {
-                    Platform.runLater(() -> loadPercentage.set(-1));
-                }
-            }
-
-            @Override
-            public void endTask() {
-                if (refresh) {
-                    DataRepository2.getInstance().reload();
-                }
-            }
-
-            @Override
-            public boolean isCancelled() {
-                return false;
-            }
-        }));
-
-        thread.setName("Repository Thread");
-        thread.setDaemon(true);
-        thread.start();
-    }
 }
