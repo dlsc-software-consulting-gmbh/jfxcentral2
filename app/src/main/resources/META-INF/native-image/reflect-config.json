@@ -3,55 +3,16 @@
   "name":"[B"
 },
 {
-  "name":"[C"
-},
-{
-  "name":"[D"
-},
-{
-  "name":"[F"
-},
-{
-  "name":"[I"
-},
-{
-  "name":"[J"
-},
-{
   "name":"[Ljava.lang.String;"
-},
-{
-  "name":"[Ljava.lang.reflect.Constructor;"
 },
 {
   "name":"[Ljavafx.collections.transformation.SortedList$Element;"
 },
 {
-  "name":"[Ljavax.management.openmbean.CompositeData;"
-},
-{
   "name":"[Lsun.security.pkcs.SignerInfo;"
 },
 {
-  "name":"[S"
-},
-{
-  "name":"[Z"
-},
-{
   "name":"apple.security.AppleProvider",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.apple.laf.AquaKeyBindings",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.apple.laf.AquaLookAndFeel",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.apple.laf.AquaMnemonicHandler$AltProcessor",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -122,8 +83,7 @@
 },
 {
   "name":"com.dlsc.jfxcentral.data.model.Learn",
-  "allDeclaredFields":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
+  "allDeclaredFields":true
 },
 {
   "name":"com.dlsc.jfxcentral.data.model.LearnJavaFX",
@@ -222,47 +182,31 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"com.dlsc.jfxcentral.data.pull.Label",
-  "allDeclaredFields":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
+  "name":"com.dlsc.jfxcentral2.app.JFXCentral2MobileApp",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"main","parameterTypes":["java.lang.String[]"] }, {"name":"onRepositoryUpdated","parameterTypes":["com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent"] }]
 },
 {
-  "name":"com.dlsc.jfxcentral.data.pull.PullRequest",
-  "allDeclaredFields":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
+  "name":"com.dlsc.jfxcentral2.mobile.components.BottomMenuBar",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"handleNavigation","parameterTypes":["com.dlsc.jfxcentral2.events.MobileLinkEvent"] }]
 },
 {
-  "name":"com.dlsc.jfxcentral.data.pull.User",
-  "allDeclaredFields":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
+  "name":"com.dlsc.jfxcentral2.mobile.skin.MainPageSkin",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"onHideMenuBarEvent","parameterTypes":["com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent"] }, {"name":"onMobileResponseEvent","parameterTypes":["com.dlsc.jfxcentral2.events.MobileResponseEvent"] }]
 },
 {
-  "name":"com.dlsc.jfxcentral2.app.JFXCentral2App",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"main","parameterTypes":["java.lang.String[]"] }
-  ]
+  "name":"com.dlsc.jfxcentral2.utils.MobileRouter",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"handleMobileLink","parameterTypes":["com.dlsc.jfxcentral2.events.MobileLinkEvent"] }]
 },
 {
-  "name":"com.dlsc.jfxcentral2.app.utils.PrettyScrollPane",
-  "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
+  "name":"com.gluonhq.attach.display.impl.DesktopDisplayService"
 },
 {
-  "name":"com.dlsc.jfxcentral2.utilities.effectdesigner.effect.LightingBumpInput",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"getInput","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"com.dlsc.jfxcentral2.utilities.effectdesigner.effect.LightingContentInput",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"getInput","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
+  "name":"com.intellij.rt.execution.application.AppMainV2$Agent",
+  "methods":[{"name":"premain","parameterTypes":["java.lang.String","java.lang.instrument.Instrumentation"] }]
 },
 {
   "name":"com.sun.crypto.provider.AESCipher$General",
@@ -308,15 +252,6 @@
   "name":"com.sun.glass.ui.Application"
 },
 {
-  "name":"com.sun.glass.ui.CommonDialogs$ExtensionFilter"
-},
-{
-  "name":"com.sun.glass.ui.CommonDialogs$FileChooserResult"
-},
-{
-  "name":"com.sun.glass.ui.EventLoop"
-},
-{
   "name":"com.sun.glass.ui.Menu"
 },
 {
@@ -327,6 +262,22 @@
 },
 {
   "name":"com.sun.glass.ui.View"
+},
+{
+  "name":"com.sun.glass.ui.mac.MacApplication"
+},
+{
+  "name":"com.sun.glass.ui.mac.MacMenuBarDelegate"
+},
+{
+  "name":"com.sun.glass.ui.mac.MacPixels"
+},
+{
+  "name":"com.sun.glass.ui.mac.MacPlatformFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.glass.ui.mac.MacView"
 },
 {
   "name":"com.sun.javafx.font.coretext.CTFactory",
@@ -349,74 +300,16 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"com.sun.javafx.webkit.theme.ScrollBarWidget"
-},
-{
-  "name":"com.sun.management.GarbageCollectorMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"com.sun.management.GcInfo",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"com.sun.management.HotSpotDiagnosticMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"com.sun.management.ThreadMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"com.sun.management.UnixOperatingSystemMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"com.sun.management.VMOption",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"com.sun.management.internal.GarbageCollectorExtImpl",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"com.sun.management.internal.HotSpotDiagnostic",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"com.sun.management.internal.HotSpotThreadImpl",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"com.sun.management.internal.OperatingSystemImpl",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"com.sun.media.jfxmediaimpl.platform.gstreamer.GSTPlatform",
-  "methods":[{"name":"getPlatformInstance","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.media.jfxmediaimpl.platform.osx.OSXPlatform",
-  "methods":[{"name":"getPlatformInstance","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
   "name":"com.sun.prism.GraphicsPipeline",
-  "methods":[
-    {"name":"getFontFactory","parameterTypes":[] }, 
-    {"name":"getPipeline","parameterTypes":[] }
-  ]
+  "methods":[{"name":"getFontFactory","parameterTypes":[] }, {"name":"getPipeline","parameterTypes":[] }]
 },
 {
-  "name":"com.sun.prism.shader.DrawCircle_Color_Loader",
-  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+  "name":"com.sun.prism.es2.ES2Pipeline",
+  "methods":[{"name":"getInstance","parameterTypes":[] }]
 },
 {
-  "name":"com.sun.prism.shader.DrawPgram_Color_Loader",
-  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+  "name":"com.sun.prism.es2.MacGLFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"com.sun.prism.shader.DrawRoundRect_Color_Loader",
@@ -431,39 +324,11 @@
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {
-  "name":"com.sun.prism.shader.FillPgram_ImagePattern_Loader",
-  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
-},
-{
   "name":"com.sun.prism.shader.FillPgram_LinearGradient_PAD_Loader",
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {
   "name":"com.sun.prism.shader.FillRoundRect_Color_Loader",
-  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
-},
-{
-  "name":"com.sun.prism.shader.FillRoundRect_LinearGradient_PAD_Loader",
-  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
-},
-{
-  "name":"com.sun.prism.shader.FillRoundRect_RadialGradient_PAD_Loader",
-  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
-},
-{
-  "name":"com.sun.prism.shader.Mask_TextureRGB_Loader",
-  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
-},
-{
-  "name":"com.sun.prism.shader.Solid_Color_Loader",
-  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
-},
-{
-  "name":"com.sun.prism.shader.Solid_LinearGradient_PAD_Loader",
-  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
-},
-{
-  "name":"com.sun.prism.shader.Solid_RadialGradient_PAD_Loader",
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {
@@ -479,47 +344,15 @@
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {
-  "name":"com.sun.prism.shader.Texture_RadialGradient_PAD_Loader",
-  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.PrCropPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.PrFloodPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.PrMergePeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.PrReflectionPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
+  "name":"com.sun.scenario.effect.impl.es2.ES2ShaderSource",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"com.sun.scenario.effect.impl.prism.PrRenderer",
   "methods":[{"name":"createRenderer","parameterTypes":["com.sun.scenario.effect.FilterContext"] }]
 },
 {
-  "name":"com.sun.scenario.effect.impl.prism.ps.PPSBlend_ADDPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.ps.PPSBlend_SRC_ATOPPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
   "name":"com.sun.scenario.effect.impl.prism.ps.PPSBlend_SRC_INPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.ps.PPSBlend_SRC_OVERPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.ps.PPSBrightpassPeer",
   "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
 },
 {
@@ -527,40 +360,12 @@
   "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
 },
 {
-  "name":"com.sun.scenario.effect.impl.prism.ps.PPSDisplacementMapPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.ps.PPSInvertMaskPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.ps.PPSLinearConvolvePeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
   "name":"com.sun.scenario.effect.impl.prism.ps.PPSLinearConvolveShadowPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.ps.PPSPerspectiveTransformPeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.ps.PPSPhongLighting_DISTANTPeer",
   "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
 },
 {
   "name":"com.sun.scenario.effect.impl.prism.ps.PPSRenderer",
   "methods":[{"name":"createRenderer","parameterTypes":["com.sun.scenario.effect.FilterContext"] }]
-},
-{
-  "name":"com.sun.scenario.effect.impl.prism.ps.PPSSepiaTonePeer",
-  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
-},
-{
-  "name":"com.sun.xml.internal.stream.XMLInputFactoryImpl",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"com.vladsch.flexmark.util.ast.TextContainer$Flags",
@@ -575,198 +380,34 @@
   "allPublicFields":true
 },
 {
-  "name":"java.awt.SequencedEvent"
-},
-{
-  "name":"java.awt.SystemColor",
-  "fields":[
-    {"name":"activeCaption"}, 
-    {"name":"activeCaptionBorder"}, 
-    {"name":"activeCaptionText"}, 
-    {"name":"control"}, 
-    {"name":"controlDkShadow"}, 
-    {"name":"controlHighlight"}, 
-    {"name":"controlLtHighlight"}, 
-    {"name":"controlShadow"}, 
-    {"name":"controlText"}, 
-    {"name":"desktop"}, 
-    {"name":"inactiveCaption"}, 
-    {"name":"inactiveCaptionBorder"}, 
-    {"name":"inactiveCaptionText"}, 
-    {"name":"info"}, 
-    {"name":"infoText"}, 
-    {"name":"menu"}, 
-    {"name":"menuText"}, 
-    {"name":"scrollbar"}, 
-    {"name":"text"}, 
-    {"name":"textHighlight"}, 
-    {"name":"textHighlightText"}, 
-    {"name":"textInactiveText"}, 
-    {"name":"textText"}, 
-    {"name":"window"}, 
-    {"name":"windowBorder"}, 
-    {"name":"windowText"}
-  ]
-},
-{
-  "name":"java.awt.geom.Path2D",
-  "methods":[{"name":"trimToSize","parameterTypes":[] }]
-},
-{
-  "name":"java.io.ObjectInputStream",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.Boolean",
-  "fields":[{"name":"TYPE"}]
-},
-{
-  "name":"java.lang.Byte",
-  "fields":[{"name":"TYPE"}]
-},
-{
   "name":"java.lang.Character",
-  "fields":[{"name":"TYPE"}],
   "methods":[{"name":"isIdeographic","parameterTypes":["int"] }]
 },
 {
   "name":"java.lang.Class",
-  "methods":[
-    {"name":"forName","parameterTypes":["java.lang.Module","java.lang.String"] }, 
-    {"name":"getRecordComponents","parameterTypes":[] }, 
-    {"name":"isRecord","parameterTypes":[] }
-  ],
-  "queriedMethods":[{"name":"getModule","parameterTypes":[] }]
-},
-{
-  "name":"java.lang.Deprecated",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.Double",
-  "fields":[{"name":"TYPE"}]
-},
-{
-  "name":"java.lang.Float",
-  "fields":[{"name":"TYPE"}]
-},
-{
-  "name":"java.lang.Integer",
-  "fields":[{"name":"TYPE"}]
-},
-{
-  "name":"java.lang.Long",
-  "fields":[{"name":"TYPE"}]
+  "methods":[{"name":"forName","parameterTypes":["java.lang.Module","java.lang.String"] }, {"name":"getModule","parameterTypes":[] }, {"name":"getRecordComponents","parameterTypes":[] }, {"name":"isRecord","parameterTypes":[] }]
 },
 {
   "name":"java.lang.Module",
-  "queriedMethods":[
-    {"name":"getDescriptor","parameterTypes":[] }, 
-    {"name":"getLayer","parameterTypes":[] }, 
-    {"name":"getName","parameterTypes":[] }
-  ]
+  "methods":[{"name":"getDescriptor","parameterTypes":[] }, {"name":"getLayer","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }]
 },
 {
   "name":"java.lang.ModuleLayer",
-  "methods":[
-    {"name":"boot","parameterTypes":[] }, 
-    {"name":"findModule","parameterTypes":["java.lang.String"] }
-  ]
-},
-{
-  "name":"java.lang.Object",
-  "allDeclaredFields":true
-},
-{
-  "name":"java.lang.Record",
-  "allDeclaredFields":true
+  "methods":[{"name":"boot","parameterTypes":[] }, {"name":"findModule","parameterTypes":["java.lang.String"] }]
 },
 {
   "name":"java.lang.Runnable"
 },
 {
-  "name":"java.lang.Short",
-  "fields":[{"name":"TYPE"}]
-},
-{
-  "name":"java.lang.StackTraceElement",
-  "queryAllPublicMethods":true
-},
-{
   "name":"java.lang.String"
 },
 {
-  "name":"java.lang.Void",
-  "fields":[{"name":"TYPE"}]
-},
-{
-  "name":"java.lang.management.BufferPoolMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.ClassLoadingMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.CompilationMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.LockInfo",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.ManagementPermission",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
-},
-{
-  "name":"java.lang.management.MemoryMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.MemoryManagerMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.MemoryPoolMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.MemoryUsage",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.MonitorInfo",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.PlatformLoggingMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.RuntimeMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"java.lang.management.ThreadInfo",
-  "queryAllPublicMethods":true
+  "name":"java.lang.Thread",
+  "fields":[{"name":"threadLocalRandomProbe"}]
 },
 {
   "name":"java.lang.reflect.RecordComponent",
-  "methods":[
-    {"name":"getName","parameterTypes":[] }, 
-    {"name":"getType","parameterTypes":[] }
-  ]
-},
-{
-  "name":"java.math.BigDecimal"
-},
-{
-  "name":"java.math.BigInteger"
-},
-{
-  "name":"java.net.URLConnection",
-  "methods":[{"name":"getContentLengthLong","parameterTypes":[] }]
+  "methods":[{"name":"getName","parameterTypes":[] }, {"name":"getType","parameterTypes":[] }]
 },
 {
   "name":"java.nio.ByteBuffer",
@@ -804,29 +445,27 @@
   "name":"java.sql.Date"
 },
 {
-  "name":"java.sql.Time"
-},
-{
   "name":"java.util.Date"
 },
 {
-  "name":"java.util.PropertyPermission",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String"] }]
+  "name":"java.util.concurrent.ForkJoinTask",
+  "fields":[{"name":"aux"}, {"name":"status"}]
 },
 {
-  "name":"java.util.ServiceLoader",
-  "methods":[{"name":"load","parameterTypes":["java.lang.Class","java.lang.ClassLoader"] }]
+  "name":"java.util.concurrent.atomic.AtomicBoolean",
+  "fields":[{"name":"value"}]
 },
 {
-  "name":"java.util.logging.LogManager",
-  "methods":[{"name":"getLoggingMXBean","parameterTypes":[] }]
+  "name":"java.util.concurrent.atomic.AtomicMarkableReference",
+  "fields":[{"name":"pair"}]
 },
 {
-  "name":"java.util.logging.LoggingMXBean",
-  "queryAllPublicMethods":true
+  "name":"java.util.concurrent.atomic.AtomicReference",
+  "fields":[{"name":"value"}]
 },
 {
-  "name":"javafx.animation.KeyValue"
+  "name":"java.util.concurrent.atomic.Striped64",
+  "fields":[{"name":"base"}, {"name":"cellsBusy"}]
 },
 {
   "name":"javafx.scene.Camera"
@@ -850,114 +489,7 @@
   "name":"javafx.scene.control.Control"
 },
 {
-  "name":"javafx.scene.control.TableColumnBase"
-},
-{
-  "name":"javafx.scene.effect.Bloom",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"getInput","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.BoxBlur",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.ColorAdjust",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.ColorInput",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"javafx.scene.effect.DisplacementMap",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.DropShadow",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"getInput","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
   "name":"javafx.scene.effect.Effect"
-},
-{
-  "name":"javafx.scene.effect.GaussianBlur",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.Glow",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"getInput","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.ImageInput",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"javafx.scene.effect.InnerShadow",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"getInput","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.MotionBlur",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.PerspectiveTransform",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"getInput","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.Reflection",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.SepiaTone",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
-},
-{
-  "name":"javafx.scene.effect.Shadow",
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setInput","parameterTypes":["javafx.scene.effect.Effect"] }
-  ]
 },
 {
   "name":"javafx.scene.image.Image"
@@ -966,28 +498,13 @@
   "name":"javafx.scene.image.ImageView"
 },
 {
-  "name":"javafx.scene.input.Clipboard"
-},
-{
-  "name":"javafx.scene.input.Dragboard"
-},
-{
   "name":"javafx.scene.layout.Pane"
 },
 {
   "name":"javafx.scene.layout.Region"
 },
 {
-  "name":"javafx.scene.shape.Arc"
-},
-{
   "name":"javafx.scene.shape.Circle"
-},
-{
-  "name":"javafx.scene.shape.ClosePath"
-},
-{
-  "name":"javafx.scene.shape.Line"
 },
 {
   "name":"javafx.scene.shape.LineTo"
@@ -1020,9 +537,6 @@
   "name":"javafx.scene.transform.Transform"
 },
 {
-  "name":"javafx.scene.web.WebView"
-},
-{
   "name":"javafx.stage.PopupWindow"
 },
 {
@@ -1032,71 +546,12 @@
   "name":"javafx.stage.Window"
 },
 {
-  "name":"javax.imageio.spi.ImageReaderSpi"
-},
-{
-  "name":"javax.imageio.spi.ImageReaderWriterSpi",
-  "methods":[{"name":"getMIMETypes","parameterTypes":[] }],
-  "queriedMethods":[
-    {"name":"getFileSuffixes","parameterTypes":[] }, 
-    {"name":"getFormatNames","parameterTypes":[] }
-  ]
-},
-{
-  "name":"javax.imageio.spi.ImageWriterSpi"
-},
-{
-  "name":"javax.management.MBeanOperationInfo",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"javax.management.MBeanServerBuilder",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"javax.management.NotificationBroadcasterSupport",
-  "queriedMethods":[{"name":"getNotificationInfo","parameterTypes":[] }]
-},
-{
-  "name":"javax.management.ObjectName"
-},
-{
-  "name":"javax.management.openmbean.CompositeData"
-},
-{
-  "name":"javax.management.openmbean.OpenMBeanOperationInfoSupport"
-},
-{
-  "name":"javax.management.openmbean.TabularData"
-},
-{
   "name":"javax.security.auth.x500.X500Principal",
   "fields":[{"name":"thisX500Name"}],
   "methods":[{"name":"<init>","parameterTypes":["sun.security.x509.X500Name"] }]
 },
 {
-  "name":"jdk.management.jfr.ConfigurationInfo",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"jdk.management.jfr.EventTypeInfo",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"jdk.management.jfr.FlightRecorderMXBean",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"jdk.management.jfr.FlightRecorderMXBeanImpl",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"jdk.management.jfr.RecordingInfo",
-  "queryAllPublicMethods":true
-},
-{
-  "name":"jdk.management.jfr.SettingDescriptorInfo",
-  "queryAllPublicMethods":true
+  "name":"jdk.internal.misc.Unsafe"
 },
 {
   "name":"org.eclipse.jgit.api.MergeCommand$FastForwardMode$Merge",
@@ -1108,76 +563,16 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"org.eclipse.jgit.lib.CoreConfig$AutoCRLF",
-  "methods":[{"name":"values","parameterTypes":[] }]
-},
-{
-  "name":"org.eclipse.jgit.lib.CoreConfig$CheckStat",
-  "methods":[{"name":"values","parameterTypes":[] }]
-},
-{
-  "name":"org.eclipse.jgit.lib.CoreConfig$EOL",
-  "methods":[{"name":"values","parameterTypes":[] }]
-},
-{
-  "name":"org.eclipse.jgit.lib.CoreConfig$HideDotFiles",
-  "methods":[{"name":"values","parameterTypes":[] }]
-},
-{
   "name":"org.eclipse.jgit.lib.CoreConfig$LogRefUpdates",
   "methods":[{"name":"values","parameterTypes":[] }]
 },
 {
-  "name":"org.eclipse.jgit.lib.CoreConfig$SymLinks",
+  "name":"org.eclipse.jgit.lib.CoreConfig$TrustLooseRefStat",
   "methods":[{"name":"values","parameterTypes":[] }]
 },
 {
   "name":"org.eclipse.jgit.lib.CoreConfig$TrustPackedRefsStat",
   "methods":[{"name":"values","parameterTypes":[] }]
-},
-{
-  "name":"org.eclipse.jgit.util.sha1.SHA1$Sha1Implementation",
-  "methods":[{"name":"values","parameterTypes":[] }]
-},
-{
-  "name":"sun.font.CFontManager",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.java2d.marlin.DMarlinRenderingEngine",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.management.ClassLoadingImpl",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"sun.management.CompilationImpl",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"sun.management.ManagementFactoryHelper$1",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"sun.management.ManagementFactoryHelper$PlatformLoggingImpl",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"sun.management.MemoryImpl",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"sun.management.MemoryManagerImpl",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"sun.management.MemoryPoolImpl",
-  "queryAllPublicConstructors":true
-},
-{
-  "name":"sun.management.RuntimeImpl",
-  "queryAllPublicConstructors":true
 },
 {
   "name":"sun.misc.Unsafe",
@@ -1213,7 +608,7 @@
 },
 {
   "name":"sun.security.provider.NativePRNG",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }]
 },
 {
   "name":"sun.security.provider.SHA",

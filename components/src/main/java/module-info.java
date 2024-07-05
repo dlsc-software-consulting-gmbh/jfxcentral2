@@ -5,6 +5,7 @@ open module com.dlsc.jfxcentral2.components {
     requires javafx.fxml;
     requires javafx.web;
     requires javafx.swing;
+    requires javafx.graphics;
     requires batik.dom;
     requires batik.svggen;
     requires com.github.weisj.jsvg;

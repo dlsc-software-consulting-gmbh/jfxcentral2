@@ -4,6 +4,7 @@ open module com.dlsc.jfxcentral2.app {
     requires javafx.fxml;
     requires javafx.web;
     requires javafx.swing;
+    requires javafx.graphics;
 
     requires com.gluonhq.attach.display;
     requires com.gluonhq.attach.browser;

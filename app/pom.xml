@@ -16,9 +16,9 @@
 
     <properties>
         <maven.javadoc.skip>true</maven.javadoc.skip>
-        <gluonfx.plugin.version>1.0.21</gluonfx.plugin.version>
+        <gluonfx.plugin.version>1.0.22</gluonfx.plugin.version>
         <javafx.plugin.version>0.0.8</javafx.plugin.version>
-        <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
+        <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2MobileApp</mainClassName>
         <app.description>JFXCentral for anything JavaFX</app.description>
         <package.type/>
         <mac.app.store/>
