@@ -235,6 +235,10 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"com.sun.crypto.provider.HmacCore$HmacSHA384",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"com.sun.crypto.provider.TlsMasterSecretGenerator",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -306,6 +310,10 @@
 },
 {
   "name":"com.sun.prism.shader.DrawPgram_Color_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.DrawRoundRect_Color_Loader",
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {
@@ -546,7 +554,27 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"org.eclipse.jgit.lib.CoreConfig$AutoCRLF",
+  "methods":[{"name":"values","parameterTypes":[] }]
+},
+{
+  "name":"org.eclipse.jgit.lib.CoreConfig$CheckStat",
+  "methods":[{"name":"values","parameterTypes":[] }]
+},
+{
+  "name":"org.eclipse.jgit.lib.CoreConfig$EOL",
+  "methods":[{"name":"values","parameterTypes":[] }]
+},
+{
+  "name":"org.eclipse.jgit.lib.CoreConfig$HideDotFiles",
+  "methods":[{"name":"values","parameterTypes":[] }]
+},
+{
   "name":"org.eclipse.jgit.lib.CoreConfig$LogRefUpdates",
+  "methods":[{"name":"values","parameterTypes":[] }]
+},
+{
+  "name":"org.eclipse.jgit.lib.CoreConfig$SymLinks",
   "methods":[{"name":"values","parameterTypes":[] }]
 },
 {
@@ -555,6 +583,10 @@
 },
 {
   "name":"org.eclipse.jgit.lib.CoreConfig$TrustPackedRefsStat",
+  "methods":[{"name":"values","parameterTypes":[] }]
+},
+{
+  "name":"org.eclipse.jgit.util.sha1.SHA1$Sha1Implementation",
   "methods":[{"name":"values","parameterTypes":[] }]
 },
 {
