@@ -72,11 +72,6 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"com.dlsc.jfxcentral.data.model.Image",
-  "allDeclaredFields":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
   "name":"com.dlsc.jfxcentral.data.model.Installing",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
@@ -102,11 +97,6 @@
 },
 {
   "name":"com.dlsc.jfxcentral.data.model.Library",
-  "allDeclaredFields":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.dlsc.jfxcentral.data.model.LibraryInfo",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -184,7 +174,11 @@
 {
   "name":"com.dlsc.jfxcentral2.app.JFXCentral2MobileApp",
   "queryAllDeclaredMethods":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"main","parameterTypes":["java.lang.String[]"] }, {"name":"onRepositoryUpdated","parameterTypes":["com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent"] }]
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"main","parameterTypes":["java.lang.String[]"] }, 
+    {"name":"onRepositoryUpdated","parameterTypes":["com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent"] }
+  ]
 },
 {
   "name":"com.dlsc.jfxcentral2.mobile.components.BottomMenuBar",
@@ -194,15 +188,15 @@
 {
   "name":"com.dlsc.jfxcentral2.mobile.skin.MainPageSkin",
   "queryAllDeclaredMethods":true,
-  "methods":[{"name":"onHideMenuBarEvent","parameterTypes":["com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent"] }, {"name":"onMobileResponseEvent","parameterTypes":["com.dlsc.jfxcentral2.events.MobileResponseEvent"] }]
+  "methods":[
+    {"name":"onHideMenuBarEvent","parameterTypes":["com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent"] }, 
+    {"name":"onMobileResponseEvent","parameterTypes":["com.dlsc.jfxcentral2.events.MobileResponseEvent"] }
+  ]
 },
 {
   "name":"com.dlsc.jfxcentral2.utils.MobileRouter",
   "queryAllDeclaredMethods":true,
   "methods":[{"name":"handleMobileLink","parameterTypes":["com.dlsc.jfxcentral2.events.MobileLinkEvent"] }]
-},
-{
-  "name":"com.gluonhq.attach.display.impl.DesktopDisplayService"
 },
 {
   "name":"com.intellij.rt.execution.application.AppMainV2$Agent",
@@ -238,10 +232,6 @@
 },
 {
   "name":"com.sun.crypto.provider.HmacCore$HmacSHA256",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.crypto.provider.HmacCore$HmacSHA384",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -301,7 +291,10 @@
 },
 {
   "name":"com.sun.prism.GraphicsPipeline",
-  "methods":[{"name":"getFontFactory","parameterTypes":[] }, {"name":"getPipeline","parameterTypes":[] }]
+  "methods":[
+    {"name":"getFontFactory","parameterTypes":[] }, 
+    {"name":"getPipeline","parameterTypes":[] }
+  ]
 },
 {
   "name":"com.sun.prism.es2.ES2Pipeline",
@@ -312,7 +305,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"com.sun.prism.shader.DrawRoundRect_Color_Loader",
+  "name":"com.sun.prism.shader.DrawPgram_Color_Loader",
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {
@@ -385,15 +378,29 @@
 },
 {
   "name":"java.lang.Class",
-  "methods":[{"name":"forName","parameterTypes":["java.lang.Module","java.lang.String"] }, {"name":"getModule","parameterTypes":[] }, {"name":"getRecordComponents","parameterTypes":[] }, {"name":"isRecord","parameterTypes":[] }]
+  "methods":[
+    {"name":"forName","parameterTypes":["java.lang.Module","java.lang.String"] }, 
+    {"name":"isRecord","parameterTypes":[] }
+  ],
+  "queriedMethods":[
+    {"name":"getModule","parameterTypes":[] }, 
+    {"name":"getRecordComponents","parameterTypes":[] }
+  ]
 },
 {
   "name":"java.lang.Module",
-  "methods":[{"name":"getDescriptor","parameterTypes":[] }, {"name":"getLayer","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }]
+  "queriedMethods":[
+    {"name":"getDescriptor","parameterTypes":[] }, 
+    {"name":"getLayer","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }
+  ]
 },
 {
   "name":"java.lang.ModuleLayer",
-  "methods":[{"name":"boot","parameterTypes":[] }, {"name":"findModule","parameterTypes":["java.lang.String"] }]
+  "methods":[
+    {"name":"boot","parameterTypes":[] }, 
+    {"name":"findModule","parameterTypes":["java.lang.String"] }
+  ]
 },
 {
   "name":"java.lang.Runnable"
@@ -402,12 +409,11 @@
   "name":"java.lang.String"
 },
 {
-  "name":"java.lang.Thread",
-  "fields":[{"name":"threadLocalRandomProbe"}]
-},
-{
   "name":"java.lang.reflect.RecordComponent",
-  "methods":[{"name":"getName","parameterTypes":[] }, {"name":"getType","parameterTypes":[] }]
+  "queriedMethods":[
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }
+  ]
 },
 {
   "name":"java.nio.ByteBuffer",
@@ -446,26 +452,6 @@
 },
 {
   "name":"java.util.Date"
-},
-{
-  "name":"java.util.concurrent.ForkJoinTask",
-  "fields":[{"name":"aux"}, {"name":"status"}]
-},
-{
-  "name":"java.util.concurrent.atomic.AtomicBoolean",
-  "fields":[{"name":"value"}]
-},
-{
-  "name":"java.util.concurrent.atomic.AtomicMarkableReference",
-  "fields":[{"name":"pair"}]
-},
-{
-  "name":"java.util.concurrent.atomic.AtomicReference",
-  "fields":[{"name":"value"}]
-},
-{
-  "name":"java.util.concurrent.atomic.Striped64",
-  "fields":[{"name":"base"}, {"name":"cellsBusy"}]
 },
 {
   "name":"javafx.scene.Camera"
@@ -551,9 +537,6 @@
   "methods":[{"name":"<init>","parameterTypes":["sun.security.x509.X500Name"] }]
 },
 {
-  "name":"jdk.internal.misc.Unsafe"
-},
-{
   "name":"org.eclipse.jgit.api.MergeCommand$FastForwardMode$Merge",
   "methods":[{"name":"values","parameterTypes":[] }]
 },
@@ -608,7 +591,7 @@
 },
 {
   "name":"sun.security.provider.NativePRNG",
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"sun.security.provider.SHA",
