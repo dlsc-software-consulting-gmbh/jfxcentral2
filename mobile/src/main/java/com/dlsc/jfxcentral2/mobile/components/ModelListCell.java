@@ -2,8 +2,6 @@ package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.AvatarView;
-import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
-import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -46,12 +44,6 @@ public class ModelListCell<T extends ModelObject> extends ListCell<T> {
         container.getStyleClass().add("container");
 
         setPrefWidth(0);
-        setOnMouseClicked(event -> {
-            T item = getItem();
-            if (item != null) {
-                MobileLinkUtil.getToPage(ModelObjectTool.getModelLink(item));
-            }
-        });
     }
 
     @Override

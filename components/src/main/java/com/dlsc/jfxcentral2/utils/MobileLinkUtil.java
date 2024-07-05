@@ -29,7 +29,11 @@ public class MobileLinkUtil {
         } else if (node instanceof Hyperlink hyperlink) {
             hyperlink.setOnAction(e -> getToPage(link));
         } else {
-            node.setOnMousePressed(e -> MobileLinkUtil.getToPage(link));
+            node.setOnMouseClicked(e -> {
+                if (e.isStillSincePress()) {
+                    MobileLinkUtil.getToPage(link);
+                }
+            });
         }
     }
 

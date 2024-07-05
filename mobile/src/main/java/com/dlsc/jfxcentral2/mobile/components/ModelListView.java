@@ -2,6 +2,9 @@ package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.gemsfx.SearchTextField;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral2.mobile.utils.ListViewUtil;
+import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
+import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -54,6 +57,9 @@ public class ModelListView<T extends ModelObject> extends VBox {
         listView.setPlaceholder(placeHolderLabel);
         listView.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(listView, Priority.ALWAYS);
+        ListViewUtil.addCellClickHandler(listView, (index, item) -> {
+            MobileLinkUtil.getToPage(ModelObjectTool.getModelLink(item));
+        });
 
         getChildren().setAll(searchWrapper, listView);
         setMaxHeight(Double.MAX_VALUE);
@@ -102,7 +108,7 @@ public class ModelListView<T extends ModelObject> extends VBox {
 
     // comparator
 
-    public final ObjectProperty<Comparator<T>> comparator = new SimpleObjectProperty<>(this, "comparator",  Comparator.comparing((T modelObject) -> StringUtils.defaultIfEmpty(modelObject.getName(),"").toLowerCase()));
+    public final ObjectProperty<Comparator<T>> comparator = new SimpleObjectProperty<>(this, "comparator", Comparator.comparing((T modelObject) -> StringUtils.defaultIfEmpty(modelObject.getName(), "").toLowerCase()));
 
     public final ObjectProperty<Comparator<T>> comparatorProperty() {
         return comparator;
