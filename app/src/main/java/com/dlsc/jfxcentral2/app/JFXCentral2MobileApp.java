@@ -19,6 +19,7 @@ import com.dlsc.jfxcentral2.app.pages.MobileRefreshPage;
 import com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent;
 import com.dlsc.jfxcentral2.mobile.components.BottomMenuBar;
 import com.dlsc.jfxcentral2.mobile.components.MobileDevelopToolBar;
+import com.dlsc.jfxcentral2.mobile.pages.MobileSearchPage;
 import com.dlsc.jfxcentral2.mobile.pages.MainPage;
 import com.dlsc.jfxcentral2.mobile.pages.MobileHomePage;
 import com.dlsc.jfxcentral2.mobile.pages.MobileLinksOfTheWeekPage;
@@ -67,7 +68,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 import java.io.File;
@@ -174,6 +174,7 @@ public class JFXCentral2MobileApp extends Application {
                 .and(MobileRoute.get(PagePath.REFRESH, r -> new MobileRefreshPage(size)))
                 .and(MobileRoute.redirect("/index", PagePath.HOME))
                 .and(MobileRoute.redirect("/home", PagePath.HOME))
+                .and(MobileRoute.get(PagePath.SEARCH, r-> new MobileSearchPage(size)))
                 .and(MobileRoute.get(PagePath.LINKS, r -> new MobileLinksOfTheWeekPage(size)))
                 .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.REAL_WORLD, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))

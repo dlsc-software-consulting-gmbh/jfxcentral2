@@ -106,6 +106,7 @@ open module com.dlsc.jfxcentral2.mobile {
     exports com.dlsc.jfxcentral2.mobile.pages;
     exports com.dlsc.jfxcentral2.mobile.pages.category;
     exports com.dlsc.jfxcentral2.mobile.pages.details;
+    exports com.dlsc.jfxcentral2.mobile.utils;
 
     uses IkonProvider;
 }
