@@ -103,7 +103,7 @@ public class JFXCentral2MobileApp extends Application {
             developToolBar = new MobileDevelopToolBar(router);
             CSSFX.start();
         } else {
-            stage.initStyle(StageStyle.UNDECORATED);
+            //stage.initStyle(StageStyle.UNDECORATED);
         }
 
         MainPage mainPage = new MainPage();
@@ -136,8 +136,7 @@ public class JFXCentral2MobileApp extends Application {
         stage.setScene(scene);
         stage.setFullScreenExitHint("");
 
-        // Mike Hearn explicitly requested to use this approach to exit the app
-        stage.setOnCloseRequest(evt -> System.exit(0));
+        stage.setTitle("JFXCentral Mobile");
         stage.show();
 
         // Go to home page
