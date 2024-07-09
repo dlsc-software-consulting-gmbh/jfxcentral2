@@ -21,6 +21,7 @@ import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.PagePath;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -69,7 +70,7 @@ public class TopMenuBar extends PaneBase {
     private Node searchTextField;
     private SessionManager sessionManager;
 
-    public TopMenuBar(boolean mobile) { //iew view) {
+    public TopMenuBar(boolean mobile) { // iew view) {
 //        this.view = view;
         this.mobile = mobile;
 
@@ -223,7 +224,7 @@ public class TopMenuBar extends PaneBase {
             showcasesBtn.setFocusTraversable(false);
             showcasesBtn.setMinWidth(Region.USE_PREF_SIZE);
             showcasesBtn.getStyleClass().add("showcases-button");
-            LinkUtil.setLink(showcasesBtn, "/showcases");
+            LinkUtil.setLink(showcasesBtn, PagePath.SHOWCASES);
 
             MenuButton learnBtn = createMenuButton("Learn");
             learnBtn.getStyleClass().add("learn-button");
@@ -233,7 +234,7 @@ public class TopMenuBar extends PaneBase {
             utilitiesBtn.setFocusTraversable(false);
             utilitiesBtn.setMinWidth(Region.USE_PREF_SIZE);
             utilitiesBtn.getStyleClass().add("online-tools-button");
-            LinkUtil.setLink(utilitiesBtn, "/utilities");
+            LinkUtil.setLink(utilitiesBtn, PagePath.UTILITIES);
 
             Button loginBtn = new Button("Login", new FontIcon(JFXCentralIcon.LOG_IN));
             loginBtn.setFocusTraversable(false);
@@ -241,7 +242,7 @@ public class TopMenuBar extends PaneBase {
             loginBtn.setManaged(SocialUtil.isSocialFeaturesEnabled());
             loginBtn.setMinWidth(Region.USE_PREF_SIZE);
             loginBtn.getStyleClass().add("login-button");
-            LinkUtil.setLink(loginBtn, "/login");
+            LinkUtil.setLink(loginBtn, PagePath.LOGIN);
 
             Region separatorRegion = createSeparatorRegion();
             separatorRegion.visibleProperty().bind(loginBtn.visibleProperty());
@@ -342,47 +343,47 @@ public class TopMenuBar extends PaneBase {
         homeBtn.getStyleClass().add("home-button");
         homeBtn.managedProperty().bind(homeBtn.visibleProperty());
         homeBtn.setFocusTraversable(false);
-        LinkUtil.setLink(homeBtn, "/");
+        LinkUtil.setLink(homeBtn, PagePath.HOME);
         return homeBtn;
     }
 
     private void fillLearnMenu(MenuButton learnBtn) {
-        MenuItem fxMenuItem = createMenuItem("Learn JavaFX", "/learn-javafx", IkonUtil.learnJavaFX);
+        MenuItem fxMenuItem = createMenuItem("Learn JavaFX", PagePath.LEARN_JAVAFX, IkonUtil.learnJavaFX);
         fxMenuItem.getStyleClass().add("learn-javafx-item");
         learnBtn.getItems().add(fxMenuItem);
 
-        MenuItem mobileMenuItem = createMenuItem("Learn Mobile", "/learn-mobile", IkonUtil.learnMobile);
+        MenuItem mobileMenuItem = createMenuItem("Learn Mobile", PagePath.LEARN_MOBILE, IkonUtil.learnMobile);
         mobileMenuItem.getStyleClass().add("learn-mobile-item");
         learnBtn.getItems().add(mobileMenuItem);
 
-        MenuItem raspberryPiMenuItem = createMenuItem("Learn Raspberry Pi", "/learn-raspberrypi", IkonUtil.learnRaspberryPi);
+        MenuItem raspberryPiMenuItem = createMenuItem("Learn Raspberry Pi", PagePath.LEARN_RASPBERRYPI, IkonUtil.learnRaspberryPi);
         raspberryPiMenuItem.getStyleClass().add("learn-raspberrypi-item");
         learnBtn.getItems().add(raspberryPiMenuItem);
     }
 
     private void fillResourcesMenu(MenuButton button) {
-        button.getItems().add(createMenuItem("Libraries", "/libraries", IkonUtil.getModelIkon(Library.class)));
-        button.getItems().add(createMenuItem("Tools", "/tools", IkonUtil.getModelIkon(Tool.class)));
-        button.getItems().add(createMenuItem("Videos", "/videos", IkonUtil.getModelIkon(Video.class)));
-        button.getItems().add(createMenuItem("Books", "/books", IkonUtil.getModelIkon(Book.class)));
-        button.getItems().add(createMenuItem("Blogs", "/blogs", IkonUtil.getModelIkon(Blog.class)));
-        button.getItems().add(createMenuItem("Tips", "/tips", IkonUtil.getModelIkon(Tip.class)));
-        button.getItems().add(createMenuItem("Tutorials", "/tutorials", IkonUtil.getModelIkon(Tutorial.class)));
-        button.getItems().add(createMenuItem("Icons", "/icons", IkonUtil.getModelIkon(IkonliPack.class)));
-        button.getItems().add(createMenuItem("Documentation", "/documentation", IkonUtil.getModelIkon(Documentation.class)));
+        button.getItems().add(createMenuItem("Libraries", PagePath.LIBRARIES, IkonUtil.getModelIkon(Library.class)));
+        button.getItems().add(createMenuItem("Tools", PagePath.TOOLS, IkonUtil.getModelIkon(Tool.class)));
+        button.getItems().add(createMenuItem("Videos", PagePath.VIDEOS, IkonUtil.getModelIkon(Video.class)));
+        button.getItems().add(createMenuItem("Books", PagePath.BOOKS, IkonUtil.getModelIkon(Book.class)));
+        button.getItems().add(createMenuItem("Blogs", PagePath.BLOGS, IkonUtil.getModelIkon(Blog.class)));
+        button.getItems().add(createMenuItem("Tips", PagePath.TIPS, IkonUtil.getModelIkon(Tip.class)));
+        button.getItems().add(createMenuItem("Tutorials", PagePath.TUTORIALS, IkonUtil.getModelIkon(Tutorial.class)));
+        button.getItems().add(createMenuItem("Icons", PagePath.ICONS, IkonUtil.getModelIkon(IkonliPack.class)));
+        button.getItems().add(createMenuItem("Documentation", PagePath.DOCUMENTATION, IkonUtil.getModelIkon(Documentation.class)));
         if (!mobile && !OSUtil.isAndroidOrIOS()) {
-            button.getItems().add(createMenuItem("Downloads", "/downloads", IkonUtil.getModelIkon(Download.class)));
+            button.getItems().add(createMenuItem("Downloads", PagePath.DOWNLOADS, IkonUtil.getModelIkon(Download.class)));
         }
     }
 
     private void fillCommunityMenu(MenuButton button) {
-        button.getItems().add(createMenuItem("People", "/people", IkonUtil.getModelIkon(Person.class)));
-        button.getItems().add(createMenuItem("Companies", "/companies", IkonUtil.getModelIkon(Company.class)));
-        button.getItems().add(createMenuItem("OpenJFX Project", "/openjfx", MaterialDesign.MDI_GITHUB_BOX));
-        button.getItems().add(createMenuItem("Links of the Week", "/links", IkonUtil.getModelIkon(LinksOfTheWeek.class)));
-        button.getItems().add(createMenuItem("Meet the Team", "/team", JFXCentralIcon.TEAM));
+        button.getItems().add(createMenuItem("People", PagePath.PEOPLE, IkonUtil.getModelIkon(Person.class)));
+        button.getItems().add(createMenuItem("Companies", PagePath.COMPANIES, IkonUtil.getModelIkon(Company.class)));
+        button.getItems().add(createMenuItem("OpenJFX Project", PagePath.OPENJFX, MaterialDesign.MDI_GITHUB_BOX));
+        button.getItems().add(createMenuItem("Links of the Week", PagePath.LINKS, IkonUtil.getModelIkon(LinksOfTheWeek.class)));
+        button.getItems().add(createMenuItem("Meet the Team", PagePath.TEAM, JFXCentralIcon.TEAM));
         if (SocialUtil.isSocialFeaturesEnabled()) {
-            button.getItems().add(createMenuItem("Top Content", "/top", JFXCentralIcon.TOP_CONTENT));
+            button.getItems().add(createMenuItem("Top Content", PagePath.TOP, JFXCentralIcon.TOP_CONTENT));
         }
     }
 

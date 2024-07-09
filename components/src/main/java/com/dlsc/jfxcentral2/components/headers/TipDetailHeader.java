@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral2.utils.PagePath;
 
 public class TipDetailHeader extends SimpleDetailHeader<Tip>  {
 
@@ -16,6 +17,6 @@ public class TipDetailHeader extends SimpleDetailHeader<Tip>  {
         setShareText("Found this tip on @JFXCentral: " + tip.getName());
         setShareTitle("Tip: " + tip.getName());
         setBackText("ALL TIPS & TRICKS");
-        setBackUrl("/tips");
+        setBackUrl(PagePath.TIPS);
     }
 }

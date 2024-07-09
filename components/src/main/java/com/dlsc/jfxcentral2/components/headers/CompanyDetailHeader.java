@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral2.utils.PagePath;
 
 public class CompanyDetailHeader extends SimpleDetailHeader<Company>  {
 
@@ -14,6 +15,6 @@ public class CompanyDetailHeader extends SimpleDetailHeader<Company>  {
         setShareText("Found this company on @JFXCentral: " + company.getName());
         setShareTitle("Company: " + company.getName());
         setBackText("ALL COMPANIES");
-        setBackUrl("/companies");
+        setBackUrl(PagePath.COMPANIES);
     }
 }

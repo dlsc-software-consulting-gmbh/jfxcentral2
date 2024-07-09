@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral2.utils.PagePath;
 
 public class IconDetailHeader extends SimpleDetailHeader<IkonliPack>  {
 
@@ -14,6 +15,6 @@ public class IconDetailHeader extends SimpleDetailHeader<IkonliPack>  {
         setShareText("Found this icon pack on @JFXCentral: " + pack.getName());
         setShareTitle("Icon pack: " + pack.getName());
         setBackText("ALL ICON PACKS");
-        setBackUrl("/icons");
+        setBackUrl(PagePath.ICONS);
     }
 }

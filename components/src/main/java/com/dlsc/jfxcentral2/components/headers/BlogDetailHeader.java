@@ -2,8 +2,9 @@ package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral2.utils.PagePath;
 
-public class BlogDetailHeader extends SimpleDetailHeader<Blog>  {
+public class BlogDetailHeader extends SimpleDetailHeader<Blog> {
 
     public BlogDetailHeader(Blog blog) {
         super(blog);
@@ -16,6 +17,6 @@ public class BlogDetailHeader extends SimpleDetailHeader<Blog>  {
         setShareText("Found this blog on @JFXCentral: " + blog.getName());
         setShareTitle("JavaFX blog: " + blog.getName());
         setBackText("ALL BLOGS");
-        setBackUrl("/blogs");
+        setBackUrl(PagePath.BLOGS);
     }
 }

@@ -7,6 +7,7 @@ open module com.dlsc.jfxcentral.sampler {
     requires javafx.web;
 
     requires fr.brouillard.oss.cssfx;
+    requires org.scenicview.scenicview;
 
     requires jfxcentral.data;
 
@@ -17,6 +18,7 @@ open module com.dlsc.jfxcentral.sampler {
     requires com.dlsc.jfxcentral2.components;
     requires one.jpro.platform.mdfx;
     requires com.dlsc.jfxcentral2.iconfont;
+    requires com.dlsc.jfxcentral2.mobile;
 
     provides fxsampler.FXSamplerProject with JFXCentralSamplerProject;
 

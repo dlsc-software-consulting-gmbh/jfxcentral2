@@ -14,7 +14,7 @@
     <parent>
         <groupId>com.dlsc</groupId>
         <artifactId>dlsc-maven-parent</artifactId>
-        <version>1.2.0</version>
+        <version>1.5.0</version>
     </parent>
 
     <modules>
@@ -22,12 +22,13 @@
         <module>sampler</module>
         <module>app</module>
         <module>iconfont</module>
+        <module>mobile</module>
     </modules>
 
     <properties>
         <java.version>17</java.version>
         <!-- Version 20 because of performance -->
-        <javafx.version>20.0.2</javafx.version>
+        <javafx.version>22.0.1</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
         <jpro.version>2024.2.0</jpro.version>
@@ -37,9 +38,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <attach.extended.version>4.0.15-SNAPSHOT</attach.extended.version>
         <attach.extended.classifier>desktop</attach.extended.classifier>
+        <enforcer.skip>true</enforcer.skip>
     </properties>
 
     <repositories>
+
+        <repository>
+            <id>project-repository</id>
+            <url>file://${project.basedir}/../repository</url>
+        </repository>
 
         <repository>
             <id>sandec</id>
@@ -66,6 +73,32 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>one.jpro.platform</groupId>
+                <artifactId>jpro-routing-core</artifactId>
+                <version>${jpro.platform.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>one.jpro.platform</groupId>
+                <artifactId>jpro-routing-dev</artifactId>
+                <version>${jpro.platform.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gluonhq.attachextended</groupId>
+                <artifactId>yt</artifactId>
+                <version>${attach.extended.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gluonhq.attachextended</groupId>
+                <artifactId>yt</artifactId>
+                <version>${attach.extended.version}</version>
+                <scope>runtime</scope>
+                <classifier>${attach.extended.classifier}</classifier>
+            </dependency>
 
             <dependency>
                 <groupId>com.gluonhq.attach</groupId>
@@ -104,6 +137,18 @@
             </dependency>
 
             <dependency>
+                <groupId>net.raumzeitfalle.fx</groupId>
+                <artifactId>scenic-view</artifactId>
+                <version>11.0.2</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
                 <groupId>com.dustinredmond.fxtrayicon</groupId>
                 <artifactId>FXTrayIcon</artifactId>
                 <version>4.0.1</version>
@@ -120,6 +165,13 @@
                 <artifactId>components</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.dlsc.jfxcentral2</groupId>
+                <artifactId>mobile</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.dlsc.jfxcentral2</groupId>
@@ -185,12 +237,6 @@
                 <groupId>de.sandec</groupId>
                 <artifactId>JMemoryBuddy</artifactId>
                 <version>0.5.3</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jetbrains</groupId>
-                <artifactId>annotations</artifactId>
-                <version>24.1.0</version>
             </dependency>
 
             <dependency>
@@ -694,8 +740,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>

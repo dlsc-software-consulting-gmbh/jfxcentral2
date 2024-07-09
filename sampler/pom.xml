@@ -27,6 +27,11 @@
 
 		<dependency>
 			<groupId>com.dlsc.jfxcentral2</groupId>
+			<artifactId>mobile</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dlsc.jfxcentral2</groupId>
 			<artifactId>iconfont</artifactId>
 		</dependency>
 
@@ -43,6 +48,11 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.raumzeitfalle.fx</groupId>
+			<artifactId>scenic-view</artifactId>
 		</dependency>
 
 		<dependency>

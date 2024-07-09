@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.gluonhq.attachextended</groupId>
+  <artifactId>yt</artifactId>
+  <versioning>
+    <latest>4.0.15-SNAPSHOT</latest>
+    <versions>
+      <version>4.0.15-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20231106083830</lastUpdated>
+  </versioning>
+</metadata>

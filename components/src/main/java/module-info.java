@@ -5,6 +5,7 @@ open module com.dlsc.jfxcentral2.components {
     requires javafx.fxml;
     requires javafx.web;
     requires javafx.swing;
+    requires javafx.graphics;
     requires batik.dom;
     requires batik.svggen;
     requires com.github.weisj.jsvg;
@@ -14,7 +15,7 @@ open module com.dlsc.jfxcentral2.components {
     requires com.gluonhq.attach.browser;
     requires com.gluonhq.attach.display;
     requires com.gluonhq.attach.video;
-//    requires com.gluonhq.attachextended.yt;
+    requires com.gluonhq.attachextended.yt;
 
     requires jfxcentral.data;
     requires org.controlsfx.controls;
@@ -101,6 +102,7 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.model;
     exports com.dlsc.jfxcentral2.components.skins;
     exports com.dlsc.jfxcentral2.utils;
+    exports com.dlsc.jfxcentral2.events;
     exports com.dlsc.jfxcentral2.components.detailsbox;
     exports com.dlsc.jfxcentral2.components.tiles;
     exports com.dlsc.jfxcentral2.components.filters;
@@ -116,6 +118,7 @@ open module com.dlsc.jfxcentral2.components {
     exports com.dlsc.jfxcentral2.utilities.paintpicker.impl;
     exports com.dlsc.jfxcentral2.utilities.paintpicker.impl.datamodel;
     exports com.dlsc.jfxcentral2.utilities.effectdesigner.effect;
+    exports com.dlsc.jfxcentral2.utils.images;
 
     uses IkonProvider;
 }

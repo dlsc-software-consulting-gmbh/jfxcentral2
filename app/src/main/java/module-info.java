@@ -4,6 +4,7 @@ open module com.dlsc.jfxcentral2.app {
     requires javafx.fxml;
     requires javafx.web;
     requires javafx.swing;
+    requires javafx.graphics;
 
     requires com.gluonhq.attach.display;
     requires com.gluonhq.attach.browser;
@@ -23,7 +24,6 @@ open module com.dlsc.jfxcentral2.app {
 
     requires one.jpro.platform.routing.core;
     requires one.jpro.platform.routing.dev;
-    requires one.jpro.platform.freezedetector;
 
     requires org.eclipse.jgit;
 
@@ -88,6 +88,8 @@ open module com.dlsc.jfxcentral2.app {
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
     requires com.gluonhq.attach.util;
+    requires com.dlsc.jfxcentral2.mobile;
+    requires jpro.utils.treeshowing;
 
     exports com.dlsc.jfxcentral2.app;
     exports com.dlsc.jfxcentral2.app.pages;

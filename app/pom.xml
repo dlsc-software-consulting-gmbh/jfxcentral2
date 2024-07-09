@@ -16,9 +16,9 @@
 
     <properties>
         <maven.javadoc.skip>true</maven.javadoc.skip>
-        <gluonfx.plugin.version>1.0.21</gluonfx.plugin.version>
+        <gluonfx.plugin.version>1.0.22</gluonfx.plugin.version>
         <javafx.plugin.version>0.0.8</javafx.plugin.version>
-        <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
+        <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2MobileApp</mainClassName>
         <app.description>JFXCentral for anything JavaFX</app.description>
         <package.type/>
         <mac.app.store/>
@@ -45,7 +45,6 @@
         </dependency>
         -->
 
-        <!--
         <dependency>
             <groupId>com.gluonhq.attachextended</groupId>
             <artifactId>yt</artifactId>
@@ -59,7 +58,6 @@
             <scope>runtime</scope>
             <classifier>${attach.extended.classifier}</classifier>
         </dependency>
-        -->
 
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -69,11 +67,6 @@
         <dependency>
             <groupId>com.dustinredmond.fxtrayicon</groupId>
             <artifactId>FXTrayIcon</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
         </dependency>
 
         <dependency>
@@ -89,25 +82,21 @@
         <dependency>
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-core</artifactId>
-            <version>${jpro.platform.version}</version>
         </dependency>
 
         <dependency>
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-dev</artifactId>
-            <version>${jpro.platform.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>one.jpro.platform</groupId>
-            <artifactId>freeze-detector</artifactId>
-            <version>${jpro.platform.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.dlsc.jfxcentral2</groupId>
             <artifactId>components</artifactId>
-            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dlsc.jfxcentral2</groupId>
+            <artifactId>mobile</artifactId>
         </dependency>
 
         <dependency>
@@ -425,14 +414,6 @@
             <artifactId>ikonli-zondicons-pack</artifactId>
         </dependency>
 
-        <!--
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j2-impl</artifactId>
-            <version>2.20.0</version>
-        </dependency>
-        -->
-
     </dependencies>
 
     <pluginRepositories>
@@ -457,9 +438,6 @@
                 <version>${javafx.plugin.version}</version>
                 <configuration>
                     <mainClass>${mainClassName}</mainClass>
-                    <options>
-                        <!--<option>-Ddevelop=true</option>-->
-                    </options>
                 </configuration>
             </plugin>
 
@@ -512,7 +490,6 @@
                     <releaseName>jfxcentral</releaseName>
                     <localJVMArgs>-Ddevelop=false</localJVMArgs>
                     <port>8088</port>
-                    <javafxVersion>22</javafxVersion>
                 </configuration>
             </plugin>
 
