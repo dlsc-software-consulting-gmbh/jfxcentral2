@@ -123,7 +123,7 @@ public class JFXCentral2App extends Application {
         }
     }
 
-    private static boolean freezeDetectorStarted = false;
+//    private static boolean freezeDetectorStarted = false;
 
     @Override
     public void start(Stage stage) {
