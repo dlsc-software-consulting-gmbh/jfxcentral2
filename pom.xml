@@ -74,6 +74,18 @@
         <dependencies>
 
             <dependency>
+                <groupId>one.jpro.platform</groupId>
+                <artifactId>jpro-routing-core</artifactId>
+                <version>${jpro.platform.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>one.jpro.platform</groupId>
+                <artifactId>jpro-routing-dev</artifactId>
+                <version>${jpro.platform.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.gluonhq.attachextended</groupId>
                 <artifactId>yt</artifactId>
                 <version>${attach.extended.version}</version>
