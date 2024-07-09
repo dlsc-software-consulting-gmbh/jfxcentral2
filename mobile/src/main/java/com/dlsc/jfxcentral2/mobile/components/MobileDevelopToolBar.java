@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.scenicview.ScenicView;
@@ -25,19 +26,45 @@ public class MobileDevelopToolBar extends VBox {
 
     private final TextField pathField;
 
-    public enum WidthType {
-        LARGE(1440),
-        MEDIUM(768),
-        SMALL(375);
+    public enum DeviceType {
+        IPHONE_6_7_8("iPhone 6/7/8", 375, 667),
+        IPHONE_6_7_8_PLUS("iPhone 6/7/8 Plus", 414, 736),
+        IPHONE_XR("iPhone XR", 414, 896),
+        IPHONE_X("iPhone X", 375, 812),
+        IPHONE_11("iPhone 11", 414, 896),
+        IPHONE_12_MINI("iPhone 12 Mini", 360, 780),
+        IPHONE_12_12_PRO("iPhone 12/12 Pro", 390, 844),
+        IPHONE_12_PRO_MAX("iPhone 12 Pro Max", 428, 926),
+        IPHONE_13_MINI("iPhone 13 Mini", 360, 780),
+        IPHONE_13_13_PRO("iPhone 13/13 Pro", 390, 844),
+        IPHONE_13_PRO_MAX("iPhone 13 Pro Max", 428, 926),
+        IPHONE_14("iPhone 14", 390, 844),
+        IPHONE_14_PLUS("iPhone 14 Plus", 428, 926),
+        IPHONE_14_PRO("iPhone 14 Pro", 393, 852),
+        IPHONE_14_PRO_MAX("iPhone 14 Pro Max", 430, 932),
+        IPHONE_15_15_PRO("iPhone 15/15 Pro", 393, 852),
+        IPHONE_15_PLUS_15_PRO_MAX("iPhone 15 Plus/15 Pro Max", 430, 932);
 
+        private final String desc;
         private final int width;
+        private final int height;
 
-        WidthType(int width) {
+        DeviceType(String desc, int width, int height) {
+            this.desc = desc;
             this.width = width;
+            this.height = height;
+        }
+
+        public String getDesc() {
+            return desc;
         }
 
         public int getWidth() {
             return width;
+        }
+
+        public int getHeight() {
+            return height;
         }
     }
 
@@ -83,9 +110,20 @@ public class MobileDevelopToolBar extends VBox {
             }
         });
 
-        Label limitWidthLabel = new Label("Choose Width: ");
-        ComboBox<WidthType> sizeComboBox = new ComboBox<>(FXCollections.observableArrayList(WidthType.values()));
-        sizeComboBox.setValue(WidthType.SMALL);
+        Label limitWidthLabel = new Label("Device: ");
+        ComboBox<DeviceType> sizeComboBox = new ComboBox<>(FXCollections.observableArrayList(DeviceType.values()));
+        sizeComboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(DeviceType object) {
+                return object.getDesc();
+            }
+
+            @Override
+            public DeviceType fromString(String string) {
+                return null;
+            }
+        });
+        sizeComboBox.setValue(DeviceType.IPHONE_12_12_PRO);
         HBox sizeBox = new HBox(limitWidthLabel, sizeComboBox);
         sizeBox.setAlignment(Pos.CENTER_LEFT);
 
@@ -93,6 +131,7 @@ public class MobileDevelopToolBar extends VBox {
             Scene scene = getScene();
             if (scene != null) {
                 scene.getWindow().setWidth(newSize.getWidth());
+                scene.getWindow().setHeight(newSize.getHeight());
                 scene.getWindow().centerOnScreen();
             }
         });
