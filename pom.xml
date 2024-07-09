@@ -26,9 +26,9 @@
     </modules>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <!-- Version 20 because of performance -->
-        <javafx.version>23-ea+22</javafx.version>
+        <javafx.version>22.0.1</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
         <jpro.version>2024.2.0</jpro.version>
@@ -38,6 +38,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <attach.extended.version>4.0.15-SNAPSHOT</attach.extended.version>
         <attach.extended.classifier>desktop</attach.extended.classifier>
+        <enforcer.skip>true</enforcer.skip>
     </properties>
 
     <repositories>
