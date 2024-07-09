@@ -8080,18 +8080,22 @@
     -fx-border-width: 0px 0px 1px 0px;
 }
 
+.search-result-list-cell:empty {
+    -fx-border-color: white;
+}
+
 .search-result-list-cell .label {
     -fx-text-alignment: left;
     -fx-alignment: top-left;
 }
 
-.search-result-list-cell:selected,
-.search-result-list-cell:hover {
+.search-result-list-cell:filled:selected,
+.search-result-list-cell:filled:hover {
     -fx-background-color: #e2e2e255 !important;
 }
 
-.search-result-list-cell:focused:selected,
-.search-result-list-cell:selected {
+.search-result-list-cell:filled:focused:selected,
+.search-result-list-cell:filled:selected {
     -fx-background-color: #cfdbfa55 !important;
 }
 

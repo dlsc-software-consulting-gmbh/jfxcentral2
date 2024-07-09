@@ -12,6 +12,8 @@ public class PagePath {
 
     public static final String REFRESH = "/refresh";
 
+    public static final String SEARCH = "/search";
+
     /*-------------- Categories Links --------------*/
 
     public static final String BLOGS = "/blogs";

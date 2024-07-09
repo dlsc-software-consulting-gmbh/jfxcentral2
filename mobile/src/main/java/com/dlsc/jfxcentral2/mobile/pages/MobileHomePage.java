@@ -18,6 +18,7 @@ import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
 import com.dlsc.jfxcentral2.mobile.home.HomePageHeader;
 import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
@@ -48,6 +49,11 @@ public class MobileHomePage extends VBox {
         SearchTextField searchTextField = new SearchTextField(true);
         searchTextField.setRight(new Label("Search"));
         searchTextField.setPromptText("Search for anything...");
+        searchTextField.focusWithinProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal) {
+                MobileLinkUtil.getToPage(PagePath.SEARCH);
+            }
+        });
         StackPane searchWrapper = new StackPane(searchTextField);
         searchWrapper.getStyleClass().add("search-wrapper");
 
