@@ -21,21 +21,17 @@
 
     <dependencies>
 
-        <!--
         <dependency>
             <groupId>com.gluonhq.attachextended</groupId>
             <artifactId>yt</artifactId>
-            <version>${attach.extended.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.gluonhq.attachextended</groupId>
             <artifactId>yt</artifactId>
-            <version>${attach.extended.version}</version>
             <scope>runtime</scope>
             <classifier>${attach.extended.classifier}</classifier>
         </dependency>
-        -->
 
         <dependency>
             <groupId>org.mockito</groupId>

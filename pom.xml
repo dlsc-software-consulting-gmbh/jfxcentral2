@@ -52,6 +52,11 @@
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
         </repository>
 
+        <repository>
+            <id>project-repository</id>
+            <url>file://${project.basedir}/repository</url>
+        </repository>
+
     </repositories>
 
     <pluginRepositories>
@@ -67,6 +72,20 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.gluonhq.attachextended</groupId>
+                <artifactId>yt</artifactId>
+                <version>${attach.extended.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gluonhq.attachextended</groupId>
+                <artifactId>yt</artifactId>
+                <version>${attach.extended.version}</version>
+                <scope>runtime</scope>
+                <classifier>${attach.extended.classifier}</classifier>
+            </dependency>
 
             <dependency>
                 <groupId>com.gluonhq.attach</groupId>

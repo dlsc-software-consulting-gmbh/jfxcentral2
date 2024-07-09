@@ -1,0 +1,83 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.gluonhq.attachextended",
+    "module": "yt",
+    "version": "4.0.15-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "yt-4.0.15-SNAPSHOT.jar",
+          "url": "yt-4.0.15-SNAPSHOT.jar",
+          "size": 2140,
+          "sha512": "eaa926fb2fcbfe87b23dcca03d42da1a1458b49e35f8dde5506480ac82e48b91f070038357f5245f8ecdddfae389ccd12f98ac1dc04ef9302aa9f159864586f4",
+          "sha256": "2889c6693480c6b498b1945bd456e53ecddc3b2eb82162730e475420ab392037",
+          "sha1": "2cfe37ce204e3a5de78b528b22da5ef592c761d6",
+          "md5": "ebb5155db2e58620591fd6607b306e4c"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.gluonhq.attach",
+          "module": "util",
+          "version": {
+            "requires": "4.0.19"
+          }
+        },
+        {
+          "group": "com.gluonhq.attach",
+          "module": "storage",
+          "version": {
+            "requires": "4.0.19"
+          }
+        },
+        {
+          "group": "org.openjfx",
+          "module": "javafx-graphics",
+          "version": {
+            "requires": "17"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "yt-4.0.15-SNAPSHOT.jar",
+          "url": "yt-4.0.15-SNAPSHOT.jar",
+          "size": 2140,
+          "sha512": "eaa926fb2fcbfe87b23dcca03d42da1a1458b49e35f8dde5506480ac82e48b91f070038357f5245f8ecdddfae389ccd12f98ac1dc04ef9302aa9f159864586f4",
+          "sha256": "2889c6693480c6b498b1945bd456e53ecddc3b2eb82162730e475420ab392037",
+          "sha1": "2cfe37ce204e3a5de78b528b22da5ef592c761d6",
+          "md5": "ebb5155db2e58620591fd6607b306e4c"
+        }
+      ]
+    }
+  ]
+}

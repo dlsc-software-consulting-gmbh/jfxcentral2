@@ -15,7 +15,7 @@ open module com.dlsc.jfxcentral2.components {
     requires com.gluonhq.attach.browser;
     requires com.gluonhq.attach.display;
     requires com.gluonhq.attach.video;
-//    requires com.gluonhq.attachextended.yt;
+    requires com.gluonhq.attachextended.yt;
 
     requires jfxcentral.data;
     requires org.controlsfx.controls;
