@@ -1,19 +1,18 @@
-package com.dlsc.jfxcentral2.mobile.pages;
+package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.gemsfx.SearchTextField;
 import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.SearchResultCell;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.mobile.utils.ListViewUtil;
-import com.dlsc.jfxcentral2.mobile.utils.PreferredFocusedNodeProvider;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
-import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -30,8 +29,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.boxicons.BoxiconsRegular;
-import org.kordamp.ikonli.elusive.Elusive;
-import org.kordamp.ikonli.fontawesome.FontAwesome;
+import org.kordamp.ikonli.fluentui.FluentUiRegularMZ;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignL;
 
@@ -39,11 +37,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MobileSearchPage extends VBox implements PreferredFocusedNodeProvider {
+public class MobileSearchView extends StackPane {
 
-    private static final String DEFAULT_STYLE_CLASS = "mobile-search-page";
+    private static final String DEFAULT_STYLE_CLASS = "mobile-search-view";
+    private static final int MAX_SUGGESTIONS = 14;
     private final SizeSupport sizeSupport = new SizeSupport(this);
-    private final SearchTextField searchField;
     private final ObservableList<ModelObject> totalResources = FXCollections.observableArrayList();
     private final List<String> searchSuggestions = new ArrayList<>(List.of(
             "JavaFX", "JFX", "JavaFX 8", "JavaFX 9", "JavaFX 10", "JavaFX 11", "JavaFX 16", "JavaFX 17",
@@ -51,47 +49,28 @@ public class MobileSearchPage extends VBox implements PreferredFocusedNodeProvid
             "Controls", "Game", "Medical", "Aviation", "Business", "Maps", "JFX Days", "Theme", "Guide", "Canvas",
             "Tutorial", "Icon", "Tool", "Started", "Learn Javafx", "JFX In Action", "Component", "Pane", "Test"));
 
-    public MobileSearchPage(ObjectProperty<Size> size) {
+    public MobileSearchView(ObjectProperty<Size> size) {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
         sizeProperty().bind(size);
 
         addModelsToCollection();
         addSuggestionsToList();
 
-        Button backButton = new Button();
-        backButton.getStyleClass().add("back-button");
-        backButton.setGraphic(new FontIcon(FontAwesome.ANGLE_LEFT));
-        MobileLinkUtil.setLink(backButton, PagePath.HOME);
-
-        Label searchLabel = new Label("Search");
-        searchField = new SearchTextField(true);
-        searchField.setRight(searchLabel);
-        searchField.setPromptText("Search for anything ...");
-        HBox.setHgrow(searchField, Priority.ALWAYS);
-
         FilteredList<ModelObject> filteredResults = new FilteredList<>(totalResources);
         filteredResults.predicateProperty().bind(Bindings.createObjectBinding(() -> {
-            String text = searchField.textProperty().getValueSafe().trim();
+            String text = searchTextProperty().getValueSafe().trim();
             if (StringUtils.isBlank(text)) {
                 return mo -> false;
             }
             return mo -> mo.matches(text);
-        }, searchField.textProperty()));
-
-        HBox searchBox = new HBox(backButton, searchField);
-        searchBox.getStyleClass().add("search-box");
+        }, searchTextProperty()));
 
         ListView<ModelObject> searchResultListView = new ListView<>(filteredResults);
         searchResultListView.getStyleClass().add("mobile");
         searchResultListView.setCellFactory(param -> new SearchResultCell());
         searchResultListView.setPlaceholder(createPlaceholder());
         ListViewUtil.addCellClickHandler(searchResultListView, (integer, modelObject) -> MobileLinkUtil.getToPage(ModelObjectTool.getModelLink(modelObject)));
-
-        StackPane contentPane = new StackPane(searchResultListView);
-        contentPane.getStyleClass().add("content-pane");
-        VBox.setVgrow(contentPane, Priority.ALWAYS);
-
-        getChildren().addAll(searchBox, contentPane);
+        getChildren().addAll(searchResultListView);
     }
 
     private void addSuggestionsToList() {
@@ -109,7 +88,7 @@ public class MobileSearchPage extends VBox implements PreferredFocusedNodeProvid
         VBox tipsBox = new VBox(tipsTitle, tipsLabel);
         tipsBox.getStyleClass().add("tips-box");
 
-        Label suggestionLabel = new Label("Random Search Keywords", new FontIcon(Elusive.RANDOM));
+        Label suggestionLabel = new Label("Suggested Search Keywords", new FontIcon(FluentUiRegularMZ.SLIDE_SEARCH_28));
 
         Button randomButton = new Button();
         randomButton.setGraphic(new FontIcon(BoxiconsRegular.REFRESH));
@@ -120,12 +99,12 @@ public class MobileSearchPage extends VBox implements PreferredFocusedNodeProvid
         GridPane randomContent = new GridPane();
         randomContent.getStyleClass().add("random-content");
         randomContent.getColumnConstraints().addAll(createColumnConstraints(), createColumnConstraints());
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < MAX_SUGGESTIONS; i++) {
             Label label = new Label();
             label.getStyleClass().add("random-label");
             label.setMaxWidth(Double.MAX_VALUE);
             randomContent.add(label, i % 2, i / 2);
-            label.setOnMouseClicked(event -> searchField.setText(label.getText()));
+            label.setOnMouseClicked(event -> setSearchText(label.getText()));
         }
 
         randomSuggestionItems(randomContent);
@@ -137,7 +116,17 @@ public class MobileSearchPage extends VBox implements PreferredFocusedNodeProvid
 
         VBox vBox = new VBox(tipsBox, suggestionsBox);
         vBox.getStyleClass().add("placeholder-vbox");
-        return vBox;
+
+        SimplePlaceHolder placeHolderLabel = new SimplePlaceHolder();
+        placeHolderLabel.visibleProperty().bind(Bindings.createBooleanBinding(() -> {
+            String text = searchTextProperty().getValueSafe().trim();
+            return !StringUtils.isBlank(text);
+        }, searchTextProperty()));
+
+        vBox.managedProperty().bind(vBox.visibleProperty());
+        vBox.visibleProperty().bind(placeHolderLabel.visibleProperty().not());
+
+        return new StackPane(vBox, placeHolderLabel);
     }
 
     private ColumnConstraints createColumnConstraints() {
@@ -154,10 +143,10 @@ public class MobileSearchPage extends VBox implements PreferredFocusedNodeProvid
         Collections.shuffle(shuffledSuggestions);
 
         List<String> list = shuffledSuggestions.stream()
-                .limit(16)
+                .limit(MAX_SUGGESTIONS)
                 .toList();
 
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < MAX_SUGGESTIONS; i++) {
             Label node = (Label) pane.getChildren().get(i);
             node.setText(list.get(i));
         }
@@ -193,9 +182,18 @@ public class MobileSearchPage extends VBox implements PreferredFocusedNodeProvid
         totalResources.addAll(repository.getLearnMobile());
     }
 
-    @Override
-    public Node getPreferredFocusedNode() {
-        return searchField;
+    private final StringProperty searchText = new SimpleStringProperty(this, "searchText", "");
+
+    public final StringProperty searchTextProperty() {
+        return searchText;
+    }
+
+    public final String getSearchText() {
+        return searchText.get();
+    }
+
+    public final void setSearchText(String searchText) {
+        this.searchText.set(searchText);
     }
 
 }

@@ -13,19 +13,25 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.SizeSupport;
+import com.dlsc.jfxcentral2.mobile.components.MobileSearchView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryAdvancedView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
 import com.dlsc.jfxcentral2.mobile.home.HomePageHeader;
 import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.PagePath;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.kordamp.ikonli.fontawesome.FontAwesome;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +40,13 @@ import java.util.List;
 public class MobileHomePage extends VBox {
 
     private final SizeSupport sizeSupport = new SizeSupport(this);
+    private final Node normalView;
+    private final MobileSearchView searchView;
+    private SearchTextField searchTextField;
+
+    public enum ContentType {
+        NORMAL, SEARCH
+    }
 
     public MobileHomePage(ObjectProperty<Size> size) {
         this();
@@ -43,20 +56,47 @@ public class MobileHomePage extends VBox {
     public MobileHomePage() {
         getStyleClass().add("mobile-home-page");
 
+        // content
+        normalView = createNormalView();
+        normalView.managedProperty().bind(normalView.visibleProperty());
+        VBox.setVgrow(normalView, Priority.ALWAYS);
+
+        searchView = new MobileSearchView(sizeProperty());
+        searchView.managedProperty().bind(searchView.visibleProperty());
+        searchView.visibleProperty().bind(Bindings.createBooleanBinding(() -> getContentType() == ContentType.SEARCH, contentTypeProperty()));
+        normalView.visibleProperty().bind(searchView.visibleProperty().not());
+        VBox.setVgrow(searchView, Priority.ALWAYS);
+
+        // header
         HomePageHeader header = new HomePageHeader();
         header.sizeProperty().bind(sizeProperty());
 
-        SearchTextField searchTextField = new SearchTextField(true);
+        // search field
+        Button backButton = new Button();
+        backButton.getStyleClass().add("back-button");
+        backButton.setGraphic(new FontIcon(FontAwesome.ANGLE_LEFT));
+        backButton.setOnAction(e -> {
+            searchTextField.clear();
+            setContentType(ContentType.NORMAL);
+        });
+        backButton.managedProperty().bind(backButton.visibleProperty());
+        backButton.visibleProperty().bind(Bindings.createBooleanBinding(() -> getContentType() == ContentType.SEARCH, contentTypeProperty()));
+
+        searchTextField = new SearchTextField(true);
         searchTextField.setRight(new Label("Search"));
         searchTextField.setPromptText("Search for anything...");
-        searchTextField.focusWithinProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal) {
-                MobileLinkUtil.getToPage(PagePath.SEARCH);
-            }
-        });
-        StackPane searchWrapper = new StackPane(searchTextField);
+        searchView.searchTextProperty().bindBidirectional(searchTextField.textProperty());
+        searchTextField.setOnMousePressed(event -> setContentType(ContentType.SEARCH));
+        searchTextField.textProperty().addListener(it -> setContentType(ContentType.SEARCH));
+
+        HBox.setHgrow(searchTextField, Priority.ALWAYS);
+        HBox searchWrapper = new HBox(backButton, searchTextField);
         searchWrapper.getStyleClass().add("search-wrapper");
 
+        getChildren().addAll(header, searchWrapper, normalView, searchView);
+    }
+
+    private Node createNormalView() {
         CategoryAdvancedView categoryAdvancedView = new CategoryAdvancedView();
         categoryAdvancedView.sizeProperty().bind(sizeProperty());
 
@@ -84,14 +124,13 @@ public class MobileHomePage extends VBox {
         CategoryPreviewView blogPreviewView = createBlogPreviewView();
         blogPreviewView.sizeProperty().bind(sizeProperty());
 
-        VBox content = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, blogPreviewView, tipsPreviewView);
-        content.getStyleClass().add("content-box");
+        VBox normalView = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, blogPreviewView, tipsPreviewView);
+        normalView.getStyleClass().add("content-box");
 
-        PrettyScrollPane scrollPane = new PrettyScrollPane(content);
-        scrollPane.getStyleClass().add("mobile");
-        VBox.setVgrow(scrollPane, Priority.ALWAYS);
-
-        getChildren().addAll(header, searchWrapper, scrollPane);
+        PrettyScrollPane prettyScrollPane = new PrettyScrollPane(normalView);
+        prettyScrollPane.getStyleClass().add("mobile");
+        VBox.setVgrow(prettyScrollPane, Priority.ALWAYS);
+        return prettyScrollPane;
     }
 
     private CategoryPreviewView createBlogPreviewView() {
@@ -111,7 +150,6 @@ public class MobileHomePage extends VBox {
                     123,
                     57,
                     2048
-
             );
             items.add(item);
         }
@@ -137,7 +175,6 @@ public class MobileHomePage extends VBox {
                     123,
                     57,
                     2048
-
             );
             items.add(item);
         }
@@ -163,7 +200,6 @@ public class MobileHomePage extends VBox {
                     123,
                     57,
                     2048
-
             );
             items.add(item);
         }
@@ -203,7 +239,6 @@ public class MobileHomePage extends VBox {
                     123,
                     57,
                     2048
-
             );
             items.add(item);
         }
@@ -272,6 +307,22 @@ public class MobileHomePage extends VBox {
         List<T> copy = new ArrayList<>(list);
         Collections.shuffle(copy);
         return copy.subList(0, sampleSize);
+    }
+
+    // content type
+
+    private final ObjectProperty<ContentType> contentType = new ReadOnlyObjectWrapper<>(this, "contentType", ContentType.NORMAL);
+
+    public final ContentType getContentType() {
+        return contentType.get();
+    }
+
+    public final ObjectProperty<ContentType> contentTypeProperty() {
+        return contentType;
+    }
+
+    public final void setContentType(ContentType contentType) {
+        this.contentType.set(contentType);
     }
 
 }
