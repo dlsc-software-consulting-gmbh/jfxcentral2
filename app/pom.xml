@@ -464,6 +464,7 @@
                         <list>storage</list>
                         <list>browser</list>
                         <list>video</list>
+                        <list>yt</list>
                     </attachList>
                     <mainClass>${mainClassName}</mainClass>
                     <releaseConfiguration>
