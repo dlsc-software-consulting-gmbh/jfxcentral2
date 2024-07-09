@@ -19,7 +19,6 @@ import com.dlsc.jfxcentral2.app.pages.MobileRefreshPage;
 import com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent;
 import com.dlsc.jfxcentral2.mobile.components.BottomMenuBar;
 import com.dlsc.jfxcentral2.mobile.components.MobileDevelopToolBar;
-import com.dlsc.jfxcentral2.mobile.pages.MobileSearchPage;
 import com.dlsc.jfxcentral2.mobile.pages.MainPage;
 import com.dlsc.jfxcentral2.mobile.pages.MobileHomePage;
 import com.dlsc.jfxcentral2.mobile.pages.MobileLinksOfTheWeekPage;
@@ -103,7 +102,7 @@ public class JFXCentral2MobileApp extends Application {
             developToolBar = new MobileDevelopToolBar(router);
             CSSFX.start();
         } else {
-            //stage.initStyle(StageStyle.UNDECORATED);
+            // stage.initStyle(StageStyle.UNDECORATED);
         }
 
         MainPage mainPage = new MainPage();
@@ -174,7 +173,6 @@ public class JFXCentral2MobileApp extends Application {
                 .and(MobileRoute.get(PagePath.REFRESH, r -> new MobileRefreshPage(size)))
                 .and(MobileRoute.redirect("/index", PagePath.HOME))
                 .and(MobileRoute.redirect("/home", PagePath.HOME))
-                .and(MobileRoute.get(PagePath.SEARCH, r-> new MobileSearchPage(size)))
                 .and(MobileRoute.get(PagePath.LINKS, r -> new MobileLinksOfTheWeekPage(size)))
                 .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.REAL_WORLD, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
