@@ -26,12 +26,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import org.kordamp.ikonli.fontawesome.FontAwesome;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,28 +69,38 @@ public class MobileHomePage extends VBox {
         header.sizeProperty().bind(sizeProperty());
 
         // search field
-        Button backButton = new Button();
-        backButton.getStyleClass().add("back-button");
-        backButton.setGraphic(new FontIcon(FontAwesome.ANGLE_LEFT));
-        backButton.setOnAction(e -> {
-            searchTextField.clear();
-            setContentType(ContentType.NORMAL);
-        });
-        backButton.managedProperty().bind(backButton.visibleProperty());
-        backButton.visibleProperty().bind(Bindings.createBooleanBinding(() -> getContentType() == ContentType.SEARCH, contentTypeProperty()));
-
         searchTextField = new SearchTextField(true);
-        searchTextField.setRight(new Label("Search"));
+        searchTextField.setRight(createSearchCancelButton());
         searchTextField.setPromptText("Search for anything...");
         searchView.searchTextProperty().bindBidirectional(searchTextField.textProperty());
         searchTextField.setOnMousePressed(event -> setContentType(ContentType.SEARCH));
         searchTextField.textProperty().addListener(it -> setContentType(ContentType.SEARCH));
 
         HBox.setHgrow(searchTextField, Priority.ALWAYS);
-        HBox searchWrapper = new HBox(backButton, searchTextField);
+        HBox searchWrapper = new HBox(searchTextField);
         searchWrapper.getStyleClass().add("search-wrapper");
 
         getChildren().addAll(header, searchWrapper, normalView, searchView);
+    }
+
+    private Button createSearchCancelButton() {
+        Button button = new Button("Search");
+        button.textProperty().bind(Bindings.createStringBinding(() -> {
+            if (getContentType() == ContentType.SEARCH) {
+                return "Cancel";
+            } else {
+                return "Search";
+            }
+        }, contentTypeProperty()));
+        button.setOnAction(event -> {
+            if (getContentType() == ContentType.SEARCH) {
+                searchTextField.clear();
+                setContentType(ContentType.NORMAL);
+            } else {
+                setContentType(ContentType.SEARCH);
+            }
+        });
+        return button;
     }
 
     private Node createNormalView() {

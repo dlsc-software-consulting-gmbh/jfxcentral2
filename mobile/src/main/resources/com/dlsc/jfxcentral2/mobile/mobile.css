@@ -496,11 +496,12 @@
     -fx-padding: 8px 8px 8px 0;
 }
 
-.mobile-home-page > .search-wrapper > .search-text-field .label {
+.mobile-home-page > .search-wrapper > .search-text-field .button {
     -fx-text-fill: -bright-blue;
-    -fx-padding: 0 5px 0 10px;
+    -fx-padding: 4 5px 4 10px;
     -fx-border-color: -light-blue;
     -fx-border-width: 0 0 0 2px;
+    -fx-background-color: transparent;
 }
 
 .home-page-header {
