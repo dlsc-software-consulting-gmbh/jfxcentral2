@@ -24,12 +24,7 @@ public class MobileBlogDetailsPage extends MobileDetailsPageBase<Blog> {
         Blog blog = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader(){
-            @Override
-            protected String goBackLink() {
-                return PagePath.BLOGS;
-            }
-        };
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.previewImageProperty().bind(ImageManager.getInstance().blogIconImageProperty(blog));
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(blog.getName());

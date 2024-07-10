@@ -6,7 +6,6 @@ import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.VideoOverviewBox;
 import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
@@ -26,12 +25,7 @@ public class MobileVideoDetailsPage extends MobileDetailsPageBase<Video> {
         Video video = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader(){
-            @Override
-            protected String goBackLink() {
-                return PagePath.VIDEOS;
-            }
-        };
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.previewImageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(video.getName());

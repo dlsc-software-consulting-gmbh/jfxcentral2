@@ -27,12 +27,7 @@ public class MobileCompanyDetailsPage extends MobileDetailsPageBase<Company> {
         Company company = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader(){
-            @Override
-            protected String goBackLink() {
-                return PagePath.COMPANIES;
-            }
-        };
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setIcon(IkonUtil.getModelIkon(Company.class));
         header.setTitle(company.getName());
