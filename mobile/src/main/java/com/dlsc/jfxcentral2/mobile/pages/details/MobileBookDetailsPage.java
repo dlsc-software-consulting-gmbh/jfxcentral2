@@ -27,7 +27,6 @@ public class MobileBookDetailsPage extends MobileDetailsPageBase<Book> {
 
         // header
         MobileCategoryHeader header = new MobileCategoryHeader();
-        // header.previewImageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(book.getName());
 

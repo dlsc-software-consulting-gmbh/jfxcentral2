@@ -26,7 +26,6 @@ public class MobileVideoDetailsPage extends MobileDetailsPageBase<Video> {
 
         // header
         MobileCategoryHeader header = new MobileCategoryHeader();
-        header.previewImageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(video.getName());
 

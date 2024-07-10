@@ -28,7 +28,6 @@ public class MobileToolDetailsPage extends MobileDetailsPageBase<Tool> {
 
         // header
         MobileCategoryHeader header = new MobileCategoryHeader();
-        header.previewImageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(tool.getName());
 

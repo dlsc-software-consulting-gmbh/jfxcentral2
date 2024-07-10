@@ -25,7 +25,6 @@ public class MobileBlogDetailsPage extends MobileDetailsPageBase<Blog> {
 
         // header
         MobileCategoryHeader header = new MobileCategoryHeader();
-        header.previewImageProperty().bind(ImageManager.getInstance().blogIconImageProperty(blog));
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(blog.getName());
 

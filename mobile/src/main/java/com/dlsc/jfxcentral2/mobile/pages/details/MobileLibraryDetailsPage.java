@@ -27,7 +27,6 @@ public class MobileLibraryDetailsPage extends MobileDetailsPageBase<Library> {
 
         // header
         MobileCategoryHeader header = new MobileCategoryHeader();
-        header.previewImageProperty().bind(ImageManager.getInstance().libraryFeaturedImageProperty(library));
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(library.getName());
 

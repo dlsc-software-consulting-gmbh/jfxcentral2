@@ -26,7 +26,6 @@ public class MobilePersonDetailsPage extends MobileDetailsPageBase<Person> {
 
         // header
         MobileCategoryHeader header = new MobileCategoryHeader();
-        header.previewImageProperty().bind(ImageManager.getInstance().personImageProperty(person));
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(person.getName());
 

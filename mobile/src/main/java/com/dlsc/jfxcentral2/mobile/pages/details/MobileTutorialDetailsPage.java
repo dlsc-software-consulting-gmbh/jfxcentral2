@@ -27,7 +27,6 @@ public class MobileTutorialDetailsPage extends MobileDetailsPageBase<Tutorial> {
 
         // header
         MobileCategoryHeader header = new MobileCategoryHeader();
-        header.previewImageProperty().bind(ImageManager.getInstance().tutorialImageLargeProperty(tutorial));
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(tutorial.getName());
 
