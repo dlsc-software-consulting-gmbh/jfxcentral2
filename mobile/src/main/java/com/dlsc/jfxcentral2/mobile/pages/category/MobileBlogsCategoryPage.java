@@ -19,6 +19,7 @@ public class MobileBlogsCategoryPage extends MobileCategoryPageBase<Blog> {
 
     public MobileBlogsCategoryPage(ObjectProperty<Size> size) {
         super(size);
+        getStyleClass().add("blogs-category-page");
     }
 
     @Override
