@@ -1088,3 +1088,96 @@
 .mobile-search-view .placeholder-vbox .random-box .random-content .label:pressed {
     -fx-background-color: -grey-10;
 }
+
+/** ----------------------------------
+ * MobilePersonDetailView
+ */
+.mobile-person-detail-view {
+    -fx-alignment: top-center;
+    -fx-spacing: 5px;
+    /*-fx-padding: 5px 15px;*/
+}
+
+.mobile-person-detail-view > .top-pane {
+    -fx-padding: 5px 0 0 0;
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(247, 249, 255, 1) 0%, rgba(247, 249, 255, 0) 100%);
+}
+
+.mobile-person-detail-view > .top-pane .avatar-view {
+    -fx-border-color: -white;
+    -fx-border-radius: 50%;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(three-pass-box, rgb(125, 125, 125, 0.6), 5, 0, 0, 0);
+}
+
+.mobile-person-detail-view > .person-content-box {
+    -fx-alignment: top-center;
+    -fx-spacing: 5px;
+}
+
+.mobile-person-detail-view > .person-content-box > .name {
+    -fx-font-family: "Spline Sans SemiBold";
+    -fx-font-size: 20px;
+    -fx-padding: 0 15px 5px 15px;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.mobile-person-detail-view > .person-content-box > .badges {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+}
+
+.mobile-person-detail-view > .person-content-box > .badges .badge-item {
+    -fx-font-family: "Spline Sans";
+    -fx-padding: 1px 5px;
+    -fx-background-color: -light-blue;
+    -fx-background-radius: 10px;
+}
+
+.mobile-person-detail-view > .person-content-box > .description {
+    -fx-padding: 5px 20px;
+    -fx-text-alignment: center;
+    -fx-font-family: "Spline Sans";
+    -fx-text-fill: #444;
+    -fx-font-size: 15px;
+}
+
+.mobile-person-detail-view > .person-content-box > .linked-objects-pane {
+    -fx-alignment: center;
+    -fx-hgap: 3px;
+    -fx-vgap: 8px;
+    -fx-padding: 5px;
+}
+
+.mobile-person-detail-view > .person-content-box > .linked-objects-pane .linked-badge {
+    -fx-font-family: "Spline Sans Medium";
+    -fx-font-size: 15px;
+    -fx-content-display: top;
+    -fx-graphic-text-gap: 5px;
+    -fx-alignment: center;
+    -fx-text-fill: #666;
+}
+
+.mobile-person-detail-view > .person-content-box > .linked-objects-pane .linked-badge .ikonli-font-icon {
+    -fx-icon-size: 28px;
+}
+
+.mobile-person-detail-view > .person-content-box .linked-objects-pane .number-label {
+    -fx-background-color: rgba(149, 182, 245, 0.88);
+    -fx-pref-width: 20px;
+    -fx-pref-height: 20px;
+    -fx-background-radius: 20px;
+    -fx-alignment: center;
+    -fx-text-fill: -white;
+    visibility: hidden;
+    -fx-translate-x: 10px;
+    -fx-translate-y: -2px;
+}
+
+.mobile-person-detail-view  .badge-icon-wrapper {
+    -fx-background-color: #f5f5f5;
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
+    -fx-background-radius: 35px;
+}
