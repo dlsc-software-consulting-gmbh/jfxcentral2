@@ -12,6 +12,7 @@ import java.util.Objects;
 public class WelcomePageView extends PageView {
 
     private static final String DEFAULT_STYLE_CLASS = "welcome-page-view";
+
     public record PageDate(String title, String description, String imageUrl) {
     }
 
@@ -47,6 +48,7 @@ public class WelcomePageView extends PageView {
             }
             return cells[index];
         });
+        setCurrentPageIndex((int) (Math.random() * PAGES.length));
 
 
         Timeline timeline = new Timeline();
