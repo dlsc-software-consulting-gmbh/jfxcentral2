@@ -36,6 +36,8 @@ import java.util.List;
 
 public class MobileHomePage extends VBox {
 
+    private static MobileHomePage instance;
+
     private final SizeSupport sizeSupport = new SizeSupport(this);
     private final Node normalView;
     private final MobileSearchView searchView;
@@ -45,12 +47,14 @@ public class MobileHomePage extends VBox {
         NORMAL, SEARCH
     }
 
-    public MobileHomePage(ObjectProperty<Size> size) {
-        this();
-        sizeProperty().bind(size);
+    public static synchronized MobileHomePage getInstance() {
+        if (instance == null) {
+            instance = new MobileHomePage();
+        }
+        return instance;
     }
 
-    public MobileHomePage() {
+    private MobileHomePage() {
         getStyleClass().add("mobile-home-page");
 
         // content

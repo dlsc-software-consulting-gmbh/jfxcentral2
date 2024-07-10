@@ -14,7 +14,7 @@ public class HelloMobileHomePage extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        homePage = new MobileHomePage();
+        homePage = MobileHomePage.getInstance();
 
         ScrollPane scrollPane = new ScrollPane(homePage);
         scrollPane.setFitToWidth(true);
