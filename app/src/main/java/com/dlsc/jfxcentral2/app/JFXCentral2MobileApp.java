@@ -165,7 +165,9 @@ public class JFXCentral2MobileApp extends Application {
                     boolean repositoryUpdated = RepositoryManager.isRepositoryUpdated();
                     EventBusUtil.post(new RepositoryUpdatedEvent(repositoryUpdated));
                     if (repositoryUpdated) {
-                        return new MobileHomePage(size);
+                        MobileHomePage mobileHomePage = MobileHomePage.getInstance();
+                        mobileHomePage.sizeProperty().bind(size);
+                        return mobileHomePage;
                     } else {
                         return new MobileRefreshPage(size);
                     }

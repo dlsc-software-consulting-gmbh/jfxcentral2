@@ -29,7 +29,7 @@ public class MobileCategoryHeader extends StackPane {
         Button backButton = new Button();
         backButton.getStyleClass().add("back-button");
         backButton.setGraphic(new FontIcon(FontAwesome.ANGLE_LEFT));
-        MobileLinkUtil.setLink(backButton, goBackLink());
+        MobileLinkUtil.setGoToBackLink(backButton);
 
         HBox topBox = new HBox(backButton);
         topBox.getStyleClass().add("top-box");

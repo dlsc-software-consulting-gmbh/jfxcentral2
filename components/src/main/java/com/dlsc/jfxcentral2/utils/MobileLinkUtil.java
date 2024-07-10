@@ -20,18 +20,30 @@ public class MobileLinkUtil {
     }
 
     public static void setLink(Node node, String link) {
+        setNodeAction(node, () -> getToPage(link));
+    }
+
+    public static void setGoToBackLink(Node node) {
+        setNodeAction(node, () -> MobileRouter.getInstance().goToBack());
+    }
+
+    public static void setGoToForwardLink(Node node) {
+        setNodeAction(node, () -> MobileRouter.getInstance().goToForward());
+    }
+
+    private static void setNodeAction(Node node, Runnable action) {
         if (node instanceof Button button) {
-            button.setOnAction(e -> getToPage(link));
+            button.setOnAction(e -> action.run());
         } else if (node instanceof CustomToggleButton button) {
-            button.setOnAction(e -> getToPage(link));
+            button.setOnAction(e -> action.run());
         } else if (node instanceof ToggleButton button) {
-            button.setOnAction(e -> getToPage(link));
+            button.setOnAction(e -> action.run());
         } else if (node instanceof Hyperlink hyperlink) {
-            hyperlink.setOnAction(e -> getToPage(link));
+            hyperlink.setOnAction(e -> action.run());
         } else {
             node.setOnMouseClicked(e -> {
                 if (e.isStillSincePress()) {
-                    MobileLinkUtil.getToPage(link);
+                    action.run();
                 }
             });
         }
