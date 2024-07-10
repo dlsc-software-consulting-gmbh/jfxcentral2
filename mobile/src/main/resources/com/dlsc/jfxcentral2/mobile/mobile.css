@@ -850,6 +850,10 @@
     -fx-avatar-type: CIRCLE;
 }
 
+.blogs-category-page .list-view .model-list-cell .avatar-view {
+    -fx-avatar-type: PLAIN;
+}
+
 /** ----------------------------------
  * MobileBlogOverviewBox
  */
