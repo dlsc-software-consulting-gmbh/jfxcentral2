@@ -24,6 +24,14 @@
         "", 
         "und"
       ]
+    }, 
+    {
+      "name":"sun.awt.resources.awt",
+      "classNames":["sun.awt.resources.awt"]
+    }, 
+    {
+      "name":"sun.awt.resources.awtosx",
+      "classNames":["sun.awt.resources.awtosx"]
     }
   ]
 }
