@@ -24,12 +24,7 @@ public class MobileShowcaseMobileDetailsPage extends MobileDetailsPageBase<RealW
         RealWorldApp app = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader(){
-            @Override
-            protected String goBackLink() {
-                return PagePath.SHOWCASES;
-            }
-        };
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.previewImageProperty().bind(ImageManager.getInstance().realWorldAppBannerImageProperty(app));
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(app.getName());

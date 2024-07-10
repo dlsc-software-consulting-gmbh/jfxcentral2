@@ -1,14 +1,10 @@
 package com.dlsc.jfxcentral2.mobile.pages.details;
 
 import com.dlsc.jfxcentral.data.model.Learn;
-import com.dlsc.jfxcentral.data.model.LearnJavaFX;
-import com.dlsc.jfxcentral.data.model.LearnMobile;
-import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.LearnOverviewBox;
 import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
@@ -28,20 +24,7 @@ public class MobileLearnDetailsPage extends MobileDetailsPageBase<Learn> {
         Learn learn = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader() {
-            @Override
-            protected String goBackLink() {
-                Class<? extends Learn> modelClazz = getModelClazz();
-                if (modelClazz == LearnJavaFX.class) {
-                    return PagePath.LEARN_JAVAFX;
-                } else if (modelClazz == LearnRaspberryPi.class) {
-                    return PagePath.LEARN_RASPBERRYPI;
-                } else if (modelClazz == LearnMobile.class) {
-                    return PagePath.LEARN_MOBILE;
-                }
-                return PagePath.HOME;
-            }
-        };
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(learn.getName());
 
