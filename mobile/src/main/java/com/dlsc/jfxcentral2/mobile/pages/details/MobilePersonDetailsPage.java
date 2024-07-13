@@ -25,13 +25,7 @@ public class MobilePersonDetailsPage extends MobileDetailsPageBase<Person> {
         Person person = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader(){
-            @Override
-            protected String goBackLink() {
-                return PagePath.PEOPLE;
-            }
-        };
-        header.previewImageProperty().bind(ImageManager.getInstance().personImageProperty(person));
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(person.getName());
 

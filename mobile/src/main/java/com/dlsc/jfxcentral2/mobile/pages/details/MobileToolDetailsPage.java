@@ -27,13 +27,7 @@ public class MobileToolDetailsPage extends MobileDetailsPageBase<Tool> {
         Tool tool = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader(){
-            @Override
-            protected String goBackLink() {
-                return PagePath.TOOLS;
-            }
-        };
-        header.previewImageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(tool.getName());
 

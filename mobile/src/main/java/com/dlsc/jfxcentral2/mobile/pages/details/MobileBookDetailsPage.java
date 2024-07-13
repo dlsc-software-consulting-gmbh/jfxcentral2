@@ -26,13 +26,7 @@ public class MobileBookDetailsPage extends MobileDetailsPageBase<Book> {
         Book book = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader(){
-            @Override
-            protected String goBackLink() {
-                return PagePath.BOOKS;
-            }
-        };
-        // header.previewImageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(book.getName());
 

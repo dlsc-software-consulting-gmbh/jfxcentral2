@@ -4,7 +4,6 @@ import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
-import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -50,10 +49,6 @@ public class MobileCategoryHeader extends StackPane {
 
         getChildren().addAll(categoryTitle, topBox);
         setMaxHeight(Region.USE_PREF_SIZE);
-    }
-
-    protected String goBackLink() {
-        return PagePath.HOME;
     }
 
     // size support
