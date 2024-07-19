@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.utils;
 
 
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
+import com.dlsc.jfxcentral2.events.OpenWebLinkEvent;
 import com.dlsc.jfxcentral2.events.MobileLinkEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -13,6 +14,10 @@ public class MobileLinkUtil {
     private static final EventBus EVENT_BUS = EventBusUtil.getEventBus();
 
     private MobileLinkUtil() {
+    }
+
+    public static void openWebLink(String link) {
+        EVENT_BUS.post(new OpenWebLinkEvent(link));
     }
 
     public static void getToPage(String link) {

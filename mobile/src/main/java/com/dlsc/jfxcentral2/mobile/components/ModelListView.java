@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.gemsfx.SearchTextField;
+import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.mobile.utils.ListViewUtil;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
@@ -53,7 +54,11 @@ public class ModelListView<T extends ModelObject> extends VBox {
         listView.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(listView, Priority.ALWAYS);
         ListViewUtil.addCellClickHandler(listView, (index, item) -> {
-            MobileLinkUtil.getToPage(ModelObjectTool.getModelLink(item));
+            if (item instanceof Documentation doc) {
+                MobileLinkUtil.openWebLink(doc.getUrl());
+            } else {
+                MobileLinkUtil.getToPage(ModelObjectTool.getModelLink(item));
+            }
         });
 
         getChildren().setAll(searchWrapper, listView);
