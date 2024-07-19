@@ -79,32 +79,32 @@ public class MobilePersonDetailView extends VBox {
     }
 
     private void updateView() {
-        Person person = getPerson();
-
-        // reset the avatar image
         if (avatarView.imageProperty().isBound()) {
             avatarView.imageProperty().unbind();
         }
-        if (person != null) {
-            avatarView.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
-        }
 
-        // reset the text
-        nameLabel.setText(person == null ? "" : person.getName());
-        descriptionLabel.setText(person == null ? "" : DataRepository2.getInstance().getPersonReadMe(person));
-
-        // reset the boxes
-        updateBadge();
-        updatePersonLinkedObjectBox();
-    }
-
-    private void updatePersonLinkedObjectBox() {
-        personLinkedObjectBox.getChildren().clear();
         Person person = getPerson();
         if (person == null) {
+            nameLabel.setText("");
+            descriptionLabel.setText("");
+            badgeBox.getChildren().clear();
+            personLinkedObjectBox.getChildren().clear();
             return;
         }
 
+        // reset the avatar
+        avatarView.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
+
+        // reset the text
+        nameLabel.setText(person.getName());
+        descriptionLabel.setText(DataRepository2.getInstance().getPersonReadMe(person));
+
+        // reset the boxes
+        updateBadge(person);
+        updatePersonLinkedObjectBox(person);
+    }
+
+    private void updatePersonLinkedObjectBox(Person person) {
         List<RealWorldApp> linkedApps = getLinkedObjects(person, RealWorldApp.class);
         if (!linkedApps.isEmpty()) {
             CategoryPreviewView showCasePreviewView = CategoryPreviewView.createShowCasePreviewView(linkedApps);
@@ -148,24 +148,19 @@ public class MobilePersonDetailView extends VBox {
         // learn part
     }
 
-    private void updateBadge() {
-        badgeBox.getChildren().clear();
-        Person person = getPerson();
-        if (person == null) {
-            return;
-        }
+    private void updateBadge(Person person) {
         if (person.isChampion()) {
-            Label championBadge = new Label("Rockstar", new FontIcon(IkonUtil.champion));
-            championBadge.getStyleClass().addAll("badge-item", "rockstar");
+            Label championBadge = new Label("Champion", new FontIcon(IkonUtil.champion));
+            championBadge.getStyleClass().addAll("badge-item", "champion");
             championBadge.setMinWidth(Region.USE_PREF_SIZE);
             badgeBox.getChildren().add(championBadge);
         }
 
         if (person.isRockstar()) {
-            Label rockStartBadge = new Label("Champion", new FontIcon(IkonUtil.rockstar));
-            rockStartBadge.getStyleClass().addAll("badge-item", "champion");
-            rockStartBadge.setMinWidth(Region.USE_PREF_SIZE);
-            badgeBox.getChildren().add(rockStartBadge);
+            Label rockstarBadge = new Label("Rockstar", new FontIcon(IkonUtil.rockstar));
+            rockstarBadge.getStyleClass().addAll("badge-item", "rockstar");
+            rockstarBadge.setMinWidth(Region.USE_PREF_SIZE);
+            badgeBox.getChildren().add(rockstarBadge);
         }
     }
 
