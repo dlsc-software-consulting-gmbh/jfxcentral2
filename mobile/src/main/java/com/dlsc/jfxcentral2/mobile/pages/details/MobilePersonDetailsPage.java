@@ -24,6 +24,7 @@ public class MobilePersonDetailsPage extends MobileDetailsPageBase<Person> {
 
         MobilePersonDetailView personDetailView = new MobilePersonDetailView();
         personDetailView.setPerson(person);
+        personDetailView.sizeProperty().bind(sizeProperty());
         PrettyScrollPane scrollPane = new PrettyScrollPane(new StackPane(personDetailView));
         scrollPane.getStyleClass().add("mobile");
         scrollPane.setMaxHeight(Double.MAX_VALUE);

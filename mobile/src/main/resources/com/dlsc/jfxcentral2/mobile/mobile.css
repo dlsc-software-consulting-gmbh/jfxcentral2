@@ -1099,7 +1099,7 @@
 }
 
 .mobile-person-detail-view > .top-pane {
-    -fx-padding: 5px 0 0 0;
+    -fx-padding: 7px 0 0 0;
     -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(247, 249, 255, 1) 0%, rgba(247, 249, 255, 0) 100%);
 }
 
@@ -1107,6 +1107,7 @@
     -fx-border-color: -white;
     -fx-border-radius: 50%;
     -fx-border-width: 2px;
+    -fx-avatar-size: 60px;
     -fx-effect: dropshadow(three-pass-box, rgb(125, 125, 125, 0.6), 5, 0, 0, 0);
 }
 
@@ -1139,45 +1140,11 @@
     -fx-padding: 5px 20px;
     -fx-text-alignment: center;
     -fx-font-family: "Spline Sans";
-    -fx-text-fill: #444;
-    -fx-font-size: 15px;
+    -fx-text-fill: #555;
+    -fx-font-size: 14px;
 }
 
-.mobile-person-detail-view > .person-content-box > .linked-objects-pane {
-    -fx-alignment: center;
-    -fx-hgap: 3px;
-    -fx-vgap: 8px;
-    -fx-padding: 5px;
-}
-
-.mobile-person-detail-view > .person-content-box > .linked-objects-pane .linked-badge {
-    -fx-font-family: "Spline Sans Medium";
-    -fx-font-size: 15px;
-    -fx-content-display: top;
-    -fx-graphic-text-gap: 5px;
-    -fx-alignment: center;
-    -fx-text-fill: #666;
-}
-
-.mobile-person-detail-view > .person-content-box > .linked-objects-pane .linked-badge .ikonli-font-icon {
-    -fx-icon-size: 28px;
-}
-
-.mobile-person-detail-view > .person-content-box .linked-objects-pane .number-label {
-    -fx-background-color: rgba(149, 182, 245, 0.88);
-    -fx-pref-width: 20px;
-    -fx-pref-height: 20px;
-    -fx-background-radius: 20px;
-    -fx-alignment: center;
-    -fx-text-fill: -white;
-    visibility: hidden;
-    -fx-translate-x: 10px;
-    -fx-translate-y: -2px;
-}
-
-.mobile-person-detail-view  .badge-icon-wrapper {
-    -fx-background-color: #f5f5f5;
-    -fx-pref-width: 50px;
-    -fx-pref-height: 50px;
-    -fx-background-radius: 35px;
+.mobile-person-detail-view > .person-content-box .person-linked-box {
+    -fx-padding: 5px 15px;
+    -fx-spacing: 15px;
 }

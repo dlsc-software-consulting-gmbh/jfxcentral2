@@ -2,18 +2,17 @@ package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
+import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral.data.model.Learn;
-import com.dlsc.jfxcentral.data.model.LearnJavaFX;
-import com.dlsc.jfxcentral.data.model.LearnMobile;
-import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
-import com.dlsc.jfxcentral.data.model.Tool;
-import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
+import com.dlsc.jfxcentral2.components.SizeSupport;
+import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
+import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import javafx.beans.property.ObjectProperty;
@@ -24,7 +23,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.fontawesome.FontAwesome;
@@ -35,11 +33,12 @@ import java.util.List;
 public class MobilePersonDetailView extends VBox {
 
     private static final String DEFAULT_STYLE_CLASS = "mobile-person-detail-view";
-    private final TilePane linkedObjectsPane;
+    private final SizeSupport sizeSupport = new SizeSupport(this);
     private final AvatarView avatarView;
     private final Label nameLabel;
     private final HBox badgeBox;
     private final Label descriptionLabel;
+    private final VBox personLinkedObjectBox;
 
     public record LinkedObjectBadge(String name, Ikon ikon, int count) {
     }
@@ -67,10 +66,10 @@ public class MobilePersonDetailView extends VBox {
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.setWrapText(true);
 
-        linkedObjectsPane = new TilePane();
-        linkedObjectsPane.getStyleClass().add("linked-objects-pane");
+        personLinkedObjectBox = new VBox();
+        personLinkedObjectBox.getStyleClass().add("person-linked-box");
 
-        VBox personContentBox = new VBox(nameLabel, badgeBox, descriptionLabel, linkedObjectsPane);
+        VBox personContentBox = new VBox(nameLabel, badgeBox, descriptionLabel, personLinkedObjectBox);
         personContentBox.getStyleClass().add("person-content-box");
 
         getChildren().addAll(topPane, personContentBox);
@@ -82,27 +81,79 @@ public class MobilePersonDetailView extends VBox {
     private void updateView() {
         Person person = getPerson();
 
-        // reset the view
+        // reset the avatar image
         if (avatarView.imageProperty().isBound()) {
             avatarView.imageProperty().unbind();
         }
-        nameLabel.setText("");
-        descriptionLabel.setText("");
-        badgeBox.getChildren().clear();
-        linkedObjectsPane.getChildren().clear();
-
-        // update the view
         if (person != null) {
             avatarView.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
-            nameLabel.setText(person.getName());
-            descriptionLabel.setText(DataRepository2.getInstance().getPersonReadMe(person));
-            updateLinkedObjectBadges();
-            updateBadge();
         }
+
+        // reset the text
+        nameLabel.setText(person == null ? "" : person.getName());
+        descriptionLabel.setText(person == null ? "" : DataRepository2.getInstance().getPersonReadMe(person));
+
+        // reset the boxes
+        updateBadge();
+        updatePersonLinkedObjectBox();
+    }
+
+    private void updatePersonLinkedObjectBox() {
+        personLinkedObjectBox.getChildren().clear();
+        Person person = getPerson();
+        if (person == null) {
+            return;
+        }
+
+        List<RealWorldApp> linkedApps = getLinkedObjects(person, RealWorldApp.class);
+        if (!linkedApps.isEmpty()) {
+            CategoryPreviewView showCasePreviewView = CategoryPreviewView.createShowCasePreviewView(linkedApps);
+            showCasePreviewView.sizeProperty().bind(sizeProperty());
+            showCasePreviewView.setTitle("Related Apps");
+            personLinkedObjectBox.getChildren().add(showCasePreviewView);
+        }
+
+        List<Library> linkedLibraries = getLinkedObjects(person, Library.class);
+        if (!linkedLibraries.isEmpty()) {
+            CategoryPreviewView libraryPreviewView = CategoryPreviewView.createLibraryPreviewView(linkedLibraries);
+            libraryPreviewView.sizeProperty().bind(sizeProperty());
+            libraryPreviewView.setTitle("Related Libraries");
+            personLinkedObjectBox.getChildren().add(libraryPreviewView);
+        }
+
+        List<Tip> linkedTips = getLinkedObjects(person, Tip.class);
+        if (!linkedTips.isEmpty()) {
+            CategoryPreviewView tipsPreviewView = CategoryPreviewView.createTipsPreviewView(linkedTips);
+            tipsPreviewView.sizeProperty().bind(sizeProperty());
+            tipsPreviewView.setTitle("Related Tips");
+            personLinkedObjectBox.getChildren().add(tipsPreviewView);
+        }
+
+        List<Book> linkedBooks = getLinkedObjects(person, Book.class);
+        if (!linkedBooks.isEmpty()) {
+            CategoryPreviewView booksPreviewView = CategoryPreviewView.createBooksPreviewView(linkedBooks);
+            booksPreviewView.sizeProperty().bind(sizeProperty());
+            booksPreviewView.setTitle("Related Books");
+            personLinkedObjectBox.getChildren().add(booksPreviewView);
+        }
+
+        List<Blog> linkedBlogs = getLinkedObjects(person, Blog.class);
+        if (!linkedBlogs.isEmpty()) {
+            CategoryPreviewView blogPreviewView = CategoryPreviewView.createBlogPreviewView(linkedBlogs);
+            blogPreviewView.sizeProperty().bind(sizeProperty());
+            blogPreviewView.setTitle("Related Blogs");
+            personLinkedObjectBox.getChildren().add(blogPreviewView);
+        }
+
+        // learn part
     }
 
     private void updateBadge() {
+        badgeBox.getChildren().clear();
         Person person = getPerson();
+        if (person == null) {
+            return;
+        }
         if (person.isChampion()) {
             Label championBadge = new Label("Rockstar", new FontIcon(IkonUtil.champion));
             championBadge.getStyleClass().addAll("badge-item", "rockstar");
@@ -118,38 +169,25 @@ public class MobilePersonDetailView extends VBox {
         }
     }
 
-    protected void updateLinkedObjectBadges() {
-        Person person = getPerson();
-        DataRepository2 dataRepository = DataRepository2.getInstance();
-        List<LinkedObjectBadge> linkedObjectBadge = List.of(
-                new LinkedObjectBadge("Apps", IkonUtil.getModelIkon(RealWorldApp.class), dataRepository.getLinkedObjects(person, RealWorldApp.class).size()),
-                new LinkedObjectBadge("Books", IkonUtil.getModelIkon(Book.class), dataRepository.getLinkedObjects(person, Book.class).size()),
-                new LinkedObjectBadge("Libraries", IkonUtil.getModelIkon(Library.class), dataRepository.getLinkedObjects(person, Library.class).size()),
-                new LinkedObjectBadge("Tools", IkonUtil.getModelIkon(Tool.class), dataRepository.getLinkedObjects(person, Tool.class).size()),
-                new LinkedObjectBadge("Videos", IkonUtil.getModelIkon(Video.class), dataRepository.getLinkedObjects(person, Video.class).size()),
-                new LinkedObjectBadge("Tips", IkonUtil.getModelIkon(Tip.class), dataRepository.getLinkedObjects(person, Tip.class).size()),
-                new LinkedObjectBadge("Learn", IkonUtil.getModelIkon(Learn.class),
-                        dataRepository.getLinkedObjects(person, LearnJavaFX.class).size()
-                                + dataRepository.getLinkedObjects(person, LearnMobile.class).size()
-                                + dataRepository.getLinkedObjects(person, LearnRaspberryPi.class).size()
-                ));
-
-        linkedObjectBadge.stream().filter(item -> item.count() > 0).forEach(item -> {
-            Label label = new Label(item.name());
-            label.getStyleClass().add("linked-badge");
-            linkedObjectsPane.getChildren().add(label);
-
-            Label numberLabel = new Label(String.valueOf(item.count()));
-            numberLabel.getStyleClass().add("number-label");
-            StackPane.setAlignment(numberLabel, Pos.TOP_RIGHT);
-            FontIcon icon = new FontIcon(item.ikon());
-
-            StackPane graphic = new StackPane(icon, numberLabel);
-            graphic.getStyleClass().add("badge-icon-wrapper");
-
-            label.setGraphic(graphic);
-        });
+    private <T extends ModelObject> List<T> getLinkedObjects(Person person, Class<T> type) {
+        return DataRepository2.getInstance().getLinkedObjects(person, type);
     }
+
+    // Size
+
+    public final ObjectProperty<Size> sizeProperty() {
+        return sizeSupport.sizeProperty();
+    }
+
+    public final void setSize(Size size) {
+        sizeSupport.setSize(size);
+    }
+
+    public final Size getSize() {
+        return sizeSupport.getSize();
+    }
+
+    // person
 
     private final ObjectProperty<Person> person = new SimpleObjectProperty<>(this, "person");
 
