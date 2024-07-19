@@ -319,13 +319,13 @@
 }
 
 .category-preview-view > .content > .category-cell .cell-content {
-    -fx-spacing: 5px;
+    -fx-spacing: 3px;
 }
 
 .category-preview-view > .content > .category-cell .cell-content > .title {
     -fx-font-family: "Roboto Condensed";
     -fx-font-weight: bold;
-    -fx-font-size: 18px;
+    -fx-font-size: 15px;
     -fx-text-fill: -grey-100;
     -fx-padding: 2px 0 2px 0;
 }
@@ -347,7 +347,7 @@
     -fx-font-family: "Roboto Condensed";
     -fx-text-fill: -grey-60;
     -fx-alignment: top-left;
-    -fx-font-size: 15px;
+    -fx-font-size: 13px;
 }
 
 .category-preview-view:md > .content > .category-cell .cell-content > .description {

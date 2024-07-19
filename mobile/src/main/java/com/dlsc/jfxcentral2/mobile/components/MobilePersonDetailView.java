@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
@@ -121,20 +122,28 @@ public class MobilePersonDetailView extends VBox {
             personLinkedObjectBox.getChildren().add(libraryPreviewView);
         }
 
-        List<Tip> linkedTips = getLinkedObjects(person, Tip.class);
-        if (!linkedTips.isEmpty()) {
-            CategoryPreviewView tipsPreviewView = CategoryPreviewView.createTipsPreviewView(linkedTips);
-            tipsPreviewView.sizeProperty().bind(sizeProperty());
-            tipsPreviewView.setTitle("Related Tips");
-            personLinkedObjectBox.getChildren().add(tipsPreviewView);
-        }
-
         List<Book> linkedBooks = getLinkedObjects(person, Book.class);
         if (!linkedBooks.isEmpty()) {
             CategoryPreviewView booksPreviewView = CategoryPreviewView.createBooksPreviewView(linkedBooks);
             booksPreviewView.sizeProperty().bind(sizeProperty());
             booksPreviewView.setTitle("Related Books");
             personLinkedObjectBox.getChildren().add(booksPreviewView);
+        }
+
+        List<Video> linkedVideos = getLinkedObjects(person, Video.class);
+        if (!linkedVideos.isEmpty()) {
+            CategoryPreviewView videoPreviewView = CategoryPreviewView.createVideosPreviewView(linkedVideos);
+            videoPreviewView.sizeProperty().bind(sizeProperty());
+            videoPreviewView.setTitle("Related Videos");
+            personLinkedObjectBox.getChildren().add(videoPreviewView);
+        }
+
+        List<Tip> linkedTips = getLinkedObjects(person, Tip.class);
+        if (!linkedTips.isEmpty()) {
+            CategoryPreviewView tipsPreviewView = CategoryPreviewView.createTipsPreviewView(linkedTips);
+            tipsPreviewView.sizeProperty().bind(sizeProperty());
+            tipsPreviewView.setTitle("Related Tips");
+            personLinkedObjectBox.getChildren().add(tipsPreviewView);
         }
 
         List<Blog> linkedBlogs = getLinkedObjects(person, Blog.class);

@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
@@ -486,6 +487,32 @@ public class CategoryPreviewView extends VBox {
 
     public static CategoryPreviewView createPeoplePreviewView(List<Person> people) {
         return createPeoplePreviewView(people, null);
+    }
+
+    public static CategoryPreviewView createVideosPreviewView(List<Video> videos, String showAllUrl) {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Videos");
+        if (showAllUrl != null) {
+            view.setShowAllUrl(showAllUrl);
+        }
+
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        for (Video video : videos) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    video.getName(),
+                    video.getDescription(),
+                    ImageManager.getInstance().youTubeImageProperty(video),
+                    ModelObjectTool.getModelLink(video)
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    public static CategoryPreviewView createVideosPreviewView(List<Video> videos) {
+        return createVideosPreviewView(videos, null);
     }
 
 }

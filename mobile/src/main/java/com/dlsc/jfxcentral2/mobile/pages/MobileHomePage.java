@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.mobile.components.MobileSearchView;
@@ -117,7 +118,7 @@ public class MobileHomePage extends VBox {
         CategoryPreviewView showCasePreviewView = CategoryPreviewView.createShowCasePreviewView(randomApps, PagePath.SHOWCASES);
         showCasePreviewView.sizeProperty().bind(sizeProperty());
 
-        List<Tip> randomTips = getRandomSample(DataRepository2.getInstance().getTips(), 3);
+        List<Tip> randomTips = getRandomSample(DataRepository2.getInstance().getTips(), 2);
         CategoryPreviewView tipsPreviewView = CategoryPreviewView.createTipsPreviewView(randomTips, PagePath.TIPS);
         tipsPreviewView.sizeProperty().bind(sizeProperty());
 
@@ -133,11 +134,15 @@ public class MobileHomePage extends VBox {
         CategoryPreviewView libraryPreviewView = CategoryPreviewView.createLibraryPreviewView(randomLibraries, PagePath.LIBRARIES);
         libraryPreviewView.sizeProperty().bind(sizeProperty());
 
-        List<Blog> randomBlogs = getRandomSample(DataRepository2.getInstance().getBlogs(), 3);
+        List<Video> randomVideos = getRandomSample(DataRepository2.getInstance().getVideos(), 3);
+        CategoryPreviewView videoPreviewView = CategoryPreviewView.createVideosPreviewView(randomVideos, PagePath.VIDEOS);
+        videoPreviewView.sizeProperty().bind(sizeProperty());
+
+        List<Blog> randomBlogs = getRandomSample(DataRepository2.getInstance().getBlogs(), 2);
         CategoryPreviewView blogPreviewView = CategoryPreviewView.createBlogPreviewView(randomBlogs, PagePath.BLOGS);
         blogPreviewView.sizeProperty().bind(sizeProperty());
 
-        VBox normalView = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, blogPreviewView, tipsPreviewView);
+        VBox normalView = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView);
         normalView.getStyleClass().add("content-box");
 
         PrettyScrollPane prettyScrollPane = new PrettyScrollPane(normalView);
