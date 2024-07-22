@@ -26,26 +26,26 @@
  */
 .bottom-menu-bar {
     -fx-alignment: top-center;
-    -fx-background-color: -white;
-    -fx-padding: 5px 0 8px 0;
+    -fx-background-color: -background;
+    -fx-padding: 8px 0 15px 0;
     -fx-border-color: -grey-10;
     -fx-border-width: 1 0 0 0;
 }
 
 .bottom-menu-bar .toggle-button {
     -fx-content-display: graphic-only;
-    -fx-background-color: -white;
+    -fx-background-color: transparent;
     -fx-text-fill: -grey-100;
     -fx-padding: 0 0 5px 0;
 }
 
 .bottom-menu-bar .toggle-button .ikonli-font-icon {
-    -fx-icon-size: 24px;
+    -fx-icon-size: 32px;
     -fx-icon-color: -grey-100;
 }
 
 .bottom-menu-bar:md-lg .toggle-button .ikonli-font-icon {
-    -fx-icon-size: 26px;
+    -fx-icon-size: 32px;
 }
 
 .bottom-menu-bar .toggle-button:selected {
