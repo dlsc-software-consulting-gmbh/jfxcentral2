@@ -26,13 +26,7 @@ public class MobileTutorialDetailsPage extends MobileDetailsPageBase<Tutorial> {
         Tutorial tutorial = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader(){
-            @Override
-            protected String goBackLink() {
-                return PagePath.TUTORIALS;
-            }
-        };
-        header.previewImageProperty().bind(ImageManager.getInstance().tutorialImageLargeProperty(tutorial));
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(tutorial.getName());
 

@@ -26,13 +26,7 @@ public class MobileLibraryDetailsPage extends MobileDetailsPageBase<Library> {
         Library library = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader(){
-            @Override
-            protected String goBackLink() {
-                return PagePath.LIBRARIES;
-            }
-        };
-        header.previewImageProperty().bind(ImageManager.getInstance().libraryFeaturedImageProperty(library));
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(library.getName());
 

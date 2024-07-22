@@ -26,13 +26,7 @@ public class MobileTipDetailsPage extends MobileDetailsPageBase<Tip> {
         Tip tip = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader(){
-            @Override
-            protected String goBackLink() {
-                return PagePath.TIPS;
-            }
-        };
-        header.previewImageProperty().bind(ImageManager.getInstance().tipBannerImageProperty(tip));
+        MobileCategoryHeader header = new MobileCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(tip.getName());
 

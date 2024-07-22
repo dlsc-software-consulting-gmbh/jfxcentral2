@@ -65,6 +65,7 @@ public class MobileBlogOverviewBox extends VBox {
                     @Override
                     protected Void call() throws InterruptedException {
                         List<Post> posts = DataRepository2.getInstance().loadPosts(blog);
+                        posts.sort((o1, o2) -> o2.getSyndEntry().getPublishedDate().compareTo(o1.getSyndEntry().getPublishedDate()));
                         Thread.sleep(500);
                         Platform.runLater(() -> {
                             listView.getItems().setAll(posts);
