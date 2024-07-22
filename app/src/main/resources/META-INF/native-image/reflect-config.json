@@ -187,8 +187,7 @@
   "methods":[
     {"name":"<init>","parameterTypes":[] }, 
     {"name":"main","parameterTypes":["java.lang.String[]"] }, 
-    {"name":"onRepositoryUpdated","parameterTypes":["com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent"] },
-    {"name":"onOpenWebLink","parameterTypes":["com.dlsc.jfxcentral2.events.OpenWebLinkEvent"] }
+    {"name":"onRepositoryUpdated","parameterTypes":["com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent"] }
   ]
 },
 {
