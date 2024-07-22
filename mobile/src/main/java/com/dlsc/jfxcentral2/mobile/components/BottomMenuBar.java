@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.events.MobileLinkEvent;
+import com.dlsc.jfxcentral2.mobile.pages.MobileHomePage;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.EventBusUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -34,7 +35,14 @@ public class BottomMenuBar extends HBox {
         homeButton.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
         homeButton.setMaxWidth(Double.MAX_VALUE);
         homeButton.setUserData(PagePath.HOME);
-        homeButton.setOnAction(evt -> MobileLinkUtil.getToPage(PagePath.HOME));
+        homeButton.setOnMouseClicked(evt -> {
+            if (homeButton.isSelected()) {
+                // If the home page is being displayed, clicking homeButton will hide the search view and display the normal content.
+                MobileHomePage.getInstance().setContentType(MobileHomePage.ContentType.NORMAL);
+            } else {
+                MobileLinkUtil.getToPage(PagePath.HOME);
+            }
+        });
         HBox.setHgrow(homeButton, Priority.ALWAYS);
 
         CustomToggleButton linksWeekButton = new CustomToggleButton();
