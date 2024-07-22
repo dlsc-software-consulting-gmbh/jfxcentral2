@@ -571,16 +571,16 @@
     -fx-background-color: -white;
 }
 
-.lotw-page-view .custom-markdown-view .markdown-code {
-    -fx-text-fill: -grey-100;
-}
-
 .lotw-page-view .links-cell {
     -fx-padding: 0 0 30px 0;
 }
 
 .lotw-page-view .links-cell .custom-markdown-view {
     -fx-padding: 0 15px;
+}
+
+.lotw-page-view .links-cell .custom-markdown-view .markdown-code {
+    -fx-text-fill: -grey-100;
 }
 
 .lotw-page-view .links-cell .date-label-container .label {
