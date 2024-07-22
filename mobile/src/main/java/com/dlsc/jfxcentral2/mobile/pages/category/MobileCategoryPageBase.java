@@ -43,7 +43,7 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox
         // list view
         ModelListView<T> listView = new ModelListView<>();
         listView.getItemsList().setAll(getCategoryItems());
-        listView.promptTextProperty().set(getSearchPromptText());
+        listView.setPromptText(getSearchPromptText());
         listView.setFilter(getFilter());
         listView.setMaxHeight(Double.MAX_VALUE);
         listView.setCellFactory(cellFactory());
