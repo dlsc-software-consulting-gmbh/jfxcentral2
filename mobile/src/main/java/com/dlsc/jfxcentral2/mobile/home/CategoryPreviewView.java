@@ -1,9 +1,19 @@
 package com.dlsc.jfxcentral2.mobile.home;
 
 import com.dlsc.gemsfx.Spacer;
+import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.ImageManager;
+import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.PlatformLinkUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.binding.Bindings;
@@ -26,6 +36,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CategoryPreviewView extends VBox {
 
     private static final String DEFAULT_STYLE_CLASS = "category-preview-view";
@@ -42,6 +55,8 @@ public class CategoryPreviewView extends VBox {
 
         moreButton = new Button("More", new FontIcon("mdi-chevron-right"));
         moreButton.getStyleClass().add("more-button");
+        moreButton.managedProperty().bind(moreButton.visibleProperty());
+        moreButton.visibleProperty().bind(showAllUrlProperty().isNotEmpty());
 
         HBox header = new HBox(titleLabel, new Spacer(), moreButton);
         header.getStyleClass().add("header");
@@ -204,7 +219,7 @@ public class CategoryPreviewView extends VBox {
             footer.managedProperty().bind(footer.visibleProperty());
             footer.setVisible(SocialUtil.isSocialFeaturesEnabled());
             pseudoClassStateChanged(SOCIAL_FEATURES_ENABLED, footer.isVisible());
-            footer.visibleProperty().addListener(it-> pseudoClassStateChanged(SOCIAL_FEATURES_ENABLED, footer.isVisible()));
+            footer.visibleProperty().addListener(it -> pseudoClassStateChanged(SOCIAL_FEATURES_ENABLED, footer.isVisible()));
 
             VBox cellContent = new VBox(titleLabel, descriptionLabel, footer);
             cellContent.getStyleClass().add("cell-content");
@@ -319,4 +334,185 @@ public class CategoryPreviewView extends VBox {
             viewsNumberProperty().set(viewsNumber);
         }
     }
+
+    public static CategoryPreviewView createBlogPreviewView(List<Blog> blogs, String showAllUrl) {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Blog");
+        if (showAllUrl != null) {
+            view.setShowAllUrl(showAllUrl);
+        }
+
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        for (Blog blog : blogs) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    blog.getName(),
+                    blog.getSummary(),
+                    ImageManager.getInstance().blogIconImageProperty(blog),
+                    ModelObjectTool.getModelLink(blog)
+            );
+            items.add(item);
+        }
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    public static CategoryPreviewView createBlogPreviewView(List<Blog> blogs) {
+        return createBlogPreviewView(blogs, null);
+    }
+
+    public static CategoryPreviewView createShowCasePreviewView(List<RealWorldApp> apps, String showAllUrl) {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Real World Apps");
+        if (showAllUrl != null) {
+            view.setShowAllUrl(showAllUrl);
+        }
+
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        for (RealWorldApp app : apps) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    app.getName(),
+                    app.getSummary(),
+                    ImageManager.getInstance().realWorldAppBannerImageProperty(app),
+                    ModelObjectTool.getModelLink(app)
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    public static CategoryPreviewView createShowCasePreviewView(List<RealWorldApp> apps) {
+        return createShowCasePreviewView(apps, null);
+    }
+
+    public static CategoryPreviewView createTipsPreviewView(List<Tip> tips, String showAllUrl) {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Tips");
+        if (showAllUrl != null) {
+            view.setShowAllUrl(showAllUrl);
+        }
+
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        for (Tip tip : tips) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    tip.getName(),
+                    tip.getSummary(),
+                    ImageManager.getInstance().tipBannerImageProperty(tip),
+                    ModelObjectTool.getModelLink(tip)
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    public static CategoryPreviewView createTipsPreviewView(List<Tip> tips) {
+        return createTipsPreviewView(tips, null);
+    }
+
+    public static CategoryPreviewView createBooksPreviewView(List<Book> books, String showAllUrl) {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Books");
+        if (showAllUrl != null) {
+            view.setShowAllUrl(showAllUrl);
+        }
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+
+        for (Book book : books) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    book.getName(),
+                    book.getSummary(),
+                    ImageManager.getInstance().bookCoverImageProperty(book),
+                    ModelObjectTool.getModelLink(book)
+            );
+            items.add(item);
+        }
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    public static CategoryPreviewView createBooksPreviewView(List<Book> books) {
+        return createBooksPreviewView(books, null);
+    }
+
+    public static CategoryPreviewView createLibraryPreviewView(List<Library> libraries, String showAllUrl) {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Libraries");
+        if (showAllUrl != null) {
+            view.setShowAllUrl(showAllUrl);
+        }
+
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        for (Library library : libraries) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    library.getName(),
+                    library.getSummary(),
+                    ImageManager.getInstance().libraryFeaturedImageProperty(library),
+                    ModelObjectTool.getModelLink(library)
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    public static CategoryPreviewView createLibraryPreviewView(List<Library> libraries) {
+        return createLibraryPreviewView(libraries, null);
+    }
+
+    public static CategoryPreviewView createPeoplePreviewView(List<Person> people, String showAllUrl) {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("People");
+        if (showAllUrl != null) {
+            view.setShowAllUrl(showAllUrl);
+        }
+
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        for (Person person : people) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    person.getName(),
+                    DataRepository2.getInstance().getPersonReadMe(person),
+                    ImageManager.getInstance().personImageProperty(person),
+                    ModelObjectTool.getModelLink(person)
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    public static CategoryPreviewView createPeoplePreviewView(List<Person> people) {
+        return createPeoplePreviewView(people, null);
+    }
+
+    public static CategoryPreviewView createVideosPreviewView(List<Video> videos, String showAllUrl) {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Videos");
+        if (showAllUrl != null) {
+            view.setShowAllUrl(showAllUrl);
+        }
+
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        for (Video video : videos) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    video.getName(),
+                    video.getDescription(),
+                    ImageManager.getInstance().youTubeImageProperty(video),
+                    ModelObjectTool.getModelLink(video)
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    public static CategoryPreviewView createVideosPreviewView(List<Video> videos) {
+        return createVideosPreviewView(videos, null);
+    }
+
 }

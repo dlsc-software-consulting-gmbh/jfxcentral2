@@ -319,13 +319,13 @@
 }
 
 .category-preview-view > .content > .category-cell .cell-content {
-    -fx-spacing: 5px;
+    -fx-spacing: 3px;
 }
 
 .category-preview-view > .content > .category-cell .cell-content > .title {
     -fx-font-family: "Roboto Condensed";
     -fx-font-weight: bold;
-    -fx-font-size: 18px;
+    -fx-font-size: 15px;
     -fx-text-fill: -grey-100;
     -fx-padding: 2px 0 2px 0;
 }
@@ -347,7 +347,7 @@
     -fx-font-family: "Roboto Condensed";
     -fx-text-fill: -grey-60;
     -fx-alignment: top-left;
-    -fx-font-size: 15px;
+    -fx-font-size: 13px;
 }
 
 .category-preview-view:md > .content > .category-cell .cell-content > .description {
@@ -1087,4 +1087,64 @@
 
 .mobile-search-view .placeholder-vbox .random-box .random-content .label:pressed {
     -fx-background-color: -grey-10;
+}
+
+/** ----------------------------------
+ * MobilePersonDetailView
+ */
+.mobile-person-detail-view {
+    -fx-alignment: top-center;
+    -fx-spacing: 5px;
+    /*-fx-padding: 5px 15px;*/
+}
+
+.mobile-person-detail-view > .top-pane {
+    -fx-padding: 7px 0 0 0;
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(247, 249, 255, 1) 0%, rgba(247, 249, 255, 0) 100%);
+}
+
+.mobile-person-detail-view > .top-pane .avatar-view {
+    -fx-border-color: -white;
+    -fx-border-radius: 50%;
+    -fx-border-width: 2px;
+    -fx-avatar-size: 60px;
+    -fx-effect: dropshadow(three-pass-box, rgb(125, 125, 125, 0.6), 5, 0, 0, 0);
+}
+
+.mobile-person-detail-view > .person-content-box {
+    -fx-alignment: top-center;
+    -fx-spacing: 5px;
+}
+
+.mobile-person-detail-view > .person-content-box > .name {
+    -fx-font-family: "Spline Sans SemiBold";
+    -fx-font-size: 20px;
+    -fx-padding: 0 15px 5px 15px;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.mobile-person-detail-view > .person-content-box > .badges {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+}
+
+.mobile-person-detail-view > .person-content-box > .badges .badge-item {
+    -fx-font-family: "Spline Sans";
+    -fx-padding: 1px 5px;
+    -fx-background-color: -light-blue;
+    -fx-background-radius: 10px;
+}
+
+.mobile-person-detail-view > .person-content-box > .description {
+    -fx-padding: 5px 20px;
+    -fx-text-alignment: center;
+    -fx-font-family: "Spline Sans";
+    -fx-text-fill: #555;
+    -fx-font-size: 14px;
+}
+
+.mobile-person-detail-view > .person-content-box .person-linked-box {
+    -fx-padding: 5px 15px;
+    -fx-spacing: 15px;
 }
