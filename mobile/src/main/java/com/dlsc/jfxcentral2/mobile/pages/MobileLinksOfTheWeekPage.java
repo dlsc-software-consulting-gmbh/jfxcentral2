@@ -4,24 +4,19 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.MobilePageBase;
-import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
-import com.dlsc.jfxcentral2.mobile.components.PageView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material2.Material2RoundAL;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
@@ -30,9 +25,7 @@ import java.util.Comparator;
 public class MobileLinksOfTheWeekPage extends MobilePageBase {
 
     private static final String DEFAULT_STYLE_CLASS = "lotw-page-view";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-
-    private final LinksContentView[] cachedContentAry = new LinksContentView[3];
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
 
     public MobileLinksOfTheWeekPage(ObjectProperty<Size> size) {
         this();
@@ -51,86 +44,56 @@ public class MobileLinksOfTheWeekPage extends MobilePageBase {
         ArrayList<LinksOfTheWeek> sortedLinks = new ArrayList<>(DataRepository2.getInstance().getLinksOfTheWeek());
         sortedLinks.sort(Comparator.comparing(LinksOfTheWeek::getCreatedOn).reversed());
 
-        PageView pageView = new PageView();
-        pageView.setPageCount(sortedLinks.size());
-        pageView.setPageFactory(index -> {
-            LinksOfTheWeek weakLinks = sortedLinks.get(index);
+        ListView<LinksOfTheWeek> listView = new ListView<>();
+        listView.getStyleClass().add("mobile");
+        listView.getItems().setAll(sortedLinks);
+        listView.setCellFactory(param -> new LinksOfTheWeekCell());
 
-            LinksContentView contentView = getLinksContentView(index);
-            contentView.setDate(weakLinks.getCreatedOn());
-            contentView.setContent(DataRepository2.getInstance().getLinksOfTheWeekReadMe(weakLinks));
-            return contentView;
-        });
+        StackPane contentWrapper = new StackPane(listView);
+        contentWrapper.getStyleClass().add("content-wrapper");
+        VBox.setVgrow(contentWrapper, Priority.ALWAYS);
 
-        PrettyScrollPane scrollPane = new PrettyScrollPane(pageView);
-        scrollPane.getStyleClass().add("mobile");
-        VBox.setVgrow(scrollPane, Priority.ALWAYS);
-
-        getChildren().addAll(header, scrollPane);
+        getChildren().addAll(header, contentWrapper);
     }
 
-    private LinksContentView getLinksContentView(int currentPageIndex) {
-        int aryIndex = currentPageIndex % cachedContentAry.length;
-        LinksContentView mdView = cachedContentAry[aryIndex];
-        if (mdView == null) {
-            cachedContentAry[aryIndex] = new LinksContentView();
-            mdView = cachedContentAry[aryIndex];
-        }
-        return mdView;
-    }
+    private static class LinksOfTheWeekCell extends ListCell<LinksOfTheWeek> {
 
-    private static class LinksContentView extends VBox {
+        private final VBox graphic = new VBox();
+        private final CustomMarkdownView markdownView;
+        private final Label dateLabel;
 
-        public LinksContentView() {
-            getStyleClass().add("links-content-view");
+        public LinksOfTheWeekCell() {
+            getStyleClass().add("links-cell");
+            setPrefWidth(0);
 
-            Label dateLabel = new Label();
-            dateLabel.setGraphic(new FontIcon(Material2RoundAL.DATE_RANGE));
-            StackPane dateLabelContainer = new StackPane(dateLabel);
+            dateLabel = new Label();
+
+            Region separator = new Region();
+            separator.getStyleClass().add("separator");
+            HBox.setHgrow(separator, Priority.ALWAYS);
+
+            HBox dateLabelContainer = new HBox(dateLabel, separator);
             dateLabelContainer.getStyleClass().add("date-label-container");
 
-            dateLabel.textProperty().bind(Bindings.createStringBinding(() -> {
-                LocalDate date = getDate();
-                return date != null ? DATE_FORMATTER.format(date) : "Unknown date";
-            }, date));
+            markdownView = new CustomMarkdownView();
+            markdownView.setFillWidth(true);
 
-            CustomMarkdownView markdownView = new CustomMarkdownView();
-            markdownView.mdStringProperty().bind(contentProperty());
-            // markdownView.setPrefHeight(markdownView.getWidth());
-
-            getChildren().addAll(dateLabelContainer, markdownView);
+            graphic.getStyleClass().add("cell-content");
+            graphic.getChildren().addAll(dateLabelContainer, markdownView);
         }
 
-        // create on date
-
-        private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>(this, "date");
-
-        public final LocalDate getDate() {
-            return date.get();
-        }
-
-        public final ObjectProperty<LocalDate> dateProperty() {
-            return date;
-        }
-
-        public final void setDate(LocalDate date) {
-            this.date.set(date);
-        }
-
-        // links of the week content
-
-        private final StringProperty content = new SimpleStringProperty(this, "content");
-
-        public final String getContent() {
-            return content.get();
-        }
-
-        public final StringProperty contentProperty() {
-            return content;
-        }
-
-        public final void setContent(String content) {
-            this.content.set(content);
+        @Override
+        protected void updateItem(LinksOfTheWeek item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                dateLabel.setText("");
+                markdownView.setMdString("");
+                setGraphic(null);
+            } else {
+                dateLabel.setText(DATE_FORMATTER.format(item.getCreatedOn()));
+                markdownView.setMdString(DataRepository2.getInstance().getLinksOfTheWeekReadMe(item));
+                setGraphic(graphic);
+            }
         }
     }
 
