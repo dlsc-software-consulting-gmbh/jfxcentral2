@@ -28,9 +28,9 @@ public class MainPageSkin extends SkinBase<MainPage> {
     }
 
     @Subscribe
-    public void onMobileResponseEvent(MobileResponseEvent responseView) {
-        System.out.println("responseView = " + responseView);
-        Node view = responseView.view();
+    public void onMobileResponseEvent(MobileResponseEvent event) {
+        Node view = event.mobileResponse().getView();
+
         borderPane.setCenter(view);
 
         // focus the preferred node

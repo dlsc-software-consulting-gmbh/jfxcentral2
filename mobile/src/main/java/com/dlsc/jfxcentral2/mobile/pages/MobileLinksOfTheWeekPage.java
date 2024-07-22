@@ -3,8 +3,8 @@ package com.dlsc.jfxcentral2.mobile.pages;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
+import com.dlsc.jfxcentral2.components.MobilePageBase;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
-import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.mobile.components.PageView;
 import com.dlsc.jfxcentral2.model.Size;
@@ -27,12 +27,11 @@ import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class MobileLinksOfTheWeekPage extends VBox {
+public class MobileLinksOfTheWeekPage extends MobilePageBase {
 
     private static final String DEFAULT_STYLE_CLASS = "lotw-page-view";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 
-    private final SizeSupport sizeSupport = new SizeSupport(this);
     private final LinksContentView[] cachedContentAry = new LinksContentView[3];
 
     public MobileLinksOfTheWeekPage(ObjectProperty<Size> size) {
@@ -78,20 +77,6 @@ public class MobileLinksOfTheWeekPage extends VBox {
             mdView = cachedContentAry[aryIndex];
         }
         return mdView;
-    }
-
-    // size
-
-    public final ObjectProperty<Size> sizeProperty() {
-        return sizeSupport.sizeProperty();
-    }
-
-    public final Size getSize() {
-        return sizeSupport.getSize();
-    }
-
-    public final void setSize(Size size) {
-        sizeSupport.setSize(size);
     }
 
     private static class LinksContentView extends VBox {

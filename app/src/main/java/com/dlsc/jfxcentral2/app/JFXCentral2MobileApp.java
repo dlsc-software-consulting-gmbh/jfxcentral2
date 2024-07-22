@@ -26,7 +26,6 @@ import com.dlsc.jfxcentral2.mobile.pages.MobileLinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileBlogsCategoryPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileBooksCategoryPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileCompaniesCategoryPage;
-import com.dlsc.jfxcentral2.mobile.pages.category.MobileDocPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileLearnJavaFXCategoryPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileLearnMobileCategoryPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileLearnRaspberryPiCategoryPage;
@@ -51,6 +50,7 @@ import com.dlsc.jfxcentral2.mobile.pages.details.MobileVideoDetailsPage;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.EventBusUtil;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
+import com.dlsc.jfxcentral2.utils.MobileResponse;
 import com.dlsc.jfxcentral2.utils.MobileRoute;
 import com.dlsc.jfxcentral2.utils.MobileRouter;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
@@ -183,22 +183,21 @@ public class JFXCentral2MobileApp extends Application {
 
     private MobileRouter createMobileRouter() {
         return MobileRouter.getInstance()
-                .and(MobileRoute.get(PagePath.HOME, r -> {
+                .and(MobileRoute.get(PagePath.HOME, url -> {
                     boolean repositoryUpdated = RepositoryManager.isRepositoryUpdated();
                     EventBusUtil.post(new RepositoryUpdatedEvent(repositoryUpdated));
                     if (repositoryUpdated) {
                         MobileHomePage mobileHomePage = MobileHomePage.getInstance();
                         mobileHomePage.sizeProperty().bind(size);
-                        return mobileHomePage;
+                        return MobileResponse.view(url, mobileHomePage);
                     } else {
-                        return new MobileRefreshPage(size);
+                        return MobileResponse.redirect(url, PagePath.REFRESH);
                     }
                 }))
-                .and(MobileRoute.get(PagePath.REFRESH, r -> new MobileRefreshPage(size)))
+                .and(MobileRoute.get(PagePath.REFRESH, r -> MobileResponse.view(r, new MobileRefreshPage(size))))
                 .and(MobileRoute.redirect("/index", PagePath.HOME))
                 .and(MobileRoute.redirect("/home", PagePath.HOME))
-                .and(MobileRoute.get(PagePath.LINKS, r -> new MobileLinksOfTheWeekPage(size)))
-                .and(MobileRoute.get(PagePath.DOCUMENTATION, r -> new MobileDocPage(size)))
+                .and(MobileRoute.get(PagePath.LINKS, r -> MobileResponse.view(r, new MobileLinksOfTheWeekPage(size))))
                 .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.REAL_WORLD, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.LIBRARIES, Library.class, () -> new MobileLibrariesCategoryPage(size), id -> new MobileLibraryDetailsPage(size, id)))
@@ -221,13 +220,12 @@ public class JFXCentral2MobileApp extends Application {
             if (index > 0 && clazz != null) {
                 String id = url.substring(index + 1).trim();
                 if (!DataRepository2.getInstance().isValidId(clazz, id)) {
-                    return new Label("Error: 404");
+                    return MobileResponse.view(url, new Label("Error: 404"));
                 }
-                return detailedResponse.call(id);
+                return MobileResponse.view(url, detailedResponse.call(id));
             }
-            return categoryResponse.get();
+            return MobileResponse.view(url, categoryResponse.get());
         });
-
     }
 
     public static void main(String[] args) {

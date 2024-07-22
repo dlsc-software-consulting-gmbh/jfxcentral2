@@ -9,6 +9,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class MobileRouter {
         long start = System.currentTimeMillis();
         System.out.println(">>> Navigating to: " + link);
 
-        if (!Objects.equals(navigator.getCurrent(), link)) {
+        if (!Objects.equals(navigator.getCurrent(), link) && !StringUtils.equalsIgnoreCase(link, PagePath.REFRESH)) {
             // Record the navigation in the history manager
             navigator.visit(link);
         }
@@ -60,20 +61,25 @@ public class MobileRouter {
         currentPath.set(link);
         for (MobileRoute mobileRoute : mobileRoutes) {
             if (mobileRoute.matches(link)) {
-                if (mobileRoute.getRedirectPath() != null) {
-                    navigateTo(mobileRoute.getRedirectPath());
+                MobileResponse response = mobileRoute.createResponse(link);
+
+                String redirectPath = response.getRedirectPath();
+                if (redirectPath != null) {
+                    navigateTo(redirectPath);
                     loadTime.set(System.currentTimeMillis() - start);
                     return;
                 }
-                Node view = mobileRoute.createView(link);
+
+                Node view = response.getView();
                 if (view != null) {
-                    EventBusUtil.post(new MobileResponseEvent(link, view));
+                    response.setFinalUrl(link);
+                    EventBusUtil.post(new MobileResponseEvent(response));
                     loadTime.set(System.currentTimeMillis() - start);
                     return;
                 }
             }
         }
-        EventBusUtil.post(new MobileResponseEvent(link, new Label("Error: 404 " + link)));
+        EventBusUtil.post(new MobileResponseEvent(MobileResponse.view(link, new Label("404 - Not Found"))));
         loadTime.set(System.currentTimeMillis() - start);
     }
 

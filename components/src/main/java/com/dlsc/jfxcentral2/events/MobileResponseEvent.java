@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.events;
 
-import javafx.scene.Node;
+import com.dlsc.jfxcentral2.utils.MobileResponse;
 
-public record MobileResponseEvent(String url, Node view) {
+public record MobileResponseEvent(MobileResponse mobileResponse) {
 }
