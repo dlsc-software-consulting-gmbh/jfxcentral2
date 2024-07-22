@@ -35,7 +35,7 @@ public class BottomMenuBar extends HBox {
         homeButton.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
         homeButton.setMaxWidth(Double.MAX_VALUE);
         homeButton.setUserData(PagePath.HOME);
-        homeButton.setOnMouseClicked(evt -> {
+        homeButton.setOnMousePressed(evt -> {
             if (homeButton.isSelected()) {
                 // If the home page is being displayed, clicking homeButton will hide the search view and display the normal content.
                 MobileHomePage.getInstance().setContentType(MobileHomePage.ContentType.NORMAL);
