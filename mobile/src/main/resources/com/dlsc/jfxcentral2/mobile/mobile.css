@@ -760,7 +760,7 @@
     -fx-max-height: 1px;
 }
 
-.mobile-details-page .overview-box  .top-box-wrapper > .top-box {
+.mobile-details-page .overview-box .top-box-wrapper > .top-box {
     -fx-spacing: 5px;
 }
 
@@ -1167,4 +1167,126 @@
 .mobile-person-detail-view > .person-content-box .person-linked-box {
     -fx-padding: 5px 15px;
     -fx-spacing: 15px;
+}
+
+/** ----------------------------------
+ * LearnCategoryBox
+ */
+.learn-category-box {
+    -fx-spacing: 10px;
+}
+
+.learn-category-box > .title {
+    -fx-font-family: "Spline Sans SemiBold";
+    -fx-font-size: 20px;
+    -fx-text-fill: -grey-100;
+    -fx-padding: 10px 0 5px 0;
+}
+
+.learn-category-box > .content {
+    -fx-spacing: 5px;
+}
+
+.learn-category-box .learn-category-cell .title {
+    -fx-font-family: "Spline Sans SemiBold";
+    -fx-font-size: 14px;
+}
+
+.learn-category-box .learn-category-cell {
+    -fx-spacing: 5px;
+    -fx-border-color: -grey-10;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px 5px 5px 5px;
+    -fx-background-radius: 10px;
+}
+
+.learn-category-box .learn-category-cell .description {
+    -fx-text-fill: -grey-60;
+}
+
+/** ----------------------------------
+ * LearnListCell
+ */
+.learn-list-cell {
+    -fx-padding: 10px 5px;
+    -fx-border-color: -grey-10;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.learn-list-cell > .container {
+    -fx-spacing: 10px;
+    -fx-alignment: center-left;
+}
+
+.learn-list-cell > .container > .title {
+    -fx-font-family: "Spline Sans Medium";
+    -fx-font-size: 14px;
+    -fx-text-fill: -grey-100;
+}
+
+.learn-list-cell .author-box {
+    -fx-spacing: 5px;
+    -fx-alignment: center-right;
+}
+
+.learn-list-cell .author-box .avatar-view {
+    -fx-avatar-size: 28px;
+}
+
+/** ----------------------------------
+ * LearnPagination
+ */
+.learn-pagination {
+    -fx-background-color: -white;
+    -fx-padding: 0 20px 10px 20px;
+}
+
+.learn-pagination .author-box {
+    -fx-spacing: 10px;
+    -fx-alignment: center-right;
+    -fx-padding: 10px 5px;
+}
+
+.learn-pagination .author-box .avatar-view {
+    -fx-avatar-size: 28px;
+    -fx-border-color: -grey-30;
+    -fx-border-radius: 30px;
+}
+
+.learn-pagination .author-box .date-label {
+    -fx-font-size: 15px;
+    -fx-text-fill: -grey-60;
+}
+
+.learn-pagination .nav-box {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+    -fx-padding: 5px;
+}
+
+.learn-pagination .nav-box .page-label {
+    -fx-font-size: 15px;
+    -fx-text-fill: -grey-60;
+    -fx-alignment: center;
+}
+
+.learn-pagination .nav-box .nav-button {
+    -fx-background-color: -white;
+    -fx-background-radius: 50px;
+    -fx-border-color: -grey-10;
+    -fx-text-fill: -grey-60;
+    -fx-content-display: graphic-only;
+    -fx-padding: 5px;
+    -fx-border-radius: 50px;
+}
+
+.learn-pagination .nav-box .nav-button:pressed {
+    -fx-background-color: -grey-10;
+    -fx-background-radius: 50px;
+
+}
+
+.learn-pagination .nav-box .nav-button .ikonli-font-icon {
+    -fx-icon-size: 20px;
+    -fx-icon-color: -grey-100;
 }

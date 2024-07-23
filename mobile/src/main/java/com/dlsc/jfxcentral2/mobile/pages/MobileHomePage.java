@@ -13,6 +13,7 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.MobilePageBase;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
+import com.dlsc.jfxcentral2.mobile.components.LearnCategoryBox;
 import com.dlsc.jfxcentral2.mobile.components.MobileSearchView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryAdvancedView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
@@ -106,6 +107,8 @@ public class MobileHomePage extends MobilePageBase {
         CategoryAdvancedView categoryAdvancedView = new CategoryAdvancedView();
         categoryAdvancedView.sizeProperty().bind(sizeProperty());
 
+        LearnCategoryBox learnCategoryBox = new LearnCategoryBox();
+
         List<LinksOfTheWeek> linksOfTheWeek = DataRepository2.getInstance().getLinksOfTheWeek();
 
         WeekLinksView weekLinksView = new WeekLinksView();
@@ -140,7 +143,7 @@ public class MobileHomePage extends MobilePageBase {
         CategoryPreviewView blogPreviewView = CategoryPreviewView.createBlogPreviewView(randomBlogs, PagePath.BLOGS);
         blogPreviewView.sizeProperty().bind(sizeProperty());
 
-        VBox normalView = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView);
+        VBox normalView = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView, learnCategoryBox);
         normalView.getStyleClass().add("content-box");
 
         PrettyScrollPane prettyScrollPane = new PrettyScrollPane(normalView);

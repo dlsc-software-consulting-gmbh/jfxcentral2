@@ -1,14 +1,16 @@
 package com.dlsc.jfxcentral2.mobile.pages.details;
 
+import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Learn;
-import com.dlsc.jfxcentral2.components.PrettyScrollPane;
-import com.dlsc.jfxcentral2.components.overviewbox.LearnOverviewBox;
+import com.dlsc.jfxcentral.data.model.LearnJavaFX;
+import com.dlsc.jfxcentral.data.model.LearnMobile;
+import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
+import com.dlsc.jfxcentral2.mobile.components.LearnPagination;
 import com.dlsc.jfxcentral2.mobile.components.MobilePageHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -28,18 +30,25 @@ public class MobileLearnDetailsPage extends MobileDetailsPageBase<Learn> {
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(learn.getName());
 
-        // overview box
-        LearnOverviewBox learnOverviewBox = new LearnOverviewBox(learn);
-        learnOverviewBox.sizeProperty().bind(sizeProperty());
-        learnOverviewBox.setIcon(null);
-        learnOverviewBox.setTitle(null);
+        // content
+        LearnPagination<Learn> detailsView = new LearnPagination<>();
+        if (learn instanceof LearnJavaFX) {
+            detailsView.setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "learn/javafx/" + learn.getId());
+            List<LearnJavaFX> learnJavaFX = DataRepository2.getInstance().getLearnJavaFX();
+            detailsView.getItems().setAll(learnJavaFX);
+        } else if (learn instanceof LearnMobile) {
+            detailsView.setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "learn/mobile/" + learn.getId());
+            List<LearnMobile> learnMobile = DataRepository2.getInstance().getLearnMobile();
+            detailsView.getItems().setAll(learnMobile);
+        } else if (learn instanceof LearnRaspberryPi) {
+            List<LearnRaspberryPi> learnRaspberryPi = DataRepository2.getInstance().getLearnRaspberryPi();
+            detailsView.setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "learn/raspberrypi/" + learn.getId());
+            detailsView.getItems().setAll(learnRaspberryPi);
+        }
+        detailsView.setSelectedItem(learn);
 
-        PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(learnOverviewBox));
-        detailsContentPane.getStyleClass().add("mobile");
-        detailsContentPane.setMaxHeight(Double.MAX_VALUE);
-        VBox.setVgrow(detailsContentPane, Priority.ALWAYS);
-
-        return List.of(header, detailsContentPane);
+        VBox.setVgrow(detailsView, Priority.ALWAYS);
+        return List.of(header, detailsView);
     }
 
 }
