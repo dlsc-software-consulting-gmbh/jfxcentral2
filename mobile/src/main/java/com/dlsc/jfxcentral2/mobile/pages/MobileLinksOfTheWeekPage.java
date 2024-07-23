@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.MobilePageBase;
-import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.MobilePageHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
@@ -36,7 +36,7 @@ public class MobileLinksOfTheWeekPage extends MobilePageBase {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
         // top header
-        MobileCategoryHeader header = new MobileCategoryHeader();
+        MobilePageHeader header = new MobilePageHeader();
         header.setTitle("Links of the Week");
         header.setIcon(IkonUtil.getModelIkon(LinksOfTheWeek.class));
 

@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral2.mobile.pages.category;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.MobilePageBase;
-import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.MobilePageHeader;
 import com.dlsc.jfxcentral2.mobile.components.ModelListCell;
 import com.dlsc.jfxcentral2.mobile.components.ModelListView;
 import com.dlsc.jfxcentral2.model.Size;
@@ -33,7 +33,7 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends Mobi
 
     public List<Node> content() {
         // header
-        MobileCategoryHeader header = createCategoryHeader();
+        MobilePageHeader header = createCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(getCategoryTitle());
         header.setIcon(getCategoryIkon());
@@ -66,8 +66,8 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends Mobi
 
     protected abstract ObservableList<T> getCategoryItems();
 
-    protected MobileCategoryHeader createCategoryHeader() {
-        return new MobileCategoryHeader();
+    protected MobilePageHeader createCategoryHeader() {
+        return new MobilePageHeader();
     }
 
     protected String getSearchPromptText() {

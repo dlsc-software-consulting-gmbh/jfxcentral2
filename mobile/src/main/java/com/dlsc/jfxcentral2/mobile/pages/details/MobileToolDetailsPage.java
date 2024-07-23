@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.mobile.pages.details;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.ToolOverviewBox;
-import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.MobilePageHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
@@ -25,7 +25,7 @@ public class MobileToolDetailsPage extends MobileDetailsPageBase<Tool> {
         Tool tool = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader();
+        MobilePageHeader header = new MobilePageHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(tool.getName());
 

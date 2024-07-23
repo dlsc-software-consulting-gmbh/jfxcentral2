@@ -17,12 +17,12 @@ import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
 
-public class MobileCategoryHeader extends StackPane {
+public class MobilePageHeader extends StackPane {
 
-    private static final String DEFAULT_STYLE_CLASS = "mobile-category-header";
+    private static final String DEFAULT_STYLE_CLASS = "mobile-page-header";
     private final SizeSupport sizeSupport = new SizeSupport(this);
 
-    public MobileCategoryHeader() {
+    public MobilePageHeader() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
         Button backButton = new Button();
@@ -34,7 +34,7 @@ public class MobileCategoryHeader extends StackPane {
         topBox.getStyleClass().add("top-box");
 
         Label categoryTitle = new Label();
-        categoryTitle.getStyleClass().add("category-title");
+        categoryTitle.getStyleClass().add("title");
         categoryTitle.textProperty().bind(titleProperty());
         categoryTitle.graphicProperty().bind(Bindings.createObjectBinding(() -> {
             Ikon icon = getIcon();
