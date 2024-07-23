@@ -1,12 +1,10 @@
 package com.dlsc.jfxcentral2.mobile.pages.details;
 
-import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.ToolOverviewBox;
 import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
@@ -34,6 +32,7 @@ public class MobileToolDetailsPage extends MobileDetailsPageBase<Tool> {
         // overview
         ToolOverviewBox toolOverviewBox = new ToolOverviewBox(tool);
         toolOverviewBox.sizeProperty().bind(sizeProperty());
+        toolOverviewBox.setIcon(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(toolOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");

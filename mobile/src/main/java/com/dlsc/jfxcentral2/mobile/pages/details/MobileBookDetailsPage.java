@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.BookOverviewBox;
 import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
@@ -33,6 +32,7 @@ public class MobileBookDetailsPage extends MobileDetailsPageBase<Book> {
         // overview
         BookOverviewBox bookOverviewBox = new BookOverviewBox(book);
         bookOverviewBox.sizeProperty().bind(sizeProperty());
+        bookOverviewBox.setIcon(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(bookOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");

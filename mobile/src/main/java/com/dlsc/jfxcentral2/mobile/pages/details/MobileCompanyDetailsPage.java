@@ -7,7 +7,6 @@ import com.dlsc.jfxcentral2.components.overviewbox.CompanyOverviewBox;
 import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
@@ -35,6 +34,7 @@ public class MobileCompanyDetailsPage extends MobileDetailsPageBase<Company> {
         // overview
         CompanyOverviewBox companyOverviewBox = new CompanyOverviewBox(company);
         companyOverviewBox.sizeProperty().bind(sizeProperty());
+        companyOverviewBox.setIcon(null);
         companyOverviewBox.imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(companyOverviewBox));

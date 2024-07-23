@@ -30,6 +30,7 @@ public class MobileLearnDetailsPage extends MobileDetailsPageBase<Learn> {
 
         // overview box
         LearnOverviewBox learnOverviewBox = new LearnOverviewBox(learn);
+        learnOverviewBox.setIcon(null);
         learnOverviewBox.sizeProperty().bind(sizeProperty());
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(learnOverviewBox));

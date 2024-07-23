@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.pages.details;
 
-import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.VideoOverviewBox;
@@ -31,6 +30,7 @@ public class MobileVideoDetailsPage extends MobileDetailsPageBase<Video> {
 
         // overview
         VideoOverviewBox videoOverviewBox = new VideoOverviewBox(video);
+        videoOverviewBox.setIcon(null);
         videoOverviewBox.sizeProperty().bind(sizeProperty());
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(videoOverviewBox));
