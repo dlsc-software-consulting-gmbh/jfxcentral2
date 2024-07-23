@@ -26,8 +26,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.Ikon;
-import org.kordamp.ikonli.fontawesome.FontAwesome;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class MobilePersonDetailView extends VBox {
 
         Button backButton = new Button();
         backButton.getStyleClass().add("back-button");
-        backButton.setGraphic(new FontIcon(FontAwesome.ANGLE_LEFT));
+        backButton.setGraphic(new FontIcon(MaterialDesignA.ARROW_LEFT));
         MobileLinkUtil.setGoToBackLink(backButton);
         StackPane.setAlignment(backButton, Pos.TOP_LEFT);
 

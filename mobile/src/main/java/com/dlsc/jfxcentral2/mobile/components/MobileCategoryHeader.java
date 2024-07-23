@@ -14,8 +14,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.Ikon;
-import org.kordamp.ikonli.fontawesome.FontAwesome;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
 
 public class MobileCategoryHeader extends StackPane {
 
@@ -27,7 +27,7 @@ public class MobileCategoryHeader extends StackPane {
 
         Button backButton = new Button();
         backButton.getStyleClass().add("back-button");
-        backButton.setGraphic(new FontIcon(FontAwesome.ANGLE_LEFT));
+        backButton.setGraphic(new FontIcon(MaterialDesignA.ARROW_LEFT));
         MobileLinkUtil.setGoToBackLink(backButton);
 
         HBox topBox = new HBox(backButton);
