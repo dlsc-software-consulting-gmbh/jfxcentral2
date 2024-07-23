@@ -28,6 +28,8 @@ public class Header extends HBox {
         FontIcon icon = new FontIcon();
         icon.getStyleClass().add("header-icon");
         icon.iconCodeProperty().bind(iconProperty());
+        icon.managedProperty().bind(icon.visibleProperty());
+        icon.visibleProperty().bind(icon.iconCodeProperty().isNotNull());
 
         StackPane wrapper = new StackPane(icon);
         wrapper.getStyleClass().add("header-icon-wrapper");

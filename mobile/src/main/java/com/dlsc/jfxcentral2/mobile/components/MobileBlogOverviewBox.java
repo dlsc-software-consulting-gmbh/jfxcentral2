@@ -7,7 +7,6 @@ import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import com.rometools.rome.feed.synd.SyndEntry;
 import javafx.application.Platform;
@@ -20,6 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.antdesignicons.AntDesignIconsOutlined;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -42,8 +42,8 @@ public class MobileBlogOverviewBox extends VBox {
 
         // top
         Header header = new Header();
-        header.setTitle("Recent posts found on " + blog.getName());
-        header.setIcon(IkonUtil.getModelIkon(Blog.class));
+        header.setTitle("Recent posts" );
+        header.setIcon(null);
 
         // center
         Label loadingTipsLabel = new Label(StringUtil.LOADING_TIPS, new FontIcon(AntDesignIconsOutlined.CLOUD_DOWNLOAD));
@@ -54,9 +54,12 @@ public class MobileBlogOverviewBox extends VBox {
         listView.getStyleClass().addAll("posts-list", "mobile");
         listView.setCellFactory(param -> new PostViewCell());
         listView.setMaxHeight(Double.MAX_VALUE);
-        VBox.setVgrow(listView, Priority.ALWAYS);
 
-        getChildren().addAll(header, listView);
+        StackPane listWrapper = new StackPane(listView);
+        listWrapper.getStyleClass().add("list-wrapper");
+
+        VBox.setVgrow(listWrapper, Priority.ALWAYS);
+        getChildren().addAll(header, listWrapper);
 
         Service<Void> service = new Service<>() {
             @Override

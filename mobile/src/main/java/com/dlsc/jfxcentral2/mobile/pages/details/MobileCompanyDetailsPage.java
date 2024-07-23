@@ -4,10 +4,9 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.CompanyOverviewBox;
-import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.MobilePageHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
-import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
@@ -27,7 +26,7 @@ public class MobileCompanyDetailsPage extends MobileDetailsPageBase<Company> {
         Company company = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader();
+        MobilePageHeader header = new MobilePageHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setIcon(IkonUtil.getModelIkon(Company.class));
         header.setTitle(company.getName());
@@ -36,6 +35,8 @@ public class MobileCompanyDetailsPage extends MobileDetailsPageBase<Company> {
         CompanyOverviewBox companyOverviewBox = new CompanyOverviewBox(company);
         companyOverviewBox.sizeProperty().bind(sizeProperty());
         companyOverviewBox.imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
+        companyOverviewBox.setIcon(null);
+        companyOverviewBox.setTitle(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(companyOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");

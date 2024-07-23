@@ -1,10 +1,9 @@
 package com.dlsc.jfxcentral2.mobile.pages.details;
 
-import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.VideoOverviewBox;
-import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.MobilePageHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
@@ -25,13 +24,15 @@ public class MobileVideoDetailsPage extends MobileDetailsPageBase<Video> {
         Video video = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader();
+        MobilePageHeader header = new MobilePageHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(video.getName());
 
         // overview
         VideoOverviewBox videoOverviewBox = new VideoOverviewBox(video);
         videoOverviewBox.sizeProperty().bind(sizeProperty());
+        videoOverviewBox.setIcon(null);
+        videoOverviewBox.setTitle(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(videoOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");

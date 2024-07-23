@@ -1,12 +1,10 @@
 package com.dlsc.jfxcentral2.mobile.pages.details;
 
-import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.components.overviewbox.TutorialOverviewBox;
-import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.mobile.components.MobilePageHeader;
 import com.dlsc.jfxcentral2.model.Size;
-import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Priority;
@@ -26,13 +24,15 @@ public class MobileTutorialDetailsPage extends MobileDetailsPageBase<Tutorial> {
         Tutorial tutorial = getItem();
 
         // header
-        MobileCategoryHeader header = new MobileCategoryHeader();
+        MobilePageHeader header = new MobilePageHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(tutorial.getName());
 
         // overview
         TutorialOverviewBox tutorialOverviewBox = new TutorialOverviewBox(tutorial);
         tutorialOverviewBox.sizeProperty().bind(sizeProperty());
+        tutorialOverviewBox.setIcon(null);
+        tutorialOverviewBox.setTitle(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(tutorialOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");
