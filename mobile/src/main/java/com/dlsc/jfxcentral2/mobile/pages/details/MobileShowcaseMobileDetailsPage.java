@@ -30,6 +30,7 @@ public class MobileShowcaseMobileDetailsPage extends MobileDetailsPageBase<RealW
         ShowcaseOverviewBox appOverviewBox = new ShowcaseOverviewBox(app);
         appOverviewBox.sizeProperty().bind(sizeProperty());
         appOverviewBox.setIcon(null);
+        appOverviewBox.setTitle(null);
 
         PrettyScrollPane scrollPane = new PrettyScrollPane(new StackPane(appOverviewBox));
         scrollPane.getStyleClass().add("mobile");

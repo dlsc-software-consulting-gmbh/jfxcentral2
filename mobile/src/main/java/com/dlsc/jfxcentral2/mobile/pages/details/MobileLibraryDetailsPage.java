@@ -32,6 +32,7 @@ public class MobileLibraryDetailsPage extends MobileDetailsPageBase<Library> {
         LibraryOverviewBox libraryOverviewBox = new LibraryOverviewBox(library);
         libraryOverviewBox.sizeProperty().bind(sizeProperty());
         libraryOverviewBox.setIcon(null);
+        libraryOverviewBox.setTitle(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(libraryOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");

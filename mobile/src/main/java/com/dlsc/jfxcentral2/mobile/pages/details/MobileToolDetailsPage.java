@@ -33,6 +33,7 @@ public class MobileToolDetailsPage extends MobileDetailsPageBase<Tool> {
         ToolOverviewBox toolOverviewBox = new ToolOverviewBox(tool);
         toolOverviewBox.sizeProperty().bind(sizeProperty());
         toolOverviewBox.setIcon(null);
+        toolOverviewBox.setTitle(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(toolOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");

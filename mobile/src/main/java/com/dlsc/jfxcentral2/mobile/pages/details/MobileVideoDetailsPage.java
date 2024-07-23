@@ -30,8 +30,9 @@ public class MobileVideoDetailsPage extends MobileDetailsPageBase<Video> {
 
         // overview
         VideoOverviewBox videoOverviewBox = new VideoOverviewBox(video);
-        videoOverviewBox.setIcon(null);
         videoOverviewBox.sizeProperty().bind(sizeProperty());
+        videoOverviewBox.setIcon(null);
+        videoOverviewBox.setTitle(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(videoOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");

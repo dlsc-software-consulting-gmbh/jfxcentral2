@@ -33,6 +33,7 @@ public class MobileBookDetailsPage extends MobileDetailsPageBase<Book> {
         BookOverviewBox bookOverviewBox = new BookOverviewBox(book);
         bookOverviewBox.sizeProperty().bind(sizeProperty());
         bookOverviewBox.setIcon(null);
+        bookOverviewBox.setTitle(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(bookOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");

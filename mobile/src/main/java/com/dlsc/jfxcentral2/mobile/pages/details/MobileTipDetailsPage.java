@@ -32,6 +32,7 @@ public class MobileTipDetailsPage extends MobileDetailsPageBase<Tip> {
         TipOverviewBox tipOverviewBox = new TipOverviewBox(tip);
         tipOverviewBox.sizeProperty().bind(sizeProperty());
         tipOverviewBox.setIcon(null);
+        tipOverviewBox.setTitle(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(tipOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");

@@ -34,8 +34,9 @@ public class MobileCompanyDetailsPage extends MobileDetailsPageBase<Company> {
         // overview
         CompanyOverviewBox companyOverviewBox = new CompanyOverviewBox(company);
         companyOverviewBox.sizeProperty().bind(sizeProperty());
-        companyOverviewBox.setIcon(null);
         companyOverviewBox.imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
+        companyOverviewBox.setIcon(null);
+        companyOverviewBox.setTitle(null);
 
         PrettyScrollPane detailsContentPane = new PrettyScrollPane(new StackPane(companyOverviewBox));
         detailsContentPane.getStyleClass().add("mobile");
