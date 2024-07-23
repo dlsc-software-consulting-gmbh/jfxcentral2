@@ -11,14 +11,13 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.components.MobilePageBase;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
-import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.mobile.components.MobileSearchView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryAdvancedView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
 import com.dlsc.jfxcentral2.mobile.home.HomePageHeader;
 import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
-import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -33,11 +32,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MobileHomePage extends VBox {
+public class MobileHomePage extends MobilePageBase {
 
     private static MobileHomePage instance;
 
-    private final SizeSupport sizeSupport = new SizeSupport(this);
     private final SearchTextField searchTextField;
 
     public enum ContentType {
@@ -149,20 +147,6 @@ public class MobileHomePage extends VBox {
         prettyScrollPane.getStyleClass().add("mobile");
         VBox.setVgrow(prettyScrollPane, Priority.ALWAYS);
         return prettyScrollPane;
-    }
-
-    // Size
-
-    public final ObjectProperty<Size> sizeProperty() {
-        return sizeSupport.sizeProperty();
-    }
-
-    public final void setSize(Size size) {
-        sizeSupport.setSize(size);
-    }
-
-    public final Size getSize() {
-        return sizeSupport.getSize();
     }
 
     private <T extends ModelObject> List<T> getRandomSample(List<T> list, int sampleSize) {

@@ -17,7 +17,7 @@ import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
-import com.dlsc.jfxcentral2.components.SizeSupport;
+import com.dlsc.jfxcentral2.components.MobilePageBase;
 import com.dlsc.jfxcentral2.components.detailsbox.AppsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.BlogsDetailsBox;
 import com.dlsc.jfxcentral2.components.detailsbox.BooksDetailsBox;
@@ -34,15 +34,12 @@ import com.dlsc.jfxcentral2.components.detailsbox.VideosDetailsBox;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;
-import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public abstract class MobileDetailsPageBase<T extends ModelObject> extends VBox {
-
-    private final SizeSupport sizeSupport = new SizeSupport(this);
+public abstract class MobileDetailsPageBase<T extends ModelObject> extends MobilePageBase {
 
     private T item;
     private final Class<? extends T> clazz;
@@ -58,18 +55,6 @@ public abstract class MobileDetailsPageBase<T extends ModelObject> extends VBox 
 
     public Class<? extends T> getModelClazz() {
         return clazz;
-    }
-
-    public final ObjectProperty<Size> sizeProperty() {
-        return sizeSupport.sizeProperty();
-    }
-
-    public final Size getSize() {
-        return sizeSupport.getSize();
-    }
-
-    public final void setSize(Size size) {
-        sizeSupport.setSize(size);
     }
 
     public T getItem() {

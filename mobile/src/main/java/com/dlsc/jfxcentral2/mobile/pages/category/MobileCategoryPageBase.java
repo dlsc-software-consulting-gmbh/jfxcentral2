@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.mobile.pages.category;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral2.components.SizeSupport;
+import com.dlsc.jfxcentral2.components.MobilePageBase;
 import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
 import com.dlsc.jfxcentral2.mobile.components.ModelListCell;
 import com.dlsc.jfxcentral2.mobile.components.ModelListView;
@@ -22,9 +22,7 @@ import org.kordamp.ikonli.Ikon;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox {
-
-    private final SizeSupport sizeSupport = new SizeSupport(this);
+public abstract class MobileCategoryPageBase<T extends ModelObject> extends MobilePageBase {
 
     public MobileCategoryPageBase(ObjectProperty<Size> size) {
         sizeProperty().bind(size);
@@ -74,20 +72,6 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox
 
     protected String getSearchPromptText() {
         return "Search...";
-    }
-
-    // size
-
-    public final ObjectProperty<Size> sizeProperty() {
-        return sizeSupport.sizeProperty();
-    }
-
-    public final Size getSize() {
-        return sizeSupport.getSize();
-    }
-
-    public final void setSize(Size size) {
-        sizeSupport.setSize(size);
     }
 
     // blocking property to control the glass pane
