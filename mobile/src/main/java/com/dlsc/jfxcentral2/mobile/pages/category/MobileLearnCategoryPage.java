@@ -10,6 +10,8 @@ import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
+import java.util.Comparator;
+
 public abstract class MobileLearnCategoryPage extends MobileCategoryPageBase<Learn> {
 
     public MobileLearnCategoryPage(ObjectProperty<Size> size) {
@@ -28,6 +30,11 @@ public abstract class MobileLearnCategoryPage extends MobileCategoryPageBase<Lea
 
     protected Callback<ListView<Learn>, ListCell<Learn>> cellFactory() {
         return param -> new LearnListCell();
+    }
+
+    @Override
+    protected Comparator<Learn> getModelComparator() {
+        return null;
     }
 
 }

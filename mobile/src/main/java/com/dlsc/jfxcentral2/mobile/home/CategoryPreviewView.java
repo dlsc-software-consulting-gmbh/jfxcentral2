@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Learn;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
@@ -13,8 +14,8 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
-import com.dlsc.jfxcentral2.utils.PlatformLinkUtil;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
@@ -66,8 +67,23 @@ public class CategoryPreviewView extends VBox {
 
         itemsProperty().addListener((observable, oldValue, newValue) -> {
             content.getChildren().clear();
-            newValue.forEach(item -> {
+
+            int size = newValue.size();
+            for (int i = 0; i < size; i++) {
+                CategoryItem item = newValue.get(i);
                 CategoryCell cell = new CategoryCell();
+                if (size == 1) {
+                    cell.getStyleClass().add("single-cell");
+                } else {
+                    if (i == 0) {
+                        cell.getStyleClass().add("first-cell");
+                    } else if (i == size - 1) {
+                        cell.getStyleClass().add("last-cell");
+                    } else {
+                        cell.getStyleClass().add("middle-cell");
+                    }
+                }
+
                 cell.setTitle(item.title());
                 cell.setDescription(item.description());
 
@@ -80,11 +96,9 @@ public class CategoryPreviewView extends VBox {
                     cell.imageProperty().bind(item.imageProperty());
                 }
 
-                PlatformLinkUtil.setLink(cell, item.url());
-
-
+                MobileLinkUtil.setLink(cell, item.url());
                 content.getChildren().add(cell);
-            });
+            }
         });
 
         getChildren().addAll(header, content);
@@ -140,7 +154,7 @@ public class CategoryPreviewView extends VBox {
     private final StringProperty showAllUrl = new SimpleStringProperty(this, "showAllUrl") {
         @Override
         protected void invalidated() {
-            PlatformLinkUtil.setLink(moreButton, getShowAllUrl());
+            MobileLinkUtil.setLink(moreButton, getShowAllUrl());
         }
     };
 
@@ -515,4 +529,29 @@ public class CategoryPreviewView extends VBox {
         return createVideosPreviewView(videos, null);
     }
 
+    public static CategoryPreviewView createLearnPreviewView(List<Learn> learns) {
+        return createLearnPreviewView(learns, null);
+    }
+
+    public static CategoryPreviewView createLearnPreviewView(List<Learn> learns, String showAllUrl) {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Learn");
+        if (showAllUrl != null) {
+            view.setShowAllUrl(showAllUrl);
+        }
+
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        for (Learn learn : learns) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    learn.getName(),
+                    learn.getSummary(),
+                    null,
+                    ModelObjectTool.getModelLink(learn)
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
+    }
 }

@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
@@ -21,6 +22,7 @@ public class MobilePageHeader extends StackPane {
 
     private static final String DEFAULT_STYLE_CLASS = "mobile-page-header";
     private final SizeSupport sizeSupport = new SizeSupport(this);
+    private final Label categoryTitle;
 
     public MobilePageHeader() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
@@ -33,8 +35,13 @@ public class MobilePageHeader extends StackPane {
         HBox topBox = new HBox(backButton);
         topBox.getStyleClass().add("top-box");
 
-        Label categoryTitle = new Label();
+        categoryTitle = new Label();
         categoryTitle.getStyleClass().add("title");
+        categoryTitle.setWrapText(true);
+        categoryTitle.setMinHeight(-1);
+        categoryTitle.setMaxHeight(Double.MAX_VALUE);
+
+        // categoryTitle.
         categoryTitle.textProperty().bind(titleProperty());
         categoryTitle.graphicProperty().bind(Bindings.createObjectBinding(() -> {
             Ikon icon = getIcon();
@@ -47,8 +54,27 @@ public class MobilePageHeader extends StackPane {
             return null;
         }, iconProperty(), previewImageProperty()));
 
+        BooleanBinding longTitleProperty = Bindings.createBooleanBinding(() -> {
+            String title = getTitle();
+            boolean isShortTitle = title == null || title.split(" ").length < 7 || title.length() < 38;
+            return getIcon() == null && getPreviewImage() == null && !isShortTitle;
+        }, widthProperty(), iconProperty(), previewImageProperty(), titleProperty());
+
+        updateLongTitle(longTitleProperty.get());
+        longTitleProperty.addListener((obs, oldVal, newVal) -> updateLongTitle(newVal));
+
         getChildren().addAll(categoryTitle, topBox);
         setMaxHeight(Region.USE_PREF_SIZE);
+    }
+
+    private void updateLongTitle(boolean isLongTitle) {
+        if (isLongTitle) {
+            if (!categoryTitle.getStyleClass().contains("long-title")) {
+                categoryTitle.getStyleClass().add("long-title");
+            }
+        } else {
+            getStyleClass().remove("long-title");
+        }
     }
 
     // size support

@@ -19,6 +19,7 @@ import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -27,8 +28,6 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends Mobi
     public MobileCategoryPageBase(ObjectProperty<Size> size) {
         sizeProperty().bind(size);
         getChildren().setAll(content());
-        // swipe right to go back to home
-        // setOnSwipeRight(evt-> MobileLinkUtil.getToPage(PagePath.HOME));
     }
 
     public List<Node> content() {
@@ -45,9 +44,14 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends Mobi
         listView.setFilter(getFilter());
         listView.setMaxHeight(Double.MAX_VALUE);
         listView.setCellFactory(cellFactory());
+        listView.setComparator(getModelComparator());
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         return List.of(header, listView);
+    }
+
+    protected Comparator<T> getModelComparator( ) {
+        return Comparator.comparing((T modelObject) -> StringUtils.defaultIfEmpty(modelObject.getName(), "").toLowerCase());
     }
 
     protected Callback<String, Predicate<T>> getFilter(){
