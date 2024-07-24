@@ -81,6 +81,8 @@ public class MobileHomePage extends MobilePageBase {
         searchWrapper.getStyleClass().add("search-wrapper");
 
         getChildren().addAll(header, searchWrapper, normalView, searchView);
+
+        setViewWillAppear(()-> setContentType(ContentType.NORMAL));
     }
 
     private Button createSearchCancelButton() {
