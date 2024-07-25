@@ -47,6 +47,7 @@ public class LearnListCell extends ListCell<Learn> {
                     .ifPresent(person -> {
                         AvatarView avatarView = new AvatarView();
                         avatarView.setTooltip(new Tooltip(person.getName()));
+                        avatarView.setMouseTransparent(true);
                         avatarView.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
                         authorBox.getChildren().add(avatarView);
                     }));

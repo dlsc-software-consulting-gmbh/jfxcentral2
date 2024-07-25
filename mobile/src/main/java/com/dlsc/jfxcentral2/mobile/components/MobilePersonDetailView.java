@@ -2,23 +2,16 @@ package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.Blog;
-import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
-import com.dlsc.jfxcentral.data.model.RealWorldApp;
-import com.dlsc.jfxcentral.data.model.Tip;
-import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
-import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -29,8 +22,6 @@ import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
 
-import java.util.List;
-
 public class MobilePersonDetailView extends VBox {
 
     private static final String DEFAULT_STYLE_CLASS = "mobile-person-detail-view";
@@ -39,7 +30,6 @@ public class MobilePersonDetailView extends VBox {
     private final Label nameLabel;
     private final HBox badgeBox;
     private final Label descriptionLabel;
-    private final VBox personLinkedObjectBox;
 
     public record LinkedObjectBadge(String name, Ikon ikon, int count) {
     }
@@ -67,10 +57,11 @@ public class MobilePersonDetailView extends VBox {
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.setWrapText(true);
 
-        personLinkedObjectBox = new VBox();
-        personLinkedObjectBox.getStyleClass().add("person-linked-box");
+        LinkedObjectsBox<Person> linkedObjectsBox = new LinkedObjectsBox<>();
+        linkedObjectsBox.sizeProperty().bind(sizeProperty());
+        linkedObjectsBox.dataProperty().bind(personProperty());
 
-        VBox personContentBox = new VBox(nameLabel, badgeBox, descriptionLabel, personLinkedObjectBox);
+        VBox personContentBox = new VBox(nameLabel, badgeBox, descriptionLabel, linkedObjectsBox);
         personContentBox.getStyleClass().add("person-content-box");
 
         getChildren().addAll(topPane, personContentBox);
@@ -89,7 +80,6 @@ public class MobilePersonDetailView extends VBox {
             nameLabel.setText("");
             descriptionLabel.setText("");
             badgeBox.getChildren().clear();
-            personLinkedObjectBox.getChildren().clear();
             return;
         }
 
@@ -102,59 +92,6 @@ public class MobilePersonDetailView extends VBox {
 
         // reset the boxes
         updateBadge(person);
-        updatePersonLinkedObjectBox(person);
-    }
-
-    private void updatePersonLinkedObjectBox(Person person) {
-        List<RealWorldApp> linkedApps = getLinkedObjects(person, RealWorldApp.class);
-        if (!linkedApps.isEmpty()) {
-            CategoryPreviewView showCasePreviewView = CategoryPreviewView.createShowCasePreviewView(linkedApps);
-            showCasePreviewView.sizeProperty().bind(sizeProperty());
-            showCasePreviewView.setTitle("Apps");
-            personLinkedObjectBox.getChildren().add(showCasePreviewView);
-        }
-
-        List<Library> linkedLibraries = getLinkedObjects(person, Library.class);
-        if (!linkedLibraries.isEmpty()) {
-            CategoryPreviewView libraryPreviewView = CategoryPreviewView.createLibraryPreviewView(linkedLibraries);
-            libraryPreviewView.sizeProperty().bind(sizeProperty());
-            libraryPreviewView.setTitle("Libraries");
-            personLinkedObjectBox.getChildren().add(libraryPreviewView);
-        }
-
-        List<Book> linkedBooks = getLinkedObjects(person, Book.class);
-        if (!linkedBooks.isEmpty()) {
-            CategoryPreviewView booksPreviewView = CategoryPreviewView.createBooksPreviewView(linkedBooks);
-            booksPreviewView.sizeProperty().bind(sizeProperty());
-            booksPreviewView.setTitle("Books");
-            personLinkedObjectBox.getChildren().add(booksPreviewView);
-        }
-
-        List<Video> linkedVideos = getLinkedObjects(person, Video.class);
-        if (!linkedVideos.isEmpty()) {
-            CategoryPreviewView videoPreviewView = CategoryPreviewView.createVideosPreviewView(linkedVideos);
-            videoPreviewView.sizeProperty().bind(sizeProperty());
-            videoPreviewView.setTitle("Videos");
-            personLinkedObjectBox.getChildren().add(videoPreviewView);
-        }
-
-        List<Tip> linkedTips = getLinkedObjects(person, Tip.class);
-        if (!linkedTips.isEmpty()) {
-            CategoryPreviewView tipsPreviewView = CategoryPreviewView.createTipsPreviewView(linkedTips);
-            tipsPreviewView.sizeProperty().bind(sizeProperty());
-            tipsPreviewView.setTitle("Tips");
-            personLinkedObjectBox.getChildren().add(tipsPreviewView);
-        }
-
-        List<Blog> linkedBlogs = getLinkedObjects(person, Blog.class);
-        if (!linkedBlogs.isEmpty()) {
-            CategoryPreviewView blogPreviewView = CategoryPreviewView.createBlogPreviewView(linkedBlogs);
-            blogPreviewView.sizeProperty().bind(sizeProperty());
-            blogPreviewView.setTitle("Blogs");
-            personLinkedObjectBox.getChildren().add(blogPreviewView);
-        }
-
-        // learn part
     }
 
     private void updateBadge(Person person) {
@@ -171,10 +108,6 @@ public class MobilePersonDetailView extends VBox {
             rockstarBadge.setMinWidth(Region.USE_PREF_SIZE);
             badgeBox.getChildren().add(rockstarBadge);
         }
-    }
-
-    private <T extends ModelObject> List<T> getLinkedObjects(Person person, Class<T> type) {
-        return DataRepository2.getInstance().getLinkedObjects(person, type);
     }
 
     // Size
@@ -207,4 +140,19 @@ public class MobilePersonDetailView extends VBox {
         personProperty().set(person);
     }
 
+    // extra node
+
+    private final ObjectProperty<Node> extraNode = new SimpleObjectProperty<>(this, "extraNode");
+
+    public final ObjectProperty<Node> extraNodeProperty() {
+        return extraNode;
+    }
+
+    public final Node getExtraNode() {
+        return extraNode.get();
+    }
+
+    public final void setExtraNode(Node extraNode) {
+        extraNodeProperty().set(extraNode);
+    }
 }

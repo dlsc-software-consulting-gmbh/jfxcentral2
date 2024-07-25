@@ -51,6 +51,7 @@ public class HelloCategoryPreviewView extends JFXCentralSampleBase {
             CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
                     app.getName(),
                     app.getSummary(),
+                    null,
                     ImageManager.getInstance().realWorldAppBannerImageProperty(app),
                     ModelObjectTool.getModelLink(app),
                     123,
@@ -77,6 +78,7 @@ public class HelloCategoryPreviewView extends JFXCentralSampleBase {
             CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
                     person.getName(),
                     DataRepository2.getInstance().getPersonReadMe(person),
+                    null,
                     ImageManager.getInstance().personImageProperty(person),
                     ModelObjectTool.getModelLink(person),
                     399,
@@ -102,6 +104,7 @@ public class HelloCategoryPreviewView extends JFXCentralSampleBase {
             CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
                     tip.getName(),
                     tip.getSummary(),
+                    null,
                     ImageManager.getInstance().tipBannerImageProperty(tip),
                     ModelObjectTool.getModelLink(tip),
                     123,
