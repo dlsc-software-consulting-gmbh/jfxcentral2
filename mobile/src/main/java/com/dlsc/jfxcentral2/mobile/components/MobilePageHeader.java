@@ -56,7 +56,7 @@ public class MobilePageHeader extends StackPane {
 
         BooleanBinding longTitleProperty = Bindings.createBooleanBinding(() -> {
             String title = getTitle();
-            boolean isShortTitle = title == null || title.split(" ").length < 7 || title.length() < 38;
+            boolean isShortTitle = title == null || (title.split(" ").length < 7 && title.length() < 35);
             return getIcon() == null && getPreviewImage() == null && !isShortTitle;
         }, widthProperty(), iconProperty(), previewImageProperty(), titleProperty());
 
