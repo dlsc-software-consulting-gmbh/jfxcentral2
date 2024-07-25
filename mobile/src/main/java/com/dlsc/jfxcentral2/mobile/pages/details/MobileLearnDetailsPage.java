@@ -28,7 +28,6 @@ public class MobileLearnDetailsPage extends MobileDetailsPageBase<Learn> {
         // header
         MobilePageHeader header = new MobilePageHeader();
         header.sizeProperty().bind(sizeProperty());
-        header.setTitle(learn.getName());
 
         // content
         LearnPagination<Learn> detailsView = new LearnPagination<>();
@@ -46,6 +45,9 @@ public class MobileLearnDetailsPage extends MobileDetailsPageBase<Learn> {
             detailsView.getItems().setAll(learnRaspberryPi);
         }
         detailsView.setSelectedItem(learn);
+
+        // bind header title to item name
+        header.titleProperty().bind(detailsView.itemProperty().map(item -> item == null ? "" : item.getName()));
 
         VBox.setVgrow(detailsView, Priority.ALWAYS);
         return List.of(header, detailsView);

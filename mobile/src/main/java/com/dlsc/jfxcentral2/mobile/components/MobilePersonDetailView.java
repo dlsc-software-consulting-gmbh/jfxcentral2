@@ -110,7 +110,7 @@ public class MobilePersonDetailView extends VBox {
         if (!linkedApps.isEmpty()) {
             CategoryPreviewView showCasePreviewView = CategoryPreviewView.createShowCasePreviewView(linkedApps);
             showCasePreviewView.sizeProperty().bind(sizeProperty());
-            showCasePreviewView.setTitle("Related Apps");
+            showCasePreviewView.setTitle("Apps");
             personLinkedObjectBox.getChildren().add(showCasePreviewView);
         }
 
@@ -118,7 +118,7 @@ public class MobilePersonDetailView extends VBox {
         if (!linkedLibraries.isEmpty()) {
             CategoryPreviewView libraryPreviewView = CategoryPreviewView.createLibraryPreviewView(linkedLibraries);
             libraryPreviewView.sizeProperty().bind(sizeProperty());
-            libraryPreviewView.setTitle("Related Libraries");
+            libraryPreviewView.setTitle("Libraries");
             personLinkedObjectBox.getChildren().add(libraryPreviewView);
         }
 
@@ -126,7 +126,7 @@ public class MobilePersonDetailView extends VBox {
         if (!linkedBooks.isEmpty()) {
             CategoryPreviewView booksPreviewView = CategoryPreviewView.createBooksPreviewView(linkedBooks);
             booksPreviewView.sizeProperty().bind(sizeProperty());
-            booksPreviewView.setTitle("Related Books");
+            booksPreviewView.setTitle("Books");
             personLinkedObjectBox.getChildren().add(booksPreviewView);
         }
 
@@ -134,7 +134,7 @@ public class MobilePersonDetailView extends VBox {
         if (!linkedVideos.isEmpty()) {
             CategoryPreviewView videoPreviewView = CategoryPreviewView.createVideosPreviewView(linkedVideos);
             videoPreviewView.sizeProperty().bind(sizeProperty());
-            videoPreviewView.setTitle("Related Videos");
+            videoPreviewView.setTitle("Videos");
             personLinkedObjectBox.getChildren().add(videoPreviewView);
         }
 
@@ -142,7 +142,7 @@ public class MobilePersonDetailView extends VBox {
         if (!linkedTips.isEmpty()) {
             CategoryPreviewView tipsPreviewView = CategoryPreviewView.createTipsPreviewView(linkedTips);
             tipsPreviewView.sizeProperty().bind(sizeProperty());
-            tipsPreviewView.setTitle("Related Tips");
+            tipsPreviewView.setTitle("Tips");
             personLinkedObjectBox.getChildren().add(tipsPreviewView);
         }
 
@@ -150,7 +150,7 @@ public class MobilePersonDetailView extends VBox {
         if (!linkedBlogs.isEmpty()) {
             CategoryPreviewView blogPreviewView = CategoryPreviewView.createBlogPreviewView(linkedBlogs);
             blogPreviewView.sizeProperty().bind(sizeProperty());
-            blogPreviewView.setTitle("Related Blogs");
+            blogPreviewView.setTitle("Blogs");
             personLinkedObjectBox.getChildren().add(blogPreviewView);
         }
 
