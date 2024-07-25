@@ -9,6 +9,9 @@
   "name":"[Ljavafx.collections.transformation.SortedList$Element;"
 },
 {
+  "name":"[Lorg.jdom2.Content;"
+},
+{
   "name":"[Lsun.security.pkcs.SignerInfo;"
 },
 {
@@ -213,6 +216,148 @@
   "methods":[{"name":"premain","parameterTypes":["java.lang.String","java.lang.instrument.Instrumentation"] }]
 },
 {
+  "name":"com.rometools.rome.feed.CopyFrom",
+  "methods":[{"name":"getInterface","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.module.DCModuleImpl",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"getContributors","parameterTypes":[] }, 
+    {"name":"getCoverages","parameterTypes":[] }, 
+    {"name":"getCreators","parameterTypes":[] }, 
+    {"name":"getDates","parameterTypes":[] }, 
+    {"name":"getDescriptions","parameterTypes":[] }, 
+    {"name":"getFormats","parameterTypes":[] }, 
+    {"name":"getIdentifiers","parameterTypes":[] }, 
+    {"name":"getLanguages","parameterTypes":[] }, 
+    {"name":"getPublishers","parameterTypes":[] }, 
+    {"name":"getRelations","parameterTypes":[] }, 
+    {"name":"getRightsList","parameterTypes":[] }, 
+    {"name":"getSources","parameterTypes":[] }, 
+    {"name":"getSubjects","parameterTypes":[] }, 
+    {"name":"getTitles","parameterTypes":[] }, 
+    {"name":"getTypes","parameterTypes":[] }, 
+    {"name":"setContributors","parameterTypes":["java.util.List"] }, 
+    {"name":"setCoverages","parameterTypes":["java.util.List"] }, 
+    {"name":"setCreators","parameterTypes":["java.util.List"] }, 
+    {"name":"setDates","parameterTypes":["java.util.List"] }, 
+    {"name":"setDescriptions","parameterTypes":["java.util.List"] }, 
+    {"name":"setFormats","parameterTypes":["java.util.List"] }, 
+    {"name":"setIdentifiers","parameterTypes":["java.util.List"] }, 
+    {"name":"setLanguages","parameterTypes":["java.util.List"] }, 
+    {"name":"setPublishers","parameterTypes":["java.util.List"] }, 
+    {"name":"setRelations","parameterTypes":["java.util.List"] }, 
+    {"name":"setRightsList","parameterTypes":["java.util.List"] }, 
+    {"name":"setSources","parameterTypes":["java.util.List"] }, 
+    {"name":"setSubjects","parameterTypes":["java.util.List"] }, 
+    {"name":"setTitles","parameterTypes":["java.util.List"] }, 
+    {"name":"setTypes","parameterTypes":["java.util.List"] }
+  ]
+},
+{
+  "name":"com.rometools.rome.feed.synd.SyndCategory",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getLabel","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getTaxonomyUri","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForAtom03",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForAtom10",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS090",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS091Netscape",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS091Userland",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS092",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS093",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS094",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS10",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS20",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.Atom03Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.Atom10Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.DCModuleParser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS090Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS091NetscapeParser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS091UserlandParser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS092Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS093Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS094Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS10Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS20Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS20wNSParser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.SyModuleParser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"com.sun.crypto.provider.AESCipher$General",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -304,6 +449,21 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"com.sun.javafx.webkit.theme.ScrollBarWidget"
+},
+{
+  "name":"com.sun.media.jfxmediaimpl.platform.gstreamer.GSTPlatform",
+  "methods":[{"name":"getPlatformInstance","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.media.jfxmediaimpl.platform.osx.OSXPlatform",
+  "methods":[{"name":"getPlatformInstance","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"com.sun.prism.GraphicsPipeline",
   "methods":[
     {"name":"getFontFactory","parameterTypes":[] }, 
@@ -335,11 +495,23 @@
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {
+  "name":"com.sun.prism.shader.FillPgram_ImagePattern_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
   "name":"com.sun.prism.shader.FillPgram_LinearGradient_PAD_Loader",
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {
   "name":"com.sun.prism.shader.FillRoundRect_Color_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.Mask_TextureRGB_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.Solid_Color_Loader",
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {
@@ -434,6 +606,10 @@
   ]
 },
 {
+  "name":"java.net.URLConnection",
+  "methods":[{"name":"getContentLengthLong","parameterTypes":[] }]
+},
+{
   "name":"java.nio.ByteBuffer",
   "methods":[{"name":"order","parameterTypes":["java.nio.ByteOrder"] }]
 },
@@ -502,6 +678,12 @@
   "name":"javafx.scene.image.ImageView"
 },
 {
+  "name":"javafx.scene.input.Clipboard"
+},
+{
+  "name":"javafx.scene.input.Dragboard"
+},
+{
   "name":"javafx.scene.layout.Pane"
 },
 {
@@ -541,6 +723,9 @@
   "name":"javafx.scene.transform.Transform"
 },
 {
+  "name":"javafx.scene.web.WebView"
+},
+{
   "name":"javafx.stage.PopupWindow"
 },
 {
@@ -554,10 +739,10 @@
 },
 {
   "name":"javax.imageio.spi.ImageReaderWriterSpi",
+  "methods":[{"name":"getMIMETypes","parameterTypes":[] }],
   "queriedMethods":[
     {"name":"getFileSuffixes","parameterTypes":[] }, 
-    {"name":"getFormatNames","parameterTypes":[] }, 
-    {"name":"getMIMETypes","parameterTypes":[] }
+    {"name":"getFormatNames","parameterTypes":[] }
   ]
 },
 {

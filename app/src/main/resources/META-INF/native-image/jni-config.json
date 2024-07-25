@@ -3,6 +3,9 @@
   "name":"[Lcom.sun.glass.ui.Screen;"
 },
 {
+  "name":"[Lcom.sun.webkit.network.FormDataElement;"
+},
+{
   "name":"[Ljava.lang.String;"
 },
 {
@@ -184,6 +187,10 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"com.sun.javafx.geom.Path2D",
+  "methods":[{"name":"<init>","parameterTypes":["int","byte[]","int","float[]","int"] }]
+},
+{
   "name":"com.sun.javafx.iio.common.ImageLoaderImpl",
   "methods":[{"name":"emitWarning","parameterTypes":["java.lang.String"] }]
 },
@@ -194,6 +201,289 @@
     {"name":"setOutputAttributes","parameterTypes":["int","int"] }, 
     {"name":"updateImageProgress","parameterTypes":["int"] }
   ]
+},
+{
+  "name":"com.sun.media.jfxmedia.locator.Locator",
+  "methods":[{"name":"getStringLocation","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.media.jfxmedia.logging.Logger",
+  "methods":[
+    {"name":"logMsg","parameterTypes":["int","java.lang.String"] }, 
+    {"name":"logMsg","parameterTypes":["int","java.lang.String","java.lang.String","java.lang.String"] }
+  ]
+},
+{
+  "name":"com.sun.media.jfxmediaimpl.NativeMediaPlayer",
+  "methods":[
+    {"name":"sendAudioSpectrumEvent","parameterTypes":["double","double","boolean"] }, 
+    {"name":"sendAudioTrack","parameterTypes":["boolean","long","java.lang.String","int","java.lang.String","int","int","float"] }, 
+    {"name":"sendBufferProgressEvent","parameterTypes":["double","long","long","long"] }, 
+    {"name":"sendDurationUpdateEvent","parameterTypes":["double"] }, 
+    {"name":"sendFrameSizeChangedEvent","parameterTypes":["int","int"] }, 
+    {"name":"sendMarkerEvent","parameterTypes":["java.lang.String","double"] }, 
+    {"name":"sendNewFrameEvent","parameterTypes":["long"] }, 
+    {"name":"sendPlayerHaltEvent","parameterTypes":["java.lang.String","double"] }, 
+    {"name":"sendPlayerMediaErrorEvent","parameterTypes":["int"] }, 
+    {"name":"sendPlayerStateEvent","parameterTypes":["int","double"] }, 
+    {"name":"sendSubtitleTrack","parameterTypes":["boolean","long","java.lang.String","int","java.lang.String"] }, 
+    {"name":"sendVideoTrack","parameterTypes":["boolean","long","java.lang.String","int","int","int","float","boolean"] }, 
+    {"name":"sendWarning","parameterTypes":["int","java.lang.String"] }
+  ]
+},
+{
+  "name":"com.sun.media.jfxmediaimpl.platform.osx.OSXMediaPlayer"
+},
+{
+  "name":"com.sun.webkit.BackForwardList",
+  "methods":[{"name":"notifyChanged","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.webkit.BackForwardList$Entry",
+  "methods":[
+    {"name":"<init>","parameterTypes":["long","long"] }, 
+    {"name":"notifyItemChanged","parameterTypes":[] }, 
+    {"name":"notifyItemDestroyed","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.CursorManager",
+  "methods":[
+    {"name":"getCursorManager","parameterTypes":[] }, 
+    {"name":"getPredefinedCursorID","parameterTypes":["int"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.FileSystem",
+  "methods":[
+    {"name":"fwkFileExists","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkMakeAllDirectories","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkPathByAppendingComponent","parameterTypes":["java.lang.String","java.lang.String"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.MainThread",
+  "methods":[{"name":"fwkScheduleDispatchFunctions","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.webkit.SharedBuffer",
+  "methods":[{"name":"fwkCreate","parameterTypes":["long"] }]
+},
+{
+  "name":"com.sun.webkit.Timer",
+  "methods":[
+    {"name":"fwkSetFireTime","parameterTypes":["double"] }, 
+    {"name":"fwkStopTimer","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.WCWidget",
+  "methods":[
+    {"name":"fwkDestroy","parameterTypes":[] }, 
+    {"name":"fwkGetScreenDepth","parameterTypes":[] }, 
+    {"name":"fwkGetScreenRect","parameterTypes":["boolean"] }, 
+    {"name":"fwkRequestFocus","parameterTypes":[] }, 
+    {"name":"fwkSetBounds","parameterTypes":["int","int","int","int"] }, 
+    {"name":"fwkSetCursor","parameterTypes":["long"] }, 
+    {"name":"fwkSetVisible","parameterTypes":["boolean"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.WebPage",
+  "methods":[
+    {"name":"fwkAddMessageToConsole","parameterTypes":["java.lang.String","int","java.lang.String"] }, 
+    {"name":"fwkAlert","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkCanRunBeforeUnloadConfirmPanel","parameterTypes":[] }, 
+    {"name":"fwkChooseFile","parameterTypes":["java.lang.String","boolean","java.lang.String"] }, 
+    {"name":"fwkCloseWindow","parameterTypes":[] }, 
+    {"name":"fwkConfirm","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkCreateWindow","parameterTypes":["boolean","boolean","boolean","boolean"] }, 
+    {"name":"fwkDidClearWindowObject","parameterTypes":["long","long"] }, 
+    {"name":"fwkFireLoadEvent","parameterTypes":["long","int","java.lang.String","java.lang.String","double","int"] }, 
+    {"name":"fwkFireResourceLoadEvent","parameterTypes":["long","int","int","java.lang.String","double","int"] }, 
+    {"name":"fwkFrameCreated","parameterTypes":["long"] }, 
+    {"name":"fwkFrameDestroyed","parameterTypes":["long"] }, 
+    {"name":"fwkGetDefaultRenderTheme","parameterTypes":[] }, 
+    {"name":"fwkGetPageBounds","parameterTypes":[] }, 
+    {"name":"fwkGetWindowBounds","parameterTypes":[] }, 
+    {"name":"fwkPermitAcceptResourceAction","parameterTypes":["long","java.lang.String"] }, 
+    {"name":"fwkPermitEnableScriptsAction","parameterTypes":["long","java.lang.String"] }, 
+    {"name":"fwkPermitNavigateAction","parameterTypes":["long","java.lang.String"] }, 
+    {"name":"fwkPermitNewWindowAction","parameterTypes":["long","java.lang.String"] }, 
+    {"name":"fwkPermitRedirectAction","parameterTypes":["long","java.lang.String"] }, 
+    {"name":"fwkPermitSubmitDataAction","parameterTypes":["long","java.lang.String","java.lang.String","boolean"] }, 
+    {"name":"fwkPrompt","parameterTypes":["java.lang.String","java.lang.String"] }, 
+    {"name":"fwkRemoveRequestURL","parameterTypes":["long","int"] }, 
+    {"name":"fwkRepaint","parameterTypes":["int","int","int","int"] }, 
+    {"name":"fwkRunBeforeUnloadConfirmPanel","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkScreenToWindow","parameterTypes":["com.sun.webkit.graphics.WCPoint"] }, 
+    {"name":"fwkSetCursor","parameterTypes":["long"] }, 
+    {"name":"fwkSetFocus","parameterTypes":["boolean"] }, 
+    {"name":"fwkSetRequestURL","parameterTypes":["long","int","java.lang.String"] }, 
+    {"name":"fwkSetScrollbarsVisible","parameterTypes":["boolean"] }, 
+    {"name":"fwkSetStatusbarText","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkSetTooltip","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkSetWindowBounds","parameterTypes":["int","int","int","int"] }, 
+    {"name":"fwkShowWindow","parameterTypes":[] }, 
+    {"name":"fwkTransferFocus","parameterTypes":["boolean"] }, 
+    {"name":"fwkWindowToScreen","parameterTypes":["com.sun.webkit.graphics.WCPoint"] }, 
+    {"name":"getHostWindow","parameterTypes":[] }, 
+    {"name":"getPage","parameterTypes":[] }, 
+    {"name":"getRenderTheme","parameterTypes":[] }, 
+    {"name":"setInputMethodState","parameterTypes":["boolean"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.Ref",
+  "methods":[
+    {"name":"deref","parameterTypes":[] }, 
+    {"name":"getID","parameterTypes":[] }, 
+    {"name":"ref","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.RenderTheme",
+  "methods":[{"name":"getSelectionColor","parameterTypes":["int"] }]
+},
+{
+  "name":"com.sun.webkit.graphics.ScrollBarTheme",
+  "methods":[{"name":"getThickness","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.webkit.graphics.WCFont",
+  "methods":[
+    {"name":"equals","parameterTypes":["java.lang.Object"] }, 
+    {"name":"getAscent","parameterTypes":[] }, 
+    {"name":"getCapHeight","parameterTypes":[] }, 
+    {"name":"getDescent","parameterTypes":[] }, 
+    {"name":"getGlyphCodes","parameterTypes":["char[]"] }, 
+    {"name":"getGlyphWidth","parameterTypes":["int"] }, 
+    {"name":"getLineGap","parameterTypes":[] }, 
+    {"name":"getLineSpacing","parameterTypes":[] }, 
+    {"name":"getXHeight","parameterTypes":[] }, 
+    {"name":"hasUniformLineMetrics","parameterTypes":[] }, 
+    {"name":"hashCode","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCFontCustomPlatformData",
+  "methods":[{"name":"createFont","parameterTypes":["int","boolean","boolean"] }]
+},
+{
+  "name":"com.sun.webkit.graphics.WCGraphicsManager",
+  "methods":[
+    {"name":"createBufferedContextRQ","parameterTypes":["com.sun.webkit.graphics.WCImage"] }, 
+    {"name":"createRTImage","parameterTypes":["int","int"] }, 
+    {"name":"createTransform","parameterTypes":["double","double","double","double","double","double"] }, 
+    {"name":"createWCPath","parameterTypes":[] }, 
+    {"name":"createWCPath","parameterTypes":["com.sun.webkit.graphics.WCPath"] }, 
+    {"name":"fwkCreateFontCustomPlatformData","parameterTypes":["com.sun.webkit.SharedBuffer"] }, 
+    {"name":"fwkCreateMediaPlayer","parameterTypes":["long"] }, 
+    {"name":"getGraphicsManager","parameterTypes":[] }, 
+    {"name":"getImageDecoder","parameterTypes":[] }, 
+    {"name":"getSupportedMediaTypes","parameterTypes":[] }, 
+    {"name":"getWCFont","parameterTypes":["java.lang.String","boolean","boolean","float"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCImage",
+  "methods":[{"name":"toData","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"com.sun.webkit.graphics.WCImageDecoder",
+  "methods":[
+    {"name":"addImageData","parameterTypes":["byte[]"] }, 
+    {"name":"destroy","parameterTypes":[] }, 
+    {"name":"getFrame","parameterTypes":["int"] }, 
+    {"name":"getFrameCompleteStatus","parameterTypes":["int"] }, 
+    {"name":"getFrameCount","parameterTypes":[] }, 
+    {"name":"getFrameDuration","parameterTypes":["int"] }, 
+    {"name":"getFrameSize","parameterTypes":["int"] }, 
+    {"name":"getImageSize","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCImageFrame",
+  "methods":[{"name":"getSize","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.webkit.graphics.WCMediaPlayer",
+  "methods":[
+    {"name":"fwkDispose","parameterTypes":[] }, 
+    {"name":"fwkGetCurrentTime","parameterTypes":[] }, 
+    {"name":"fwkLoad","parameterTypes":["java.lang.String","java.lang.String"] }, 
+    {"name":"fwkPause","parameterTypes":[] }, 
+    {"name":"fwkPlay","parameterTypes":[] }, 
+    {"name":"fwkPrepareToPlay","parameterTypes":[] }, 
+    {"name":"fwkSetMute","parameterTypes":["boolean"] }, 
+    {"name":"fwkSetPreload","parameterTypes":["int"] }, 
+    {"name":"fwkSetPreservesPitch","parameterTypes":["boolean"] }, 
+    {"name":"fwkSetRate","parameterTypes":["float"] }, 
+    {"name":"fwkSetVolume","parameterTypes":["float"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCPath",
+  "methods":[
+    {"name":"addBezierCurveTo","parameterTypes":["double","double","double","double","double","double"] }, 
+    {"name":"addLineTo","parameterTypes":["double","double"] }, 
+    {"name":"closeSubpath","parameterTypes":[] }, 
+    {"name":"contains","parameterTypes":["int","double","double"] }, 
+    {"name":"getBounds","parameterTypes":[] }, 
+    {"name":"isEmpty","parameterTypes":[] }, 
+    {"name":"moveTo","parameterTypes":["double","double"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCPoint",
+  "methods":[
+    {"name":"<init>","parameterTypes":["float","float"] }, 
+    {"name":"getX","parameterTypes":[] }, 
+    {"name":"getY","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCRectangle",
+  "fields":[
+    {"name":"h"}, 
+    {"name":"w"}, 
+    {"name":"x"}, 
+    {"name":"y"}
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCRenderQueue",
+  "methods":[
+    {"name":"fwkAddBuffer","parameterTypes":["java.nio.ByteBuffer"] }, 
+    {"name":"fwkDisposeGraphics","parameterTypes":[] }, 
+    {"name":"refFloatArr","parameterTypes":["float[]"] }, 
+    {"name":"refIntArr","parameterTypes":["int[]"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.network.CookieJar",
+  "methods":[
+    {"name":"fwkGet","parameterTypes":["java.lang.String","boolean"] }, 
+    {"name":"fwkPut","parameterTypes":["java.lang.String","java.lang.String"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.network.FormDataElement",
+  "methods":[
+    {"name":"fwkCreateFromByteArray","parameterTypes":["byte[]"] }, 
+    {"name":"fwkCreateFromFile","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.network.NetworkContext",
+  "methods":[
+    {"name":"canHandleURL","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkLoad","parameterTypes":["com.sun.webkit.WebPage","boolean","java.lang.String","java.lang.String","java.lang.String","com.sun.webkit.network.FormDataElement[]","long"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.network.URLLoaderBase",
+  "methods":[{"name":"fwkCancel","parameterTypes":[] }]
 },
 {
   "name":"java.awt.AlphaComposite",
@@ -302,6 +592,15 @@
   "methods":[
     {"name":"getPixels","parameterTypes":["int","int","int","int","int[]","java.awt.image.DataBuffer"] }, 
     {"name":"setPixels","parameterTypes":["int","int","int","int","int[]","java.awt.image.DataBuffer"] }
+  ]
+},
+{
+  "name":"java.awt.image.SinglePixelPackedSampleModel",
+  "fields":[
+    {"name":"bitMasks"}, 
+    {"name":"bitOffsets"}, 
+    {"name":"bitSizes"}, 
+    {"name":"maxBitSize"}
   ]
 },
 {
@@ -424,6 +723,16 @@
 },
 {
   "name":"sun.awt.image.ByteComponentRaster",
+  "fields":[
+    {"name":"data"}, 
+    {"name":"dataOffsets"}, 
+    {"name":"pixelStride"}, 
+    {"name":"scanlineStride"}, 
+    {"name":"type"}
+  ]
+},
+{
+  "name":"sun.awt.image.IntegerComponentRaster",
   "fields":[
     {"name":"data"}, 
     {"name":"dataOffsets"}, 
