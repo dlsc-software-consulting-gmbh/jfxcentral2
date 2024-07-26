@@ -20,41 +20,41 @@ public class IntroPane extends VBox {
     public static final String SELECTED = "selected";
     private final PageView pageView;
 
-    public record PageDate(String title, String description, String imageUrl) {
+    public record IntroCardData(String title, String description, String imageUrl) {
     }
 
-    public static final List<PageDate> PAGES = new ArrayList<>(List.of(
-            new PageDate("JavaFX Books", "Explore our JavaFX book collection, from beginner guides to advanced tutorials, including game development and use-cases like JavaFX for Raspberry Pi.", "books.png"),
-            new PageDate("Videos", "Watch JavaFX videos, conference talks, demos, and tutorials for all expertise levels.", "videos.png"),
-            new PageDate("Libraries", "Explore JavaFX third-party libraries, featuring components, game engines, styles, 3D graphics, and frameworks to enhance your projects.", "libraries.png"),
-            new PageDate("JavaFX Tutorials", "Browse tutorials ranging from JavaFX basics to advanced application and game development.", "tutorials.png"),
-            new PageDate("Tools", "Explore JavaFX tools including plugins, layout, CSS tools, testing, and packaging.", "tools.png"),
-            new PageDate("Links of The Week", "Miscellaneous stuff found on the web that is related to JavaFX.", "news.png"),
-            new PageDate("Tips & Tricks", "Discover practical JavaFX tips in this section, featuring articles that share real-world techniques and tricks for effective JavaFX development.", "tips.png"),
-            new PageDate("JavaFX Blogs", "Visit our blog section for articles from JavaFX experts, featuring practical tips, cutting-edge insights, and more from the world of JavaFX.", "blogs.png"),
-            new PageDate("People", "A curated list of people connected to JavaFX. They develop libraries, applications, tools or they present at conferences and evangelise JavaFX.", "people.png"),
-            new PageDate("Companies", "Explore companies in JavaFX, especially those with significant influence and contributions to the JavaFX community, shaping and advancing the ecosystem.", "companies.png")
+    public final List<IntroCardData> introCardData = new ArrayList<>(List.of(
+            new IntroCardData("JavaFX Books", "Explore our JavaFX book collection, from beginner guides to advanced tutorials, including game development and use-cases like JavaFX for Raspberry Pi.", "books.png"),
+            new IntroCardData("Videos", "Watch JavaFX videos, conference talks, demos, and tutorials for all expertise levels.", "videos.png"),
+            new IntroCardData("Libraries", "Explore JavaFX third-party libraries, featuring components, game engines, styles, 3D graphics, and frameworks to enhance your projects.", "libraries.png"),
+            new IntroCardData("JavaFX Tutorials", "Browse tutorials ranging from JavaFX basics to advanced application and game development.", "tutorials.png"),
+            new IntroCardData("Tools", "Explore JavaFX tools including plugins, layout, CSS tools, testing, and packaging.", "tools.png"),
+            new IntroCardData("Links of The Week", "Miscellaneous stuff found on the web that is related to JavaFX.", "news.png"),
+            new IntroCardData("Tips & Tricks", "Discover practical JavaFX tips in this section, featuring articles that share real-world techniques and tricks for effective JavaFX development.", "tips.png"),
+            new IntroCardData("JavaFX Blogs", "Visit our blog section for articles from JavaFX experts, featuring practical tips, cutting-edge insights, and more from the world of JavaFX.", "blogs.png"),
+            new IntroCardData("People", "A curated list of people connected to JavaFX. They develop libraries, applications, tools or they present at conferences and evangelise JavaFX.", "people.png"),
+            new IntroCardData("Companies", "Explore companies in JavaFX, especially those with significant influence and contributions to the JavaFX community, shaping and advancing the ecosystem.", "companies.png")
     ));
 
     public IntroPane() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
         // shuffle pages
-        Collections.shuffle(PAGES);
+        Collections.shuffle(introCardData);
 
         // page view
         pageView = new PageView();
         pageView.setSwitchPageDuration(Duration.seconds(0.5));
         pageView.setPageFactory(pageIndex -> {
-            int index = pageIndex % PAGES.size();
+            int index = pageIndex % introCardData.size();
 
-            PageDate pageDate = PAGES.get(index);
+            IntroCardData cardData = introCardData.get(index);
             IntroCard cell = new IntroCard();
-            cell.getStyleClass().add(pageDate.title().toLowerCase().replace(" ", "-"));
-            URL resource = IntroPane.class.getResource(pageDate.imageUrl());
+            cell.getStyleClass().add(cardData.title().toLowerCase().replace(" ", "-"));
+            URL resource = IntroPane.class.getResource(cardData.imageUrl());
             cell.setImage(new Image(Objects.requireNonNull(resource).toExternalForm()));
-            cell.setTitle(pageDate.title());
-            cell.setDescription(pageDate.description());
+            cell.setTitle(cardData.title());
+            cell.setDescription(cardData.description());
 
             return cell;
         });
@@ -67,7 +67,7 @@ public class IntroPane extends VBox {
 
     private HBox createProgressBox() {
         List<Region> dots = new ArrayList<>();
-        for (int i = 0; i < PAGES.size(); i++) {
+        for (int i = 0; i < introCardData.size(); i++) {
             Region dot = new Region();
             dot.getStyleClass().add(DOT);
             int finalI = i;
@@ -78,8 +78,8 @@ public class IntroPane extends VBox {
         dots.get(0).getStyleClass().add(SELECTED);
 
         pageView.currentPageIndexProperty().addListener((obs, oldPage, newPage) -> {
-            int oldIndex = oldPage.intValue() % PAGES.size();
-            int newIndex = newPage.intValue() % PAGES.size();
+            int oldIndex = oldPage.intValue() % introCardData.size();
+            int newIndex = newPage.intValue() % introCardData.size();
 
             dots.get(oldIndex).getStyleClass().remove(SELECTED);
             dots.get(newIndex).getStyleClass().add(SELECTED);
