@@ -8,11 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class WelcomePageCell extends VBox {
+public class IntroCard extends VBox {
 
-    private static final String DEFAULT_STYLE_CLASS = "welcome-page-view-cell";
+    private static final String DEFAULT_STYLE_CLASS = "intro-card";
 
-    public WelcomePageCell() {
+    public IntroCard() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
         CustomImageView imageView = new CustomImageView();
