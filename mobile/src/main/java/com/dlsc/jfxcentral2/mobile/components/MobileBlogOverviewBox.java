@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import com.rometools.rome.feed.synd.SyndEntry;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -42,7 +43,7 @@ public class MobileBlogOverviewBox extends VBox {
 
         // top
         Header header = new Header();
-        header.setTitle("Recent posts" );
+        header.setTitle("Recent posts");
         header.setIcon(null);
 
         // center
@@ -54,6 +55,10 @@ public class MobileBlogOverviewBox extends VBox {
         listView.getStyleClass().addAll("posts-list", "mobile");
         listView.setCellFactory(param -> new PostViewCell());
         listView.setMaxHeight(Double.MAX_VALUE);
+        listView.prefHeightProperty().bind(Bindings.createDoubleBinding(() -> {
+                    return listView.getItems().size() * listView.getFixedCellSize();
+                },
+                Bindings.size(listView.getItems()), listView.fixedCellSizeProperty()));
 
         StackPane listWrapper = new StackPane(listView);
         listWrapper.getStyleClass().add("list-wrapper");

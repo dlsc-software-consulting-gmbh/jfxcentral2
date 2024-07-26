@@ -5,7 +5,11 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Learn;
+import com.dlsc.jfxcentral.data.model.LearnJavaFX;
+import com.dlsc.jfxcentral.data.model.LearnMobile;
+import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
@@ -29,12 +33,15 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.ArrayList;
@@ -85,6 +92,7 @@ public class CategoryPreviewView extends VBox {
                 }
 
                 cell.setTitle(item.title());
+                cell.setTitleGraphic(item.titleGraphic());
                 cell.setDescription(item.description());
 
                 // must enable social features
@@ -110,12 +118,17 @@ public class CategoryPreviewView extends VBox {
      * @param likesNumber : must enable social features
      * @param viewsNumber : must enable social features
      */
-    public record CategoryItem(String title, String description, ObjectProperty<Image> imageProperty, String url,
+    public record CategoryItem(String title, String description, Node titleGraphic, ObjectProperty<Image> imageProperty,
+                               String url,
                                int likesNumber,
                                int saveNumber,
                                int viewsNumber) {
         public CategoryItem(String title, String description, ObjectProperty<Image> imageProperty, String url) {
-            this(title, description, imageProperty, url, 0, 0, 0);
+            this(title, description, null, imageProperty, url, 0, 0, 0);
+        }
+
+        public CategoryItem(String title, String description, Node titleGraphic, ObjectProperty<Image> imageProperty, String url) {
+            this(title, description, titleGraphic, imageProperty, url, 0, 0, 0);
         }
     }
 
@@ -200,17 +213,23 @@ public class CategoryPreviewView extends VBox {
             AvatarView avatarView = new AvatarView();
             avatarView.imageProperty().bind(imageProperty());
             avatarView.setType(AvatarView.Type.SQUARE);
+            avatarView.setMouseTransparent(true);
+            avatarView.managedProperty().bind(avatarView.visibleProperty());
+            avatarView.visibleProperty().bind(imageProperty().isNotNull());
 
             // right side
             Label titleLabel = new Label();
             titleLabel.getStyleClass().add("title");
             titleLabel.textProperty().bind(titleProperty());
+            titleLabel.graphicProperty().bind(titleGraphicProperty());
 
             Label descriptionLabel = new Label();
             descriptionLabel.getStyleClass().add("description");
             descriptionLabel.setWrapText(true);
             descriptionLabel.setMaxHeight(Double.MAX_VALUE);
             descriptionLabel.textProperty().bind(descriptionProperty());
+            descriptionLabel.managedProperty().bind(descriptionLabel.visibleProperty());
+            descriptionLabel.visibleProperty().bind(descriptionProperty().isNotEmpty());
             VBox.setVgrow(descriptionLabel, Priority.ALWAYS);
 
             Label likesLabel = new Label();
@@ -257,6 +276,22 @@ public class CategoryPreviewView extends VBox {
 
         public final void setTitle(String title) {
             titleProperty().set(title);
+        }
+
+        // titleGraphic
+
+        private final ObjectProperty<Node> titleGraphic = new SimpleObjectProperty<>(this, "titleGraphic");
+
+        public final ObjectProperty<Node> titleGraphicProperty() {
+            return titleGraphic;
+        }
+
+        public final Node getTitleGraphic() {
+            return titleGraphicProperty().get();
+        }
+
+        public final void setTitleGraphic(Node titleGraphic) {
+            titleGraphicProperty().set(titleGraphic);
         }
 
         // description
@@ -539,14 +574,55 @@ public class CategoryPreviewView extends VBox {
         if (showAllUrl != null) {
             view.setShowAllUrl(showAllUrl);
         }
-
+        view.getStyleClass().add("learn-category-preview-view");
         List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
         for (Learn learn : learns) {
+            // create title graphic
+            Ikon icon = ModelObjectTool.getModelIcon(learn);
+            FontIcon fontIcon = new FontIcon(icon);
+            StackPane iconWrapper = new StackPane(fontIcon);
+            iconWrapper.getStyleClass().add("icon-wrapper");
+            if (learn instanceof LearnJavaFX) {
+                iconWrapper.getStyleClass().add("javafx");
+            } else if (learn instanceof LearnMobile) {
+                iconWrapper.getStyleClass().add("mobile");
+            } else if (learn instanceof LearnRaspberryPi) {
+                iconWrapper.getStyleClass().add("raspberry-pi");
+            }
+
+            // create item
             CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
                     learn.getName(),
-                    learn.getSummary(),
+                    null,
+                    iconWrapper,
                     null,
                     ModelObjectTool.getModelLink(learn)
+            );
+            items.add(item);
+        }
+
+        view.getItems().setAll(items);
+        return view;
+    }
+
+    public static CategoryPreviewView createCompanyPreviewView(List<Company> linkedCompanies) {
+        return createCompanyPreviewView(linkedCompanies, null);
+    }
+
+    public static CategoryPreviewView createCompanyPreviewView(List<Company> linkedCompanies, String showAllUrl) {
+        CategoryPreviewView view = new CategoryPreviewView();
+        view.setTitle("Companies");
+        if (showAllUrl != null) {
+            view.setShowAllUrl(showAllUrl);
+        }
+
+        List<CategoryPreviewView.CategoryItem> items = new ArrayList<>();
+        for (Company company : linkedCompanies) {
+            CategoryPreviewView.CategoryItem item = new CategoryPreviewView.CategoryItem(
+                    company.getName(),
+                    company.getDescription(),
+                    ImageManager.getInstance().companyImageProperty(company),
+                    ModelObjectTool.getModelLink(company)
             );
             items.add(item);
         }
