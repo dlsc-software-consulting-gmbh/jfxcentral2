@@ -4,8 +4,8 @@ import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
-import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
@@ -15,27 +15,33 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.Ikon;
-import org.kordamp.ikonli.fontawesome.FontAwesome;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign2.MaterialDesignA;
 
-public class MobileCategoryHeader extends StackPane {
+public class MobilePageHeader extends StackPane {
 
-    private static final String DEFAULT_STYLE_CLASS = "mobile-category-header";
+    private static final String DEFAULT_STYLE_CLASS = "mobile-page-header";
     private final SizeSupport sizeSupport = new SizeSupport(this);
+    private final Label categoryTitle;
 
-    public MobileCategoryHeader() {
+    public MobilePageHeader() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
         Button backButton = new Button();
         backButton.getStyleClass().add("back-button");
-        backButton.setGraphic(new FontIcon(FontAwesome.ANGLE_LEFT));
-        MobileLinkUtil.setLink(backButton, goBackLink());
+        backButton.setGraphic(new FontIcon(MaterialDesignA.ARROW_LEFT));
+        MobileLinkUtil.setGoToBackLink(backButton);
 
         HBox topBox = new HBox(backButton);
         topBox.getStyleClass().add("top-box");
 
-        Label categoryTitle = new Label();
-        categoryTitle.getStyleClass().add("category-title");
+        categoryTitle = new Label();
+        categoryTitle.getStyleClass().add("title");
+        categoryTitle.setWrapText(true);
+        categoryTitle.setMinHeight(-1);
+        categoryTitle.setMaxHeight(Double.MAX_VALUE);
+
+        // categoryTitle.
         categoryTitle.textProperty().bind(titleProperty());
         categoryTitle.graphicProperty().bind(Bindings.createObjectBinding(() -> {
             Ikon icon = getIcon();
@@ -48,12 +54,27 @@ public class MobileCategoryHeader extends StackPane {
             return null;
         }, iconProperty(), previewImageProperty()));
 
+        BooleanBinding longTitleProperty = Bindings.createBooleanBinding(() -> {
+            String title = getTitle();
+            boolean isShortTitle = title == null || (title.split(" ").length < 7 && title.length() < 35);
+            return getIcon() == null && getPreviewImage() == null && !isShortTitle;
+        }, widthProperty(), iconProperty(), previewImageProperty(), titleProperty());
+
+        updateLongTitle(longTitleProperty.get());
+        longTitleProperty.addListener((obs, oldVal, newVal) -> updateLongTitle(newVal));
+
         getChildren().addAll(categoryTitle, topBox);
         setMaxHeight(Region.USE_PREF_SIZE);
     }
 
-    protected String goBackLink() {
-        return PagePath.HOME;
+    private void updateLongTitle(boolean isLongTitle) {
+        if (isLongTitle) {
+            if (!categoryTitle.getStyleClass().contains("long-title")) {
+                categoryTitle.getStyleClass().add("long-title");
+            }
+        } else {
+            getStyleClass().remove("long-title");
+        }
     }
 
     // size support

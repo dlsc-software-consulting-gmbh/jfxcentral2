@@ -7,10 +7,10 @@ import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
-import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.StringUtil;
 import com.rometools.rome.feed.synd.SyndEntry;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -20,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.antdesignicons.AntDesignIconsOutlined;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -42,8 +43,8 @@ public class MobileBlogOverviewBox extends VBox {
 
         // top
         Header header = new Header();
-        header.setTitle("Recent posts found on " + blog.getName());
-        header.setIcon(IkonUtil.getModelIkon(Blog.class));
+        header.setTitle("Recent posts");
+        header.setIcon(null);
 
         // center
         Label loadingTipsLabel = new Label(StringUtil.LOADING_TIPS, new FontIcon(AntDesignIconsOutlined.CLOUD_DOWNLOAD));
@@ -54,9 +55,16 @@ public class MobileBlogOverviewBox extends VBox {
         listView.getStyleClass().addAll("posts-list", "mobile");
         listView.setCellFactory(param -> new PostViewCell());
         listView.setMaxHeight(Double.MAX_VALUE);
-        VBox.setVgrow(listView, Priority.ALWAYS);
+        listView.prefHeightProperty().bind(Bindings.createDoubleBinding(() -> {
+                    return listView.getItems().size() * listView.getFixedCellSize();
+                },
+                Bindings.size(listView.getItems()), listView.fixedCellSizeProperty()));
 
-        getChildren().addAll(header, listView);
+        StackPane listWrapper = new StackPane(listView);
+        listWrapper.getStyleClass().add("list-wrapper");
+
+        VBox.setVgrow(listWrapper, Priority.ALWAYS);
+        getChildren().addAll(header, listWrapper);
 
         Service<Void> service = new Service<>() {
             @Override
@@ -65,6 +73,7 @@ public class MobileBlogOverviewBox extends VBox {
                     @Override
                     protected Void call() throws InterruptedException {
                         List<Post> posts = DataRepository2.getInstance().loadPosts(blog);
+                        posts.sort((o1, o2) -> o2.getSyndEntry().getPublishedDate().compareTo(o1.getSyndEntry().getPublishedDate()));
                         Thread.sleep(500);
                         Platform.runLater(() -> {
                             listView.getItems().setAll(posts);

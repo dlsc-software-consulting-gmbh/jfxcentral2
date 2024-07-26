@@ -32,6 +32,8 @@ public class OverviewBox<T extends ModelObject> extends PaneBase implements Name
         Header header = new Header();
         header.titleProperty().bind(titleProperty());
         header.iconProperty().bind(iconProperty());
+        header.managedProperty().bind(header.visibleProperty());
+        header.visibleProperty().bind(titleProperty().isNotEmpty().and(iconProperty().isNotNull()));
 
         topWrapper = new StackPane();
         topWrapper.getStyleClass().add("top-wrapper");

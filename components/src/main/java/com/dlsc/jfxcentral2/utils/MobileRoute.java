@@ -1,8 +1,6 @@
 package com.dlsc.jfxcentral2.utils;
 
-import javafx.scene.Node;
 import javafx.util.Callback;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Pattern;
 
@@ -12,17 +10,18 @@ import java.util.regex.Pattern;
  */
 
 public class MobileRoute {
+
     private final String path;
-    private final Callback<String, Node> viewCallback;
+    private final Callback<String, MobileResponse> responseCallback;
     private final String redirectPath;
     private final Pattern pattern;
 
     /**
      * Constructor for normal routes
      */
-    public MobileRoute(String path, Callback<String, Node> viewCallback) {
+    public MobileRoute(String path, Callback<String, MobileResponse> responseCallback) {
         this.path = path;
-        this.viewCallback = viewCallback;
+        this.responseCallback = responseCallback;
         this.redirectPath = null;
         this.pattern = Pattern.compile(Pattern.quote(path) + "(/.*)?");
     }
@@ -32,7 +31,7 @@ public class MobileRoute {
      */
     public MobileRoute(String path, String redirectPath) {
         this.path = path;
-        this.viewCallback = null;
+        this.responseCallback = null;
         this.redirectPath = redirectPath;
         this.pattern = null;
     }
@@ -42,11 +41,14 @@ public class MobileRoute {
             // Strict match for redirect routes
             return url.equals(path);
         }
-        return url.equals(path) || pattern.matcher(StringUtils.trimToEmpty(url)).matches();
+        return url.equals(path) || pattern.matcher(url.trim()).matches();
     }
 
-    public Node createView(String url) {
-        return viewCallback.call(url);
+    public MobileResponse createResponse(String url) {
+        if (redirectPath != null) {
+            return MobileResponse.redirect(url, redirectPath);
+        }
+        return responseCallback.call(url);
     }
 
     public String getRedirectPath() {
@@ -57,8 +59,8 @@ public class MobileRoute {
         return path;
     }
 
-    public static MobileRoute get(String path, Callback<String, Node> viewCallback) {
-        return new MobileRoute(path, viewCallback);
+    public static MobileRoute get(String path, Callback<String, MobileResponse> responseCallback) {
+        return new MobileRoute(path, responseCallback);
     }
 
     public static MobileRoute redirect(String path, String redirectPath) {

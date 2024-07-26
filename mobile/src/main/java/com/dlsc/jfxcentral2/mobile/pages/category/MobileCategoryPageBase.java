@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral2.mobile.pages.category;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral2.components.SizeSupport;
-import com.dlsc.jfxcentral2.mobile.components.MobileCategoryHeader;
+import com.dlsc.jfxcentral2.components.MobilePageBase;
+import com.dlsc.jfxcentral2.mobile.components.MobilePageHeader;
 import com.dlsc.jfxcentral2.mobile.components.ModelListCell;
 import com.dlsc.jfxcentral2.mobile.components.ModelListView;
 import com.dlsc.jfxcentral2.model.Size;
@@ -19,23 +19,20 @@ import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox {
-
-    private final SizeSupport sizeSupport = new SizeSupport(this);
+public abstract class MobileCategoryPageBase<T extends ModelObject> extends MobilePageBase {
 
     public MobileCategoryPageBase(ObjectProperty<Size> size) {
         sizeProperty().bind(size);
         getChildren().setAll(content());
-        // swipe right to go back to home
-        // setOnSwipeRight(evt-> MobileLinkUtil.getToPage(PagePath.HOME));
     }
 
     public List<Node> content() {
         // header
-        MobileCategoryHeader header = createCategoryHeader();
+        MobilePageHeader header = createCategoryHeader();
         header.sizeProperty().bind(sizeProperty());
         header.setTitle(getCategoryTitle());
         header.setIcon(getCategoryIkon());
@@ -43,13 +40,18 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox
         // list view
         ModelListView<T> listView = new ModelListView<>();
         listView.getItemsList().setAll(getCategoryItems());
-        listView.promptTextProperty().set(getSearchPromptText());
+        listView.setPromptText(getSearchPromptText());
         listView.setFilter(getFilter());
         listView.setMaxHeight(Double.MAX_VALUE);
         listView.setCellFactory(cellFactory());
+        listView.setComparator(getModelComparator());
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         return List.of(header, listView);
+    }
+
+    protected Comparator<T> getModelComparator( ) {
+        return Comparator.comparing((T modelObject) -> StringUtils.defaultIfEmpty(modelObject.getName(), "").toLowerCase());
     }
 
     protected Callback<String, Predicate<T>> getFilter(){
@@ -68,26 +70,12 @@ public abstract class MobileCategoryPageBase<T extends ModelObject> extends VBox
 
     protected abstract ObservableList<T> getCategoryItems();
 
-    protected MobileCategoryHeader createCategoryHeader() {
-        return new MobileCategoryHeader();
+    protected MobilePageHeader createCategoryHeader() {
+        return new MobilePageHeader();
     }
 
     protected String getSearchPromptText() {
         return "Search...";
-    }
-
-    // size
-
-    public final ObjectProperty<Size> sizeProperty() {
-        return sizeSupport.sizeProperty();
-    }
-
-    public final Size getSize() {
-        return sizeSupport.getSize();
-    }
-
-    public final void setSize(Size size) {
-        sizeSupport.setSize(size);
     }
 
     // blocking property to control the glass pane

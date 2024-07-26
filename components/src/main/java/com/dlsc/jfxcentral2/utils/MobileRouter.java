@@ -2,15 +2,18 @@ package com.dlsc.jfxcentral2.utils;
 
 import com.dlsc.jfxcentral2.events.MobileLinkEvent;
 import com.dlsc.jfxcentral2.events.MobileResponseEvent;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyLongProperty;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The MobileRouter class is responsible for managing navigation in the mobile application.
@@ -20,6 +23,7 @@ public class MobileRouter {
 
     private static MobileRouter instance;
     private final List<MobileRoute> mobileRoutes = new ArrayList<>();
+    private final Navigator<String> navigator = new Navigator<>();
 
     private MobileRouter() {
         EventBusUtil.register(this);
@@ -39,32 +43,70 @@ public class MobileRouter {
 
     @Subscribe
     public void handleMobileLink(MobileLinkEvent linkEvent) {
+        navigateTo(linkEvent.link());
+    }
+
+    public void navigateTo(String link) {
         long start = System.currentTimeMillis();
-        String link = linkEvent.link();
         System.out.println(">>> Navigating to: " + link);
 
-        currentPath.set(linkEvent.link());
+        if (!Objects.equals(navigator.getCurrent(), link) && !StringUtils.equalsIgnoreCase(link, PagePath.REFRESH)) {
+            // Record the navigation in the history manager
+            navigator.visit(link);
+        }
+        updateView(link, start);
+    }
+
+    private void updateView(String link, long start) {
+        currentPath.set(link);
         for (MobileRoute mobileRoute : mobileRoutes) {
             if (mobileRoute.matches(link)) {
-                if (mobileRoute.getRedirectPath() != null) {
-                    handleMobileLink(new MobileLinkEvent(mobileRoute.getRedirectPath()));
+                MobileResponse response = mobileRoute.createResponse(link);
+
+                String redirectPath = response.getRedirectPath();
+                if (redirectPath != null) {
+                    navigateTo(redirectPath);
                     loadTime.set(System.currentTimeMillis() - start);
                     return;
                 }
-                Node view = mobileRoute.createView(link);
+
+                Node view = response.getView();
                 if (view != null) {
-                    EventBusUtil.post(new MobileResponseEvent(link, view));
+                    response.setFinalUrl(link);
+                    EventBusUtil.post(new MobileResponseEvent(response));
                     loadTime.set(System.currentTimeMillis() - start);
                     return;
                 }
             }
         }
-        EventBusUtil.post(new MobileResponseEvent(link, new Label("Error: 404 " + link)));
+        EventBusUtil.post(new MobileResponseEvent(MobileResponse.view(link, new Label("404 - Not Found"))));
         loadTime.set(System.currentTimeMillis() - start);
     }
 
+    public void goToBack() {
+        if (navigator.isCanGoBack()) {
+            String previousLink = navigator.goBack();
+            EventBusUtil.post(new MobileLinkEvent(previousLink));
+        }
+    }
+
+    public void goToForward() {
+        if (navigator.isCanGoForward()) {
+            String nextLink = navigator.goForward();
+            EventBusUtil.post(new MobileLinkEvent(nextLink));
+        }
+    }
+
+    public final ReadOnlyBooleanProperty canGoBackProperty() {
+        return navigator.canGoBackProperty();
+    }
+
+    public final ReadOnlyBooleanProperty canGoForwardProperty() {
+        return navigator.canGoForwardProperty();
+    }
+
     public void start() {
-        handleMobileLink(new MobileLinkEvent(PagePath.HOME));
+        navigateTo(PagePath.HOME);
     }
 
     // current path

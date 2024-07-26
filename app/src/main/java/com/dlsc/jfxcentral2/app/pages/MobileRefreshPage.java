@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral2.app.pages;
 import com.dlsc.jfxcentral2.app.RepositoryManager;
 import com.dlsc.jfxcentral2.app.utils.RepositoryUpdater;
 import com.dlsc.jfxcentral2.components.CustomImageView;
-import com.dlsc.jfxcentral2.mobile.components.WelcomePageView;
+import com.dlsc.jfxcentral2.mobile.components.IntroPane;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
@@ -44,12 +44,15 @@ public class MobileRefreshPage extends StackPane {
             invalidationListener.invalidated(null);
         });
 
-        // top part
-        WelcomePageView welcomePageView = new WelcomePageView();
-        StackPane topBox = new StackPane(welcomePageView);
-        topBox.getStyleClass().add("top-box");
+        // top part (logo)
+        CustomImageView logo = new CustomImageView();
+        logo.getStyleClass().addAll("jfx-central-logo", "color");
 
-        Label loadLabel = new Label("Progress download github repository. 38%");
+        // center part (intro pane)
+        IntroPane introPane = new IntroPane();
+        VBox.setVgrow(introPane, Priority.ALWAYS);
+
+        Label loadLabel = new Label();
         loadLabel.getStyleClass().add("load-label");
         loadLabel.setManaged(false);
         loadLabel.setVisible(false);
@@ -79,24 +82,10 @@ public class MobileRefreshPage extends StackPane {
             repositoryUpdater.performUpdate(false);
         });
 
-        Label welcomeLabel = new Label("Welcome to JFXCentral");
-        welcomeLabel.getStyleClass().add("welcome-label");
-        welcomeLabel.managedProperty().bind(welcomeLabel.visibleProperty());
-        welcomeLabel.visibleProperty().bind(startButton.visibleProperty().not());
-
-        Label descLabel = new Label("Home to anything related to JavaFX.");
-        descLabel.getStyleClass().add("desc-label");
-        descLabel.managedProperty().bind(descLabel.visibleProperty());
-        descLabel.visibleProperty().bind(startButton.visibleProperty().not());
-
-        VBox bottomBox = new VBox(welcomeLabel, descLabel, startButton, loadLabel);
+        VBox bottomBox = new VBox(startButton, loadLabel);
         bottomBox.getStyleClass().add("bottom-box");
-        VBox.setVgrow(bottomBox, Priority.ALWAYS);
 
-        CustomImageView logo = new CustomImageView();
-        logo.getStyleClass().addAll("jfx-central-logo", "color");
-
-        VBox content = new VBox(topBox, bottomBox, logo);
+        VBox content = new VBox(logo, introPane, bottomBox);
         content.getStyleClass().add("content-box");
         getChildren().add(content);
 

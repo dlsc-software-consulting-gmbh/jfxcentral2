@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.mobile.home;
 
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.SizeSupport;
+import com.dlsc.jfxcentral2.mobile.pages.MobileHomePage;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.Label;
@@ -57,6 +58,12 @@ public class HomePageHeader extends HBox {
             if (newValue == Size.SMALL || oldValue == Size.SMALL) {
                 updateView();
             }
+        });
+
+        // click on the logo to go back to the normal view.
+        setOnMouseClicked(e -> {
+            MobileHomePage.getInstance().setContentType(MobileHomePage.ContentType.NORMAL);
+            requestFocus();
         });
     }
 

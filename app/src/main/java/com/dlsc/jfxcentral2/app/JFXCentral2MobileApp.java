@@ -16,6 +16,7 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.app.pages.MobileRefreshPage;
+import com.dlsc.jfxcentral2.events.OpenWebLinkEvent;
 import com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent;
 import com.dlsc.jfxcentral2.mobile.components.BottomMenuBar;
 import com.dlsc.jfxcentral2.mobile.components.MobileDevelopToolBar;
@@ -25,6 +26,7 @@ import com.dlsc.jfxcentral2.mobile.pages.MobileLinksOfTheWeekPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileBlogsCategoryPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileBooksCategoryPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileCompaniesCategoryPage;
+import com.dlsc.jfxcentral2.mobile.pages.category.MobileDocPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileLearnJavaFXCategoryPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileLearnMobileCategoryPage;
 import com.dlsc.jfxcentral2.mobile.pages.category.MobileLearnRaspberryPiCategoryPage;
@@ -49,11 +51,14 @@ import com.dlsc.jfxcentral2.mobile.pages.details.MobileVideoDetailsPage;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.EventBusUtil;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
+import com.dlsc.jfxcentral2.utils.MobileResponse;
 import com.dlsc.jfxcentral2.utils.MobileRoute;
 import com.dlsc.jfxcentral2.utils.MobileRouter;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import com.dlsc.jfxcentral2.utils.Subscribe;
+import com.gluonhq.attach.browser.BrowserService;
 import com.gluonhq.attach.display.DisplayService;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
@@ -70,6 +75,8 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -148,6 +155,22 @@ public class JFXCentral2MobileApp extends Application {
         notchPane.setManaged(event.isUpdated());
     }
 
+    @Subscribe
+    public void onOpenWebLink(OpenWebLinkEvent event) {
+        String link = event.link();
+        if (OSUtil.isNative()) {
+            BrowserService.create().ifPresent(service -> {
+                try {
+                    service.launchExternalBrowser(link);
+                } catch (IOException | URISyntaxException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            getHostServices().showDocument(link);
+        }
+    }
+
     private void updateSizeProperty(Scene scene) {
         double sceneWidth = scene.getWidth();
         if (sceneWidth < 760) {
@@ -165,15 +188,18 @@ public class JFXCentral2MobileApp extends Application {
                     boolean repositoryUpdated = RepositoryManager.isRepositoryUpdated();
                     EventBusUtil.post(new RepositoryUpdatedEvent(repositoryUpdated));
                     if (repositoryUpdated) {
-                        return new MobileHomePage(size);
+                        MobileHomePage mobileHomePage = MobileHomePage.getInstance();
+                        mobileHomePage.sizeProperty().bind(size);
+                        return MobileResponse.view(r, mobileHomePage);
                     } else {
-                        return new MobileRefreshPage(size);
+                        return MobileResponse.redirect(r, PagePath.REFRESH);
                     }
                 }))
-                .and(MobileRoute.get(PagePath.REFRESH, r -> new MobileRefreshPage(size)))
+                .and(MobileRoute.get(PagePath.REFRESH, r -> MobileResponse.view(r, new MobileRefreshPage(size))))
                 .and(MobileRoute.redirect("/index", PagePath.HOME))
                 .and(MobileRoute.redirect("/home", PagePath.HOME))
-                .and(MobileRoute.get(PagePath.LINKS, r -> new MobileLinksOfTheWeekPage(size)))
+                .and(MobileRoute.get(PagePath.LINKS, r -> MobileResponse.view(r, new MobileLinksOfTheWeekPage(size))))
+                .and(MobileRoute.get(PagePath.DOCUMENTATION, r -> MobileResponse.view(r, new MobileDocPage(size))))
                 .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.REAL_WORLD, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.LIBRARIES, Library.class, () -> new MobileLibrariesCategoryPage(size), id -> new MobileLibraryDetailsPage(size, id)))
@@ -196,13 +222,12 @@ public class JFXCentral2MobileApp extends Application {
             if (index > 0 && clazz != null) {
                 String id = url.substring(index + 1).trim();
                 if (!DataRepository2.getInstance().isValidId(clazz, id)) {
-                    return new Label("Error: 404");
+                    return MobileResponse.view(url, new Label("Error: 404"));
                 }
-                return detailedResponse.call(id);
+                return MobileResponse.view(url, detailedResponse.call(id));
             }
-            return categoryResponse.get();
+            return MobileResponse.view(url, categoryResponse.get());
         });
-
     }
 
     public static void main(String[] args) {

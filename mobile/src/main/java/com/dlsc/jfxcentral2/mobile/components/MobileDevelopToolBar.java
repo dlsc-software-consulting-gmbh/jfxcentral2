@@ -91,8 +91,26 @@ public class MobileDevelopToolBar extends VBox {
         Label countLabel = new Label();
         Label visibleCountLabel = new Label();
 
-        HBox row1 = new HBox(5, pathField, loadTimeLabel, countLabel, visibleCountLabel);
+        Button goBackButton = new Button();
+        goBackButton.disableProperty().bind(router.canGoBackProperty().not());
+        goBackButton.setGraphic(new FontIcon(MaterialDesign.MDI_ARROW_LEFT));
+        goBackButton.setOnAction(evt -> router.goToBack());
+
+        Button goForwardButton = new Button();
+        goForwardButton.disableProperty().bind(router.canGoForwardProperty().not());
+        goForwardButton.setGraphic(new FontIcon(MaterialDesign.MDI_ARROW_RIGHT));
+        goForwardButton.setOnAction(evt -> router.goToForward());
+
+        Button refreshButton = new Button();
+        refreshButton.setGraphic(new FontIcon(MaterialDesign.MDI_REFRESH));
+        refreshButton.setOnAction(evt -> MobileLinkUtil.getToPage(router.getCurrentPath()));
+
+        HBox navigationBox = new HBox(2, goBackButton, goForwardButton, refreshButton);
+        navigationBox.setAlignment(Pos.CENTER_LEFT);
+
+        HBox row1 = new HBox(5, navigationBox, pathField, loadTimeLabel);
         HBox.setHgrow(pathField, Priority.ALWAYS);
+        row1.setAlignment(Pos.CENTER_LEFT);
 
         Label sizeLabel = new Label();
         sceneProperty().addListener((obs, oldScene, newScene) -> {
@@ -110,8 +128,8 @@ public class MobileDevelopToolBar extends VBox {
             }
         });
 
-        Label limitWidthLabel = new Label("Device: ");
         ComboBox<DeviceType> sizeComboBox = new ComboBox<>(FXCollections.observableArrayList(DeviceType.values()));
+        sizeComboBox.setPrefWidth(138);
         sizeComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(DeviceType object) {
@@ -124,8 +142,6 @@ public class MobileDevelopToolBar extends VBox {
             }
         });
         sizeComboBox.setValue(DeviceType.IPHONE_12_12_PRO);
-        HBox sizeBox = new HBox(limitWidthLabel, sizeComboBox);
-        sizeBox.setAlignment(Pos.CENTER_LEFT);
 
         sizeComboBox.valueProperty().addListener((obs, oldSize, newSize) -> {
             Scene scene = getScene();
@@ -144,7 +160,7 @@ public class MobileDevelopToolBar extends VBox {
             }
         });
 
-        HBox row2 = new HBox(5, sizeLabel, sizeBox, scenicViewButton);
+        HBox row2 = new HBox(5, countLabel, visibleCountLabel, sizeComboBox, scenicViewButton);
         row2.setAlignment(Pos.CENTER_RIGHT);
 
         getChildren().addAll(row1, row2);

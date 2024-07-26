@@ -24,6 +24,8 @@ public class LibraryOverviewBox extends PaneBase implements NameProvider {
         Header header = new Header();
         header.titleProperty().bind(titleProperty());
         header.iconProperty().bind(iconProperty());
+        header.managedProperty().bind(header.visibleProperty());
+        header.visibleProperty().bind(titleProperty().isNotEmpty().and(iconProperty().isNotNull()));
 
         CustomMarkdownView markdownView = new CustomMarkdownView();
         markdownView.setBaseURL(DataRepository2.getInstance().getRepositoryDirectoryURL() + "libraries/" + library.getId());

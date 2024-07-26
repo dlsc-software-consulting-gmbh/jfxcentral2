@@ -35,7 +35,7 @@ public class VideosDetailsBox extends DetailsBoxBase<Video> {
         ExternalLinkUtil.setExternalLink(youTubeButton, "https://youtu.be/" + video.getId(), "https://youtu.be/" + video.getId());
 
         if (OSUtil.isNative()) {
-            return List.of(youTubeButton);
+            return List.of(playButton);
         }
         return List.of(playButton, youTubeButton);
     }

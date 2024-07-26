@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral2.mobile.pages.category;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral2.mobile.components.ModelListCell;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
@@ -15,45 +15,45 @@ import javafx.scene.image.Image;
 import javafx.util.Callback;
 import org.kordamp.ikonli.Ikon;
 
-public class MobileBlogsCategoryPage extends MobileCategoryPageBase<Blog> {
+public class MobileDocPage extends MobileCategoryPageBase<Documentation> {
 
-    public MobileBlogsCategoryPage(ObjectProperty<Size> size) {
+    public MobileDocPage(ObjectProperty<Size> size) {
         super(size);
-        getStyleClass().add("blogs-category-page");
+        getStyleClass().add("doc-category-page");
     }
 
     @Override
-    protected Callback<ListView<Blog>, ListCell<Blog>> cellFactory() {
+    protected Callback<ListView<Documentation>, ListCell<Documentation>> cellFactory() {
         return param -> new ModelListCell<>() {
             @Override
-            protected void handleImage(Blog item, ObjectProperty<Image> imageProperty) {
-                imageProperty.bind(ImageManager.getInstance().blogIconImageProperty(item));
+            protected void handleImage(Documentation item, ObjectProperty<Image> imageProperty) {
+                imageProperty.bind(ImageManager.getInstance().documentationImageProperty(item));
             }
 
             @Override
-            protected String getSummary(Blog item) {
-                return item.getSummary();
+            protected String getSummary(Documentation item) {
+                return item.getDescription();
             }
         };
     }
 
     @Override
     protected String getCategoryTitle() {
-        return "Blogs";
+        return "Documentation";
     }
 
     @Override
     protected Ikon getCategoryIkon() {
-        return IkonUtil.getModelIkon(Blog.class);
+        return IkonUtil.getModelIkon(Documentation.class);
     }
 
     @Override
     protected String getSearchPromptText() {
-        return "Search for a blog";
+        return "Search for a documentation";
     }
 
     @Override
-    protected ObservableList<Blog> getCategoryItems() {
-        return FXCollections.observableArrayList(DataRepository2.getInstance().getBlogs());
+    protected ObservableList<Documentation> getCategoryItems() {
+        return FXCollections.observableArrayList(DataRepository2.getInstance().getDocumentation());
     }
 }
