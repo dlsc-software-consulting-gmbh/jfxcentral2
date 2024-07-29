@@ -11,7 +11,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 public class PeopleFilterView extends SimpleModelObjectSearchFilterView<Person> {
     public PeopleFilterView() {
         getStyleClass().add("people-filter-view");
-        setSearchPromptText("Search for a JFX person");
+        setSearchPromptText("Search for a person ...");
 
         Label keysLabel = new Label("*KEY");
         keysLabel.getStyleClass().add("keys-label");

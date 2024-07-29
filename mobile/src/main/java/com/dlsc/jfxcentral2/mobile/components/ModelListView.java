@@ -36,7 +36,8 @@ public class ModelListView<T extends ModelObject> extends VBox {
     public ModelListView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
-        SearchTextField searchTextField = new SearchTextField(true);
+        SearchTextField searchTextField = new SearchTextField();
+        searchTextField.setRound(true);
         searchTextField.promptTextProperty().bind(promptTextProperty());
         StackPane searchWrapper = new StackPane(searchTextField);
         searchWrapper.getStyleClass().add("search-wrapper");

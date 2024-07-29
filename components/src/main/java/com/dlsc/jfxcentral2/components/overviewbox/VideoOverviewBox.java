@@ -2,8 +2,10 @@ package com.dlsc.jfxcentral2.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 
 public class VideoOverviewBox extends SimpleOverviewBox<Video> {
 
@@ -17,7 +19,14 @@ public class VideoOverviewBox extends SimpleOverviewBox<Video> {
     }
 
     @Override
-    protected Node createBottomNode() {
+    protected Node createTopNode() {
         return VideoViewFactory.createVideoViewNode(getModel());
+    }
+
+    @Override
+    protected Node createBottomNode() {
+        CustomMarkdownView markdownView = new CustomMarkdownView();
+        markdownView.setMdString(getModel().getDescription());
+        return markdownView;
     }
 }

@@ -15,7 +15,7 @@ public class ShowcaseFilterView extends SimpleModelObjectSearchFilterView<RealWo
 
     public ShowcaseFilterView() {
         getStyleClass().add("showcases-filter-view");
-        setSearchPromptText("Search for an application...");
+        setSearchPromptText("Search for an application ...");
 
         if (domainFilterItems == null) {
             domainFilterItems = getDomainFilterItems();

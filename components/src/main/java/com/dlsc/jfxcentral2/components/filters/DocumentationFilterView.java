@@ -24,7 +24,7 @@ public class DocumentationFilterView extends SimpleSearchFilterView<Documentatio
                 new SortItem<>("From Z to A", Comparator.comparing((Documentation modelObject) -> modelObject.getName().toLowerCase()).reversed()))
         ));
 
-        setSearchPromptText("Search for a Documentation");
+        setSearchPromptText("Search for documentation ...");
 
         setOnSearch(text -> tool -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(tool.getName(), text)

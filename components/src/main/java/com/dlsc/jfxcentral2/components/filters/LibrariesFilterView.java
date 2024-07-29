@@ -7,7 +7,7 @@ public class LibrariesFilterView extends SimpleModelObjectSearchFilterView<Libra
 
     public LibrariesFilterView() {
         getStyleClass().add("libraries-filter-view");
-        setSearchPromptText("Search for a library");
+        setSearchPromptText("Search for a library ...");
 
         setOnSearch(text -> library -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(library.getName(), text)

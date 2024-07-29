@@ -20,7 +20,8 @@ public class SearchTextView extends StackPane {
     public SearchTextView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
-        SearchTextField searchTextField = new SearchTextField(true);
+        SearchTextField searchTextField = new SearchTextField();
+        searchTextField.setRound(true);
         searchTextField.promptTextProperty().bind(promptTextProperty());
         searchText.bind(searchTextField.textProperty());
 

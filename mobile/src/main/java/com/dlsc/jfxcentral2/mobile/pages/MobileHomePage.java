@@ -69,7 +69,8 @@ public class MobileHomePage extends MobilePageBase {
         header.sizeProperty().bind(sizeProperty());
 
         // search field
-        searchTextField = new SearchTextField(true);
+        searchTextField = new SearchTextField();
+        searchTextField.setRound(true);
         searchTextField.setRight(createSearchCancelButton());
         searchTextField.setPromptText("Search for anything...");
         searchView.searchTextProperty().bindBidirectional(searchTextField.textProperty());

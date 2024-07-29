@@ -8,7 +8,7 @@ public class TipsAndTricksFilterView extends SimpleModelObjectSearchFilterView<T
     public TipsAndTricksFilterView() {
         getStyleClass().add("tips-filter-view");
 
-        setSearchPromptText("Search for tips and tricks");
+        setSearchPromptText("Search for a tip or trick ...");
 
         setOnSearch(text -> tip -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(tip.getName(), text)

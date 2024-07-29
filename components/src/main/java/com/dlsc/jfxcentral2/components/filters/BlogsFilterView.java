@@ -7,7 +7,7 @@ public class BlogsFilterView extends SimpleModelObjectSearchFilterView<Blog> {
 
     public BlogsFilterView() {
         getStyleClass().add("blogs-filter-view");
-        setSearchPromptText("Search for a blog");
+        setSearchPromptText("Search for a blog ...");
 
         setOnSearch(text -> blog -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(blog.getName(), text)

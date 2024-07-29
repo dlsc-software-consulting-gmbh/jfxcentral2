@@ -28,7 +28,6 @@ open module com.dlsc.jfxcentral2.mobile {
     requires jpro.webapi;
     requires one.jpro.platform.routing.core;
     requires java.desktop;
-    requires commons.validator;
     requires com.dlsc.jfxcentral2.iconfont;
     requires com.google.gson;
 
