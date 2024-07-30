@@ -3,13 +3,14 @@ package com.dlsc.jfxcentral2.mobile.components;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
-import com.dlsc.jfxcentral2.components.PrettyScrollPane;
+
 import javafx.beans.binding.Bindings;
+import javafx.scene.control.ScrollPane;
 
 public class LotwPagination extends MobilePagination<LinksOfTheWeek> {
 
     private static final String DEFAULT_STYLE_CLASS = "lotw-pagination";
-    private final PrettyScrollPane scrollPane = new PrettyScrollPane();
+    private final ScrollPane scrollPane = new ScrollPane();
 
     public LotwPagination() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);

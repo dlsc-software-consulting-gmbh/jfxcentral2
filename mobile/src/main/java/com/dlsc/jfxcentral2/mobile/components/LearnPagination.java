@@ -9,13 +9,14 @@ import com.dlsc.jfxcentral.data.model.LearnMobile;
 import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
-import com.dlsc.jfxcentral2.components.PrettyScrollPane;
+
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -28,7 +29,7 @@ public class LearnPagination<T extends Learn> extends MobilePagination<T> {
     private static final String DEFAULT_STYLE_CLASS = "learn-pagination";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 
-    private final PrettyScrollPane scrollPane = new PrettyScrollPane();
+    private final ScrollPane scrollPane = new ScrollPane();
 
     public LearnPagination() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);

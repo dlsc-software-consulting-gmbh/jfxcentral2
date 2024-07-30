@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.gemsfx.SearchTextField;
 import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral2.components.MobileSearchTextField;
 import com.dlsc.jfxcentral2.mobile.utils.ListViewUtil;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
@@ -36,8 +36,7 @@ public class ModelListView<T extends ModelObject> extends VBox {
     public ModelListView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
-        SearchTextField searchTextField = new SearchTextField();
-        searchTextField.setRound(true);
+        MobileSearchTextField searchTextField = new MobileSearchTextField();
         searchTextField.promptTextProperty().bind(promptTextProperty());
         StackPane searchWrapper = new StackPane(searchTextField);
         searchWrapper.getStyleClass().add("search-wrapper");

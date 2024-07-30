@@ -40,7 +40,7 @@ public class HelloSearchFilterView2 extends JFXCentralSampleBase {
                 ))
         );
 
-        //Add SearchField
+        //Add MobileSearchTextField
         filterView.setSearchPromptText("Search Videos");
         filterView.setOnSearch(text -> video -> StringUtils.isBlank(text) || StringUtils.containsIgnoreCase(video.getName(), text));
 
