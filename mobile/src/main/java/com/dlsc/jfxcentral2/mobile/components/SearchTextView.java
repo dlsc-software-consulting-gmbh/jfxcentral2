@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.gemsfx.SearchTextField;
+import com.dlsc.jfxcentral2.components.MobileSearchTextField;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.BooleanProperty;
@@ -20,7 +20,7 @@ public class SearchTextView extends StackPane {
     public SearchTextView() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
-        SearchTextField searchTextField = new SearchTextField(true);
+        MobileSearchTextField searchTextField = new MobileSearchTextField();
         searchTextField.promptTextProperty().bind(promptTextProperty());
         searchText.bind(searchTextField.textProperty());
 

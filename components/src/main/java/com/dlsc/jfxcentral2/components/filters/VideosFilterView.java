@@ -21,7 +21,7 @@ public class VideosFilterView extends SimpleModelObjectSearchFilterView<Video> {
         getStyleClass().add("videos-filter-view");
 
         setSortGroup(null);
-        setSearchPromptText("Search for a video");
+        setSearchPromptText("Search for a video ...");
 
         if (typeFilterItems == null) {
             typeFilterItems = getVideoFilterItems(Video::getType, createFilterPredicate(Video::getType));

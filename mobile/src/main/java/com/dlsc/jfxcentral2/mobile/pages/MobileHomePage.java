@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.pages;
 
-import com.dlsc.gemsfx.SearchTextField;
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
@@ -11,8 +10,9 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.components.MobileSearchTextField;
 import com.dlsc.jfxcentral2.components.MobilePageBase;
-import com.dlsc.jfxcentral2.components.PrettyScrollPane;
+
 import com.dlsc.jfxcentral2.mobile.components.LearnCategoryBox;
 import com.dlsc.jfxcentral2.mobile.components.MobileSearchView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryAdvancedView;
@@ -25,6 +25,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -37,7 +38,7 @@ public class MobileHomePage extends MobilePageBase {
 
     private static MobileHomePage instance;
 
-    private final SearchTextField searchTextField;
+    private final MobileSearchTextField searchTextField;
 
     public enum ContentType {
         NORMAL, SEARCH
@@ -69,7 +70,7 @@ public class MobileHomePage extends MobilePageBase {
         header.sizeProperty().bind(sizeProperty());
 
         // search field
-        searchTextField = new SearchTextField(true);
+        searchTextField = new MobileSearchTextField();
         searchTextField.setRight(createSearchCancelButton());
         searchTextField.setPromptText("Search for anything...");
         searchView.searchTextProperty().bindBidirectional(searchTextField.textProperty());
@@ -145,13 +146,14 @@ public class MobileHomePage extends MobilePageBase {
         CategoryPreviewView blogPreviewView = CategoryPreviewView.createBlogPreviewView(randomBlogs, PagePath.BLOGS);
         blogPreviewView.sizeProperty().bind(sizeProperty());
 
-        VBox normalView = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView, learnCategoryBox);
+       // VBox normalView = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView, learnCategoryBox);
+        VBox normalView = new VBox(showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView, learnCategoryBox);
         normalView.getStyleClass().add("content-box");
 
-        PrettyScrollPane prettyScrollPane = new PrettyScrollPane(normalView);
-        prettyScrollPane.getStyleClass().add("mobile");
-        VBox.setVgrow(prettyScrollPane, Priority.ALWAYS);
-        return prettyScrollPane;
+        ScrollPane ScrollPane = new ScrollPane(normalView);
+        ScrollPane.getStyleClass().add("mobile");
+        VBox.setVgrow(ScrollPane, Priority.ALWAYS);
+        return ScrollPane;
     }
 
     private <T extends ModelObject> List<T> getRandomSample(List<T> list, int sampleSize) {

@@ -8139,7 +8139,7 @@
 }
 
 /** ------------------------------------
- * search-field-list-view (SearchField popup)
+ * search-field-list-view (MobileSearchTextField popup)
  */
 .search-field-list-view {
     -fx-pref-height: 350px !important;
@@ -9310,6 +9310,16 @@
 
 .packs-icons-view:sm .content-box-wrapper .collapsible-button {
     -fx-padding: 10px 30px;
+}
+
+/* ----------------------------------------------------------------------------
+ * ScrollPane
+ */
+
+.scroll-pane {
+    -fx-padding: 0;
+    -fx-background-insets: 0; /* no focus border */
+    -fx-border-width: 0;
 }
 
 /* ----------------------------------------------------------------------------

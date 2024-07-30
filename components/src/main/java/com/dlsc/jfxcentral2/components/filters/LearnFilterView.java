@@ -15,7 +15,7 @@ public class LearnFilterView extends SimpleModelObjectSearchFilterView<Learn> {
     public LearnFilterView() {
         getStyleClass().addAll("learn-filter-view", "tools-filter-view");
 
-        setSearchPromptText("Search for a lesson");
+        setSearchPromptText("Search for a lesson ...");
 
         setOnSearch(text -> learn -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(learn.getName(), text)

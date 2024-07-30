@@ -7,7 +7,7 @@ public class CompaniesFilterView extends SimpleModelObjectSearchFilterView<Compa
 
     public CompaniesFilterView() {
         getStyleClass().add("companies-filter-view");
-        setSearchPromptText("Search for a company");
+        setSearchPromptText("Search for a company ...");
 
         setOnSearch(text -> company -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(company.getName(), text)

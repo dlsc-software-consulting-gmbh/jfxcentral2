@@ -9,6 +9,8 @@ open module com.dlsc.jfxcentral2.components {
     requires batik.dom;
     requires batik.svggen;
     requires com.github.weisj.jsvg;
+    requires org.apache.commons.validator;
+    requires org.apache.commons.logging;
 
     requires fr.brouillard.oss.cssfx;
 
@@ -28,7 +30,6 @@ open module com.dlsc.jfxcentral2.components {
     requires jpro.webapi;
     requires one.jpro.platform.routing.core;
     requires java.desktop;
-    requires commons.validator;
     requires com.dlsc.jfxcentral2.iconfont;
     requires com.google.gson;
 
@@ -96,6 +97,7 @@ open module com.dlsc.jfxcentral2.components {
     requires org.kordamp.ikonli.win10;
     requires org.kordamp.ikonli.zondicons;
     requires com.rometools.rome;
+    requires java.prefs;
     // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.components;

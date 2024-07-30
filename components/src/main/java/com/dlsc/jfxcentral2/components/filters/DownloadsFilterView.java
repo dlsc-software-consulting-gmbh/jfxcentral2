@@ -7,7 +7,7 @@ public class DownloadsFilterView extends SimpleModelObjectSearchFilterView<Downl
 
     public DownloadsFilterView() {
         getStyleClass().add("downloads-filter-view");
-        setSearchPromptText("Search for a download");
+        setSearchPromptText("Search for a download ...");
 
         setOnSearch(text -> download -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(download.getName(), text)

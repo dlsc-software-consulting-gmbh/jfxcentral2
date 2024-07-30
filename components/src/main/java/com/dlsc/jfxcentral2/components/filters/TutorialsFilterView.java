@@ -8,7 +8,7 @@ public class TutorialsFilterView extends SimpleModelObjectSearchFilterView<Tutor
     public TutorialsFilterView() {
         getStyleClass().add("tutorials-filter-view");
 
-        setSearchPromptText("Search for a tutorial");
+        setSearchPromptText("Search for a tutorial ...");
 
         setOnSearch(text -> tutorial -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(tutorial.getName(), text)

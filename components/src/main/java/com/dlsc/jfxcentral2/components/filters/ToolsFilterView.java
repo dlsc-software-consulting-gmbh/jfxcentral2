@@ -8,7 +8,7 @@ public class ToolsFilterView extends SimpleModelObjectSearchFilterView<Tool> {
     public ToolsFilterView() {
         getStyleClass().add("tools-filter-view");
 
-        setSearchPromptText("Search for a tool");
+        setSearchPromptText("Search for a tool ...");
 
         setOnSearch(text -> tool -> StringUtils.isBlank(text)
                 || StringUtils.containsIgnoreCase(tool.getName(), text)
