@@ -903,7 +903,7 @@
     -fx-background-color: -white;
 }
 
-.model-list-view .search-wrapper .search-text-field .left-pane {
+.model-list-view .search-wrapper .mobile-search-text-field {
     -fx-padding: 8px;
 }
 
