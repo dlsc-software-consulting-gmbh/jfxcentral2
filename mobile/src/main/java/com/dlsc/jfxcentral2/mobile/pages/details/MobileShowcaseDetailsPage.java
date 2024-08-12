@@ -13,9 +13,9 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class MobileShowcaseMobileDetailsPage extends MobileDetailsPageBase<RealWorldApp> {
+public class MobileShowcaseDetailsPage extends MobileDetailsPageBase<RealWorldApp> {
 
-    public MobileShowcaseMobileDetailsPage(ObjectProperty<Size> size, String itemId) {
+    public MobileShowcaseDetailsPage(ObjectProperty<Size> size, String itemId) {
         super(size, RealWorldApp.class, itemId);
     }
 

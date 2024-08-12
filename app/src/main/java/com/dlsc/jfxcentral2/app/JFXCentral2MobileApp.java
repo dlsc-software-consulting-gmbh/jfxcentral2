@@ -43,7 +43,7 @@ import com.dlsc.jfxcentral2.mobile.pages.details.MobileCompanyDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileLearnDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileLibraryDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobilePersonDetailsPage;
-import com.dlsc.jfxcentral2.mobile.pages.details.MobileShowcaseMobileDetailsPage;
+import com.dlsc.jfxcentral2.mobile.pages.details.MobileShowcaseDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileTipDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileToolDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileTutorialDetailsPage;
@@ -200,8 +200,8 @@ public class JFXCentral2MobileApp extends Application {
                 .and(MobileRoute.redirect("/home", PagePath.HOME))
                 .and(MobileRoute.get(PagePath.LINKS, r -> MobileResponse.view(r, new MobileLinksOfTheWeekPage(size))))
                 .and(MobileRoute.get(PagePath.DOCUMENTATION, r -> MobileResponse.view(r, new MobileDocPage(size))))
-                .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute(PagePath.REAL_WORLD, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.REAL_WORLD, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.LIBRARIES, Library.class, () -> new MobileLibrariesCategoryPage(size), id -> new MobileLibraryDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.PEOPLE, Person.class, () -> new MobilePeopleCategoryPage(size), id -> new MobilePersonDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.BLOGS, Blog.class, () -> new MobileBlogsCategoryPage(size), id -> new MobileBlogDetailsPage(size, id)))
