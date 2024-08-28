@@ -34,6 +34,7 @@ public class BottomMenuBar extends HBox {
 
         CustomToggleButton homeButton = new CustomToggleButton();
         homeButton.setText("Home");
+        homeButton.setPrefWidth(0);
         homeButton.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
         homeButton.setMaxWidth(Double.MAX_VALUE);
         homeButton.setUserData(PagePath.HOME);
@@ -48,6 +49,7 @@ public class BottomMenuBar extends HBox {
         HBox.setHgrow(homeButton, Priority.ALWAYS);
 
         CustomToggleButton linksWeekButton = new CustomToggleButton();
+        linksWeekButton.setPrefWidth(0);
         linksWeekButton.setText("News");
         linksWeekButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(LinksOfTheWeek.class)));
         linksWeekButton.setMaxWidth(Double.MAX_VALUE);
@@ -56,6 +58,7 @@ public class BottomMenuBar extends HBox {
         HBox.setHgrow(linksWeekButton, Priority.ALWAYS);
 
         CustomToggleButton showcasesButton = new CustomToggleButton();
+        showcasesButton.setPrefWidth(0);
         showcasesButton.setText("Apps");
         showcasesButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(RealWorldApp.class)));
         showcasesButton.setMaxWidth(Double.MAX_VALUE);
@@ -64,6 +67,7 @@ public class BottomMenuBar extends HBox {
         HBox.setHgrow(showcasesButton, Priority.ALWAYS);
 
         CustomToggleButton libraryButton = new CustomToggleButton();
+        libraryButton.setPrefWidth(0);
         libraryButton.setText("Libs");
         libraryButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Library.class)));
         libraryButton.setMaxWidth(Double.MAX_VALUE);
@@ -72,6 +76,7 @@ public class BottomMenuBar extends HBox {
         HBox.setHgrow(libraryButton, Priority.ALWAYS);
 
         CustomToggleButton peopleButton = new CustomToggleButton();
+        peopleButton.setPrefWidth(0);
         peopleButton.setText("People");
         peopleButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Person.class)));
         peopleButton.setMaxWidth(Double.MAX_VALUE);

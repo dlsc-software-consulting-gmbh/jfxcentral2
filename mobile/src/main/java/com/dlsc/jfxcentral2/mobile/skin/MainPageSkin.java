@@ -11,6 +11,7 @@ import com.dlsc.jfxcentral2.utils.Subscribe;
 import javafx.scene.Node;
 import javafx.scene.control.SkinBase;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -19,6 +20,7 @@ public class MainPageSkin extends SkinBase<MainPage> {
 
     private final BorderPane borderPane = new BorderPane();
     private final BottomMenuBar bottomMenuBar = new BottomMenuBar();
+    private final StackPane centerPane = new StackPane();
 
     public MainPageSkin(MainPage control) {
         super(control);
@@ -27,6 +29,9 @@ public class MainPageSkin extends SkinBase<MainPage> {
         bottomMenuBar.managedProperty().bind(bottomMenuBar.visibleProperty());
         bottomMenuBar.setVisible(false);
 
+        centerPane.getStyleClass().add("content-pane");
+
+        borderPane.setCenter(centerPane);
         borderPane.setBottom(bottomMenuBar);
         getChildren().add(borderPane);
     }
@@ -41,7 +46,7 @@ public class MainPageSkin extends SkinBase<MainPage> {
         Node newView = event.mobileResponse().getView();
         invokeLifecycleMethod(newView, MobilePageBase::getViewWillAppear);
 
-        borderPane.setCenter(newView);
+        centerPane.getChildren().setAll(newView);
 
         // Old view did disappear
         invokeLifecycleMethod(oldView, MobilePageBase::getViewDidDisappear);

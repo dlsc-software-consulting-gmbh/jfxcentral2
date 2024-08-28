@@ -21,14 +21,21 @@ import com.dlsc.jfxcentral2.mobile.home.HomePageHeader;
 import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,9 +80,11 @@ public class MobileHomePage extends MobilePageBase {
         searchTextField = new MobileSearchTextField();
         searchTextField.setRight(createSearchCancelButton());
         searchTextField.setPromptText("Search for anything...");
-        searchView.searchTextProperty().bindBidirectional(searchTextField.textProperty());
         searchTextField.setOnMousePressed(event -> setContentType(ContentType.SEARCH));
+        searchTextField.setOnTouchPressed(event -> setContentType(ContentType.SEARCH));
         searchTextField.textProperty().addListener(it -> setContentType(ContentType.SEARCH));
+
+        searchView.searchTextProperty().bindBidirectional(searchTextField.textProperty());
 
         HBox.setHgrow(searchTextField, Priority.ALWAYS);
         HBox searchWrapper = new HBox(searchTextField);
@@ -150,10 +159,51 @@ public class MobileHomePage extends MobilePageBase {
         VBox normalView = new VBox(showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView, learnCategoryBox);
         normalView.getStyleClass().add("content-box");
 
-        ScrollPane ScrollPane = new ScrollPane(normalView);
-        ScrollPane.getStyleClass().add("mobile");
-        VBox.setVgrow(ScrollPane, Priority.ALWAYS);
-        return ScrollPane;
+        ScrollPane scrollPane = new ScrollPane(normalView);
+        scrollPane.getStyleClass().add("mobile");
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
+
+        Node drawerContent = createDrawerContent();
+        StackPane.setAlignment(drawerContent, Pos.BOTTOM_CENTER);
+
+        return new StackPane(scrollPane, drawerContent);
+    }
+
+    private Node createDrawerContent() {
+        ToggleButton title = new ToggleButton("Content");
+        title.setMaxWidth(Double.MAX_VALUE);
+        title.getStyleClass().add("title");
+        title.selectedProperty().bindBidirectional(showDrawerProperty());
+
+        CategoriesPane content = new CategoriesPane();
+        content.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        content.setAlignment(Pos.CENTER);
+        VBox.setVgrow(content, Priority.ALWAYS);
+
+        VBox drawer = new VBox(title, content);
+        drawer.getStyleClass().add("drawer");
+        drawer.setPrefHeight(300);
+        drawer.setMaxHeight(Region.USE_PREF_SIZE);
+
+        drawer.translateYProperty().bind(Bindings.createDoubleBinding(() -> isShowDrawer() ? 0d : drawer.getHeight() - title.getHeight(), showDrawer));
+
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(drawer.widthProperty());
+        clip.heightProperty().bind(drawer.heightProperty().add(50));
+        clip.setLayoutY(-50);
+        drawer.setClip(clip);
+
+        return drawer;
+    }
+
+    private final BooleanProperty showDrawer = new SimpleBooleanProperty(this, "showDrawer", true);
+
+    public boolean isShowDrawer() {
+        return showDrawer.get();
+    }
+
+    public BooleanProperty showDrawerProperty() {
+        return showDrawer;
     }
 
     private <T extends ModelObject> List<T> getRandomSample(List<T> list, int sampleSize) {
