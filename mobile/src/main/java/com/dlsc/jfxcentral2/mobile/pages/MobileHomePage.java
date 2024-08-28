@@ -173,19 +173,20 @@ public class MobileHomePage extends MobilePageBase {
         ToggleButton title = new ToggleButton("Content");
         title.setMaxWidth(Double.MAX_VALUE);
         title.getStyleClass().add("title");
-        title.selectedProperty().bindBidirectional(showDrawerProperty());
+
+        final int HEIGHT = 200;
 
         CategoriesPane content = new CategoriesPane();
         content.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         content.setAlignment(Pos.CENTER);
+        content.setPrefHeight(HEIGHT);
         VBox.setVgrow(content, Priority.ALWAYS);
 
         VBox drawer = new VBox(title, content);
         drawer.getStyleClass().add("drawer");
-        drawer.setPrefHeight(300);
         drawer.setMaxHeight(Region.USE_PREF_SIZE);
 
-        drawer.translateYProperty().bind(Bindings.createDoubleBinding(() -> isShowDrawer() ? 0d : drawer.getHeight() - title.getHeight(), showDrawer));
+        drawer.translateYProperty().bind(Bindings.createDoubleBinding(() -> title.isSelected() ? 0d: HEIGHT, title.selectedProperty()));
 
         Rectangle clip = new Rectangle();
         clip.widthProperty().bind(drawer.widthProperty());
@@ -194,16 +195,6 @@ public class MobileHomePage extends MobilePageBase {
         drawer.setClip(clip);
 
         return drawer;
-    }
-
-    private final BooleanProperty showDrawer = new SimpleBooleanProperty(this, "showDrawer", true);
-
-    public boolean isShowDrawer() {
-        return showDrawer.get();
-    }
-
-    public BooleanProperty showDrawerProperty() {
-        return showDrawer;
     }
 
     private <T extends ModelObject> List<T> getRandomSample(List<T> list, int sampleSize) {

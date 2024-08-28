@@ -590,7 +590,7 @@
  */
 .mobile-search-text-field {
     -fx-background-radius: 1000px;
-    -fx-padding: 5px 10px;
+    -fx-padding: 6px 10px;
 }
 
 .mobile-search-text-field > .ikonli-font-icon {
@@ -937,10 +937,6 @@
     -fx-padding: 10px 15px 0 15px;
     -fx-spacing: 15px;
     -fx-background-color: -white;
-}
-
-.model-list-view .search-wrapper .search-text-field .left-pane {
-    -fx-padding: 8px;
 }
 
 .model-list-view .list-view .model-list-cell {
