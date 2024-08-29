@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.overviewbox;
 
 import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -49,6 +50,7 @@ public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
 
         if (!isSmall()) {
             GridPane gridPane = new GridPane();
+            gridPane.setVisible(!OSUtil.isAndroidOrIOS());
             gridPane.getStyleClass().add("top-grid");
             for (int i = 0; i < 4; i++) {
                 ColumnConstraints columnConstraints = new ColumnConstraints();
@@ -89,6 +91,7 @@ public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
                     createdOnGroup.getHeader(),
                     createdOnLabel
             );
+            topBox.setVisible(!OSUtil.isAndroidOrIOS());
             createdOnLabel.getStyleClass().add("last");
             topBox.getStyleClass().add("top-box");
             return topBox;

@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.CustomMarkdownView;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.model.NameProvider;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -50,6 +51,9 @@ public class OverviewBox<T extends ModelObject> extends PaneBase implements Name
 
         VBox bodyBox = new VBox(topWrapper, markdownView, bottomWrapper);
         bodyBox.getStyleClass().add("body-box");
+        if (OSUtil.isAndroidOrIOS()) {
+            bodyBox.getStyleClass().add("no-top-padding");
+        }
 
         VBox contentBox = new VBox();
         contentBox.getStyleClass().add("content-box");

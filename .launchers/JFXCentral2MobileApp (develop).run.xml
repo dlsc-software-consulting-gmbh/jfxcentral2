@@ -2,7 +2,7 @@
   <configuration default="false" name="JFXCentral2MobileApp (develop)" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.dlsc.jfxcentral2.app.JFXCentral2MobileApp" />
     <module name="app" />
-    <option name="VM_PARAMETERS" value="-Ddevelop=true -Dsocial=false" />
+    <option name="VM_PARAMETERS" value="-Ddevelop=true -Dsocial=false -Dnative=true" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.dlsc.jfxcentral2.app.*" />
