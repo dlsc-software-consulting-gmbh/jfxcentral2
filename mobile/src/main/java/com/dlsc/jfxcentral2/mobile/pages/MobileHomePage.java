@@ -21,15 +21,15 @@ import com.dlsc.jfxcentral2.mobile.home.HomePageHeader;
 import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -87,10 +87,11 @@ public class MobileHomePage extends MobilePageBase {
         searchView.searchTextProperty().bindBidirectional(searchTextField.textProperty());
 
         HBox.setHgrow(searchTextField, Priority.ALWAYS);
+
         HBox searchWrapper = new HBox(searchTextField);
         searchWrapper.getStyleClass().add("search-wrapper");
 
-        getChildren().addAll(header, searchWrapper, normalView, searchView);
+        getChildren().addAll(searchWrapper, normalView, searchView);
 
         setViewWillAppear(()-> setContentType(ContentType.NORMAL));
     }
@@ -104,6 +105,7 @@ public class MobileHomePage extends MobilePageBase {
                 return "Search";
             }
         }, contentTypeProperty()));
+
         button.setOnAction(event -> {
             if (getContentType() == ContentType.SEARCH) {
                 searchTextField.clear();
@@ -112,6 +114,7 @@ public class MobileHomePage extends MobilePageBase {
                 setContentType(ContentType.SEARCH);
             }
         });
+
         return button;
     }
 
@@ -163,38 +166,7 @@ public class MobileHomePage extends MobilePageBase {
         scrollPane.getStyleClass().add("mobile");
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
 
-        Node drawerContent = createDrawerContent();
-        StackPane.setAlignment(drawerContent, Pos.BOTTOM_CENTER);
-
-        return new StackPane(scrollPane, drawerContent);
-    }
-
-    private Node createDrawerContent() {
-        ToggleButton title = new ToggleButton("Content");
-        title.setMaxWidth(Double.MAX_VALUE);
-        title.getStyleClass().add("title");
-
-        final int HEIGHT = 200;
-
-        CategoriesPane content = new CategoriesPane();
-        content.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        content.setAlignment(Pos.CENTER);
-        content.setPrefHeight(HEIGHT);
-        VBox.setVgrow(content, Priority.ALWAYS);
-
-        VBox drawer = new VBox(title, content);
-        drawer.getStyleClass().add("drawer");
-        drawer.setMaxHeight(Region.USE_PREF_SIZE);
-
-        drawer.translateYProperty().bind(Bindings.createDoubleBinding(() -> title.isSelected() ? 0d: HEIGHT, title.selectedProperty()));
-
-        Rectangle clip = new Rectangle();
-        clip.widthProperty().bind(drawer.widthProperty());
-        clip.heightProperty().bind(drawer.heightProperty().add(50));
-        clip.setLayoutY(-50);
-        drawer.setClip(clip);
-
-        return drawer;
+        return scrollPane;
     }
 
     private <T extends ModelObject> List<T> getRandomSample(List<T> list, int sampleSize) {
@@ -222,5 +194,4 @@ public class MobileHomePage extends MobilePageBase {
     public final void setContentType(ContentType contentType) {
         this.contentType.set(contentType);
     }
-
 }

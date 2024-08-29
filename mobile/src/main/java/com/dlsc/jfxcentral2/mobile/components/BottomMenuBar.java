@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.components.SizeSupport;
 import com.dlsc.jfxcentral2.events.MobileLinkEvent;
+import com.dlsc.jfxcentral2.mobile.pages.MainPage;
 import com.dlsc.jfxcentral2.mobile.pages.MobileHomePage;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.EventBusUtil;
@@ -28,7 +29,7 @@ public class BottomMenuBar extends HBox {
     private final SizeSupport sizeSupport = new SizeSupport(this);
     private final ToggleGroup toggleGroup;
 
-    public BottomMenuBar() {
+    public BottomMenuBar(Runnable closeDrawerCallback) {
         getStyleClass().add("bottom-menu-bar");
         EventBusUtil.register(this);
 
@@ -39,6 +40,7 @@ public class BottomMenuBar extends HBox {
         homeButton.setMaxWidth(Double.MAX_VALUE);
         homeButton.setUserData(PagePath.HOME);
         homeButton.setOnMousePressed(evt -> {
+            closeDrawerCallback.run();
             if (homeButton.isSelected()) {
                 // If the home page is being displayed, clicking homeButton will hide the search view and display the normal content.
                 MobileHomePage.getInstance().setContentType(MobileHomePage.ContentType.NORMAL);
@@ -54,6 +56,7 @@ public class BottomMenuBar extends HBox {
         linksWeekButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(LinksOfTheWeek.class)));
         linksWeekButton.setMaxWidth(Double.MAX_VALUE);
         linksWeekButton.setUserData(PagePath.LINKS);
+        linksWeekButton.setOnMouseClicked(evt -> closeDrawerCallback.run());
         MobileLinkUtil.setLink(linksWeekButton, PagePath.LINKS);
         HBox.setHgrow(linksWeekButton, Priority.ALWAYS);
 
@@ -63,6 +66,7 @@ public class BottomMenuBar extends HBox {
         showcasesButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(RealWorldApp.class)));
         showcasesButton.setMaxWidth(Double.MAX_VALUE);
         showcasesButton.setUserData(PagePath.SHOWCASES);
+        showcasesButton.setOnMouseClicked(evt -> closeDrawerCallback.run());
         MobileLinkUtil.setLink(showcasesButton, PagePath.SHOWCASES);
         HBox.setHgrow(showcasesButton, Priority.ALWAYS);
 
@@ -72,6 +76,7 @@ public class BottomMenuBar extends HBox {
         libraryButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Library.class)));
         libraryButton.setMaxWidth(Double.MAX_VALUE);
         libraryButton.setUserData(PagePath.LIBRARIES);
+        libraryButton.setOnMouseClicked(evt -> closeDrawerCallback.run());
         MobileLinkUtil.setLink(libraryButton, PagePath.LIBRARIES);
         HBox.setHgrow(libraryButton, Priority.ALWAYS);
 
@@ -81,6 +86,7 @@ public class BottomMenuBar extends HBox {
         peopleButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Person.class)));
         peopleButton.setMaxWidth(Double.MAX_VALUE);
         peopleButton.setUserData(PagePath.PEOPLE);
+        peopleButton.setOnMouseClicked(evt -> closeDrawerCallback.run());
         MobileLinkUtil.setLink(peopleButton, PagePath.PEOPLE);
         HBox.setHgrow(peopleButton, Priority.ALWAYS);
 
