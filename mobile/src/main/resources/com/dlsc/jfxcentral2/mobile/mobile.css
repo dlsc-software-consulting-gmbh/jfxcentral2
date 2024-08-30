@@ -6,7 +6,7 @@
 }
 
 /** ----------------------------------
- *PrettyScrollPane
+ * PrettyScrollPane
  */
 .scroll-pane.mobile {
     -fx-fit-to-width: true;
@@ -14,43 +14,6 @@
 
 .scroll-pane.mobile .viewport {
     -fx-background-color: -white;
-}
-
-/** ----------------------------------
- * BottomMenuBar
- */
-.bottom-menu-bar {
-    -fx-alignment: top-center;
-    -fx-background-color: -background;
-    -fx-padding: 8px 0 25px 0;
-    -fx-border-color: -grey-10;
-    -fx-border-width: 1 0 0 0;
-    -fx-font-size: 12px;
-}
-
-.bottom-menu-bar .toggle-button {
-    -fx-content-display: top;
-    -fx-background-color: transparent;
-    -fx-text-fill: -grey-60;
-    -fx-padding: 0 0 5px 0;
-    -fx-graphic-text-gap: 0px;
-}
-
-.bottom-menu-bar .toggle-button .ikonli-font-icon {
-    -fx-icon-size: 24px;
-    -fx-icon-color: -grey-60;
-}
-
-.bottom-menu-bar:md-lg .toggle-button .ikonli-font-icon {
-    -fx-icon-size: 24px;
-}
-
-.bottom-menu-bar .toggle-button:selected {
-    -fx-text-fill: -bright-blue;
-}
-
-.bottom-menu-bar .toggle-button:selected .ikonli-font-icon {
-    -fx-icon-color: -bright-blue;
 }
 
 /** ----------------------------------
@@ -575,9 +538,10 @@
 
 .main-page .drawer > .categories-pane {
     -fx-font-size: 12px;
+    -fx-padding: 0px 0px 15px 0px;
 }
 
-.main-page .drawer > .categories-pane > .button {
+.main-page .drawer > .categories-pane > .toggle-button {
     -fx-content-display: top;
     -fx-background-color: transparent;
     -fx-text-fill: -grey-60;
@@ -585,9 +549,17 @@
     -fx-graphic-text-gap: 0px;
 }
 
-.main-page .drawer > .categories-pane > .button .ikonli-font-icon {
+.main-page .drawer > .categories-pane > .toggle-button .ikonli-font-icon {
     -fx-icon-size: 24px;
     -fx-icon-color: -grey-60;
+}
+
+.main-page .drawer > .categories-pane > .toggle-button:selected {
+    -fx-text-fill: -bright-blue;
+}
+
+.main-page .drawer > .categories-pane > .toggle-button:selected .ikonli-font-icon {
+    -fx-icon-color: -bright-blue;
 }
 
 /** ----------------------------------

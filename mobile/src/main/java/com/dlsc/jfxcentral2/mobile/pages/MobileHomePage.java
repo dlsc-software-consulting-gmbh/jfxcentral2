@@ -124,12 +124,6 @@ public class MobileHomePage extends MobilePageBase {
 
         LearnCategoryBox learnCategoryBox = new LearnCategoryBox();
 
-        List<LinksOfTheWeek> linksOfTheWeek = DataRepository2.getInstance().getLinksOfTheWeek();
-
-        WeekLinksView weekLinksView = new WeekLinksView();
-        weekLinksView.sizeProperty().bind(sizeProperty());
-        weekLinksView.setLinksOfTheWeek(linksOfTheWeek.get(linksOfTheWeek.size() - 1));
-
         List<RealWorldApp> randomApps = getRandomSample(DataRepository2.getInstance().getRealWorldApps(), 3);
         CategoryPreviewView showCasePreviewView = CategoryPreviewView.createShowCasePreviewView(randomApps, PagePath.SHOWCASES);
         showCasePreviewView.sizeProperty().bind(sizeProperty());
@@ -158,7 +152,6 @@ public class MobileHomePage extends MobilePageBase {
         CategoryPreviewView blogPreviewView = CategoryPreviewView.createBlogPreviewView(randomBlogs, PagePath.BLOGS);
         blogPreviewView.sizeProperty().bind(sizeProperty());
 
-       // VBox normalView = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView, learnCategoryBox);
         VBox normalView = new VBox(showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView, learnCategoryBox);
         normalView.getStyleClass().add("content-box");
 

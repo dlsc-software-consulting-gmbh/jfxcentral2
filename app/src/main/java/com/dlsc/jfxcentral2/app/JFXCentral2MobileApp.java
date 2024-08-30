@@ -18,7 +18,6 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.app.pages.MobileRefreshPage;
 import com.dlsc.jfxcentral2.events.OpenWebLinkEvent;
 import com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent;
-import com.dlsc.jfxcentral2.mobile.components.BottomMenuBar;
 import com.dlsc.jfxcentral2.mobile.components.MobileDevelopToolBar;
 import com.dlsc.jfxcentral2.mobile.pages.MainPage;
 import com.dlsc.jfxcentral2.mobile.pages.MobileHomePage;
@@ -135,7 +134,7 @@ public class JFXCentral2MobileApp extends Application {
         scene.setFill(Color.web("#070B32"));
         scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
         scene.getStylesheets().add(Objects.requireNonNull(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css")).toExternalForm());
-        scene.getStylesheets().add(Objects.requireNonNull(BottomMenuBar.class.getResource("/com/dlsc/jfxcentral2/mobile/mobile.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(MainPage.class.getResource("/com/dlsc/jfxcentral2/mobile/mobile.css")).toExternalForm());
         // scene.focusOwnerProperty().addListener(it -> System.out.println("focus owner: " + scene.getFocusOwner()));
         updateSizeProperty(scene);
 

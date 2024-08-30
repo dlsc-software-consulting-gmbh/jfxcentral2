@@ -7,6 +7,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import one.jpro.platform.routing.LinkUtil;
 import org.kordamp.ikonli.javafx.FontIcon;
 import scala.Option;
@@ -36,14 +39,21 @@ public class LinksOfTheWeekHeader extends CategoryHeader  {
         CustomImageView rssImageView = new CustomImageView();
         rssImageView.setImage(RSS_IMAGE);
         LinkUtil.setLinkInternalNoPush(rssImageView, "/lotw/rss.xml", Option.empty(), false);
-        //rssImageView.setVisible(false);
-        //rssImageView.setManaged(false);
 
         HBox box = new HBox(label, rssImageView);
         box.getStyleClass().add("rss-box");
         box.setAlignment(Pos.CENTER);
 
-        setContent(box);
+        Label descriptionLabel = new Label("Do you have JavaFX news you want to share with the community? Let us know!\nSend a mail to links@jfx-central.com");
+        descriptionLabel.getStyleClass().add("description-label");
+        descriptionLabel.setWrapText(true);
+        descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
+        descriptionLabel.setTextAlignment(TextAlignment.CENTER);
+
+        VBox vbox = new VBox(20, box, descriptionLabel);
+        vbox.setAlignment(Pos.CENTER);
+
+        setContent(vbox);
         setTitle("Links of the Week");
         setIkon(IkonUtil.getModelIkon(LinksOfTheWeek.class));
         setBackgroundImage(BACKGROUND_IMAGE);

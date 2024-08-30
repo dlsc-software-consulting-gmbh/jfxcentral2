@@ -24,16 +24,16 @@ public class IntroPane extends VBox {
     }
 
     public final List<IntroCardData> introCardData = new ArrayList<>(List.of(
-            new IntroCardData("JavaFX Books", "Explore our JavaFX book collection, from beginner guides to advanced tutorials, including game development and use-cases like JavaFX for Raspberry Pi.", "books.png"),
-            new IntroCardData("Videos", "Watch JavaFX videos, conference talks, demos, and tutorials for all expertise levels.", "videos.png"),
-            new IntroCardData("Libraries", "Explore JavaFX third-party libraries, featuring components, game engines, styles, 3D graphics, and frameworks to enhance your projects.", "libraries.png"),
-            new IntroCardData("JavaFX Tutorials", "Browse tutorials ranging from JavaFX basics to advanced application and game development.", "tutorials.png"),
-            new IntroCardData("Tools", "Explore JavaFX tools including plugins, layout, CSS tools, testing, and packaging.", "tools.png"),
+            new IntroCardData("Books", "Beginner guides, advanced tutorials, game development.", "books.png"),
+            new IntroCardData("Videos", "Watch videos of conference talks, demos, and tutorials.", "videos.png"),
+            new IntroCardData("Libraries", "Explore third-party libraries that you can add to your own applications.", "libraries.png"),
+            new IntroCardData("Tutorials", "See a listing of places where you can find good online tutorials.", "tutorials.png"),
+            new IntroCardData("Tools", "Find out which tools are available for styling, testing, packaging, etc...", "tools.png"),
             new IntroCardData("Links of The Week", "Miscellaneous stuff found on the web that is related to JavaFX.", "news.png"),
-            new IntroCardData("Tips & Tricks", "Discover practical JavaFX tips in this section, featuring articles that share real-world techniques and tricks for effective JavaFX development.", "tips.png"),
-            new IntroCardData("JavaFX Blogs", "Visit our blog section for articles from JavaFX experts, featuring practical tips, cutting-edge insights, and more from the world of JavaFX.", "blogs.png"),
-            new IntroCardData("People", "A curated list of people connected to JavaFX. They develop libraries, applications, tools or they present at conferences and evangelise JavaFX.", "people.png"),
-            new IntroCardData("Companies", "Explore companies in JavaFX, especially those with significant influence and contributions to the JavaFX community, shaping and advancing the ecosystem.", "companies.png")
+            new IntroCardData("Tips & Tricks", "Real-world tips and tricks for effective user interface development.", "tips.png"),
+            new IntroCardData("Blogs", "A collection of blogs related to JavaFX", "blogs.png"),
+            new IntroCardData("People", "People that influence the JavaFX ecosystem.", "people.png"),
+            new IntroCardData("Companies", "Companies that contribute to the JavaFX ecosystem.", "companies.png")
     ));
 
     public IntroPane() {

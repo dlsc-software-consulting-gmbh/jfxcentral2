@@ -4,7 +4,6 @@ import com.dlsc.gemsfx.GlassPane;
 import com.dlsc.jfxcentral2.components.MobilePageBase;
 import com.dlsc.jfxcentral2.events.MobileResponseEvent;
 import com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent;
-import com.dlsc.jfxcentral2.mobile.components.BottomMenuBar;
 import com.dlsc.jfxcentral2.mobile.pages.CategoriesPane;
 import com.dlsc.jfxcentral2.mobile.pages.MainPage;
 import com.dlsc.jfxcentral2.mobile.utils.PreferredFocusedNodeProvider;
@@ -18,7 +17,6 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -34,49 +32,53 @@ import java.util.function.Function;
 
 public class MainPageSkin extends SkinBase<MainPage> {
 
-    private final BottomMenuBar bottomMenuBar;
+    public static final double CLOSED_DRAWER_HEIGHT = .28;
+    public static final int DRAWER_ANIMATION_DURATION = 150;
+
     private final StackPane contentPane = new StackPane();
     private final GlassPane glassPane = new GlassPane();
     private final Node drawer;
     private StackPane drawerHandle;
 
-    private final DoubleProperty drawerHeightPercentage = new SimpleDoubleProperty();
+    // value between 0 and 1
+    private final DoubleProperty drawerHeight = new SimpleDoubleProperty(CLOSED_DRAWER_HEIGHT);
+
     private CategoriesPane content;
     private Timeline timeline;
+    private double startY = -1;
 
     public MainPageSkin(MainPage control) {
         super(control);
 
         EventBusUtil.register(this);
 
-        bottomMenuBar = new BottomMenuBar(() -> hideDrawer());
-        bottomMenuBar.setVisible(false);
-
         drawer = createDrawerContent();
 
         contentPane.getStyleClass().add("content-pane");
 
         contentPane.setManaged(false);
-        bottomMenuBar.setManaged(false);
         glassPane.setManaged(false);
         drawer.setManaged(false);
+        drawer.setVisible(false);
 
         glassPane.setOnMouseClicked(evt -> hideDrawer());
-        glassPane.hideProperty().bind(drawerHeightPercentage.isEqualTo(0));
+        glassPane.setBlockingOpacity(0);
+        glassPane.hideProperty().bind(drawerHeight.lessThanOrEqualTo(CLOSED_DRAWER_HEIGHT));
 
-        getChildren().setAll(contentPane, bottomMenuBar, glassPane, drawer);
+        getChildren().setAll(contentPane, glassPane, drawer);
 
-        drawerHeightPercentage.addListener(it -> getSkinnable().requestLayout());
+        drawerHeight.addListener(it -> getSkinnable().requestLayout());
     }
 
     @Override
     protected void layoutChildren(double contentX, double contentY, double contentWidth, double contentHeight) {
-        double barHeight = bottomMenuBar.prefHeight(contentWidth);
-        bottomMenuBar.resizeRelocate(contentX, contentY + contentHeight - barHeight, contentWidth, barHeight);
-        double drawerHeight = drawerHeightPercentage.get() * content.prefHeight(-1) + drawerHandle.prefHeight(-1);
-        drawer.resizeRelocate(contentX, contentY + contentHeight - barHeight - drawerHeight, contentWidth, drawerHeight);
-        contentPane.resizeRelocate(contentX, contentY, contentWidth, contentHeight - barHeight - drawerHeight);
-        glassPane.resizeRelocate(contentX, contentY, contentWidth, contentHeight - barHeight - drawerHeight);
+        double drawerHeight = 0;
+        if (drawer.isVisible()) {
+            drawerHeight = this.drawerHeight.get() * content.prefHeight(-1) + drawerHandle.prefHeight(-1);
+            drawer.resizeRelocate(contentX, contentY + contentHeight - drawerHeight, contentWidth, drawerHeight);
+        }
+        contentPane.resizeRelocate(contentX, contentY, contentWidth, contentHeight - drawerHeight);
+        glassPane.resizeRelocate(contentX, contentY, contentWidth, contentHeight - drawerHeight);
     }
 
     private Node createDrawerContent() {
@@ -90,15 +92,8 @@ public class MainPageSkin extends SkinBase<MainPage> {
         drawerHandle.setMaxWidth(Double.MAX_VALUE);
         drawerHandle.setMinHeight(Region.USE_PREF_SIZE);
         drawerHandle.getStyleClass().add("handle");
-        drawerHandle.setOnMouseClicked(evt -> {
-            if (drawerHeightPercentage.get() > 0) {
-                hideDrawer();
-            } else {
-                showDrawer();
-            }
-        });
 
-        content = new CategoriesPane();
+        content = new CategoriesPane(this::hideDrawer);
         content.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         content.setAlignment(Pos.CENTER);
         content.setMouseTransparent(false);
@@ -116,19 +111,61 @@ public class MainPageSkin extends SkinBase<MainPage> {
         clip.setLayoutY(-50);
         drawer.setClip(clip);
 
+        drawer.addEventFilter(MouseEvent.MOUSE_PRESSED, evt -> startY = evt.getScreenY());
+
+        drawer.addEventFilter(MouseEvent.MOUSE_RELEASED, evt -> {
+            startY = 0;
+
+            if (drawerHeight.get() > CLOSED_DRAWER_HEIGHT) {
+                if (drawerHeight.get() < .75) {
+                    hideDrawer();
+                } else {
+                    showDrawer();
+                }
+            }
+        });
+
+        drawer.addEventFilter(MouseEvent.MOUSE_DRAGGED, evt -> {
+            if (startY != -1) {
+                double deltaY = startY - evt.getScreenY();
+                double height = drawerHeight.get();
+                height += (deltaY / drawer.prefHeight(-1));
+                if (height > CLOSED_DRAWER_HEIGHT && height <= 1) {
+                    height = Math.max(CLOSED_DRAWER_HEIGHT, Math.min(1, height));
+                    drawerHeight.set(height);
+                    startY = evt.getScreenY();
+                }
+            }
+        });
+
+//        drawer.addEventFilter(MouseEvent.MOUSE_CLICKED, evt -> {
+//            if (evt.isConsumed()) {
+//                return;
+//            }
+//            if (drawerHeight.get() > CLOSED_DRAWER_HEIGHT) {
+//                hideDrawer();
+//            } else if (evt.getClickCount() == 2) {
+//                showDrawer();
+//            }
+//        });
+
+        drawer.setOnSwipeDown(evt -> hideDrawer());
+        drawer.setOnSwipeUp(evt -> showDrawer());
+
         return drawer;
     }
 
     private void installCloseDrawerHandler(Node node) {
-        node.addEventFilter(MouseEvent.MOUSE_CLICKED, evt -> {
-            if (evt.getButton().equals(MouseButton.PRIMARY) && evt.isStillSincePress()) {
-                hideDrawer();
-            }
-        });
+//        node.addEventFilter(MouseEvent.MOUSE_CLICKED, evt -> {
+//            if (evt.getButton().equals(MouseButton.PRIMARY) && evt.isStillSincePress()) {
+//                System.out.println("closing bc of handler");
+//                hideDrawer();
+//            }
+//        });
     }
 
     private void hideDrawer() {
-        animateDrawer(0);
+        animateDrawer(CLOSED_DRAWER_HEIGHT);
     }
 
     private void showDrawer() {
@@ -140,8 +177,8 @@ public class MainPageSkin extends SkinBase<MainPage> {
             timeline.stop();
         }
 
-        KeyValue keyValue = new KeyValue(drawerHeightPercentage, value);
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(100), keyValue);
+        KeyValue keyValue = new KeyValue(drawerHeight, value);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(DRAWER_ANIMATION_DURATION), keyValue);
         timeline = new Timeline(keyFrame);
         timeline.play();
     }
@@ -185,7 +222,6 @@ public class MainPageSkin extends SkinBase<MainPage> {
 
     @Subscribe
     public void onHideMenuBarEvent(RepositoryUpdatedEvent event) {
-        bottomMenuBar.setVisible(event.isUpdated());
+        drawer.setVisible(event.isUpdated());
     }
-
 }

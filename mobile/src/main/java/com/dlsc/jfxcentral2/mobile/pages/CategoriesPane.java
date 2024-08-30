@@ -7,103 +7,154 @@ import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.LearnJavaFX;
 import com.dlsc.jfxcentral.data.model.LearnMobile;
 import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
+import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.Member;
+import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral2.components.CustomToggleButton;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class CategoriesPane extends GridPane {
 
-    public CategoriesPane() {
+    public CategoriesPane(Runnable closeDrawer) {
         getStyleClass().add("categories-pane");
 
         setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-        Button booksButton = new Button();
+        CustomToggleButton homeButton = new CustomToggleButton();
+        homeButton.setText("Home");
+        homeButton.setPrefWidth(0);
+        homeButton.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
+        homeButton.setMaxWidth(Double.MAX_VALUE);
+        homeButton.setUserData(PagePath.HOME);
+        homeButton.setOnMousePressed(evt -> {
+            MobileHomePage.getInstance().setContentType(MobileHomePage.ContentType.NORMAL);
+            MobileLinkUtil.getToPage(PagePath.HOME);
+        });
+
+        CustomToggleButton linksWeekButton = new CustomToggleButton();
+        linksWeekButton.setPrefWidth(0);
+        linksWeekButton.setText("News");
+        linksWeekButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(LinksOfTheWeek.class)));
+        linksWeekButton.setMaxWidth(Double.MAX_VALUE);
+        linksWeekButton.setUserData(PagePath.LINKS);
+        linksWeekButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.LINKS));
+
+        CustomToggleButton showcasesButton = new CustomToggleButton();
+        showcasesButton.setPrefWidth(0);
+        showcasesButton.setText("Apps");
+        showcasesButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(RealWorldApp.class)));
+        showcasesButton.setMaxWidth(Double.MAX_VALUE);
+        showcasesButton.setUserData(PagePath.SHOWCASES);
+        showcasesButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.SHOWCASES));
+
+        CustomToggleButton libraryButton = new CustomToggleButton();
+        libraryButton.setPrefWidth(0);
+        libraryButton.setText("Libs");
+        libraryButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Library.class)));
+        libraryButton.setMaxWidth(Double.MAX_VALUE);
+        libraryButton.setUserData(PagePath.LIBRARIES);
+        libraryButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.LIBRARIES));
+
+        CustomToggleButton peopleButton = new CustomToggleButton();
+        peopleButton.setPrefWidth(0);
+        peopleButton.setText("People");
+        peopleButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Person.class)));
+        peopleButton.setMaxWidth(Double.MAX_VALUE);
+        peopleButton.setUserData(PagePath.PEOPLE);
+        peopleButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.PEOPLE));
+
+        CustomToggleButton booksButton = new CustomToggleButton();
         booksButton.setText("Books");
         booksButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Book.class)));
         booksButton.setMaxWidth(Double.MAX_VALUE);
-        booksButton.setUserData(PagePath.HOME);
-        MobileLinkUtil.setLink(booksButton, PagePath.BOOKS);
+        booksButton.setUserData(PagePath.BOOKS);
+        booksButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.BOOKS));
 
-        Button blogsButton = new Button();
+        CustomToggleButton blogsButton = new CustomToggleButton();
         blogsButton.setText("Blogs");
         blogsButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Blog.class)));
         blogsButton.setMaxWidth(Double.MAX_VALUE);
         blogsButton.setUserData(PagePath.BLOGS);
-        MobileLinkUtil.setLink(blogsButton, PagePath.BLOGS);
+        blogsButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.BLOGS));
 
-        Button companiesButton = new Button();
+        CustomToggleButton companiesButton = new CustomToggleButton();
         companiesButton.setText("Companies");
         companiesButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Company.class)));
         companiesButton.setMaxWidth(Double.MAX_VALUE);
         companiesButton.setUserData(PagePath.COMPANIES);
-        MobileLinkUtil.setLink(companiesButton, PagePath.COMPANIES);
+        companiesButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.COMPANIES));
 
-        Button docsButton = new Button();
+        CustomToggleButton docsButton = new CustomToggleButton();
         docsButton.setText("Docs");
         docsButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Documentation.class)));
         docsButton.setMaxWidth(Double.MAX_VALUE);
         docsButton.setUserData(PagePath.DOCUMENTATION);
-        MobileLinkUtil.setLink(docsButton, PagePath.DOCUMENTATION);
+        docsButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.DOCUMENTATION));
 
-        Button tutorialsButton = new Button();
+        CustomToggleButton tutorialsButton = new CustomToggleButton();
         tutorialsButton.setText("Tutorials");
         tutorialsButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Tutorial.class)));
         tutorialsButton.setMaxWidth(Double.MAX_VALUE);
         tutorialsButton.setUserData(PagePath.TUTORIALS);
-        MobileLinkUtil.setLink(tutorialsButton, PagePath.TUTORIALS);
+        tutorialsButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.TUTORIALS));
 
-        Button tipsButton = new Button();
+        CustomToggleButton tipsButton = new CustomToggleButton();
         tipsButton.setText("Tips");
         tipsButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Tip.class)));
         tipsButton.setMaxWidth(Double.MAX_VALUE);
         tipsButton.setUserData(PagePath.TIPS);
-        MobileLinkUtil.setLink(tipsButton, PagePath.TIPS);
+        tipsButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.LINKS));
 
-        Button toolsButton = new Button();
+        CustomToggleButton toolsButton = new CustomToggleButton();
         toolsButton.setText("Tools");
         toolsButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Tool.class)));
         toolsButton.setMaxWidth(Double.MAX_VALUE);
         toolsButton.setUserData(PagePath.TOOLS);
-        MobileLinkUtil.setLink(toolsButton, PagePath.TOOLS);
+        toolsButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.TOOLS));
 
-        Button videosButton = new Button();
+        CustomToggleButton videosButton = new CustomToggleButton();
         videosButton.setText("Videos");
         videosButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(Video.class)));
         videosButton.setMaxWidth(Double.MAX_VALUE);
         videosButton.setUserData(PagePath.VIDEOS);
-        MobileLinkUtil.setLink(videosButton, PagePath.VIDEOS);
+        videosButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.VIDEOS));
 
-        Button learnJavaFXButton = new Button();
+        CustomToggleButton learnJavaFXButton = new CustomToggleButton();
         learnJavaFXButton.setText("Learn JFX");
         learnJavaFXButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(LearnJavaFX.class)));
         learnJavaFXButton.setMaxWidth(Double.MAX_VALUE);
         learnJavaFXButton.setUserData(PagePath.LEARN_JAVAFX);
-        MobileLinkUtil.setLink(learnJavaFXButton, PagePath.LEARN_JAVAFX);
+        learnJavaFXButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.LEARN_JAVAFX));
 
-        Button learnMobileButton = new Button();
+        CustomToggleButton learnMobileButton = new CustomToggleButton();
         learnMobileButton.setText("Learn Mobile");
         learnMobileButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(LearnMobile.class)));
         learnMobileButton.setMaxWidth(Double.MAX_VALUE);
         learnMobileButton.setUserData(PagePath.LEARN_MOBILE);
-        MobileLinkUtil.setLink(learnMobileButton, PagePath.LEARN_MOBILE);
+        learnMobileButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.LEARN_MOBILE));
 
-        Button learnRaspberryPiButton = new Button();
+        CustomToggleButton learnRaspberryPiButton = new CustomToggleButton();
         learnRaspberryPiButton.setText("Learn PI");
         learnRaspberryPiButton.setGraphic(new FontIcon(IkonUtil.getModelIkon(LearnRaspberryPi.class)));
         learnRaspberryPiButton.setMaxWidth(Double.MAX_VALUE);
         learnRaspberryPiButton.setUserData(PagePath.LEARN_RASPBERRYPI);
-        MobileLinkUtil.setLink(learnRaspberryPiButton, PagePath.LEARN_RASPBERRYPI);
+        learnRaspberryPiButton.setOnMousePressed(evt -> MobileLinkUtil.getToPage(PagePath.LEARN_RASPBERRYPI));
 
         GridPane.setHgrow(videosButton, Priority.ALWAYS);
         GridPane.setHgrow(toolsButton, Priority.ALWAYS);
@@ -141,18 +192,34 @@ public class CategoriesPane extends GridPane {
         learnMobileButton.setPrefWidth(0);
         learnRaspberryPiButton.setPrefWidth(0);
 
-        add(videosButton, 0, 0);
-        add(toolsButton, 1, 0);
-        add(docsButton, 2, 0);
-        add(tipsButton, 3, 0);
-        add(tutorialsButton, 4, 0);
+        add(homeButton, 0, 0);
+        add(linksWeekButton, 1, 0);
+        add(showcasesButton, 2, 0);
+        add(libraryButton, 3, 0);
+        add(peopleButton, 4, 0);
 
-        add(learnJavaFXButton, 0, 1);
-        add(learnRaspberryPiButton, 1, 1);
-        add(learnMobileButton, 2, 1);
-        add(booksButton, 3, 1);
-        add(blogsButton, 4, 1);
+        add(videosButton, 0, 1);
+        add(toolsButton, 1, 1);
+        add(docsButton, 2, 1);
+        add(tipsButton, 3, 1);
+        add(tutorialsButton, 4, 1);
 
-        add(companiesButton, 0, 2);
+        add(learnJavaFXButton, 0, 2);
+        add(learnRaspberryPiButton, 1, 2);
+        add(learnMobileButton, 2, 2);
+        add(booksButton, 3, 2);
+        add(blogsButton, 4, 2);
+
+        add(companiesButton, 0, 3);
+
+        ToggleGroup toggleGroup = new ToggleGroup();
+        toggleGroup.getToggles().addAll(
+                homeButton, linksWeekButton, showcasesButton, libraryButton, peopleButton,
+                videosButton, toolsButton, docsButton, tipsButton, tutorialsButton,
+                learnJavaFXButton, learnRaspberryPiButton, learnMobileButton, booksButton, blogsButton
+        );
+
+        toggleGroup.selectToggle(homeButton);
+//        toggleGroup.selectedToggleProperty().addListener(it -> closeDrawer.run());
     }
 }
