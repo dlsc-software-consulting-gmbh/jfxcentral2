@@ -1065,6 +1065,28 @@
     -fx-border-width: 0 0 1px 0;
 }
 
+.mobile-refresh-page .update-content-box {
+    -fx-alignment: center;
+    -fx-padding: 0 50px;
+    -fx-spacing: 5px;
+}
+
+.mobile-refresh-page .update-content-box .custom-image-view {
+    -fx-fit-width: 400px;
+}
+
+.mobile-refresh-page .update-content-box .dividing-line {
+    -fx-border-color: #75767660;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 0 0 10px 0;
+}
+
+.mobile-refresh-page .update-content-box > .label {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 1.3em;
+    -fx-text-fill: -grey-30;
+}
+
 /** ----------------------------------
  * IntroPane
  */

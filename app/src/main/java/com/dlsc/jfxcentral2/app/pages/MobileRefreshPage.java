@@ -15,6 +15,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
@@ -35,6 +36,7 @@ public class MobileRefreshPage extends StackPane {
 
     private final WeakInvalidationListener weakInvalidationListener = new WeakInvalidationListener(invalidationListener);
     private final RepositoryUpdater repositoryUpdater = new RepositoryUpdater();
+    private final CustomImageView logo;
 
     public MobileRefreshPage(ObjectProperty<Size> size) {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
@@ -44,10 +46,19 @@ public class MobileRefreshPage extends StackPane {
             invalidationListener.invalidated(null);
         });
 
-        // top part (logo)
-        CustomImageView logo = new CustomImageView();
+        logo = new CustomImageView();
         logo.getStyleClass().addAll("jfx-central-logo", "color");
 
+        boolean firstTimeSetup = RepositoryManager.isFirstTimeSetup();
+
+        if (firstTimeSetup) {
+            setupFirstTimeUI();
+        } else {
+            setupUpdateUI();
+        }
+    }
+
+    private void setupFirstTimeUI() {
         // center part (intro pane)
         IntroPane introPane = new IntroPane();
         VBox.setVgrow(introPane, Priority.ALWAYS);
@@ -72,8 +83,8 @@ public class MobileRefreshPage extends StackPane {
         // bottom part
         Button startButton = new Button("Get Started");
         startButton.getStyleClass().add("start-button");
-        startButton.setVisible(RepositoryManager.isFirstTimeSetup());
-        startButton.setVisible(RepositoryManager.isFirstTimeSetup());
+        startButton.setVisible(true);
+        startButton.setVisible(true);
         startButton.setOnAction(evt -> {
             startButton.setVisible(false);
             startButton.setManaged(false);
@@ -88,10 +99,22 @@ public class MobileRefreshPage extends StackPane {
         VBox content = new VBox(logo, introPane, bottomBox);
         content.getStyleClass().add("content-box");
         getChildren().add(content);
+    }
 
-        if (!RepositoryManager.isFirstTimeSetup()) {
-            repositoryUpdater.performUpdate(true);
-        }
+    private void setupUpdateUI() {
+        Label tipsLabel = new Label("Checking for updates ...");
+
+        Region dividingLine = new Region();
+        dividingLine.getStyleClass().add("dividing-line");
+
+        VBox updateContentBox = new VBox(logo, dividingLine, tipsLabel);
+        updateContentBox.getStyleClass().add("update-content-box");
+        updateContentBox.setMaxHeight(Region.USE_PREF_SIZE);
+
+        getChildren().add(updateContentBox);
+
+        // start the update process
+        repositoryUpdater.performUpdate(true);
     }
 
 }
