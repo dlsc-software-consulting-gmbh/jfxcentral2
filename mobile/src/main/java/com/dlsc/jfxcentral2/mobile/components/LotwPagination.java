@@ -32,5 +32,4 @@ public class LotwPagination extends MobilePagination<LinksOfTheWeek> {
             return scrollPane;
         });
     }
-
 }
