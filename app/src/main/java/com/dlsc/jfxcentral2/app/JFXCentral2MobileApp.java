@@ -18,7 +18,6 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.app.pages.MobileRefreshPage;
 import com.dlsc.jfxcentral2.events.OpenWebLinkEvent;
 import com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent;
-import com.dlsc.jfxcentral2.mobile.components.BottomMenuBar;
 import com.dlsc.jfxcentral2.mobile.components.MobileDevelopToolBar;
 import com.dlsc.jfxcentral2.mobile.pages.MainPage;
 import com.dlsc.jfxcentral2.mobile.pages.MobileHomePage;
@@ -43,7 +42,7 @@ import com.dlsc.jfxcentral2.mobile.pages.details.MobileCompanyDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileLearnDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileLibraryDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobilePersonDetailsPage;
-import com.dlsc.jfxcentral2.mobile.pages.details.MobileShowcaseMobileDetailsPage;
+import com.dlsc.jfxcentral2.mobile.pages.details.MobileShowcaseDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileTipDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileToolDetailsPage;
 import com.dlsc.jfxcentral2.mobile.pages.details.MobileTutorialDetailsPage;
@@ -135,7 +134,7 @@ public class JFXCentral2MobileApp extends Application {
         scene.setFill(Color.web("#070B32"));
         scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
         scene.getStylesheets().add(Objects.requireNonNull(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css")).toExternalForm());
-        scene.getStylesheets().add(Objects.requireNonNull(BottomMenuBar.class.getResource("/com/dlsc/jfxcentral2/mobile/mobile.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(MainPage.class.getResource("/com/dlsc/jfxcentral2/mobile/mobile.css")).toExternalForm());
         // scene.focusOwnerProperty().addListener(it -> System.out.println("focus owner: " + scene.getFocusOwner()));
         updateSizeProperty(scene);
 
@@ -200,8 +199,8 @@ public class JFXCentral2MobileApp extends Application {
                 .and(MobileRoute.redirect("/home", PagePath.HOME))
                 .and(MobileRoute.get(PagePath.LINKS, r -> MobileResponse.view(r, new MobileLinksOfTheWeekPage(size))))
                 .and(MobileRoute.get(PagePath.DOCUMENTATION, r -> MobileResponse.view(r, new MobileDocPage(size))))
-                .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute(PagePath.REAL_WORLD, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseMobileDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.REAL_WORLD, RealWorldApp.class, () -> new MobileShowcasesCategoryPage(size), id -> new MobileShowcaseDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.LIBRARIES, Library.class, () -> new MobileLibrariesCategoryPage(size), id -> new MobileLibraryDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.PEOPLE, Person.class, () -> new MobilePeopleCategoryPage(size), id -> new MobilePersonDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.BLOGS, Blog.class, () -> new MobileBlogsCategoryPage(size), id -> new MobileBlogDetailsPage(size, id)))

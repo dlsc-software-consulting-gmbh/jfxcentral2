@@ -19,16 +19,26 @@ import com.dlsc.jfxcentral2.mobile.home.CategoryAdvancedView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
 import com.dlsc.jfxcentral2.mobile.home.HomePageHeader;
 import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
+import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
+import com.dlsc.jfxcentral2.utils.StringUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,8 +47,6 @@ import java.util.List;
 public class MobileHomePage extends MobilePageBase {
 
     private static MobileHomePage instance;
-
-    private final MobileSearchTextField searchTextField;
 
     public enum ContentType {
         NORMAL, SEARCH
@@ -56,13 +64,13 @@ public class MobileHomePage extends MobilePageBase {
 
         // content
         Node normalView = createNormalView();
+        normalView.visibleProperty().bind(contentTypeProperty().isEqualTo(ContentType.NORMAL));
         normalView.managedProperty().bind(normalView.visibleProperty());
         VBox.setVgrow(normalView, Priority.ALWAYS);
 
         MobileSearchView searchView = new MobileSearchView(sizeProperty());
+        searchView.visibleProperty().bind(contentTypeProperty().isEqualTo(ContentType.SEARCH));
         searchView.managedProperty().bind(searchView.visibleProperty());
-        searchView.visibleProperty().bind(Bindings.createBooleanBinding(() -> getContentType() == ContentType.SEARCH, contentTypeProperty()));
-        normalView.visibleProperty().bind(searchView.visibleProperty().not());
         VBox.setVgrow(searchView, Priority.ALWAYS);
 
         // header
@@ -70,39 +78,39 @@ public class MobileHomePage extends MobilePageBase {
         header.sizeProperty().bind(sizeProperty());
 
         // search field
-        searchTextField = new MobileSearchTextField();
+        MobileSearchTextField searchTextField = new MobileSearchTextField();
         searchTextField.setRight(createSearchCancelButton());
         searchTextField.setPromptText("Search for anything...");
-        searchView.searchTextProperty().bindBidirectional(searchTextField.textProperty());
         searchTextField.setOnMousePressed(event -> setContentType(ContentType.SEARCH));
-        searchTextField.textProperty().addListener(it -> setContentType(ContentType.SEARCH));
-
-        HBox.setHgrow(searchTextField, Priority.ALWAYS);
-        HBox searchWrapper = new HBox(searchTextField);
-        searchWrapper.getStyleClass().add("search-wrapper");
-
-        getChildren().addAll(header, searchWrapper, normalView, searchView);
-
-        setViewWillAppear(()-> setContentType(ContentType.NORMAL));
-    }
-
-    private Button createSearchCancelButton() {
-        Button button = new Button("Search");
-        button.textProperty().bind(Bindings.createStringBinding(() -> {
-            if (getContentType() == ContentType.SEARCH) {
-                return "Cancel";
-            } else {
-                return "Search";
-            }
-        }, contentTypeProperty()));
-        button.setOnAction(event -> {
-            if (getContentType() == ContentType.SEARCH) {
-                searchTextField.clear();
-                setContentType(ContentType.NORMAL);
-            } else {
+        searchTextField.setOnTouchPressed(event -> setContentType(ContentType.SEARCH));
+        searchTextField.textProperty().addListener((obs, oldV, newV) -> {
+            if (StringUtils.isNotBlank(newV)) {
                 setContentType(ContentType.SEARCH);
             }
         });
+
+        searchView.searchTextProperty().bindBidirectional(searchTextField.textProperty());
+
+        HBox.setHgrow(searchTextField, Priority.ALWAYS);
+
+        HBox searchWrapper = new HBox(searchTextField);
+        searchWrapper.getStyleClass().add("search-wrapper");
+
+        getChildren().addAll(searchWrapper, normalView, searchView);
+
+        setViewWillAppear(() -> setContentType(ContentType.NORMAL));
+
+        contentTypeProperty().addListener(it -> {
+            if (getContentType().equals(ContentType.NORMAL)) {
+                searchTextField.clear();
+            }
+        });
+    }
+
+    private Button createSearchCancelButton() {
+        Button button = new Button("Cancel");
+        button.visibleProperty().bind(contentTypeProperty().isEqualTo(ContentType.SEARCH));
+        button.setOnMouseClicked(evt -> setContentType(ContentType.NORMAL));
         return button;
     }
 
@@ -111,12 +119,6 @@ public class MobileHomePage extends MobilePageBase {
         categoryAdvancedView.sizeProperty().bind(sizeProperty());
 
         LearnCategoryBox learnCategoryBox = new LearnCategoryBox();
-
-        List<LinksOfTheWeek> linksOfTheWeek = DataRepository2.getInstance().getLinksOfTheWeek();
-
-        WeekLinksView weekLinksView = new WeekLinksView();
-        weekLinksView.sizeProperty().bind(sizeProperty());
-        weekLinksView.setLinksOfTheWeek(linksOfTheWeek.get(linksOfTheWeek.size() - 1));
 
         List<RealWorldApp> randomApps = getRandomSample(DataRepository2.getInstance().getRealWorldApps(), 3);
         CategoryPreviewView showCasePreviewView = CategoryPreviewView.createShowCasePreviewView(randomApps, PagePath.SHOWCASES);
@@ -146,14 +148,14 @@ public class MobileHomePage extends MobilePageBase {
         CategoryPreviewView blogPreviewView = CategoryPreviewView.createBlogPreviewView(randomBlogs, PagePath.BLOGS);
         blogPreviewView.sizeProperty().bind(sizeProperty());
 
-       // VBox normalView = new VBox(categoryAdvancedView, weekLinksView, showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView, learnCategoryBox);
         VBox normalView = new VBox(showCasePreviewView, peoplePreviewView, libraryPreviewView, booksPreviewView, videoPreviewView, blogPreviewView, tipsPreviewView, learnCategoryBox);
         normalView.getStyleClass().add("content-box");
 
-        ScrollPane ScrollPane = new ScrollPane(normalView);
-        ScrollPane.getStyleClass().add("mobile");
-        VBox.setVgrow(ScrollPane, Priority.ALWAYS);
-        return ScrollPane;
+        ScrollPane scrollPane = new ScrollPane(normalView);
+        scrollPane.getStyleClass().add("mobile");
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
+
+        return scrollPane;
     }
 
     private <T extends ModelObject> List<T> getRandomSample(List<T> list, int sampleSize) {
@@ -181,5 +183,4 @@ public class MobileHomePage extends MobilePageBase {
     public final void setContentType(ContentType contentType) {
         this.contentType.set(contentType);
     }
-
 }

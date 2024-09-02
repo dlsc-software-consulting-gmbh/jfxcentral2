@@ -652,6 +652,9 @@
   "name":"java.util.Date"
 },
 {
+  "name":"javafx.animation.KeyValue"
+},
+{
   "name":"javafx.scene.Camera"
 },
 {

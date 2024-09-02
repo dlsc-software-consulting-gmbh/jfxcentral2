@@ -3273,6 +3273,11 @@
     -fx-fit-height: 32px;
 }
 
+.links-of-the-week-header .description-label {
+    -fx-padding: 20px;
+    -fx-text-fill: -white;
+}
+
 /** ------------------------------------
  * PersonDetailHeader
  */
@@ -6851,8 +6856,16 @@
     -fx-padding: 20px 30px;
 }
 
+.overview-box:md-lg .body-box.no-top-padding {
+    -fx-padding: 0px 30px 20px 30px;
+}
+
 .overview-box:sm .body-box {
     -fx-padding: 20px;
+}
+
+.overview-box:sm .body-box.no-top-padding {
+    -fx-padding: 0px 20px 20px 20px;
 }
 
 .overview-box > .content-box > .body-box {
