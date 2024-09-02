@@ -28,6 +28,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -174,9 +175,11 @@ public class CategorySelectionView extends GridPane {
         button.setGraphic(new FontIcon(icon));
         button.setMaxWidth(Double.MAX_VALUE);
         button.setUserData(path);
-        button.setOnMousePressed(evt -> {
-            MobileHomePage.getInstance().setContentType(MobileHomePage.ContentType.NORMAL);
-            MobileLinkUtil.getToPage(path);
+        button.setOnMouseClicked(evt -> {
+            if (evt.getButton().equals(MouseButton.PRIMARY) && evt.isStillSincePress()) {
+                MobileHomePage.getInstance().setContentType(MobileHomePage.ContentType.NORMAL);
+                MobileLinkUtil.getToPage(path);
+            }
         });
         toggleGroup.getToggles().add(button);
         return button;
