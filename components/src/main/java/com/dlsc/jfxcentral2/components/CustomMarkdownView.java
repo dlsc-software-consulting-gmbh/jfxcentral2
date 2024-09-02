@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -8,13 +9,18 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.web.WebView;
+import one.jpro.jproutils.treeshowing.TreeShowing;
 import one.jpro.platform.mdfx.MarkdownView;
 import one.jpro.platform.mdfx.extensions.ImageExtension;
 import one.jpro.platform.mdfx.extensions.YoutubeExtension;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -32,6 +38,41 @@ public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
 
         getStyleClass().add("custom-markdown-view");
         getStylesheets().add(Objects.requireNonNull(CustomMarkdownView.class.getResource("markdown.css")).toExternalForm());
+
+        TreeShowing.treeShowing(this).addListener(it -> setupWorkAroundForWebViewLayout());
+        Platform.runLater(this::setupWorkAroundForWebViewLayout);
+        mdStringProperty().addListener(it -> Platform.runLater(this::setupWorkAroundForWebViewLayout));
+    }
+
+    private void setupWorkAroundForWebViewLayout() {
+        List<WebView> webViews = new ArrayList<>();
+        getChildrenUnmodifiable().forEach(child -> collectWebViews(child, webViews));
+        webViews.forEach(view -> {
+            fixIt(view);
+            view.localToSceneTransformProperty().addListener((obs, oldV, newV) -> fixIt(view));
+        });
+    }
+
+    boolean fixing = false;
+
+    private void fixIt(WebView view) {
+        if (!fixing) {
+            fixing = true;
+            double width = view.getWidth();
+            double height = view.getHeight();
+            view.resize(width + 1, height + 1);
+            view.resize(width, height);
+            fixing = false;
+        }
+    }
+
+    private void collectWebViews(Node node, List<WebView> webViews) {
+        if (node instanceof WebView) {
+            webViews.add((WebView) node);
+        } else if (node instanceof Parent) {
+            Parent parent = (Parent) node;
+            parent.getChildrenUnmodifiable().forEach(child -> collectWebViews(child, webViews));
+        }
     }
 
     public CustomMarkdownView(String mdString) {

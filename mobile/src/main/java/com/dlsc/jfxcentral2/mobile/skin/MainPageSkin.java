@@ -4,7 +4,7 @@ import com.dlsc.gemsfx.GlassPane;
 import com.dlsc.jfxcentral2.components.MobilePageBase;
 import com.dlsc.jfxcentral2.events.MobileResponseEvent;
 import com.dlsc.jfxcentral2.events.RepositoryUpdatedEvent;
-import com.dlsc.jfxcentral2.mobile.pages.CategoriesPane;
+import com.dlsc.jfxcentral2.mobile.components.CategorySelectionView;
 import com.dlsc.jfxcentral2.mobile.pages.MainPage;
 import com.dlsc.jfxcentral2.mobile.utils.PreferredFocusedNodeProvider;
 import com.dlsc.jfxcentral2.utils.EventBusUtil;
@@ -18,7 +18,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.SkinBase;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -32,7 +31,7 @@ import java.util.function.Function;
 
 public class MainPageSkin extends SkinBase<MainPage> {
 
-    public static final double CLOSED_DRAWER_HEIGHT = .28;
+    public static final double CLOSED_DRAWER_HEIGHT = .26;
     public static final int DRAWER_ANIMATION_DURATION = 150;
 
     private final StackPane contentPane = new StackPane();
@@ -43,7 +42,7 @@ public class MainPageSkin extends SkinBase<MainPage> {
     // value between 0 and 1
     private final DoubleProperty drawerHeight = new SimpleDoubleProperty(CLOSED_DRAWER_HEIGHT);
 
-    private CategoriesPane content;
+    private CategorySelectionView content;
     private Timeline timeline;
     private double startY = -1;
 
@@ -93,7 +92,7 @@ public class MainPageSkin extends SkinBase<MainPage> {
         drawerHandle.setMinHeight(Region.USE_PREF_SIZE);
         drawerHandle.getStyleClass().add("handle");
 
-        content = new CategoriesPane(this::hideDrawer);
+        content = new CategorySelectionView(this::hideDrawer);
         content.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         content.setAlignment(Pos.CENTER);
         content.setMouseTransparent(false);
