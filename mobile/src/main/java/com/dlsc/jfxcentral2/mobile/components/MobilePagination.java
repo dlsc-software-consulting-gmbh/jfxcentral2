@@ -52,7 +52,7 @@ public class MobilePagination<T> extends VBox {
         contentWrapper.getStyleClass().add("content-wrapper");
         VBox.setVgrow(contentWrapper, Priority.ALWAYS);
 
-        getChildren().addAll(contentWrapper, navBox);
+        getChildren().addAll(navBox, contentWrapper);
 
         itemProperty().bind(Bindings.createObjectBinding(() -> {
             boolean validatedIndex = isValidIndex();
