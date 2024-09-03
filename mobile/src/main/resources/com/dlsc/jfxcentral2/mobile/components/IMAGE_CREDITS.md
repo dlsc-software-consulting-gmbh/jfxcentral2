@@ -16,9 +16,8 @@
 - **License**: [Pixabay License](https://pixabay.com/service/license-summary/)
 
 ## libraries.png
-- **Author**: OpenClipart-Vectors
-- **Source**: https://pixabay.com/vectors/github-logo-favicon-mascot-button-154769/
-- **License**: [Pixabay License](https://pixabay.com/service/license-summary/)
+- **Author**: Github
+- **Source**: https://github.com/logos
 
 ## news.png
 - **Author**: OpenClipart-Vectors
