@@ -25,8 +25,8 @@
 - **License**: [Pixabay License](https://pixabay.com/service/license-summary/)
 
 ## people.png
-- **Author**: GDJ
-- **Source**: https://pixabay.com/vectors/connections-communications-social-2099068/
+- **Author**: Mohamed_hassan
+- **Source**: https://pixabay.com/vectors/social-media-network-people-5508549/
 - **License**: [Pixabay License](https://pixabay.com/service/license-summary/)
 
 ## tips.png
