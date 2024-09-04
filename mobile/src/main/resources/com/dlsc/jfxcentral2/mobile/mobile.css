@@ -502,6 +502,11 @@
     -fx-padding: 0px 10px;
 }
 
+.mobile-home-page .mobile-search-text-field .right-box {
+    -fx-alignment: center-right;
+    -fx-spacing: 10px;
+}
+
 .mobile-home-page .content-box {
     -fx-padding: 5px 15px 50px 15px;
     -fx-spacing: 30px;
@@ -615,6 +620,33 @@
     -fx-background-insets: 4px;
 }
 
+.mobile-search-text-field .arrow-button {
+    -fx-background-color: -grey-20;
+    -fx-background-radius: 50%;
+    -button-size: 16px;
+    -fx-min-width: -button-size;
+    -fx-min-height: -button-size;
+    -fx-max-width: -button-size;
+    -fx-max-height: -button-size;
+}
+
+.mobile-search-text-field .arrow-button:pressed {
+    -fx-background-color: -grey-30;
+}
+
+.mobile-search-text-field .arrow-button > .arrow {
+    -fx-shape: "M9.99998 11.2122L6.36343 14.8487L5.15125 13.6366L8.78779 10L5.15125 6.36346L6.36343 5.15128L9.99998 8.78782L13.6365 5.15128L14.8487 6.36346L11.2122 10L14.8487 13.6366L13.6365 14.8487L9.99998 11.2122Z";
+    -fx-background-color: white;
+    -arrow-size: 7px;
+    -fx-min-width: -arrow-size;
+    -fx-min-height: -arrow-size;
+    -fx-max-width: -arrow-size;
+    -fx-max-height: -arrow-size;
+}
+
+/** ----------------------------------
+ * HomePageHeader
+ */
 .home-page-header {
     -fx-alignment: center;
     -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(247, 249, 255, 1) 0%, rgba(247, 249, 255, 0) 100%);
