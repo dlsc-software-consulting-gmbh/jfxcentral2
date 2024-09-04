@@ -98,14 +98,14 @@ public class MobileRefreshPage extends StackPane {
 
             FadeIn fadeIn = new FadeIn(loadLabel);
             fadeIn.setSpeed(2);
+            fadeIn.setOnFinished(e -> repositoryUpdater.performUpdate(false));
 
             fadeOut.setOnFinished(e -> {
                 startButton.setVisible(false);
                 loadLabel.setVisible(true);
-
                 fadeIn.play();
-              //  repositoryUpdater.performUpdate(false);
             });
+
             fadeOut.play();
         });
 
