@@ -1,5 +1,11 @@
 package com.dlsc.jfxcentral2.app.pages;
 
+import animatefx.animation.FadeIn;
+import animatefx.animation.FadeOut;
+import animatefx.animation.GlowBackground;
+import animatefx.animation.SlideOutUp;
+import animatefx.animation.Tada;
+import animatefx.animation.Wobble;
 import com.dlsc.jfxcentral2.app.RepositoryManager;
 import com.dlsc.jfxcentral2.app.utils.RepositoryUpdater;
 import com.dlsc.jfxcentral2.components.CustomImageView;
@@ -18,7 +24,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
+import one.jpro.jproutils.treeshowing.TreeShowing;
 
 public class MobileRefreshPage extends StackPane {
 
@@ -65,7 +74,6 @@ public class MobileRefreshPage extends StackPane {
 
         Label loadLabel = new Label();
         loadLabel.getStyleClass().add("load-label");
-        loadLabel.setManaged(false);
         loadLabel.setVisible(false);
         loadLabel.setTextAlignment(TextAlignment.CENTER);
         loadLabel.textProperty().bind(Bindings.createStringBinding(() -> {
@@ -81,19 +89,27 @@ public class MobileRefreshPage extends StackPane {
         }, repositoryUpdater.loadMessageProperty(), repositoryUpdater.loadPercentageProperty()));
 
         // bottom part
-        Button startButton = new Button("Get Started");
+        Button startButton = new Button("Start");
         startButton.getStyleClass().add("start-button");
-        startButton.setVisible(true);
-        startButton.setVisible(true);
+
         startButton.setOnAction(evt -> {
-            startButton.setVisible(false);
-            startButton.setManaged(false);
-            loadLabel.setVisible(true);
-            loadLabel.setManaged(true);
-            repositoryUpdater.performUpdate(false);
+            FadeOut fadeOut = new FadeOut(startButton);
+            fadeOut.setSpeed(2);
+
+            FadeIn fadeIn = new FadeIn(loadLabel);
+            fadeIn.setSpeed(2);
+
+            fadeOut.setOnFinished(e -> {
+                startButton.setVisible(false);
+                loadLabel.setVisible(true);
+
+                fadeIn.play();
+              //  repositoryUpdater.performUpdate(false);
+            });
+            fadeOut.play();
         });
 
-        VBox bottomBox = new VBox(startButton, loadLabel);
+        StackPane bottomBox = new StackPane(startButton, loadLabel);
         bottomBox.getStyleClass().add("bottom-box");
 
         VBox content = new VBox(logo, introPane, bottomBox);

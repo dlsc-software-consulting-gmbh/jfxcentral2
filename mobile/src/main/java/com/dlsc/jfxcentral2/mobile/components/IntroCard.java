@@ -1,10 +1,15 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
 import com.dlsc.jfxcentral2.components.CustomImageView;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -17,9 +22,16 @@ public class IntroCard extends VBox {
 
         CustomImageView imageView = new CustomImageView();
         imageView.imageProperty().bind(imageProperty());
+        imageView.setPreserveRatio(true);
 
         StackPane imageWrapper = new StackPane(imageView);
         imageWrapper.getStyleClass().add("image-wrapper");
+        imageWrapper.setMinSize(0, 0);
+        VBox.setVgrow(imageWrapper, Priority.ALWAYS);
+
+        NumberBinding size = Bindings.min(imageWrapper.widthProperty(), imageWrapper.heightProperty());
+        imageView.fitWidthProperty().bind(size);
+        imageView.fitHeightProperty().bind(size);
 
         Label titleLabel = new Label();
         titleLabel.getStyleClass().add("title");
@@ -29,6 +41,7 @@ public class IntroCard extends VBox {
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.textProperty().bind(descriptionProperty());
         descriptionLabel.setWrapText(true);
+        descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         getChildren().addAll(imageWrapper, titleLabel, descriptionLabel);
     }

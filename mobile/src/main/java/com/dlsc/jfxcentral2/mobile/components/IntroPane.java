@@ -24,23 +24,20 @@ public class IntroPane extends VBox {
     }
 
     public final List<IntroCardData> introCardData = new ArrayList<>(List.of(
-            new IntroCardData("Books", "Beginner guides, advanced tutorials, game development.", "books.png"),
-            new IntroCardData("Videos", "Watch videos of conference talks, demos, and tutorials.", "videos.png"),
-            new IntroCardData("Libraries", "Explore third-party libraries that you can add to your own applications.", "libraries.png"),
-            new IntroCardData("Tutorials", "See a listing of places where you can find good online tutorials.", "tutorials.png"),
-            new IntroCardData("Tools", "Find out which tools are available for styling, testing, packaging, etc...", "tools.png"),
-            new IntroCardData("Links of The Week", "Miscellaneous stuff found on the web that is related to JavaFX.", "news.png"),
-            new IntroCardData("Tips & Tricks", "Real-world tips and tricks for effective user interface development.", "tips.png"),
-            new IntroCardData("Blogs", "A collection of blogs related to JavaFX", "blogs.png"),
-            new IntroCardData("People", "People that influence the JavaFX ecosystem.", "people.png"),
-            new IntroCardData("Companies", "Companies that contribute to the JavaFX ecosystem.", "companies.png")
+            new IntroCardData("People", "Discover people that influence the JavaFX ecosystem.", "people.png"),
+            new IntroCardData("Libraries", "Explore third-party libraries that you can add to your JavaFX applications.", "libraries.png"),
+            new IntroCardData("Videos", "Watch videos of JavaFX conference talks, demos, and tutorials.", "videos.png"),
+            new IntroCardData("Books", "Become aware of literature available for JavaFX.", "books.png"),
+            new IntroCardData("Tools", "Find out which tools are available for your JavaFX coding needs.", "tools.png"),
+            new IntroCardData("Links of the Week", "Dive into random stuff found on the web that is related to JavaFX.", "news.png"),
+            new IntroCardData("Tutorials", "Read the list of tutorials for JavaFX.", "tutorials.png"),
+            new IntroCardData("Tips & Tricks", "Study tips and tricks for JavaFX user interface development.", "tips.png"),
+            new IntroCardData("Blogs", "Browse through a collection of blogs related to programming in JavaFX", "blogs.png"),
+            new IntroCardData("Companies", "Find out which companies contribute to JavaFX.", "companies.png")
     ));
 
     public IntroPane() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
-
-        // shuffle pages
-        Collections.shuffle(introCardData);
 
         // page view
         pageView = new PageView();

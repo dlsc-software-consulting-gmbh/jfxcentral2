@@ -40,17 +40,13 @@ public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
         getStylesheets().add(Objects.requireNonNull(CustomMarkdownView.class.getResource("markdown.css")).toExternalForm());
 
         TreeShowing.treeShowing(this).addListener(it -> setupWorkAroundForWebViewLayout());
-        Platform.runLater(this::setupWorkAroundForWebViewLayout);
         mdStringProperty().addListener(it -> Platform.runLater(this::setupWorkAroundForWebViewLayout));
     }
 
     private void setupWorkAroundForWebViewLayout() {
         List<WebView> webViews = new ArrayList<>();
         getChildrenUnmodifiable().forEach(child -> collectWebViews(child, webViews));
-        webViews.forEach(view -> {
-            fixIt(view);
-            view.localToSceneTransformProperty().addListener((obs, oldV, newV) -> fixIt(view));
-        });
+        webViews.forEach(view -> view.localToSceneTransformProperty().addListener((obs, oldV, newV) -> fixIt(view)));
     }
 
     boolean fixing = false;
@@ -58,11 +54,12 @@ public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
     private void fixIt(WebView view) {
         if (!fixing) {
             fixing = true;
+            view.setLayoutY(view.getLayoutY() + 1);
             double width = view.getWidth();
             double height = view.getHeight();
             view.resize(width + 1, height + 1);
             view.resize(width, height);
-            fixing = false;
+            Platform.runLater(() -> fixing = false);
         }
     }
 
