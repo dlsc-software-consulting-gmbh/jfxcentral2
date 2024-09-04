@@ -4,40 +4,27 @@ import com.dlsc.jfxcentral.data.DataRepository2;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.data.model.Video;
-import com.dlsc.jfxcentral2.components.MobileSearchTextField;
 import com.dlsc.jfxcentral2.components.MobilePageBase;
-
+import com.dlsc.jfxcentral2.components.MobileSearchTextField;
 import com.dlsc.jfxcentral2.mobile.components.LearnCategoryBox;
 import com.dlsc.jfxcentral2.mobile.components.MobileSearchView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryAdvancedView;
 import com.dlsc.jfxcentral2.mobile.home.CategoryPreviewView;
 import com.dlsc.jfxcentral2.mobile.home.HomePageHeader;
-import com.dlsc.jfxcentral2.mobile.home.WeekLinksView;
-import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
-import com.dlsc.jfxcentral2.utils.StringUtil;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -79,7 +66,7 @@ public class MobileHomePage extends MobilePageBase {
 
         // search field
         MobileSearchTextField searchTextField = new MobileSearchTextField();
-        searchTextField.setRight(createSearchCancelButton());
+        searchTextField.setRight(createSearchFieldRightNode(searchTextField));
         searchTextField.setPromptText("Search for anything...");
         searchTextField.setOnMousePressed(event -> setContentType(ContentType.SEARCH));
         searchTextField.setOnTouchPressed(event -> setContentType(ContentType.SEARCH));
@@ -107,11 +94,14 @@ public class MobileHomePage extends MobilePageBase {
         });
     }
 
-    private Button createSearchCancelButton() {
-        Button button = new Button("Cancel");
-        button.visibleProperty().bind(contentTypeProperty().isEqualTo(ContentType.SEARCH));
-        button.setOnMouseClicked(evt -> setContentType(ContentType.NORMAL));
-        return button;
+    private HBox createSearchFieldRightNode(MobileSearchTextField searchTextField) {
+        Button cancelButton = new Button("Cancel");
+        cancelButton.visibleProperty().bind(contentTypeProperty().isEqualTo(ContentType.SEARCH));
+        cancelButton.setOnMouseClicked(evt -> setContentType(ContentType.NORMAL));
+
+        HBox rightBox = new HBox(searchTextField.getRight(), cancelButton);
+        rightBox.getStyleClass().add("right-box");
+        return rightBox;
     }
 
     private Node createNormalView() {
