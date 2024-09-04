@@ -75,6 +75,12 @@
         <dependencies>
 
             <dependency>
+                <groupId>io.github.typhon0</groupId>
+                <artifactId>AnimateFX</artifactId>
+                <version>1.3.0</version>
+            </dependency>
+
+            <dependency>
                 <groupId>one.jpro.platform</groupId>
                 <artifactId>jpro-routing-core</artifactId>
                 <version>${jpro.platform.version}</version>

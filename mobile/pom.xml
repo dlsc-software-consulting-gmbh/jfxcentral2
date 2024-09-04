@@ -22,6 +22,11 @@
     <dependencies>
 
         <dependency>
+            <groupId>io.github.typhon0</groupId>
+            <artifactId>AnimateFX</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.gluonhq.attachextended</groupId>
             <artifactId>yt</artifactId>
         </dependency>

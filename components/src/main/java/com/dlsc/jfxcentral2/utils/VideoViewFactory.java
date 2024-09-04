@@ -68,13 +68,14 @@ public class VideoViewFactory {
             return webView;
         }
 
-        StackPane webViewWrapper = new StackPane();
-        webViewWrapper.getStyleClass().add("web-view-wrapper");
-
         Button closeButton = new Button();
         closeButton.setFocusTraversable(false);
         closeButton.getStyleClass().addAll("close-button", "blue-button");
         closeButton.setGraphic(new FontIcon(IkonUtil.close));
+
+        WebViewWrapper webViewWrapper = new WebViewWrapper(webView, closeButton);
+        webViewWrapper.getStyleClass().add("web-view-wrapper");
+
         closeButton.setOnAction(event -> {
             Pane parent = (Pane) webViewWrapper.getParent();
             if (parent != null) {
@@ -83,12 +84,33 @@ public class VideoViewFactory {
             }
         });
 
-        StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
-        StackPane.setMargin(closeButton, new Insets(5, 5, 0, 0));
-
-        webViewWrapper.getChildren().addAll(webView, closeButton);
-        webViewWrapper.setFocusTraversable(false);
         return webViewWrapper;
+    }
+
+    private static class WebViewWrapper extends StackPane {
+
+        public WebViewWrapper(WebView webView, Button closeButton) {
+            StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
+            StackPane.setMargin(closeButton, new Insets(5, 5, 0, 0));
+            getChildren().addAll(webView, closeButton);
+            setFocusTraversable(false);
+
+            webView.localToSceneTransformProperty().addListener((obs, oldV, newV) -> fixIt(webView));
+        }
+
+        boolean fixing = false;
+
+        private void fixIt(WebView view) {
+            if (!fixing) {
+                fixing = true;
+                view.setLayoutY(view.getLayoutY() + 1);
+                double width = view.getWidth();
+                double height = view.getHeight();
+                view.resize(width + 1, height + 1);
+                view.resize(width, height);
+                Platform.runLater(() -> fixing = false);
+            }
+        }
     }
 
     private static void bindWidthAndHeight(HTMLView htmlView, Region region) {

@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
@@ -28,8 +30,18 @@ public class MobileSearchTextField extends BorderPane {
         BorderPane.setAlignment(icon, Pos.CENTER);
         BorderPane.setMargin(textField, new Insets(0, 10, 0, 10));
 
+        // right side clear button
+        Region arrow = new Region();
+        arrow.getStyleClass().add("arrow");
+        StackPane arrowButton = new StackPane(arrow);
+        arrowButton.getStyleClass().add("arrow-button");
+        arrowButton.setOnMousePressed(e -> textField.clear());
+        arrowButton.visibleProperty().bind(textField.textProperty().isNotEmpty());
+        BorderPane.setAlignment(arrowButton, Pos.CENTER_RIGHT);
+
         setLeft(icon);
         setCenter(textField);
+        setRight(arrowButton);
     }
 
     private final StringProperty text = new SimpleStringProperty();

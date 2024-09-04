@@ -9,6 +9,7 @@ open module com.dlsc.jfxcentral2.mobile {
     requires batik.svggen;
     requires com.github.weisj.jsvg;
     requires org.scenicview.scenicview;
+    requires animatefx;
 
     requires fr.brouillard.oss.cssfx;
 
