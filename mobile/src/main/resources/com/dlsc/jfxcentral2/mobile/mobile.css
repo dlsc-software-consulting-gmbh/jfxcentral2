@@ -1034,12 +1034,12 @@
 
 .mobile-refresh-page > .content-box {
     -fx-alignment: top-center;
-    -fx-padding: 80px 0 40px 0;
+    -fx-padding: 90px 0 40px 0;
     -fx-spacing: 20px;
 }
 
 .mobile-refresh-page > .content-box > .custom-image-view {
-    -fx-fit-height: 40px;
+    -fx-fit-height: 50px;
 }
 
 .mobile-refresh-page .bottom-box {
