@@ -194,7 +194,7 @@ public class JFXCentral2MobileApp extends Application {
                         return MobileResponse.redirect(r, PagePath.REFRESH);
                     }
                 }))
-                .and(MobileRoute.get(PagePath.REFRESH, r -> MobileResponse.view(r, new MobileRefreshPage(size))))
+                .and(MobileRoute.get(PagePath.REFRESH, r -> MobileResponse.view(r, new MobileRefreshPage())))
                 .and(MobileRoute.redirect("/index", PagePath.HOME))
                 .and(MobileRoute.redirect("/home", PagePath.HOME))
                 .and(MobileRoute.get(PagePath.LINKS, r -> MobileResponse.view(r, new MobileLinksOfTheWeekPage(size))))

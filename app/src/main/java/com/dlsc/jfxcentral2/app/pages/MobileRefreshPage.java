@@ -39,15 +39,20 @@ public class MobileRefreshPage extends StackPane {
      */
     private final InvalidationListener invalidationListener = it -> {
         if (RepositoryManager.isRepositoryUpdated()) {
-            Platform.runLater(() -> MobileLinkUtil.getToPage(PagePath.HOME));
+            Platform.runLater(() -> {
+                if (isGoToHomePage()) {
+                    MobileLinkUtil.getToPage(PagePath.HOME);
+                }
+            });
         }
     };
 
+    private boolean goToHomePage = false;
     private final WeakInvalidationListener weakInvalidationListener = new WeakInvalidationListener(invalidationListener);
     private final RepositoryUpdater repositoryUpdater = new RepositoryUpdater();
     private final CustomImageView logo;
 
-    public MobileRefreshPage(ObjectProperty<Size> size) {
+    public MobileRefreshPage() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
 
         Platform.runLater(() -> {
@@ -63,8 +68,13 @@ public class MobileRefreshPage extends StackPane {
         if (firstTimeSetup) {
             setupFirstTimeUI();
         } else {
+            goToHomePage = true;
             setupUpdateUI();
         }
+    }
+
+    private boolean isGoToHomePage() {
+        return goToHomePage;
     }
 
     private void setupFirstTimeUI() {
@@ -98,7 +108,6 @@ public class MobileRefreshPage extends StackPane {
 
             FadeIn fadeIn = new FadeIn(loadLabel);
             fadeIn.setSpeed(2);
-            fadeIn.setOnFinished(e -> repositoryUpdater.performUpdate(false));
 
             fadeOut.setOnFinished(e -> {
                 startButton.setVisible(false);
@@ -107,6 +116,14 @@ public class MobileRefreshPage extends StackPane {
             });
 
             fadeOut.play();
+
+            goToHomePage = true;
+
+            if (RepositoryManager.isRepositoryUpdated()) {
+                Platform.runLater(() -> {
+                    MobileLinkUtil.getToPage(PagePath.HOME);
+                });
+            }
         });
 
         StackPane bottomBox = new StackPane(startButton, loadLabel);
@@ -115,6 +132,8 @@ public class MobileRefreshPage extends StackPane {
         VBox content = new VBox(logo, introPane, bottomBox);
         content.getStyleClass().add("content-box");
         getChildren().add(content);
+
+        repositoryUpdater.performUpdate(false);
     }
 
     private void setupUpdateUI() {
