@@ -1077,6 +1077,7 @@
 }
 
 .mobile-refresh-page .bottom-box .load-label {
+    -fx-font-family: monospace;
     -fx-font-size: 1.2em;
     -fx-text-fill: -grey-60;
     -fx-text-alignment: center;
