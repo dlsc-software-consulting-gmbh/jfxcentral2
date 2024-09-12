@@ -649,7 +649,7 @@
  */
 .home-page-header {
     -fx-alignment: center;
-    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(247, 249, 255, 1) 0%, rgba(247, 249, 255, 0) 100%);
+    -fx-background-color: white;
 }
 
 .home-page-header:sm {
@@ -1253,7 +1253,7 @@
 
 .mobile-person-detail-view > .top-pane {
     -fx-padding: 7px 0 0 0;
-    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(247, 249, 255, 1) 0%, rgba(247, 249, 255, 0) 100%);
+    -fx-background-color: white;
 }
 
 .mobile-person-detail-view > .top-pane .avatar-view {
