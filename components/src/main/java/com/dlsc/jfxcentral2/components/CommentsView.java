@@ -186,7 +186,7 @@ public class CommentsView extends PaneBase implements NameProvider {
 
         submitButton.setOnAction(e -> {
             User writedUser = new User(
-                    "0", "Dirk Lemmermann", new Image(getClass().getResource("/com/dlsc/jfxcentral2/demoimages/person-avatar.png").toExternalForm()),
+                    "0", "Dirk Lemmermann", new Image(Objects.requireNonNull(CommentsView.class.getResource("person-avatar.png")).toExternalForm()),
                     List.of(new Badge("Champion", IkonUtil.champion),
                             new Badge("Rockstar", IkonUtil.rockstar))
             );
