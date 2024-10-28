@@ -43,7 +43,7 @@ public class QuickLinksGenerator {
     private static List<QuickLink> createQuickLinks(int count) {
         List<QuickLink> list = new ArrayList<>();
         List<ModelObject> dataList = createShuffledSublist(count);
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < dataList.size(); i++) {
             ModelObject mo = dataList.get(i);
             list.add(new NormalQuickLink(getCategoryName(mo), mo.getName(), IkonUtil.getModelIkon(mo), PageUtil.getLink(mo)));
         }
@@ -174,7 +174,7 @@ public class QuickLinksGenerator {
 
         Collections.shuffle(allModelObjects);
 
-        return allModelObjects.subList(0, size);
+        return allModelObjects.subList(0, Math.min(allModelObjects.size(), size));
     }
 
     public static List<QuickLink> generateWebsiteChangesQuickLinks(ObjectProperty<Size> sizeProperty) {
