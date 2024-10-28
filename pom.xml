@@ -31,7 +31,7 @@
         <javafx.version>22.0.1</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2024.2.0</jpro.version>
+        <jpro.version>2024.3.3</jpro.version>
         <jpro.platform.version>0.3.1</jpro.platform.version>
         <batik.version>1.16</batik.version>
         <attach.version>4.0.19</attach.version>
