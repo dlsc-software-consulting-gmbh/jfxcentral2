@@ -18,7 +18,9 @@
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <gluonfx.plugin.version>1.0.22</gluonfx.plugin.version>
         <javafx.plugin.version>0.0.8</javafx.plugin.version>
-        <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2MobileApp</mainClassName>
+        <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
+        <mainClassName.jpro>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName.jpro>
+        <mainClassName.mobile>com.dlsc.jfxcentral2.app.JFXCentral2MobileApp</mainClassName.mobile>
         <app.description>JFXCentral for anything JavaFX</app.description>
         <package.type/>
         <mac.app.store/>
@@ -455,7 +457,7 @@
                         <list>browser</list>
                         <list>video</list>
                     </attachList>
-                    <mainClass>${mainClassName}</mainClass>
+                    <mainClass>${mainClassName.mobile}</mainClass>
                     <releaseConfiguration>
                         <vendor>Gluon</vendor>
                         <description>${app.description}</description>
@@ -486,7 +488,7 @@
                 <artifactId>jpro-maven-plugin</artifactId>
                 <version>${jpro.version}</version>
                 <configuration>
-                    <mainClassName>${mainClassName}</mainClassName>
+                    <mainClassName>${mainClassName.jpro}</mainClassName>
                     <releaseName>jfxcentral</releaseName>
                     <localJVMArgs>-Ddevelop=false</localJVMArgs>
                     <port>8088</port>
