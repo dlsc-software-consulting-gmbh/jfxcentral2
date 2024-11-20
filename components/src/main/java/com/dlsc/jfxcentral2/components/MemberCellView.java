@@ -38,6 +38,7 @@ public class MemberCellView extends PaneBase {
 
         socialLinksView.setMastodonUrl(member.getMastodon());
         socialLinksView.setWebsiteUrl(member.getWebsite());
+        socialLinksView.setBlueskyUrl(member.getBluesky());
 
         if (StringUtils.isNotBlank(member.getLinkedIn())) {
             socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + member.getLinkedIn());
