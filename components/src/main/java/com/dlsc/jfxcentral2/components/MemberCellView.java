@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Member;
 import javafx.geometry.Pos;
@@ -28,7 +28,7 @@ public class MemberCellView extends PaneBase {
         jobTitleLabel.setText(member.getJobTitle());
 
         descriptionMd = new CustomMarkdownView();
-        descriptionMd.setMdString(DataRepository2.getInstance().getMemberReadMe(member));
+        descriptionMd.setMdString(DataRepository.getInstance().getMemberReadMe(member));
 
         socialLinksView = new SocialLinksView(true);
 
