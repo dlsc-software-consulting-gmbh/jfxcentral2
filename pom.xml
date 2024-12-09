@@ -31,8 +31,8 @@
         <javafx.version>22.0.1</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2024.3.3</jpro.version>
-        <jpro.platform.version>0.3.1</jpro.platform.version>
+        <jpro.version>2024.4.1</jpro.version>
+        <jpro.platform.version>0.5.1-SNAPSHOT</jpro.platform.version>
         <batik.version>1.16</batik.version>
         <attach.version>4.0.19</attach.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -240,13 +240,25 @@
             </dependency>
 
             <dependency>
-                <groupId>de.sandec</groupId>
+                <groupId>one.jpro</groupId>
                 <artifactId>JMemoryBuddy</artifactId>
-                <version>0.5.3</version>
+                <version>0.5.6</version>
             </dependency>
 
             <dependency>
                 <groupId>com.sandec.jpro</groupId>
+                <artifactId>jpro-webapi</artifactId>
+                <version>2024.3.3</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>one.jpro</groupId>
                 <artifactId>jpro-webapi</artifactId>
                 <version>${jpro.version}</version>
                 <exclusions>
