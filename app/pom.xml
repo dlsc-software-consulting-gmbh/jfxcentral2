@@ -112,7 +112,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.sandec.jpro</groupId>
+            <groupId>one.jpro</groupId>
             <artifactId>jpro-webapi</artifactId>
         </dependency>
 
@@ -477,6 +477,10 @@
                     <releaseName>jfxcentral</releaseName>
                     <localJVMArgs>-Ddevelop=false</localJVMArgs>
                     <port>8088</port>
+                    <releasePlatforms>
+                        <platform>linux</platform>
+                        <platform>current</platform>
+                    </releasePlatforms>
                 </configuration>
             </plugin>
 
