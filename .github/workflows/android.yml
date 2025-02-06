@@ -22,11 +22,13 @@ jobs:
 
       - name: Setup Gluon's GraalVM
         uses: gluonhq/setup-graalvm@master
-        with:
-          graalvm: '22.1.0.1-Final'
-          jdk: 'java23'
+        # set GITHUB_TOKEN to avoid exceeding GitHub's API rate limit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #with:
+          # GraalVM version. Default: latest
+          # Java version. Since GraalVM 22, either java11, java17 or java23. Before GraalVM 22, empty. Default: java23
+          # Architecture flag. Available options are 'x86_64' (default) and 'aarch64'. The latter is available for M1 runners starting GraalVM 22.1.
 
       # Install extra required packaged on top of ubuntu-latest
       - name: Install libraries
