@@ -11,7 +11,7 @@
   <version>1.0-SNAPSHOT</version>
   <name>app</name>
   <properties>
-    <gluonfx.plugin.version>1.0.22</gluonfx.plugin.version>
+    <gluonfx.plugin.version>1.0.25</gluonfx.plugin.version>
     <mac.app.store></mac.app.store>
     <version.code></version.code>
     <maven.javadoc.skip>true</maven.javadoc.skip>
