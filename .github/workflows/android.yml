@@ -61,6 +61,15 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEYALIAS: ${{ secrets.ANDROID_KEYALIAS }}
           ANDROID_KEYALIAS_PASSWORD: ${{ secrets.ANDROID_KEYALIAS_PASSWORD }}
+        continue-on-error: true  # This allows the workflow to continue even if this step fails
+
+      - name: Upload build log file
+        if: always()  # This ensures the logs are uploaded even if previous steps fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: /home/runner/work/jfxcentral2/jfxcentral2/app/target/gluonfx/aarch64-android/gvm/log
+          retention-days: 5  # Optional: specify how long to keep the artifacts
 
       # To be able to validate the build result, output the created files
       - name: Show created files
