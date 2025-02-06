@@ -90,7 +90,7 @@ jobs:
       - name: Upoad to Google Play
         uses: r0adkll/upload-google-play@v1.1.3
         with:
-          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           packageName: com.dlsc.jfxcentral2.app.JfxCentral2MobileApp
           releaseFiles: target/gluonfx/aarch64-android/gvm/JFXCentral2MobileApp.aab
           track: beta

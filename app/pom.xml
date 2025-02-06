@@ -25,7 +25,6 @@
         <mac.signing.user.name/>
         <bundle.version/>
         <bundle.short.version/>
-        <version.code/>
         <provided.keystore.path/>
         <provided.keystore.password/>
         <provided.key.alias/>
@@ -472,7 +471,7 @@
                         <!-- simulatorDevice>iPad Pro (12.9-inch) (2nd generation)</simulatorDevice -->
                         <!-- simulatorDevice>iPad (10th generation)</simulatorDevice -->
                         <!-- for Android -->
-                        <versionCode>${version.code}</versionCode>
+                        <versionCode>${env.GITHUB_RUN_NUMBER}</versionCode>
                         <providedKeyStorePath>${provided.keystore.path}</providedKeyStorePath>
                         <providedKeyStorePassword>${provided.keystore.password}</providedKeyStorePassword>
                         <providedKeyAlias>${provided.key.alias}</providedKeyAlias>
