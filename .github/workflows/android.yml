@@ -54,7 +54,7 @@ jobs:
       - name: Gluon Build
         run: |
           export ANDROID_SDK=$ANDROID_HOME
-          ./mvnw -DconsoleProcessLog=true -pl app -Pandroid gluonfx:build gluonfx:package
+          ./mvnw -pl app -Pandroid gluonfx:build gluonfx:package
         env:
           GRAALVM_HOME: ${{ env.JAVA_HOME }}
           ANDROID_KEYSTOREPATH: ${{ steps.android_keystore_file.outputs.filePath }}
