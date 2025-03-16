@@ -85,9 +85,9 @@ public class FooterView extends PaneBase {
     }
 
     private LineNumberPane initLinksPane() {
-        Hyperlink twitterLink = new Hyperlink("Twitter");
-        twitterLink.getStyleClass().addAll("link", "twitter-link");
-        ExternalLinkUtil.setExternalLink(twitterLink, "https://twitter.com/dlemmermann");
+        Hyperlink blueskyLink = new Hyperlink("Bluesky");
+        blueskyLink.getStyleClass().addAll("link", "bluesky-link");
+        ExternalLinkUtil.setExternalLink(blueskyLink, "https://bsky.app/profile/dlemmermann.bsky.social");
 
         Hyperlink linkedinLink = new Hyperlink("Linkedin");
         linkedinLink.getStyleClass().addAll("link", "linkedin-link");
@@ -101,7 +101,7 @@ public class FooterView extends PaneBase {
         youtubeLink.getStyleClass().addAll("link", "youtube-link");
         ExternalLinkUtil.setExternalLink(youtubeLink, "https://www.youtube.com/@dlsc/videos");
 
-        LineNumberPane linksPane = new LineNumberPane(new Label("Stay in the loop"), null, twitterLink, linkedinLink, githubLink, youtubeLink);
+        LineNumberPane linksPane = new LineNumberPane(new Label("Stay in the loop"), null, blueskyLink, linkedinLink, githubLink, youtubeLink);
         linksPane.getStyleClass().add("links-pane");
         return linksPane;
     }
