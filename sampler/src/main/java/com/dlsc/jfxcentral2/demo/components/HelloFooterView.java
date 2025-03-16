@@ -22,14 +22,6 @@ public class HelloFooterView extends JFXCentralSampleBase {
     @Override
     protected Region createControl() {
         footer = new FooterView();
-        footer.setOnSendMail(() -> System.out.println("Send mail to dlemmermann@gmail.com"));
-        footer.setOnTwitter(() -> System.out.println("https://twitter.com/dlemmermann"));
-        footer.setOnGithub(() -> System.out.println("https://github.com/dlsc-software-consulting-gmbh"));
-        footer.setOnLinkedin(() -> System.out.println("https://www.linkedin.com/in/dlemmermann/"));
-        footer.setOnYoutube(() -> System.out.println("youtube channel"));
-        footer.setOnTC(() -> System.out.println("onT&C"));
-        footer.setOnPrivacyPolicy(() -> System.out.println("onPrivacyPolicy"));
-        footer.setOnCookies(() -> System.out.println("onCookies"));
         return new ScrollPane(footer);
     }
 
