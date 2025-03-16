@@ -204,7 +204,7 @@
         </dependency>
         <dependency>
             <groupId>one.jpro.platform</groupId>
-            <artifactId>jpro-internal-util</artifactId>
+            <artifactId>jpro-utils</artifactId>
             <version>${jpro.platform.version}</version>
         </dependency>
 
@@ -460,7 +460,7 @@
         </dependency>
         <dependency>
             <groupId>one.jpro.platform</groupId>
-            <artifactId>jpro-internal-util</artifactId>
+            <artifactId>jpro-utils</artifactId>
             <version>${jpro.platform.version}</version>
         </dependency>
         <dependency>
