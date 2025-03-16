@@ -930,7 +930,7 @@
     -fx-spacing: 40px;
 }
 
-.footer-view .links-pane .twitter-link {
+.footer-view .links-pane .bluesky-link {
     tf: -blue;
     -fx-text-fill: tf;
 }
