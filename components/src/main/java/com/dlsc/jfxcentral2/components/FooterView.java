@@ -4,8 +4,6 @@ import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -138,7 +136,6 @@ public class FooterView extends PaneBase {
         return contactPane;
     }
 
-
     private static class LineNumberPane extends GridPane {
 
         public LineNumberPane(Node... nodes ) {
@@ -169,117 +166,5 @@ public class FooterView extends PaneBase {
                 add(node, 1, i);
             }
         }
-    }
-
-    private final ObjectProperty<Runnable> onSendMail = new SimpleObjectProperty<>(this, "onSendMail");
-
-    public Runnable getOnSendMail() {
-        return onSendMail.get();
-    }
-
-    public ObjectProperty<Runnable> onSendMailProperty() {
-        return onSendMail;
-    }
-
-    public void setOnSendMail(Runnable onSendMail) {
-        this.onSendMail.set(onSendMail);
-    }
-
-    private final ObjectProperty<Runnable> onCookies = new SimpleObjectProperty<>(this, "onCookies");
-
-    public Runnable getOnCookies() {
-        return onCookies.get();
-    }
-
-    public ObjectProperty<Runnable> onCookiesProperty() {
-        return onCookies;
-    }
-
-    public void setOnCookies(Runnable onCookies) {
-        this.onCookies.set(onCookies);
-    }
-
-    private final ObjectProperty<Runnable> onTwitter = new SimpleObjectProperty<>(this, "onTwitter");
-
-    public Runnable getOnTwitter() {
-        return onTwitter.get();
-    }
-
-    public ObjectProperty<Runnable> onTwitterProperty() {
-        return onTwitter;
-    }
-
-    public void setOnTwitter(Runnable onTwitter) {
-        this.onTwitter.set(onTwitter);
-    }
-
-    private final ObjectProperty<Runnable> onLinkedin = new SimpleObjectProperty<>(this, "onLinkedin");
-
-    public Runnable getOnLinkedin() {
-        return onLinkedin.get();
-    }
-
-    public ObjectProperty<Runnable> onLinkedinProperty() {
-        return onLinkedin;
-    }
-
-    public void setOnLinkedin(Runnable onLinkedin) {
-        this.onLinkedin.set(onLinkedin);
-    }
-
-    private final ObjectProperty<Runnable> onGithub = new SimpleObjectProperty<>(this, "onGithub");
-
-    public Runnable getOnGithub() {
-        return onGithub.get();
-    }
-
-    public ObjectProperty<Runnable> onGithubProperty() {
-        return onGithub;
-    }
-
-    public void setOnGithub(Runnable onGithub) {
-        this.onGithub.set(onGithub);
-    }
-
-    private final ObjectProperty<Runnable> onYoutube = new SimpleObjectProperty<>(this, "onYoutube");
-
-    public Runnable getOnYoutube() {
-        return onYoutube.get();
-    }
-
-    public ObjectProperty<Runnable> onYoutubeProperty() {
-        return onYoutube;
-    }
-
-    public void setOnYoutube(Runnable onYoutube) {
-        this.onYoutube.set(onYoutube);
-    }
-
-    private final ObjectProperty<Runnable> onTC = new SimpleObjectProperty<>(this, "onTC");
-
-    public Runnable getOnTC() {
-        return onTC.get();
-    }
-
-    public ObjectProperty<Runnable> onTCProperty() {
-        return onTC;
-    }
-
-    public void setOnTC(Runnable onTC) {
-        this.onTC.set(onTC);
-    }
-
-    private final ObjectProperty<Runnable> onPrivacyPolicy = new SimpleObjectProperty<>(this, "onPrivacyPolicy");
-
-    public Runnable getOnPrivacyPolicy() {
-        return onPrivacyPolicy.get();
-    }
-
-    public ObjectProperty<Runnable> onPrivacyPolicyProperty() {
-        return onPrivacyPolicy;
-    }
-
-    public void setOnPrivacyPolicy(Runnable onPrivacyPolicy) {
-        this.onPrivacyPolicy.set(onPrivacyPolicy);
     }
 }
