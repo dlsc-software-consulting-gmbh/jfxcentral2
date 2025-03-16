@@ -146,6 +146,9 @@ public class SocialLinksView extends StackPane {
     private void updateView() {
         pane.getChildren().clear();
 
+        if (StringUtils.isNotBlank(getBlueskyUrl())) {
+            pane.getChildren().add(blueskyLinkBtn);
+        }
         if (StringUtils.isNotBlank(getTwitterUrl())) {
             pane.getChildren().add(twitterLinkBtn);
         }
@@ -166,9 +169,6 @@ public class SocialLinksView extends StackPane {
         }
         if (StringUtils.isNotBlank(getRedditUrl())) {
             pane.getChildren().add(redditLinkBtn);
-        }
-        if (StringUtils.isNotBlank(getBlueskyUrl())) {
-            pane.getChildren().add(blueskyLinkBtn);
         }
         if (StringUtils.isNotBlank(getMailUrl())) {
             pane.getChildren().add(mailLinkBtn);
