@@ -53,7 +53,6 @@ public enum JFXCentralIcon implements Ikon {
     TIPS_TRICKS("jfx-icon-tips-tricks", '\ue92e'),
     TOOLS("jfx-icon-tools", '\ue92f'),
     TUTORIALS("jfx-icon-tutorials", '\ue930'),
-    TWITTER("jfx-icon-twitter", '\ue931'),
     VIDEOS("jfx-icon-videos", '\ue932'),
     WWW("jfx-icon-www", '\ue933'),
     YOUTUBE("jfx-icon-youtube", '\ue934'),

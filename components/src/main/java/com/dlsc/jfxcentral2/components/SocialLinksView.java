@@ -15,7 +15,6 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 public class SocialLinksView extends StackPane {
 
-    private final Button twitterLinkBtn;
     private final Button mastodonLinkBtn;
     private final Button linkedInLinkBtn;
     private final Button websiteLinkBtn;
@@ -43,14 +42,14 @@ public class SocialLinksView extends StackPane {
 
         getChildren().add(pane);
 
-        twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
-        twitterLinkBtn.getStyleClass().add("twitter-link-btn");
-        twitterLinkBtn.setMaxWidth(Double.MAX_VALUE);
-        twitterLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
-        twitterLinkBtn.visibleProperty().bind(twitterUrlProperty().isNotEmpty());
-        twitterLinkBtn.managedProperty().bind(twitterLinkBtn.visibleProperty());
-        twitterLinkBtn.setFocusTraversable(false);
-        twitterUrl.addListener(it -> updateLink(twitterLinkBtn, getTwitterUrl()));
+        blueskyLinkBtn = new Button("BLUESKY", new FontIcon(JFXCentralIcon.BLUESKY));
+        blueskyLinkBtn.getStyleClass().add("bluesky-link-btn");
+        blueskyLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
+        blueskyLinkBtn.setMaxWidth(Double.MAX_VALUE);
+        blueskyLinkBtn.visibleProperty().bind(blueskyUrlProperty().isNotEmpty());
+        blueskyLinkBtn.managedProperty().bind(blueskyLinkBtn.visibleProperty());
+        blueskyLinkBtn.setFocusTraversable(false);
+        blueskyUrl.addListener(it -> updateLink(blueskyLinkBtn, getBlueskyUrl()));
 
         mastodonLinkBtn = new Button("MASTODON", new FontIcon(CoreUiBrands.MASTODON));
         mastodonLinkBtn.getStyleClass().add("mastodon-link-btn");
@@ -106,15 +105,6 @@ public class SocialLinksView extends StackPane {
         facebookLinkBtn.setFocusTraversable(false);
         facebookUrl.addListener(it -> updateLink(facebookLinkBtn, getFacebookUrl()));
 
-        blueskyLinkBtn = new Button("BLUESKY", new FontIcon(JFXCentralIcon.BLUESKY));
-        blueskyLinkBtn.getStyleClass().add("bluesky-link-btn");
-        blueskyLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
-        blueskyLinkBtn.setMaxWidth(Double.MAX_VALUE);
-        blueskyLinkBtn.visibleProperty().bind(blueskyUrlProperty().isNotEmpty());
-        blueskyLinkBtn.managedProperty().bind(blueskyLinkBtn.visibleProperty());
-        blueskyLinkBtn.setFocusTraversable(false);
-        blueskyUrl.addListener(it -> updateLink(blueskyLinkBtn, getBlueskyUrl()));
-
         mailLinkBtn = new Button("MAIL", new FontIcon(IkonUtil.mail));
         mailLinkBtn.getStyleClass().add("mail-link-btn");
         mailLinkBtn.setMinWidth(Region.USE_PREF_SIZE);
@@ -126,7 +116,6 @@ public class SocialLinksView extends StackPane {
 
         InvalidationListener updateViewListener = it -> updateView();
 
-        twitterUrl.addListener(updateViewListener);
         mastodonUrl.addListener(updateViewListener);
         linkedInUrl.addListener(updateViewListener);
         websiteUrl.addListener(updateViewListener);
@@ -148,9 +137,6 @@ public class SocialLinksView extends StackPane {
 
         if (StringUtils.isNotBlank(getBlueskyUrl())) {
             pane.getChildren().add(blueskyLinkBtn);
-        }
-        if (StringUtils.isNotBlank(getTwitterUrl())) {
-            pane.getChildren().add(twitterLinkBtn);
         }
         if (StringUtils.isNotBlank(getMastodonUrl())) {
             pane.getChildren().add(mastodonLinkBtn);
@@ -179,20 +165,6 @@ public class SocialLinksView extends StackPane {
         if (StringUtils.isNotBlank(url)) {
             ExternalLinkUtil.setExternalLink(node, url);
         }
-    }
-
-    private final StringProperty twitterUrl = new SimpleStringProperty(this, "twitterUrl");
-
-    public String getTwitterUrl() {
-        return twitterUrl.get();
-    }
-
-    public StringProperty twitterUrlProperty() {
-        return twitterUrl;
-    }
-
-    public void setTwitterUrl(String twitterUrl) {
-        this.twitterUrl.set(twitterUrl);
     }
 
     private final StringProperty mastodonUrl = new SimpleStringProperty(this, "mastodonUrl");

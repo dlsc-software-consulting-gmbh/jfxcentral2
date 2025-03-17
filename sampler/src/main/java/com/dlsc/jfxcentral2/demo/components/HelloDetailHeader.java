@@ -81,7 +81,6 @@ public class HelloDetailHeader extends JFXCentralSampleBase {
         person.setWebsite("https://www.dlsc.com");
         person.setLinkedIn("https://www.linkedin.com/in/dlemmermann");
         person.setGitHub("https://github.com/dlemmermann");
-        person.setTwitter("https://twitter.com/dlemmermann");
         person.setChampion(true);
         person.setRockstar(true);
         return person;

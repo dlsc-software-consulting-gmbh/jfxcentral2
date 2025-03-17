@@ -103,14 +103,6 @@ public class PersonDetailHeader extends DetailHeader<Person> {
             socialFlowPane.getChildren().add(blueskyLinkBtn);
         }
 
-        if (StringUtils.isNotBlank(person.getTwitter())) {
-            Button twitterLinkBtn = new Button("TWITTER", new FontIcon(IkonUtil.twitter));
-            twitterLinkBtn.setFocusTraversable(false);
-            twitterLinkBtn.getStyleClass().addAll("twitter-link-btn", "link-button");
-            ExternalLinkUtil.setExternalLink(twitterLinkBtn, "https://twitter.com/" + person.getTwitter());
-            socialFlowPane.getChildren().add(twitterLinkBtn);
-        }
-
         if (StringUtils.isNotBlank(person.getMastodon())) {
             Button mastodonLinkBtn = new Button("MASTODON", new FontIcon(IkonUtil.mastodon));
             mastodonLinkBtn.setFocusTraversable(false);

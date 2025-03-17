@@ -3,9 +3,11 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Member;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,10 +33,6 @@ public class MemberCellView extends PaneBase {
         descriptionMd.setMdString(DataRepository.getInstance().getMemberReadMe(member));
 
         socialLinksView = new SocialLinksView(true);
-
-        if (StringUtils.isNotBlank(member.getTwitter())) {
-            socialLinksView.setTwitterUrl("https://www.twitter.com/" + member.getTwitter());
-        }
 
         socialLinksView.setMastodonUrl(member.getMastodon());
         socialLinksView.setWebsiteUrl(member.getWebsite());
