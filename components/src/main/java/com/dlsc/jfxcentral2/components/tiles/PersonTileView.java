@@ -81,7 +81,6 @@ public class PersonTileView extends SimpleTileView<Person> {
         SocialLinksView socialLinksView = new SocialLinksView();
         socialLinksView.getStyleClass().add("person-social-links-view");
         socialLinksView.setPrefWidth(socialViewWidth);
-        socialLinksView.setTwitterUrl("https://x.com/" + person.getTwitter());
         socialLinksView.setMastodonUrl(person.getMastodon());
         socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + person.getLinkedIn());
         socialLinksView.setWebsiteUrl(person.getWebsite());

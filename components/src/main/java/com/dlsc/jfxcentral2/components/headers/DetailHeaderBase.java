@@ -74,7 +74,7 @@ public class DetailHeaderBase extends CategoryHeader {
             String url = URLEncoder.encode("https://www.jfx-central.com/" + shareUrl, StandardCharsets.UTF_8);
             String title = URLEncoder.encode(shareTitle, StandardCharsets.UTF_8);
             String titleWithBody = URLEncoder.encode(shareTitle + " " + shareText, StandardCharsets.UTF_8);
-            String body = URLEncoder.encode(shareText + " ", StandardCharsets.UTF_8); // extra space for proper formatting on twitter
+            String body = URLEncoder.encode(shareText + " ", StandardCharsets.UTF_8); // extra space for proper formatting
             String bodyWithUrl = URLEncoder.encode(shareText + " https://www.jfx-central.com/" + shareUrl, StandardCharsets.UTF_8);
             String bodyWithUrlAndTags = URLEncoder.encode(shareText + " https://www.jfx-central.com/" + shareUrl + " #javafx #java #ux #ui", StandardCharsets.UTF_8);
 
