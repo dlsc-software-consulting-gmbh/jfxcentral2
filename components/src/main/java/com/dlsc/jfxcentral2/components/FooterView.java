@@ -85,7 +85,7 @@ public class FooterView extends PaneBase {
     private LineNumberPane initLinksPane() {
         Hyperlink blueskyLink = new Hyperlink("Bluesky");
         blueskyLink.getStyleClass().addAll("link", "bluesky-link");
-        ExternalLinkUtil.setExternalLink(blueskyLink, "https://bsky.app/profile/dlemmermann.bsky.social");
+        ExternalLinkUtil.setExternalLink(blueskyLink, "https://bsky.app/profile/jfxcentral.com");
 
         Hyperlink linkedinLink = new Hyperlink("Linkedin");
         linkedinLink.getStyleClass().addAll("link", "linkedin-link");
