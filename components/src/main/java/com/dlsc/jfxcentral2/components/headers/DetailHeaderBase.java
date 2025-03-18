@@ -83,7 +83,7 @@ public class DetailHeaderBase extends CategoryHeader {
             socialLinksView.setMailUrl("mailto:?subject=" + title.replace("+", "%20") + "&body=" + body.replace("+", "%20"));
             socialLinksView.setRedditUrl("https://www.reddit.com/r/JavaFX/submit?title=" + title + "&selftext=true&text=" + bodyWithUrl + "&link=" + url);
             socialLinksView.setBlueskyUrl("https://bsky.app/intent/compose?text=" + bodyWithUrlAndTags);
-            socialLinksView.setMastodonUrl(url);
+            socialLinksView.setMastodonUrl("https://{SERVER}/share?text=" + bodyWithUrlAndTags);
         }
     }
 
