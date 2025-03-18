@@ -58,7 +58,10 @@ public class SocialLinksView extends StackPane {
         mastodonLinkBtn.visibleProperty().bind(mastodonUrlProperty().isNotEmpty());
         mastodonLinkBtn.managedProperty().bind(mastodonLinkBtn.visibleProperty());
         mastodonLinkBtn.setFocusTraversable(false);
-        mastodonUrl.addListener(it -> updateLink(mastodonLinkBtn, getMastodonUrl()));
+        mastodonLinkBtn.setOnAction(event -> {
+            var dialog = new MastodonShareView(getMastodonUrl());
+            dialog.showAndWait();
+        });
 
         redditLinkBtn = new Button("REDDIT", new FontIcon(IkonUtil.reddit));
         redditLinkBtn.getStyleClass().add("reddit-link-btn");
