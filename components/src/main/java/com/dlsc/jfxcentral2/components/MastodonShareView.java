@@ -1,7 +1,16 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.utils.RegistryHelper;
 import javafx.scene.control.*;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+
+import java.awt.*;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class MastodonShareView extends Dialog<String> {
 
@@ -20,6 +29,7 @@ public class MastodonShareView extends Dialog<String> {
         grid.add(new Label("What is your Mastodon server URL?"), 0, 0);
 
         serverAddress = new TextField();
+        serverAddress.setText(RegistryHelper.get(RegistryHelper.RegistryKey.MASTODON_SERVER));
         grid.add(serverAddress, 1, 0);
 
         // Add the content to the dialog
@@ -37,9 +47,24 @@ public class MastodonShareView extends Dialog<String> {
         if (buttonType != null && buttonType.getButtonData() == ButtonBar.ButtonData.APPLY) {
             String serverUrl = serverAddress.getText().trim();
             if (!serverUrl.isEmpty()) {
-                return serverUrl;
+                RegistryHelper.put(RegistryHelper.RegistryKey.MASTODON_SERVER, serverUrl);
+
+                String shareUrl = String.format(
+                        "https://%s/share?text=%s%%0A%s",
+                        serverUrl,
+                        URLEncoder.encode("Test", StandardCharsets.UTF_8),
+                        URLEncoder.encode(url, StandardCharsets.UTF_8)
+                );
+
+                try {
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop.getDesktop().browse(new URI(shareUrl));
+                    }
+                } catch (Exception e) {
+                    System.err.println("Can't open browser: " + e.getMessage());
+                }
             }
         }
-        return null;
+        return "";
     }
 }
