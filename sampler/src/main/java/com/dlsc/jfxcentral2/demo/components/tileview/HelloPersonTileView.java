@@ -21,7 +21,6 @@ public class HelloPersonTileView extends JFXCentralSampleBase {
         person.setChampion(true);
         person.setRockstar(true);
         person.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ");
-        person.setTwitter("https://twitter.com/dlemmermann");
         person.setLinkedIn("dlemmermann");
         person.setWebsite("https://www.dlsc.com");
         person.setEmail("dlemmermann@gmail.com");

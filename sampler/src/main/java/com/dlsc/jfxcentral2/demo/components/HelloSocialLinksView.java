@@ -18,7 +18,6 @@ public class HelloSocialLinksView extends JFXCentralSampleBase {
     @Override
     protected Region createControl() {
         socialLinksView = new SocialLinksView();
-        socialLinksView.setTwitterUrl("https://twitter.com/dlemmermann");
         socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/dlemmermann/");
         socialLinksView.setWebsiteUrl("https://www.dlsc.com");
         socialLinksView.setMailUrl("mailto:dlemmermann@gmail.com");
@@ -28,7 +27,6 @@ public class HelloSocialLinksView extends JFXCentralSampleBase {
         menuButton.setFocusTraversable(false);
 
         SocialLinksView menuLinksView = new SocialLinksView();
-        menuLinksView.setTwitterUrl("https://twitter.com/");
         menuLinksView.setLinkedInUrl("https://www.linkedin.com/in/");
         menuLinksView.setGithubUrl("https://github.com/");
         customMenuItem = new CustomMenuItem(menuLinksView);

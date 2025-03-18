@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral2.components.tiles;
 
-import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral2.components.SocialLinksView;
@@ -30,13 +30,13 @@ public class PersonTileView extends SimpleTileView<Person> {
 
         getStyleClass().add("person-tile-view");
 
-        //add image for testing
+        // add image for testing
         imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
 
         setTitle(person.getName());
-        setDescription(DataRepository2.getInstance().getPersonReadMe(person));
+        setDescription(DataRepository.getInstance().getPersonReadMe(person));
 
-        //add badges
+        // add badges
         badgeBox.getChildren().clear();
         if (person.isChampion()) {
             Label championBadge = new Label("", new FontIcon(IkonUtil.champion));
@@ -81,11 +81,11 @@ public class PersonTileView extends SimpleTileView<Person> {
         SocialLinksView socialLinksView = new SocialLinksView();
         socialLinksView.getStyleClass().add("person-social-links-view");
         socialLinksView.setPrefWidth(socialViewWidth);
-        socialLinksView.setTwitterUrl(person.getTwitter());
         socialLinksView.setMastodonUrl(person.getMastodon());
         socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + person.getLinkedIn());
         socialLinksView.setWebsiteUrl(person.getWebsite());
-        socialLinksView.setGithubUrl(person.getGitHub());
+        socialLinksView.setGithubUrl("https://github.com/" + person.getGitHub());
+        socialLinksView.setBlueskyUrl("https://bsky.app/profile/" + person.getBluesky());
         if (StringUtils.isNotBlank(person.getEmail().trim())) {
             socialLinksView.setMailUrl("mailto:" + person.getEmail());
         }
