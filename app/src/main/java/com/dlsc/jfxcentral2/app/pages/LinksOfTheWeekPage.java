@@ -34,8 +34,15 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 
+    private String id;
+
     public LinksOfTheWeekPage(ObjectProperty<Size> size) {
         super(size);
+    }
+
+    public LinksOfTheWeekPage(ObjectProperty<Size> size, String id) {
+        super(size);
+        this.id = id;
     }
 
     @Override
@@ -89,6 +96,17 @@ public class LinksOfTheWeekPage extends CategoryPageBase<LinksOfTheWeek> {
                 detailsContentPane.getMenuView().setSelectedIndex(-1);
             }
         });
+
+        if (id != null) {
+            ObservableList<LinksOfTheWeek> linksOfTheWeeks = linksOfTheWeekView.getLinksOfTheWeeks();
+            for (int i = 0; i < linksOfTheWeeks.size(); i++) {
+                LinksOfTheWeek linksOfTheWeek = linksOfTheWeeks.get(i);
+                if (id.equals(linksOfTheWeek.getId())) {
+                    linksOfTheWeekView.goToPage(linksOfTheWeeks.size() - i - 1);
+                    break;
+                }
+            }
+        }
 
         return wrapContent(header, detailsContentPane);
     }
