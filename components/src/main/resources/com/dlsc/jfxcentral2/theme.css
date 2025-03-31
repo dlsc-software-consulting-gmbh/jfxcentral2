@@ -7173,15 +7173,15 @@
     -fx-pref-width: 317px;
 }
 
-.links-of-the-week-view .links-box .week-box {
+.links-of-the-week-view .links-box {
     -fx-background-color: -white;
 }
 
-.links-of-the-week-view:md-lg .links-box .week-box .custom-markdown-view {
+.links-of-the-week-view:md-lg .links-box .custom-markdown-view {
     -fx-padding: 20px 30px;
 }
 
-.links-of-the-week-view:sm .links-box .week-box .custom-markdown-view {
+.links-of-the-week-view:sm .links-box .custom-markdown-view {
     -fx-padding: 20px 15px;
 }
 
