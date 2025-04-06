@@ -1,70 +1,104 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.dlsc.jfxcentral2.utils.RegistryHelper;
-import javafx.scene.control.*;
-import javafx.scene.control.Dialog;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import one.jpro.platform.routing.LinkUtil;
 
-import java.awt.*;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
-public class MastodonShareView extends Dialog<String> {
+public class MastodonShareView extends VBox {
 
-    private final String url;
+    private static final String DEFAULT_STYLE_CLASS = "mastodon-share-view";
+
     private final TextField serverAddress;
+    private final Button okButton;
 
-    public MastodonShareView(String url) {
-        this.url = url;
+    public MastodonShareView() {
+        getStyleClass().add(DEFAULT_STYLE_CLASS);
 
-        setTitle("Share on Mastodon");
-
-        // Set up the dialog content
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.add(new Label("What is your Mastodon server URL?"), 0, 0);
-        grid.add(new Label("E.g. mastodon.social, hachyderm.io,..."), 0, 1);
+        Label promptLabel = new Label("What is your Mastodon server URL?");
+        promptLabel.getStyleClass().add("prompt-label");
 
         serverAddress = new TextField();
         serverAddress.setText(RegistryHelper.get(RegistryHelper.RegistryKey.MASTODON_SERVER));
-        grid.add(serverAddress, 1, 0);
+        serverAddress.setOnAction(event -> Optional.ofNullable(buildShareUrl()).ifPresent(url -> LinkUtil.gotoPage(serverAddress, url)));
 
-        // Add the content to the dialog
-        getDialogPane().setContent(grid);
+        Label exampleLabel = new Label("E.g. mastodon.social, hachyderm.io,...");
+        exampleLabel.getStyleClass().add("example-label");
 
-        // Set up the dialog buttons
-        getDialogPane().getButtonTypes().add(new ButtonType("OK", ButtonBar.ButtonData.APPLY));
-        getDialogPane().getButtonTypes().add(new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE));
+        Button backButton = new Button("Back");
+        backButton.getStyleClass().addAll("back-button", "blue-button");
+        backButton.setOnAction(event -> Optional.ofNullable(getOnBack()).ifPresent(Runnable::run));
+        backButton.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(backButton, Priority.ALWAYS);
 
-        // Result handler
-        setResultConverter(this::handleButtonClick);
+        okButton = new Button("Ok");
+        okButton.getStyleClass().addAll("ok-button", "blue-button");
+        okButton.setOnAction(event -> Optional.ofNullable(buildShareUrl()).ifPresent(url -> LinkUtil.gotoPage(okButton, url)));
+        okButton.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(okButton, Priority.ALWAYS);
+
+        HBox actionsBox = new HBox(backButton, okButton);
+        actionsBox.getStyleClass().add("actions-box");
+
+        getChildren().addAll(promptLabel, serverAddress, exampleLabel, actionsBox);
     }
 
-    private String handleButtonClick(ButtonType buttonType) {
-        if (buttonType != null && buttonType.getButtonData() == ButtonBar.ButtonData.APPLY) {
-            String serverUrl = serverAddress.getText()
-                    .trim()
-                    .replace("http://", "")
-                    .replace("https://", "")
-                    .replace("/", "")
-                    .replace("\\", "");
-            if (!serverUrl.isEmpty()) {
-                RegistryHelper.put(RegistryHelper.RegistryKey.MASTODON_SERVER, serverUrl);
-                String shareUrl = url.replace("{SERVER}", serverUrl);
-                try {
-                    if (Desktop.isDesktopSupported()) {
-                        Desktop.getDesktop().browse(new URI(shareUrl));
-                    }
-                } catch (Exception e) {
-                    LOGGER.error("Can't open browser: {}", e.getMessage());
-                }
-            }
+    private String buildShareUrl() {
+        String serverUrl = serverAddress.getText()
+                .trim()
+                .replace("http://", "")
+                .replace("https://", "")
+                .replace("/", "")
+                .replace("\\", "");
+        if (!serverUrl.isEmpty()) {
+            RegistryHelper.put(RegistryHelper.RegistryKey.MASTODON_SERVER, serverUrl);
+            return getMastodonUrl().replace("{SERVER}", serverUrl);
         }
-        return "";
+        return null;
+    }
+
+    // mastodonUrl
+
+    private final StringProperty mastodonUrl = new SimpleStringProperty(this, "mastodonUrl");
+
+    public final StringProperty mastodonUrlProperty() {
+        return mastodonUrl;
+    }
+
+    public final String getMastodonUrl() {
+        return mastodonUrl.get();
+    }
+
+    public final void setMastodonUrl(String value) {
+        mastodonUrlProperty().set(value);
+    }
+
+    // on back button clicked
+
+    private ObjectProperty<Runnable> onBack;
+
+    public final ObjectProperty<Runnable> onBackProperty() {
+        if (onBack == null) {
+            onBack = new SimpleObjectProperty<>(this, "onBack");
+        }
+        return onBack;
+    }
+
+    public final void setOnBack(Runnable value) {
+        onBackProperty().set(value);
+    }
+
+    public final Runnable getOnBack() {
+        return onBack == null ? null : onBackProperty().get();
     }
 }
