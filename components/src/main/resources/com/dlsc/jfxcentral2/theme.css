@@ -10440,3 +10440,43 @@
 .single-icon-features-wrapper:sm {
     -fx-padding: 30px 0px;
 }
+
+/** ----------------------------------------------------------------------------
+ * MastodonShareView
+ */
+.mastodon-share-view {
+    -fx-background-color: -white;
+    -fx-spacing: 10px;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-padding: 15px;
+    -fx-background-radius: 10px;
+    -fx-effect: -blue-shadow;
+    -fx-alignment: center-right;
+}
+
+.mastodon-share-view .label {
+    -fx-font-family: "Spline Sans";
+    -fx-wrap-text: true;
+}
+
+.mastodon-share-view .prompt-label {
+    -fx-text-fill: -grey-100;
+}
+
+.mastodon-share-view .example-label {
+    -fx-text-fill: -grey-50;
+}
+
+.mastodon-share-view .actions-box {
+    -fx-spacing: 5px;
+}
+
+.mastodon-share-view .actions-box .button {
+    -fx-text-fill: -white;
+    -fx-font-family: "Spline Sans";
+}
+
+.mastodon-share-view .actions-box .ok-button {
+    -fx-padding: 5px 16px;
+}

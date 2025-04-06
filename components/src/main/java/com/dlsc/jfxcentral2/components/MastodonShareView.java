@@ -30,7 +30,13 @@ public class MastodonShareView extends VBox {
 
         serverAddress = new TextField();
         serverAddress.setText(RegistryHelper.get(RegistryHelper.RegistryKey.MASTODON_SERVER));
-        serverAddress.setOnAction(event -> Optional.ofNullable(buildShareUrl()).ifPresent(url -> LinkUtil.gotoPage(serverAddress, url)));
+        //serverAddress.setOnAction(event -> Optional.ofNullable(buildShareUrl()).ifPresent(url -> LinkUtil.gotoPage(serverAddress, url)));
+
+        // serverAddress.setOnKeyPressed(event -> {
+        //     if (event.getCode() == KeyCode.ENTER) {
+        //         Optional.ofNullable(buildShareUrl()).ifPresent(url -> LinkUtil.gotoPage(serverAddress, url));
+        //     }
+        // });
 
         Label exampleLabel = new Label("E.g. mastodon.social, hachyderm.io,...");
         exampleLabel.getStyleClass().add("example-label");
@@ -43,7 +49,7 @@ public class MastodonShareView extends VBox {
 
         okButton = new Button("Ok");
         okButton.getStyleClass().addAll("ok-button", "blue-button");
-        okButton.setOnAction(event -> Optional.ofNullable(buildShareUrl()).ifPresent(url -> LinkUtil.gotoPage(okButton, url)));
+        okButton.setOnAction(event -> Optional.ofNullable(buildShareUrl()).ifPresent(url -> LinkUtil.setExternalLink(okButton, url)));
         okButton.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(okButton, Priority.ALWAYS);
 
