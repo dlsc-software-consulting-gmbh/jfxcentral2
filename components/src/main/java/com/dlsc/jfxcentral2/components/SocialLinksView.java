@@ -4,11 +4,17 @@ import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.InvalidationListener;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.coreui.CoreUiBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -59,11 +65,12 @@ public class SocialLinksView extends StackPane {
         mastodonLinkBtn.managedProperty().bind(mastodonLinkBtn.visibleProperty());
         mastodonLinkBtn.setFocusTraversable(false);
         mastodonLinkBtn.setOnAction(event -> {
-            if (getMastodonUrl().contains("{SERVER}")) {
-                var dialog = new MastodonShareView(getMastodonUrl());
-                dialog.showAndWait();
+            String url = getMastodonUrl();
+            Runnable shareHandler = getOnShareToMastodon();
+            if (url.contains("{SERVER}") && shareHandler != null) {
+                shareHandler.run();
             } else {
-                ExternalLinkUtil.setExternalLink(mastodonLinkBtn, getMastodonUrl());
+                ExternalLinkUtil.setExternalLink(mastodonLinkBtn, url);
             }
         });
 
@@ -172,6 +179,26 @@ public class SocialLinksView extends StackPane {
         if (StringUtils.isNotBlank(url)) {
             ExternalLinkUtil.setExternalLink(node, url);
         }
+    }
+
+    private ObjectProperty<Runnable> onShareToMastodon;
+
+    /**
+     * The action to be executed when the user clicks the share button for Mastodon.
+     */
+    public ObjectProperty<Runnable> onShareToMastodonProperty() {
+        if (onShareToMastodon == null) {
+            onShareToMastodon = new SimpleObjectProperty<>(this, "onShareToMastodon");
+        }
+        return onShareToMastodon;
+    }
+
+    public void setOnShareToMastodon(Runnable onShareToMastodon) {
+        this.onShareToMastodonProperty().set(onShareToMastodon);
+    }
+
+    public Runnable getOnShareToMastodon() {
+        return onShareToMastodon == null ? null : onShareToMastodonProperty().get();
     }
 
     private final StringProperty mastodonUrl = new SimpleStringProperty(this, "mastodonUrl");
