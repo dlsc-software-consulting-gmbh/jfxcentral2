@@ -230,7 +230,7 @@ public class JFXCentral2App extends Application {
         }
 
         // add client URL handler
-        if (OSUtil.isAWTSupported()) {
+        if (!WebAPI.isBrowser() && OSUtil.isAWTSupported()) {
             addClientUrlHandler(scene, sessionManager);
         }
 
