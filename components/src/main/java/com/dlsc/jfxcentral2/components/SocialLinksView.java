@@ -44,6 +44,7 @@ public class SocialLinksView extends StackPane {
         } else {
             pane = new VBox();
             pane.getStyleClass().addAll("pane", "vbox");
+            getStyleClass().add("vertical");
         }
 
         getChildren().add(pane);

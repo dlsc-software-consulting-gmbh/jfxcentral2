@@ -2853,6 +2853,10 @@
     -fx-alignment: center-right;
 }
 
+.social-links-view.vertical {
+    -fx-pref-width: 165px;
+}
+
 .social-links-view > .flow-pane {
     -fx-hgap: 5px;
     -fx-vgap: 10px;
@@ -2873,6 +2877,11 @@
     -fx-text-fill: -bright-blue;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
+}
+
+.social-links-view.vertical .button {
+    -fx-padding: 4px 15px;
+    -fx-graphic-text-gap: 10px;
 }
 
 .social-links-view .button:hover {
@@ -10479,4 +10488,42 @@
 
 .mastodon-share-view .actions-box .ok-button {
     -fx-padding: 5px 16px;
+}
+
+/** ----------------------------------------------------------------------------
+ * MastodonInputField
+ */
+.mastodon-suggestion-list-view {
+    -fx-max-height: 150px;
+    -fx-pref-width: 140px;
+    -fx-font-size: 12px;
+}
+
+.mastodon-suggestion-list-view:focused {
+    -fx-background-color: #e2e2e233;
+}
+
+.mastodon-suggestion-list-view .list-cell {
+    -fx-background-color: -white;
+    -fx-text-fill: -grey-100;
+}
+
+.mastodon-suggestion-list-view .list-cell:hover {
+    -fx-background-color: -grey-10;
+}
+
+.mastodon-suggestion-list-view .list-cell:selected {
+    -fx-background-color: -light-blue;
+}
+
+.mastodon-suggestion-list-view .list-cell:empty {
+    -fx-background-color: -white;
+}
+
+.mastodon-suggestion-list-view .scroll-bar > .thumb {
+    -fx-background-color: transparent, #00000026;
+}
+
+.mastodon-suggestion-list-view .scroll-bar > .track-background {
+    -fx-background-color: -white;
 }
