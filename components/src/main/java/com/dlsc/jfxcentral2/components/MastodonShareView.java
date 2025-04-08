@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
 import com.dlsc.jfxcentral2.utils.RegistryHelper;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -7,11 +8,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import one.jpro.platform.routing.LinkUtil;
 
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ public class MastodonShareView extends VBox {
 
     private static final String DEFAULT_STYLE_CLASS = "mastodon-share-view";
 
-    private final TextField serverAddress;
+    private final MastodonInputField serverAddress;
     private final Button okButton;
 
     public MastodonShareView() {
@@ -28,15 +27,8 @@ public class MastodonShareView extends VBox {
         Label promptLabel = new Label("What is your Mastodon server URL?");
         promptLabel.getStyleClass().add("prompt-label");
 
-        serverAddress = new TextField();
+        serverAddress = new MastodonInputField();
         serverAddress.setText(RegistryHelper.get(RegistryHelper.RegistryKey.MASTODON_SERVER));
-        //serverAddress.setOnAction(event -> Optional.ofNullable(buildShareUrl()).ifPresent(url -> LinkUtil.gotoPage(serverAddress, url)));
-
-        // serverAddress.setOnKeyPressed(event -> {
-        //     if (event.getCode() == KeyCode.ENTER) {
-        //         Optional.ofNullable(buildShareUrl()).ifPresent(url -> LinkUtil.gotoPage(serverAddress, url));
-        //     }
-        // });
 
         Label exampleLabel = new Label("E.g. mastodon.social, hachyderm.io,...");
         exampleLabel.getStyleClass().add("example-label");
@@ -49,7 +41,7 @@ public class MastodonShareView extends VBox {
 
         okButton = new Button("Ok");
         okButton.getStyleClass().addAll("ok-button", "blue-button");
-        okButton.setOnAction(event -> Optional.ofNullable(buildShareUrl()).ifPresent(url -> LinkUtil.setExternalLink(okButton, url)));
+
         okButton.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(okButton, Priority.ALWAYS);
 
@@ -57,6 +49,17 @@ public class MastodonShareView extends VBox {
         actionsBox.getStyleClass().add("actions-box");
 
         getChildren().addAll(promptLabel, serverAddress, exampleLabel, actionsBox);
+
+        createNewShareLink();
+        mastodonUrlProperty().addListener(obs -> createNewShareLink());
+        serverAddress.textProperty().addListener(obs -> createNewShareLink());
+    }
+
+    private void createNewShareLink() {
+        String shareUrl = buildShareUrl();
+        if (shareUrl != null) {
+            ExternalLinkUtil.setExternalLink(okButton, shareUrl);
+        }
     }
 
     private String buildShareUrl() {
@@ -66,7 +69,7 @@ public class MastodonShareView extends VBox {
                 .replace("https://", "")
                 .replace("/", "")
                 .replace("\\", "");
-        if (!serverUrl.isEmpty()) {
+        if (!serverUrl.isEmpty() && getMastodonUrl() != null) {
             RegistryHelper.put(RegistryHelper.RegistryKey.MASTODON_SERVER, serverUrl);
             return getMastodonUrl().replace("{SERVER}", serverUrl);
         }
