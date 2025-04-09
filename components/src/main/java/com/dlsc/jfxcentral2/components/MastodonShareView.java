@@ -40,6 +40,7 @@ public class MastodonShareView extends VBox {
             if (StringUtils.isBlank(shareUrl)) {
                 return;
             }
+            // According to Florian, this works well in most browsers like Chrome. Safari might block it, so we offer an "OK" button as fallback.
             if (WebAPI.isBrowser()) {
                 WebAPI.getWebAPI(getScene()).openURLAsTab(shareUrl);
             } else if (Desktop.isDesktopSupported()) {
