@@ -1,7 +1,9 @@
 package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.jfxcentral2.utils.ExternalLinkUtil;
+import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.dlsc.jfxcentral2.utils.RegistryHelper;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,7 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
 import java.util.Optional;
 
 public class MastodonShareView extends VBox {
@@ -29,6 +35,21 @@ public class MastodonShareView extends VBox {
 
         serverAddress = new MastodonInputField();
         serverAddress.setText(RegistryHelper.get(RegistryHelper.RegistryKey.MASTODON_SERVER));
+        serverAddress.setOnAction(event -> {
+            String shareUrl = buildShareUrl();
+            if (StringUtils.isBlank(shareUrl)) {
+                return;
+            }
+            if (WebAPI.isBrowser()) {
+                WebAPI.getWebAPI(getScene()).openURLAsTab(shareUrl);
+            } else if (Desktop.isDesktopSupported()) {
+                try {
+                    Desktop.getDesktop().browse(URI.create(shareUrl));
+                } catch (IOException e) {
+                    LOGGER.error("Failed to browse the URL: {}", shareUrl, e);
+                }
+            }
+        });
 
         Label exampleLabel = new Label("E.g. mastodon.social, hachyderm.io,...");
         exampleLabel.getStyleClass().add("example-label");
@@ -57,8 +78,11 @@ public class MastodonShareView extends VBox {
 
     private void createNewShareLink() {
         String shareUrl = buildShareUrl();
-        if (shareUrl != null) {
+        if (StringUtils.isNotBlank(shareUrl)) {
             ExternalLinkUtil.setExternalLink(okButton, shareUrl);
+            okButton.setDisable(false);
+        } else {
+            okButton.setDisable(true);
         }
     }
 
