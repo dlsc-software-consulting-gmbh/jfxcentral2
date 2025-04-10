@@ -23,6 +23,7 @@ import java.util.Optional;
 public class MastodonShareView extends VBox {
 
     private static final String DEFAULT_STYLE_CLASS = "mastodon-share-view";
+    private static final String DEFAULT_MASTODON_SERVER = "mastodon.social";
 
     private final MastodonInputField serverAddress;
     private final Button okButton;
@@ -34,7 +35,7 @@ public class MastodonShareView extends VBox {
         promptLabel.getStyleClass().add("prompt-label");
 
         serverAddress = new MastodonInputField();
-        serverAddress.setText(RegistryHelper.get(RegistryHelper.RegistryKey.MASTODON_SERVER));
+        serverAddress.setText(getSavedOrDefaultServerAddress());
         serverAddress.setOnAction(event -> {
             String shareUrl = buildShareUrl();
             if (StringUtils.isBlank(shareUrl)) {
@@ -75,6 +76,11 @@ public class MastodonShareView extends VBox {
         createNewShareLink();
         mastodonUrlProperty().addListener(obs -> createNewShareLink());
         serverAddress.textProperty().addListener(obs -> createNewShareLink());
+    }
+
+    private String getSavedOrDefaultServerAddress() {
+        String storedServer = RegistryHelper.get(RegistryHelper.RegistryKey.MASTODON_SERVER);
+        return StringUtils.isBlank(storedServer) ? DEFAULT_MASTODON_SERVER : storedServer;
     }
 
     private void createNewShareLink() {
