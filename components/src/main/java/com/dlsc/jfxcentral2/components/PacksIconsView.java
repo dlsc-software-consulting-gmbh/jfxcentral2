@@ -1,5 +1,7 @@
 package com.dlsc.jfxcentral2.components;
 
+import com.dlsc.gemsfx.SelectionBox;
+import com.dlsc.gemsfx.util.SimpleStringConverter;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.components.gridview.IkonGridView;
@@ -8,7 +10,6 @@ import com.dlsc.jfxcentral2.components.tiles.IkonliPackTileView;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,6 +22,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -34,7 +36,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 
 import java.util.Comparator;
-import java.util.Set;
 
 public class PacksIconsView extends PaneBase {
 
@@ -48,6 +49,7 @@ public class PacksIconsView extends PaneBase {
     private final SearchService searchService = new SearchService();
     private final IkonGridView ikonGridView;
     private final ComboBox<Scope> scopeComboBox;
+    private final HBox packSelectionWrapper;
 
     private enum Scope {
         PACKS, ICONS
@@ -85,6 +87,17 @@ public class PacksIconsView extends PaneBase {
             }
         }, scopeComboBox.getSelectionModel().selectedItemProperty()));
 
+        // pack selection
+        SelectionBox<IkonliPack> ikonliPackSelection = initIkonliPackSelection();
+        ikonliPackSelection.getStyleClass().addAll("pack-selection");
+        ikonliPackSelection.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(ikonliPackSelection, Priority.ALWAYS);
+        packSelectionWrapper = new HBox(new Label("PACKS"), ikonliPackSelection);
+        packSelectionWrapper.getStyleClass().addAll("combo-box-wrapper", "pack-selection-wrapper");
+        HBox.setHgrow(packSelectionWrapper, Priority.ALWAYS);
+        packSelectionWrapper.managedProperty().bind(packSelectionWrapper.visibleProperty());
+        packSelectionWrapper.visibleProperty().bind(scopeComboBox.getSelectionModel().selectedItemProperty().map(item -> item == Scope.ICONS));
+
         ComboBox<Sort> sortComboBox = initSortComboBox();
         sortComboBox.getStyleClass().addAll("sort-combo-box");
         sortComboBox.setMaxWidth(Double.MAX_VALUE);
@@ -97,7 +110,7 @@ public class PacksIconsView extends PaneBase {
         topWrapper.getStyleClass().add("top-wrapper");
 
         // center
-        ikonGridView = createIkonGridView(scopeComboBox, sortComboBox);
+        ikonGridView = createIkonGridView(scopeComboBox, ikonliPackSelection, sortComboBox);
 
         ModelGridView<IkonliPack> packGridView = createModelGridView(sortComboBox);
 
@@ -190,7 +203,7 @@ public class PacksIconsView extends PaneBase {
     private void updateUI() {
         Pane topBox = isSmall() ? new VBox() : new HBox();
         topBox.getStyleClass().addAll("top-box");
-        topBox.getChildren().addAll(searchField, scopeComboBoxWrapper, sortComboBoxWrapper);
+        topBox.getChildren().addAll(searchField, scopeComboBoxWrapper, packSelectionWrapper, sortComboBoxWrapper);
         topWrapper.getChildren().setAll(topBox);
     }
 
@@ -214,7 +227,7 @@ public class PacksIconsView extends PaneBase {
             }
         }, searchText));
 
-        //sort
+        // sort
         SortedList<IkonliPack> sortedPacks = new SortedList<>(filteredPacks);
         sortedPacks.comparatorProperty().bind(Bindings.createObjectBinding(() -> {
             Sort sort = sortComboBox.getValue();
@@ -228,7 +241,7 @@ public class PacksIconsView extends PaneBase {
         return packGridView;
     }
 
-    private IkonGridView createIkonGridView(ComboBox<Scope> scopeComboBox, ComboBox<Sort> sortComboBox) {
+    private IkonGridView createIkonGridView(ComboBox<Scope> scopeComboBox, SelectionBox<IkonliPack> ikonliPackSelection, ComboBox<Sort> sortComboBox) {
         IkonGridView ikonGridView = new IkonGridView();
         ikonGridView.sizeProperty().bind(sizeProperty());
         ikonGridView.managedProperty().bind(visibleProperty());
@@ -244,9 +257,19 @@ public class PacksIconsView extends PaneBase {
             }
         }, sizeProperty(), scopeComboBox.valueProperty()));
 
-        // ikons data
-        Set<Ikon> ikons = IkonliPackUtil.getInstance().getDataMap().keySet();
-        ObservableList<Ikon> icons = FXCollections.observableArrayList(ikons);
+        // icons (default load all icons)
+        ObservableList<Ikon> icons = FXCollections.observableArrayList(IkonliPackUtil.getInstance().getAllIkons());
+
+        ObservableList<IkonliPack> selectedPacks = ikonliPackSelection.getSelectionModel().getSelectedItems();
+        selectedPacks.subscribe(() -> {
+            if (scopeComboBox.getSelectionModel().getSelectedItem() == Scope.ICONS) {
+                if (selectedPacks.size() == ikonliPackSelection.getItems().size()) {
+                    icons.setAll(IkonliPackUtil.getInstance().getAllIkons());
+                } else {
+                    icons.setAll(IkonliPackUtil.getInstance().getIkonsForPacksFiltered(selectedPacks));
+                }
+            }
+        });
 
         FilteredList<Ikon> filteredIconsList = new FilteredList<>(icons);
         filteredIconsList.predicateProperty().bind(Bindings.createObjectBinding(() -> {
@@ -263,12 +286,12 @@ public class PacksIconsView extends PaneBase {
                         }
                     }
                     return true;
-                    //return StringUtils.containsAnyIgnoreCase(str, keys);
+                    // return StringUtils.containsAnyIgnoreCase(str, keys);
                 };
             }
         }, searchText));
 
-        //sort
+        // sort
         SortedList<Ikon> sortedList = new SortedList<>(filteredIconsList);
         sortedList.comparatorProperty().bind(Bindings.createObjectBinding(() -> {
             Sort sort = sortComboBox.getValue();
@@ -316,6 +339,25 @@ public class PacksIconsView extends PaneBase {
         scopeBox.getItems().addAll(Scope.values());
         scopeBox.getSelectionModel().select(Scope.ICONS);
         return scopeBox;
+    }
+
+    private SelectionBox<IkonliPack> initIkonliPackSelection() {
+        ObservableList<IkonliPack> packs = FXCollections.observableArrayList(DataRepository.getInstance().getIkonliPacks());
+        SelectionBox<IkonliPack> selectionBox = new SelectionBox<>(packs);
+        selectionBox.setPromptText("Select packs");
+        selectionBox.setItemConverter(new SimpleStringConverter<>(IkonliPack::getName));
+        selectionBox.setSelectedItemsConverter(new SimpleStringConverter<>(list -> {
+            if (list.isEmpty()) {
+                return "Select packs";
+            } else if (list.size() == 1) {
+                return list.get(0).getName();
+            } else {
+                return list.size() + " packs";
+            }
+        }));
+        selectionBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        selectionBox.getSelectionModel().selectAll();
+        return selectionBox;
     }
 
 }
