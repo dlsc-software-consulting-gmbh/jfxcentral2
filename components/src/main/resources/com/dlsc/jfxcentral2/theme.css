@@ -9325,6 +9325,11 @@
     -fx-padding: 10px 30px;
 }
 
+.packs-icons-view .top-box .selection-box .display-label {
+    -fx-font-family: "Spline Sans";
+    -fx-font-weight: normal;
+}
+
 /* ----------------------------------------------------------------------------
  * ScrollPane
  */
