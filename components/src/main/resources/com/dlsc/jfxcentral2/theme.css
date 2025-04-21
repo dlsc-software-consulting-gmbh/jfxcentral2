@@ -9339,6 +9339,77 @@
     -fx-font-weight: normal;
 }
 
+.packs-icons-view:md-lg .top-box .combo-box-wrapper .scope-combo-box {
+    -fx-pref-width: 118px;
+}
+
+.packs-icons-view:md-lg .top-box .combo-box-wrapper .selection-box {
+    -fx-pref-width: 128px;
+}
+
+.packs-icons-view:md-lg .top-box .combo-box-wrapper .sort-combo-box {
+    -fx-pref-width: 115px;
+}
+
+.packs-icons-view .top-box .selection-box:empty .display-label {
+    -fx-text-fill: -orange;
+}
+
+/** ---------------------------------
+ * SelectionPopup
+ */
+.selection-popup {
+}
+
+.selection-popup > .content {
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(14, 74, 228, 0.25), 10, 0.2, 0, 0);
+    -fx-padding: 20px 5px;
+    -fx-max-height: 25em;
+    -fx-translate-y: 8px;
+}
+
+
+.selection-popup > .content .extra-buttons-box .extra-button {
+    -fx-text-fill: -grey-100;
+    -fx-pref-height: 35px;
+}
+
+.selection-popup > .content .extra-buttons-box .extra-button:hover {
+    -fx-background-color: -bright-blue;
+    -fx-text-fill: -white;
+}
+
+.selection-popup > .content .extra-buttons-box .extra-button:pressed {
+    -fx-background-color: -light-blue;
+}
+
+.selection-popup > .content > .options-scroll-pane {
+    -fx-padding: 0;
+}
+
+.selection-popup > .content > .options-scroll-pane .options-box {
+    -fx-spacing: 3px;
+}
+
+.selection-popup > .content > .options-scroll-pane .options-box > .check-box {
+    -fx-cursor: hand;
+    -fx-label-padding: 0 0 0 4px;
+    -fx-text-fill: -grey-100;
+    -fx-padding: 3px 5px;
+    -fx-border-width: 0;
+    -fx-pref-height: 45px;
+}
+
+.selection-popup > .content > .options-scroll-pane .options-box > .check-box:hover {
+    -fx-background-color: transparent;
+}
+
+.selection-popup > .content > .options-scroll-pane .options-box > .check-box:selected {
+    -fx-background-color: derive(-grey-10, 50%);
+    -fx-text-fill: -grey-100;
+}
+
 /* ----------------------------------------------------------------------------
  * ScrollPane
  */
