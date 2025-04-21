@@ -9372,6 +9372,7 @@
 
 .selection-popup > .content .extra-buttons-box .extra-button {
     -fx-text-fill: -grey-100;
+    -fx-padding: 4px 15px;
     -fx-pref-height: 35px;
 }
 
@@ -9382,6 +9383,7 @@
 
 .selection-popup > .content .extra-buttons-box .extra-button:pressed {
     -fx-background-color: -light-blue;
+    -fx-text-fill: -grey-100;
 }
 
 .selection-popup > .content > .options-scroll-pane {
@@ -9408,6 +9410,16 @@
 .selection-popup > .content > .options-scroll-pane .options-box > .check-box:selected {
     -fx-background-color: derive(-grey-10, 50%);
     -fx-text-fill: -grey-100;
+}
+
+.selection-popup > .content .extra-buttons-box {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+}
+
+.selection-popup > .content .quick-select-label {
+    -fx-padding: 0 0 0 5px;
+    -fx-text-fill: -grey-30;
 }
 
 /* ----------------------------------------------------------------------------
