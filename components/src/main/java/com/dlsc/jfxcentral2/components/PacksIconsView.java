@@ -310,7 +310,7 @@ public class PacksIconsView extends PaneBase {
         comboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(Sort object) {
-                return object == Sort.FROM_A_TO_Z ? "From A to Z" : "From Z to A";
+                return object == Sort.FROM_A_TO_Z ? "A → Z" : "Z → A";
             }
 
             @Override
@@ -344,15 +344,15 @@ public class PacksIconsView extends PaneBase {
     private SelectionBox<IkonliPack> initIkonliPackSelection() {
         ObservableList<IkonliPack> packs = FXCollections.observableArrayList(DataRepository.getInstance().getIkonliPacks());
         SelectionBox<IkonliPack> selectionBox = new SelectionBox<>(packs);
-        selectionBox.setPromptText("Select packs");
+        selectionBox.setPromptText("Select");
         selectionBox.setItemConverter(new SimpleStringConverter<>(IkonliPack::getName));
         selectionBox.setSelectedItemsConverter(new SimpleStringConverter<>(list -> {
             if (list.isEmpty()) {
-                return "Select packs";
-            } else if (list.size() == 1) {
-                return list.get(0).getName();
+                return "Select";
+            } else if (list.size() == selectionBox.getItems().size()) {
+                return "All";
             } else {
-                return list.size() + " packs";
+                return String.valueOf(list.size());
             }
         }));
         selectionBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
