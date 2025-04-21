@@ -159,21 +159,18 @@ public class IkonliPackUtil {
         if (packs == null || packs.isEmpty()) {
             return Collections.emptyList();
         }
-        long start = System.currentTimeMillis();
 
         Set<String> packNames = packs.stream()
                 .map(IkonliPack::getName)
                 .collect(Collectors.toSet());
 
-        List<Ikon> list = dataMap.entrySet().stream()
+        return dataMap.entrySet().stream()
                 .filter(entry -> {
                     IkonData data = entry.getValue();
                     return data.getIkonliPack() != null && packNames.contains(data.getIkonliPack().getName());
                 })
                 .map(Map.Entry::getKey)
                 .toList();
-        System.out.println("IkonliPackUtil.getIkonsForPacksFiltered took " + (System.currentTimeMillis() - start) + "ms");
-        return list;
     }
 
 }
