@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.IkonProvider;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.Optional;
 import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class IkonliPackUtil {
 
@@ -25,6 +28,7 @@ public class IkonliPackUtil {
     private final Map<Ikon, IkonData> dataMap = new HashMap<>();
     private final Map<String, IkonData> nameMap = new HashMap<>();
     private final Set<IkonData> ikonDataSet = new TreeSet<>();
+    private Set<Ikon> allIkons;
 
     private IkonliPackUtil() {
         if (null != IkonProvider.class.getModule().getLayer()) {
@@ -128,6 +132,45 @@ public class IkonliPackUtil {
             }
         }
         return Optional.empty();
+    }
+
+    /**
+     * Retrieves all available Ikons as an unmodifiable set. If the set has not
+     * been initialized yet, it is created from the keys of the data map and
+     * cached for future access.
+     *
+     * @return a set containing all available Ikons
+     */
+    public Set<Ikon> getAllIkons() {
+        if (allIkons == null) {
+            allIkons = Collections.unmodifiableSet(dataMap.keySet());
+        }
+        return allIkons;
+    }
+
+
+    /**
+     * Filters and retrieves a list of Ikons that belong to the specified collection of IkonliPacks.
+     *
+     * @param packs the collection of IkonliPacks to filter Ikons by; if null or empty, the method returns an empty list
+     * @return a list of Ikons associated with the specified IkonliPacks, or an empty list if no matching Ikons are found
+     */
+    public List<Ikon> getIkonsForPacksFiltered(Collection<IkonliPack> packs) {
+        if (packs == null || packs.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        Set<String> packNames = packs.stream()
+                .map(IkonliPack::getName)
+                .collect(Collectors.toSet());
+
+        return dataMap.entrySet().stream()
+                .filter(entry -> {
+                    IkonData data = entry.getValue();
+                    return data.getIkonliPack() != null && packNames.contains(data.getIkonliPack().getName());
+                })
+                .map(Map.Entry::getKey)
+                .toList();
     }
 
 }

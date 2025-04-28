@@ -33,7 +33,7 @@ public class HelloSearchIkonGridView extends JFXCentralSampleBase {
         ikonGridView.sizeProperty().bind(sizeComboBox.valueProperty());
         TextField searchField = new TextField();
         searchField.setPromptText("Search");
-        Set<Ikon> ikons = IkonliPackUtil.getInstance().getDataMap().keySet();
+        Set<Ikon> ikons = IkonliPackUtil.getInstance().getAllIkons();
         System.out.println(ikons.size());
         ikonGridView.itemsProperty().bind(Bindings.createObjectBinding(()->
                 FXCollections.observableArrayList(ikons.stream().filter(it -> StringUtils.containsIgnoreCase( it.getDescription(),searchField.getText().trim()))

@@ -2,32 +2,23 @@ package com.dlsc.jfxcentral2.app.pages;
 
 import animatefx.animation.FadeIn;
 import animatefx.animation.FadeOut;
-import animatefx.animation.GlowBackground;
-import animatefx.animation.SlideOutUp;
-import animatefx.animation.Tada;
-import animatefx.animation.Wobble;
 import com.dlsc.jfxcentral2.app.RepositoryManager;
 import com.dlsc.jfxcentral2.app.utils.RepositoryUpdater;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.mobile.components.IntroPane;
-import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.WeakInvalidationListener;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
-import javafx.util.Duration;
-import one.jpro.jproutils.treeshowing.TreeShowing;
 
 public class MobileRefreshPage extends StackPane {
 

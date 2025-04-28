@@ -98,7 +98,6 @@ open module com.dlsc.jfxcentral2.components {
     requires org.kordamp.ikonli.zondicons;
     requires com.rometools.rome;
     requires java.prefs;
-    requires jpro.utils.treeshowing;
     // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.components;
