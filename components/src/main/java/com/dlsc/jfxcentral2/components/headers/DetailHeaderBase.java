@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.gemsfx.Spacer;
+import com.dlsc.jfxcentral2.components.MastodonShareView;
 import com.dlsc.jfxcentral2.components.SocialLinksView;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.PlatformLinkUtil;
@@ -15,6 +16,7 @@ import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
@@ -23,6 +25,9 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class DetailHeaderBase extends CategoryHeader {
+
+    private SocialLinksView socialLinksView;
+    private MastodonShareView mastodonShareView;
 
     public DetailHeaderBase() {
         getStyleClass().add("detail-header");
@@ -44,17 +49,28 @@ public class DetailHeaderBase extends CategoryHeader {
         backButton.getStyleClass().addAll("back-button");
         backUrlProperty().addListener(it -> PlatformLinkUtil.setLink(backButton, getBackUrl()));
 
-        SocialLinksView socialLinksView = new SocialLinksView(false);
+        socialLinksView = new SocialLinksView(false);
+        socialLinksView.managedProperty().bind(socialLinksView.visibleProperty());
+        socialLinksView.setOnShareToMastodon(() -> socialLinksView.setVisible(false));
 
-        CustomMenuItem customMenuItem = new CustomMenuItem(socialLinksView);
+        mastodonShareView = new MastodonShareView();
+        mastodonShareView.mastodonUrlProperty().bind(socialLinksView.mastodonUrlProperty());
+        mastodonShareView.prefWidthProperty().bind(socialLinksView.widthProperty());
+        mastodonShareView.prefHeightProperty().bind(socialLinksView.heightProperty());
+        mastodonShareView.managedProperty().bind(mastodonShareView.visibleProperty());
+        mastodonShareView.visibleProperty().bind(socialLinksView.visibleProperty().not());
+        mastodonShareView.setOnBack(() -> socialLinksView.setVisible(true));
+
+        CustomMenuItem customMenuItem = new CustomMenuItem(new StackPane(socialLinksView, mastodonShareView));
         customMenuItem.setHideOnClick(false);
 
         MenuButton menuButton = new MenuButton("SHARE", new FontIcon(JFXCentralIcon.SHARE));
         menuButton.setFocusTraversable(false);
         menuButton.getStyleClass().add("share-button");
         menuButton.getItems().addAll(customMenuItem);
+        menuButton.setOnShowing(evt -> socialLinksView.setVisible(true));
 
-        InvalidationListener updateShareButtonLinks = it -> updateShareButton(socialLinksView);
+        InvalidationListener updateShareButtonLinks = it -> updateShareButton();
 
         shareUrlProperty().addListener(updateShareButtonLinks);
         shareTextProperty().addListener(updateShareButtonLinks);
@@ -65,7 +81,7 @@ public class DetailHeaderBase extends CategoryHeader {
         return bottomBox;
     }
 
-    private void updateShareButton(SocialLinksView socialLinksView) {
+    private void updateShareButton() {
         String shareText = getShareText();
         String shareUrl = getShareUrl();
         String shareTitle = getShareTitle();
@@ -74,14 +90,16 @@ public class DetailHeaderBase extends CategoryHeader {
             String url = URLEncoder.encode("https://www.jfx-central.com/" + shareUrl, StandardCharsets.UTF_8);
             String title = URLEncoder.encode(shareTitle, StandardCharsets.UTF_8);
             String titleWithBody = URLEncoder.encode(shareTitle + " " + shareText, StandardCharsets.UTF_8);
-            String body = URLEncoder.encode(shareText + " ", StandardCharsets.UTF_8); // extra space for proper formatting on twitter
+            String body = URLEncoder.encode(shareText + " ", StandardCharsets.UTF_8); // extra space for proper formatting
             String bodyWithUrl = URLEncoder.encode(shareText + " https://www.jfx-central.com/" + shareUrl, StandardCharsets.UTF_8);
+            String bodyWithUrlAndTags = URLEncoder.encode(shareText + " https://www.jfx-central.com/" + shareUrl + " #javafx #java #ux #ui", StandardCharsets.UTF_8);
 
             socialLinksView.setFacebookUrl("https://www.facebook.com/sharer/sharer.php?u=" + url + "&t=" + titleWithBody);
-            socialLinksView.setTwitterUrl("https://twitter.com/share?text=" + body + "&url=" + url + "&hashtags=javafx,java,ux,ui");
             socialLinksView.setLinkedInUrl("https://www.linkedin.com/shareArticle?mini=false&url=" + url + "&title=" + title + "&summary=" + body);
             socialLinksView.setMailUrl("mailto:?subject=" + title.replace("+", "%20") + "&body=" + body.replace("+", "%20"));
             socialLinksView.setRedditUrl("https://www.reddit.com/r/JavaFX/submit?title=" + title + "&selftext=true&text=" + bodyWithUrl + "&link=" + url);
+            socialLinksView.setBlueskyUrl("https://bsky.app/intent/compose?text=" + bodyWithUrlAndTags);
+            socialLinksView.setMastodonUrl("https://{SERVER}/share?text=" + bodyWithUrlAndTags);
         }
     }
 

@@ -53,13 +53,13 @@ public enum JFXCentralIcon implements Ikon {
     TIPS_TRICKS("jfx-icon-tips-tricks", '\ue92e'),
     TOOLS("jfx-icon-tools", '\ue92f'),
     TUTORIALS("jfx-icon-tutorials", '\ue930'),
-    TWITTER("jfx-icon-twitter", '\ue931'),
     VIDEOS("jfx-icon-videos", '\ue932'),
     WWW("jfx-icon-www", '\ue933'),
     YOUTUBE("jfx-icon-youtube", '\ue934'),
     TOP_CONTENT("jfx-icon-top-content", '\ue935'),
     HANDSHAKE("jfx-icon-handshake", '\ue936'),
-    TEAM("jfx-icon-team", '\ue937');
+    TEAM("jfx-icon-team", '\ue937'),
+    BLUESKY("jfx-icon-bluesky", '\ue938');
 
     private final String description;
     private final int icon;

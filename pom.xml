@@ -14,7 +14,7 @@
     <parent>
         <groupId>com.dlsc</groupId>
         <artifactId>dlsc-maven-parent</artifactId>
-        <version>1.5.0</version>
+        <version>1.6.0</version>
     </parent>
 
     <modules>
@@ -26,13 +26,13 @@
     </modules>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>24</java.version>
         <!-- Version 20 because of performance -->
         <javafx.version>22.0.1</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2024.2.0</jpro.version>
-        <jpro.platform.version>0.3.1</jpro.platform.version>
+        <jpro.version>2025.2.1</jpro.version>
+        <jpro.platform.version>0.5.7</jpro.platform.version>
         <batik.version>1.16</batik.version>
         <attach.version>4.0.19</attach.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -240,13 +240,25 @@
             </dependency>
 
             <dependency>
-                <groupId>de.sandec</groupId>
+                <groupId>one.jpro</groupId>
                 <artifactId>JMemoryBuddy</artifactId>
-                <version>0.5.3</version>
+                <version>0.5.6</version>
             </dependency>
 
             <dependency>
                 <groupId>com.sandec.jpro</groupId>
+                <artifactId>jpro-webapi</artifactId>
+                <version>2024.3.3</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>one.jpro</groupId>
                 <artifactId>jpro-webapi</artifactId>
                 <version>${jpro.version}</version>
                 <exclusions>
@@ -284,7 +296,7 @@
             <dependency>
                 <groupId>com.dlsc.gemsfx</groupId>
                 <artifactId>gemsfx</artifactId>
-                <version>2.47.0</version>
+                <version>2.103.0</version>
             </dependency>
 
             <dependency>
@@ -343,7 +355,7 @@
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.12.0</version>
+                <version>2.14.0</version>
             </dependency>
 
             <dependency>
@@ -379,7 +391,7 @@
             <dependency>
                 <groupId>com.dlsc.jfxcentral</groupId>
                 <artifactId>model</artifactId>
-                <version>1.41.0</version>
+                <version>2.5.0</version>
             </dependency>
 
             <dependency>
@@ -409,7 +421,7 @@
             <dependency>
                 <groupId>org.eclipse.jgit</groupId>
                 <artifactId>org.eclipse.jgit</artifactId>
-                <version>6.9.0.202403050737-r</version>
+                <version>6.10.1.202505221210-r</version>
             </dependency>
 
             <dependency>
@@ -745,7 +757,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>

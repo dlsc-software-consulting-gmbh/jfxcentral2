@@ -1,11 +1,13 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Member;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import org.apache.commons.lang3.StringUtils;
 
@@ -28,16 +30,16 @@ public class MemberCellView extends PaneBase {
         jobTitleLabel.setText(member.getJobTitle());
 
         descriptionMd = new CustomMarkdownView();
-        descriptionMd.setMdString(DataRepository2.getInstance().getMemberReadMe(member));
+        descriptionMd.setMdString(DataRepository.getInstance().getMemberReadMe(member));
 
         socialLinksView = new SocialLinksView(true);
 
-        if (StringUtils.isNotBlank(member.getTwitter())) {
-            socialLinksView.setTwitterUrl("https://www.twitter.com/" + member.getTwitter());
-        }
-
         socialLinksView.setMastodonUrl(member.getMastodon());
         socialLinksView.setWebsiteUrl(member.getWebsite());
+
+        if (StringUtils.isNotBlank(member.getBluesky())) {
+            socialLinksView.setBlueskyUrl("https://bsky.app/profile/" + member.getBluesky());
+        }
 
         if (StringUtils.isNotBlank(member.getLinkedIn())) {
             socialLinksView.setLinkedInUrl("https://www.linkedin.com/in/" + member.getLinkedIn());

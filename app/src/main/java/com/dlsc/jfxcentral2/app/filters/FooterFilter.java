@@ -16,7 +16,7 @@ import one.jpro.platform.routing.filter.container.ContainerFilter;
 public class FooterFilter {
 
     public static Filter create(ObjectProperty<Size> sizeProperty) {
-        return ContainerFilter.create(() -> new FooterFilterContainer(sizeProperty));
+        return ContainerFilter.create(() -> new FooterFilterContainer(sizeProperty), FooterFilterContainer.class);
     }
 
     static class FooterFilterContainer extends ContainerVBox {

@@ -10,14 +10,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;
-import one.jpro.jproutils.treeshowing.TreeShowing;
 import one.jpro.platform.mdfx.MarkdownView;
 import one.jpro.platform.mdfx.extensions.ImageExtension;
 import one.jpro.platform.mdfx.extensions.YoutubeExtension;
+import one.jpro.platform.utils.TreeShowing;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;

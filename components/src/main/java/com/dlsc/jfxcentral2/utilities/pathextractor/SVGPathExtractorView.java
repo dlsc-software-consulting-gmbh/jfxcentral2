@@ -33,7 +33,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
-import one.jpro.platform.routing.CopyUtil;
+import one.jpro.platform.utils.CopyUtil;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.antdesignicons.AntDesignIconsOutlined;
 import org.kordamp.ikonli.boxicons.BoxiconsRegular;

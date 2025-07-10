@@ -33,7 +33,7 @@ open module com.dlsc.jfxcentral2.mobile {
     requires com.google.gson;
 
     requires one.jpro.platform.image.manager;
-    requires one.jpro.platform.internal.util;
+    requires one.jpro.platform.utils;
 
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.core;
@@ -97,7 +97,6 @@ open module com.dlsc.jfxcentral2.mobile {
     requires org.kordamp.ikonli.zondicons;
     requires com.rometools.rome;
     requires com.dlsc.jfxcentral2.components;
-    requires jpro.utils.treeshowing;
     // ikonli icon packs END
 
     exports com.dlsc.jfxcentral2.mobile.home;

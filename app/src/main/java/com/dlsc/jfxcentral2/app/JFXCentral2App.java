@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.app;
 
 import com.dlsc.gemsfx.util.StageManager;
-import com.dlsc.jfxcentral.data.DataRepository2;
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
@@ -11,6 +11,7 @@ import com.dlsc.jfxcentral.data.model.LearnJavaFX;
 import com.dlsc.jfxcentral.data.model.LearnMobile;
 import com.dlsc.jfxcentral.data.model.LearnRaspberryPi;
 import com.dlsc.jfxcentral.data.model.Library;
+import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
@@ -229,7 +230,7 @@ public class JFXCentral2App extends Application {
         }
 
         // add client URL handler
-        if (OSUtil.isAWTSupported()) {
+        if (!WebAPI.isBrowser() && OSUtil.isAWTSupported()) {
             addClientUrlHandler(scene, sessionManager);
         }
 
@@ -283,7 +284,7 @@ public class JFXCentral2App extends Application {
                 .and(Route.get(PagePath.LEGAL_TERMS, r -> Response.view(new LegalPage(size, LegalPage.Section.TERMS))))
                 .and(Route.get(PagePath.LEGAL_COOKIES, r -> Response.view(new LegalPage(size, LegalPage.Section.COOKIES))))
                 .and(Route.get(PagePath.LEGAL_PRIVACY, r -> Response.view(new LegalPage(size, LegalPage.Section.PRIVACY))))
-                .and(Route.get(PagePath.LINKS, r -> Response.view(new LinksOfTheWeekPage(size))))
+                .and(createLOTWRoute())
                 .and(Route.get(PagePath.TEAM, r -> Response.view(new TeamPage(size))))
                 .and(Route.get(PagePath.OPENJFX, r -> Response.view(new OpenJFXPage(size))))
                 .and(Route.get(PagePath.DOCUMENTATION, r -> Response.view(new DocumentationCategoryPage(size))))
@@ -315,6 +316,31 @@ public class JFXCentral2App extends Application {
         return route;
     }
 
+    private Route createLOTWRoute() {
+        return request -> {
+            if (request.getPath().startsWith(PagePath.LINKS)) {
+                String pathWithoutLinks = request.getPath().replace(PagePath.LINKS, "");
+                int i = pathWithoutLinks.lastIndexOf("/");
+                if (i < 0) {
+                    return Response.view(new LinksOfTheWeekPage(size));
+                }
+                // request date: e.g. 2024-07-28
+                String formatedDate = pathWithoutLinks.substring(i + 1);
+                if (!formatedDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                    return Response.view(new ErrorPage(size, request));
+                }
+
+                // links of week id: e.g. 2024/2024-07/2024-07-28
+                String id = String.format("%s/%s/%s", formatedDate.substring(0, 4), formatedDate.substring(0, 7), formatedDate);
+                if (!DataRepository.getInstance().isValidId(LinksOfTheWeek.class, id)) {
+                    return Response.view(new ErrorPage(size, request));
+                }
+                return Response.view(new LinksOfTheWeekPage(size, id));
+            }
+            return Response.empty();
+        };
+    }
+
     private Route createCategoryOrDetailRoute(String path, Class<? extends ModelObject> clazz, Supplier<View> masterResponse, Callback<String, View> detailedResponse) {
         return r -> {
             if (r.getPath().startsWith(path)) {
@@ -328,7 +354,7 @@ public class JFXCentral2App extends Application {
         int index = request.getPath().lastIndexOf("/");
         if (index > 0) {
             String id = request.getPath().substring(index + 1).trim();
-            if (!DataRepository2.getInstance().isValidId(clazz, id)) {
+            if (!DataRepository.getInstance().isValidId(clazz, id)) {
                 return Response.view(new ErrorPage(size, request));
             }
 
@@ -360,7 +386,7 @@ public class JFXCentral2App extends Application {
             String ikonliPackId = parts[1];
             String iconDescription = parts[2];
 
-            return DataRepository2.getInstance().getIkonliPackById(ikonliPackId)
+            return DataRepository.getInstance().getIkonliPackById(ikonliPackId)
                     .flatMap(ikonliPack -> IkonliPackUtil.getInstance().getIkon(ikonliPack, iconDescription)
                             .map(ikon -> {
                                 IconInfo iconInfo = new IconInfoBuilder(ikon, ikonliPack.getName(), ikonliPackId).build();
