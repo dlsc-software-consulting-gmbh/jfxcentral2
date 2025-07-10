@@ -16,7 +16,7 @@
 
     <properties>
         <maven.javadoc.skip>true</maven.javadoc.skip>
-        <gluonfx.plugin.version>1.0.22</gluonfx.plugin.version>
+        <gluonfx.plugin.version>1.0.25</gluonfx.plugin.version>
         <javafx.plugin.version>0.0.8</javafx.plugin.version>
         <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
         <mainClassName.jpro>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName.jpro>
@@ -27,7 +27,6 @@
         <mac.signing.user.name/>
         <bundle.version/>
         <bundle.short.version/>
-        <version.code/>
         <provided.keystore.path/>
         <provided.keystore.password/>
         <provided.key.alias/>
@@ -46,20 +45,6 @@
             <artifactId>log4j-core</artifactId>
         </dependency>
         -->
-
-        <dependency>
-            <groupId>com.gluonhq.attachextended</groupId>
-            <artifactId>yt</artifactId>
-            <version>${attach.extended.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.gluonhq.attachextended</groupId>
-            <artifactId>yt</artifactId>
-            <version>${attach.extended.version}</version>
-            <scope>runtime</scope>
-            <classifier>${attach.extended.classifier}</classifier>
-        </dependency>
 
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -474,7 +459,7 @@
                         <!-- simulatorDevice>iPad Pro (12.9-inch) (2nd generation)</simulatorDevice -->
                         <!-- simulatorDevice>iPad (10th generation)</simulatorDevice -->
                         <!-- for Android -->
-                        <versionCode>${version.code}</versionCode>
+                        <versionCode>${env.GITHUB_RUN_NUMBER}</versionCode>
                         <providedKeyStorePath>${provided.keystore.path}</providedKeyStorePath>
                         <providedKeyStorePassword>${provided.keystore.password}</providedKeyStorePassword>
                         <providedKeyAlias>${provided.key.alias}</providedKeyAlias>

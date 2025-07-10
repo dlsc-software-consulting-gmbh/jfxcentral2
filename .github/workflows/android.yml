@@ -1,0 +1,107 @@
+# https://docs.gluonhq.com/#platforms_linux_github_actions
+# https://developers.google.com/android/management/service-account
+# https://developer.android.com/studio/publish/app-signing
+# encode keystore file: openssl base64 -in <infile> -out <outfile>
+
+# After a successful run, upload is visible on
+# https://play.google.com/console/u/1/ ... TODO
+
+name: Linux Android
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Gluon's GraalVM
+        uses: gluonhq/setup-graalvm@master
+        # set GITHUB_TOKEN to avoid exceeding GitHub's API rate limit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #with:
+          # GraalVM version. Default: latest
+          # Java version. Since GraalVM 22, either java11, java17 or java23. Before GraalVM 22, empty. Default: java23
+          # Architecture flag. Available options are 'x86_64' (default) and 'aarch64'. The latter is available for M1 runners starting GraalVM 22.1.
+
+      # Install extra required packaged on top of ubuntu-latest
+      - name: Install libraries
+        run: |
+          sudo apt-get update
+          sudo apt install libasound2-dev libavcodec-dev libavformat-dev libavutil-dev libgl-dev libgtk-3-dev libpango1.0-dev libxtst-dev
+
+      # Setup the Android keystore, based on a repo secret. See the section 'Setup Android Keystore' below.
+      - name: Setup Android Keystore
+        id: android_keystore_file
+        uses: timheuer/base64-to-file@v1.2.4
+        with:
+          fileName: 'my.keystore'
+          encodedString: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+
+      # Build the project
+      - name: Project Build
+        run: ./mvnw install
+
+      # Build the app
+      # The android profile is used, which means a native build will be created for the gluonfx target android.
+      # This step also uses some env variables taken from the repo secrets. See the section 'Setup Android Keystore' below.
+      - name: Gluon Build
+        run: |
+          export ANDROID_SDK=$ANDROID_HOME
+          ./mvnw -pl app -Pandroid gluonfx:build gluonfx:package
+        env:
+          GRAALVM_HOME: ${{ env.JAVA_HOME }}
+          ANDROID_KEYSTOREPATH: ${{ steps.android_keystore_file.outputs.filePath }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEYALIAS: ${{ secrets.ANDROID_KEYALIAS }}
+          ANDROID_KEYALIAS_PASSWORD: ${{ secrets.ANDROID_KEYALIAS_PASSWORD }}
+        continue-on-error: true  # This allows the workflow to continue even if this step fails
+
+      - name: Upload build log file
+        if: always()  # This ensures the logs are uploaded even if previous steps fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: /home/runner/work/jfxcentral2/jfxcentral2/app/target/gluonfx/aarch64-android/gvm/log
+          retention-days: 5  # Optional: specify how long to keep the artifacts
+
+      # To be able to validate the build result, output the created files
+      - name: Show created files
+        run: ls -lR target/gluonfx/*
+
+      # Create a staging directory where the binary will be copied into
+      - name: Make staging directory
+        run: mkdir staging
+
+      # Copy the apk to the staging directory
+      - name: Copy native app to staging
+        run: cp -r target/gluonfx/aarch64-android/gvm/JFXCentral2MobileApp.* staging
+
+      # Upload the target directory as a build artifact
+      #- name: Make artifact from target directory
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: Target
+      #    path: target/gluonfx/
+
+      # Upload the staging directory as a build artifact
+      - name: Make artifact from staging directory
+        uses: actions/upload-artifact@v4
+        with:
+          name: Package
+          path: staging
+
+      # Upload the aab to the Google Play Store. See the section below.
+      - name: Upoad to Google Play
+        uses: r0adkll/upload-google-play@v1.1.3
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          packageName: com.dlsc.jfxcentral2.app.JfxCentral2MobileApp
+          releaseFiles: target/gluonfx/aarch64-android/gvm/JFXCentral2MobileApp.aab
+          track: beta
