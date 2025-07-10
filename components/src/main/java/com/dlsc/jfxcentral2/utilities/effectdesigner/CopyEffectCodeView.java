@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import one.jpro.platform.routing.CopyUtil;
+import one.jpro.platform.utils.CopyUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.boxicons.BoxiconsLogos;
 import org.kordamp.ikonli.carbonicons.CarbonIcons;
