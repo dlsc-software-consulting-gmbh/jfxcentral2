@@ -443,9 +443,6 @@
                         <list>video</list>
                     </attachList>
                     <mainClass>${mainClassName.mobile}</mainClass>
-                    <nativeImageArgs>
-                        <list>-H:-RunReachabilityHandlersConcurrently</list>
-                    </nativeImageArgs>
                     <releaseConfiguration>
                         <vendor>Gluon</vendor>
                         <description>${app.description}</description>
