@@ -16,7 +16,7 @@
 
     <properties>
         <maven.javadoc.skip>true</maven.javadoc.skip>
-        <gluonfx.plugin.version>1.0.25</gluonfx.plugin.version>
+        <gluonfx.plugin.version>1.0.27</gluonfx.plugin.version>
         <javafx.plugin.version>0.0.8</javafx.plugin.version>
         <mainClassName>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName>
         <mainClassName.jpro>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName.jpro>
@@ -443,6 +443,10 @@
                         <list>video</list>
                     </attachList>
                     <mainClass>${mainClassName.mobile}</mainClass>
+                    <nativeImageArgs>
+                        <list>-H:+UnlockExperimentalVMOptions</list>
+                        <list>-H:-RunReachabilityHandlersConcurrently</list>
+                    </nativeImageArgs>
                     <releaseConfiguration>
                         <vendor>Gluon</vendor>
                         <description>${app.description}</description>

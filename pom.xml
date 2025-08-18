@@ -41,7 +41,6 @@
     </properties>
 
     <repositories>
-
         <repository>
             <id>project-repository</id>
             <url>file://${project.basedir}/../repository</url>
@@ -56,23 +55,19 @@
             <id>Gluon</id>
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
         </repository>
-
     </repositories>
 
     <pluginRepositories>
-
         <pluginRepository>
             <id>gluon-releases</id>
             <url>
                 https://nexus.gluonhq.com/nexus/content/repositories/releases/
             </url>
         </pluginRepository>
-
     </pluginRepositories>
 
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>io.github.typhon0</groupId>
                 <artifactId>AnimateFX</artifactId>

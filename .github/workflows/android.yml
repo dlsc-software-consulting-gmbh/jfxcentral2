@@ -42,7 +42,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2.4
         with:
           fileName: 'my.keystore'
-          encodedString: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          encodedString: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}m
 
       # Build the project
       - name: Project Build
