@@ -444,7 +444,6 @@
                     </attachList>
                     <mainClass>${mainClassName.mobile}</mainClass>
                     <nativeImageArgs>
-                        <list>-H:+UnlockExperimentalVMOptions</list>
                         <list>-H:-RunReachabilityHandlersConcurrently</list>
                     </nativeImageArgs>
                     <releaseConfiguration>
