@@ -27,12 +27,11 @@
 
     <properties>
         <java.version>24</java.version>
-        <!-- Version 20 because of performance -->
-        <javafx.version>22.0.1</javafx.version>
+        <javafx.version>25.0.2</javafx.version>
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
         <jpro.version>2025.2.1</jpro.version>
-        <jpro.platform.version>0.5.7</jpro.platform.version>
+        <jpro.platform.version>0.5.8</jpro.platform.version>
         <batik.version>1.16</batik.version>
         <attach.version>4.0.19</attach.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
