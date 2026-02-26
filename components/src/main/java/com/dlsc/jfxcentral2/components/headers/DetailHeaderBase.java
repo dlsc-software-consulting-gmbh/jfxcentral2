@@ -27,7 +27,6 @@ import java.nio.charset.StandardCharsets;
 public class DetailHeaderBase extends CategoryHeader {
 
     private SocialLinksView socialLinksView;
-    private MastodonShareView mastodonShareView;
 
     public DetailHeaderBase() {
         getStyleClass().add("detail-header");
@@ -53,7 +52,7 @@ public class DetailHeaderBase extends CategoryHeader {
         socialLinksView.managedProperty().bind(socialLinksView.visibleProperty());
         socialLinksView.setOnShareToMastodon(() -> socialLinksView.setVisible(false));
 
-        mastodonShareView = new MastodonShareView();
+        MastodonShareView mastodonShareView = new MastodonShareView();
         mastodonShareView.mastodonUrlProperty().bind(socialLinksView.mastodonUrlProperty());
         mastodonShareView.prefWidthProperty().bind(socialLinksView.widthProperty());
         mastodonShareView.prefHeightProperty().bind(socialLinksView.heightProperty());
