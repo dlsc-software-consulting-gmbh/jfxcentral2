@@ -20,6 +20,7 @@ public class NamedColorsView extends VBox {
         Label title = new Label("Named Colors");
         TilePane tilePane = new TilePane();
         tilePane.getStyleClass().add("tile-pane");
+        tilePane.setPrefColumns(15);
         for (NamedColor namedColor : namedColors) {
             Rectangle rectangle = new Rectangle(18, 18);
             rectangle.setUserData(namedColor);
@@ -48,20 +49,20 @@ public class NamedColorsView extends VBox {
                 return;
             }
 
-            if (result.startsWith("#")){
+            if (result.startsWith("#")) {
                 tilePane.getChildren().forEach(node -> {
                     Rectangle rectangle = (Rectangle) node;
-                    rectangle.setVisible(StringUtils.containsIgnoreCase(((NamedColor)rectangle.getUserData()).hex(), result));
+                    rectangle.setVisible(StringUtils.containsIgnoreCase(((NamedColor) rectangle.getUserData()).hex(), result));
                 });
-            }else {
+            } else {
                 tilePane.getChildren().forEach(node -> {
                     Rectangle rectangle = (Rectangle) node;
-                    rectangle.setVisible(StringUtils.containsIgnoreCase(((NamedColor)rectangle.getUserData()).name(), result));
+                    rectangle.setVisible(StringUtils.containsIgnoreCase(((NamedColor) rectangle.getUserData()).name(), result));
                 });
             }
         });
 
-        HBox topBox = new HBox(title,searchField);
+        HBox topBox = new HBox(title, searchField);
         topBox.getStyleClass().add("top-box");
         getChildren().addAll(topBox, tilePane);
 
