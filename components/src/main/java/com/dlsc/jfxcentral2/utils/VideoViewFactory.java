@@ -3,10 +3,10 @@ package com.dlsc.jfxcentral2.utils;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
+import com.sun.net.httpserver.HttpServer;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
-import javafx.concurrent.Worker;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -18,6 +18,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.kordamp.ikonli.javafx.FontIcon;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 
 public class VideoViewFactory {
 
@@ -47,12 +52,42 @@ public class VideoViewFactory {
             }
         });
         WebEngine webEngine = webView.getEngine();
-        webEngine.load("https://www.youtube.com/embed/" + video.getId());
-        webView.sceneProperty().addListener(it -> {
-            if (webView.getScene() == null) {
-                webEngine.loadContent("empty");
-            }
-        });
+        webEngine.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+
+        String html = "<!DOCTYPE html><html><head>" +
+                "<style>body{margin:0;padding:0;background:#000;overflow:hidden;height:100%;}" +
+                "iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}</style>" +
+                "</head><body>" +
+                "<iframe src=\"https://www.youtube.com/embed/" + video.getId() + "\" frameborder=\"0\" allowfullscreen allow=\"autoplay; encrypted-media\"></iframe>" +
+                "</body></html>";
+        byte[] htmlBytes = html.getBytes(StandardCharsets.UTF_8);
+
+        try {
+            HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+            server.createContext("/", exchange -> {
+                exchange.getResponseHeaders().add("Content-Type", "text/html; charset=utf-8");
+                exchange.sendResponseHeaders(200, htmlBytes.length);
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(htmlBytes);
+                }
+            });
+            server.start();
+            int port = server.getAddress().getPort();
+            webEngine.load("http://127.0.0.1:" + port + "/");
+            webView.sceneProperty().addListener(it -> {
+                if (webView.getScene() == null) {
+                    server.stop(0);
+                    webEngine.load(null);
+                }
+            });
+        } catch (IOException e) {
+            webEngine.load("https://www.youtube.com/embed/" + video.getId());
+            webView.sceneProperty().addListener(it -> {
+                if (webView.getScene() == null) {
+                    webEngine.load(null);
+                }
+            });
+        }
 
         webView.setOnScroll(event -> {
             if (event.getDeltaY() != 0) {
