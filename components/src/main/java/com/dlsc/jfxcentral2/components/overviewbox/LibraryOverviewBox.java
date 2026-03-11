@@ -33,9 +33,8 @@ public class LibraryOverviewBox extends PaneBase implements NameProvider {
 
         LibraryPreviewBox libraryPreviewBox = new LibraryPreviewBox(library);
         libraryPreviewBox.sizeProperty().bind(sizeProperty());
-        VBox.setMargin(libraryPreviewBox, new Insets(20, 0, 0, 0));
 
-        VBox bodyBox = new VBox(markdownView, libraryPreviewBox);
+        VBox bodyBox = new VBox(libraryPreviewBox, markdownView);
         bodyBox.getStyleClass().add("body-box");
 
         VBox contentBox = new VBox();

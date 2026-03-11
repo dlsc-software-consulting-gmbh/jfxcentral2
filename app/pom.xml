@@ -69,11 +69,23 @@
         <dependency>
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>one.jpro.platform</groupId>
+                    <artifactId>jpro-platform</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-dev</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>one.jpro.platform</groupId>
+                    <artifactId>jpro-platform</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

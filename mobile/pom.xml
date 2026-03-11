@@ -105,6 +105,12 @@
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-image-manager</artifactId>
             <version>${jpro.platform.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>one.jpro.platform</groupId>
+                    <artifactId>jpro-platform</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -192,6 +198,12 @@
         <dependency>
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-mdfx</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>one.jpro.platform</groupId>
+                    <artifactId>jpro-platform</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>fr.brouillard.oss</groupId>
@@ -201,11 +213,23 @@
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-core</artifactId>
             <version>${jpro.platform.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>one.jpro.platform</groupId>
+                    <artifactId>jpro-platform</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-utils</artifactId>
             <version>${jpro.platform.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>one.jpro.platform</groupId>
+                    <artifactId>jpro-platform</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--    ** Icon pack dependencies START **  -->
@@ -462,6 +486,12 @@
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-utils</artifactId>
             <version>${jpro.platform.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>one.jpro.platform</groupId>
+                    <artifactId>jpro-platform</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.dlsc.jfxcentral2</groupId>

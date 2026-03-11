@@ -67,23 +67,34 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
     }
 
     private VBox createInfoNode(StringProperty versionProperty) {
-        TextArea repositoryCoordinatesArea = new TextArea(StringUtil.LOADING_TIPS);
+        CustomMarkdownView repositoryCoordinatesArea = new CustomMarkdownView(StringUtil.LOADING_TIPS);
         repositoryCoordinatesArea.getStyleClass().add("code-text-area");
-        repositoryCoordinatesArea.setEditable(false);
         repositoryCoordinatesArea.setMaxWidth(Double.MAX_VALUE);
 
         if (isAvailable) {
-            repositoryCoordinatesArea.textProperty().bind(Bindings.createStringBinding(() -> {
+            repositoryCoordinatesArea.mdStringProperty().bind(Bindings.createStringBinding(() -> {
                 String version = versionProperty.get();
                 if (StringUtils.equalsIgnoreCase("unknown", version)) {
                     return "WAIT TIMEOUT...";
                 }
                 if (getBuildTool().equals(BuildTool.MAVEN)) {
-                    return getMavenInfo(version);
+                    return wrapIntoXmlCodeBlock(getMavenInfo(version));
                 }
-                return getGradleInfo(version);
+                return wrapIntoJsonCodeBlock(getGradleInfo(version));
             }, versionProperty, buildTool));
         }
+
+        StringProperty formattedText = new SimpleStringProperty(this, "formattedText");
+        formattedText.bind(Bindings.createStringBinding(() -> {
+            String version = versionProperty.get();
+            if (StringUtils.equalsIgnoreCase("unknown", version)) {
+                return "";
+            }
+            if (getBuildTool().equals(BuildTool.MAVEN)) {
+                return getMavenInfo(version);
+            }
+            return getGradleInfo(version);
+        }, versionProperty, buildTool));
 
         RadioButton mavenButton = new RadioButton("Maven");
         mavenButton.setOnAction(evt -> setBuildTool(BuildTool.MAVEN));
@@ -109,8 +120,8 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
         descriptionLabel.mdStringProperty().bind(descriptionProperty());
 
         // copying to clipboard
-        CopyUtil.setCopyOnClick(copyButton, repositoryCoordinatesArea.getText());
-        repositoryCoordinatesArea.textProperty().addListener(it -> CopyUtil.setCopyOnClick(copyButton, repositoryCoordinatesArea.getText()));
+        CopyUtil.setCopyOnClick(copyButton, formattedText.get()); // maybe the text is already there
+        repositoryCoordinatesArea.mdStringProperty().addListener(it -> CopyUtil.setCopyOnClick(copyButton, formattedText.get()));
 
         VBox bodyBox = new VBox(descriptionLabel, buttonsBox, repositoryCoordinatesArea);
         bodyBox.getStyleClass().add("body-box");
@@ -129,6 +140,14 @@ public class LibraryCoordinatesBox extends PaneBase implements NameProvider {
                 "    <artifactId>" + artifactId + "</artifactId>" + LINED_SEPARATOR +
                 "    <version>" + version + "</version>" + LINED_SEPARATOR +
                 "</dependency>";
+    }
+
+    private String wrapIntoXmlCodeBlock(String text) {
+        return "```xml\n" + text + "\n```";
+    }
+
+    private String wrapIntoJsonCodeBlock(String text) {
+        return "```groovy\n" + text + "\n```";
     }
 
     private final StringProperty description = new SimpleStringProperty(this, "description");
