@@ -7,9 +7,9 @@
     -mdfx-bg-color-2: -fx-control-inner-background-alt;
     -mdfx-bg-color-3: -fx-color;
 
-    -mdfx-bq-color-border: derive(-fx-accent, -50%);
-    -mdfx-bq-color-background: -fx-accent;
-    -mdfx-bq-text-fill: -fx-selection-bar-text;
+    -mdfx-bq-color-border: derive(-red, -50%);
+    -mdfx-bq-color-background: -red;
+    -mdfx-bq-text-fill: black;
 
     -mdfx-code-block-border: -fx-box-border;
     -mdfx-code-block-background: -fx-control-inner-background;
