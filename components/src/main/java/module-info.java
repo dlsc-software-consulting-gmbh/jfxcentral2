@@ -7,8 +7,8 @@ open module com.dlsc.jfxcentral2.components {
     requires jdk.httpserver;
     requires javafx.swing;
     requires javafx.graphics;
-    requires batik.dom;
-    requires batik.svggen;
+    requires org.apache.xmlgraphics.batik.dom;
+    requires org.apache.xmlgraphics.batik.svggen;
     requires com.github.weisj.jsvg;
     requires org.apache.commons.validator;
     requires org.apache.commons.logging;
