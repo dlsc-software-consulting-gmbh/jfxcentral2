@@ -237,7 +237,7 @@ public class JFXCentral2App extends Application {
 
         stage.show();
 
-//        ScenicView.show(scene);
+        ScenicView.show(scene);
     }
 
     private final ObjectProperty<Runnable> onCloseVideoPane = new SimpleObjectProperty<>(this, "onCloseVideoPane");
