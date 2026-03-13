@@ -73,8 +73,9 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         contentBox.alignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(Pos.TOP_LEFT).otherwise(Pos.CENTER));
 
         Label nameLabel = new Label(model.getName());
-        nameLabel.getStyleClass().add("name");
+        nameLabel.getStyleClass().addAll("name", "xxx");
         nameLabel.setWrapText(true);
+        nameLabel.setMinHeight(Region.USE_PREF_SIZE);
         nameLabel.textAlignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(TextAlignment.LEFT).otherwise(TextAlignment.CENTER));
 
         Label summaryLabel = new Label();
