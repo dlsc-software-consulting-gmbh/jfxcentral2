@@ -90,6 +90,7 @@ open module com.dlsc.jfxcentral2.app {
     requires com.gluonhq.attach.util;
     requires com.dlsc.jfxcentral2.mobile;
     requires animatefx;
+    requires org.scenicview.scenicview;
 
     exports com.dlsc.jfxcentral2.app;
     exports com.dlsc.jfxcentral2.app.pages;

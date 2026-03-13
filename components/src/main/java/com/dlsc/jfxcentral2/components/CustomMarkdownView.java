@@ -35,7 +35,7 @@ public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
     public CustomMarkdownView() {
         super("", extensions);
 
-        getStyleClass().add("custom-markdown-view");
+        getStyleClass().addAll("markdown-view", "custom-markdown-view");
         getStylesheets().add(Objects.requireNonNull(CustomMarkdownView.class.getResource("markdown.css")).toExternalForm());
 
         TreeShowing.treeShowing(this).addListener(it -> setupWorkAroundForWebViewLayout());

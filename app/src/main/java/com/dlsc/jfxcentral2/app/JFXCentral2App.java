@@ -100,6 +100,7 @@ import one.jpro.platform.routing.dev.DevFilter;
 import one.jpro.platform.routing.dev.StatisticsFilter;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.apache.commons.lang3.StringUtils;
+import org.scenicview.ScenicView;
 
 import java.awt.Desktop;
 import java.awt.Image;
@@ -235,6 +236,8 @@ public class JFXCentral2App extends Application {
         }
 
         stage.show();
+
+//        ScenicView.show(scene);
     }
 
     private final ObjectProperty<Runnable> onCloseVideoPane = new SimpleObjectProperty<>(this, "onCloseVideoPane");

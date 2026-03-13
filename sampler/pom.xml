@@ -83,6 +83,12 @@
 		<dependency>
 			<groupId>one.jpro.platform</groupId>
 			<artifactId>jpro-mdfx</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>one.jpro.platform</groupId>
+					<artifactId>jpro-platform</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
