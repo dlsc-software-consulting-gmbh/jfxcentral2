@@ -31,7 +31,7 @@
         <junit.version>5.10.0</junit.version>
         <ikonli.version>12.4.0</ikonli.version>
         <jpro.version>2026.1.1</jpro.version>
-        <jpro.platform.version>0.6.0</jpro.platform.version>
+        <jpro.platform.version>0.6.1-SNAPSHOT</jpro.platform.version>
         <batik.version>1.19</batik.version>
         <attach.version>4.0.24</attach.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
