@@ -10,7 +10,7 @@
     <loc>https://www.jfx-central.com/blogs</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.jfx-central.com/books</loc>
@@ -130,7 +130,7 @@
     <loc>https://www.jfx-central.com/links</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.jfx-central.com/legal/terms</loc>
@@ -154,49 +154,49 @@
     <loc>https://www.jfx-central.com/blogs/abhinay.xyz</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.jfx-central.com/blogs/foojay</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.jfx-central.com/blogs/gluon</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.jfx-central.com/blogs/harmoniccode</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.jfx-central.com/blogs/pixelduke</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.jfx-central.com/blogs/pixelperfect</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.jfx-central.com/blogs/reddit</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.jfx-central.com/blogs/webtechie</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.jfx-central.com/books/definitiveguide2modernjavaclients</loc>
