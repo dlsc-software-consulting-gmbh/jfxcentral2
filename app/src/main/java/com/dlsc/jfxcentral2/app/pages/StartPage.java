@@ -23,7 +23,7 @@ public class StartPage extends PageBase {
 
     @Override
     public String title() {
-        return "JFXCentral";
+        return "JFXCentral - JavaFX Community Hub";
     }
 
     @Override
