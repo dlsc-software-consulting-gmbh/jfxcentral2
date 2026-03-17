@@ -261,7 +261,7 @@ public class JFXCentral2App extends Application {
                 .and(Route.redirect("/home", "/"))
                 .and(Route.redirect("/index", "/"))
                 .and(r -> {
-                    if(r.getPath().contains(PagePath.REAL_WORLD)) {
+                    if (r.getPath().startsWith(PagePath.REAL_WORLD)) {
                         return Response.redirect(r.getUrl().replace(PagePath.REAL_WORLD, PagePath.SHOWCASES));
                     } else {
                         return Response.empty();
