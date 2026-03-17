@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components.headers;
 
 import com.dlsc.jfxcentral2.model.IconInfo;
 import javafx.scene.control.Label;
+import one.jpro.platform.routing.SEOUtil;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.Ikon;
@@ -38,11 +39,13 @@ public class SingleIconDetailHeader extends DetailHeaderBase {
         nameLabel.getStyleClass().add("name");
         nameLabel.setWrapText(true);
         nameLabel.setGraphic(new FontIcon(getIkon()));
+        SEOUtil.h1(nameLabel);
 
         Label descLabel = new Label();
         descLabel.setText(String.format("An icon named '%s' from the icon pack %s.", iconName, ikonliPackName));
         descLabel.getStyleClass().add("description");
         descLabel.setWrapText(true);
+        SEOUtil.wrap("p", descLabel);
 
         contentBox.getChildren().addAll(nameLabel, descLabel);
         return contentBox;

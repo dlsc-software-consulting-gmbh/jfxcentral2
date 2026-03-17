@@ -4,6 +4,7 @@ import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import javafx.beans.binding.Bindings;
+import one.jpro.platform.routing.SEOUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
@@ -30,10 +31,12 @@ public class WeekLinksLiteView extends PaneBase {
         getStyleClass().add("week-links-lite-view");
         title = new Label("Links of the week");
         title.getStyleClass().add("title");
+        SEOUtil.h2(title);
 
         subtitle = new Label("Miscellaneous stuff found on the web");
         subtitle.setWrapText(true);
         subtitle.getStyleClass().add("subtitle");
+        SEOUtil.wrap("p", subtitle);
 
         viewAllButton = new Button("VIEW ALL LINKS OF THE WEEK");
         viewAllButton.getStyleClass().add("view-all-button");

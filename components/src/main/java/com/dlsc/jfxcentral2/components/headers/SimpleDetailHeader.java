@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.SaveAndLikeUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import one.jpro.platform.routing.SEOUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -77,6 +78,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         nameLabel.setWrapText(true);
         nameLabel.setMinHeight(Region.USE_PREF_SIZE);
         nameLabel.textAlignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(TextAlignment.LEFT).otherwise(TextAlignment.CENTER));
+        SEOUtil.h1(nameLabel);
 
         Label summaryLabel = new Label();
         summaryLabel.visibleProperty().bind(summaryLabel.textProperty().isNotEmpty());
@@ -86,6 +88,7 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         summaryLabel.setWrapText(true);
         summaryLabel.textAlignmentProperty().bind(nameLabel.textAlignmentProperty());
         summaryLabel.setMinHeight(Region.USE_PREF_SIZE);
+        SEOUtil.h2(summaryLabel);
 
         SaveAndLikeButton saveAndLikeButton = new SaveAndLikeButton();
         saveAndLikeButton.setMinWidth(Region.USE_PREF_SIZE);

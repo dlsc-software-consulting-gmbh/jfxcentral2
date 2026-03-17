@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.Spacer;
 import javafx.beans.property.SimpleStringProperty;
+import one.jpro.platform.routing.SEOUtil;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -16,6 +17,7 @@ public class TitleAndDescriptionBox extends PaneBase {
         title.managedProperty().bind(title.visibleProperty());
         title.visibleProperty().bind(title.textProperty().isNotEmpty());
         title.textProperty().bind(titleProperty());
+        SEOUtil.h2(title);
 
         Label description = new Label();
         description.getStyleClass().add("description");
@@ -23,6 +25,7 @@ public class TitleAndDescriptionBox extends PaneBase {
         description.managedProperty().bind(description.visibleProperty());
         description.visibleProperty().bind(description.textProperty().isNotEmpty());
         description.textProperty().bind(descriptionProperty());
+        SEOUtil.wrap("p", description);
 
         getChildren().setAll(new VBox(title, new Spacer(), description));
     }
