@@ -19,5 +19,11 @@ public class JFXCentral2Server {
             }
             return Response.empty();
         });
+        ServerAPI.getServerAPI().addRequestHandler(request -> {
+            if (request.getPath().equals("/robots.txt")) {
+                return Response.of("User-agent: *\nAllow: /\n\nSitemap: https://www.jfx-central.com/sitemap.xml".getBytes(), "application/text");
+            }
+            return Response.empty();
+        });
     }
 }
