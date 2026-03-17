@@ -28,7 +28,7 @@ public class StartPage extends PageBase {
 
     @Override
     public String description() {
-        return "JFXCentral.com is a hub for JavaFX developers, offering resources like libraries, tools, tutorials, and showcases. It also curates community updates and provides a cross-platform JavaFX example app.";
+        return "JFXCentral is a hub for JavaFX developers, offering resources like libraries, tools, tutorials, and showcases. It also curates community updates and provides a cross-platform JavaFX example app.";
     }
 
     @Override
