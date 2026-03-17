@@ -90,12 +90,16 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import one.jpro.platform.routing.*;
+import one.jpro.platform.routing.LinkUtil;
+import one.jpro.platform.routing.Request;
+import one.jpro.platform.routing.Response;
+import one.jpro.platform.routing.Route;
+import one.jpro.platform.routing.RouteNode;
+import one.jpro.platform.routing.View;
 import one.jpro.platform.routing.dev.DevFilter;
 import one.jpro.platform.routing.dev.StatisticsFilter;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.apache.commons.lang3.StringUtils;
-import org.scenicview.ScenicView;
 
 import java.awt.Desktop;
 import java.awt.Image;
@@ -261,7 +265,7 @@ public class JFXCentral2App extends Application {
                 .and(Route.redirect("/home", "/"))
                 .and(Route.redirect("/index", "/"))
                 .and(r -> {
-                    if(r.getPath().contains(PagePath.REAL_WORLD)) {
+                    if (r.getPath().startsWith(PagePath.REAL_WORLD)) {
                         return Response.redirect(r.getUrl().replace(PagePath.REAL_WORLD, PagePath.SHOWCASES));
                     } else {
                         return Response.empty();
