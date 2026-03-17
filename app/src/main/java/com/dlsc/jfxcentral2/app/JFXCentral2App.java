@@ -90,12 +90,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import one.jpro.platform.routing.LinkUtil;
-import one.jpro.platform.routing.Request;
-import one.jpro.platform.routing.Response;
-import one.jpro.platform.routing.Route;
-import one.jpro.platform.routing.RouteNode;
-import one.jpro.platform.routing.View;
+import one.jpro.platform.routing.*;
 import one.jpro.platform.routing.dev.DevFilter;
 import one.jpro.platform.routing.dev.StatisticsFilter;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
@@ -237,7 +232,7 @@ public class JFXCentral2App extends Application {
 
         stage.show();
 
-        ScenicView.show(scene);
+        //ScenicView.show(scene);
     }
 
     private final ObjectProperty<Runnable> onCloseVideoPane = new SimpleObjectProperty<>(this, "onCloseVideoPane");
@@ -265,13 +260,19 @@ public class JFXCentral2App extends Application {
                 }))
                 .and(Route.redirect("/home", "/"))
                 .and(Route.redirect("/index", "/"))
+                .and(r -> {
+                    if(r.getPath().contains(PagePath.REAL_WORLD)) {
+                        return Response.redirect(r.getUrl().replace(PagePath.REAL_WORLD, PagePath.SHOWCASES));
+                    } else {
+                        return Response.empty();
+                    }
+                })
                 .and(createCategoryOrDetailRoute(PagePath.BLOGS, Blog.class, () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute(PagePath.BOOKS, Book.class, () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.COMPANIES, Company.class, () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute(PagePath.DOWNLOADS, Download.class, () -> new DownloadsCategoryPage(size), id -> new DownloadDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute(PagePath.LIBRARIES, Library.class, () -> new LibrariesCategoryPage(size), id -> new LibraryDetailsPage(size, id)))
                 .and(createCategoryOrDetailRoute(PagePath.PEOPLE, Person.class, () -> new PeopleCategoryPage(size), id -> new PersonDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute(PagePath.REAL_WORLD, RealWorldApp.class, () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // legacy routing for real world apps / showcases
                 .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute(PagePath.TIPS, Tip.class, () -> new TipCategoryPage(size), id -> new TipDetailsPage(size, id))) // new routing for showcases
                 .and(createCategoryOrDetailRoute(PagePath.TOOLS, Tool.class, () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
