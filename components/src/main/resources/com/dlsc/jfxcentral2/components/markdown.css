@@ -117,38 +117,19 @@
     -fx-text-fill: -mdfx-font-color;
 }
 
-.markdown-codeblock-box,
 .markdown-code {
     -fx-padding: 0px 8px;
-}
-
-.markdown-code {
-    /*-fx-max-width: 300*/
-}
-
-.markdown-code,
-.markdown-codeblock {
+    -fx-font-family: "JetBrains Mono Regular";
     -fx-wrap-text: true;
     -fx-font-size: 0.8571em;
 }
 
-.markdown-codeblock-box {
-    -fx-padding: 8;
-    -fx-border-radius: 0.1428em;
-    -fx-border-color: -mdfx-border-color-1;
-    -fx-border-width: 0.0357em;
-    -fx-background-radius: 0.1428em;
-    -fx-background-color: -light-blue;
-    -fx-font-family: "JetBrains Mono Regular";
-}
-
 .markdown-code-background {
     -fx-padding: 8;
-    -fx-border-radius: 0.1428em;
-    -fx-border-color: -mdfx-border-color-1;
-    -fx-border-width: 0.0357em;
-    -fx-background-radius: 0.1428em;
-    -fx-background-color: -light-blue;
+    -fx-background-color: derive(beige, -50%), beige;
+    -fx-background-insets: 0px, 1px;
+    -fx-background-radius: 4px, 3px;
+    -fx-border-width: 0px;
 }
 
 .markdown-code-anti-padding {
@@ -215,17 +196,22 @@
 /* ---------- CODE BLOCK ---------- */
 
 .markdown-code-block {
-    -fx-font-family: "JetBrains Mono Regular";
     -fx-font-size: .8em;
     -fx-padding: 0px;
 }
 
 .markdown-code-block .code-text-flow {
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-text-fill: white;
     -fx-padding: 12px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
-    -fx-border-color: -mdfx-code-block-border;
+    -fx-border-color: #010409;
     -fx-border-width: 0px;
-    -fx-background-color: -mdfx-code-block-background;
+    -fx-background-color: #010409;
     -fx-line-spacing: 2px;
+}
+
+.markdown-code-block .code-text-flow .text {
+    -fx-fill: white;
 }

@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.mobile.pages.MobileHomePage;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.Label;
+import one.jpro.platform.routing.SEOUtil;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -37,6 +38,7 @@ public class HomePageHeader extends HBox {
         // right side
         label1 = new Label("Home to anything");
         label1.getStyleClass().add("label1");
+        SEOUtil.h1(label1);
 
         fxLogo = new CustomImageView();
         fxLogo.getStyleClass().add("fx-logo");

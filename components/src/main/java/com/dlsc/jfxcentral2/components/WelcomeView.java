@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
 import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
+import one.jpro.platform.routing.SEOUtil;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -36,17 +37,20 @@ public class WelcomeView extends PaneBase {
 
         Label label1 = new Label("Home to anything");
         label1.getStyleClass().add("home-label");
+        SEOUtil.h1(label1);
 
         CustomImageView fxLogo = new CustomImageView();
         fxLogo.getStyleClass().add("fx-logo");
 
         Label label2 = new Label("related", fxLogo);
         label2.getStyleClass().add("related-label");
+        SEOUtil.wrap("span", label2);
 
         String fxDesc = "JavaFX is an advanced GUI toolkit accessible from any JVM language, which runs on desktop, mobile and the web." + (WebAPI.isBrowser() ? " In fact, this website was written in JavaFX!" : "");
         Label jfxDescLabel = new Label(fxDesc);
         jfxDescLabel.getStyleClass().add("fx-description-label");
         jfxDescLabel.setWrapText(true);
+        SEOUtil.wrap("p", jfxDescLabel);
         jfxDescLabel.setMinHeight(Region.USE_PREF_SIZE);
         jfxDescLabel.managedProperty().bind(jfxDescLabel.visibleProperty());
 
