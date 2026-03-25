@@ -62,7 +62,7 @@ public class SponsorsViewSkin extends ControlBaseSkin<SponsorsView> {
         showedSponsor.clear();
 
         Collections.shuffle(temp);
-        showedSponsor.addAll(temp.subList(0, realLogoCount));
+        showedSponsor.addAll(temp.subList(0, Math.min(temp.size() -1, realLogoCount)));
 
         //add divider and logo
         for (int i = 0; i < showedSponsor.size(); i++) {
