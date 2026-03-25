@@ -12,7 +12,7 @@ public class DlscQuickLinkTest {
      * The DlscQuickLinkTest constructor creates a new instance of DlscQuickLink and
      * tests to see if it is working as expected.
      * 
-     * The testSenaptQuickLinkMethod creates a new DlscQuickLink, and
+     * The testDlscQuickLinkMethod creates a new DlscQuickLink, and
      * verifies that the URL set in the superclass is correct.
      */
     @Test
