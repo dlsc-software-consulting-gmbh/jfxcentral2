@@ -22,7 +22,7 @@ import java.util.Objects;
 public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-    private static final Image DLSC_COLOR_IMAGE = new Image(Objects.requireNonNull(QuickLinkViewSkin.class.getResource("/com/dlsc/jfxcentral2/components/logos/dlsc-logo-white-text.png")).toExternalForm(), true);
+    private static final Image DLSC_IMAGE = new Image(Objects.requireNonNull(QuickLinkViewSkin.class.getResource("/com/dlsc/jfxcentral2/components/logos/dlsc-logo-white-text.png")).toExternalForm(), true);
 
     public QuickLinkViewSkin(QuickLinkView control) {
         super(control);
@@ -106,7 +106,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             topLabel.getStyleClass().add("top-label");
 
             CustomImageView logoView = new CustomImageView();
-            logoView.setImage(DLSC_COLOR_IMAGE);
+            logoView.setImage(DLSC_IMAGE);
 
             Label bottomLabel = new Label("Main sponsor  /  Main sponsor  /  Main sponsor");
             bottomLabel.getStyleClass().add("bottom-label");
