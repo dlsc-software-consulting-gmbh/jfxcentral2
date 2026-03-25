@@ -99,6 +99,7 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
             control.setStyle("-fx-background-image: url(" + temp.getImageUrl() + ");");
         } else if (quickLink instanceof DlscQuickLink) {
             int randomStyle = (int) (Math.random() * 3);
+            control.getStyleClass().removeAll("dlsc-link-view", "dlsc-link-view-0", "dlsc-link-view-1", "dlsc-link-view-2");
             control.getStyleClass().addAll("dlsc-link-view", "dlsc-link-view-" + randomStyle);
 
             Label topLabel = new Label();
