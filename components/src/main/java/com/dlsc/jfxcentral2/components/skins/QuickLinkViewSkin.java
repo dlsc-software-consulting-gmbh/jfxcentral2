@@ -4,10 +4,10 @@ import com.dlsc.gemsfx.Spacer;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.QuickLinkView;
 import com.dlsc.jfxcentral2.model.DateQuickLink;
+import com.dlsc.jfxcentral2.model.DlscQuickLink;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
-import com.dlsc.jfxcentral2.model.SenaptQuickLink;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -22,7 +22,7 @@ import java.util.Objects;
 public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-    private static final Image SENAPT_COLOR_IMAGE = new Image(Objects.requireNonNull(QuickLinkViewSkin.class.getResource("/com/dlsc/jfxcentral2/components/logos/senapt-color.png")).toExternalForm(), true);
+    private static final Image DLSC_COLOR_IMAGE = new Image(Objects.requireNonNull(QuickLinkViewSkin.class.getResource("/com/dlsc/jfxcentral2/components/logos/dlsc-color.png")).toExternalForm(), true);
 
     public QuickLinkViewSkin(QuickLinkView control) {
         super(control);
@@ -97,15 +97,15 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
         } else if (quickLink instanceof ImageQuickLink temp) {
             control.getStyleClass().add("image-link-view");
             control.setStyle("-fx-background-image: url(" + temp.getImageUrl() + ");");
-        } else if (quickLink instanceof SenaptQuickLink) {
+        } else if (quickLink instanceof DlscQuickLink) {
             int randomStyle = (int) (Math.random() * 3);
-            control.getStyleClass().addAll("senapt-link-view", "senapt-link-view-" + randomStyle);
+            control.getStyleClass().addAll("dlsc-link-view", "dlsc-link-view-" + randomStyle);
 
             Label topLabel = new Label();
             topLabel.getStyleClass().add("top-label");
 
             CustomImageView logoView = new CustomImageView();
-            logoView.setImage(SENAPT_COLOR_IMAGE);
+            logoView.setImage(DLSC_COLOR_IMAGE);
 
             Label bottomLabel = new Label("Main sponsor  /  Main sponsor  /  Main sponsor");
             bottomLabel.getStyleClass().add("bottom-label");
@@ -121,10 +121,10 @@ public class QuickLinkViewSkin extends ControlBaseSkin<QuickLinkView> {
                 bottomLabel.setText(topLabel.getText());
             } else if (randomStyle == 1) {
                 topLabel.setText("MAIN SPONSOR");
-                bottomLabel.setText("senapt.co.uk");
+                bottomLabel.setText("dlsc.com");
             } else if (randomStyle == 2) {
                 topLabel.setText(isSmall() ? "MAIN SPONSOR" : "PLATINUM SPONSOR OF JFXCENTRAL");
-                bottomLabel.setText("senapt.co.uk");
+                bottomLabel.setText("dlsc.com");
             }
 
             VBox contentBox = new VBox(topLabel, logoView, bottomLabel);

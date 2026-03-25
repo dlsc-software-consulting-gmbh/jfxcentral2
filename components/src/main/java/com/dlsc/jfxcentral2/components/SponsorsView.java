@@ -22,6 +22,7 @@ import javafx.scene.control.Skin;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class SponsorsView extends ControlBase {
 
@@ -39,37 +40,37 @@ public class SponsorsView extends ControlBase {
     private List<SponsorsView.Sponsor> createSponsors() {
         return List.of(
                 new SponsorsView.Sponsor("JPRO",
-                        getClass().getResource("logos/jpro.png").toExternalForm(),
+                        Objects.requireNonNull(getClass().getResource("logos/jpro.png")).toExternalForm(),
                         "https://www.jpro.one/"),
                 new SponsorsView.Sponsor("SANDEC",
-                        getClass().getResource("logos/sandec.png").toExternalForm(),
+                        Objects.requireNonNull(getClass().getResource("logos/sandec.png")).toExternalForm(),
                         "https://www.jpro.one/"),
                 new SponsorsView.Sponsor("DLSC",
-                        getClass().getResource("logos/dlsc.png").toExternalForm(),
+                        Objects.requireNonNull(getClass().getResource("logos/dlsc.png")).toExternalForm(),
                         "https://www.dlsc.com/"),
                 new SponsorsView.Sponsor("NAVIELEKTRO",
-                        getClass().getResource("logos/navielektro.png").toExternalForm(),
+                        Objects.requireNonNull(getClass().getResource("logos/navielektro.png")).toExternalForm(),
                         "https://www.navielektro.fi/"),
                 new SponsorsView.Sponsor(
                         "Hydraulic",
-                        getClass().getResource("logos/hydraulic.png").toExternalForm(),
-                        "https://www.hydraulic.dev/"),
-                new SponsorsView.Sponsor(
-                        "Senapt",
-                        getClass().getResource("logos/Senapt.png").toExternalForm(),
-                        "https://www.senapt.co.uk"),
-                new SponsorsView.Sponsor(
-                        "TomatoEnergy",
-                        getClass().getResource("logos/TomatoEnergy.png").toExternalForm(),
-                        "https://www.tomato.energy/"),
-                new SponsorsView.Sponsor(
-                        "TomatoHomes",
-                        getClass().getResource("logos/TomatoHomes.png").toExternalForm(),
-                        "https://www.tomato.homes/"),
-                new SponsorsView.Sponsor(
-                        "MyWatts",
-                        getClass().getResource("logos/MyWatts.png").toExternalForm(),
-                        "https://www.mywatts.co.uk/"));
+                        Objects.requireNonNull(getClass().getResource("logos/hydraulic.png")).toExternalForm(),
+                        "https://www.hydraulic.dev/"));
+//                new SponsorsView.Sponsor(
+//                        "Senapt",
+//                        Objects.requireNonNull(getClass().getResource("logos/Senapt.png")).toExternalForm(),
+//                        "https://www.senapt.co.uk"),
+//                new SponsorsView.Sponsor(
+//                        "TomatoEnergy",
+//                        Objects.requireNonNull(getClass().getResource("logos/TomatoEnergy.png")).toExternalForm(),
+//                        "https://www.tomato.energy/"),
+//                new SponsorsView.Sponsor(
+//                        "TomatoHomes",
+//                        Objects.requireNonNull(getClass().getResource("logos/TomatoHomes.png")).toExternalForm(),
+//                        "https://www.tomato.homes/"),
+//                new SponsorsView.Sponsor(
+//                        "MyWatts",
+//                        Objects.requireNonNull(getClass().getResource("logos/MyWatts.png")).toExternalForm(),
+//                        "https://www.mywatts.co.uk/"));
 //                new SponsorsView.Sponsor(
 //                        "EvXcen",
 //                        getClass().getResource("logos/EvXcen.png").toExternalForm(),
