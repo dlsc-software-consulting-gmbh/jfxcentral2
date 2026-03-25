@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
+import one.jpro.platform.routing.SEOUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -50,6 +51,7 @@ public class CategoryHeader extends PaneBase {
         titleLabel.getStyleClass().add("header-title");
         titleLabel.managedProperty().bind(titleLabel.visibleProperty());
         titleLabel.visibleProperty().bind(titleProperty().isNotEmpty().or(ikonProperty().isNotNull()));
+        SEOUtil.h1(titleLabel);
 
         Label descriptionLabel = new Label();
         descriptionLabel.getStyleClass().add("header-description");
@@ -57,6 +59,7 @@ public class CategoryHeader extends PaneBase {
         descriptionLabel.textProperty().bind(descriptionProperty());
         descriptionLabel.managedProperty().bind(descriptionLabel.visibleProperty());
         descriptionLabel.visibleProperty().bind(descriptionProperty().isNotEmpty());
+        SEOUtil.h2(descriptionLabel);
 
         VBox defaultContent = new VBox(titleLabel, descriptionLabel);
         defaultContent.getStyleClass().add("default-content");

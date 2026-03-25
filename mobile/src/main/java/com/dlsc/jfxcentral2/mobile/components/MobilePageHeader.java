@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import one.jpro.platform.routing.SEOUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
@@ -38,6 +39,7 @@ public class MobilePageHeader extends StackPane {
         categoryTitle = new Label();
         categoryTitle.getStyleClass().add("title");
         categoryTitle.setWrapText(true);
+        SEOUtil.h1(categoryTitle);
         categoryTitle.setMinHeight(-1);
         categoryTitle.setMaxHeight(Double.MAX_VALUE);
 
