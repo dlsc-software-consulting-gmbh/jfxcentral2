@@ -2604,7 +2604,7 @@
 }
 
 .quick-link-view.dlsc-link-view-0 {
-    -fx-background-image: url("utils/dlsc-bg0.jpg");
+    -fx-background-image: url("utils/sponsor-bg0.jpg");
 }
 
 .quick-link-view.dlsc-link-view-0 .content-box {
@@ -2632,7 +2632,7 @@
 }
 
 .quick-link-view.dlsc-link-view-1 {
-    -fx-background-image: url("utils/senapt-bg1.jpg");
+    -fx-background-image: url("utils/sponsor-bg1.jpg");
 }
 
 .quick-link-view.dlsc-link-view-1 .content-box,
@@ -2669,7 +2669,7 @@
 }
 
 .quick-link-view.dlsc-link-view-2 {
-    -fx-background-image: url("utils/senapt-bg2.jpg");
+    -fx-background-image: url("utils/sponsor-bg2.jpg");
 }
 
 /** -------------------------------
