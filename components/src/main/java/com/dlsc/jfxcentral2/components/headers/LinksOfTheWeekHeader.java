@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.geometry.Pos;
+import one.jpro.platform.routing.SEOUtil;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -35,6 +36,7 @@ public class LinksOfTheWeekHeader extends CategoryHeader  {
         label.getStyleClass().add("header-title");
         label.managedProperty().bind(label.visibleProperty());
         label.visibleProperty().bind(titleProperty().isNotEmpty().or(ikonProperty().isNotNull()));
+        SEOUtil.h1(label);
 
         CustomImageView rssImageView = new CustomImageView();
         rssImageView.setImage(RSS_IMAGE);
@@ -47,6 +49,7 @@ public class LinksOfTheWeekHeader extends CategoryHeader  {
         Label descriptionLabel = new Label("Do you have JavaFX news you want to share with the community? Let us know!\nSend a mail to links@jfx-central.com");
         descriptionLabel.getStyleClass().add("description-label");
         descriptionLabel.setWrapText(true);
+        SEOUtil.wrap("p", descriptionLabel);
         descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
         descriptionLabel.setTextAlignment(TextAlignment.CENTER);
 

@@ -12,10 +12,10 @@ import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.model.DateQuickLink;
+import com.dlsc.jfxcentral2.model.DlscQuickLink;
 import com.dlsc.jfxcentral2.model.ImageQuickLink;
 import com.dlsc.jfxcentral2.model.NormalQuickLink;
 import com.dlsc.jfxcentral2.model.QuickLink;
-import com.dlsc.jfxcentral2.model.SenaptQuickLink;
 import com.dlsc.jfxcentral2.model.Size;
 import javafx.beans.property.ObjectProperty;
 
@@ -52,7 +52,7 @@ public class QuickLinksGenerator {
 
     private static List<QuickLink> getSmallQuickLinks() {
         List<QuickLink> list = createQuickLinks(3);
-        list.add(new SenaptQuickLink());
+        list.add(new DlscQuickLink());
         Collections.shuffle(list);
         return list;
     }
@@ -63,7 +63,7 @@ public class QuickLinksGenerator {
         List<QuickLink> list = createQuickLinks(count);
 
         //add main sponsor
-        list.add(new SenaptQuickLink());
+        list.add(new DlscQuickLink());
 
         //Randomly generate 1~3 QuickLinks for image placeholders
         int count2 = new Random().nextInt(3) + 1;

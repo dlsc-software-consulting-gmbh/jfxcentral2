@@ -1,10 +1,32 @@
+.markdown-view {
+    -mdfx-font-color: black;
+    -mdfx-link-color: -bright-blue;
+    -mdfx-border-color-1: -fx-box-border;
+
+    -mdfx-bg-color-1: -fx-control-inner-background;
+    -mdfx-bg-color-2: -fx-control-inner-background-alt;
+    -mdfx-bg-color-3: -fx-color;
+
+    -mdfx-bq-color-border: derive(-red, -50%);
+    -mdfx-bq-color-background: -red;
+    -mdfx-bq-text-fill: black;
+
+    -mdfx-code-block-border: -fx-box-border;
+    -mdfx-code-block-background: -fx-control-inner-background;
+}
+
+.markdown-code-block {
+    -mdfx-code-theme: "/one/jpro/platform/mdfx/themes/github-dark-default.json";
+}
+
 .clickable-image {
-  -fx-cursor: hand;
+    -fx-cursor: hand;
 }
 
 .markdown-text {
     -fx-font-size: 1em;
     -fx-font-family: "Spline Sans";
+    -fx-fill: -mdfx-font-color;
 }
 
 .markdown-italic {
@@ -24,35 +46,32 @@
 }
 
 .markdown-normal-flow {
-    -fx-line-spacing: 0.142em;
-}
-
-.markdown-view.centered .markdown-normal-flow {
-    -fx-text-alignment: center;
+    -fx-line-spacing: 5;
 }
 
 .markdown-heading .markdown-text {
-    -fx-font-size: 1em;
+    /*-fx-line-spacing: 100;*/
+    -fx-fill: -mdfx-font-color;
 }
 
 .markdown-heading-1 {
-    -fx-padding: 0em 0em 1em 0em;
+    -fx-padding: 14px 0px;
 }
 
 .markdown-heading-2 {
-    -fx-padding: 1.4285em 0em 0em 0em;
+    -fx-padding: 10px 0px;
 }
 
 .markdown-heading-3 {
-    -fx-padding: 1.4285em 0em 0em 0em;
+    -fx-padding: 8px 0px;
 }
 
 .markdown-heading-4 {
-    -fx-padding: 1.4285em 0em 0em 0em;
+    -fx-padding: 6px 0px;
 }
 
 .markdown-heading-5 {
-    -fx-padding: 1.4285em 0em 0em 0em;
+    -fx-padding: 4px 0px;
 }
 
 .markdown-heading-1 .markdown-text {
@@ -81,8 +100,8 @@
 }
 
 .markdown-link {
-    -fx-cursor: hand;
     -fx-fill: -mdfx-link-color;
+    -fx-cursor: hand;
 }
 
 .markdown-link-hover {
@@ -90,65 +109,44 @@
 }
 
 .markdown-paragraph-list {
-    -fx-spacing: 10;
+    -fx-spacing: 10px;
 }
 
 .markdown-listitem-dot {
+    -fx-font-size: 16px;
     -fx-text-fill: -mdfx-font-color;
 }
 
-.markdown-codeblock-box,
 .markdown-code {
-    -fx-padding: 0 8 0 8;
-}
-
-.markdown-code {
-    /*-fx-max-width: 300*/
-}
-
-.markdown-code,
-.markdown-codeblock {
+    -fx-padding: 0px 8px;
+    -fx-font-family: "JetBrains Mono Regular";
     -fx-wrap-text: true;
     -fx-font-size: 0.8571em;
 }
 
-.markdown-code {
-}
-
-.markdown-codeblock-box {
-    -fx-padding: 8;
-    -fx-border-radius: 0.1428em;
-    -fx-border-color: -mdfx-border-color-1;
-    -fx-border-width: 0.0357em;
-    -fx-background-radius: 0.1428em;
-    -fx-background-color: -light-blue;
-    -fx-font-family: "JetBrains Mono Regular";
-}
-
 .markdown-code-background {
     -fx-padding: 8;
-    -fx-border-radius: 0.1428em;
-    -fx-border-color: -mdfx-border-color-1;
-    -fx-border-width: 0.0357em;
-    -fx-background-radius: 0.1428em;
-    -fx-background-color: -light-blue;
+    -fx-background-color: derive(beige, -50%), beige;
+    -fx-background-insets: 0px, 1px;
+    -fx-background-radius: 4px, 3px;
+    -fx-border-width: 0px;
 }
 
 .markdown-code-anti-padding {
     /*-fx-padding: -8;*/
     -fx-border-color: red;
-    -fx-border-width: 1;
+    -fx-border-width: 1px;
 }
 
 .markdown-table-table {
-    -fx-vgap: 0;
-    -fx-hgap: 0;
+    -fx-vgap: -1px;
+    -fx-hgap: -1px;
 }
 
 .markdown-table-cell {
-    -fx-padding: 8;
+    -fx-padding: 8px;
     -fx-border-color: -mdfx-border-color-1;
-    -fx-border-width: 0;
+    -fx-border-width: 0px;
 }
 
 .markdown-table-even {
@@ -170,25 +168,50 @@
     -fx-fill: -white;
 }
 
+
 .markdown-table-cell-top .markdown-normal-flow {
     -fx-alignment: center;
     -fx-text-alignment: center;
 }
 
 .markdown-hbox1 {
-    -fx-spacing: 0;
-    -fx-padding: 2;
+    -fx-spacing: 0px;
+    -fx-padding: 2px;
 }
+
+/* ---------- BLOCK QUOTE ---------- */
 
 .markdown-normal-block-quote {
-    -fx-background-insets: 0.7142em 0.7142em 0.7142em 0em;
-    -fx-border-insets: 0.7142em 0.7142em 0.7142em 0em;
+    -fx-background: -mdfx-bq-color-background;
+    -fx-background-color: -fx-background;
+    -fx-border-color: -mdfx-bq-color-border;
+    -fx-border-width: 0px 0px 0px 3px;
+    -fx-padding: 10px;
 }
 
-.markdown-normal-block-quote .markdown-link {
-    -fx-underline: true;
+.markdown-normal-block-quote .markdown-normal-flow .markdown-text {
+    -fx-fill: -mdfx-bq-text-fill;
 }
 
-.markdown-normal-block-quote * {
-    -mdfx-font-color: -fx-accent;
+/* ---------- CODE BLOCK ---------- */
+
+.markdown-code-block {
+    -fx-font-size: .8em;
+    -fx-padding: 0px;
+}
+
+.markdown-code-block .code-text-flow {
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-text-fill: white;
+    -fx-padding: 12px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-color: #010409;
+    -fx-border-width: 0px;
+    -fx-background-color: #010409;
+    -fx-line-spacing: 2px;
+}
+
+.markdown-code-block .code-text-flow .text {
+    -fx-fill: white;
 }

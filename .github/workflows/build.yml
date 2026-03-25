@@ -1,8 +1,6 @@
 name: Build
 on:
   push:
-  pull_request:
-    types: [opened, synchronize, reopened]
 jobs:
   build:
     name: Build
@@ -16,6 +14,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 24
+          distribution: 'zulu'
 #      - name: Cache Maven packages
 #        uses: actions/cache@v1
 #        with:

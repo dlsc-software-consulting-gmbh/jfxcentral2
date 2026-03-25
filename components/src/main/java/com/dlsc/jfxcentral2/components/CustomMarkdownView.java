@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
@@ -35,11 +36,16 @@ public class CustomMarkdownView extends one.jpro.platform.mdfx.MarkdownView {
     public CustomMarkdownView() {
         super("", extensions);
 
-        getStyleClass().add("custom-markdown-view");
+        getStyleClass().addAll("markdown-view", "custom-markdown-view");
         getStylesheets().add(Objects.requireNonNull(CustomMarkdownView.class.getResource("markdown.css")).toExternalForm());
 
         TreeShowing.treeShowing(this).addListener(it -> setupWorkAroundForWebViewLayout());
         mdStringProperty().addListener(it -> Platform.runLater(this::setupWorkAroundForWebViewLayout));
+    }
+
+    @Override
+    public Optional<String> getDefaultLanguage() {
+        return Optional.of("java");
     }
 
     private void setupWorkAroundForWebViewLayout() {

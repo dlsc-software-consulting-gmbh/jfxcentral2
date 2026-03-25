@@ -26,9 +26,10 @@ import one.jpro.platform.routing.LinkUtil;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.kordamp.ikonli.Ikon;
+import org.kordamp.ikonli.DefaultIkonResolver;
 import org.kordamp.ikonli.IkonHandler;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.javafx.IkonResolver;
+import org.kordamp.ikonli.javafx.JavaFXFontLoader;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
@@ -153,7 +154,7 @@ public class IkonDetailView extends DetailView<Ikon> {
     }
 
     private SVGGraphics2D getSvgGraphics2D(SVGType svgType) {
-        IkonHandler handler = IkonResolver.getInstance().resolve(getData().getDescription());
+        IkonHandler handler = DefaultIkonResolver.getInstance(JavaFXFontLoader.getInstance()).resolve(getData().getDescription());
         Font font;
         /*
          * The createFont method does not close the provided InputStream.

@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.components;
 import com.dlsc.gemsfx.Spacer;
 import javafx.animation.FadeTransition;
 import javafx.beans.binding.Bindings;
+import one.jpro.platform.routing.SEOUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,6 +25,7 @@ public class Header extends HBox {
         Label title = new Label();
         title.getStyleClass().add("header-title");
         title.textProperty().bind(titleProperty());
+        SEOUtil.h2(title);
 
         FontIcon icon = new FontIcon();
         icon.getStyleClass().add("header-icon");

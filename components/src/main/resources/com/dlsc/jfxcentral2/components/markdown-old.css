@@ -1,0 +1,194 @@
+.clickable-image {
+  -fx-cursor: hand;
+}
+
+.markdown-text {
+    -fx-font-size: 1em;
+    -fx-font-family: "Spline Sans";
+}
+
+.markdown-italic {
+    -fx-font-family: "Spline Sans Italic";
+}
+
+.markdown-bold {
+    -fx-font-family: "Spline Sans SemiBold";
+}
+
+.markdown-italic.markdown-bold {
+    -fx-font-family: "Spline Sans SemiBold";
+}
+
+.markdown-strikethrough {
+    -fx-strikethrough: true;
+}
+
+.markdown-normal-flow {
+    -fx-line-spacing: 0.142em;
+}
+
+.markdown-view.centered .markdown-normal-flow {
+    -fx-text-alignment: center;
+}
+
+.markdown-heading .markdown-text {
+    -fx-font-size: 1em;
+}
+
+.markdown-heading-1 {
+    -fx-padding: 0em 0em 1em 0em;
+}
+
+.markdown-heading-2 {
+    -fx-padding: 1.4285em 0em 0em 0em;
+}
+
+.markdown-heading-3 {
+    -fx-padding: 1.4285em 0em 0em 0em;
+}
+
+.markdown-heading-4 {
+    -fx-padding: 1.4285em 0em 0em 0em;
+}
+
+.markdown-heading-5 {
+    -fx-padding: 1.4285em 0em 0em 0em;
+}
+
+.markdown-heading-1 .markdown-text {
+    -fx-font-size: 1.714em;
+    -fx-font-family: "Spline Sans SemiBold";
+}
+
+.markdown-heading-2 .markdown-text {
+    -fx-font-size: 1.2857em;
+    -fx-font-family: "Spline Sans SemiBold";
+}
+
+.markdown-heading-3 .markdown-text {
+    -fx-font-size: 1em;
+    -fx-font-family: "Spline Sans SemiBold";
+}
+
+.markdown-heading-4 .markdown-text {
+    -fx-font-size: 1em;
+    -fx-font-family: "Spline Sans SemiBold";
+}
+
+.markdown-heading-5 .markdown-text {
+    -fx-font-size: 1em;
+    -fx-font-family: "Spline Sans SemiBold";
+}
+
+.markdown-link {
+    -fx-cursor: hand;
+    -fx-fill: -mdfx-link-color;
+}
+
+.markdown-link-hover {
+    -fx-underline: true;
+}
+
+.markdown-paragraph-list {
+    -fx-spacing: 10;
+}
+
+.markdown-listitem-dot {
+    -fx-text-fill: -mdfx-font-color;
+}
+
+.markdown-codeblock-box,
+.markdown-code {
+    -fx-padding: 0 8 0 8;
+}
+
+.markdown-code {
+    /*-fx-max-width: 300*/
+}
+
+.markdown-code,
+.markdown-codeblock {
+    -fx-wrap-text: true;
+    -fx-font-size: 0.8571em;
+}
+
+.markdown-code {
+}
+
+.markdown-codeblock-box {
+    -fx-padding: 8;
+    -fx-border-radius: 0.1428em;
+    -fx-border-color: -mdfx-border-color-1;
+    -fx-border-width: 0.0357em;
+    -fx-background-radius: 0.1428em;
+    -fx-background-color: -light-blue;
+    -fx-font-family: "JetBrains Mono Regular";
+}
+
+.markdown-code-background {
+    -fx-padding: 8;
+    -fx-border-radius: 0.1428em;
+    -fx-border-color: -mdfx-border-color-1;
+    -fx-border-width: 0.0357em;
+    -fx-background-radius: 0.1428em;
+    -fx-background-color: -light-blue;
+}
+
+.markdown-code-anti-padding {
+    /*-fx-padding: -8;*/
+    -fx-border-color: red;
+    -fx-border-width: 1;
+}
+
+.markdown-table-table {
+    -fx-vgap: 0;
+    -fx-hgap: 0;
+}
+
+.markdown-table-cell {
+    -fx-padding: 8;
+    -fx-border-color: -mdfx-border-color-1;
+    -fx-border-width: 0;
+}
+
+.markdown-table-even {
+    -fx-background-color: white;
+}
+
+.markdown-table-odd {
+    -fx-background-color: -light-blue;
+}
+
+.markdown-table-cell-top {
+    -fx-background-color: -bright-blue;
+}
+
+.markdown-table-cell-top .markdown-text {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Roboto Condensed";
+    -fx-fill: -white;
+}
+
+.markdown-table-cell-top .markdown-normal-flow {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.markdown-hbox1 {
+    -fx-spacing: 0;
+    -fx-padding: 2;
+}
+
+.markdown-normal-block-quote {
+    -fx-background-insets: 0.7142em 0.7142em 0.7142em 0em;
+    -fx-border-insets: 0.7142em 0.7142em 0.7142em 0em;
+}
+
+.markdown-normal-block-quote .markdown-link {
+    -fx-underline: true;
+}
+
+.markdown-normal-block-quote * {
+    -mdfx-font-color: -fx-accent;
+}
