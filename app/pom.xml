@@ -436,6 +436,9 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.plugin.version}</version>
                 <configuration>
+                    <options>
+                        <option>-Djavafx.enablePreview=true</option>
+                    </options>
                     <mainClass>${mainClassName}</mainClass>
                 </configuration>
             </plugin>
