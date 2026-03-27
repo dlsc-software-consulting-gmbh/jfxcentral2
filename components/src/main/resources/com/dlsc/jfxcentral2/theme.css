@@ -3477,6 +3477,27 @@
     -fx-pref-width: 1px;
 }
 
+.simple-detail-header .website-button .repo-button-graphic {
+    -fx-spacing: 5px;
+    -fx-alignment: center;
+}
+
+.simple-detail-header .website-button .repo-button-graphic .repo-icon {
+    -fx-icon-color: -fill;
+    -fx-icon-size: 14px;
+}
+
+.simple-detail-header .website-button .repo-button-graphic .star-icon {
+    -fx-icon-color: #f1c40f;
+    -fx-icon-size: 13px;
+}
+
+.simple-detail-header .website-button .repo-button-graphic .stars-count {
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 12px;
+}
+
 .dark-header .overlay {
     -fx-background-color: rgba(0, 0, 0, .5);
 }
