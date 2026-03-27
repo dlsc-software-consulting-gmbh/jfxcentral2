@@ -4174,6 +4174,11 @@
     -fx-avatar-size: 22px;
 }
 
+.library-tile-view .github-stars-badge .ikonli-font-icon {
+    -fx-icon-color: #f1c40f;
+    -fx-icon-size: 16px;
+}
+
 /** ------------------------------------
  * TileView
  */

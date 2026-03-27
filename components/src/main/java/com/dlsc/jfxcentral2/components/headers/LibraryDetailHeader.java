@@ -74,11 +74,6 @@ public class LibraryDetailHeader extends SimpleDetailHeader<Library> {
     }
 
     private String formatStarCount(long stars) {
-        if (stars >= 1_000_000) {
-            return String.format("%.1fM", stars / 1_000_000.0);
-        } else if (stars >= 1_000) {
-            return String.format("%.1fk", stars / 1_000.0);
-        }
-        return String.valueOf(stars);
+        return GitHubStarsService.formatStarCount(stars);
     }
 }
