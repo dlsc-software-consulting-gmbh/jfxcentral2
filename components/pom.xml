@@ -138,6 +138,17 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>jfx-incubator-richtext</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>jfx-incubator-input</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
@@ -190,6 +201,7 @@
             <groupId>com.dlsc.jfxcentral</groupId>
             <artifactId>model</artifactId>
         </dependency>
+
         <dependency>
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-mdfx</artifactId>
@@ -200,10 +212,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>fr.brouillard.oss</groupId>
             <artifactId>cssfx</artifactId>
         </dependency>
+
         <dependency>
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-routing-core</artifactId>
@@ -215,6 +229,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>one.jpro.platform</groupId>
             <artifactId>jpro-utils</artifactId>
@@ -471,6 +486,7 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
