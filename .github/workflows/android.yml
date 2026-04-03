@@ -21,8 +21,8 @@ jobs:
       - uses: actions/checkout@v4
 
       # Setup Gluon's GraalVM for native image compilation (Android target).
-      # Gluon's GraalVM is JDK 23-based; all class files must target Java 23 so
-      # native-image can process them. GRAALVM_HOME is saved for the gluonfx plugin.
+      # Gluon's GraalVM is currently Java 23-based, so its path is saved to
+      # GRAALVM_HOME before a separate JDK 25 install overrides JAVA_HOME.
       - name: Setup Gluon's GraalVM
         uses: gluonhq/setup-graalvm@master
         # set GITHUB_TOKEN to avoid exceeding GitHub's API rate limit
@@ -33,10 +33,18 @@ jobs:
           # Java version. Since GraalVM 22, either java11, java17 or java23. Before GraalVM 22, empty. Default: java23
           # Architecture flag. Available options are 'x86_64' (default) and 'aarch64'. The latter is available for M1 runners starting GraalVM 22.1.
 
-      # Save the Gluon GraalVM path as GRAALVM_HOME.
+      # Save the Gluon GraalVM path as GRAALVM_HOME before JDK 25 overrides JAVA_HOME.
       # The gluonfx plugin reads GRAALVM_HOME to locate the native-image compiler.
       - name: Save GraalVM Home
         run: echo "GRAALVM_HOME=$JAVA_HOME" >> $GITHUB_ENV
+
+      # The project targets Java 25. Install JDK 25 so that ./mvnw install compiles
+      # successfully. This overrides JAVA_HOME; GRAALVM_HOME was saved in the prior step.
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: 25
+          distribution: 'zulu'
 
       # Install extra required packaged on top of ubuntu-latest
       - name: Install libraries
@@ -52,15 +60,18 @@ jobs:
           fileName: 'my.keystore'
           encodedString: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
 
-      # Build and install all modules, targeting Java 23 bytecode so that
-      # GraalVM 23's native-image can process every class file in the classpath.
+      # Build the project using JDK 25 (JAVA_HOME) so all modules compile correctly.
       - name: Project Build
-        run: ./mvnw install -Dmaven.compiler.release=23
+        run: ./mvnw install
 
-      # Build the app for Android. The android profile activates the gluonfx Android
-      # target and sets java.version=23 so the app module is also compiled to Java 23
-      # bytecode. GRAALVM_HOME points to Gluon's GraalVM so the gluonfx plugin can
-      # find the native-image compiler for the Android target.
+      # Build the app for Android using the android Maven profile.
+      # GRAALVM_HOME points to Gluon's GraalVM so the gluonfx plugin can find the
+      # native-image compiler.
+      # NOTE: As of April 2026, Gluon's GraalVM latest release (gluon-23+25.1) is
+      # Java 23-based and cannot process class files compiled with Java 25 (class
+      # file version 69). This project and its dependencies (e.g. jpro-mdfx) require
+      # Java 25, so the Gluon Build step will fail until Gluon releases a GraalVM
+      # that supports Java 25 or later. Track: https://github.com/gluonhq/graal/releases
       # The keystore env vars (ANDROID_KEYSTOREPATH, ANDROID_KEYSTORE_PASSWORD,
       # ANDROID_KEYALIAS, ANDROID_KEYALIAS_PASSWORD) must match the names referenced
       # in the android profile of app/pom.xml.
