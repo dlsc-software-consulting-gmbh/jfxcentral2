@@ -10,7 +10,7 @@ name: Linux Android
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, copilot/featureandroid-build-improvements ]
   pull_request:
     branches: [ master ]
 
