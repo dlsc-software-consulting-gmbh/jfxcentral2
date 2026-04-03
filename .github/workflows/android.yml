@@ -67,11 +67,24 @@ jobs:
       # Build the app for Android using the android Maven profile.
       # GRAALVM_HOME points to Gluon's GraalVM so the gluonfx plugin can find the
       # native-image compiler.
-      # NOTE: As of April 2026, Gluon's GraalVM latest release (gluon-23+25.1) is
-      # Java 23-based and cannot process class files compiled with Java 25 (class
-      # file version 69). This project and its dependencies (e.g. jpro-mdfx) require
-      # Java 25, so the Gluon Build step will fail until Gluon releases a GraalVM
-      # that supports Java 25 or later. Track: https://github.com/gluonhq/graal/releases
+      #
+      # NOTE (April 2026): This step is currently blocked by a Java version mismatch.
+      # Two approaches have been investigated and both are blocked:
+      #
+      # 1. Gluon's GraalVM (gluon-23+25.1-dev, latest): Java 23-based, so native-image
+      #    rejects class file version 69 (Java 25). Cannot compile with --release 23
+      #    either because jpro-mdfx-0.6.1.jar is itself a Java 25 artifact (module-info
+      #    can't be read by a Java 23 compiler). Track: https://github.com/gluonhq/graal/releases
+      #
+      # 2. Oracle GraalVM 25: Supports Java 25 class files, BUT its native-image only
+      #    supports native host compilation — it does NOT include Gluon's Android/iOS
+      #    cross-compilation patches. The gluonfx plugin requires Gluon's fork for
+      #    mobile targets; using Oracle GraalVM fails with 'Missing library libjvm.a'
+      #    because the Gluon-specific clibraries for Android are absent.
+      #
+      # Resolution: Wait for Gluon to release a Java 25-based GraalVM that includes
+      # Android cross-compilation support. Until then this step will fail.
+      #
       # The keystore env vars (ANDROID_KEYSTOREPATH, ANDROID_KEYSTORE_PASSWORD,
       # ANDROID_KEYALIAS, ANDROID_KEYALIAS_PASSWORD) must match the names referenced
       # in the android profile of app/pom.xml.
