@@ -571,6 +571,7 @@
             <properties>
                 <gluonfx.target>android</gluonfx.target>
                 <app.identifier>com.dlsc.jfxcentral</app.identifier>
+                <java.version>23</java.version>
                 <attach.extended.classifier>android</attach.extended.classifier>
                 <version.code>${env.GITHUB_RUN_NUMBER}</version.code>
                 <provided.keystore.path>${env.ANDROID_KEYSTOREPATH}</provided.keystore.path>
