@@ -20,6 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Setup Gluon's GraalVM for native image compilation (Android target).
+      # Gluon's GraalVM is currently Java 23-based, so its path is saved to
+      # GRAALVM_HOME before a separate JDK 25 install overrides JAVA_HOME.
       - name: Setup Gluon's GraalVM
         uses: gluonhq/setup-graalvm@master
         # set GITHUB_TOKEN to avoid exceeding GitHub's API rate limit
@@ -29,6 +32,19 @@ jobs:
           # GraalVM version. Default: latest
           # Java version. Since GraalVM 22, either java11, java17 or java23. Before GraalVM 22, empty. Default: java23
           # Architecture flag. Available options are 'x86_64' (default) and 'aarch64'. The latter is available for M1 runners starting GraalVM 22.1.
+
+      # Save the Gluon GraalVM path as GRAALVM_HOME before JDK 25 overrides JAVA_HOME.
+      # The gluonfx plugin reads GRAALVM_HOME to locate the native-image compiler.
+      - name: Save GraalVM Home
+        run: echo "GRAALVM_HOME=$JAVA_HOME" >> $GITHUB_ENV
+
+      # The project targets Java 25. Install JDK 25 so that ./mvnw install compiles
+      # successfully. This overrides JAVA_HOME; GRAALVM_HOME was saved in the prior step.
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: 25
+          distribution: 'zulu'
 
       # Install extra required packaged on top of ubuntu-latest
       - name: Install libraries
@@ -44,24 +60,27 @@ jobs:
           fileName: 'my.keystore'
           encodedString: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
 
-      # Build the project
+      # Build the project using JDK 25 (JAVA_HOME) so all modules compile correctly.
       - name: Project Build
         run: ./mvnw install
 
       # Build the app
       # The android profile is used, which means a native build will be created for the gluonfx target android.
-      # This step also uses some env variables taken from the repo secrets. See the section 'Setup Android Keystore' below.
+      # GRAALVM_HOME points to Gluon's GraalVM (saved earlier) so the gluonfx plugin
+      # can find the native-image compiler for the Android target.
+      # The keystore env vars (ANDROID_KEYSTOREPATH, ANDROID_KEYSTORE_PASSWORD,
+      # ANDROID_KEYALIAS, ANDROID_KEYALIAS_PASSWORD) must match the names referenced
+      # in the android profile of app/pom.xml.
       - name: Gluon Build
         run: |
           export ANDROID_SDK=$ANDROID_HOME
           ./mvnw -pl app -Pandroid gluonfx:build gluonfx:package
         env:
-          GRAALVM_HOME: ${{ env.JAVA_HOME }}
+          GRAALVM_HOME: ${{ env.GRAALVM_HOME }}
           ANDROID_KEYSTOREPATH: ${{ steps.android_keystore_file.outputs.filePath }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEYALIAS: ${{ secrets.ANDROID_KEYALIAS }}
           ANDROID_KEYALIAS_PASSWORD: ${{ secrets.ANDROID_KEYALIAS_PASSWORD }}
-        continue-on-error: true  # This allows the workflow to continue even if this step fails
 
       - name: Upload build log file
         if: always()  # This ensures the logs are uploaded even if previous steps fail
@@ -71,17 +90,18 @@ jobs:
           path: /home/runner/work/jfxcentral2/jfxcentral2/app/target/gluonfx/aarch64-android/gvm/log
           retention-days: 5  # Optional: specify how long to keep the artifacts
 
-      # To be able to validate the build result, output the created files
+      # To be able to validate the build result, output the created files.
+      # Build output is under app/target/ because the gluonfx build was run with -pl app.
       - name: Show created files
-        run: ls -lR target/gluonfx/*
+        run: ls -lR app/target/gluonfx/
 
       # Create a staging directory where the binary will be copied into
       - name: Make staging directory
         run: mkdir staging
 
-      # Copy the apk to the staging directory
+      # Copy the apk/aab to the staging directory
       - name: Copy native app to staging
-        run: cp -r target/gluonfx/aarch64-android/gvm/JFXCentral2MobileApp.* staging
+        run: cp -r app/target/gluonfx/aarch64-android/gvm/JFXCentral2MobileApp.* staging
 
       # Upload the target directory as a build artifact
       #- name: Make artifact from target directory
@@ -98,10 +118,11 @@ jobs:
           path: staging
 
       # Upload the aab to the Google Play Store. See the section below.
-      - name: Upoad to Google Play
+      # packageName must match the appIdentifier configured in app/pom.xml (android profile).
+      - name: Upload to Google Play
         uses: r0adkll/upload-google-play@v1.1.3
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-          packageName: com.dlsc.jfxcentral2.app.JfxCentral2MobileApp
-          releaseFiles: target/gluonfx/aarch64-android/gvm/JFXCentral2MobileApp.aab
+          packageName: com.dlsc.jfxcentral
+          releaseFiles: app/target/gluonfx/aarch64-android/gvm/JFXCentral2MobileApp.aab
           track: beta

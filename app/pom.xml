@@ -22,6 +22,7 @@
         <mainClassName.jpro>com.dlsc.jfxcentral2.app.JFXCentral2App</mainClassName.jpro>
         <mainClassName.mobile>com.dlsc.jfxcentral2.app.JFXCentral2MobileApp</mainClassName.mobile>
         <app.description>JFXCentral for anything JavaFX</app.description>
+        <app.identifier/>
         <package.type/>
         <mac.app.store/>
         <mac.signing.user.name/>
@@ -446,6 +447,7 @@
                 <version>${gluonfx.plugin.version}</version>
                 <configuration>
                     <target>${gluonfx.target}</target>
+                    <appIdentifier>${app.identifier}</appIdentifier>
                     <attachList>
                         <list>display</list>
                         <list>lifecycle</list>
@@ -571,10 +573,10 @@
                 <app.identifier>com.dlsc.jfxcentral</app.identifier>
                 <attach.extended.classifier>android</attach.extended.classifier>
                 <version.code>${env.GITHUB_RUN_NUMBER}</version.code>
-                <provided.keystore.path>${env.GLUON_ANDROID_KEYSTOREPATH}</provided.keystore.path>
-                <provided.keystore.password>${env.GLUON_ANDROID_KEYSTORE_PASSWORD}</provided.keystore.password>
-                <provided.key.alias>${env.GLUON_ANDROID_KEYALIAS}</provided.key.alias>
-                <provided.key.alias.password>${env.GLUON_ANDROID_KEYALIAS_PASSWORD}</provided.key.alias.password>
+                <provided.keystore.path>${env.ANDROID_KEYSTOREPATH}</provided.keystore.path>
+                <provided.keystore.password>${env.ANDROID_KEYSTORE_PASSWORD}</provided.keystore.password>
+                <provided.key.alias>${env.ANDROID_KEYALIAS}</provided.key.alias>
+                <provided.key.alias.password>${env.ANDROID_KEYALIAS_PASSWORD}</provided.key.alias.password>
             </properties>
         </profile>
         <profile>
