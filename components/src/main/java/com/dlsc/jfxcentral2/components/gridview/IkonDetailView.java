@@ -6,7 +6,6 @@ import com.dlsc.jfxcentral2.utils.FileUtil;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.dlsc.jfxcentral2.utils.OSUtil;
-import com.dlsc.jfxcentral2.utils.SVGPathExtractor;
 import com.dlsc.jfxcentral2.utils.WebAPIUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.collections.FXCollections;
@@ -21,19 +20,23 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import one.jpro.platform.utils.CopyUtil;
 import one.jpro.platform.routing.LinkUtil;
+import one.jpro.platform.utils.CopyUtil;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
-import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.DefaultIkonResolver;
+import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.IkonHandler;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.JavaFXFontLoader;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
@@ -137,18 +140,24 @@ public class IkonDetailView extends DetailView<Ikon> {
     private String extractorPathFromIcon(String iconLiteral) {
         // no AWT support on ios / android
         if (OSUtil.isAWTSupported()) {
-            SVGType type = SVGType.FILL;
-            SVGGraphics2D g2d = getSvgGraphics2D(type);
+            SVGGraphics2D g2d = getSvgGraphics2D(SVGType.FILL);
 
-            File cacheDir = getCacheDirectory();
-            File tempFile = createSvgTempFile(g2d, cacheDir, type, iconLiteral);
-
-            String paths = SVGPathExtractor.extractPaths(tempFile);
+            Element root = g2d.getRoot();
+            NodeList pathNodes = root.getElementsByTagName("path");
+            StringBuilder pathData = new StringBuilder();
+            for (int i = 0; i < pathNodes.getLength(); i++) {
+                Element pathEl = (Element) pathNodes.item(i);
+                String d = pathEl.getAttribute("d");
+                if (!d.trim().isEmpty()) {
+                    if (!pathData.isEmpty()) {
+                        pathData.append(" ");
+                    }
+                    pathData.append(d.trim());
+                }
+            }
 
             g2d.dispose();
-            FileUtil.clearDirectory(cacheDir);
-
-            return paths;
+            return pathData.toString();
         }
         return "";
     }
@@ -168,8 +177,8 @@ public class IkonDetailView extends DetailView<Ikon> {
             throw new RuntimeException(e);
         }
 
-        char iconChar = (char) getData().getCode();
-        GlyphVector glyphVector = font.createGlyphVector(new FontRenderContext(new AffineTransform(), true, true), "" + iconChar);
+        String glyphString = new String(Character.toChars(getData().getCode()));
+        GlyphVector glyphVector = font.createGlyphVector(new FontRenderContext(new AffineTransform(), true, true), glyphString);
         Shape glyphShape = glyphVector.getGlyphOutline(0);
 
         // Center the glyph vertically
