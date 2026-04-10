@@ -237,7 +237,7 @@ public class QuickLinksGenerator {
         result.addAll(findRecentItems(repository.getRealWorldApps()));
         result.addAll(findRecentItems(repository.getDownloads()));
         result.addAll(findRecentItems(repository.getTips()));
-        result.addAll(findRecentItems(repository.getIkonliPacks()));
+        result.addAll(findRecentItems(IkonliPackUtil.getInstance().getAggregatedPacks()));
 
         // newest ones on top
         result.sort(Comparator.comparing(ModelObject::getCreationOrUpdateDate).reversed());

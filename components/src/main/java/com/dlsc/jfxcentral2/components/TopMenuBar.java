@@ -19,6 +19,7 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
+import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import com.dlsc.jfxcentral2.utils.ModelObjectTool;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
@@ -161,7 +162,7 @@ public class TopMenuBar extends PaneBase {
         search(repository.getDownloads(), pattern, results);
         search(repository.getTutorials(), pattern, results);
         search(repository.getTips(), pattern, results);
-        search(repository.getIkonliPacks(), pattern, results);
+        search(IkonliPackUtil.getInstance().getAggregatedPacks(), pattern, results);
 
         if (!OSUtil.isNative()) {
             search(repository.getUtilities(), pattern, results);

@@ -19,10 +19,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import org.kordamp.ikonli.Ikon;
-import org.kordamp.ikonli.IkonProvider;
 import org.kordamp.ikonli.javafx.FontIcon;
-
-import java.util.EnumSet;
 
 public class IconPreviewPane extends PaneBase {
 
@@ -77,10 +74,7 @@ public class IconPreviewPane extends PaneBase {
                             }
                         }
 
-                        ObservableList<? extends Ikon> icons = FXCollections.observableArrayList();
-                        IkonProvider ikonProvider = IkonliPackUtil.getInstance().getIkonData(ikonPackModel.getName()).getIkonProvider();
-                        EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
-                        icons.addAll(enumSet);
+                        ObservableList<Ikon> icons = IkonliPackUtil.getInstance().getIkonList(ikonPackModel);
                         FXCollections.shuffle(icons);
 
                         for (int i = 0; i < columnCount * 4 && i < icons.size(); i++) {

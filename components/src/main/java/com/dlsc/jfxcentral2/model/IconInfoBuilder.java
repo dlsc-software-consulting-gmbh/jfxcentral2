@@ -25,19 +25,28 @@ public class IconInfoBuilder {
         IconInfo iconInfo = new IconInfo();
         iconInfo.setIkon(ikon);
 
-        // if the pack name is not provided, try to get it from the ikon
-        if (ikonliPackName == null) {
-            IkonliPack ikonliPack = IkonliPackUtil.getInstance().getIkonData(ikon).getIkonliPack();
-            if (ikonliPack != null) {
-                ikonliPackName = ikonliPack.getName();
+        // Resolve pack name and id from the aggregated pack
+        if (ikonliPackName == null || ikonliPackId == null) {
+            IkonData ikonData = IkonliPackUtil.getInstance().getIkonData(ikon);
+            if (ikonData != null) {
+                IkonliPack originalPack = ikonData.getIkonliPack();
+                if (originalPack != null) {
+                    String aggregatedId = IkonliPackUtil.getInstance().getAggregatedId(originalPack);
+                    if (aggregatedId != null) {
+                        IkonliPack aggregatedPack = IkonliPackUtil.getInstance().getAggregatedPack(aggregatedId);
+                        if (aggregatedPack != null) {
+                            if (ikonliPackName == null) {
+                                ikonliPackName = aggregatedPack.getName();
+                            }
+                            if (ikonliPackId == null) {
+                                ikonliPackId = aggregatedId;
+                            }
+                        }
+                    }
+                }
             }
         }
         iconInfo.setIkonliPackName(ikonliPackName);
-
-        // if the pack id is not provided, try to get it from the pack name
-        if (ikonliPackId == null && ikonliPackName != null) {
-            ikonliPackId = ikonliPackName.toLowerCase();
-        }
         iconInfo.setIkonliPackId(ikonliPackId);
 
         // set the icon description

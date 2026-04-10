@@ -18,6 +18,14 @@ public class IconPackDetailPage extends DetailsPageBase<IkonliPack> {
 
     public IconPackDetailPage(ObjectProperty<Size> size, String itemId) {
         super(size, IkonliPack.class, itemId);
+
+        // Override: try aggregated pack lookup if DataRepository didn't find the item
+        if (getItem() == null) {
+            IkonliPack aggregated = IkonliPackUtil.getInstance().getAggregatedPack(itemId);
+            if (aggregated != null) {
+                setItem(aggregated);
+            }
+        }
     }
 
     @Override
@@ -32,7 +40,7 @@ public class IconPackDetailPage extends DetailsPageBase<IkonliPack> {
         IkonliIconsFilter filter = new IkonliIconsFilter();
         filter.sizeProperty().bind(sizeProperty());
 
-        // data
+        // data (supports both original and aggregated packs)
         FilteredList<Ikon> filteredList = new FilteredList<>(IkonliPackUtil.getInstance().getIkonList(ikonliPack));
         filteredList.predicateProperty().bind(filter.predicateProperty());
 

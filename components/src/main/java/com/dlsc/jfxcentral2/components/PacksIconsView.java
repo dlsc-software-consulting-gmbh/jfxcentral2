@@ -2,7 +2,6 @@ package com.dlsc.jfxcentral2.components;
 
 import com.dlsc.gemsfx.SelectionBox;
 import com.dlsc.gemsfx.util.SimpleStringConverter;
-import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
 import com.dlsc.jfxcentral2.components.gridview.IkonGridView;
 import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
@@ -20,9 +19,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -38,10 +34,7 @@ import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
 
 public class PacksIconsView extends PaneBase {
 
@@ -221,8 +214,8 @@ public class PacksIconsView extends PaneBase {
         packGridView.setRows(3);
         packGridView.managedProperty().bind(visibleProperty());
 
-        // packs data
-        ObservableList<IkonliPack> packs = FXCollections.observableArrayList(DataRepository.getInstance().getIkonliPacks());
+        // packs data (aggregated: one entry per Maven artifact)
+        ObservableList<IkonliPack> packs = FXCollections.observableArrayList(IkonliPackUtil.getInstance().getAggregatedPacks());
         FilteredList<IkonliPack> filteredPacks = new FilteredList<>(packs);
         filteredPacks.predicateProperty().bind(Bindings.createObjectBinding(() -> {
             String text = searchText.get().trim();
@@ -348,7 +341,7 @@ public class PacksIconsView extends PaneBase {
     }
 
     private SelectionBox<IkonliPack> initIkonliPackSelection() {
-        ObservableList<IkonliPack> packs = FXCollections.observableArrayList(DataRepository.getInstance().getIkonliPacks());
+        ObservableList<IkonliPack> packs = FXCollections.observableArrayList(IkonliPackUtil.getInstance().getAggregatedPacks());
         SelectionBox<IkonliPack> selectionBox = new SelectionBox<>(packs);
         selectionBox.setPromptText("Select");
         selectionBox.setItemConverter(new SimpleStringConverter<>(IkonliPack::getName));
@@ -361,99 +354,10 @@ public class PacksIconsView extends PaneBase {
                 return String.valueOf(list.size());
             }
         }));
-        selectionBox.setTop(createExtraButtonsBox(selectionBox));
+
         selectionBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         selectionBox.getSelectionModel().selectAll();
         return selectionBox;
-    }
-
-    private Node createExtraButtonsBox(SelectionBox<IkonliPack> selectionBox) {
-        Button clearButton = selectionBox.createExtraButton("Clear", null);
-        clearButton.getStyleClass().add("clear-button");
-        clearButton.setOnAction(e -> selectionBox.getSelectionModel().clearSelection());
-
-        Button selectAllButton = selectionBox.createExtraButton("Select All", () -> selectionBox.getSelectionModel().selectAll());
-        selectAllButton.managedProperty().bind(selectAllButton.visibleProperty());
-        selectAllButton.visibleProperty().bind(selectionBox.currentSelectionModeProperty().isEqualTo(SelectionMode.MULTIPLE));
-        selectAllButton.getStyleClass().add("select-all-button");
-
-        Button materialDesignAZ = createSelectMaterialDesignAZButton(selectionBox);
-
-        Button material2Variants = createSelectMaterial2VariantsButton(selectionBox);
-
-        VBox actionBox = new VBox(clearButton, selectAllButton, material2Variants, materialDesignAZ);
-        actionBox.managedProperty().bind(actionBox.visibleProperty());
-        actionBox.visibleProperty().bind(selectionBox.itemsProperty().emptyProperty().not());
-
-        Label quickSelectLabel = new Label("QUICK SELECT");
-        quickSelectLabel.getStyleClass().add("quick-select-label");
-        quickSelectLabel.setRotate(-90);
-
-        HBox extraButtonsBox = new HBox(new Group(quickSelectLabel), actionBox);
-        extraButtonsBox.getStyleClass().add("extra-buttons-box");
-
-        return extraButtonsBox;
-    }
-
-    private Button createSelectMaterial2VariantsButton(SelectionBox<IkonliPack> selectionBox) {
-        return selectionBox.createExtraButton("Select Material2 Variants", () -> {
-            selectionBox.getSelectionModel().clearSelection();
-
-            List<IkonliPack> items = selectionBox.getItems();
-            List<Integer> indices = new ArrayList<>();
-
-            String prefix = "Material2";
-
-            for (int i = 0; i < items.size(); i++) {
-                IkonliPack pack = items.get(i);
-                String name = Objects.requireNonNullElse(pack.getName(), "");
-
-                if (name.startsWith(prefix)) {
-                    indices.add(i);
-                }
-            }
-
-            if (!indices.isEmpty()) {
-                selectionBox.getSelectionModel().selectIndices(
-                        indices.get(0),
-                        indices.size() > 1
-                                ? indices.subList(1, indices.size()).stream().mapToInt(Integer::intValue).toArray()
-                                : new int[0]
-                );
-            }
-        });
-    }
-
-    private Button createSelectMaterialDesignAZButton(SelectionBox<IkonliPack> selectionBox) {
-        return selectionBox.createExtraButton("Select MaterialDesign A–Z", () -> {
-            selectionBox.getSelectionModel().clearSelection();
-
-            List<IkonliPack> items = selectionBox.getItems();
-            List<Integer> indices = new ArrayList<>();
-
-            String prefix = "MaterialDesign";
-            int expectedLength = prefix.length() + 1;
-
-            for (int i = 0; i < items.size(); i++) {
-                IkonliPack pack = items.get(i);
-                String name = Objects.requireNonNullElse(pack.getName(), "");
-
-                if (name.startsWith(prefix)
-                        && name.length() == expectedLength
-                        && Character.isUpperCase(name.charAt(prefix.length()))) {
-                    indices.add(i);
-                }
-            }
-
-            if (!indices.isEmpty()) {
-                selectionBox.getSelectionModel().selectIndices(
-                        indices.get(0),
-                        indices.size() > 1
-                                ? indices.subList(1, indices.size()).stream().mapToInt(Integer::intValue).toArray()
-                                : new int[0]
-                );
-            }
-        });
     }
 
 }
