@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral2.app;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Documentation;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import com.dlsc.jfxcentral2.utils.LOGGER;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PageUtil;
@@ -88,7 +89,7 @@ public class TrayIconManager {
         repository.getBooks().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(books, mo));
         repository.getRealWorldApps().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(realWorld, mo));
         repository.getTips().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tips, mo));
-        repository.getIkonliPacks().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(icons, mo));
+        IkonliPackUtil.getInstance().getAggregatedPacks().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(icons, mo));
         repository.getUtilities().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(utilities, mo));
         repository.getDocumentation().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(documentation, mo, modelObject -> {
             String docUrl = null;

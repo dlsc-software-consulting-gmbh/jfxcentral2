@@ -387,20 +387,39 @@ public class JFXCentral2App extends Application {
             String[] parts = StringUtils.split(requestPath, '/');
             // Route to IconsCategoryPage or IconPackDetailPage: /icons or /icons/{ikonPackId}
             if (parts.length < 3) {
-                return createResponse(r, IkonliPack.class, () -> new IconsCategoryPage(size), id -> new IconPackDetailPage(size, id));
+                int index = requestPath.lastIndexOf("/");
+                if (index > 0) {
+                    String id = requestPath.substring(index + 1).trim();
+                    // Check both DataRepository (legacy ids) and aggregated packs
+                    if (!DataRepository.getInstance().isValidId(IkonliPack.class, id)
+                            && IkonliPackUtil.getInstance().getAggregatedPack(id) == null) {
+                        return Response.view(new ErrorPage(size, r));
+                    }
+                    return Response.view(new IconPackDetailPage(size, id));
+                }
+                return Response.view(new IconsCategoryPage(size));
             }
 
             //  Route to SingleIconPage: /icons/{ikonliPackId}/{iconDescription}
             String ikonliPackId = parts[1];
             String iconDescription = parts[2];
 
-            return DataRepository.getInstance().getIkonliPackById(ikonliPackId)
-                    .flatMap(ikonliPack -> IkonliPackUtil.getInstance().getIkon(ikonliPack, iconDescription)
-                            .map(ikon -> {
-                                IconInfo iconInfo = new IconInfoBuilder(ikon, ikonliPack.getName(), ikonliPackId).build();
-                                return Response.view(new SingleIconPage(size, iconInfo, true));
-                            }))
-                    .orElseGet(() -> Response.view(new ErrorPage(size, r)));
+            // Try aggregated pack first, then fall back to DataRepository
+            IkonliPack pack = IkonliPackUtil.getInstance().getAggregatedPack(ikonliPackId);
+            if (pack == null) {
+                pack = DataRepository.getInstance().getIkonliPackById(ikonliPackId).orElse(null);
+            }
+
+            if (pack != null) {
+                final IkonliPack finalPack = pack;
+                return IkonliPackUtil.getInstance().getIkon(finalPack, iconDescription)
+                        .map(ikon -> {
+                            IconInfo iconInfo = new IconInfoBuilder(ikon, finalPack.getName(), ikonliPackId).build();
+                            return Response.view(new SingleIconPage(size, iconInfo, true));
+                        })
+                        .orElseGet(() -> Response.view(new ErrorPage(size, r)));
+            }
+            return Response.view(new ErrorPage(size, r));
         };
     }
 

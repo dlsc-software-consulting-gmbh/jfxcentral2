@@ -34,6 +34,7 @@ open module com.dlsc.jfxcentral2.app {
     requires org.kordamp.ikonli.bootstrapicons;
     requires org.kordamp.ikonli.boxicons;
     requires org.kordamp.ikonli.bpmn;
+    requires org.kordamp.ikonli.bytedance;
     requires org.kordamp.ikonli.captainicon;
     requires org.kordamp.ikonli.carbonicons;
     requires org.kordamp.ikonli.codicons;
@@ -48,6 +49,7 @@ open module com.dlsc.jfxcentral2.app {
     requires org.kordamp.ikonli.fluentui;
     requires org.kordamp.ikonli.fontawesome;
     requires org.kordamp.ikonli.fontawesome5;
+    requires org.kordamp.ikonli.fontawesome6;
     requires org.kordamp.ikonli.fontelico;
     requires org.kordamp.ikonli.foundation;
     requires org.kordamp.ikonli.hawcons;

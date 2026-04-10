@@ -464,6 +464,11 @@
             </dependency>
             <dependency>
                 <groupId>org.kordamp.ikonli</groupId>
+                <artifactId>ikonli-bytedance-pack</artifactId>
+                <version>${ikonli.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kordamp.ikonli</groupId>
                 <artifactId>ikonli-captainicon-pack</artifactId>
                 <version>${ikonli.version}</version>
             </dependency>
@@ -530,6 +535,11 @@
             <dependency>
                 <groupId>org.kordamp.ikonli</groupId>
                 <artifactId>ikonli-fontawesome5-pack</artifactId>
+                <version>${ikonli.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kordamp.ikonli</groupId>
+                <artifactId>ikonli-fontawesome6-pack</artifactId>
                 <version>${ikonli.version}</version>
             </dependency>
             <dependency>

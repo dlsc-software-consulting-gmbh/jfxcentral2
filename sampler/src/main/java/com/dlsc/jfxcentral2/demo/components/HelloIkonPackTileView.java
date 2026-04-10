@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral2.demo.components;
 
-import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.IkonliPack;
+import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import com.dlsc.jfxcentral2.components.SizeComboBox;
 import com.dlsc.jfxcentral2.components.tiles.IkonliPackTileView;
 import com.dlsc.jfxcentral2.demo.JFXCentralSampleBase;
@@ -15,7 +15,7 @@ public class HelloIkonPackTileView extends JFXCentralSampleBase {
 
     @Override
     protected Region createControl() {
-        IkonliPack ikonPackModel = DataRepository.getInstance().getIkonliPacks().get(0);
+        IkonliPack ikonPackModel = IkonliPackUtil.getInstance().getAggregatedPacks().get(0);
         ikonPackModel.setDescription("Some description");
 
         ikonPackModelTileView = new IkonliPackTileView(ikonPackModel);
