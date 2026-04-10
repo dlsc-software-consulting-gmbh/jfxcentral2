@@ -221,6 +221,18 @@
             </dependency>
 
             <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>jfx-incubator-richtext</artifactId>
+                <version>${javafx.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>jfx-incubator-input</artifactId>
+                <version>${javafx.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.controlsfx</groupId>
                 <artifactId>controlsfx</artifactId>
                 <version>11.2.3</version>

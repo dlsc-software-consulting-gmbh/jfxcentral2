@@ -4,9 +4,13 @@ open module com.dlsc.jfxcentral2.components {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires jfx.incubator.richtext;
+    requires jfx.incubator.input;
+
     requires jdk.httpserver;
     requires javafx.swing;
     requires javafx.graphics;
+    requires java.net.http;
     requires org.apache.xmlgraphics.batik.dom;
     requires org.apache.xmlgraphics.batik.svggen;
     requires com.github.weisj.jsvg;

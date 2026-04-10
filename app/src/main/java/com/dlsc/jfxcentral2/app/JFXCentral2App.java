@@ -65,6 +65,7 @@ import com.dlsc.jfxcentral2.app.pages.details.TutorialDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.UtilityDetailsPage;
 import com.dlsc.jfxcentral2.app.pages.details.VideoDetailsPage;
 import com.dlsc.jfxcentral2.app.stage.CustomStage;
+import com.dlsc.jfxcentral2.app.stage.NavigationView;
 import com.dlsc.jfxcentral2.app.utils.VideoPane;
 import com.dlsc.jfxcentral2.components.PrettyScrollPane;
 import com.dlsc.jfxcentral2.model.IconInfo;
@@ -83,6 +84,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HeaderBar;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -100,6 +104,7 @@ import one.jpro.platform.routing.dev.DevFilter;
 import one.jpro.platform.routing.dev.StatisticsFilter;
 import one.jpro.platform.routing.sessionmanager.SessionManager;
 import org.apache.commons.lang3.StringUtils;
+import org.scenicview.ScenicView;
 
 import java.awt.Desktop;
 import java.awt.Image;
@@ -127,6 +132,7 @@ public class JFXCentral2App extends Application {
 //    private static boolean freezeDetectorStarted = false;
 
     @Override
+    @SuppressWarnings("deprecation")
     public void start(Stage stage) {
         if (!OSUtil.isNative()) {
             // This is a workaround to prevent a deadlock between the TrayIcon and the JPro ImageManager
@@ -154,7 +160,12 @@ public class JFXCentral2App extends Application {
         System.setProperty("jpro.imagemanager.cache", new File(new File(System.getProperty("user.home")), ".jfxcentral/imagecache").getAbsolutePath());
         System.out.println("jpro.imagemanager.cache: " + System.getProperty("jpro.imagemanager.cache"));
 
-        stage.initStyle(StageStyle.UNDECORATED);
+        // Use the EXTENDED stage style on desktop so the client area merges with the
+        // native header bar area; HeaderBar provides the draggable area and navigation controls.
+        // For browser (JPro) the stage style has no effect; for mobile the app uses a separate entry point.
+        if (!WebAPI.isBrowser() && !OSUtil.isAndroidOrIOS()) {
+            stage.initStyle(StageStyle.EXTENDED);
+        }
 
         // route node
         Route route = createRoute();
@@ -198,21 +209,34 @@ public class JFXCentral2App extends Application {
 
         StackPane wrapper = new StackPane(parent, videoPane);
 
-        // customs stage for decorations / the chrome
-        CustomStage customStage = new CustomStage(stage, parent, sessionManager, size);
-        customStage.setCloseHandler(() -> {
-            if (!OSUtil.isNative()) {
-                if (SystemTray.isSupported() && trayIconManager != null) {
-                    trayIconManager.hide();
-                }
-            }
-            stage.close();
-        });
-
         parent.setOnMousePressed(evt -> routeNode.requestFocus());
 
+        // Build the scene root depending on the target platform:
+        // - Desktop: EXTENDED stage style + HeaderBar containing the navigation controls
+        // - Browser / mobile: CustomStage wrapper (simple BorderPane with CSS)
+        final Parent sceneRoot;
+        if (!WebAPI.isBrowser() && !OSUtil.isAndroidOrIOS()) {
+            NavigationView navigationView = new NavigationView(sessionManager);
+
+            Label titleLabel = new Label("JFXCentral");
+            titleLabel.getStyleClass().add("header-bar-title");
+
+            HeaderBar headerBar = new HeaderBar();
+            headerBar.getStyleClass().add("app-header-bar");
+            headerBar.setCenter(titleLabel);
+            headerBar.setTrailing(navigationView);
+
+            BorderPane desktopRoot = new BorderPane();
+            desktopRoot.getStylesheets().add(Objects.requireNonNull(CustomStage.class.getResource("stage.css")).toExternalForm());
+            desktopRoot.setTop(headerBar);
+            desktopRoot.setCenter(parent);
+            sceneRoot = desktopRoot;
+        } else {
+            sceneRoot = new CustomStage(stage, parent, sessionManager, size);
+        }
+
         // scene
-        Scene scene = new Scene(customStage, 1400, 800);
+        Scene scene = new Scene(sceneRoot, 1400, 800);
         scene.setFill(Color.web("#070B32"));
         scene.widthProperty().addListener((it -> updateSizeProperty(scene)));
         scene.getStylesheets().add(Objects.requireNonNull(NodeUtil.class.getResource("/com/dlsc/jfxcentral2/theme.css")).toExternalForm());
@@ -225,8 +249,14 @@ public class JFXCentral2App extends Application {
         // do not store stage width, height, location when we are running in a browser
         if (!WebAPI.isBrowser()) {
             StageManager.install(stage, "com/dlsc/jfxcentral2", 500, 800);
-            // Mike Hearn explicitly requested to use this approach to exit the app
-            stage.setOnCloseRequest(evt -> System.exit(0));
+            // Mike Hearn explicitly requested to use this approach to exit the app.
+            // Also hide the tray icon so it does not linger after the window closes.
+            stage.setOnCloseRequest(evt -> {
+                if (trayIconManager != null) {
+                    trayIconManager.hide();
+                }
+                System.exit(0);
+            });
         }
 
         // add client URL handler

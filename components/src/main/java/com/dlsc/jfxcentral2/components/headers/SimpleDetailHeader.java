@@ -30,6 +30,8 @@ import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.text.MessageFormat;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * AppDetailHeader or BookDetailHeader
@@ -126,12 +128,15 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
             }
         });
 
+        configureWebsiteButton(websiteButton);
+
         Region separator = new Region();
         separator.getStyleClass().add("region-separator");
         separator.managedProperty().bind(separator.visibleProperty());
         separator.visibleProperty().bind(websiteButton.visibleProperty().and(saveAndLikeButton.visibleProperty()));
 
         HBox buttonBox = new HBox(saveAndLikeButton, separator, websiteButton);
+        buttonBox.getChildren().addAll(createExtraNodesForButtonBox());
         buttonBox.getStyleClass().add("button-box");
         buttonBox.alignmentProperty().bind(Bindings.when(needAdjustmentToLeft).then(Pos.CENTER_LEFT).otherwise(Pos.CENTER));
 
@@ -140,6 +145,28 @@ public class SimpleDetailHeader<T extends ModelObject> extends DetailHeader<T> {
         Pane contentPane = isSmall() ? new VBox(logoImageView, contentBox) : new FlowPane(logoImageView, contentBox);
         contentPane.getStyleClass().add("flow-pane");
         return contentPane;
+    }
+
+    /**
+     * Override to provide additional nodes that will be added to the button box
+     * (the HBox containing the save/like and website buttons). Called each time
+     * the center node is rebuilt.
+     *
+     * @return extra nodes to append to the button box; never null
+     */
+    protected List<javafx.scene.Node> createExtraNodesForButtonBox() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * Hook called after the website button is fully created and bound, once per
+     * {@link #createCenterNode()} invocation. Subclasses can override to further
+     * customise the button (e.g. replace the graphic with a compound node).
+     *
+     * @param button the freshly created website button
+     */
+    protected void configureWebsiteButton(Button button) {
+        // no-op by default
     }
 
     private final StringProperty summary = new SimpleStringProperty(this, "summary");
