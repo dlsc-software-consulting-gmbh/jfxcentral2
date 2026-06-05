@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral2.utils;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,15 +33,15 @@ public class StringUtil {
         long gb = mb * 1024;
 
         if (size >= gb) {
-            return String.format("%.1f GB", (float) size / gb);
+            return String.format(Locale.ROOT, "%.1f GB", (float) size / gb);
         } else if (size >= mb) {
             float f = (float) size / mb;
-            return String.format(f > 100 ? "%.0f MB" : "%.1f MB", f);
+            return String.format(Locale.ROOT, f > 100 ? "%.0f MB" : "%.1f MB", f);
         } else if (size >= kb) {
             float f = (float) size / kb;
-            return String.format(f > 100 ? "%.0f KB" : "%.1f KB", f);
+            return String.format(Locale.ROOT, f > 100 ? "%.0f KB" : "%.1f KB", f);
         } else {
-            return String.format("%d Byte", size);
+            return String.format(Locale.ROOT, "%d Byte", size);
         }
     }
 }
