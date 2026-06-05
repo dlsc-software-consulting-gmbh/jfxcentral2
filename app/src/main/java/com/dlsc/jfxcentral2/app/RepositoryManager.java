@@ -40,13 +40,27 @@ public class RepositoryManager {
         return repositoryUpdated;
     }
 
-    public static void updateRepository(ProgressMonitor monitor) {
+    // synchronized so concurrent sessions can't run two pulls on the same repo at once
+    // (that race left a contended .git/index.lock). Callers that wait then see the flag
+    // already set and return without a second pull.
+    public static synchronized void updateRepository(ProgressMonitor monitor) {
         if (!isRepositoryUpdated()) {
             try {
                 initialLoad(monitor);
                 repositoryUpdated.set(true);
             } catch (Exception e) {
                 e.printStackTrace();
+                // a stale .git/index.lock (e.g. from an interrupted update) fails the pull;
+                // clear it and retry once before wiping the whole repository
+                if (clearStaleIndexLock()) {
+                    try {
+                        initialLoad(monitor);
+                        repositoryUpdated.set(true);
+                        return;
+                    } catch (Exception retry) {
+                        retry.printStackTrace();
+                    }
+                }
                 monitor.beginTask("Repository operation failed.\nRemoving application data.\nPlease relaunch.", -1);
                 File repositoryDirectory = getRepositoryDirectory();
                 System.out.println("repository clone / update failed, deleting it ...");
@@ -63,6 +77,15 @@ public class RepositoryManager {
 
     private static File getRepositoryDirectory() {
         return DataRepository.getRepositoryDirectory();
+    }
+
+    private static boolean clearStaleIndexLock() {
+        File lockFile = new File(getRepositoryDirectory(), ".git/index.lock");
+        if (lockFile.exists() && lockFile.delete()) {
+            LOGGER.warn("removed stale git index.lock, retrying repository update");
+            return true;
+        }
+        return false;
     }
 
     public static boolean isFirstTimeSetup() {

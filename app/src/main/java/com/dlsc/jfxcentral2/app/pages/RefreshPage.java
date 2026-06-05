@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral2.app.utils.RepositoryUpdater;
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import com.dlsc.jfxcentral2.components.Mode;
 import com.dlsc.jfxcentral2.model.Size;
+import com.jpro.webapi.WebAPI;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.WeakInvalidationListener;
@@ -109,6 +110,10 @@ public class RefreshPage extends PageBase {
         Button exitButton = new Button("EXIT");
         exitButton.setFocusTraversable(false);
         exitButton.setCancelButton(true);
+
+        // never exit under JPro - System.exit would shut down the server for all users
+        exitButton.setVisible(!WebAPI.isBrowser());
+        exitButton.setManaged(!WebAPI.isBrowser());
 
         // use system exit so it works properly everywhere, including native
         exitButton.setOnAction(evt -> System.exit(0));
