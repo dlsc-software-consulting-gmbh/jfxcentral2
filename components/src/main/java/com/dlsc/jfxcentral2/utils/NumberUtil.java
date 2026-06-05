@@ -1,5 +1,7 @@
 package com.dlsc.jfxcentral2.utils;
 
+import java.util.Locale;
+
 public class NumberUtil {
 
     private NumberUtil() {
@@ -30,11 +32,11 @@ public class NumberUtil {
      */
     public static String trimTrailingZeros(double value, boolean keepDecimal, int decimalPlaces) {
         String formatStr = "%." + decimalPlaces + "f";
-        String formatted = String.format(formatStr, value);
+        String formatted = String.format(Locale.ROOT, formatStr, value);
 
         long intValue = (long) value;
         if (value == intValue) {
-            return keepDecimal ? String.format("%.1f", value) : String.valueOf(intValue);
+            return keepDecimal ? String.format(Locale.ROOT, "%.1f", value) : String.valueOf(intValue);
         } else {
             String str = formatted.replaceAll("\\.?0*$", "");
             return keepDecimal && !str.contains(".") ? str + ".0" : str;
