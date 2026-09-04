@@ -218,6 +218,11 @@ public class PacksIconsView extends PaneBase {
      * <p>The order matters: changing the scope clears the search field and resets the sort order, so
      * those two have to be applied afterwards. Values that match nothing are ignored.
      *
+     * <p>"pack" only belongs to the icon scope and is ignored otherwise. Applying it while the pack
+     * scope is active would select packs the icon list does not follow, because that list is only
+     * recomputed while the icon scope is active - and the pack selection is hidden in the pack
+     * scope, so the user could never bring the two back in sync.
+     *
      * @param params the parameters of the request, may be {@code null}
      */
     public void applyQueryParams(QueryParams params) {
@@ -226,7 +231,9 @@ public class PacksIconsView extends PaneBase {
         }
 
         params.get(SCOPE_PARAM).ifPresent(this::applyScope);
-        params.get(PACK_PARAM).ifPresent(this::applyPacks);
+        if (scopeComboBox.getSelectionModel().getSelectedItem() == Scope.ICONS) {
+            params.get(PACK_PARAM).ifPresent(this::applyPacks);
+        }
         params.get(SORT_PARAM).ifPresent(this::applySort);
         params.get(SEARCH_PARAM).ifPresent(this::applySearchText);
     }
