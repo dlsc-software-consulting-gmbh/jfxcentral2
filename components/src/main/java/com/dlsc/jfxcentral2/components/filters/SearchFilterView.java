@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral2.components.CustomSearchField;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.utils.QueryParams;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -44,7 +45,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -57,6 +60,12 @@ public class SearchFilterView<T> extends PaneBase {
     private static final String DEFAULT_STYLE_CLASS = "search-filter-view";
     private static final Orientation FILTER_BOX_DEFAULT_ORIENTATION = Orientation.HORIZONTAL;
     private static final String WITH_SEARCH_FIELD = "with-search-field";
+
+    /**
+     * Reserved query parameter names, see {@link #applyQueryParams(QueryParams)}.
+     */
+    private static final String SEARCH_PARAM = "search";
+    private static final String SORT_PARAM = "sort";
 
     /**
      * delayed search interval 200 ms
@@ -77,6 +86,27 @@ public class SearchFilterView<T> extends PaneBase {
 
     private ScheduledFuture<?> future;
     private final CustomSearchField searchField = new CustomSearchField(true);
+
+    /**
+     * The current selection per filter group, keyed by parameter name. The combo boxes are recreated
+     * on every layout change, so the selection has to survive outside of them. The applied flag of
+     * the filter items must not be used for this: those lists are static and shared by all sessions.
+     */
+    private final Map<String, String> selectedFilterNames = new LinkedHashMap<>();
+    private String selectedSortParamValue;
+
+    /**
+     * The combo boxes of the current layout, so that query parameters take effect immediately
+     * instead of only after the next rebuild.
+     */
+    private final Map<String, ComboBox<FilterItem<T>>> comboBoxByParam = new LinkedHashMap<>();
+    private ComboBox<SortItem<T>> sortComboBox;
+
+    /**
+     * Suppresses the debounced search while the search text is being set programmatically.
+     */
+    private boolean applyingQueryParams;
+
     private final StringConverter<FilterItem<T>> predicateItemStringConverter = new StringConverter<>() {
         @Override
         public String toString(FilterItem<T> object) {
@@ -95,12 +125,35 @@ public class SearchFilterView<T> extends PaneBase {
         }
     }
 
-    public record FilterGroup<T>(String title, List<FilterItem<T>> filterItems) {
+    /**
+     * A group of mutually exclusive filters, rendered as a single combo box.
+     *
+     * @param paramName the query parameter this group is addressed by, derived from the title
+     */
+    public record FilterGroup<T>(String title, List<FilterItem<T>> filterItems, String paramName) {
+        public FilterGroup(String title, List<FilterItem<T>> filterItems) {
+            this(title, filterItems, QueryParams.toSlug(title));
+        }
     }
 
-    public record SortItem<T>(String name, Comparator<T> comparator, boolean isApplied) {
+    /**
+     * A sort order offered by a {@link SortGroup}.
+     *
+     * @param paramValue the stable value used in the "sort" query parameter. It is deliberately not
+     *                   derived from the display name, so that rewording a label does not break
+     *                   links that were already shared.
+     */
+    public record SortItem<T>(String name, Comparator<T> comparator, boolean isApplied, String paramValue) {
         public SortItem(String name, Comparator<T> comparator) {
-            this(name, comparator, false);
+            this(name, comparator, false, QueryParams.toSlug(name));
+        }
+
+        public SortItem(String name, Comparator<T> comparator, String paramValue) {
+            this(name, comparator, false, paramValue);
+        }
+
+        public SortItem(String name, Comparator<T> comparator, boolean isApplied) {
+            this(name, comparator, isApplied, QueryParams.toSlug(name));
         }
     }
 
@@ -116,6 +169,9 @@ public class SearchFilterView<T> extends PaneBase {
         searchField.managedProperty().bind(searchField.visibleProperty());
         searchField.visibleProperty().bind(onSearchProperty().isNotNull());
         searchField.textProperty().addListener((ob, ov, str) -> {
+            if (applyingQueryParams) {
+                return;
+            }
             if (future != null) {
                 future.cancel(false);
             }
@@ -143,6 +199,77 @@ public class SearchFilterView<T> extends PaneBase {
 
         layoutBySize();
 
+    }
+
+    /**
+     * Applies the query parameters of the current request: "search" fills the search field, "sort"
+     * picks a sort order and every filter group is addressed by its own parameter name.
+     *
+     * <p>A value that matches no item is ignored and the group falls back to its default, so that a
+     * shared link keeps working after the underlying data has been renamed.
+     *
+     * @param params the parameters of the request, may be {@code null}
+     */
+    public void applyQueryParams(QueryParams params) {
+        if (params == null || params.isEmpty()) {
+            return;
+        }
+
+        params.get(SEARCH_PARAM).ifPresent(this::applySearchText);
+
+        for (FilterGroup<T> filterGroup : getFilterGroups()) {
+            params.get(filterGroup.paramName()).ifPresent(value -> applyFilterValue(filterGroup, value));
+        }
+
+        SortGroup<T> sortGroup = getSortGroup();
+        if (sortGroup != null) {
+            params.get(SORT_PARAM).ifPresent(value -> applySortValue(sortGroup, value));
+        }
+    }
+
+    private void applySearchText(String text) {
+        // Setting the text triggers the debounced search, which would both delay the first filtering
+        // and spin up this instance's scheduler thread for a user who never typed anything.
+        applyingQueryParams = true;
+        try {
+            searchField.setText(text);
+        } finally {
+            applyingQueryParams = false;
+        }
+        searchText.set(text);
+    }
+
+    private void applyFilterValue(FilterGroup<T> filterGroup, String value) {
+        String normalized = QueryParams.normalize(value);
+        FilterItem<T> item = findFilterItem(filterGroup, it -> QueryParams.normalize(it.name()).equals(normalized));
+        if (item == null) {
+            item = defaultItem(filterGroup);
+        }
+        if (item == null) {
+            return;
+        }
+
+        selectedFilterNames.put(filterGroup.paramName(), item.name());
+        ComboBox<FilterItem<T>> comboBox = comboBoxByParam.get(filterGroup.paramName());
+        if (comboBox != null) {
+            comboBox.getSelectionModel().select(item);
+        }
+    }
+
+    private void applySortValue(SortGroup<T> sortGroup, String value) {
+        String normalized = QueryParams.normalize(value);
+        SortItem<T> item = findSortItem(sortGroup, it -> QueryParams.normalize(it.paramValue()).equals(normalized));
+        if (item == null) {
+            item = defaultSortItem(sortGroup);
+        }
+        if (item == null) {
+            return;
+        }
+
+        selectedSortParamValue = item.paramValue();
+        if (sortComboBox != null) {
+            sortComboBox.getSelectionModel().select(item);
+        }
     }
 
     private final ReadOnlyObjectWrapper<Predicate<T>> predicate = new ReadOnlyObjectWrapper<>(this, "predicate", item -> true);
@@ -221,6 +348,9 @@ public class SearchFilterView<T> extends PaneBase {
         }
         setPredicate(item -> true);
 
+        comboBoxByParam.clear();
+        sortComboBox = null;
+
         Pane filtersBox = isSmall() ? new VBox() : new HBox();
         filtersBox.getStyleClass().add("filters-box");
         ObservableList<FilterGroup<T>> items = getFilterGroups();
@@ -254,9 +384,9 @@ public class SearchFilterView<T> extends PaneBase {
             if (comparator.isBound()) {
                 comparator.unbind();
             }
-            ComboBox<SortItem<T>> sortComboBox = createComboBox();
-            sortComboBox.getStyleClass().addAll("filter-combo-box", "sort-combo-box");
-            sortComboBox.setConverter(new StringConverter<>() {
+            ComboBox<SortItem<T>> sortBox = createComboBox();
+            sortBox.getStyleClass().addAll("filter-combo-box", "sort-combo-box");
+            sortBox.setConverter(new StringConverter<>() {
                 @Override
                 public String toString(SortItem<T> object) {
                     return object == null ? null : object.name();
@@ -267,13 +397,15 @@ public class SearchFilterView<T> extends PaneBase {
                     return null;
                 }
             });
-            sortComboBox.getItems().setAll(getSortGroup().sortItems());
-            comparator.bind(sortComboBox.getSelectionModel().selectedItemProperty().map(SortItem::comparator));
-            getSortGroup().sortItems().stream().filter(it -> it.isApplied).findFirst()
-                    .ifPresentOrElse(
-                            it -> sortComboBox.getSelectionModel().select(it),
-                            () -> sortComboBox.getSelectionModel().selectFirst()
-                    );
+            sortBox.getItems().setAll(getSortGroup().sortItems());
+            comparator.bind(sortBox.getSelectionModel().selectedItemProperty().map(SortItem::comparator));
+            selectSortItem(sortBox, getSortGroup());
+            sortBox.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> {
+                if (nv != null) {
+                    selectedSortParamValue = nv.paramValue();
+                }
+            });
+            sortComboBox = sortBox;
 
             Pane box = getFilterBoxOrientation() == Orientation.VERTICAL ? new VBox() : new HBox();
             box.getStyleClass().addAll("filter-box", "sort-box");
@@ -281,12 +413,12 @@ public class SearchFilterView<T> extends PaneBase {
             Label titleLabel = new Label(getSortGroup().title);
             titleLabel.setMinWidth(Region.USE_PREF_SIZE);
             titleLabel.getStyleClass().add("filter-title");
-            HBox.setHgrow(sortComboBox, Priority.ALWAYS);
-            sortComboBox.setMaxWidth(Double.MAX_VALUE);
+            HBox.setHgrow(sortBox, Priority.ALWAYS);
+            sortBox.setMaxWidth(Double.MAX_VALUE);
             if (isSmall()) {
-                box.getChildren().setAll(titleLabel, new Spacer(), sortComboBox);
+                box.getChildren().setAll(titleLabel, new Spacer(), sortBox);
             } else {
-                box.getChildren().setAll(titleLabel, sortComboBox);
+                box.getChildren().setAll(titleLabel, sortBox);
             }
             filtersBox.getChildren().add(box);
         }
@@ -321,12 +453,90 @@ public class SearchFilterView<T> extends PaneBase {
         comboBox.getItems().addAll(filterGroup.filterItems);
 
         childPredicateProperty.bind(comboBox.getSelectionModel().selectedItemProperty().map(it -> it == null ? item -> true : it.predicate));
-        filterGroup.filterItems.stream()
-                .filter(FilterItem::isApplied).findFirst()
-                .ifPresentOrElse(it -> comboBox.getSelectionModel().select(it), () -> comboBox.getSelectionModel().selectFirst());
+        selectFilterItem(comboBox, filterGroup);
+        comboBox.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> {
+            if (nv != null) {
+                selectedFilterNames.put(filterGroup.paramName(), nv.name());
+            }
+        });
+        comboBoxByParam.put(filterGroup.paramName(), comboBox);
         comboBox.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(comboBox, Priority.ALWAYS);
         return comboBox;
+    }
+
+    /**
+     * Selects the item a rebuilt combo box has to show: the one selected before, otherwise the
+     * default of the group.
+     */
+    private void selectFilterItem(ComboBox<FilterItem<T>> comboBox, FilterGroup<T> filterGroup) {
+        String selectedName = selectedFilterNames.get(filterGroup.paramName());
+        FilterItem<T> item = null;
+        if (selectedName != null) {
+            item = findFilterItem(filterGroup, it -> selectedName.equals(it.name()));
+        }
+        if (item == null) {
+            item = defaultItem(filterGroup);
+        }
+        if (item == null) {
+            comboBox.getSelectionModel().selectFirst();
+        } else {
+            comboBox.getSelectionModel().select(item);
+        }
+    }
+
+    private void selectSortItem(ComboBox<SortItem<T>> comboBox, SortGroup<T> sortGroup) {
+        SortItem<T> item = null;
+        if (selectedSortParamValue != null) {
+            item = findSortItem(sortGroup, it -> selectedSortParamValue.equals(it.paramValue()));
+        }
+        if (item == null) {
+            item = defaultSortItem(sortGroup);
+        }
+        if (item == null) {
+            comboBox.getSelectionModel().selectFirst();
+        } else {
+            comboBox.getSelectionModel().select(item);
+        }
+    }
+
+    /**
+     * The item a group falls back to: the first one flagged as applied, otherwise the first one.
+     * This is the single definition of "default", shared by the initial selection, the fallback for
+     * an unknown query parameter value and the decision whether a parameter can be omitted.
+     */
+    private FilterItem<T> defaultItem(FilterGroup<T> filterGroup) {
+        List<FilterItem<T>> items = filterGroup.filterItems();
+        if (items == null || items.isEmpty()) {
+            return null;
+        }
+        FilterItem<T> applied = findFilterItem(filterGroup, FilterItem::isApplied);
+        return applied == null ? items.get(0) : applied;
+    }
+
+    private SortItem<T> defaultSortItem(SortGroup<T> sortGroup) {
+        List<SortItem<T>> items = sortGroup.sortItems();
+        if (items == null || items.isEmpty()) {
+            return null;
+        }
+        SortItem<T> applied = findSortItem(sortGroup, SortItem::isApplied);
+        return applied == null ? items.get(0) : applied;
+    }
+
+    private FilterItem<T> findFilterItem(FilterGroup<T> filterGroup, Predicate<FilterItem<T>> matcher) {
+        List<FilterItem<T>> items = filterGroup.filterItems();
+        if (items == null) {
+            return null;
+        }
+        return items.stream().filter(matcher).findFirst().orElse(null);
+    }
+
+    private SortItem<T> findSortItem(SortGroup<T> sortGroup, Predicate<SortItem<T>> matcher) {
+        List<SortItem<T>> items = sortGroup.sortItems();
+        if (items == null) {
+            return null;
+        }
+        return items.stream().filter(matcher).findFirst().orElse(null);
     }
 
     private <S> ComboBox<S> createComboBox() {

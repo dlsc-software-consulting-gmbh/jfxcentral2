@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral2.components.filters.VideosFilterView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.components.tiles.VideoTileView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PageRequest;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.VideoViewFactory;
 import javafx.beans.property.ObjectProperty;
@@ -19,8 +20,8 @@ import org.kordamp.ikonli.Ikon;
 
 public class VideosCategoryPage extends CategoryPageBase<Video> {
 
-    public VideosCategoryPage(ObjectProperty<Size> size) {
-        super(size);
+    public VideosCategoryPage(ObjectProperty<Size> size, PageRequest pageRequest) {
+        super(size, pageRequest);
     }
 
     @Override

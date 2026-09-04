@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral2.components.tiles.IkonliPackTileView;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
+import com.dlsc.jfxcentral2.utils.QueryParams;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.SimpleStringProperty;
@@ -34,7 +35,10 @@ import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 
 public class PacksIconsView extends PaneBase {
 
@@ -49,13 +53,40 @@ public class PacksIconsView extends PaneBase {
     private final IkonGridView ikonGridView;
     private final ComboBox<Scope> scopeComboBox;
     private final HBox packSelectionWrapper;
+    private final SelectionBox<IkonliPack> ikonliPackSelection;
+    private final ComboBox<Sort> sortComboBox;
+
+    /**
+     * Suppresses the debounced search while the search text is being set programmatically.
+     */
+    private boolean applyingQueryParams;
+
+    private static final String SCOPE_PARAM = "scope";
+    private static final String PACK_PARAM = "pack";
+    private static final String SORT_PARAM = "sort";
+    private static final String SEARCH_PARAM = "search";
+    private static final String PACK_SEPARATOR = ",";
 
     private enum Scope {
-        PACKS, ICONS
+        PACKS, ICONS;
+
+        String paramValue() {
+            return name().toLowerCase(Locale.ROOT);
+        }
     }
 
     private enum Sort {
-        FROM_A_TO_Z, FROM_Z_TO_A
+        FROM_A_TO_Z("az"), FROM_Z_TO_A("za");
+
+        private final String paramValue;
+
+        Sort(String paramValue) {
+            this.paramValue = paramValue;
+        }
+
+        String paramValue() {
+            return paramValue;
+        }
     }
 
     public PacksIconsView() {
@@ -65,7 +96,12 @@ public class PacksIconsView extends PaneBase {
         searchField = new CustomSearchField(true);
         searchField.getStyleClass().add("filter-search-field");
         searchField.setFocusTraversable(false);
-        searchField.textProperty().addListener((ob, ov, str) -> searchService.restart());
+        searchField.textProperty().addListener((ob, ov, str) -> {
+            if (applyingQueryParams) {
+                return;
+            }
+            searchService.restart();
+        });
         HBox.setHgrow(searchField, Priority.ALWAYS);
 
         searchService.setOnSucceeded(evt -> searchText.set(searchField.getText()));
@@ -87,7 +123,7 @@ public class PacksIconsView extends PaneBase {
         }, scopeComboBox.getSelectionModel().selectedItemProperty()));
 
         // pack selection
-        SelectionBox<IkonliPack> ikonliPackSelection = initIkonliPackSelection();
+        ikonliPackSelection = initIkonliPackSelection();
         ikonliPackSelection.getStyleClass().addAll("pack-selection");
         ikonliPackSelection.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(ikonliPackSelection, Priority.ALWAYS);
@@ -97,7 +133,7 @@ public class PacksIconsView extends PaneBase {
         packSelectionWrapper.managedProperty().bind(packSelectionWrapper.visibleProperty());
         packSelectionWrapper.visibleProperty().bind(scopeComboBox.getSelectionModel().selectedItemProperty().map(item -> item == Scope.ICONS));
 
-        ComboBox<Sort> sortComboBox = initSortComboBox();
+        sortComboBox = initSortComboBox();
         sortComboBox.getStyleClass().addAll("sort-combo-box");
         sortComboBox.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(sortComboBox, Priority.ALWAYS);
@@ -172,6 +208,82 @@ public class PacksIconsView extends PaneBase {
         contentBox.getStyleClass().add("content-box");
         getChildren().setAll(contentBox);
         updateUI();
+    }
+
+    /**
+     * Applies the query parameters of the current request: "scope" picks packs or icons, "pack"
+     * narrows the icon scope down to a comma separated list of pack ids, "sort" picks a sort order
+     * and "search" fills the search field.
+     *
+     * <p>The order matters: changing the scope clears the search field and resets the sort order, so
+     * those two have to be applied afterwards. Values that match nothing are ignored.
+     *
+     * @param params the parameters of the request, may be {@code null}
+     */
+    public void applyQueryParams(QueryParams params) {
+        if (params == null || params.isEmpty()) {
+            return;
+        }
+
+        params.get(SCOPE_PARAM).ifPresent(this::applyScope);
+        params.get(PACK_PARAM).ifPresent(this::applyPacks);
+        params.get(SORT_PARAM).ifPresent(this::applySort);
+        params.get(SEARCH_PARAM).ifPresent(this::applySearchText);
+    }
+
+    private void applyScope(String value) {
+        String normalized = QueryParams.normalize(value);
+        for (Scope scope : Scope.values()) {
+            if (QueryParams.normalize(scope.paramValue()).equals(normalized)) {
+                scopeComboBox.getSelectionModel().select(scope);
+                return;
+            }
+        }
+    }
+
+    private void applyPacks(String value) {
+        List<IkonliPack> matches = new ArrayList<>();
+        for (String id : value.split(PACK_SEPARATOR)) {
+            IkonliPack pack = IkonliPackUtil.getInstance().getAggregatedPack(id.trim());
+            if (pack != null && !matches.contains(pack)) {
+                matches.add(pack);
+            }
+        }
+
+        // An empty selection would show nothing at all, so an unusable parameter falls back to the
+        // default of having every pack selected.
+        if (matches.isEmpty()) {
+            ikonliPackSelection.getSelectionModel().selectAll();
+            return;
+        }
+
+        ikonliPackSelection.getSelectionModel().clearSelection();
+        for (IkonliPack pack : matches) {
+            ikonliPackSelection.getSelectionModel().select(pack);
+        }
+    }
+
+    private void applySort(String value) {
+        String normalized = QueryParams.normalize(value);
+        for (Sort sort : Sort.values()) {
+            if (QueryParams.normalize(sort.paramValue()).equals(normalized)) {
+                sortComboBox.getSelectionModel().select(sort);
+                return;
+            }
+        }
+    }
+
+    private void applySearchText(String text) {
+        // Setting the text starts the debounced search service, which would only delay the first
+        // filtering. The grid switches on the raw text, the filtering on the debounced one, so both
+        // have to be set here.
+        applyingQueryParams = true;
+        try {
+            searchField.setText(text);
+        } finally {
+            applyingQueryParams = false;
+        }
+        searchText.set(text);
     }
 
     private class SearchService extends Service<String> {

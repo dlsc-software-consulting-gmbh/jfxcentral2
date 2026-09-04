@@ -34,9 +34,9 @@ public class LearnFilterView extends SimpleModelObjectSearchFilterView<Learn> {
                         return piList.indexOf(pi);
                     }
                     return 0;
-                })),
-                new SortItem<>("From A to Z", Comparator.comparing((Learn modelObject) -> modelObject.getName().toLowerCase())),
-                new SortItem<>("From Z to A", Comparator.comparing((Learn modelObject) -> modelObject.getName().toLowerCase()).reversed()))
+                }), "natural"),
+                new SortItem<>("From A to Z", Comparator.comparing((Learn modelObject) -> modelObject.getName().toLowerCase()), "az"),
+                new SortItem<>("From Z to A", Comparator.comparing((Learn modelObject) -> modelObject.getName().toLowerCase()).reversed(), "za"))
         ));
     }
 }

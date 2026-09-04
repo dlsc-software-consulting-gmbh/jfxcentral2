@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral2.components.PullRequestsView;
 import com.dlsc.jfxcentral2.components.StripView;
 import com.dlsc.jfxcentral2.components.filters.PullRequestsFilterView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PageRequest;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
@@ -23,8 +24,12 @@ public class OpenJFXPage extends PageBase {
     private final ObservableList<PullRequest> pullRequests;
     private final FilteredList<PullRequest> filteredList;
 
-    public OpenJFXPage(ObjectProperty<Size> size) {
+    private final PageRequest pageRequest;
+
+    public OpenJFXPage(ObjectProperty<Size> size, PageRequest pageRequest) {
         super(size, Mode.LIGHT);
+
+        this.pageRequest = pageRequest == null ? PageRequest.EMPTY : pageRequest;
 
         // data
         pullRequests = FXCollections.observableArrayList();
@@ -60,6 +65,7 @@ public class OpenJFXPage extends PageBase {
         // filter view
         PullRequestsFilterView pullRequestsFilterView = new PullRequestsFilterView();
         pullRequestsFilterView.sizeProperty().bind(sizeProperty());
+        pullRequestsFilterView.applyQueryParams(pageRequest.params());
         pullRequestsFilterView.setDisable(pullRequests.isEmpty());
         blockingProperty().bind(pullRequestsFilterView.blockingProperty());
 

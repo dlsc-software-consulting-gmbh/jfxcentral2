@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral2.components.gridview.IkonGridView;
 import com.dlsc.jfxcentral2.components.headers.IconDetailHeader;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
+import com.dlsc.jfxcentral2.utils.PageRequest;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -16,8 +17,12 @@ import org.kordamp.ikonli.Ikon;
 
 public class IconPackDetailPage extends DetailsPageBase<IkonliPack> {
 
-    public IconPackDetailPage(ObjectProperty<Size> size, String itemId) {
+    private final PageRequest pageRequest;
+
+    public IconPackDetailPage(ObjectProperty<Size> size, String itemId, PageRequest pageRequest) {
         super(size, IkonliPack.class, itemId);
+
+        this.pageRequest = pageRequest == null ? PageRequest.EMPTY : pageRequest;
 
         // Override: try aggregated pack lookup if DataRepository didn't find the item
         if (getItem() == null) {
@@ -39,6 +44,7 @@ public class IconPackDetailPage extends DetailsPageBase<IkonliPack> {
         // filter view
         IkonliIconsFilter filter = new IkonliIconsFilter();
         filter.sizeProperty().bind(sizeProperty());
+        filter.applyQueryParams(pageRequest.params());
 
         // data (supports both original and aggregated packs)
         FilteredList<Ikon> filteredList = new FilteredList<>(IkonliPackUtil.getInstance().getIkonList(ikonliPack));

@@ -75,6 +75,7 @@ import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import com.dlsc.jfxcentral2.utils.NodeUtil;
 import com.dlsc.jfxcentral2.utils.OSUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
+import com.dlsc.jfxcentral2.utils.PageRequest;
 import com.dlsc.jfxcentral2.utils.SocialUtil;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
@@ -115,7 +116,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 public class JFXCentral2App extends Application {
 
@@ -301,21 +302,21 @@ public class JFXCentral2App extends Application {
                         return Response.empty();
                     }
                 })
-                .and(createCategoryOrDetailRoute(PagePath.BLOGS, Blog.class, () -> new BlogsCategoryPage(size), id -> new BlogDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute(PagePath.BOOKS, Book.class, () -> new BooksCategoryPage(size), id -> new BookDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute(PagePath.COMPANIES, Company.class, () -> new CompaniesCategoryPage(size), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute(PagePath.DOWNLOADS, Download.class, () -> new DownloadsCategoryPage(size), id -> new DownloadDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute(PagePath.LIBRARIES, Library.class, () -> new LibrariesCategoryPage(size), id -> new LibraryDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute(PagePath.PEOPLE, Person.class, () -> new PeopleCategoryPage(size), id -> new PersonDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, () -> new ShowcasesCategoryPage(size), id -> new ShowcaseDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute(PagePath.TIPS, Tip.class, () -> new TipCategoryPage(size), id -> new TipDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute(PagePath.TOOLS, Tool.class, () -> new ToolsCategoryPage(size), id -> new ToolDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute(PagePath.TUTORIALS, Tutorial.class, () -> new TutorialsCategoryPage(size), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
-                .and(createCategoryOrDetailRoute(PagePath.VIDEOS, Video.class, () -> new VideosCategoryPage(size), id -> new VideoDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute(PagePath.UTILITIES, Utility.class, () -> new UtilitiesCategoryPage(size), id -> new UtilityDetailsPage(size, id)))
-                .and(createCategoryOrDetailRoute(PagePath.LEARN_JAVAFX, LearnJavaFX.class, () -> new LearnJavaFXCategoryPage(size), id -> new LearnDetailsPage(size, LearnJavaFX.class, id)))
-                .and(createCategoryOrDetailRoute(PagePath.LEARN_MOBILE, LearnMobile.class, () -> new LearnMobileCategoryPage(size), id -> new LearnDetailsPage(size, LearnMobile.class, id)))
-                .and(createCategoryOrDetailRoute(PagePath.LEARN_RASPBERRYPI, LearnRaspberryPi.class, () -> new LearnRaspberryPiCategoryPage(size), id -> new LearnDetailsPage(size, LearnRaspberryPi.class, id)))
+                .and(createCategoryOrDetailRoute(PagePath.BLOGS, Blog.class, r -> new BlogsCategoryPage(size, PageRequest.of(r)), id -> new BlogDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.BOOKS, Book.class, r -> new BooksCategoryPage(size, PageRequest.of(r)), id -> new BookDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.COMPANIES, Company.class, r -> new CompaniesCategoryPage(size, PageRequest.of(r)), id -> new CompanyDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.DOWNLOADS, Download.class, r -> new DownloadsCategoryPage(size, PageRequest.of(r)), id -> new DownloadDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.LIBRARIES, Library.class, r -> new LibrariesCategoryPage(size, PageRequest.of(r)), id -> new LibraryDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.PEOPLE, Person.class, r -> new PeopleCategoryPage(size, PageRequest.of(r)), id -> new PersonDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.SHOWCASES, RealWorldApp.class, r -> new ShowcasesCategoryPage(size, PageRequest.of(r)), id -> new ShowcaseDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.TIPS, Tip.class, r -> new TipCategoryPage(size, PageRequest.of(r)), id -> new TipDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.TOOLS, Tool.class, r -> new ToolsCategoryPage(size, PageRequest.of(r)), id -> new ToolDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.TUTORIALS, Tutorial.class, r -> new TutorialsCategoryPage(size, PageRequest.of(r)), id -> new TutorialDetailsPage(size, id))) // new routing for showcases
+                .and(createCategoryOrDetailRoute(PagePath.VIDEOS, Video.class, r -> new VideosCategoryPage(size, PageRequest.of(r)), id -> new VideoDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.UTILITIES, Utility.class, r -> new UtilitiesCategoryPage(size, PageRequest.of(r)), id -> new UtilityDetailsPage(size, id)))
+                .and(createCategoryOrDetailRoute(PagePath.LEARN_JAVAFX, LearnJavaFX.class, r -> new LearnJavaFXCategoryPage(size, PageRequest.of(r)), id -> new LearnDetailsPage(size, LearnJavaFX.class, id)))
+                .and(createCategoryOrDetailRoute(PagePath.LEARN_MOBILE, LearnMobile.class, r -> new LearnMobileCategoryPage(size, PageRequest.of(r)), id -> new LearnDetailsPage(size, LearnMobile.class, id)))
+                .and(createCategoryOrDetailRoute(PagePath.LEARN_RASPBERRYPI, LearnRaspberryPi.class, r -> new LearnRaspberryPiCategoryPage(size, PageRequest.of(r)), id -> new LearnDetailsPage(size, LearnRaspberryPi.class, id)))
                 .and(createIconPackOrDetailRoute(PagePath.ICONS))
                 .and(Route.get(PagePath.CREDITS, r -> Response.view(new CreditsPage(size))))
                 .and(Route.get(PagePath.LEGAL, r -> Response.view(new LegalPage(size, LegalPage.Section.TERMS))))
@@ -324,8 +325,8 @@ public class JFXCentral2App extends Application {
                 .and(Route.get(PagePath.LEGAL_PRIVACY, r -> Response.view(new LegalPage(size, LegalPage.Section.PRIVACY))))
                 .and(createLOTWRoute())
                 .and(Route.get(PagePath.TEAM, r -> Response.view(new TeamPage(size))))
-                .and(Route.get(PagePath.OPENJFX, r -> Response.view(new OpenJFXPage(size))))
-                .and(Route.get(PagePath.DOCUMENTATION, r -> Response.view(new DocumentationCategoryPage(size))))
+                .and(Route.get(PagePath.OPENJFX, r -> Response.view(new OpenJFXPage(size, PageRequest.of(r)))))
+                .and(Route.get(PagePath.DOCUMENTATION, r -> Response.view(new DocumentationCategoryPage(size, PageRequest.of(r)))))
                 .filter(FooterFilter.create(size))
                 .and(Route.get(PagePath.REFRESH, r -> {
                     RepositoryManager.prepareForRefresh();
@@ -379,7 +380,7 @@ public class JFXCentral2App extends Application {
         };
     }
 
-    private Route createCategoryOrDetailRoute(String path, Class<? extends ModelObject> clazz, Supplier<View> masterResponse, Callback<String, View> detailedResponse) {
+    private Route createCategoryOrDetailRoute(String path, Class<? extends ModelObject> clazz, Function<Request, View> masterResponse, Callback<String, View> detailedResponse) {
         return r -> {
             if (r.getPath().startsWith(path)) {
                 return createResponse(r, clazz, masterResponse, detailedResponse);
@@ -388,7 +389,7 @@ public class JFXCentral2App extends Application {
         };
     }
 
-    private Response createResponse(Request request, Class<? extends ModelObject> clazz, Supplier<View> categoryResponse, Callback<String, View> detailedResponse) {
+    private Response createResponse(Request request, Class<? extends ModelObject> clazz, Function<Request, View> categoryResponse, Callback<String, View> detailedResponse) {
         int index = request.getPath().lastIndexOf("/");
         if (index > 0) {
             String id = request.getPath().substring(index + 1).trim();
@@ -399,7 +400,7 @@ public class JFXCentral2App extends Application {
             return Response.view(detailedResponse.call(id));
         }
 
-        return Response.view(categoryResponse.get());
+        return Response.view(categoryResponse.apply(request));
     }
 
     /**
@@ -425,9 +426,9 @@ public class JFXCentral2App extends Application {
                             && IkonliPackUtil.getInstance().getAggregatedPack(id) == null) {
                         return Response.view(new ErrorPage(size, r));
                     }
-                    return Response.view(new IconPackDetailPage(size, id));
+                    return Response.view(new IconPackDetailPage(size, id, PageRequest.of(r)));
                 }
-                return Response.view(new IconsCategoryPage(size));
+                return Response.view(new IconsCategoryPage(size, PageRequest.of(r)));
             }
 
             //  Route to SingleIconPage: /icons/{ikonliPackId}/{iconDescription}

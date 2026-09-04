@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
 import com.dlsc.jfxcentral2.utils.OSUtil;
+import com.dlsc.jfxcentral2.utils.PageRequest;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -20,8 +21,24 @@ import org.kordamp.ikonli.Ikon;
 
 public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
 
+    private final PageRequest pageRequest;
+
     public CategoryPageBase(ObjectProperty<Size> size) {
+        this(size, PageRequest.EMPTY);
+    }
+
+    public CategoryPageBase(ObjectProperty<Size> size, PageRequest pageRequest) {
         super(size, Mode.DARK);
+        this.pageRequest = pageRequest == null ? PageRequest.EMPTY : pageRequest;
+    }
+
+    /**
+     * The request this page was created for, carrying the path and the query parameters.
+     *
+     * @return the page request, never {@code null}
+     */
+    protected PageRequest getPageRequest() {
+        return pageRequest;
     }
 
     @Override
@@ -36,6 +53,7 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         // filter
         SearchFilterView<T> filterView = createSearchFilterView();
         filterView.sizeProperty().bind(sizeProperty());
+        filterView.applyQueryParams(pageRequest.params());
         blockingProperty().bind(filterView.blockingProperty());
 
         // data

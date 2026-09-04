@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral2.components.filters.ShowcaseFilterView;
 import com.dlsc.jfxcentral2.components.tiles.AppTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PageRequest;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
@@ -17,8 +18,8 @@ import org.kordamp.ikonli.Ikon;
 
 public class ShowcasesCategoryPage extends CategoryPageBase<RealWorldApp> {
 
-    public ShowcasesCategoryPage(ObjectProperty<Size> size) {
-        super(size);
+    public ShowcasesCategoryPage(ObjectProperty<Size> size, PageRequest pageRequest) {
+        super(size, pageRequest);
     }
 
     @Override
