@@ -88,16 +88,14 @@ public class SearchFilterView<T> extends PaneBase {
     private final CustomSearchField searchField = new CustomSearchField(true);
 
     /**
-     * The current selection per filter group, keyed by parameter name. The combo boxes are recreated
-     * on every layout change, so the selection has to survive outside of them. The applied flag of
-     * the filter items must not be used for this: those lists are static and shared by all sessions.
+     * Current selection per filter group, kept outside the combo boxes since those are recreated on
+     * every layout change.
      */
     private final Map<String, String> selectedFilterNames = new LinkedHashMap<>();
     private String selectedSortParamValue;
 
     /**
-     * The combo boxes of the current layout, so that query parameters take effect immediately
-     * instead of only after the next rebuild.
+     * Combo boxes of the current layout, by parameter name.
      */
     private final Map<String, ComboBox<FilterItem<T>>> comboBoxByParam = new LinkedHashMap<>();
     private ComboBox<SortItem<T>> sortComboBox;
@@ -139,9 +137,7 @@ public class SearchFilterView<T> extends PaneBase {
     /**
      * A sort order offered by a {@link SortGroup}.
      *
-     * @param paramValue the stable value used in the "sort" query parameter. It is deliberately not
-     *                   derived from the display name, so that rewording a label does not break
-     *                   links that were already shared.
+     * @param paramValue stable value used in the "sort" query parameter, independent of the label
      */
     public record SortItem<T>(String name, Comparator<T> comparator, boolean isApplied, String paramValue) {
         public SortItem(String name, Comparator<T> comparator) {
@@ -203,10 +199,8 @@ public class SearchFilterView<T> extends PaneBase {
 
     /**
      * Applies the query parameters of the current request: "search" fills the search field, "sort"
-     * picks a sort order and every filter group is addressed by its own parameter name.
-     *
-     * <p>A value that matches no item is ignored and the group falls back to its default, so that a
-     * shared link keeps working after the underlying data has been renamed.
+     * picks a sort order and every filter group is addressed by its own parameter name. A value that
+     * matches no item falls back to the group's default.
      *
      * @param params the parameters of the request, may be {@code null}
      */
@@ -228,8 +222,7 @@ public class SearchFilterView<T> extends PaneBase {
     }
 
     private void applySearchText(String text) {
-        // Setting the text triggers the debounced search, which would both delay the first filtering
-        // and spin up this instance's scheduler thread for a user who never typed anything.
+        // Bypass the debounce so the value applies at once and no search thread is started.
         applyingQueryParams = true;
         try {
             searchField.setText(text);

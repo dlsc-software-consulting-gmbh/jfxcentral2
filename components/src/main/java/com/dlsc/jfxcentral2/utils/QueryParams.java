@@ -36,10 +36,7 @@ public final class QueryParams {
     /**
      * Creates an instance from the raw, still encoded parameters of a request.
      *
-     * <p>A value that cannot be decoded is dropped and the remaining parameters are kept. Values
-     * arriving through the router have already passed the percent-escape validation of
-     * {@code java.net.URI}, so this is a safeguard for direct callers rather than a fix for a
-     * reachable failure.
+     * <p>A value that cannot be decoded is dropped and the remaining parameters are kept.
      *
      * @param raw the raw parameters, may be {@code null}
      * @return an instance holding the decoded parameters, never {@code null}
@@ -58,7 +55,7 @@ public final class QueryParams {
             try {
                 decoded.put(name.toLowerCase(Locale.ROOT), decode(entry.getValue()));
             } catch (IllegalArgumentException ex) {
-                LOGGER.warn("Ignoring query parameter with an undecodable value: ", name);
+                LOGGER.warn("Ignoring undecodable query parameter: ", name);
             }
         }
 
@@ -174,8 +171,7 @@ public final class QueryParams {
     }
 
     private static String encode(String value) {
-        // URLEncoder targets form encoding, where a space becomes "+". Inside a query string "%20"
-        // is the safer form because it survives readers that do not apply form decoding.
+        // URLEncoder emits "+" for spaces; use "%20", which is safe anywhere in a query string.
         return URLEncoder.encode(value, StandardCharsets.UTF_8).replace("+", "%20");
     }
 }

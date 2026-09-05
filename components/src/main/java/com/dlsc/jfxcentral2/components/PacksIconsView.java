@@ -212,16 +212,9 @@ public class PacksIconsView extends PaneBase {
 
     /**
      * Applies the query parameters of the current request: "scope" picks packs or icons, "pack"
-     * narrows the icon scope down to a comma separated list of pack ids, "sort" picks a sort order
-     * and "search" fills the search field.
-     *
-     * <p>The order matters: changing the scope clears the search field and resets the sort order, so
-     * those two have to be applied afterwards. Values that match nothing are ignored.
-     *
-     * <p>"pack" only belongs to the icon scope and is ignored otherwise. Applying it while the pack
-     * scope is active would select packs the icon list does not follow, because that list is only
-     * recomputed while the icon scope is active - and the pack selection is hidden in the pack
-     * scope, so the user could never bring the two back in sync.
+     * narrows the icon scope to a comma separated list of pack ids, "sort" picks a sort order and
+     * "search" fills the search field. Scope is applied first because it resets the search and sort.
+     * "pack" applies only in the icon scope. Values that match nothing are ignored.
      *
      * @param params the parameters of the request, may be {@code null}
      */
@@ -251,14 +244,13 @@ public class PacksIconsView extends PaneBase {
     private void applyPacks(String value) {
         List<IkonliPack> matches = new ArrayList<>();
         for (String id : value.split(PACK_SEPARATOR)) {
-            IkonliPack pack = IkonliPackUtil.getInstance().getAggregatedPack(id.trim());
+            IkonliPack pack = IkonliPackUtil.getInstance().getAggregatedPack(id.trim().toLowerCase(Locale.ROOT));
             if (pack != null && !matches.contains(pack)) {
                 matches.add(pack);
             }
         }
 
-        // An empty selection would show nothing at all, so an unusable parameter falls back to the
-        // default of having every pack selected.
+        // Fall back to all packs when nothing matched.
         if (matches.isEmpty()) {
             ikonliPackSelection.getSelectionModel().selectAll();
             return;
@@ -281,9 +273,7 @@ public class PacksIconsView extends PaneBase {
     }
 
     private void applySearchText(String text) {
-        // Setting the text starts the debounced search service, which would only delay the first
-        // filtering. The grid switches on the raw text, the filtering on the debounced one, so both
-        // have to be set here.
+        // Bypass the debounce so the value applies at once; set both the field and the debounced text.
         applyingQueryParams = true;
         try {
             searchField.setText(text);
