@@ -26,13 +26,9 @@ public final class BrowserUrlSync {
     /**
      * Replaces the URL shown by the browser and updates the router's bookkeeping to match.
      *
-     * <p>The result only states that the Java side preconditions held, the script was submitted and
-     * the router state was updated. Whether the browser executed the script is not confirmed: the
-     * two updates are not atomic.
-     *
      * @param node the node the calling view belongs to
      * @param url  an absolute-path reference within the application, such as {@code /videos?type=library}
-     * @return whether the URL was submitted, so that the caller only records what it submitted
+     * @return whether the script was submitted; the browser's execution of it is not confirmed
      */
     public static boolean replace(Node node, String url) {
         if (!WebAPI.isBrowser() || node == null || node.getScene() == null) {
@@ -71,8 +67,7 @@ public final class BrowserUrlSync {
     }
 
     /**
-     * Builds the script that replaces the URL. Extracted so that a test can assert the exact
-     * script text instead of only the escaping of its argument.
+     * Builds the script that replaces the URL.
      */
     static String buildReplaceScript(String url) {
         return "history.replaceState(history.state, '', " + GSON.toJson(url) + ");";

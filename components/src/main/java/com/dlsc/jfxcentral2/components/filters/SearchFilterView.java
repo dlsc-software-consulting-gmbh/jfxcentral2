@@ -53,7 +53,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -92,7 +91,7 @@ public class SearchFilterView<T> extends PaneBase {
     /**
      * The current selection per filter group, keyed by parameter name. The combo boxes are recreated
      * on every layout change, so the selection has to survive outside of them. The applied flag of
-     * the filter items must not be used for this: those lists are static and shared by all sessions.
+     * the filter items cannot hold it: those lists are static and shared by all sessions.
      */
     private final Map<String, String> selectedFilterNames = new LinkedHashMap<>();
     private String selectedSortParamValue;
@@ -115,7 +114,6 @@ public class SearchFilterView<T> extends PaneBase {
      */
     private String canonicalPath;
     private String lastWrittenUrl;
-    private BiPredicate<Node, String> urlWriter = BrowserUrlSync::replace;
 
     private final StringConverter<FilterItem<T>> predicateItemStringConverter = new StringConverter<>() {
         @Override
@@ -288,8 +286,8 @@ public class SearchFilterView<T> extends PaneBase {
     /**
      * Sets the path the browser address bar is kept in sync with. While it is set, every later change
      * of the search text, a filter or the sort order rewrites the address bar without reloading the
-     * page; {@code null} turns the sync off. The current state is not written on the call itself, so
-     * that mounting the page does not overwrite the history entry the router is about to push.
+     * page; {@code null} turns the sync off. The router pushes the history entry only after the page
+     * is mounted, so writing on this call would replace the previous page's entry instead.
      *
      * @param canonicalPath the path of the page as registered in the router, or {@code null}
      */
@@ -332,20 +330,12 @@ public class SearchFilterView<T> extends PaneBase {
         return params;
     }
 
-    /**
-     * Replaces the function that writes the URL, so that a local harness can observe the sync
-     * outside of the browser. Null restores the default.
-     */
-    void setUrlWriter(BiPredicate<Node, String> urlWriter) {
-        this.urlWriter = urlWriter == null ? BrowserUrlSync::replace : urlWriter;
-    }
-
     private void writeUrl() {
         if (canonicalPath == null) {
             return;
         }
         String url = QueryParams.buildUrl(canonicalPath, toQueryParams());
-        if (!url.equals(lastWrittenUrl) && urlWriter.test(this, url)) {
+        if (!url.equals(lastWrittenUrl) && BrowserUrlSync.replace(this, url)) {
             lastWrittenUrl = url;
         }
     }
@@ -582,8 +572,8 @@ public class SearchFilterView<T> extends PaneBase {
 
     /**
      * The item a group falls back to: the first one flagged as applied, otherwise the first one.
-     * This is the single definition of "default", shared by the initial selection, the fallback for
-     * an unknown query parameter value and the decision whether a parameter can be omitted.
+     * Used for the initial selection, as the fallback for an unknown parameter value and to decide
+     * whether a parameter can be omitted.
      */
     private FilterItem<T> defaultItem(FilterGroup<T> filterGroup) {
         List<FilterItem<T>> items = filterGroup.filterItems();

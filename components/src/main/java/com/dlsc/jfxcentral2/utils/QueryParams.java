@@ -36,10 +36,7 @@ public final class QueryParams {
     /**
      * Creates an instance from the raw, still encoded parameters of a request.
      *
-     * <p>A value that cannot be decoded is dropped and the remaining parameters are kept. Values
-     * arriving through the router have already passed the percent-escape validation of
-     * {@code java.net.URI}, so this is a safeguard for direct callers rather than a fix for a
-     * reachable failure.
+     * <p>A value that cannot be decoded is dropped and the remaining parameters are kept.
      *
      * @param raw the raw parameters, may be {@code null}
      * @return an instance holding the decoded parameters, never {@code null}

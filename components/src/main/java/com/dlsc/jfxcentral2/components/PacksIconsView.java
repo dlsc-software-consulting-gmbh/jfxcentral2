@@ -22,7 +22,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -44,7 +43,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 public class PacksIconsView extends PaneBase {
@@ -85,7 +83,6 @@ public class PacksIconsView extends PaneBase {
      */
     private String canonicalPath;
     private String lastWrittenUrl;
-    private BiPredicate<Node, String> urlWriter = BrowserUrlSync::replace;
 
     private enum Scope {
         PACKS, ICONS;
@@ -239,16 +236,10 @@ public class PacksIconsView extends PaneBase {
 
     /**
      * Applies the query parameters of the current request: "scope" picks packs or icons, "pack"
-     * narrows the icon scope down to a comma separated list of pack ids, "sort" picks a sort order
-     * and "search" fills the search field.
-     *
-     * <p>The order matters: changing the scope clears the search field and resets the sort order, so
-     * those two have to be applied afterwards. Values that match nothing are ignored.
-     *
-     * <p>"pack" only belongs to the icon scope and is ignored otherwise. Applying it while the pack
-     * scope is active would select packs the icon list does not follow, because that list is only
-     * recomputed while the icon scope is active - and the pack selection is hidden in the pack
-     * scope, so the user could never bring the two back in sync.
+     * narrows the icon scope to a comma separated list of pack ids, "sort" picks a sort order and
+     * "search" fills the search field. The scope is applied first because it clears the search and
+     * resets the sort. The pack parameter only applies to the icon scope; in the pack scope the
+     * selection is hidden and the icon list is not recomputed, so it is ignored there.
      *
      * @param params the parameters of the request, may be {@code null}
      */
@@ -328,9 +319,9 @@ public class PacksIconsView extends PaneBase {
     /**
      * Sets the path the browser address bar is kept in sync with. While it is set, every later change
      * of the scope, the selected packs, the sort order or the search text rewrites the address bar
-     * without reloading the page; {@code null} turns the sync off. The current state is not written
-     * on the call itself, so that mounting the page does not overwrite the history entry the router
-     * is about to push.
+     * without reloading the page; {@code null} turns the sync off. The router pushes the history
+     * entry only after the page is mounted, so writing on this call would replace the previous
+     * page's entry instead.
      *
      * @param canonicalPath the path of the page as registered in the router, or {@code null}
      */
@@ -376,20 +367,12 @@ public class PacksIconsView extends PaneBase {
         return params;
     }
 
-    /**
-     * Replaces the function that writes the URL, so that a local harness can observe the sync
-     * outside of the browser. Null restores the default.
-     */
-    void setUrlWriter(BiPredicate<Node, String> urlWriter) {
-        this.urlWriter = urlWriter == null ? BrowserUrlSync::replace : urlWriter;
-    }
-
     private void writeUrl() {
         if (canonicalPath == null) {
             return;
         }
         String url = QueryParams.buildUrl(canonicalPath, toQueryParams());
-        if (!url.equals(lastWrittenUrl) && urlWriter.test(this, url)) {
+        if (!url.equals(lastWrittenUrl) && BrowserUrlSync.replace(this, url)) {
             lastWrittenUrl = url;
         }
     }
