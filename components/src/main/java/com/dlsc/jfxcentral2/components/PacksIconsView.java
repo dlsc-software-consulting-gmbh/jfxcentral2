@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral2.components.gridview.ModelGridView;
 import com.dlsc.jfxcentral2.components.tiles.IkonliPackTileView;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.BrowserUrlSync;
 import com.dlsc.jfxcentral2.utils.IkonliPackUtil;
 import com.dlsc.jfxcentral2.utils.QueryParams;
 import javafx.beans.binding.Bindings;
@@ -15,11 +16,13 @@ import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -37,8 +40,12 @@ import org.kordamp.ikonli.Ikon;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
 
 public class PacksIconsView extends PaneBase {
 
@@ -60,6 +67,13 @@ public class PacksIconsView extends PaneBase {
      * Suppresses the debounced search while the search text is being set programmatically.
      */
     private boolean applyingQueryParams;
+
+    /**
+     * The path the browser address bar is kept in sync with, null turns the sync off.
+     */
+    private String canonicalPath;
+    private String lastWrittenUrl;
+    private BiPredicate<Node, String> urlWriter = BrowserUrlSync::replace;
 
     private static final String SCOPE_PARAM = "scope";
     private static final String PACK_PARAM = "pack";
@@ -152,6 +166,18 @@ public class PacksIconsView extends PaneBase {
         scopeComboBox.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> {
             searchField.setText("");
             sortComboBox.getSelectionModel().select(0);
+        });
+
+        // The controls are created once, so the listeners can be attached here. The address bar
+        // follows the debounced search text, so it only changes when the filtering does.
+        scopeComboBox.getSelectionModel().selectedItemProperty().addListener(it -> writeUrl());
+        sortComboBox.getSelectionModel().selectedItemProperty().addListener(it -> writeUrl());
+        ikonliPackSelection.getSelectionModel().getSelectedItems().addListener((ListChangeListener<IkonliPack>) change -> writeUrl());
+        searchText.addListener(it -> writeUrl());
+        sceneProperty().addListener((ob, ov, nv) -> {
+            if (nv != null) {
+                writeUrl();
+            }
         });
 
         ObjectBinding<? extends PaneBase> gridViewNodeBinding = Bindings.createObjectBinding(() -> {
@@ -291,6 +317,72 @@ public class PacksIconsView extends PaneBase {
             applyingQueryParams = false;
         }
         searchText.set(text);
+    }
+
+    /**
+     * Sets the path the browser address bar is kept in sync with. While it is set, every change of
+     * the scope, the selected packs, the sort order or the search text rewrites the address bar
+     * without reloading the page; {@code null} turns the sync off.
+     *
+     * @param canonicalPath the path of the page as registered in the router, or {@code null}
+     */
+    public void setCanonicalPath(String canonicalPath) {
+        this.canonicalPath = canonicalPath;
+        writeUrl();
+    }
+
+    /**
+     * The current state as query parameters, omitting every dimension that is at its default. The
+     * packs are only part of it in the icon scope, matching {@link #applyQueryParams(QueryParams)}.
+     *
+     * @return the parameters, never {@code null}
+     */
+    public Map<String, String> toQueryParams() {
+        Map<String, String> params = new LinkedHashMap<>();
+
+        Scope scope = scopeComboBox.getSelectionModel().getSelectedItem();
+        if (scope != null && scope != Scope.ICONS) {
+            params.put(SCOPE_PARAM, scope.paramValue());
+        }
+
+        if (scope == Scope.ICONS) {
+            List<IkonliPack> selected = ikonliPackSelection.getSelectionModel().getSelectedItems();
+            if (!selected.isEmpty() && selected.size() < ikonliPackSelection.getItems().size()) {
+                params.put(PACK_PARAM, selected.stream()
+                        .map(pack -> IkonliPackUtil.getInstance().getAggregatedId(pack))
+                        .collect(Collectors.joining(PACK_SEPARATOR)));
+            }
+        }
+
+        Sort sort = sortComboBox.getSelectionModel().getSelectedItem();
+        if (sort != null && sort != Sort.FROM_A_TO_Z) {
+            params.put(SORT_PARAM, sort.paramValue());
+        }
+
+        String text = searchText.get();
+        if (StringUtils.isNotBlank(text)) {
+            params.put(SEARCH_PARAM, text.trim());
+        }
+
+        return params;
+    }
+
+    /**
+     * Replaces the function that writes the URL, so that a local harness can observe the sync
+     * outside of the browser. Null restores the default.
+     */
+    void setUrlWriter(BiPredicate<Node, String> urlWriter) {
+        this.urlWriter = urlWriter == null ? BrowserUrlSync::replace : urlWriter;
+    }
+
+    private void writeUrl() {
+        if (canonicalPath == null) {
+            return;
+        }
+        String url = QueryParams.buildUrl(canonicalPath, toQueryParams());
+        if (!url.equals(lastWrittenUrl) && urlWriter.test(this, url)) {
+            lastWrittenUrl = url;
+        }
     }
 
     private class SearchService extends Service<String> {

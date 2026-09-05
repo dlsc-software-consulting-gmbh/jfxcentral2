@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral2.components.CustomSearchField;
 import com.dlsc.jfxcentral2.components.Header;
 import com.dlsc.jfxcentral2.components.PaneBase;
 import com.dlsc.jfxcentral2.iconfont.JFXCentralIcon;
+import com.dlsc.jfxcentral2.utils.BrowserUrlSync;
 import com.dlsc.jfxcentral2.utils.QueryParams;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -52,6 +53,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -106,6 +108,14 @@ public class SearchFilterView<T> extends PaneBase {
      * Suppresses the debounced search while the search text is being set programmatically.
      */
     private boolean applyingQueryParams;
+
+    /**
+     * The path the browser address bar is kept in sync with. Null turns the sync off, which is the
+     * case for pages that were not created by a registered route.
+     */
+    private String canonicalPath;
+    private String lastWrittenUrl;
+    private BiPredicate<Node, String> urlWriter = BrowserUrlSync::replace;
 
     private final StringConverter<FilterItem<T>> predicateItemStringConverter = new StringConverter<>() {
         @Override
@@ -180,6 +190,14 @@ public class SearchFilterView<T> extends PaneBase {
                     Platform.runLater(() -> searchText.set(str));
                 }
             }, SEARCH_DELAY, TimeUnit.MILLISECONDS);
+        });
+
+        // The address bar follows the debounced text, so it only changes when the filtering does.
+        searchText.addListener(it -> writeUrl());
+        sceneProperty().addListener((ob, ov, nv) -> {
+            if (nv != null) {
+                writeUrl();
+            }
         });
 
         filterBoxOrientationProperty().addListener(it -> layoutBySize());
@@ -269,6 +287,71 @@ public class SearchFilterView<T> extends PaneBase {
         selectedSortParamValue = item.paramValue();
         if (sortComboBox != null) {
             sortComboBox.getSelectionModel().select(item);
+        }
+    }
+
+    /**
+     * Sets the path the browser address bar is kept in sync with. While it is set, every change of
+     * the search text, a filter or the sort order rewrites the address bar without reloading the
+     * page; {@code null} turns the sync off.
+     *
+     * @param canonicalPath the path of the page as registered in the router, or {@code null}
+     */
+    public void setCanonicalPath(String canonicalPath) {
+        this.canonicalPath = canonicalPath;
+        writeUrl();
+    }
+
+    /**
+     * The current state as query parameters, omitting every dimension that is at its default. The
+     * search component is the debounced text, so the result only changes when the filtering does.
+     *
+     * @return the parameters, never {@code null}
+     */
+    public Map<String, String> toQueryParams() {
+        Map<String, String> params = new LinkedHashMap<>();
+
+        if (getOnSearch() != null) {
+            String text = searchText.get();
+            if (StringUtils.isNotBlank(text)) {
+                params.put(SEARCH_PARAM, text.trim());
+            }
+        }
+
+        for (FilterGroup<T> filterGroup : getFilterGroups()) {
+            String selectedName = selectedFilterNames.get(filterGroup.paramName());
+            FilterItem<T> defaultItem = defaultItem(filterGroup);
+            if (selectedName != null && (defaultItem == null || !selectedName.equals(defaultItem.name()))) {
+                params.put(filterGroup.paramName(), QueryParams.toSlug(selectedName));
+            }
+        }
+
+        SortGroup<T> sortGroup = getSortGroup();
+        if (sortGroup != null && selectedSortParamValue != null) {
+            SortItem<T> defaultSortItem = defaultSortItem(sortGroup);
+            if (defaultSortItem == null || !selectedSortParamValue.equals(defaultSortItem.paramValue())) {
+                params.put(SORT_PARAM, selectedSortParamValue);
+            }
+        }
+
+        return params;
+    }
+
+    /**
+     * Replaces the function that writes the URL, so that a local harness can observe the sync
+     * outside of the browser. Null restores the default.
+     */
+    void setUrlWriter(BiPredicate<Node, String> urlWriter) {
+        this.urlWriter = urlWriter == null ? BrowserUrlSync::replace : urlWriter;
+    }
+
+    private void writeUrl() {
+        if (canonicalPath == null) {
+            return;
+        }
+        String url = QueryParams.buildUrl(canonicalPath, toQueryParams());
+        if (!url.equals(lastWrittenUrl) && urlWriter.test(this, url)) {
+            lastWrittenUrl = url;
         }
     }
 
@@ -403,6 +486,7 @@ public class SearchFilterView<T> extends PaneBase {
             sortBox.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> {
                 if (nv != null) {
                     selectedSortParamValue = nv.paramValue();
+                    writeUrl();
                 }
             });
             sortComboBox = sortBox;
@@ -457,6 +541,7 @@ public class SearchFilterView<T> extends PaneBase {
         comboBox.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> {
             if (nv != null) {
                 selectedFilterNames.put(filterGroup.paramName(), nv.name());
+                writeUrl();
             }
         });
         comboBoxByParam.put(filterGroup.paramName(), comboBox);

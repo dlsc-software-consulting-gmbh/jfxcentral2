@@ -45,6 +45,7 @@ public class IconPackDetailPage extends DetailsPageBase<IkonliPack> {
         IkonliIconsFilter filter = new IkonliIconsFilter();
         filter.sizeProperty().bind(sizeProperty());
         filter.applyQueryParams(pageRequest.params());
+        filter.setCanonicalPath(pageRequest.path());
 
         // data (supports both original and aggregated packs)
         FilteredList<Ikon> filteredList = new FilteredList<>(IkonliPackUtil.getInstance().getIkonList(ikonliPack));

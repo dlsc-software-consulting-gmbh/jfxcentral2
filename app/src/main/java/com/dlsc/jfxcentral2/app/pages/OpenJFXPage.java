@@ -66,6 +66,7 @@ public class OpenJFXPage extends PageBase {
         PullRequestsFilterView pullRequestsFilterView = new PullRequestsFilterView();
         pullRequestsFilterView.sizeProperty().bind(sizeProperty());
         pullRequestsFilterView.applyQueryParams(pageRequest.params());
+        pullRequestsFilterView.setCanonicalPath(pageRequest.path());
         pullRequestsFilterView.setDisable(pullRequests.isEmpty());
         blockingProperty().bind(pullRequestsFilterView.blockingProperty());
 

@@ -70,6 +70,7 @@ public class IconsCategoryPage extends CategoryPageBase<IkonliPack> {
         PacksIconsView packsIconsView = new PacksIconsView();
         packsIconsView.sizeProperty().bind(sizeProperty());
         packsIconsView.applyQueryParams(getPageRequest().params());
+        packsIconsView.setCanonicalPath(getPageRequest().path());
 
         FeaturesContainer featuresContainer = new FeaturesContainer();
         featuresContainer.sizeProperty().bind(sizeProperty());

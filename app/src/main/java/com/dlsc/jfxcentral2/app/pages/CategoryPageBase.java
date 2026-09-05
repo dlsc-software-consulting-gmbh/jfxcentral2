@@ -54,6 +54,7 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
         SearchFilterView<T> filterView = createSearchFilterView();
         filterView.sizeProperty().bind(sizeProperty());
         filterView.applyQueryParams(pageRequest.params());
+        filterView.setCanonicalPath(pageRequest.path());
         blockingProperty().bind(filterView.blockingProperty());
 
         // data
