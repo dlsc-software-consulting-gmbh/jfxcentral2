@@ -194,11 +194,6 @@ public class SearchFilterView<T> extends PaneBase {
 
         // The address bar follows the debounced text, so it only changes when the filtering does.
         searchText.addListener(it -> writeUrl());
-        sceneProperty().addListener((ob, ov, nv) -> {
-            if (nv != null) {
-                writeUrl();
-            }
-        });
 
         filterBoxOrientationProperty().addListener(it -> layoutBySize());
         filterGroupsProperty().addListener((InvalidationListener) it -> layoutBySize());
@@ -291,15 +286,15 @@ public class SearchFilterView<T> extends PaneBase {
     }
 
     /**
-     * Sets the path the browser address bar is kept in sync with. While it is set, every change of
-     * the search text, a filter or the sort order rewrites the address bar without reloading the
-     * page; {@code null} turns the sync off.
+     * Sets the path the browser address bar is kept in sync with. While it is set, every later change
+     * of the search text, a filter or the sort order rewrites the address bar without reloading the
+     * page; {@code null} turns the sync off. The current state is not written on the call itself, so
+     * that mounting the page does not overwrite the history entry the router is about to push.
      *
      * @param canonicalPath the path of the page as registered in the router, or {@code null}
      */
     public void setCanonicalPath(String canonicalPath) {
         this.canonicalPath = canonicalPath;
-        writeUrl();
     }
 
     /**

@@ -8,7 +8,6 @@ import one.jpro.platform.routing.sessionmanager.SessionManager;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
@@ -17,7 +16,6 @@ import java.util.regex.Pattern;
  */
 public final class BrowserUrlSync {
 
-    private static final Logger LOGGER = Logger.getLogger(BrowserUrlSync.class.getName());
     private static final Gson GSON = new Gson();
     private static final Pattern SEGMENT = Pattern.compile("[A-Za-z0-9._~-]+");
     private static final Pattern PAIR = Pattern.compile("[^=&]+=[^=&]+");
@@ -41,7 +39,7 @@ public final class BrowserUrlSync {
             return false;
         }
         if (!isSafeUrl(url)) {
-            LOGGER.warning("Refusing to write an unexpected URL to the address bar: " + url);
+            LOGGER.warn("Refusing to write an unexpected URL to the address bar: ", url);
             return false;
         }
         SessionManager sessionManager = sessionManagerOf(node);
@@ -67,7 +65,7 @@ public final class BrowserUrlSync {
                 return sessionManager;
             }
         } catch (Exception ex) {
-            LOGGER.fine("No session manager for the node, skipping the address bar sync");
+            // No routing context for this node, which is an expected case off the router tree.
         }
         return null;
     }

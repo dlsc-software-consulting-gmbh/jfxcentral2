@@ -180,11 +180,6 @@ public class PacksIconsView extends PaneBase {
         sortComboBox.getSelectionModel().selectedItemProperty().addListener(it -> writeUrl());
         ikonliPackSelection.getSelectionModel().getSelectedItems().addListener((ListChangeListener<IkonliPack>) change -> writeUrl());
         searchText.addListener(it -> writeUrl());
-        sceneProperty().addListener((ob, ov, nv) -> {
-            if (nv != null) {
-                writeUrl();
-            }
-        });
 
         ObjectBinding<? extends PaneBase> gridViewNodeBinding = Bindings.createObjectBinding(() -> {
             if (StringUtils.isBlank(searchField.getText()) || (scopeComboBox.getSelectionModel().getSelectedItem() == Scope.PACKS)) {
@@ -331,15 +326,16 @@ public class PacksIconsView extends PaneBase {
     }
 
     /**
-     * Sets the path the browser address bar is kept in sync with. While it is set, every change of
-     * the scope, the selected packs, the sort order or the search text rewrites the address bar
-     * without reloading the page; {@code null} turns the sync off.
+     * Sets the path the browser address bar is kept in sync with. While it is set, every later change
+     * of the scope, the selected packs, the sort order or the search text rewrites the address bar
+     * without reloading the page; {@code null} turns the sync off. The current state is not written
+     * on the call itself, so that mounting the page does not overwrite the history entry the router
+     * is about to push.
      *
      * @param canonicalPath the path of the page as registered in the router, or {@code null}
      */
     public void setCanonicalPath(String canonicalPath) {
         this.canonicalPath = canonicalPath;
-        writeUrl();
     }
 
     /**
