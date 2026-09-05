@@ -44,8 +44,8 @@ public final class BrowserUrlSync {
             LOGGER.warning("Refusing to write an unexpected URL to the address bar: " + url);
             return false;
         }
-        if (!(SessionManagerContext.getContext(node) instanceof SessionManager sessionManager)
-                || sessionManager.getURL() == null) {
+        SessionManager sessionManager = sessionManagerOf(node);
+        if (sessionManager == null || sessionManager.getURL() == null) {
             return false;
         }
         // The router keeps an absolute URL, so the path has to be resolved against it.
@@ -54,6 +54,22 @@ public final class BrowserUrlSync {
         // Scala setter of the router's url var, there is no public replaceURL API.
         sessionManager.url_$eq(absoluteUrl);
         return true;
+    }
+
+    /**
+     * Returns the router of the node, or {@code null} when there is none. The router context lookup
+     * throws when the node is not inside a routing tree, so it is guarded here to keep
+     * {@link #replace} to its contract of returning false instead of throwing.
+     */
+    private static SessionManager sessionManagerOf(Node node) {
+        try {
+            if (SessionManagerContext.getContext(node) instanceof SessionManager sessionManager) {
+                return sessionManager;
+            }
+        } catch (Exception ex) {
+            LOGGER.fine("No session manager for the node, skipping the address bar sync");
+        }
+        return null;
     }
 
     /**

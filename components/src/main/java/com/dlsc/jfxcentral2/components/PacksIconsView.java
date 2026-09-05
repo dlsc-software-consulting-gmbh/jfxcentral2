@@ -81,6 +81,12 @@ public class PacksIconsView extends PaneBase {
     private static final String SEARCH_PARAM = "search";
     private static final String PACK_SEPARATOR = ",";
 
+    /**
+     * Stable value for "no pack selected", so that an empty selection round trips instead of being
+     * indistinguishable from "every pack selected", which also omits the parameter.
+     */
+    private static final String PACK_NONE = "none";
+
     private enum Scope {
         PACKS, ICONS;
 
@@ -275,6 +281,11 @@ public class PacksIconsView extends PaneBase {
     }
 
     private void applyPacks(String value) {
+        if (PACK_NONE.equals(QueryParams.normalize(value))) {
+            ikonliPackSelection.getSelectionModel().clearSelection();
+            return;
+        }
+
         List<IkonliPack> matches = new ArrayList<>();
         for (String id : value.split(PACK_SEPARATOR)) {
             IkonliPack pack = IkonliPackUtil.getInstance().getAggregatedPack(id.trim());
@@ -347,7 +358,9 @@ public class PacksIconsView extends PaneBase {
 
         if (scope == Scope.ICONS) {
             List<IkonliPack> selected = ikonliPackSelection.getSelectionModel().getSelectedItems();
-            if (!selected.isEmpty() && selected.size() < ikonliPackSelection.getItems().size()) {
+            if (selected.isEmpty()) {
+                params.put(PACK_PARAM, PACK_NONE);
+            } else if (selected.size() < ikonliPackSelection.getItems().size()) {
                 params.put(PACK_PARAM, selected.stream()
                         .map(pack -> IkonliPackUtil.getInstance().getAggregatedId(pack))
                         .collect(Collectors.joining(PACK_SEPARATOR)));
