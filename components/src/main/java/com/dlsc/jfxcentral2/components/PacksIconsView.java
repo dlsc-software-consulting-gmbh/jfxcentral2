@@ -214,7 +214,8 @@ public class PacksIconsView extends PaneBase {
      * Applies the query parameters of the current request: "scope" picks packs or icons, "pack"
      * narrows the icon scope to a comma separated list of pack ids, "sort" picks a sort order and
      * "search" fills the search field. Scope is applied first because it resets the search and sort.
-     * "pack" applies only in the icon scope. Values that match nothing are ignored.
+     * "pack" applies only in the icon scope; an unusable value selects all packs. An unknown scope
+     * or sort is ignored.
      *
      * @param params the parameters of the request, may be {@code null}
      */

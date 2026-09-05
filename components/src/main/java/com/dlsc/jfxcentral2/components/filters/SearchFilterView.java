@@ -495,8 +495,8 @@ public class SearchFilterView<T> extends PaneBase {
 
     /**
      * The item a group falls back to: the first one flagged as applied, otherwise the first one.
-     * This is the single definition of "default", shared by the initial selection, the fallback for
-     * an unknown query parameter value and the decision whether a parameter can be omitted.
+     * This is the single definition of "default", shared by the initial selection and the fallback
+     * for an unknown query parameter value.
      */
     private FilterItem<T> defaultItem(FilterGroup<T> filterGroup) {
         List<FilterItem<T>> items = filterGroup.filterItems();
