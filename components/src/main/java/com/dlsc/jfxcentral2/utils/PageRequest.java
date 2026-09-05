@@ -3,18 +3,16 @@ package com.dlsc.jfxcentral2.utils;
 import one.jpro.platform.routing.Request;
 
 /**
- * The part of a routing request that a page needs: the path it was reached by and its decoded
- * query parameters.
+ * The decoded query parameters a page needs, carried from the routing request to the page.
  *
- * @param path   the request path without the query string, for example {@code /videos}
  * @param params the decoded query parameters
  */
-public record PageRequest(String path, QueryParams params) {
+public record PageRequest(QueryParams params) {
 
     /**
      * A request without any parameter, used by callers that create a page outside of the router.
      */
-    public static final PageRequest EMPTY = new PageRequest("/", QueryParams.EMPTY);
+    public static final PageRequest EMPTY = new PageRequest(QueryParams.EMPTY);
 
     /**
      * Creates an instance from a routing request.
@@ -26,6 +24,6 @@ public record PageRequest(String path, QueryParams params) {
         if (request == null) {
             return EMPTY;
         }
-        return new PageRequest(request.getPath(), QueryParams.of(request.getQueryParameters()));
+        return new PageRequest(QueryParams.of(request.getQueryParameters()));
     }
 }

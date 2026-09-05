@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral2.utils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -17,7 +16,7 @@ import java.util.Optional;
  * <p>Parameter names are lower-cased and values are URL-decoded on construction. Matching a
  * parameter value against a display name is done via {@link #normalize(String)}, which is lenient:
  * {@code jfxinaction}, {@code jfx-in-action} and {@code JFX%20In%20Action} all match the data value
- * {@code "JFX In Action"}. Links are generated with the readable form produced by
+ * {@code "JFX In Action"}. A filter group's parameter name is derived from its title with
  * {@link #toSlug(String)}.
  */
 public final class QueryParams {
@@ -138,40 +137,4 @@ public final class QueryParams {
         return builder.toString();
     }
 
-    /**
-     * Builds a URL from a path and a set of parameters.
-     *
-     * <p>Parameters with a blank value are omitted and values are percent-encoded, which keeps the
-     * result parsable by the router: an empty value or an unencoded {@code =} makes the framework
-     * reject the whole request.
-     *
-     * @param path   the page path, for example {@code /videos}
-     * @param params the parameters to append, may be {@code null}
-     * @return the URL, never {@code null}
-     */
-    public static String buildUrl(String path, Map<String, String> params) {
-        String base = path == null ? "" : path;
-        if (params == null || params.isEmpty()) {
-            return base;
-        }
-
-        StringBuilder builder = new StringBuilder(base);
-        boolean first = true;
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            String name = entry.getKey();
-            String value = entry.getValue();
-            if (StringUtils.isBlank(name) || StringUtils.isBlank(value)) {
-                continue;
-            }
-            builder.append(first ? '?' : '&');
-            builder.append(encode(name)).append('=').append(encode(value));
-            first = false;
-        }
-        return builder.toString();
-    }
-
-    private static String encode(String value) {
-        // URLEncoder emits "+" for spaces; use "%20", which is safe anywhere in a query string.
-        return URLEncoder.encode(value, StandardCharsets.UTF_8).replace("+", "%20");
-    }
 }
