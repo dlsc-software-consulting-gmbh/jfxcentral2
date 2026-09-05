@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral2.components.filters.UtilitiesFilterView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.components.tiles.UtilityTileView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PageRequest;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
@@ -17,8 +18,8 @@ import org.kordamp.ikonli.Ikon;
 
 public class UtilitiesCategoryPage extends CategoryPageBase<Utility> {
 
-    public UtilitiesCategoryPage(ObjectProperty<Size> size) {
-        super(size);
+    public UtilitiesCategoryPage(ObjectProperty<Size> size, PageRequest pageRequest) {
+        super(size, pageRequest);
     }
 
     @Override

@@ -15,9 +15,9 @@ public class UtilitiesFilterView extends SimpleModelObjectSearchFilterView<Utili
 
         setSortGroup(new SortGroup<>("ORDER",
                 List.of(
-                        new SortItem<>("Status", Comparator.comparing((Utility modelObject) -> modelObject.getStatus().ordinal())),
-                        new SortItem<>("From A to Z", Comparator.comparing((Utility modelObject) -> modelObject.getName().toLowerCase())),
-                        new SortItem<>("From Z to A", Comparator.comparing((Utility modelObject) -> modelObject.getName().toLowerCase()).reversed())
+                        new SortItem<>("Status", Comparator.comparing((Utility modelObject) -> modelObject.getStatus().ordinal()), "status"),
+                        new SortItem<>("From A to Z", Comparator.comparing((Utility modelObject) -> modelObject.getName().toLowerCase()), "az"),
+                        new SortItem<>("From Z to A", Comparator.comparing((Utility modelObject) -> modelObject.getName().toLowerCase()).reversed(), "za")
                 )
         ));
 
