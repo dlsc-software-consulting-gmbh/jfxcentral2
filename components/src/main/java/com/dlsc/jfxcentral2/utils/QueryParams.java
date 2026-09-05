@@ -175,7 +175,9 @@ public final class QueryParams {
 
     private static String encode(String value) {
         // URLEncoder targets form encoding, where a space becomes "+". Inside a query string "%20"
-        // is the safer form because it survives readers that do not apply form decoding.
-        return URLEncoder.encode(value, StandardCharsets.UTF_8).replace("+", "%20");
+        // is the safer form because it survives readers that do not apply form decoding. The comma
+        // is left as is: it is a legal query character and keeps multi-value links such as a pack
+        // list readable, and "%2C" is only ever the encoding of a comma so undoing it is exact.
+        return URLEncoder.encode(value, StandardCharsets.UTF_8).replace("+", "%20").replace("%2C", ",");
     }
 }

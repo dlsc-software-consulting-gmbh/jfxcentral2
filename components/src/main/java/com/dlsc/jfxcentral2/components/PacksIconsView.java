@@ -51,6 +51,18 @@ public class PacksIconsView extends PaneBase {
 
     private static final int SEARCH_DELAY = 200;
 
+    private static final String SCOPE_PARAM = "scope";
+    private static final String PACK_PARAM = "pack";
+    private static final String SORT_PARAM = "sort";
+    private static final String SEARCH_PARAM = "search";
+    private static final String PACK_SEPARATOR = ",";
+
+    /**
+     * Stable value for "no pack selected", so that an empty selection round trips instead of being
+     * indistinguishable from "every pack selected", which also omits the parameter.
+     */
+    private static final String PACK_NONE = "none";
+
     private final CustomSearchField searchField;
     private final StackPane topWrapper;
     private final HBox sortComboBoxWrapper;
@@ -74,18 +86,6 @@ public class PacksIconsView extends PaneBase {
     private String canonicalPath;
     private String lastWrittenUrl;
     private BiPredicate<Node, String> urlWriter = BrowserUrlSync::replace;
-
-    private static final String SCOPE_PARAM = "scope";
-    private static final String PACK_PARAM = "pack";
-    private static final String SORT_PARAM = "sort";
-    private static final String SEARCH_PARAM = "search";
-    private static final String PACK_SEPARATOR = ",";
-
-    /**
-     * Stable value for "no pack selected", so that an empty selection round trips instead of being
-     * indistinguishable from "every pack selected", which also omits the parameter.
-     */
-    private static final String PACK_NONE = "none";
 
     private enum Scope {
         PACKS, ICONS;
@@ -283,7 +283,7 @@ public class PacksIconsView extends PaneBase {
 
         List<IkonliPack> matches = new ArrayList<>();
         for (String id : value.split(PACK_SEPARATOR)) {
-            IkonliPack pack = IkonliPackUtil.getInstance().getAggregatedPack(id.trim());
+            IkonliPack pack = IkonliPackUtil.getInstance().getAggregatedPack(id.trim().toLowerCase(Locale.ROOT));
             if (pack != null && !matches.contains(pack)) {
                 matches.add(pack);
             }
