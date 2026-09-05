@@ -110,7 +110,7 @@ public final class QueryParams {
     }
 
     /**
-     * Converts a display name into the readable form used when generating links, for example
+     * Converts a display name into a readable query-parameter slug, for example
      * {@code "JFX In Action"} becomes {@code "jfx-in-action"}.
      *
      * @param displayName the display name, may be {@code null}
@@ -136,5 +136,4 @@ public final class QueryParams {
         }
         return builder.toString();
     }
-
 }

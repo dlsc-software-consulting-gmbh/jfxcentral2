@@ -33,7 +33,7 @@ public abstract class CategoryPageBase<T extends ModelObject> extends PageBase {
     }
 
     /**
-     * The request this page was created for, carrying the path and the query parameters.
+     * The request this page was created for, carrying the query parameters.
      *
      * @return the page request, never {@code null}
      */
