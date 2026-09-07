@@ -20,8 +20,8 @@ public class DocumentationFilterView extends SimpleSearchFilterView<Documentatio
 
         //Documentation are still displayed in alphabetical order.
         setSortGroup(new SortGroup<>("ORDER", List.of(
-                new SortItem<>("From A to Z", Comparator.comparing((Documentation modelObject) -> modelObject.getName().toLowerCase())),
-                new SortItem<>("From Z to A", Comparator.comparing((Documentation modelObject) -> modelObject.getName().toLowerCase()).reversed()))
+                new SortItem<>("From A to Z", Comparator.comparing((Documentation modelObject) -> modelObject.getName().toLowerCase()), "az"),
+                new SortItem<>("From Z to A", Comparator.comparing((Documentation modelObject) -> modelObject.getName().toLowerCase()).reversed(), "za"))
         ));
 
         setSearchPromptText("Search for documentation ...");

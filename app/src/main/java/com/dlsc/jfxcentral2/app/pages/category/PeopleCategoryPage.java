@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral2.components.headers.CategoryHeader;
 import com.dlsc.jfxcentral2.components.tiles.PersonTileView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PageRequest;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
@@ -23,8 +24,8 @@ public class PeopleCategoryPage extends CategoryPageBase<Person> {
 
     private static final Image BANNER_IMAGE = new Image(Objects.requireNonNull(PeopleCategoryPage.class.getResource("people-banner.jpg")).toExternalForm());
 
-    public PeopleCategoryPage(ObjectProperty<Size> size) {
-        super(size);
+    public PeopleCategoryPage(ObjectProperty<Size> size, PageRequest pageRequest) {
+        super(size, pageRequest);
     }
 
     @Override

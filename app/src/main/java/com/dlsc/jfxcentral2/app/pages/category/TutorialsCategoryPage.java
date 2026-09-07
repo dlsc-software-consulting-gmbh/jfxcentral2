@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral2.components.filters.TutorialsFilterView;
 import com.dlsc.jfxcentral2.components.tiles.TileViewBase;
 import com.dlsc.jfxcentral2.components.tiles.TutorialTileView;
 import com.dlsc.jfxcentral2.model.Size;
+import com.dlsc.jfxcentral2.utils.PageRequest;
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
@@ -17,8 +18,8 @@ import org.kordamp.ikonli.Ikon;
 
 public class TutorialsCategoryPage extends CategoryPageBase<Tutorial> {
 
-    public TutorialsCategoryPage(ObjectProperty<Size> size) {
-        super(size);
+    public TutorialsCategoryPage(ObjectProperty<Size> size, PageRequest pageRequest) {
+        super(size, pageRequest);
     }
 
     @Override
