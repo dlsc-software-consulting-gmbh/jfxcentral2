@@ -8,7 +8,7 @@ public enum License {
     BSD3("BSD 3-Clause 'New' or 'Revised' license"),
     BSD2("BSD 2-Clause 'Simplified' or 'FreeBSD' license"),
     GPL("GNU General Public License (GPL)"),
-    GPLV3("NU General Public License (GPL v3)"),
+    GPLV3("GNU General Public License (GPL v3)"),
     GPL2CLASSPATH("GNU General Public License, version 2, with the Classpath Exception"),
     LGPL("GNU Library or 'Lesser' General Public License (LGPL)"),
     MIT("MIT license"),
