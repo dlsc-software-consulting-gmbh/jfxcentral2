@@ -2890,7 +2890,7 @@
     -fx-background-color: -bright-blue;
 }
 
-.week-links-lite-view > .content-box .label {
+.week-links-lite-view > .content-box > .top-box .label {
     -fx-text-fill: -white;
 }
 
