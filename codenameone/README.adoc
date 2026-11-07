@@ -1,0 +1,55 @@
+= JFXCentral Mobile with Codename One
+
+This module builds the JFXCentral mobile app (the `mobile` module's views)
+for Android, iOS and the web with https://www.codenameone.com[Codename One].
+
+The JavaFX sources are compiled as they are, from `common/src/main/desktop`,
+against Codename One's JavaFX compatibility layer, which runs them on Codename
+One's own native-peer UI on every target. `common/src/main/java` holds the
+parts that had to change: the data repository (read over HTTPS from the
+`jfxcentral-data` repository and cached on the device, rather than cloned with
+JGit) and the `JFXCentralMobile` entry point.
+
+Only the JavaFX files the port changes are committed under
+`common/src/main/desktop`. The ones it uses unchanged are listed in
+`common/src/main/desktop/.gitignore` and copied from the `mobile`, `app`,
+`components` and `iconfont` modules at the start of every build, so they
+always match the desktop app. To change one for the port, delete its line
+from that file and commit the file.
+
+== What changed against the desktop and mobile modules
+
+* *Data* -- `DataRepository` and `RepositoryManager` fetch the JSON files and
+  readmes over HTTPS, keep them for a day and fall back to the cached copy
+  when offline. There is no git clone on the device.
+* *Images* -- `ImageManager` downloads into Codename One's storage, with a
+  bounded memory cache.
+* *Markdown* -- `CustomMarkdownView` renders the repository's readmes with
+  plain JavaFX nodes; mdfx needs a WebView.
+* *Links* -- open in the system browser (a new tab on the web). Only `http`,
+  `https` and `mailto` links are opened.
+* *Platform services* (storage, display, browser, settings) -- provided by
+  Codename One's `Storage`, `Display` and `CN.execute`.
+* *People list* -- the readmes the list and its search show are read once
+  per run, in the background, and kept in memory, rather than fetched
+  for each row as it scrolls.
+* *Page transitions* -- opening a detail page slides it in, going back slides
+  it out, and switching sections cross fades.
+* *Wrapping labels* -- `WrapLabel` stands in for `Label.setWrapText(true)`,
+  which this Codename One release draws on one line.
+
+== Building
+
+Requires JDK 17. The Codename One version is pinned in `pom.xml`.
+
+[source,bash]
+----
+./run.sh                 # the simulator
+./build.sh android       # Android APK (cloud build)
+./build.sh ios_source    # iOS: an Xcode project, built locally on a Mac
+./build.sh javascript    # the web app, built locally
+./mvnw package -Dcodename1.platform=ios -Dcodename1.buildTarget=ios-device  # iOS (cloud build)
+----
+
+Cloud builds need a free Codename One account; `./build.sh` asks for it the
+first time.
