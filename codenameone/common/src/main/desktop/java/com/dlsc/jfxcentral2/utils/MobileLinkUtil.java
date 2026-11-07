@@ -17,6 +17,11 @@ public class MobileLinkUtil {
     }
 
     public static void openWebLink(String link) {
+        // Only web and mail links leave the app, as for ExternalLinkUtil; a
+        // documentation URL from the data repository is not trusted to be one.
+        if (!ExternalLinkUtil.isOpenable(link)) {
+            return;
+        }
         EVENT_BUS.post(new OpenWebLinkEvent(link));
     }
 

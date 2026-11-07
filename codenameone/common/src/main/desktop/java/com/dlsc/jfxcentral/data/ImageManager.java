@@ -22,9 +22,6 @@ import com.dlsc.jfxcentral.data.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.io.ByteArrayInputStream;
-import com.codename1.io.Storage;
-import com.codename1.io.rest.Rest;
 import java.util.Objects;
 
 public class ImageManager {
@@ -262,7 +259,7 @@ public class ImageManager {
 
     /// The images of the pages seen most recently. Bounded, so browsing
     /// hundreds of people does not keep every avatar in memory; one that falls
-    /// out is read back from `Storage`.
+    /// out is read back from the layer's `Storage` cache.
     private final Map<String, ObjectProperty<Image>> remoteImageCache =
             new java.util.LinkedHashMap<String, ObjectProperty<Image>>(64, 0.75f, true) {
                 @Override
@@ -271,18 +268,13 @@ public class ImageManager {
                 }
             };
 
-    /// How long a stored image is shown before it is fetched again (in the
-    /// background, with the stored one on screen meanwhile).
-    private static final long IMAGE_MAX_AGE = 7L * 24 * 60 * 60 * 1000;
-
     private ObjectProperty<Image> remoteImageProperty(String baseURL, String photoKey, Image placeholderImage, int width, int height) {
         return remoteImageProperty(baseURL, "", photoKey, placeholderImage, width, height);
     }
 
-    /// Fetches an image with Codename One's network layer, keeps its bytes in
-    /// `Storage` so it is there offline and on the next start, and builds the
-    /// JavaFX image from them. The JavaFX layer does not open `http:` URLs
-    /// itself, and a phone should not refetch an avatar on every visit anyway.
+    /// The JavaFX layer downloads an `http:` image in the background and keeps
+    /// it in `Storage`; the placeholder shows until it has arrived, and stays
+    /// when it fails.
     private ObjectProperty<Image> remoteImageProperty(String imageUrl, String append, String photoKey, Image placeholderImage, int width, int height) {
         if (StringUtils.isBlank(imageUrl) || StringUtils.isBlank(photoKey)) {
             return new SimpleObjectProperty<>(placeholderImage);
@@ -293,47 +285,26 @@ public class ImageManager {
         }
         ObjectProperty<Image> property = new SimpleObjectProperty<>(placeholderImage);
         remoteImageCache.put(photoKey, property);
-        String storageKey = storageKey(photoKey);
-        String stampKey = storageKey + ".time";
-        boolean fresh = false;
-        Object cached = Storage.getInstance().readObject(storageKey);
-        if (cached instanceof byte[]) {
-            Image image = new Image(new ByteArrayInputStream((byte[]) cached));
-            if (image.isError()) {
-                // Bytes that do not decode are dropped and fetched again.
-                Storage.getInstance().deleteStorageFile(storageKey);
-            } else {
-                property.set(image);
-                Object stamp = Storage.getInstance().readObject(stampKey);
-                fresh = stamp instanceof Long && System.currentTimeMillis() - (Long) stamp < IMAGE_MAX_AGE;
-            }
-        }
-        if (!fresh) {
-            Rest.get(imageUrl + append).onErrorCodeBytes(r -> { }).onError(evt -> evt.consume()).fetchAsBytes(response -> {
-                byte[] data = response.getResponseData();
-                Image image = response.getResponseCode() == 200 && data != null && data.length > 0
-                        ? new Image(new ByteArrayInputStream(data)) : null;
-                if (image != null && !image.isError()) {
-                    Storage.getInstance().writeObject(storageKey, data);
-                    Storage.getInstance().writeObject(stampKey, Long.valueOf(System.currentTimeMillis()));
-                    property.set(image);
-                } else if (property.get() == placeholderImage) {
-                    // Nothing to show: forget the attempt so the next visit
-                    // tries again instead of keeping the placeholder all session.
+        Image image = new Image(imageUrl + append, true);
+        if (image.getProgress() >= 1 && !image.isError()) {
+            property.set(image);
+        } else {
+            image.progressProperty().addListener((obs, o, n) -> {
+                if (n.doubleValue() >= 1) {
+                    if (image.isError()) {
+                        // Forget the attempt so the next visit tries again.
+                        remoteImageCache.remove(photoKey);
+                    } else {
+                        property.set(image);
+                    }
+                }
+            });
+            image.errorProperty().addListener((obs, o, n) -> {
+                if (n) {
                     remoteImageCache.remove(photoKey);
                 }
             });
         }
         return property;
-    }
-
-    /// A flat `Storage` name: the key's hash, then its characters made safe.
-    private static String storageKey(String key) {
-        StringBuilder safe = new StringBuilder("img-").append(Integer.toHexString(key.hashCode())).append('-');
-        for (int i = 0; i < key.length() && i < 60; i++) {
-            char c = key.charAt(i);
-            safe.append(Character.isLetterOrDigit(c) || c == '-' || c == '.' ? c : '_');
-        }
-        return safe.toString();
     }
 }

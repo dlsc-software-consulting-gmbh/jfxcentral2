@@ -28,17 +28,6 @@ public class JFXCentralMobile extends FxLifecycle {
             double pixelsPerInch = Display.getInstance().convertToPixels(254, true) / 10.0;
             Display.getInstance().setProperty("desktopcompat.scale", String.valueOf(pixelsPerInch / 160.0));
         }
-        // The iOS theme blurs the backdrop of a text field under an opaque
-        // white fill: invisible, and computed again on every repaint, which
-        // the JavaFX layer does on every touch and scroll frame -- most of
-        // the time a frame took. Codename One 7.0.280 does not skip a blur
-        // its own fill hides, and CSS cannot take a theme's blur away
-        // (blur(0) writes nothing), so the theme entries are zeroed here.
-        java.util.Hashtable<String, Object> noBlur = new java.util.Hashtable<>();
-        for (String state : new String[] {"", "sel#", "press#", "dis#"}) {
-            noBlur.put("TextField." + state + "backdropFilterBlur", Float.valueOf(0));
-        }
-        com.codename1.ui.plaf.UIManager.getInstance().addThemeProps(noBlur);
         // Lets an agent or a test drive the app over a loopback MCP socket, in
         // a debuggable build only: a release build never opens the port.
         if (Display.getInstance().isDebuggableBuild()) {

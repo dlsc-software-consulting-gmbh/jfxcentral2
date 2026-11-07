@@ -1,8 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.jfxcentral2.utils.CellGraphics;
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
@@ -17,16 +14,15 @@ public class LearnListCell extends ListCell<Learn> {
 
     private static final String DEFAULT_STYLE_CLASS = "learn-list-cell";
     private final HBox authorBox;
-    private final WrapLabel titleLabel;
+    private final Label titleLabel;
     private final HBox container;
 
     public LearnListCell() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
         setPrefWidth(0);
 
-        titleLabel = new WrapLabel();
-        // A row is 80px tall (ModelListView).
-        titleLabel.setMaxLines(2);
+        titleLabel = new Label();
+        titleLabel.setWrapText(true);
         titleLabel.getStyleClass().add("title");
 
         authorBox = new HBox();
@@ -41,7 +37,6 @@ public class LearnListCell extends ListCell<Learn> {
 
         container = new HBox(titleLabel, new Spacer(), authorBox);
         container.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-        CellGraphics.fitToCell(this, container);
         container.getStyleClass().add("container");
     }
 

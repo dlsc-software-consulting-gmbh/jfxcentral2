@@ -378,7 +378,7 @@ public abstract class ModelObject {
         return o == null ? null : o.toString();
     }
 
-    private static LocalDate date(Object o) {
+    static LocalDate date(Object o) {
         if (o instanceof String && ((String) o).length() >= 10) {
             try {
                 return LocalDate.parse(((String) o).substring(0, 10));

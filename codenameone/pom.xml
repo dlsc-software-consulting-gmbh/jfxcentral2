@@ -16,8 +16,8 @@
 <module>common</module>
 </modules>
   <properties>
-    <cn1.plugin.version>7.0.280</cn1.plugin.version>
-    <cn1.version>7.0.280</cn1.version>
+    <cn1.plugin.version>7.0.281</cn1.plugin.version>
+    <cn1.version>7.0.281</cn1.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- The kotlin profile's org.jetbrains:annotations; the compose profile
              raises it to the version the Compose runtime asks for. -->

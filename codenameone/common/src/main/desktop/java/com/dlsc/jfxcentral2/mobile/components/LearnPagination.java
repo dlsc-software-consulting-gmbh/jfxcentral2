@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.jfxcentral2.utils.Observables;
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
@@ -33,12 +32,9 @@ public class LearnPagination<T extends Learn> extends MobilePagination<T> {
 
     public LearnPagination() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
-        // mobile.css asks for -fx-fit-to-width, which the JavaFX layer does not read from CSS
-        scrollPane.setFitToWidth(true);
-
         Label dateLabel = new Label();
         dateLabel.getStyleClass().add("date-label");
-        dateLabel.textProperty().bind(Observables.map(itemProperty(), item -> item == null ? "" : DATE_FORMATTER.format(item.getCreatedOn())));
+        dateLabel.textProperty().bind(itemProperty().map(item -> item == null ? "" : DATE_FORMATTER.format(item.getCreatedOn())));
 
         Spacer spacer = new Spacer();
 

@@ -74,6 +74,14 @@ public class Book extends ModelObject {
         this.isbn = isbn;
     }
 
+    /// The generated mapper leaves `LocalDate` fields alone, so the date is read
+    /// here along with the base fields; without it every book page threw.
+    @Override
+    public void readBaseFields(java.util.Map<String, Object> m) {
+        super.readBaseFields(m);
+        publishedDate = date(m.get("publishedDate"));
+    }
+
     public LocalDate getPublishedDate() {
         return publishedDate;
     }

@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.pages;
 
-import com.dlsc.jfxcentral2.utils.Observables;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.LinksOfTheWeek;
 import com.dlsc.jfxcentral2.components.MobilePageBase;
@@ -43,7 +42,7 @@ public class MobileLinksOfTheWeekPage extends MobilePageBase {
         VBox.setVgrow(pagination, Priority.ALWAYS);
 
         // bind header title to item name
-        header.titleProperty().bind(Observables.map(pagination.itemProperty(), item -> {
+        header.titleProperty().bind(pagination.itemProperty().map(item -> {
             if (item == null) {
                 return "Links of the Week";
             } else {

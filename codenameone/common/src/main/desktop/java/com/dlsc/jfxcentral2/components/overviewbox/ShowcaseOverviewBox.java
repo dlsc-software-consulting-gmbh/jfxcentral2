@@ -1,8 +1,5 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
-import com.dlsc.jfxcentral2.utils.Observables;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral2.utils.OSUtil;
@@ -23,10 +20,10 @@ public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
 
     private static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM yyyy");
 
-    private WrapLabel locationLabel;
-    private WrapLabel domainLabel;
-    private WrapLabel createdByLabel;
-    private WrapLabel createdOnLabel;
+    private Label locationLabel;
+    private Label domainLabel;
+    private Label createdByLabel;
+    private Label createdOnLabel;
 
     public ShowcaseOverviewBox(RealWorldApp app) {
         super(app);
@@ -59,13 +56,13 @@ public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
                 ColumnConstraints columnConstraints = new ColumnConstraints();
                 columnConstraints.setHalignment(HPos.LEFT);
                 if (i == 0) {
-                    columnConstraints.hgrowProperty().bind(Observables.map(locationLabel.visibleProperty(), b -> b ? Priority.ALWAYS : Priority.NEVER));
+                    columnConstraints.hgrowProperty().bind(locationLabel.visibleProperty().map(b -> b ? Priority.ALWAYS : Priority.NEVER));
                 }else if (i == 1) {
-                    columnConstraints.hgrowProperty().bind(Observables.map(domainLabel.visibleProperty(), b -> b ? Priority.ALWAYS : Priority.NEVER));
+                    columnConstraints.hgrowProperty().bind(domainLabel.visibleProperty().map(b -> b ? Priority.ALWAYS : Priority.NEVER));
                 }else if (i == 2) {
-                    columnConstraints.hgrowProperty().bind(Observables.map(createdByLabel.visibleProperty(), b -> b ? Priority.ALWAYS : Priority.NEVER));
+                    columnConstraints.hgrowProperty().bind(createdByLabel.visibleProperty().map(b -> b ? Priority.ALWAYS : Priority.NEVER));
                 } else {
-                    columnConstraints.hgrowProperty().bind(Observables.map(createdOnLabel.visibleProperty(), b -> b ? Priority.ALWAYS : Priority.NEVER));
+                    columnConstraints.hgrowProperty().bind(createdOnLabel.visibleProperty().map(b -> b ? Priority.ALWAYS : Priority.NEVER));
                 }
                 gridPane.getColumnConstraints().add(columnConstraints);
             }
@@ -122,17 +119,18 @@ public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
 
     private static class FieldGroup {
         private final Label header;
-        private final WrapLabel label;
+        private final Label label;
 
         public FieldGroup(String headerText, String[] labelStyles) {
             header = new Label(headerText);
             header.getStyleClass().add("field-title");
             header.managedProperty().bind(header.visibleProperty());
 
-            label = new WrapLabel();
+            label = new Label();
+            label.setWrapText(true);
             label.getStyleClass().addAll(labelStyles);
             label.managedProperty().bind(label.visibleProperty());
-            label.visibleProperty().bind(Observables.map(label.textProperty(), s -> !StringUtils.isEmpty(s) && !StringUtils.equalsIgnoreCase(s, "Unknown")));
+            label.visibleProperty().bind(label.textProperty().map(s -> !StringUtils.isEmpty(s) && !StringUtils.equalsIgnoreCase(s, "Unknown")));
             header.visibleProperty().bind(label.visibleProperty());
         }
 
@@ -140,7 +138,7 @@ public class ShowcaseOverviewBox extends OverviewBox<RealWorldApp> {
             return header;
         }
 
-        public WrapLabel getLabel() {
+        public Label getLabel() {
             return label;
         }
     }

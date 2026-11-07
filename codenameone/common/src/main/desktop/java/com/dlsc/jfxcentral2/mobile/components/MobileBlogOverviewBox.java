@@ -1,8 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.jfxcentral2.utils.CellGraphics;
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
 import com.dlsc.jfxcentral2.icons.MaterialIcon;
 
 import com.dlsc.jfxcentral.data.DataRepository;
@@ -103,7 +100,7 @@ public class MobileBlogOverviewBox extends VBox {
 
     private static class PostViewCell extends ListCell<Post> {
 
-        private final WrapLabel titleLabel;
+        private final Label titleLabel;
         private final Label timeLabel;
         private final HBox contentBox;
 
@@ -111,7 +108,8 @@ public class MobileBlogOverviewBox extends VBox {
             getStyleClass().add("post-view-cell");
             setPrefWidth(0);
 
-            titleLabel = new WrapLabel();
+            titleLabel = new Label();
+            titleLabel.setWrapText(true);
             titleLabel.getStyleClass().add("title-label");
             titleLabel.setMaxWidth(Double.MAX_VALUE);
             titleLabel.setMinHeight(Region.USE_PREF_SIZE);
@@ -121,7 +119,6 @@ public class MobileBlogOverviewBox extends VBox {
             timeLabel.setMinWidth(Region.USE_PREF_SIZE);
 
             contentBox = new HBox(titleLabel, timeLabel);
-            CellGraphics.fitToCell(this, contentBox);
             contentBox.getStyleClass().add("content-box");
             HBox.setHgrow(titleLabel, Priority.ALWAYS);
         }

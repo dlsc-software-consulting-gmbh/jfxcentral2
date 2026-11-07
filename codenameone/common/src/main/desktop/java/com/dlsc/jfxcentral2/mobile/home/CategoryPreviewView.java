@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.home;
 
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
 import com.dlsc.jfxcentral2.components.Spacer;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
@@ -74,12 +72,8 @@ public class CategoryPreviewView extends VBox {
         VBox content = new VBox();
         content.getStyleClass().add("content");
 
-        // A ListChangeListener rather than a ChangeListener: the Codename One
-        // JavaFX layer fires a ListProperty's change listeners only when the list
-        // itself is replaced, not when its contents change.
-        itemsProperty().addListener((javafx.collections.ListChangeListener<CategoryItem>) change -> {
+        itemsProperty().addListener((observable, oldValue, newValue) -> {
             content.getChildren().clear();
-            ObservableList<CategoryItem> newValue = getItems();
 
             int size = newValue.size();
             for (int i = 0; i < size; i++) {
@@ -229,8 +223,9 @@ public class CategoryPreviewView extends VBox {
             titleLabel.textProperty().bind(titleProperty());
             titleLabel.graphicProperty().bind(titleGraphicProperty());
 
-            WrapLabel descriptionLabel = new WrapLabel();
+            Label descriptionLabel = new Label();
             descriptionLabel.getStyleClass().add("description");
+            descriptionLabel.setWrapText(true);
             descriptionLabel.setMaxHeight(Double.MAX_VALUE);
             descriptionLabel.textProperty().bind(descriptionProperty());
             descriptionLabel.managedProperty().bind(descriptionLabel.visibleProperty());
@@ -271,6 +266,8 @@ public class CategoryPreviewView extends VBox {
             titleLabel.setMinWidth(0);
             HBox.setHgrow(cellContent, Priority.ALWAYS);
 
+            // Depends on padding, not insetsProperty(): bound to the layer's
+            // insets the cap never took hold and a long readme grew the row.
             this.maxHeightProperty().bind(Bindings.createObjectBinding(() -> avatarView.getAvatarSize() + this.getInsets().getTop() + this.getInsets().getBottom(), avatarView.avatarSizeProperty(), this.paddingProperty()));
             getChildren().addAll(avatarView, cellContent);
         }

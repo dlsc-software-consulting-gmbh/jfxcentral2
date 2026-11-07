@@ -14,8 +14,6 @@ public class LotwPagination extends MobilePagination<LinksOfTheWeek> {
 
     public LotwPagination() {
         getStyleClass().add(DEFAULT_STYLE_CLASS);
-        // mobile.css asks for -fx-fit-to-width, which the JavaFX layer does not read from CSS
-        scrollPane.setFitToWidth(true);
 
         CustomMarkdownView markdownView = new CustomMarkdownView();
         markdownView.mdStringProperty().bind(Bindings.createStringBinding(() -> {

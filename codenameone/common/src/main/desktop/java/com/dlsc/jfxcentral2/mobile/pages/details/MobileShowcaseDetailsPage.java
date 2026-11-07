@@ -42,10 +42,6 @@ public class MobileShowcaseDetailsPage extends MobileDetailsPageBase<RealWorldAp
         detailsPageContentWrapper.getStyleClass().add("details-page-content-wrapper");
 
         ScrollPane scrollPane = new ScrollPane(detailsPageContentWrapper);
-
-        // mobile.css asks for -fx-fit-to-width, which the JavaFX layer does not read from CSS
-
-        scrollPane.setFitToWidth(true);
         scrollPane.getStyleClass().add("mobile");
 
         return List.of(header, scrollPane);

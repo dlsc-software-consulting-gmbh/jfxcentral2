@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral2.components.overviewbox;
 
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
@@ -31,7 +29,8 @@ public class BookOverviewBox extends OverviewBox<Book> {
     protected Node createTopNode() {
         Book book = getModel();
 
-        WrapLabel writtenByLabel = new WrapLabel();
+        Label writtenByLabel = new Label();
+        writtenByLabel.setWrapText(true);
         Label publisherLabel = new Label();
         Label publishDateLabel = new Label();
         Label isbnLabel = new Label();

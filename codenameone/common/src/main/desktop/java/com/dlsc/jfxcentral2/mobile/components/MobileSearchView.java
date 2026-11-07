@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
 import com.dlsc.jfxcentral2.icons.MaterialIcon;
 
 import com.dlsc.jfxcentral2.components.Spacer;
@@ -82,7 +80,8 @@ public class MobileSearchView extends StackPane {
     private Node createPlaceholder() {
         Label tipsTitle = new Label("Tips", new FontIcon(MaterialIcon.LIGHTBULB));
         tipsTitle.getStyleClass().add("tips-title");
-        WrapLabel tipsLabel = new WrapLabel("You can search for JavaFX libraries, blogs, tips, people, tutorials, tools, videos, real-world apps, etc.");
+        Label tipsLabel = new Label("You can search for JavaFX libraries, blogs, tips, people, tutorials, tools, videos, real-world apps, etc.");
+        tipsLabel.setWrapText(true);
         tipsLabel.getStyleClass().add("tips-content");
 
         VBox tipsBox = new VBox(tipsTitle, tipsLabel);

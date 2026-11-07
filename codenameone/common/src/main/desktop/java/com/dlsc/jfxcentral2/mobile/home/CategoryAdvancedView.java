@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.home;
 
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
 import javafx.beans.property.SimpleIntegerProperty;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
@@ -58,8 +56,7 @@ public class CategoryAdvancedView extends GridPane {
         addCategoriesToView();
 
         // update view
-        // ListChangeListener: see CategoryPreviewView, contents changes only reach these.
-        categoriesProperty().addListener((javafx.collections.ListChangeListener<Category>) change -> updateView());
+        categoriesProperty().addListener((observable, oldValue, newValue) -> updateView());
         updateView();
     }
 
@@ -229,7 +226,8 @@ public class CategoryAdvancedView extends GridPane {
             titleLabel.getStyleClass().add("title");
             titleLabel.textProperty().bind(titleProperty());
 
-            WrapLabel descriptionLabel = new WrapLabel();
+            Label descriptionLabel = new Label();
+            descriptionLabel.setWrapText(true);
             descriptionLabel.getStyleClass().add("description");
             descriptionLabel.textProperty().bind(descriptionProperty());
 

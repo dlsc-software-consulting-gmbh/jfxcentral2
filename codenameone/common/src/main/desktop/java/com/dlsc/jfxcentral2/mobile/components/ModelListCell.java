@@ -1,8 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.jfxcentral2.utils.CellGraphics;
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral2.components.AvatarView;
 import javafx.beans.property.ObjectProperty;
@@ -20,7 +17,7 @@ public class ModelListCell<T extends ModelObject> extends ListCell<T> {
     private static final String DEFAULT_STYLE_CLASS = "model-list-cell";
     private final AvatarView imageView;
     private final Label titleLabel;
-    private final WrapLabel summaryLabel;
+    private final Label summaryLabel;
     private final HBox container;
 
     public ModelListCell() {
@@ -45,10 +42,9 @@ public class ModelListCell<T extends ModelObject> extends ListCell<T> {
         titleLabel = new Label();
         titleLabel.getStyleClass().add("title-label");
 
-        summaryLabel = new WrapLabel();
+        summaryLabel = new Label();
+        summaryLabel.setWrapText(true);
         summaryLabel.getStyleClass().add("summary-label");
-        // A row is 80px tall (-fx-cell-size), room for the title and two lines.
-        summaryLabel.setMaxLines(2);
         summaryLabel.setMaxWidth(Double.MAX_VALUE);
         summaryLabel.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(summaryLabel, Priority.ALWAYS);
@@ -58,7 +54,6 @@ public class ModelListCell<T extends ModelObject> extends ListCell<T> {
 
         container = new HBox(imageView, rightBox);
         container.getStyleClass().add("container");
-        CellGraphics.fitToCell(this, container);
 
         setPrefWidth(0);
     }

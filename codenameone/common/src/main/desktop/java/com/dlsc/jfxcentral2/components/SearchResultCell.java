@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.components;
 
-import com.dlsc.jfxcentral2.utils.CellGraphics;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.data.model.Company;
@@ -56,10 +55,8 @@ public class SearchResultCell extends ListCell<ModelObject> {
 
         setPrefWidth(0);
 
-        // No visibility binding: the cell shows its graphic only while it has an
-        // item, and binding it makes the Codename One JavaFX layer throw on layout.
+        hBox.visibleProperty().bind(itemProperty().isNotNull());
 
-        CellGraphics.fitToCell(this, hBox);
         setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }

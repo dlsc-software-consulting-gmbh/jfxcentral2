@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.pages.details;
 
-import com.dlsc.jfxcentral2.utils.Observables;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Learn;
 import com.dlsc.jfxcentral.data.model.LearnJavaFX;
@@ -33,25 +32,39 @@ public class MobileLearnDetailsPage extends MobileDetailsPageBase<Learn> {
         // content
         LearnPagination<Learn> detailsView = new LearnPagination<>();
         if (learn instanceof LearnJavaFX) {
-            detailsView.setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "learn/javafx/" + learn.getId());
             List<LearnJavaFX> learnJavaFX = DataRepository.getInstance().getLearnJavaFX();
             detailsView.getItems().setAll(learnJavaFX);
         } else if (learn instanceof LearnMobile) {
-            detailsView.setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "learn/mobile/" + learn.getId());
             List<LearnMobile> learnMobile = DataRepository.getInstance().getLearnMobile();
             detailsView.getItems().setAll(learnMobile);
         } else if (learn instanceof LearnRaspberryPi) {
             List<LearnRaspberryPi> learnRaspberryPi = DataRepository.getInstance().getLearnRaspberryPi();
-            detailsView.setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "learn/raspberrypi/" + learn.getId());
             detailsView.getItems().setAll(learnRaspberryPi);
         }
+        // Images in a lesson resolve against that lesson's folder, so the base
+        // URL follows the lesson shown, not the one the page opened on.
+        detailsView.setBaseURL(baseURL(learn));
+        detailsView.itemProperty().addListener((obs, o, n) -> detailsView.setBaseURL(baseURL(n)));
         detailsView.setSelectedItem(learn);
 
         // bind header title to item name
-        header.titleProperty().bind(Observables.map(detailsView.itemProperty(), item -> item == null ? "" : item.getName()));
+        header.titleProperty().bind(detailsView.itemProperty().map(item -> item == null ? "" : item.getName()));
 
         VBox.setVgrow(detailsView, Priority.ALWAYS);
         return List.of(header, detailsView);
     }
 
+    private static String baseURL(Learn learn) {
+        String folder;
+        if (learn instanceof LearnJavaFX) {
+            folder = "learn/javafx/";
+        } else if (learn instanceof LearnMobile) {
+            folder = "learn/mobile/";
+        } else if (learn instanceof LearnRaspberryPi) {
+            folder = "learn/raspberrypi/";
+        } else {
+            return null;
+        }
+        return DataRepository.getInstance().getRepositoryDirectoryURL() + folder + learn.getId();
+    }
 }

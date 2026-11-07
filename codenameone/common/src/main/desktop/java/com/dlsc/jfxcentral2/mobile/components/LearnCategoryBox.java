@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
 import com.dlsc.jfxcentral2.utils.IkonUtil;
 import com.dlsc.jfxcentral2.utils.MobileLinkUtil;
 import com.dlsc.jfxcentral2.utils.PagePath;
@@ -63,7 +61,8 @@ public class LearnCategoryBox extends VBox {
             fontIcon.iconCodeProperty().bind(iconProperty());
             title.textProperty().bind(titleProperty());
 
-            WrapLabel description = new WrapLabel();
+            Label description = new Label();
+            description.setWrapText(true);
             description.getStyleClass().add("description");
             description.textProperty().bind(descriptionProperty());
 

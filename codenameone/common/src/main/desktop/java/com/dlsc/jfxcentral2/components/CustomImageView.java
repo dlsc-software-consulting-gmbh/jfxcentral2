@@ -4,10 +4,11 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.image.ImageView;
 
-/// An ImageView whose fit size has its own properties. The desktop app set them
-/// from CSS (`-fx-fit-width`, `-fx-fit-height`) through the styleable property
-/// API, which the Codename One JavaFX layer does not have; the mobile views set
-/// them in code instead.
+/// An ImageView whose fit size has its own properties. The desktop app binds the
+/// fit size to them and sets them from CSS through the styleable property API,
+/// which the Codename One JavaFX layer does not have. Its `ImageView` reads
+/// `-fx-fit-width` and `-fx-fit-height` from CSS itself, so here the fit size
+/// stays unbound for those rules, and a value set in code is copied onto it.
 public class CustomImageView extends ImageView {
 
     private static final double DEFAULT_HEIGHT = -1;
@@ -16,8 +17,8 @@ public class CustomImageView extends ImageView {
     public CustomImageView() {
         getStyleClass().add("custom-image-view");
         setPreserveRatio(true);
-        fitWidthProperty().bind(fittingWidthProperty());
-        fitHeightProperty().bind(fittingHeightProperty());
+        fittingWidth.addListener((obs, o, n) -> setFitWidth(n.doubleValue()));
+        fittingHeight.addListener((obs, o, n) -> setFitHeight(n.doubleValue()));
     }
 
     private final DoubleProperty fittingHeight = new SimpleDoubleProperty(this, "fittingHeight", DEFAULT_HEIGHT);

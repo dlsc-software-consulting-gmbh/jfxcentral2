@@ -27,8 +27,6 @@ public class MobilePersonDetailsPage extends MobileDetailsPageBase<Person> {
         personDetailView.setPerson(person);
         personDetailView.sizeProperty().bind(sizeProperty());
         ScrollPane scrollPane = new ScrollPane(new StackPane(personDetailView));
-        // mobile.css asks for -fx-fit-to-width, which the JavaFX layer does not read from CSS
-        scrollPane.setFitToWidth(true);
         scrollPane.getStyleClass().add("mobile");
         scrollPane.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(scrollPane, Priority.ALWAYS);

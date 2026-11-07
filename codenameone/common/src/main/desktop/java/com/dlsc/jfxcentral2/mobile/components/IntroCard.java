@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
 import com.dlsc.jfxcentral2.components.CustomImageView;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
@@ -39,11 +37,11 @@ public class IntroCard extends VBox {
         titleLabel.getStyleClass().add("title");
         titleLabel.textProperty().bind(titleProperty());
 
-        WrapLabel descriptionLabel = new WrapLabel();
+        Label descriptionLabel = new Label();
         descriptionLabel.getStyleClass().add("description");
         descriptionLabel.textProperty().bind(descriptionProperty());
+        descriptionLabel.setWrapText(true);
         descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
-        descriptionLabel.setMaxWidth(Double.MAX_VALUE);
 
         getChildren().addAll(imageWrapper, titleLabel, descriptionLabel);
     }

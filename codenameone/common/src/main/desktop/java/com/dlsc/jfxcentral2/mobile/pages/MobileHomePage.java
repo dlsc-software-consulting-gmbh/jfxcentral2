@@ -145,9 +145,6 @@ public class MobileHomePage extends MobilePageBase {
 
         ScrollPane scrollPane = new ScrollPane(normalView);
 
-        // mobile.css asks for -fx-fit-to-width, which the JavaFX layer does not read from CSS
-
-        scrollPane.setFitToWidth(true);
         scrollPane.getStyleClass().add("mobile");
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
 

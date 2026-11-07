@@ -43,10 +43,6 @@ public class MobileTutorialDetailsPage extends MobileDetailsPageBase<Tutorial> {
         detailsPageContentWrapper.getStyleClass().add("details-page-content-wrapper");
 
         ScrollPane detailsContentPane = new ScrollPane(detailsPageContentWrapper);
-
-        // mobile.css asks for -fx-fit-to-width, which the JavaFX layer does not read from CSS
-
-        detailsContentPane.setFitToWidth(true);
         detailsContentPane.getStyleClass().add("mobile");
         detailsContentPane.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(detailsContentPane, Priority.ALWAYS);

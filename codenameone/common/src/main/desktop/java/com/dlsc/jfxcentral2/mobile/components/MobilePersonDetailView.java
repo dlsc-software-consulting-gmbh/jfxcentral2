@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral2.mobile.components;
 
-import com.dlsc.jfxcentral2.utils.WrapLabel;
-
 import com.dlsc.jfxcentral2.icons.MaterialIcon;
 
 import com.dlsc.jfxcentral.data.DataRepository;
@@ -32,7 +30,7 @@ public class MobilePersonDetailView extends VBox {
     private final AvatarView avatarView;
     private final Label nameLabel;
     private final HBox badgeBox;
-    private final WrapLabel descriptionLabel;
+    private final Label descriptionLabel;
 
     public record LinkedObjectBadge(String name, Ikon ikon, int count) {
     }
@@ -56,7 +54,8 @@ public class MobilePersonDetailView extends VBox {
         badgeBox = new HBox();
         badgeBox.getStyleClass().add("badges");
 
-        descriptionLabel = new WrapLabel();
+        descriptionLabel = new Label();
+        descriptionLabel.setWrapText(true);
         descriptionLabel.getStyleClass().add("description");
 
         LinkedObjectsBox<Person> linkedObjectsBox = new LinkedObjectsBox<>();
