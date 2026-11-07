@@ -10,6 +10,13 @@ parts that had to change: the data repository (read over HTTPS from the
 `jfxcentral-data` repository and cached on the device, rather than cloned with
 JGit) and the `JFXCentralMobile` entry point.
 
+Only the JavaFX files the port changes are committed under
+`common/src/main/desktop`. The ones it uses unchanged are listed in
+`common/src/main/desktop/.gitignore` and copied from the `mobile`, `app`,
+`components` and `iconfont` modules at the start of every build, so they
+always match the desktop app. To change one for the port, delete its line
+from that file and commit the file.
+
 == What changed against the desktop and mobile modules
 
 * *Data* -- `DataRepository` and `RepositoryManager` fetch the JSON files and
